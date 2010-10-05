@@ -1,0 +1,1 @@
+_this addaction ["Change Tyres",RMM_fnc_actionargument_path,[0,{[_caller,_target] call TK_fnc_changeTyres}],-1,false,true,"","(vehicle _this == _this) && !(canmove _target)"];

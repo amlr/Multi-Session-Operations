@@ -1,0 +1,1 @@
+_this addaction ["Construction",RMM_fnc_actionargument_path,[0,{_target execvm "scripts\coin.sqf"}],-1,false,true,"","vehicle _this == _this"];

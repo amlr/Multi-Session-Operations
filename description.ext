@@ -1,0 +1,164 @@
+//http://community.bistudio.com/wiki/description.ext#Header_Class
+class header {
+	gametype = COOP;
+	minplayers = 1;
+	maxplayers = 16;
+};
+
+//http://community.bistudio.com/wiki/description.ext#OnLoad...
+onLoadIntro = "";
+onLoadMission = "";
+onLoadIntroTime = false;
+onLoadMissionTime = false;
+estimatedTimeLeft = 7200;
+
+//http://community.bistudio.com/wiki/Description.ext#Respawn...
+respawn = 3;
+respawnDelay = 10;
+respawnVehicleDelay = 0;
+respawnDialog = 0;
+
+//http://community.bistudio.com/wiki/description.ext#Show...
+showCompass = 1;
+showGPS = 1;
+showHUD = 1;
+showMap = 1;
+showNotePad = 0;
+showRadio = 0;
+showWatch = 1;
+
+//http://community.bistudio.com/wiki/description.ext#Miscellaneous
+disabledAI = 1;
+aiKills = 0;
+briefing = 1;
+debriefing = 1;
+
+//http://community.bistudio.com/wiki/description.ext#Score
+MinScore = 0;
+AvgScore = 50;
+MaxScore = 100;
+
+//http://community.bistudio.com/wiki/description.ext#Sounds
+class CfgMusic {
+};
+class CfgSounds {
+	sounds[] = {};
+	class muezzin {
+		name = "muezzin";
+		sound[] = {"sounds\muezzin.ogg", 1, 1};
+		titles[] = {};
+	};
+};
+class CfgRadio {
+};
+
+//http://community.bistudio.com/wiki/description.ext#CfgIdentities
+class CfgIdentities {
+};
+
+//http://community.bistudio.com/wiki/description.ext#Weapons_and_Magazines
+class Weapons {
+};
+class Magazines {
+};
+
+class Params {
+	class maxRespawns {
+		title = "Max Respawns"; 
+		values[]= {1,2,3,4,5,6,7}; 
+		texts[]= {"1","2","3","4","5","6","7"}; 
+		default = 2; 
+	};
+}; 
+
+//http://community.bistudio.com/wiki/Functions_Library
+class cfgFunctions {
+	class TK {
+		file = "TK";
+		class Misc {
+			class addBuild {};
+			class addLogistics {};
+			class changeTyres {};
+			class takibani {};
+			class takistani {};
+			class spareTyres {};
+			class threatFunc {};
+			class vehicle {};
+		};
+	};
+	class RMM {
+		class client {
+			class actionargument {};
+			class taskadd {};
+			class taskhint {};
+			class taskupdate {};
+		};
+		class common {
+			class deleteEntity {};
+			class ExMP {};
+			class failSafeLS {};
+			class findEntity {};
+			class getAlive {};
+			class getDistance {};
+			class getGroup {};
+			class getNearest {};
+			class getNearestBuilding {};
+			class getPos {};
+			class getVolume {};
+			class inArea {};
+			class isAlive {};
+			class randPos {};
+			class setHeight {};
+			class setPos {};
+			class supplyDrop {};
+			class vectRotate2D {};
+		};
+		class server {
+			class addWaypoint {};
+			class dynoCreate {};
+			class searchNearby {};
+			class spawnVehiclePath {};
+			class taskAttack {};
+			class taskDefend {};
+			class taskPatrol {};
+		};
+		class logistics {
+			file = "dialogs\logistics";
+			class logistics_doOpen {};
+			class logistics_doLoad {};
+			class logistics_doUnload {};
+			class logistics_doMove {};
+		};
+		class logbook {
+			file = "dialogs\logbook";
+			class logbook_openLog {};
+		};
+	};
+	class BIS {
+		class server {
+			class dynocreate {};
+		};
+	};
+	class revive {
+		file = "revive";
+		class functions {
+			class init {};
+			class conscious {};
+			class unconscious {};
+			class damage {};
+			class handle_events {};
+			class heal {};
+		};
+	};
+};
+
+//http://community.bistudio.com/wiki/PreProcessor_Commands
+#include <dialogs\c_ui.hpp>
+#include <dialogs\debug.hpp>
+#include <dialogs\settings.hpp>
+
+#include <dialogs\jipmarkers.hpp>
+#include <dialogs\logbook.hpp>
+#include <dialogs\logistics.hpp>
+#include <dialogs\recruit.hpp>
+//#include <dialogs\supplies.hpp>
