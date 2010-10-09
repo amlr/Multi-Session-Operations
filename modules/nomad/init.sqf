@@ -1,7 +1,3 @@
-if (isserver) then {
-	rmm_nomad_respawns = paramsArray select 0;
-	publicVariable "rmm_nomad_respawns";
-};
 if (isdedicated) exitwith {};
 
 waituntil {not isnull player};
@@ -35,7 +31,7 @@ waituntil {not isnil "rmm_nomad_respawns"};
 	],
 	[
 		{
-			if (_this > rmm_nomad_respawns) then {_disconnect = true;};
+			if (_this > (paramsArray select 0)) then {_disconnect = true;};
 		},
 		{
 			if (typeof player != _this) then {_disconnect = true;};

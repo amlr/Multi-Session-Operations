@@ -63,12 +63,7 @@ class Magazines {
 };
 
 class Params {
-	class maxRespawns {
-		title = "Max Respawns"; 
-		values[]= {1,2,3,4,5,6,7}; 
-		texts[]= {"1","2","3","4","5","6","7"}; 
-		default = 2; 
-	};
+	#include <modules\nomad\params.hpp>
 }; 
 
 //http://community.bistudio.com/wiki/Functions_Library
