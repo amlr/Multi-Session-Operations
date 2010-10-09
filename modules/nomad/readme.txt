@@ -7,3 +7,5 @@ Launch using a dedicated server and perform the testing procedure before releasi
 - test type of weapons, number of magazines and backpack contents on reconnect
 - test disconnect when returning as a different class
 - test changing slot as same class
+
+Wolffy - Successfully tested on dedi 09/OCT/10

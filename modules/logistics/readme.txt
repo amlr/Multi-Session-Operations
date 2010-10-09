@@ -5,4 +5,6 @@ Launch using a dedicated server and perform the testing procedure before releasi
 - try packing ammo crate into both vehicles
 - try unpacking ammo crate and confirm remaining space has returned
 - try packing motorcycle into MTVR
-- try packing motorcycle into Jackal
+- try packing motorcycle into Land Drover
+
+Wolffy - Successfully tested on dedi 10/OCT/10
