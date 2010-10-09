@@ -44,7 +44,7 @@ class RMM_ui_logbook {
 			w = CUI_Box_W;
 			y = CUI_Row_Y(9);
 			h = CUI_Row_DY(9,10);
-			action = "[player getvariable ""RMM_logbook_target"",""RMM_log"",[[name player,[daytime] call BIS_fnc_timeToString,ctrlText 2]],true] call BIS_fnc_variableSpaceAdd; closedialog 0;";
+			action = "[player getvariable ""RMM_logbook_target"",""RMM_logbook"",[[name player,[daytime] call BIS_fnc_timeToString,ctrlText 2]],true] call BIS_fnc_variableSpaceAdd; closedialog 0;";
 			default = true;
 		};
 	};

@@ -40,7 +40,6 @@ RMM_supply_crates = [];
 	};
 	
 	{
-		player groupchat str _x;
 		for "_i" from 1 to (_x select 1) do {
 			private ["_v","_p","_s"];
 			_p = [_position,_offset] call _fnc_offsetPos;

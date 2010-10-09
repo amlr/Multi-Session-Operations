@@ -1,3 +1,4 @@
+if (tolower(typename _this) == "group") exitwith {{_x call TK_fnc_takibani} foreach (units _this)};
 if (local _this) then {
 	private ["_types"];
 	_types = _this getvariable "takibani";

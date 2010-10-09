@@ -753,11 +753,11 @@ class Mission
 			vehicle="US_WarfareBBarracks_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="this addAction [""Recruitment"",""functions\client\fn_actionargument.sqf"",[[],{createDialog ""RMM_ui_recruitment""}], -1, false, true, """", ""MSO_R_Leader""];";
+			init="this addAction [""Recruitment"",""functions\client\fn_actionargument.sqf"", [[],{createDialog ""RMM_ui_recruitment""}], -1, false, true, """", ""MSO_R_Leader""];";
 		};
 		class Item2
 		{
-			position[]={2515.7295,391.16324,-4445.0796};
+			position[]={13214.52,131.89189,12288.525};
 			id=2;
 			side="EMPTY";
 			vehicle="FlagCarrierBAF";
@@ -765,11 +765,12 @@ class Mission
 		};
 		class Item3
 		{
-			position[]={2522.5732,390.35977,-4444.4653};
+			position[]={13221.363,130.912,12289.139};
 			id=3;
 			side="EMPTY";
 			vehicle="SignM_FARP_Winchester_EP1";
 			skill=0.2;
+			init="this addAction [""Open logbook"", ""functions\client\fn_actionargument.sqf"", [this,{[_this] call logbook_fnc_open}]];";
 		};
 		class Item4
 		{
@@ -783,8 +784,7 @@ class Mission
 		};
 		class Item5
 		{
-			position[]={2482.9629,395.77527,-4464.8979};
-			azimut=270;
+			position[]={13251.355,127.19401,12309.708};
 			id=28;
 			side="EMPTY";
 			vehicle="WarfareBAirport";
@@ -793,11 +793,12 @@ class Mission
 		class Item6
 		{
 			position[]={8226.834,296.04001,1812.9844};
-			azimut=147.1646;
+			azimut=147.16499;
 			id=29;
 			side="EMPTY";
 			vehicle="SignM_UN_Base_EP1";
 			skill=0.2;
+			init="this addAction [""Open logbook"", ""functions\client\fn_actionargument.sqf"", [this,{[_this] call logbook_fnc_open}]];";
 		};
 		class Item7
 		{
@@ -898,7 +899,7 @@ class Mission
 		};
 		class Item1
 		{
-			position[]={2501.6611,394.91885,-4493.811};
+			position[]={13283.957,128.28204,12270.246};
 			name="farp";
 			type="Empty";
 		};

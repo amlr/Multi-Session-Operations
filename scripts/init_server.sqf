@@ -16,9 +16,7 @@ _func_groupSpawn = {
 	};
 	_grp = [_this select 1, resistance, [TK_GUE_Group,TK_GUE_GroupWeapons,TK_GUE_Patrol,TK_GUE_ATTeam,TK_GUE_AATeam,TK_GUE_SniperTeam,TK_GUE_Technicals,TK_GUE_MotorizedPatrol,TK_GUE_MotorizedGroup,TK_GUE_MechanizedPatrol,TK_GUE_MechanizedGroup,TK_GUE_T34Platoon,TK_GUE_T55Section] select _idx] call BIS_fnc_SpawnGroup;
 	if (_idx < 3) then {
-		{
-			_x call TK_fnc_takibani;
-		} foreach (units _grp);
+		_grp call TK_fnc_takibani;
 	};
 	_grp;
 };

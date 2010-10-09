@@ -14,6 +14,7 @@ if (_threat > 0.1) then {
 			};
 		};
 		_group = [[_town, 100] call RMM_fnc_randPos, resistance, _class] call BIS_fnc_SpawnGroup;
+		_group call TK_fnc_takibani;
 		[_group] call RMM_fnc_taskDefend;
 		_town setvariable ["threat",_threat - 0.001];
 		waituntil {sleep 1; !(_town getvariable "ALICE_active")};
