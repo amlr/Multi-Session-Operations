@@ -1,10 +1,6 @@
 waituntil {not isnull player};
 waituntil {getplayeruid player != ""};
 
-{
-	_x call TK_fnc_vehicle;
-} foreach vehicles;
-
 player call revive_fnc_init;
 
 onMapSingleClick "if (_shift && _alt) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
@@ -34,68 +30,37 @@ MSO_R = [];
 MSO_R_Admin = false;
 MSO_R_Leader = false;
 MSO_R_Officer = false;
+MSO_R_Air = false;
+MSO_R_Tank = false;
+
+{
+	_x call TK_fnc_vehicle;
+} foreach vehicles;
 
 private "_exit";
 _exit = false;
 {
 	if (_uid == (_x select 0)) exitwith {
-		if (count _x < 2) then {_x set [1,["BAF_L85A2_RIS_ACOG"]]};
-		if (count _x < 3) then {_x set [2,"PRIVATE"]};
-		if (rank player != (_x select 2)) exitwith {_exit = true;};
-		MSO_R_Weapons = _x select 1;
-		if (isnil _string) then {
-			removeallweapons player;
-			removeallitems player;
-			{player addweapon _x} foreach ((_x select 1) + _default);
-			player selectweapon ((_x select 1) select 0);
-			player switchmove ""; //stop animation
-		
-			//give them a sidearm
-			player addWeapon "Colt1911";
-			player addBackpack "BAF_AssaultPack_RifleAmmo";
-		};
-		if (count _x > 1) then {
-			MSO_R = _x select 3;
-			MSO_R_Admin = "admin" in MSO_R;
-			MSO_R_Leader = (_x select 2) in ["CORPORAL","LIEUTENANT"];
-			MSO_R_Officer = (_x select 2) == "LIEUTENANT";
-		};
+		MSO_R = _x select 2;
+		MSO_R_Admin = "admin" in MSO_R;
+		MSO_R_Leader = (_x select 1) in ["CORPORAL","LIEUTENANT"];
+		MSO_R_Officer = (_x select 1) == "LIEUTENANT";
+		MSO_R_Air = ("pilot" in MSO_R) || MSO_R_Admin;
+		MSO_R_Tank = ("crew" in MSO_R) || MSO_R_Admin;
 	};
 } foreach [
-	["822401", ["BAF_L85A2_RIS_ACOG","Laserdesignator"],"CORPORAL"], //Ryan
-	["1022977", ["BAF_L85A2_UGL_ACOG","Binocular_Vector","ItemGPS"]], //Glenn
-	["1027329"], //Medel
-	["1062145", ["BAF_L85A2_UGL_ACOG","Binocular_Vector"],"CORPORAL"], //Antipop
-	["1065345", ["BAF_L85A2_UGL_ACOG","Binocular_Vector"],"CORPORAL"], //Tank
-	["1326785"], //Chimpy
-	["1555398"], //Stalks
-	["1675206"], //Stalkz
-	["1769798"], //Mike
-	["2194502"], //CQBSam
-	["3048774",["BAF_L85A2_UGL_ACOG","Binocular_Vector"],"LIEUTENANT",["admin"]], //Rommel
-	["3049670"], //A6-Intruder
-	["3050822"], //Greasy Trigger
-	["3051014"], //Spoon
-	["3051654"], //Winston
-	["3053638"], //Snowcat
-	["3059270"], //Sealquest
-	["3059526"], //Azza
-	["3075398"], //Recon
-	["3077638"], //Ordeal
-	["3088582"], //Drifit
-	["3093319"], //Kdog
-	["3095110"], //Akuras
-	["912385"], //Dozza
-	["932353"], //Dagger
-	["940417"] //Jukeheavy
+	["822401", 		"CORPORAL",		["crew"]],	//Ryan
+	["1022977",		"PRIVATE",		["crew"]],	//Glenn
+	["1062145", 	"CORPORAL",		["crew"]], 	//Antipop
+	["1019521", 	"PRIVATE",		["pilot"]], //Innomadic
+	["1065345", 	"CORPORAL",		["pilot"]], //Tank
+	["3048774",		"LIEUTENANT",	["admin"]], //Rommel
 ];
 
 //default weapons
 if (isnil _string) then {
-	if (primaryweapon player == "") then {
-		{player addweapon _x} foreach (["BAF_L85A2_RIS_ACOG"] + _default);
-		player addBackpack "BAF_AssaultPack_RifleAmmo";
-	};
+	removeallweapons player;
+	player addBackpack "BAF_AssaultPack_RifleAmmo";
 };
 
 //settings dialog

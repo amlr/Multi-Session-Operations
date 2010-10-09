@@ -28,7 +28,8 @@ waituntil {not isnil "rmm_nomad_respawns"};
 		{if(isnil "terraindetail")then{1;}else{terraindetail;};},
 		{lifestate player;},
 		{[assignedVehicle player, assignedVehicleRole player]},
-		{getDir player;}
+		{getDir player;},
+		{rank player}
 	],
 	[
 		{
@@ -95,6 +96,7 @@ waituntil {not isnil "rmm_nomad_respawns"};
 				};
 			};
 		},
-		{player setdir _this;}
+		{player setdir _this;},
+		{player setunitrank _this;}
 	]
 ] execfsm "modules\nomad\nomad.fsm";
