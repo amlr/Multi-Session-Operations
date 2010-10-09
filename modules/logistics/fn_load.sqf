@@ -8,6 +8,7 @@ _target = player getvariable "logistics_target";
 
 private ["_object","_array"];
 _object = (player getvariable "logistics_nearby") select _index;
+player commandchat str [_this,_object,(player getvariable "logistics_nearby")];
 if (isnull _object) exitwith {};
 if (count (crew _object) > 0) exitwith {};
 _array = _target getvariable "logistics_contents";
@@ -16,7 +17,7 @@ if (_object in _array) exitwith {};
 
 private ["_volume_t","_volume_o"];
 _volume_t = _target getvariable "logistics_volume";
-_volume_o = ceil([_object] call RMM_fnc_getvolume);
+_volume_o = [_object] call RMM_fnc_getvolume;
 if (isnil "_volume_t") exitwith {};
 if (isnil "_volume_o") exitwith {};
 if (_volume_t - _volume_o < 0) exitwith {};

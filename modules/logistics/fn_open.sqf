@@ -19,10 +19,17 @@ if (isnil "_volume") then {
 	} foreach (_target getvariable "logistics_contents");
 };
 
-ctrlsettext [2,format ["%1 (%2m3 remaining)", gettext (configfile >> "cfgvehicles" >> _typeof >> "displayname"),floor(_volume)]];
+ctrlsettext [2,format ["%1 (%2m3 remaining)", gettext (configfile >> "cfgvehicles" >> _typeof >> "displayname"),(round (_volume * 10^4))/10^4]];
 
 private ["_nearby"];
-_nearby = nearestobjects [_target,["LandVehicle","M1030_US_DES_EP1","reammobox","staticweapon","barrelbase","land_fort_bagfence_corner","TargetEpopup","land_tires_ep1","land_fort_bagfence_long","land_fort_bagfence_round","land_bagfencecorner","roadbarrier_light","roadcone","rubberboat","land_camonet_nato","land_camonet_east","helih"],sizeof _typeof];
+_nearby = (nearestobjects [_target,[
+	"LandVehicle","M1030_US_DES_EP1","reammobox",
+	"staticweapon","barrelbase","land_fort_bagfence_corner",
+	"TargetEpopup","land_tires_ep1","land_fort_bagfence_long",
+	"land_fort_bagfence_round","land_bagfencecorner","roadbarrier_light",
+	"roadcone","rubberboat","land_camonet_nato",
+	"land_camonet_east","helih"
+],sizeof _typeof]) - [_target];
 {
 	private ["_type","_text","_tvolume","_icon"];
 	_type = typeof _x;
@@ -30,7 +37,9 @@ _nearby = nearestobjects [_target,["LandVehicle","M1030_US_DES_EP1","reammobox",
 	//_icon = gettext (configfile >> "cfgvehicles" >> _type >> "icon");
 	_tvolume = [_x] call RMM_fnc_getvolume;
 	if (_volume > _tvolume) then {
-		lbadd [1, format[_text + " (%1m3)",ceil _tvolume]];
+		lbadd [1, format[_text + " (%1m3)",(round (_tvolume * 10^4))/10^4]];
+	} else {
+		_nearby = _nearby - [_x];
 	};
 } foreach _nearby;
 
@@ -41,7 +50,7 @@ _array = _target getvariable "logistics_contents";
 	_type = typeof _x;
 	_text = gettext (configfile >> "cfgvehicles" >> _type >> "displayname");
 	//_icon = gettext (configfile >> "cfgvehicles" >> _type >> "icon");
-	lbadd [3, format[_text + " (%1m3)",ceil ([_x] call RMM_fnc_getvolume)]];
+	lbadd [3, format[_text + " (%1m3)",(round (([_x] call RMM_fnc_getvolume) * 10^4))/10^4]];
 } foreach _array;
 
 player setvariable ["logistics_target",_target];
