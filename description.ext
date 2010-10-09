@@ -138,6 +138,6 @@ class cfgFunctions {
 
 #include <dialogs\jipmarkers.hpp>
 #include <dialogs\logbook.hpp>
-#include <modules\logistics\dialogs.hpp>
+#include <modules\logistics\dialog.hpp>
 #include <dialogs\recruit.hpp>
 //#include <dialogs\supplies.hpp>
