@@ -134,17 +134,7 @@ class cfgFunctions {
 			class dynocreate {};
 		};
 	};
-	class revive {
-		file = "revive";
-		class functions {
-			class init {};
-			class conscious {};
-			class unconscious {};
-			class damage {};
-			class handle_events {};
-			class heal {};
-		};
-	};
+	#include <modules\revive\function.hpp>
 };
 
 //http://community.bistudio.com/wiki/PreProcessor_Commands
