@@ -20,7 +20,7 @@ if (not isdedicated) then {
 	execNow "scripts\init_player.sqf";
 	execFSM "fsm\playersurrender.fsm";
 };
-execNow "modules\nomad\init.sqf";
+execNow "modules\nomad\main.sqf";
 
 "RMM_MPe" addPublicVariableEventHandler {
 	private ["_data","_locality","_params","_code"];
