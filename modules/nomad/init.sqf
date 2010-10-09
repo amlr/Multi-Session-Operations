@@ -26,9 +26,7 @@ waituntil {not isnil "rmm_nomad_respawns"};
 		{rating player;},
 		{viewdistance;},
 		{if(isnil "terraindetail")then{1;}else{terraindetail;};},
-#ifdef RMM_REVIVE
 		{lifestate player;},
-#endif
 		{[assignedVehicle player, assignedVehicleRole player]},
 		{getDir player;}
 	],
@@ -73,13 +71,11 @@ waituntil {not isnil "rmm_nomad_respawns"};
 			setterraingrid ((-10 * _this + 50) max 1);
 			terraindetail = _this;
 		},
-#ifdef RMM_REVIVE
 		{
 			if (tolower(_this) == "unconscious") then {
 				[1,player] call revive_fnc_handle_events;
 			};
 		},
-#endif
 		{
 			private ["_vehicle", "_vehpos", "_tp"];
 			_vehicle = _this select 0;
