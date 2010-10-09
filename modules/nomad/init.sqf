@@ -30,8 +30,11 @@ waituntil {not isnil "rmm_nomad_respawns"};
 		{rating player;},
 		{viewdistance;},
 		{if(isnil "terraindetail")then{1;}else{terraindetail;};},
+#ifdef RMM_REVIVE
 		{lifestate player;},
-		{vehicle player;}
+#endif
+		{[assignedVehicle player, assignedVehicleRole player]},
+		{getDir player;}
 	],
 	[
 		{
@@ -74,15 +77,32 @@ waituntil {not isnil "rmm_nomad_respawns"};
 			setterraingrid ((-10 * _this + 50) max 1);
 			terraindetail = _this;
 		},
+#ifdef RMM_REVIVE
 		{
 			if (tolower(_this) == "unconscious") then {
 				[1,player] call revive_fnc_handle_events;
 			};
 		},
+#endif
 		{
-			if !((typeof _this) iskindof "camanbase") then {
-				player moveincargo _this;
+			private ["_vehicle", "_vehpos", "_tp"];
+			_vehicle = _this select 0;
+			_vehpos = _this select 1;
+			if (count _vehpos != 0) then {
+				switch(_vehpos select 0) do {
+					case "Driver": {
+						player moveInDriver _vehicle;
+					};
+					case "Cargo": {
+						player moveInCargo _vehicle;
+					};
+					case "Turret": {
+						_tp = _vehpos select 1;
+						player moveInTurret [_vehicle, _tp];
+					};
+				};
 			};
-		}
+		},
+		{player setdir _this;}
 	]
-] execfsm "fsm\nomad.fsm";
+] execfsm "modules\nomad\nomad.fsm";
