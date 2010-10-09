@@ -2,7 +2,6 @@ if (isdedicated) exitwith {};
 
 waituntil {not isnull player};
 waituntil {getplayeruid player != ""};
-waituntil {not isnil "rmm_nomad_respawns"};
 
 [
 	[

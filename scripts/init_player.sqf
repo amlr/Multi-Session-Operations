@@ -1,11 +1,6 @@
 waituntil {not isnull player};
 waituntil {getplayeruid player != ""};
 
-player call revive_fnc_init;
-
-onMapSingleClick "if (_shift && _alt) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
-RMM_jipmarkers_types = ["mil_objective","mil_marker","mil_flag","mil_ambush","mil_destroy","mil_start","mil_end","mil_pickup","mil_join","mil_warning","mil_unknown"];
-
 player setskill 0;
 {player disableAI _x} foreach ["move","anim","target","autotarget"];
 
@@ -20,42 +15,48 @@ player addeventhandler ["killed", {
 	};
 }];
 
-//custom weapons per signups
-private ["_uid","_string","_default"];
+private ["_uid","_string"];
 _uid = getplayeruid player;
 _string = format ["RMM_nomad_%1",_uid];
-_default = ["itemwatch","itemmap","itemcompass","itemradio"];
 
 MSO_R = [];
 MSO_R_Admin = false;
 MSO_R_Leader = false;
 MSO_R_Officer = false;
 MSO_R_Air = false;
-MSO_R_Tank = false;
-
-{
-	_x call TK_fnc_vehicle;
-} foreach vehicles;
+MSO_R_Crew = false;
 
 private "_exit";
 _exit = false;
+
+#include <mso_signups.hpp>
+
+if (MSO_R_Air) then {
+	"farp" setmarkertypelocal "Faction_BritishArmedForces_BAF";
+};
+
 {
-	if (_uid == (_x select 0)) exitwith {
-		MSO_R = _x select 2;
-		MSO_R_Admin = "admin" in MSO_R;
-		MSO_R_Leader = (_x select 1) in ["CORPORAL","LIEUTENANT"];
-		MSO_R_Officer = (_x select 1) == "LIEUTENANT";
-		MSO_R_Air = ("pilot" in MSO_R) || MSO_R_Admin;
-		MSO_R_Tank = ("crew" in MSO_R) || MSO_R_Admin;
+	if (not isnil {_x getvariable "logistics"}) then {
+		_this addaction ["Logistics",RMM_fnc_actionargument_path,[0,{_target call logistics_fnc_doOpen}],-1,false,true,"","(vehicle _this == _this)"];
 	};
-} foreach [
-	["822401", 		"CORPORAL",		["crew"]],	//Ryan
-	["1022977",		"PRIVATE",		["crew"]],	//Glenn
-	["1062145", 	"CORPORAL",		["crew"]], 	//Antipop
-	["1019521", 	"PRIVATE",		["pilot"]], //Innomadic
-	["1065345", 	"CORPORAL",		["pilot"]], //Tank
-	["3048774",		"LIEUTENANT",	["admin"]], //Rommel
-];
+	if (_x iskindof "Car") then {
+		_this addaction ["Change Tyres",RMM_fnc_actionargument_path,[0,{[_caller,_target] call TK_fnc_changeTyres}],-1,false,true,"","(vehicle _this == _this) && !(canmove _target)"];
+	} else {
+		if (_x iskindof "Air") then {
+			if (not MSO_R_Air) then {
+				lockdriver _x;
+			};
+		};
+		if (_x iskindof "Tank") then {
+			if (not MSO_R_Crew) then {
+				lockdriver _x;
+			};
+		};
+	};
+	if (not isnil {_x getvariable "construction"}) then {
+		_this addaction ["Construction",RMM_fnc_actionargument_path,[0,{_target execvm "scripts\coin.sqf"}],-1,false,true,"","vehicle _this == _this"];
+	};
+} foreach vehicles;
 
 //default weapons
 if (isnil _string) then {
