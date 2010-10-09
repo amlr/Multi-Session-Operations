@@ -2,6 +2,7 @@ if (isdedicated) exitwith {};
 
 waituntil {not isnull player};
 waituntil {getplayeruid player != ""};
+waituntil {not isnil "params_nomadrespawns"};
 
 [
 	[
@@ -25,14 +26,14 @@ waituntil {getplayeruid player != ""};
 		{rating player;},
 		{viewdistance;},
 		{if(isnil "terraindetail")then{1;}else{terraindetail;};},
-		{lifestate player;},
-		{[assignedVehicle player, assignedVehicleRole player]},
 		{getDir player;},
+		{[assignedVehicle player, assignedVehicleRole player]},
+		{lifestate player;},
 		{rank player}
 	],
 	[
 		{
-			if (_this > (paramsArray select 0)) then {_disconnect = true;};
+			if (_this > (params_nomadrespawns)) then {_disconnect = true;};
 		},
 		{
 			if (typeof player != _this) then {_disconnect = true;};
@@ -71,11 +72,7 @@ waituntil {getplayeruid player != ""};
 			setterraingrid ((-10 * _this + 50) max 1);
 			terraindetail = _this;
 		},
-		{
-			if (tolower(_this) == "unconscious") then {
-				[1,player] call revive_fnc_handle_events;
-			};
-		},
+		{player setdir _this;},
 		{
 			private ["_vehicle", "_vehpos", "_tp"];
 			_vehicle = _this select 0;
@@ -95,7 +92,11 @@ waituntil {getplayeruid player != ""};
 				};
 			};
 		},
-		{player setdir _this;},
+		{
+			if (tolower(_this) == "unconscious") then {
+				[1,player] call revive_fnc_handle_events;
+			};
+		},
 		{player setunitrank _this;}
 	]
 ] execfsm "modules\nomad\nomad.fsm";

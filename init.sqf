@@ -26,6 +26,15 @@ if (not isdedicated) then {
 	execFSM "fsm\playersurrender.fsm";
 	player call revive_fnc_init;
 };
+
+// http://www.ofpec.com/forum/index.php?topic=34033.0;all
+// refers to params by name to remove array order errors
+if (isserver) then {
+	for [{_i = 0},{_i < count(paramsArray)},{_i = _i + 1}] do {
+		call compile format ["PARAMS_%1 = %2;",(configName ((missionConfigFile >> "Params") select _i)),(paramsArray select _i)];
+	};
+};
+
 execNow "modules\jipmarkers\main.sqf";
 execNow "modules\nomad\main.sqf";
 
