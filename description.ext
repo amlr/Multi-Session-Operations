@@ -127,8 +127,8 @@ class cfgFunctions {
 			class dynocreate {};
 		};
 	};
-	#include <modules\logistics\function.hpp>
-	#include <modules\revive\function.hpp>
+	#include <modules\logistics\functions.hpp>
+	#include <modules\revive\functions.hpp>
 };
 
 //http://community.bistudio.com/wiki/PreProcessor_Commands
