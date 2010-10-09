@@ -5,18 +5,20 @@ enableSaving [false, false];
 
 waituntil {not isnil "BIS_fnc_init"};
 
-["Receiving"] call RMM_fnc_failSafeLS;
+//["Receiving",3] call RMM_fnc_failSafeLS;
 
 execNow "scripts\cfg_groups.sqf";
 
 if (isserver) then {
 	execNow "scripts\cfg_locations.sqf";
-	execNow "scripts\init_server.sqf";
+	//execNow "scripts\init_server.sqf";
+	execNow "scripts\farp.sqf";
 };
 if (not isdedicated) then {
-	execvm "scripts\calltoprayer.sqf";
 	execNow "briefing.sqf";
 	execNow "tasks.sqf";
+	
+	execvm "scripts\calltoprayer.sqf";
 	execNow "scripts\init_player.sqf";
 	execFSM "fsm\playersurrender.fsm";
 };
@@ -39,4 +41,4 @@ execNow "modules\nomad\main.sqf";
 	};
 };
 
-endLoadingScreen;
+//endLoadingScreen;

@@ -1,3 +1,7 @@
+//0, All
+//1, Server
+//2, Clients
+//3, Local
 private ["_locality","_params","_code"];
 _locality = _this select 0;
 _params = _this select 1;
