@@ -62,6 +62,7 @@ class Weapons {
 class Magazines {
 };
 
+//http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
 class Params {
 	#include <modules\nomad\params.hpp>
 }; 

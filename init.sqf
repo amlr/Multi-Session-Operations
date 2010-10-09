@@ -27,12 +27,8 @@ if (not isdedicated) then {
 	player call revive_fnc_init;
 };
 
-// http://www.ofpec.com/forum/index.php?topic=34033.0;all
-// refers to params by name to remove array order errors
-if (isserver && !isNil "paramsArray") then {
-	for [{_i = 0},{_i < count(paramsArray)},{_i = _i + 1}] do {
-		call compile format ["PARAMS_%1 = %2;",(configName ((missionConfigFile >> "Params") select _i)),(paramsArray select _i)];
-	};
+for "_i" from 0 to ((count paramsArray)-1) do {
+	missionNamespace setVariable [configName ((missionConfigFile/"Params") select _i),paramsArray select _i];
 };
 
 execNow "modules\jipmarkers\main.sqf";

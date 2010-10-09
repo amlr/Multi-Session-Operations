@@ -2,7 +2,6 @@ if (isdedicated) exitwith {};
 
 waituntil {not isnull player};
 waituntil {getplayeruid player != ""};
-waituntil {not isnil "params_nomadrespawns"};
 
 [
 	[
@@ -33,7 +32,7 @@ waituntil {not isnil "params_nomadrespawns"};
 	],
 	[
 		{
-			if (_this > (params_nomadrespawns)) then {_disconnect = true;};
+			if (_this > (nomadRespawns)) then {_disconnect = true;};
 		},
 		{
 			if (typeof player != _this) then {_disconnect = true;};
