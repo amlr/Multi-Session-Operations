@@ -3,7 +3,7 @@
 /*
 item0[] = {"func_init",2,250,200.000000,150.000000,300.000000,200.000000,0.000000,"func init"};
 item1[] = {"not_initdone",4,218,200.000000,75.000000,300.000000,125.000000,1.000000,"not initdone"};
-item2[] = {"_",4,218,75.000000,150.000000,175.000000,200.000000,0.000000,""};
+item2[] = {"_",8,218,75.000000,150.000000,175.000000,200.000000,0.000000,""};
 item3[] = {"start",0,4346,75.000000,75.000000,175.000000,125.000000,0.000000,"start"};
 item4[] = {"count___0",4,218,200.000000,225.000000,300.000000,275.000000,1.000000,"count > 0"};
 item5[] = {"wait",3,250,200.000000,300.000000,300.000000,350.000000,0.000000,"wait"};
@@ -26,8 +26,8 @@ link9[] = {7,4};
 link10[] = {7,8};
 link11[] = {8,9};
 link12[] = {11,10};
-globals[] = {25.000000,1,0,0,0,640,480,1,201,6316128,1,-155.715637,354.836761,477.742889,-108.116013,800,918,1};
-window[] = {2,-1,-1,-1,-1,1142,154,1339,203,3,818};
+globals[] = {25.000000,1,0,0,0,640,480,1,201,6316128,1,-115.512459,395.039856,455.406738,-130.452667,800,918,1};
+window[] = {2,-1,-1,-1,-1,1084,110,1295,145,3,818};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -212,7 +212,15 @@ class FSM
        "			_list set [count _list, (_x call RMM_fnc_frzr_udelete)];" \n
        "		};" \n
        "	} foreach (units _group);" \n
-       "	_group call RMM_fnc_deleteentity;" \n
+       "	{" \n
+       "		if (vehicle _x != _x) then {" \n
+       "			unassignvehicle _x;" \n
+       "			_x setposasl [0,0,0];" \n
+       "		};" \n
+       "		deletevehicle _x;" \n
+       "	} foreach (units _group);" \n
+       "	{deletewaypoint _x} foreach (waypoints _group);" \n
+       "	deletegroup _group;" \n
        "" \n
        "	_reference setvariable [""RMM_frzr_frozen"",true];" \n
        "	_reference setvariable [""RMM_frzr_grpdata"",[_list,_waypoints,_params]];" \n
@@ -241,7 +249,7 @@ class FSM
           priority = 0.000000;
           to="check";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"not isnil ""RMM_fnc_deleteentity"""/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
@@ -313,7 +321,7 @@ class FSM
           priority = 0.000000;
           to="check";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"not isnil ""RMM_fnc_deleteentity"""/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
@@ -346,7 +354,7 @@ class FSM
     {
       name = "check";
       init = /*%FSM<STATEINIT""">*/"private ""_players"";" \n
-       "_players = [] call BIS_fnc_listPlayers;" \n
+       "_players = playableUnits + switchableUnits;" \n
        "" \n
        "{" \n
        "	private [""_reference""];" \n
