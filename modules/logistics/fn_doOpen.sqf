@@ -8,15 +8,15 @@ _target = _this;
 _typeof = typeof _target;
 
 private ["_volume"];
-_volume = _target getvariable "RMM_logistics_volume";
+_volume = _target getvariable "logistics_volume";
 if (isnil "_volume") then {
 	_volume = ([_target] call RMM_fnc_getvolume) ^ 0.5;
-	_target setvariable ["RMM_logistics_volume",_volume];
+	_target setvariable ["logistics_volume",_volume];
 	{
 		private ["_volume_o"];
 		_volume_o = [_x] call RMM_fnc_getvolume;
-		_target setvariable ["RMM_logistics_volume",_volume - _volume_o];
-	} foreach (_target getvariable "RMM_logistics_contents");
+		_target setvariable ["logistics_volume",_volume - _volume_o];
+	} foreach (_target getvariable "logistics_contents");
 };
 
 ctrlsettext [2,format ["%1 (%2m3 remaining)", gettext (configfile >> "cfgvehicles" >> _typeof >> "displayname"),floor(_volume)]];
@@ -35,7 +35,7 @@ _nearby = nearestobjects [_target,["LandVehicle","M1030_US_DES_EP1","reammobox",
 } foreach _nearby;
 
 private ["_array"];
-_array = _target getvariable "RMM_logistics_contents";
+_array = _target getvariable "logistics_contents";
 {
 	private ["_type","_text","_icon"];
 	_type = typeof _x;
@@ -44,5 +44,5 @@ _array = _target getvariable "RMM_logistics_contents";
 	lbadd [3, format[_text + " (%1m3)",ceil ([_x] call RMM_fnc_getvolume)]];
 } foreach _array;
 
-player setvariable ["RMM_logistics_target",_target];
-player setvariable ["RMM_logistics_nearby",_nearby];
+player setvariable ["logistics_target",_target];
+player setvariable ["logistics_nearby",_nearby];

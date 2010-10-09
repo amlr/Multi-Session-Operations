@@ -27,7 +27,7 @@ class RMM_ui_logistics {
 			y = CUI_Box_Row(0,2);
 			w = CUI_Box_W;
 			h = CUI_Row_DY(1,CUI_Box_Rows);
-			onLBDblClick = "_this spawn RMM_fnc_logistics_doLoad";
+			onLBDblClick = "_this spawn logistics_fnc_doLoad";
 		};
 		class PText : SText {
 			idc = 2;
@@ -38,7 +38,7 @@ class RMM_ui_logistics {
 		class PLb : SLb {
 			idc = 3;
 			x = CUI_Box_X(2);
-			onLBDblClick = "_this spawn RMM_fnc_logistics_doUnload";
+			onLBDblClick = "_this spawn logistics_fnc_doUnload";
 		};
 	};
 };
