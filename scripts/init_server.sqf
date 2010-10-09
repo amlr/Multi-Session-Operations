@@ -1,8 +1,3 @@
-RMM_NOMAD_RESPAWNS = paramsArray select 0;
-publicVariable "RMM_NOMAD_RESPAWNS";
-
-if (True) exitwith {};
-
 if (isnil "RMM_cnstrct_buildings" && not isnil "RMM_supply_crates") then {RMM_cnstrct_buildings = +RMM_supply_crates; publicVariable "RMM_cnstrct_buildings";};
 
 private ["_list"];
