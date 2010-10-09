@@ -5,7 +5,7 @@ enableSaving [false, false];
 
 waituntil {not isnil "BIS_fnc_init"};
 
-["Receiving"] call RMM_fnc_failSafeLS; 
+["Receiving"] call RMM_fnc_failSafeLS;
 
 execNow "scripts\cfg_groups.sqf";
 
