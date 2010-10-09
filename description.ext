@@ -71,14 +71,9 @@ class cfgFunctions {
 	class TK {
 		file = "TK";
 		class Misc {
-			class addBuild {};
-			class addLogistics {};
-			class changeTyres {};
 			class takibani {};
 			class takistani {};
-			class spareTyres {};
 			class threatFunc {};
-			class vehicle {};
 		};
 	};
 	class RMM {
@@ -117,18 +112,16 @@ class cfgFunctions {
 			class taskDefend {};
 			class taskPatrol {};
 		};
-		class logbook {
-			file = "dialogs\logbook";
-			class logbook_openLog {};
-		};
 	};
 	class BIS {
 		class server {
 			class dynocreate {};
 		};
 	};
+	#include <modules\logbook\functions.hpp>
 	#include <modules\logistics\functions.hpp>
 	#include <modules\revive\functions.hpp>
+	#include <modules\tyres\functions.hpp>
 };
 
 //http://community.bistudio.com/wiki/PreProcessor_Commands
@@ -136,8 +129,8 @@ class cfgFunctions {
 #include <dialogs\debug.hpp>
 #include <dialogs\settings.hpp>
 
-#include <dialogs\jipmarkers.hpp>
-#include <dialogs\logbook.hpp>
+#include <modules\jipmarkers\dialog.hpp>
+#include <modules\logbook\dialog.hpp>
 #include <modules\logistics\dialog.hpp>
 #include <dialogs\recruit.hpp>
 //#include <dialogs\supplies.hpp>

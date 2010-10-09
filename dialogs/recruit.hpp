@@ -20,13 +20,13 @@ class RMM_ui_recruitment { // by Rommel
 			w = CUI_Box_W;
 			y = CUI_Row_Y(1);
 			h = CUI_Row_DY(0,1);
-			action = "if (count (units player) < 6) then {(group player) createunit [""BAF_Soldier_MTP"", getmarkerpos ""headquarters"", [], 0, ""FORM""]};";
+			action = "if (count (units player) < 6) then {(group player) createunit [""BAF_Soldier_MTP"", getmarkerpos ""unbase"", [], 0, ""FORM""]};";
 			default = true;
 		};
 		class SoldierMG : SoldierWB {
 			text = "Machinegunner";
 			y = CUI_Row_Y(2);
-			action = "if (count (units player) < 6) then {(group player) createunit [""BAF_Soldier_MG_MTP"", getmarkerpos ""headquarters"", [], 0, ""FORM""]};";
+			action = "if (count (units player) < 6) then {(group player) createunit [""BAF_Soldier_MG_MTP"", getmarkerpos ""unbase"", [], 0, ""FORM""]};";
 		};
 	};
 };

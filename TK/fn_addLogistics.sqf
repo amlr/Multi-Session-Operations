@@ -1,1 +1,0 @@
-_this addaction ["Logistics",RMM_fnc_actionargument_path,[0,{_target call logistics_fnc_doOpen}],-1,false,true,"","(vehicle _this == _this)"];

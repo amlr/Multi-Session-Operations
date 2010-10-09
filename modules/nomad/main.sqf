@@ -28,7 +28,8 @@ waituntil {not isnil "params_nomadrespawns"};
 		{if(isnil "terraindetail")then{1;}else{terraindetail;};},
 		{getDir player;},
 		{[assignedVehicle player, assignedVehicleRole player]},
-		{lifestate player;}
+		{lifestate player;},
+		{rank player}
 	],
 	[
 		{
@@ -95,6 +96,7 @@ waituntil {not isnil "params_nomadrespawns"};
 			if (tolower(_this) == "unconscious") then {
 				[1,player] call revive_fnc_handle_events;
 			};
-		}
+		},
+		{player setunitrank _this;}
 	]
 ] execfsm "modules\nomad\nomad.fsm";

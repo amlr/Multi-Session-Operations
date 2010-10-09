@@ -1,11 +1,14 @@
 #define execNow call compile preprocessfilelinenumbers
 
+//http://community.bistudio.com/wiki/startLoadingScreen
+startLoadingScreen ["Receiving", "RscDisplayLoadMission"];
+
 //http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];
 
 waituntil {not isnil "BIS_fnc_init"};
 
-//["Receiving",3] call RMM_fnc_failSafeLS;
+["Receiving",10] call RMM_fnc_failSafeLS;
 
 execNow "scripts\cfg_groups.sqf";
 
@@ -21,6 +24,7 @@ if (not isdedicated) then {
 	execvm "scripts\calltoprayer.sqf";
 	execNow "scripts\init_player.sqf";
 	execFSM "fsm\playersurrender.fsm";
+	player call revive_fnc_init;
 };
 
 // http://www.ofpec.com/forum/index.php?topic=34033.0;all
@@ -31,6 +35,7 @@ if (isserver) then {
 	};
 };
 
+execNow "modules\jipmarkers\main.sqf";
 execNow "modules\nomad\main.sqf";
 
 "RMM_MPe" addPublicVariableEventHandler {
@@ -50,4 +55,4 @@ execNow "modules\nomad\main.sqf";
 	};
 };
 
-//endLoadingScreen;
+endLoadingScreen;

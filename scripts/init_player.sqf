@@ -1,15 +1,6 @@
 waituntil {not isnull player};
 waituntil {getplayeruid player != ""};
 
-{
-	_x call TK_fnc_vehicle;
-} foreach vehicles;
-
-player call revive_fnc_init;
-
-onMapSingleClick "if (_shift && _alt) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
-RMM_jipmarkers_types = ["mil_objective","mil_marker","mil_flag","mil_ambush","mil_destroy","mil_start","mil_end","mil_pickup","mil_join","mil_warning","mil_unknown"];
-
 player setskill 0;
 {player disableAI _x} foreach ["move","anim","target","autotarget"];
 
@@ -24,78 +15,54 @@ player addeventhandler ["killed", {
 	};
 }];
 
-//custom weapons per signups
-private ["_uid","_string","_default"];
+private ["_uid","_string"];
 _uid = getplayeruid player;
 _string = format ["RMM_nomad_%1",_uid];
-_default = ["itemwatch","itemmap","itemcompass","itemradio"];
 
 MSO_R = [];
 MSO_R_Admin = false;
 MSO_R_Leader = false;
 MSO_R_Officer = false;
+MSO_R_Air = false;
+MSO_R_Crew = false;
 
 private "_exit";
 _exit = false;
+
+#include <mso_signups.hpp>
+
+if (MSO_R_Air) then {
+	"farp" setmarkertypelocal "Faction_BritishArmedForces_BAF";
+};
+
 {
-	if (_uid == (_x select 0)) exitwith {
-		if (count _x < 2) then {_x set [1,["BAF_L85A2_RIS_ACOG"]]};
-		if (count _x < 3) then {_x set [2,"PRIVATE"]};
-		if (rank player != (_x select 2)) exitwith {_exit = true;};
-		MSO_R_Weapons = _x select 1;
-		if (isnil _string) then {
-			removeallweapons player;
-			removeallitems player;
-			{player addweapon _x} foreach ((_x select 1) + _default);
-			player selectweapon ((_x select 1) select 0);
-			player switchmove ""; //stop animation
-		
-			//give them a sidearm
-			player addWeapon "Colt1911";
-			player addBackpack "BAF_AssaultPack_RifleAmmo";
+	if (not isnil {_x getvariable "logistics"}) then {
+		_x addaction ["Logistics",RMM_fnc_actionargument_path,[0,{_target call logistics_fnc_open}],-1,false,true,"","(vehicle _this == _this)"];
+	};
+	if (_x iskindof "Car") then {
+		_x addaction ["Change Tyres",RMM_fnc_actionargument_path,[0,{[_caller,_target] call tyres_fnc_change}],-1,false,true,"","(vehicle _this == _this) && !(canmove _target)"];
+	} else {
+		if (_x iskindof "Air") then {
+			if (not MSO_R_Air) then {
+				_x lockdriver true;
+			};
 		};
-		if (count _x > 1) then {
-			MSO_R = _x select 3;
-			MSO_R_Admin = "admin" in MSO_R;
-			MSO_R_Leader = (_x select 2) in ["CORPORAL","LIEUTENANT"];
-			MSO_R_Officer = (_x select 2) == "LIEUTENANT";
+		if (_x iskindof "Tank") then {
+			if (not MSO_R_Crew) then {
+				_x lockdriver true;
+			};
 		};
 	};
-} foreach [
-	["822401", ["BAF_L85A2_RIS_ACOG","Laserdesignator"],"CORPORAL"], //Ryan
-	["1022977", ["BAF_L85A2_UGL_ACOG","Binocular_Vector","ItemGPS"]], //Glenn
-	["1027329"], //Medel
-	["1062145", ["BAF_L85A2_UGL_ACOG","Binocular_Vector"],"CORPORAL"], //Antipop
-	["1065345", ["BAF_L85A2_UGL_ACOG","Binocular_Vector"],"CORPORAL"], //Tank
-	["1326785"], //Chimpy
-	["1555398"], //Stalks
-	["1675206"], //Stalkz
-	["1769798"], //Mike
-	["2194502"], //CQBSam
-	["3048774",["BAF_L85A2_UGL_ACOG","Binocular_Vector"],"LIEUTENANT",["admin"]], //Rommel
-	["3049670"], //A6-Intruder
-	["3050822"], //Greasy Trigger
-	["3051014"], //Spoon
-	["3051654"], //Winston
-	["3053638"], //Snowcat
-	["3059270"], //Sealquest
-	["3059526"], //Azza
-	["3075398"], //Recon
-	["3077638"], //Ordeal
-	["3088582"], //Drifit
-	["3093319"], //Kdog
-	["3095110"], //Akuras
-	["912385"], //Dozza
-	["932353"], //Dagger
-	["940417"] //Jukeheavy
-];
+	if (not isnil {_x getvariable "construction"}) then {
+		_x addaction ["Construction",RMM_fnc_actionargument_path,[0,{_target execvm "scripts\coin.sqf"}],-1,false,true,"","vehicle _this == _this"];
+	};
+} foreach vehicles;
 
 //default weapons
 if (isnil _string) then {
-	if (primaryweapon player == "") then {
-		{player addweapon _x} foreach (["BAF_L85A2_RIS_ACOG"] + _default);
-		player addBackpack "BAF_AssaultPack_RifleAmmo";
-	};
+	removeallweapons player;
+	player switchmove "";
+	player addBackpack "BAF_AssaultPack_RifleAmmo";
 };
 
 //settings dialog

@@ -33,4 +33,4 @@ _object attachto [logistics_Virtual,[0,0,10]];
 waituntil {_object distance logistics_Virtual < 15};
 
 closeDialog 0;
-_target call logistics_fnc_doOpen;
+_target call logistics_fnc_open;
