@@ -36,18 +36,14 @@ if (MSO_R_Air) then {
 };
 
 {
-	if (_x iskindof "Car") then {
-		_x addaction ["Change Tyres",RMM_fnc_actionargument_path,[0,{[_caller,_target] call tyres_fnc_change}],-1,false,true,"","(vehicle _this == _this) && !(canmove _target)"];
-	} else {
-		if (_x iskindof "Air") then {
-			if (not MSO_R_Air) then {
-				_x lockdriver true;
-			};
+	if (_x iskindof "Air") then {
+		if (not MSO_R_Air) then {
+			_x lockdriver true;
 		};
-		if (_x iskindof "Tank") then {
-			if (not MSO_R_Crew) then {
-				_x lockdriver true;
-			};
+	};
+	if (_x iskindof "Tank") then {
+		if (not MSO_R_Crew) then {
+			_x lockdriver true;
 		};
 	};
 	if (not isnil {_x getvariable "construction"}) then {

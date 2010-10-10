@@ -27,12 +27,15 @@ if (not isdedicated) then {
 	player call revive_fnc_init;
 };
 
-for "_i" from 0 to ((count paramsArray)-1) do {
-	missionNamespace setVariable [configName ((missionConfigFile/"Params") select _i),paramsArray select _i];
+if (!isNil "paramsArray") then {
+	for "_i" from 0 to ((count paramsArray)-1) do {
+		missionNamespace setVariable [configName ((missionConfigFile/"Params") select _i),paramsArray select _i];
+	};
 };
 
 execNow "modules\jipmarkers\main.sqf";
 execNow "modules\logistics\main.sqf";
+execNow "modules\tyres\main.sqf";
 execNow "modules\nomad\main.sqf";
 
 "RMM_MPe" addPublicVariableEventHandler {
