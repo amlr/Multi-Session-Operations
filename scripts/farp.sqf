@@ -8,21 +8,21 @@ if (isnil "supply_crates") then {supply_crates = [];};
 
 [[
 	["BAF_Merlin_HC3_D",	1,	{CLEAR;LOGISTICS;}],
-	["MtvrRepair_DES_EP1",	2,	{CONSTRUCTION;CLEAR;}],
+	["MtvrRepair_DES_EP1",	3,	{CONSTRUCTION;CLEAR;}],
 	["MtvrRefuel_DES_EP1",	2,	{CLEAR;}],
 	["MtvrReammo_DES_EP1",	2,	{CLEAR;}],
-	["Misc_cargo_cont_net2",	8,	{SUPPLIES;}],
+	["Misc_cargo_cont_net2",	10,	{SUPPLIES;}],
 	["BAF_VehicleBox",		4,	{CLEAR; _this setvehicleinit "this execvm ""scripts\ammocrate.sqf"""; processinitcommands;}],
 	["USBasicAmmunitionBox_EP1", 10, {CLEAR;}],
 	["BAF_Offroad_W",	8,	{CLEAR;LOGISTICS;}],
-	["BAF_Jackal2_L2A1_D",	4,	{CLEAR;LOGISTICS;}],
+	["BAF_Jackal2_L2A1_W",	4,	{CLEAR;LOGISTICS;}],
 	["Land_Pneu", 40, {}],
 	["Barrel4", 20, {}],
 	["M2StaticMG_US_EP1", 4, {}],
 	["MK19_TriPod_US_EP1", 4, {}],
-	["M252_US_EP1", 2, {}],
+	["M252_US_EP1", 4, {}],
 	["BAF_FV510_W", 2, {CLEAR; LOGISTICS;}],
-	["M1030_US_DES_EP1", 20, {}]
+	["M1030_US_DES_EP1", 18, {}]
 ],
 	getmarkerpos "farp", //position
 	markerdir "farp", //direction

@@ -757,7 +757,7 @@ class Mission
 		};
 		class Item2
 		{
-			position[]={13214.52,131.89189,12288.525};
+			position[]={2365.8003,365.6131,-412.11658};
 			id=2;
 			side="EMPTY";
 			vehicle="FlagCarrierBAF";
@@ -765,7 +765,7 @@ class Mission
 		};
 		class Item3
 		{
-			position[]={13221.363,130.912,12289.139};
+			position[]={2372.644,365.5744,-411.5033};
 			id=3;
 			side="EMPTY";
 			vehicle="SignM_FARP_Winchester_EP1";
@@ -784,7 +784,8 @@ class Mission
 		};
 		class Item5
 		{
-			position[]={13251.355,127.19401,12309.708};
+			position[]={2332.2258,365.1557,-432.9704};
+			azimut=270;
 			id=28;
 			side="EMPTY";
 			vehicle="WarfareBAirport";
@@ -899,7 +900,7 @@ class Mission
 		};
 		class Item1
 		{
-			position[]={13283.957,128.28204,12270.246};
+			position[]={2370.082,366.90009,-505.46606};
 			name="farp";
 			type="Empty";
 		};
