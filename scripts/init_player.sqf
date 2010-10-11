@@ -46,9 +46,6 @@ if (MSO_R_Air) then {
 			_x lockdriver true;
 		};
 	};
-	if (not isnil {_x getvariable "construction"}) then {
-		_x addaction ["Construction",RMM_fnc_actionargument_path,[0,{_target execvm "scripts\coin.sqf"}],-1,false,true,"","vehicle _this == _this"];
-	};
 } foreach vehicles;
 
 //default weapons

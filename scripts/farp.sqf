@@ -1,4 +1,4 @@
-RMM_supply_crates = [];
+if (isnil "RMM_supply_crates") then {RMM_supply_crates = [];};
 
 #define LOGISTICS	_this setvariable ["logistics",true,true]
 //#define CLEAR	clearWeaponCargoGlobal _this; clearMagazineCargoGlobal _this
