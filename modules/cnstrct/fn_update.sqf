@@ -1,3 +1,6 @@
+#define COLOR_GREEN "#(argb,8,8,3)color(0,1,0,0.3,ca)"
+#define COLOR_GRAY 	"#(argb,8,8,3)color(0,0,0,0.3,ca)"
+
 private ["_supplies"];
 _supplies = cnstrct_center getvariable "cnstrct_supplies";
 ((uinamespace getvariable "BIS_CONTROL_CAM_DISPLAY") displayctrl 112224) ctrlsetstructuredtext (parsetext format["<t size='2'>S%1</t>",_supplies]);

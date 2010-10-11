@@ -1,7 +1,3 @@
-#define COLOR_GREEN "#(argb,8,8,3)color(0,1,0,0.3,ca)"
-#define COLOR_RED 	"#(argb,8,8,3)color(1,0,0,0.3,ca)"
-#define COLOR_GRAY 	"#(argb,8,8,3)color(0,0,0,0.3,ca)"
-
 hint parsetext format ["<t size='1.25'>CONSTRUCTION MODULE</t><br/>Note: %1 to sell", keyName ((actionKeys "Compass") select 0)];
 
 if (isnil {_this getvariable "cnstrct_radius"}) then {

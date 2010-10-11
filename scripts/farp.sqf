@@ -26,7 +26,7 @@ if (isnil "supply_crates") then {supply_crates = [];};
 ],
 	getmarkerpos "farp", //position
 	markerdir "farp", //direction
-	80 //row length (metres)
+	75 //row length (metres)
 ] call {
 	private ["_array", "_position", "_offset", "_direction", "_distance"];
 	_array = _this select 0;

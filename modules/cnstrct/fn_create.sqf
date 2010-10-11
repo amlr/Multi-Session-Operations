@@ -1,3 +1,5 @@
+#define COLOR_GREEN "#(argb,8,8,3)color(0,1,0,0.3,ca)"
+
 if ((cnstrct_preview getvariable "cnstrct_color") != COLOR_GREEN) exitwith {};
 private ["_class"];
 _class = cnstrct_preview getvariable "cnstrct_type";
