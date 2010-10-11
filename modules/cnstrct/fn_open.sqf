@@ -2,7 +2,7 @@
 #define COLOR_RED 	"#(argb,8,8,3)color(1,0,0,0.3,ca)"
 #define COLOR_GRAY 	"#(argb,8,8,3)color(0,0,0,0.3,ca)"
 
-////////////////////////////////
+hint parsetext format ["<t size='1.25'>CONSTRUCTION MODULE</t><br/>Note: %1 to sell", keyName ((actionKeys "Compass") select 0)];
 
 if (isnil {_this getvariable "cnstrct_radius"}) then {
 	if (isnil {_this getvariable "cnstrct_supplies"}) then {
@@ -50,11 +50,7 @@ if (isnil {_this getvariable "cnstrct_radius"}) then {
 	_this setvariable ["cnstrct_usenvg",false];
 };
 
-////////////////////////////////
-
 disableserialization;
-
-hint parsetext format ["<t size='1.25'>CONSTRUCTION MODULE\n</t>Note: %1 to sell", keyName ((actionKeys "Compass") select 0)];
 
 private ["_position","_viewdistance"];
 _position = getpos _this;
@@ -73,15 +69,11 @@ BIS_CONTROL_CAM = _camera;
 showcinemaborder false;
 1122 cutrsc ["constructioninterface","plain"];
 
-////////////////////////////////
-
 cnstrct_center = _this;
 cnstrct_params = "";
 cnstrct_preview = objnull;
 cnstrct_center setvariable ["cnstrct_camera",_camera];
 cnstrct_center setvariable ["cnstrct_usenvg",false];
-
-////////////////////////////////
 
 private ["_display"];
 _display = findDisplay 46;
@@ -91,19 +83,13 @@ _keydown = _display displayaddeventhandler ["KeyDown","0 = _this spawn cnstrct_f
 _keyup = _display displayaddeventhandler ["KeyUp","0 = _this spawn cnstrct_fnc_handler;"];
 _mousedown = _display displayaddeventhandler ["MouseButtonDown","0 = _this spawn cnstrct_fnc_handler;"];
 
-////////////////////////////////
-
 [["Categories",true],"cnstrct_menu",_this getvariable "cnstrct_categories","","cnstrct_params = %2"] call BIS_fnc_createmenu;
 [] call cnstrct_fnc_refresh;
 	
-////////////////////////////////
-
 while {not isnil "cnstrct_center"} do {
 	[] call cnstrct_fnc_update;
 	sleep 0.2;
 };
-
-////////////////////////////////
 
 if (not isnil {_this getvariable "cnstrct_selected"}) then {
 	deletevehicle ((_this getvariable "cnstrct_selected") select 1);
