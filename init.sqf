@@ -39,10 +39,11 @@ if (!isNil "paramsArray") then {
 // ====================================================================================
 // Modules
 
+execNow "modules\cnstrct\main.sqf";
 execNow "modules\jipmarkers\main.sqf";
 execNow "modules\logistics\main.sqf";
-execNow "modules\tyres\main.sqf";
 execNow "modules\nomad\main.sqf";
+execNow "modules\tyres\main.sqf";
 
 "RMM_MPe" addPublicVariableEventHandler {
 	private ["_data","_locality","_params","_code"];

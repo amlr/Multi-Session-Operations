@@ -119,6 +119,7 @@ class cfgFunctions {
 			class dynocreate {};
 		};
 	};
+	#include <modules\cnstrct\functions.hpp>
 	#include <modules\logbook\functions.hpp>
 	#include <modules\logistics\functions.hpp>
 	#include <modules\revive\functions.hpp>

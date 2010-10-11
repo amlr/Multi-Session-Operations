@@ -5,12 +5,6 @@
 ////////////////////////////////
 
 if (isnil {_this getvariable "cnstrct_radius"}) then {
-	////////////////////////////////
-
-	["Preloading CoIn"] call RMM_fnc_failSafeLS;
-	
-	////////////////////////////////
-
 	if (isnil {_this getvariable "cnstrct_supplies"}) then {
 		_this setvariable ["cnstrct_supplies",0,true];
 	};
@@ -54,14 +48,13 @@ if (isnil {_this getvariable "cnstrct_radius"}) then {
 		]];
 	};
 	_this setvariable ["cnstrct_usenvg",false];
-	endLoadingScreen;
 };
 
 ////////////////////////////////
 
 disableserialization;
 
-hint format ["CONSTRUCTION MODULE\nNote: %1 to sell", keyName ((actionKeys "Compass") select 0)];
+hint parsetext format ["<t size='1.25'>CONSTRUCTION MODULE\n</t>Note: %1 to sell", keyName ((actionKeys "Compass") select 0)];
 
 private ["_position","_viewdistance"];
 _position = getpos _this;

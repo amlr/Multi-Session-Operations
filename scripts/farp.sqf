@@ -1,19 +1,20 @@
 if (isnil "RMM_supply_crates") then {RMM_supply_crates = [];};
 
+#define CONSTRUCTION	_this setvariable ["construction",true,true]
 #define LOGISTICS	_this setvariable ["logistics",true,true]
 //#define CLEAR	clearWeaponCargoGlobal _this; clearMagazineCargoGlobal _this
 #define CLEAR	clearWeaponCargo _this; clearMagazineCargo _this
 
 [[
-	["BAF_Merlin_HC3_D",	1,	{CLEAR; LOGISTICS;}],
-	["MtvrRepair_DES_EP1",	2,	{CLEAR;}],
+	["BAF_Merlin_HC3_D",	1,	{CLEAR;LOGISTICS;}],
+	["MtvrRepair_DES_EP1",	2,	{CONSTRUCTION;CLEAR;}],
 	["MtvrRefuel_DES_EP1",	2,	{CLEAR;}],
 	["MtvrReammo_DES_EP1",	2,	{CLEAR;}],
 	["Misc_cargo_cont_net2",	8,	{RMM_supply_crates set [count RMM_supply_crates, _this]}],
 	["BAF_VehicleBox",		4,	{CLEAR; _this setvehicleinit "this execvm ""scripts\ammocrate.sqf"""; processinitcommands;}],
 	["USBasicAmmunitionBox_EP1", 10, {CLEAR;}],
-	["BAF_Offroad_W",	8,	{CLEAR; LOGISTICS;}],
-	["BAF_Jackal2_L2A1_D",	4,	{CLEAR; LOGISTICS;}],
+	["BAF_Offroad_W",	8,	{CLEAR;LOGISTICS;}],
+	["BAF_Jackal2_L2A1_D",	4,	{CLEAR;LOGISTICS;}],
 	["Land_Pneu", 40, {}],
 	["Barrel4", 20, {}],
 	["M2StaticMG_US_EP1", 4, {}],
@@ -24,7 +25,7 @@ if (isnil "RMM_supply_crates") then {RMM_supply_crates = [];};
 ],
 	getmarkerpos "farp", //position
 	markerdir "farp", //direction
-	100 //row length (metres)
+	80 //row length (metres)
 ] call {
 	private ["_array", "_position", "_offset", "_direction", "_distance"];
 	_array = _this select 0;

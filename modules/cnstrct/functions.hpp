@@ -1,5 +1,5 @@
 class cnstrct {
-	file = "modules\coin";
+	file = "modules\cnstrct";
 	class functions {
 		class create {};
 		class handler {};
