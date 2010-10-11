@@ -12,7 +12,7 @@ if (isnil {_this getvariable "cnstrct_radius"}) then {
 		_this setvariable ["cnstrct_radius",100];
 	};
 	if (isnil "cnstrct_buildings") then {
-		cnstrct_buildings = false;
+		cnstrct_buildings = [];
 		publicvariable "cnstrct_buildings";
 	};
 	//List of items, fixed for OA

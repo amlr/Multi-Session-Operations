@@ -1,5 +1,6 @@
-if (isnil "RMM_supply_crates") then {RMM_supply_crates = [];};
+if (isnil "supply_crates") then {supply_crates = [];};
 
+#define SUPPLIES	supply_crates set [count supply_crates, _this]
 #define CONSTRUCTION	_this setvariable ["construction",true,true]
 #define LOGISTICS	_this setvariable ["logistics",true,true]
 //#define CLEAR	clearWeaponCargoGlobal _this; clearMagazineCargoGlobal _this
@@ -10,7 +11,7 @@ if (isnil "RMM_supply_crates") then {RMM_supply_crates = [];};
 	["MtvrRepair_DES_EP1",	2,	{CONSTRUCTION;CLEAR;}],
 	["MtvrRefuel_DES_EP1",	2,	{CLEAR;}],
 	["MtvrReammo_DES_EP1",	2,	{CLEAR;}],
-	["Misc_cargo_cont_net2",	8,	{RMM_supply_crates set [count RMM_supply_crates, _this]}],
+	["Misc_cargo_cont_net2",	8,	{SUPPLIES;}],
 	["BAF_VehicleBox",		4,	{CLEAR; _this setvehicleinit "this execvm ""scripts\ammocrate.sqf"""; processinitcommands;}],
 	["USBasicAmmunitionBox_EP1", 10, {CLEAR;}],
 	["BAF_Offroad_W",	8,	{CLEAR;LOGISTICS;}],
@@ -64,5 +65,3 @@ if (isnil "RMM_supply_crates") then {RMM_supply_crates = [];};
 		};
 	} foreach _array;
 };
-
-publicvariable "RMM_supply_crates";

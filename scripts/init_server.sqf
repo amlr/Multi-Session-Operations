@@ -1,4 +1,4 @@
-if (isnil "RMM_cnstrct_buildings" && not isnil "RMM_supply_crates") then {RMM_cnstrct_buildings = +RMM_supply_crates; publicVariable "RMM_cnstrct_buildings";};
+if (isnil "cnstrct_buildings" && not isnil "supply_crates") then {cnstrct_buildings = +supply_crates; publicVariable "cnstrct_buildings";};
 
 private ["_list"];
 _list = nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), ["FlatArea","Hill","FlatAreaCitySmall","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"], 20000];
