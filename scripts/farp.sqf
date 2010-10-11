@@ -65,3 +65,5 @@ if (isnil "supply_crates") then {supply_crates = [];};
 		};
 	} foreach _array;
 };
+
+if (isnil "cnstrct_buildings") then {cnstrct_buildings = +supply_crates; publicVariable "cnstrct_buildings";};
