@@ -1,0 +1,349 @@
+/*%FSM<COMPILE "C:\Program Files\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, reducer">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"func_init",2,4346,350.000000,350.000000,450.000000,400.000000,0.000000,"func init"};
+item1[] = {"not_initdone",4,218,350.000000,275.000000,450.000000,325.000000,0.000000,"not initdone"};
+item2[] = {"_",8,218,225.000000,350.000000,325.000000,400.000000,0.000000,""};
+item3[] = {"start",0,250,225.000000,275.000000,325.000000,325.000000,0.000000,"start"};
+item4[] = {"count___0",4,218,350.000000,425.000000,450.000000,475.000000,1.000000,"count > 0"};
+item5[] = {"wait",3,250,350.000000,500.000000,450.000000,550.000000,0.000000,"wait"};
+item6[] = {"time___wait",4,218,225.000000,500.000000,325.000000,550.000000,0.000000,"time > wait"};
+item7[] = {"check",3,250,225.000000,425.000000,325.000000,475.000000,0.000000,"check"};
+item8[] = {"_",8,218,100.000000,425.000000,200.000000,475.000000,0.000000,""};
+item9[] = {"exit",1,250,100.000000,350.000000,200.000000,400.000000,0.000000,"exit"};
+item10[] = {"not_isserver",4,218,100.000000,275.000000,200.000000,325.000000,2.000000,"not isserver"};
+link0[] = {0,2};
+link1[] = {1,0};
+link2[] = {2,7};
+link3[] = {3,1};
+link4[] = {3,2};
+link5[] = {3,10};
+link6[] = {4,5};
+link7[] = {5,6};
+link8[] = {6,7};
+link9[] = {7,4};
+link10[] = {7,8};
+link11[] = {8,9};
+link12[] = {10,9};
+globals[] = {25.000000,1,0,0,0,640,480,1,195,6316128,1,8.326469,611.477417,602.185181,158.876434,1249,918,1};
+window[] = {2,-1,-1,-1,-1,993,664,2038,54,3,1267};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "reducer";
+  class States
+  {
+    /*%FSM<STATE "func_init">*/
+    class func_init
+    {
+      name = "func_init";
+      init = /*%FSM<STATEINIT""">*/"RMM_fnc_reducer_ureform = {" \n
+       "	private [""_data"",""_group"",""_position""];" \n
+       "	_data = _this select 0;" \n
+       "	_group = _this select 1;" \n
+       "	_position = _this select 2;" \n
+       "" \n
+       "	private [""_type"",""_weapons"",""_magazines"",""_vehicle"",""_vehicle_pos""];" \n
+       "	_type = _data select 0;" \n
+       "	_weapons = _data select 1;" \n
+       "	_magazines = _data select 2;" \n
+       "	_vehicle = _data select 3;" \n
+       "	_vehicle_pos = _data select 4;" \n
+       "	" \n
+       "	private ""_unit"";" \n
+       "	_unit = _group createunit [_type, _position, [], 50, ""form""];" \n
+       "" \n
+       "	removeallweapons _unit;" \n
+       "	removeallitems _unit;" \n
+       "	{_unit addweapon _x} foreach _weapons;" \n
+       "	{_unit addmagazine _x} foreach _magazines;" \n
+       "" \n
+       "	if (count _vehicle_pos > 0) then {" \n
+       "		switch (_vehicle_pos select 0) do {" \n
+       "			case ""cargo"": {" \n
+       "				_unit moveincargo _vehicle;" \n
+       "			};" \n
+       "			case ""commander"": {" \n
+       "				_unit moveincommander _vehicle;" \n
+       "			};" \n
+       "			/*" \n
+       "			case ""turret"": {" \n
+       "				private ""_index"";" \n
+       "				_index = _vehicle_pos select 1;" \n
+       "				_unit moveinturret [_vehicle, _index];" \n
+       "			};" \n
+       "			*/" \n
+       "		};" \n
+       "	};" \n
+       "};" \n
+       "" \n
+       "RMM_fnc_reducer_ureduce = {" \n
+       "	private ""_unit"";" \n
+       "	_unit = _this select 0;" \n
+       "" \n
+       "	private [""_type"", ""_weapons"", ""_magazines"", ""_vehicle"", ""_vehicle_pos""];" \n
+       "	_type = typeof _unit;" \n
+       "	_weapons = weapons _unit;" \n
+       "	_magazines = magazines _unit;" \n
+       "	_vehicle = assignedvehicle _unit;" \n
+       "	_vehicle_pos = assignedvehiclerole _unit;" \n
+       "" \n
+       "	if (count _vehicle_pos == count (_vehicle_pos - [""driver"",""turret""])) then {" \n
+       "		if (vehicle _unit != _unit) then {" \n
+       "			unassignvehicle _unit;" \n
+       "			_unit setposasl [0,0,0];" \n
+       "		};" \n
+       "		deletevehicle _unit;" \n
+       "		[_type, _weapons, _magazines, _vehicle, _vehicle_pos];" \n
+       "	} else {" \n
+       "		[];" \n
+       "	};" \n
+       "};" \n
+       "" \n
+       "RMM_fnc_reducer_reform = {" \n
+       "	private ""_group"";" \n
+       "	_group = _this select 0;" \n
+       "" \n
+       "	if (not (_group getvariable ""RMM_reducer_reduced"")) exitwith {};" \n
+       "" \n
+       "	private ""_data"";" \n
+       "	_data = _group getvariable ""RMM_reducer_grpdata"";" \n
+       "" \n
+       "	private [""_list"",""_params""];" \n
+       "	_list = _data select 0;" \n
+       "	_params = _data select 1;" \n
+       "" \n
+       "	private [""_behaviour"",""_combatmode"",""_skill""];" \n
+       "	_behaviour = _params select 0;" \n
+       "	_combatmode = _params select 1;" \n
+       "	_skill = _params select 2;" \n
+       "" \n
+       "	private ""_leader"";" \n
+       "	_leader = leader _group;" \n
+       "	_leader setskill _skill;" \n
+       "	{_leader enableAI _x} foreach [""TARGET"",""AUTOTARGET""];" \n
+       "" \n
+       "	_group setbehaviour _behaviour;" \n
+       "	_group setcombatmode _combatmode;" \n
+       "" \n
+       "	private ""_position""" \n
+       "	_position = getpos _leader;" \n
+       "	{" \n
+       "		[_x,_group,_position] call RMM_fnc_reducer_ureform;" \n
+       "	} foreach _list;" \n
+       "" \n
+       "	_group setvariable [""RMM_reducer_reduced"",false];" \n
+       "	_group setvariable [""RMM_reducer_expires"",time + 60];" \n
+       "	_group setvariable [""RMM_reducer_grpdata"",nil];" \n
+       "};" \n
+       "" \n
+       "RMM_fnc_reducer_reduce = {" \n
+       "	private ""_group"";" \n
+       "	_group = _this select 0;" \n
+       "" \n
+       "	if (time < (_group getvariable ""RMM_reducer_expires"")) exitwith {};" \n
+       "" \n
+       "	private ""_leader"";" \n
+       "	_leader = leader _group;" \n
+       "	_leader setskill 0;" \n
+       "	{_leader disableAI _x} foreach [""TARGET"",""AUTOTARGET""];" \n
+       "" \n
+       "	private ""_params"";" \n
+       "	_params = [behaviour _leader, combatmode _group, skill _leader];" \n
+       "" \n
+       "	_group setbehaviour ""careless"";" \n
+       "	_group setcombatmode ""blue"";" \n
+       "	" \n
+       "	private ""_list"";" \n
+       "	_list = [];" \n
+       "" \n
+       "	{" \n
+       "		if (alive _x) then {" \n
+       "			private ""_return"";" \n
+       "			_return = _x call RMM_fnc_reducer_ureduce;" \n
+       "			if (count _return > 0) then {" \n
+       "				_list set [count _list, _return];" \n
+       "			};" \n
+       "		};" \n
+       "	} foreach ((units _group) - [_leader]);" \n
+       "" \n
+       "	_group setvariable [""RMM_reducer_reduced"",true];" \n
+       "	_group setvariable [""RMM_reducer_grpdata"",[_list, _params]];" \n
+       "};"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="check";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "start">*/
+    class start
+    {
+      name = "start";
+      init = /*%FSM<STATEINIT""">*/"/*" \n
+       "	Reducer" \n
+       "	Author(s):" \n
+       "		Rommel, Wolffy.au" \n
+       "	" \n
+       "	Description:" \n
+       "		This script reduces and reforms groups depending on their distance to players, aimed to reduce load" \n
+       "	Example:" \n
+       "		[create range, delete range, groups, update rate]" \n
+       "		[700,900,synchronizedobjects this, 5 (optional)] execvm ""scriptname""" \n
+       "*/" \n
+       "" \n
+       "private [""_logic""];" \n
+       "_logic = _this select 0;" \n
+       "" \n
+       "private [""_groups""];" \n
+       "_groups = [];" \n
+       "" \n
+       "{" \n
+       "	if (not (_x in _groups)) then {" \n
+       "		_x setvariable [""RMM_reducer_reduced"",false];" \n
+       "		_groups set [count _groups, _x];" \n
+       "		_x allowfleeing 0;" \n
+       "	};" \n
+       "} foreach (synchronizedObjects _logic);" \n
+       "" \n
+       "if (isnil {_logic getvariable ""_custom_init""}) then {_logic setvariable [""custom_init"",[]]};" \n
+       "" \n
+       "private [""_spawn_range""];" \n
+       "_spawn_range = _logic getvariable ""spawn_range"";" \n
+       "if (isnil ""_spawn_range"") then {_spawn_range = 2400};"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "not_isserver">*/
+        class not_isserver
+        {
+          priority = 2.000000;
+          to="exit";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"not isserver"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="check";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "not_initdone">*/
+        class not_initdone
+        {
+          priority = 0.000000;
+          to="func_init";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"isnil ""RMM_fnc_reducer_ureform"""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "wait">*/
+    class wait
+    {
+      name = "wait";
+      init = /*%FSM<STATEINIT""">*/"_wait = time + 5 + random 1;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "time___wait">*/
+        class time___wait
+        {
+          priority = 0.000000;
+          to="check";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _wait"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "check">*/
+    class check
+    {
+      name = "check";
+      init = /*%FSM<STATEINIT""">*/"private ""_players"";" \n
+       "_players = playableUnits + switchableUnits;" \n
+       "" \n
+       "{" \n
+       "	private ""_group"";" \n
+       "	_group = _x;" \n
+       "	if (isnull _group) then {" \n
+       "		_groups = _groups - [_group];" \n
+       "	} else {" \n
+       "		if (_group getvariable ""RMM_reducer_reduced"") then {" \n
+       "			if (({_group distance _x < _spawn_range} count playableunits > 0) or (not alive (leader _group))) then {" \n
+       "				[_group] call RMM_fnc_reducer_reform;" \n
+       "			};" \n
+       "		} else {" \n
+       "			if ({_group distance _x < (_spawn_range * 1.1)} count playableunits == 0) then {" \n
+       "				[_group] call RMM_fnc_reducer_reduce;" \n
+       "			};" \n
+       "		};" \n
+       "	};" \n
+       "} foreach _groups;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "count___0">*/
+        class count___0
+        {
+          priority = 1.000000;
+          to="wait";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"count _groups > 0"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="exit";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "exit">*/
+    class exit
+    {
+      name = "exit";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="start";
+  finalStates[] =
+  {
+    "exit",
+  };
+};
+/*%FSM</COMPILE>*/
