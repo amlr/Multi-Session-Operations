@@ -1,14 +1,14 @@
 #define execNow call compile preprocessfilelinenumbers
 
 //http://community.bistudio.com/wiki/startLoadingScreen
-startLoadingScreen ["Receiving", "RscDisplayLoadMission"];
+startLoadingScreen ["", "RscDisplayLoadMission"];
 
 //http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];
 
 waituntil {not isnil "BIS_fnc_init"};
 
-["Receiving",10] call RMM_fnc_failSafeLS;
+["",10] call RMM_fnc_failSafeLS;
 
 execNow "scripts\cfg_groups.sqf";
 
@@ -18,7 +18,6 @@ execNow "scripts\cfg_groups.sqf";
 if (isserver) then {
 	execNow "scripts\cfg_locations.sqf";
 	execNow "scripts\init_server.sqf";
-	execNow "scripts\farp.sqf";
 	execVM "scripts\zora.sqf";
 };
 if (not isdedicated) then {

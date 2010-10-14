@@ -23,4 +23,5 @@ _volume_t = _target getvariable "logistics_volume";
 _target setvariable ["logistics_contents",_array - [_object],true];
 _target setvariable ["logistics_volume",_volume_t + _volume_o];
 
+//if (_volume_o > 
 [_object,player] call logistics_fnc_move;

@@ -7,7 +7,7 @@ player setskill 0;
 player addeventhandler ["killed", {
 	(_this select 0) spawn {
 		waituntil {alive player};
-		removeallweapons player;
+		//removeallweapons player;
 		player switchmove "";
 		player setskill 0;
 		{player disableAI _x} foreach ["move","anim","target","autotarget"];
@@ -65,7 +65,7 @@ if (MSO_R_Air) then {
 
 //default weapons
 if (isnil _string) then {
-	removeallweapons player;
+	//removeallweapons player;
 	player switchmove "";
 	player addBackpack "BAF_AssaultPack_RifleAmmo";
 };

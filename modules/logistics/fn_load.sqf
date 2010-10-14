@@ -8,7 +8,6 @@ _target = player getvariable "logistics_target";
 
 private ["_object","_array"];
 _object = (player getvariable "logistics_nearby") select _index;
-player commandchat str [_this,_object,(player getvariable "logistics_nearby")];
 if (isnull _object) exitwith {};
 if (count (crew _object) > 0) exitwith {};
 _array = _target getvariable "logistics_contents";
