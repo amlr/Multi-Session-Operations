@@ -1,7 +1,7 @@
 /*%FSM<COMPILE "C:\Program Files\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, freezer">*/
 /*%FSM<HEAD>*/
 /*
-item0[] = {"func_init",2,250,200.000000,150.000000,300.000000,200.000000,0.000000,"func init"};
+item0[] = {"func_init",2,4346,200.000000,150.000000,300.000000,200.000000,0.000000,"func init"};
 item1[] = {"not_initdone",4,218,200.000000,75.000000,300.000000,125.000000,1.000000,"not initdone"};
 item2[] = {"_",8,218,75.000000,150.000000,175.000000,200.000000,0.000000,""};
 item3[] = {"start",0,250,75.000000,75.000000,175.000000,125.000000,0.000000,"start"};
@@ -26,7 +26,7 @@ link10[] = {7,8};
 link11[] = {8,9};
 link12[] = {10,9};
 globals[] = {25.000000,1,0,0,0,640,480,1,201,6316128,1,-156.949188,436.476440,502.954590,-178.001312,800,918,1};
-window[] = {2,-1,-1,-1,-1,968,22,1207,29,3,818};
+window[] = {2,-1,-1,-1,-1,1113,132,1317,174,3,818};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -67,7 +67,6 @@ class FSM
        "	_damage = _data select 6;" \n
        "	_skill = _data select 7;" \n
        "	_rank = _data select 8;" \n
-       "	_custom_init = _logic getvariable ""custom_init"";" \n
        "	" \n
        "	private [""_unit""];" \n
        "	_unit = _group createUnit [_type, _position, [], 0, ""NONE""];" \n
@@ -76,8 +75,6 @@ class FSM
        "	_unit setskill _skill;" \n
        "	_unit setrank _rank;" \n
        "	" \n
-       "	{_unit call _x} foreach _custom_init;" \n
-       "" \n
        "	removeallweapons _unit;" \n
        "	removeallitems _unit;" \n
        "	{_unit addweapon _x} foreach _weapons;" \n
@@ -169,7 +166,7 @@ class FSM
        "		[_x,_group,_logic] call RMM_fnc_frzr_ucreate;" \n
        "	} foreach _list;" \n
        "" \n
-       "	{[_group,_logic] call _x} foreach (_logic getvariable ""_custom_init"");" \n
+       "	{[_group,_logic] call _x} foreach (_logic getvariable ""custom_init"");" \n
        "" \n
        "	_reference setvariable [""RMM_frzr_frozen"",false];" \n
        "	_reference setvariable [""RMM_frzr_group"",_group];" \n
@@ -290,7 +287,7 @@ class FSM
        "" \n
        "private [""_spawn_range""];" \n
        "_spawn_range = _logic getvariable ""spawn_range"";" \n
-       "if (isnil ""_spawn_range"") then {_spawn_range = 2400};"/*%FSM</STATEINIT""">*/;
+       "if (isnil ""_spawn_range"") then {_spawn_range = 2000};"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
