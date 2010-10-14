@@ -8,4 +8,7 @@ if (local _man) then {
 	_man setunitpos "up";
 	removeallweapons _man;
 	removeallitems _man;
+	if (random 1 > 0.8) then {
+		_this addweapon "itemWatch";
+	};
 };

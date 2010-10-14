@@ -23,7 +23,6 @@ class Mission
 		"CACharacters_W_BAF",
 		"CACharacters_BAF",
 		"ca_baf",
-		"cacharacters_e",
 		"ca_missions_garbagecollector",
 		"cawheeled_d_baf",
 		"CATracked_W_BAF",
@@ -40,7 +39,6 @@ class Mission
 	addOnsAuto[]=
 	{
 		"CACharacters_BAF",
-		"cacharacters_e",
 		"ca_missions_garbagecollector",
 		"ca_modules_functions",
 		"ca_modules_silvie",
@@ -70,7 +68,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=25;
+		items=23;
 		class Item0
 		{
 			side="WEST";
@@ -366,84 +364,37 @@ class Mission
 		};
 		class Item16
 		{
-			side="EAST";
+			side="LOGIC";
 			class Vehicles
 			{
 				items=1;
 				class Item0
 				{
-					position[]={9117.9482,450.552,3397.8337};
-					azimut=-70.764603;
-					id=21;
-					side="EAST";
-					vehicle="TK_INS_Soldier_TL_EP1";
+					position[]={8516.0254,300.05621,2088.0234};
+					id=20;
+					side="LOGIC";
+					vehicle="GarbageCollector";
 					leader=1;
-					rank="CORPORAL";
-					skill=0.2;
-					init="this setvariable [""takibani"",["""",""sapper""]];";
-				};
-			};
-			class Waypoints
-			{
-				items=4;
-				class Item0
-				{
-					position[]={8949.877,437.03448,3384.8037};
-					combatMode="GREEN";
-					combat="SAFE";
-					expActiv="this fire ""pipebombmuzzle""";
-					class Effects
-					{
-					};
-					showWP="NEVER";
-				};
-				class Item1
-				{
-					position[]={9117.6768,450.5119,3401.3982};
-					combatMode="BLUE";
-					class Effects
-					{
-					};
-					showWP="NEVER";
-				};
-				class Item2
-				{
-					position[]={9118.0908,450.61478,3402.1331};
-					combat="STEALTH";
-					synchronizations[]={0};
-					class Effects
-					{
-					};
-					showWP="NEVER";
-				};
-				class Item3
-				{
-					position[]={9117.0576,450.29608,3401.9836};
-					combatMode="YELLOW";
-					expActiv="this action [""touchOff"", this];";
-					class Effects
-					{
-					};
-					showWP="NEVER";
+					lock="UNLOCKED";
+					skill=0.60000002;
 				};
 			};
 		};
 		class Item17
 		{
-			side="EAST";
+			side="LOGIC";
 			class Vehicles
 			{
 				items=1;
 				class Item0
 				{
-					position[]={9121.4932,451.75583,3399.3167};
-					azimut=-70.764603;
-					id=20;
-					side="EAST";
-					vehicle="TK_INS_Soldier_EP1";
+					position[]={8423.5273,296.48978,2088.2112};
+					id=21;
+					side="LOGIC";
+					vehicle="FunctionsManager";
 					leader=1;
-					skill=0.2;
-					init="this setvariable [""takibani"",[""""]];";
+					lock="UNLOCKED";
+					skill=0.60000002;
 				};
 			};
 		};
@@ -455,13 +406,14 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={8516.0254,300.05621,2088.0234};
+					position[]={8451.9316,297.81943,2088.3804};
 					id=22;
 					side="LOGIC";
-					vehicle="GarbageCollector";
+					vehicle="SilvieManager";
 					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;
+					init="this setvariable [""vehicleCount"",""floor (%1 ^ 0.3)""]; this setvariable [""vehicleInit"",{if (random 1>0.2) then {_this lock true}; _this setfuel (random 1)}];";
 				};
 			};
 		};
@@ -473,13 +425,14 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={8423.5273,296.48978,2088.2112};
+					position[]={8485.6641,299.46225,2088.3745};
 					id=23;
 					side="LOGIC";
-					vehicle="FunctionsManager";
+					vehicle="Alice2Manager";
 					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;
+					init="this setvariable [""civilianCount"",""round (%1 ^ 0.8)""]; this setvariable [""initArray"",[{_this call TK_fnc_takistani}]]; this setvariable [""spawnDistance"",1500]; this setvariable [""trafficDistance"",1200]; this setvariable [""threatDecay"",0.000005]; this setvariable [""RALICE_func"", {_this spawn TK_fnc_threatFunc}]; this setvariable [ ""RALICE_randomSeed"",0.5]; if (isserver) then {this execfsm (""fsm\ftl.fsm"");};";
 				};
 			};
 		};
@@ -491,14 +444,14 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={8451.9316,297.81943,2088.3804};
+					position[]={8541.9512,301.74969,2088.1768};
 					id=24;
 					side="LOGIC";
-					vehicle="SilvieManager";
+					vehicle="BIS_clouds_Logic";
 					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;
-					init="this setvariable [""vehicleCount"",""floor (%1 ^ 0.3)""]; this setvariable [""vehicleInit"",{if (random 1>0.2) then {_this lock true}; _this setfuel (random 1)}];";
+					init="0 = this execfsm ""fsm\dynweather.fsm""";
 				};
 			};
 		};
@@ -510,55 +463,17 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={8485.6641,299.46225,2088.3745};
-					id=25;
-					side="LOGIC";
-					vehicle="Alice2Manager";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-					init="this setvariable [""civilianCount"",""round (%1 ^ 0.8)""]; this setvariable [""initArray"",[{_this call TK_fnc_takistani}]]; this setvariable [""spawnDistance"",1500]; this setvariable [""trafficDistance"",1200]; this setvariable [""threatDecay"",0.000005]; this setvariable [""RALICE_func"", {_this spawn TK_fnc_threatFunc}]; this setvariable [ ""RALICE_randomSeed"",0.5]; if (isserver) then {this execfsm (""fsm\ftl.fsm"");};";
-				};
-			};
-		};
-		class Item22
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={8541.9512,301.74969,2088.1768};
-					id=26;
-					side="LOGIC";
-					vehicle="BIS_clouds_Logic";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-					init="0 = this execfsm ""fsm\dynweather.fsm""";
-				};
-			};
-		};
-		class Item23
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
 					position[]={8394.4141,296.04001,2087.4429};
-					id=39;
+					id=37;
 					side="LOGIC";
 					vehicle="LocationLogicOwnerEast";
 					leader=1;
 					skill=0.2;
-					init="this setvariable [""debug"", true]; this setvariable [""bordersize"", 10000]; this setvariable [""factionlist"", [""BIS_TK_GUE""]]; this setvariable [""maxgroups"",3]; this setvariable [""mindist"",1400]; this setvariable [""maxdist"",2000]; if (isserver) then {[this] execvm ""modules\zora\main.sqf""};";
+					init="this setvariable [""debug"", false]; this setvariable [""bordersize"", 10000]; this setvariable [""factionlist"", [""BIS_TK_GUE""]]; this setvariable [""maxgroups"",1]; this setvariable [""mindist"",1400]; this setvariable [""maxdist"",2000]; this setvariable [""custom_init"",[{_this call TK_fnc_takibani;}]]; if (isserver) then {[this] execvm ""modules\zora\main.sqf""};";
 				};
 			};
 		};
-		class Item24
+		class Item22
 		{
 			side="WEST";
 			class Vehicles
@@ -567,7 +482,7 @@ class Mission
 				class Item0
 				{
 					position[]={8272.3145,296.04001,1844.5463};
-					id=40;
+					id=38;
 					side="WEST";
 					vehicle="BAF_Soldier_SL_MTP";
 					leader=1;
@@ -578,7 +493,7 @@ class Mission
 				class Item1
 				{
 					position[]={8275.3145,296.04001,1839.5463};
-					id=41;
+					id=39;
 					side="WEST";
 					vehicle="BAF_Soldier_TL_MTP";
 					rank="SERGEANT";
@@ -587,7 +502,7 @@ class Mission
 				class Item2
 				{
 					position[]={8277.3145,296.04001,1839.5463};
-					id=42;
+					id=40;
 					side="WEST";
 					vehicle="BAF_Soldier_GL_MTP";
 					rank="CORPORAL";
@@ -596,7 +511,7 @@ class Mission
 				class Item3
 				{
 					position[]={8279.3145,296.04001,1839.5463};
-					id=43;
+					id=41;
 					side="WEST";
 					vehicle="BAF_Soldier_AR_MTP";
 					rank="CORPORAL";
@@ -605,7 +520,7 @@ class Mission
 				class Item4
 				{
 					position[]={8281.3145,296.04001,1839.5463};
-					id=44;
+					id=42;
 					side="WEST";
 					vehicle="BAF_Soldier_Marksman_MTP";
 					rank="CORPORAL";
@@ -614,7 +529,7 @@ class Mission
 				class Item5
 				{
 					position[]={8283.3145,296.04001,1839.5463};
-					id=45;
+					id=43;
 					side="WEST";
 					vehicle="BAF_Soldier_GL_MTP";
 					skill=0.2;
@@ -622,7 +537,7 @@ class Mission
 				class Item6
 				{
 					position[]={8285.3145,296.04001,1839.5463};
-					id=46;
+					id=44;
 					side="WEST";
 					vehicle="BAF_Soldier_AR_MTP";
 					skill=0.2;
@@ -630,7 +545,7 @@ class Mission
 				class Item7
 				{
 					position[]={8287.3145,296.04001,1839.5463};
-					id=47;
+					id=45;
 					side="WEST";
 					vehicle="BAF_Soldier_AAR_MTP";
 					skill=0.2;
@@ -640,7 +555,7 @@ class Mission
 					position[]={8267.4629,296.04001,1863.0997};
 					azimut=37.946335;
 					special="NONE";
-					id=48;
+					id=46;
 					side="WEST";
 					vehicle="BAF_L2A1_Tripod_D";
 					skill=0.2;
@@ -650,7 +565,7 @@ class Mission
 					position[]={8204.9639,296.04001,1823.7229};
 					azimut=-94.893784;
 					special="NONE";
-					id=49;
+					id=47;
 					side="WEST";
 					vehicle="BAF_L2A1_Tripod_D";
 					skill=0.2;
@@ -744,7 +659,7 @@ class Mission
 		{
 			position[]={8420.9717,295.96829,2001.4219};
 			azimut=240;
-			id=27;
+			id=25;
 			side="EMPTY";
 			vehicle="C130J_US_EP1";
 			skill=0.2;
@@ -754,7 +669,7 @@ class Mission
 		{
 			position[]={2332.2258,365.1557,-432.9704};
 			azimut=270;
-			id=28;
+			id=26;
 			side="EMPTY";
 			vehicle="WarfareBAirport";
 			skill=0.2;
@@ -763,7 +678,7 @@ class Mission
 		{
 			position[]={8226.834,296.04001,1812.9844};
 			azimut=147.16499;
-			id=29;
+			id=27;
 			side="EMPTY";
 			vehicle="SignM_UN_Base_EP1";
 			skill=0.2;
@@ -773,7 +688,7 @@ class Mission
 		{
 			position[]={8267.6963,296.04001,1832.4243};
 			azimut=148;
-			id=30;
+			id=28;
 			side="EMPTY";
 			vehicle="US_WarfareBUAVterminal_Base_EP1";
 			leader=1;
@@ -783,7 +698,7 @@ class Mission
 		class Item8
 		{
 			position[]={8259.7119,296.04001,1857.8529};
-			id=31;
+			id=29;
 			side="EMPTY";
 			vehicle="FlagCarrierUNO_EP1";
 			skill=0.2;
@@ -792,7 +707,7 @@ class Mission
 		{
 			position[]={8267.4531,296.04001,1862.9768};
 			azimut=-135;
-			id=32;
+			id=30;
 			side="EMPTY";
 			vehicle="Land_GuardShed";
 			skill=0.2;
@@ -801,7 +716,7 @@ class Mission
 		{
 			position[]={8264.5889,296.04001,1862.7867};
 			azimut=-25;
-			id=33;
+			id=31;
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_long";
 			leader=1;
@@ -811,7 +726,7 @@ class Mission
 		{
 			position[]={8261.8926,296.04001,1861.2264};
 			azimut=-35;
-			id=34;
+			id=32;
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_long";
 			leader=1;
@@ -821,7 +736,7 @@ class Mission
 		{
 			position[]={8204.7979,296.04001,1823.7939};
 			azimut=90;
-			id=35;
+			id=33;
 			side="EMPTY";
 			vehicle="Land_GuardShed";
 			skill=0.2;
@@ -830,7 +745,7 @@ class Mission
 		{
 			position[]={8209.0801,296.04001,1827.5131};
 			azimut=-25;
-			id=36;
+			id=34;
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_long";
 			leader=1;
@@ -840,7 +755,7 @@ class Mission
 		{
 			position[]={8206.7549,296.04001,1825.8414};
 			azimut=-45;
-			id=37;
+			id=35;
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_long";
 			leader=1;
@@ -850,7 +765,7 @@ class Mission
 		{
 			position[]={8292.001,296.04001,1835.283};
 			azimut=325;
-			id=38;
+			id=36;
 			side="EMPTY";
 			vehicle="US_WarfareBVehicleServicePoint_Base_EP1";
 			skill=0.2;
@@ -881,23 +796,8 @@ class Mission
 	};
 	class Sensors
 	{
-		items=2;
+		items=1;
 		class Item0
-		{
-			position[]={8946.8223,437.27673,3385.541};
-			a=10;
-			b=10;
-			angle=-39.206314;
-			activationBy="WEST";
-			interruptable=1;
-			type="SWITCH";
-			age="UNKNOWN";
-			class Effects
-			{
-			};
-			synchronizations[]={0};
-		};
-		class Item1
 		{
 			position[]={8032.6064,296.04001,1864.9584};
 			a=200;

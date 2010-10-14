@@ -37,8 +37,8 @@ link16[] = {13,2};
 link17[] = {14,15};
 link18[] = {15,3};
 link19[] = {15,13};
-globals[] = {25.000000,1,0,1,16777215,640,480,2,17,6316128,1,-527.081299,134.454300,679.440247,-298.481842,621,918,1};
-window[] = {2,-1,-1,-1,-1,905,44,1216,58,3,639};
+globals[] = {25.000000,1,0,1,16777215,640,480,2,17,6316128,1,-459.133392,202.402191,679.440247,-298.481842,621,918,1};
+window[] = {2,-1,-1,-1,-1,1079,176,1348,232,3,639};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -92,6 +92,7 @@ class FSM
        "_maxgroups = _logic getvariable ""maxgroups"";" \n
        "_zora_mindist = _logic getvariable ""mindist"";" \n
        "_zora_maxdist = _logic getvariable ""maxdist"";" \n
+       "_custom_init = _logic getvariable ""custom_init"";" \n
        "" \n
        "//--- Check if bordersize changed" \n
        "if (_bordersize != _bordersizeold) then {" \n
@@ -265,7 +266,7 @@ class FSM
        "		_slopeCoef = [5,5,5,10,100] select (_classes find _debugtype);" \n
        "		_safepos = [position _x, _zora_mindist,  _zora_maxdist, 2, 0, _slopeCoef, 0,_triglist] call BIS_fnc_findSafePos;" \n
        "		_grpP = [_safepos, _side, _types, _positions, _ranks] call BIS_fnc_spawnGroup;" \n
-       "		player sidechat str _side;" \n
+       "		{_grpP call _x} foreach _custom_init;" \n
        "		_fsm = [_grpP,_x,_group,_debugType] execfsm (BIS_Zora_path + ""zora_patrol.fsm"");" \n
        "//		diag_debugfsm _fsm;" \n
        "" \n
@@ -379,6 +380,8 @@ class FSM
        "_maxgroups = _logic getvariable ""maxgroups"";" \n
        "_zora_mindist = _logic getvariable ""mindist"";" \n
        "_zora_maxdist = _logic getvariable ""maxdist"";" \n
+       "_custom_init = _logic getvariable ""custom_init"";" \n
+       "if (isnil ""_custom_init"") then {_logic setvariable [""custom_init"",[]]; _custom_init = [];};" \n
        "if (isnil ""_zora_mindist"") then {_logic setvariable [""mindist"",500]; _zora_mindist = 500};" \n
        "if (isnil ""_zora_maxdist"") then {_logic setvariable [""maxdist"",1000]; _zora_maxdist = 1000};" \n
        "" \n

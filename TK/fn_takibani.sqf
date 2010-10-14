@@ -1,18 +1,14 @@
 if (tolower(typename _this) == "group") exitwith {{_x call TK_fnc_takibani} foreach (units _this)};
+player globalchat str _this;
 if (local _this) then {
 	private ["_types"];
 	_types = _this getvariable "takibani";
 	if (isnil "_types") then {_types = [""]};
 	removeAllWeapons _this;
 	removeAllItems _this;
+	_this setskill 1;
 	{
 		switch (_x) do {
-			case "leader" : {
-				_this addweapon "itemMap";
-				_this addweapon "itemWatch";
-				_this addweapon "EvPhoto";
-				_this addweapon "Evkobalt";
-			};
 			case "observer" : {
 				_this addweapon "itemRadio";
 				_this addweapon "binocular";
@@ -40,7 +36,7 @@ if (local _this) then {
 					_this addweapon "itemMap";
 					_this addweapon "itemCompass";
 				};
-				if (random 1 > 0.8) then {
+				if (random 1 > 0.82) then {
 					_this addweapon "itemWatch";
 				};
 				if (random 1 > 0.97) then {

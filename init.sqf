@@ -17,8 +17,9 @@ execNow "scripts\cfg_groups.sqf";
 
 if (isserver) then {
 	execNow "scripts\cfg_locations.sqf";
-	//execNow "scripts\init_server.sqf";
+	execNow "scripts\init_server.sqf";
 	execNow "scripts\farp.sqf";
+	execVM "scripts\zora.sqf";
 };
 if (not isdedicated) then {
 	execNow "briefing.sqf";
