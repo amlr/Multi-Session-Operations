@@ -10,17 +10,20 @@ waituntil {not isnil "BIS_fnc_init"};
 
 ["",10] call RMM_fnc_failSafeLS;
 
-execNow "scripts\cfg_groups.sqf";
-
 // ====================================================================================
 // Mission Scripts
 
+if (!isNil "paramsArray") then {
+	for "_i" from 0 to ((count paramsArray)-1) do {
+		missionNamespace setVariable [configName ((missionConfigFile/"Params") select _i),paramsArray select _i];
+	};
+};
+
 if (isserver) then {
-	execNow "scripts\cfg_locations.sqf";
-	execNow "scripts\init_server.sqf";
 	execVM "scripts\zora.sqf";
 };
 if (not isdedicated) then {
+	execVM "intro.sqf";
 	execNow "briefing.sqf";
 	execNow "tasks.sqf";
 	
@@ -28,12 +31,6 @@ if (not isdedicated) then {
 	execNow "scripts\init_player.sqf";
 	execFSM "fsm\playersurrender.fsm";
 	player call revive_fnc_init;
-};
-
-if (!isNil "paramsArray") then {
-	for "_i" from 0 to ((count paramsArray)-1) do {
-		missionNamespace setVariable [configName ((missionConfigFile/"Params") select _i),paramsArray select _i];
-	};
 };
 
 // ====================================================================================

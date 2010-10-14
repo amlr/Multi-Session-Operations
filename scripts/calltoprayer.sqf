@@ -6,7 +6,6 @@ _fnc_between = {
 	(daytime > _a AND daytime < _b)
 };
 _fnc_prayer = {
-	
 	{
 		sleep (random 5);
 		_x say3D "muezzin";
