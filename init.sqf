@@ -23,14 +23,11 @@ if (isserver) then {
 	execVM "scripts\zora.sqf";
 };
 if (not isdedicated) then {
-	execVM "intro.sqf";
 	execNow "briefing.sqf";
 	execNow "tasks.sqf";
 	
 	execvm "scripts\calltoprayer.sqf";
 	execNow "scripts\init_player.sqf";
-	execFSM "fsm\playersurrender.fsm";
-	player call revive_fnc_init;
 };
 
 // ====================================================================================

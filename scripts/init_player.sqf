@@ -69,7 +69,10 @@ if (isnil _string) then {
 	removeallweapons player;
 	removeallitems player;
 	player switchmove "";
-	player addBackpack "CZ_Backpack_Ammo_EP1";
+	if (not isnull (unitBackpack player)) then {
+		clearWeaponCargo (unitBackpack player);
+		clearMagazineCargo (unitBackpack player);
+	};
 };
 
 //settings dialog

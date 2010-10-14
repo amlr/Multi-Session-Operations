@@ -1,10 +1,11 @@
 if (isdedicated) exitwith {};
 
 RMM_cas_types = [
-	"BAF_Apache_AH1_D",
-	"AW159_Lynx_BAF"
+	"A10",
+	"AH64D",
+	"AH1Z"
 ];
-RMM_cas_missiontime = 600;
+RMM_cas_missiontime = 540;
 RMM_cas_flyinheight = 125;
 
 if (isnil "RMM_cas_lastTime") then {

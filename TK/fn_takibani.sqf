@@ -39,13 +39,21 @@ if (local _this) then {
 				if (random 1 > 0.82) then {
 					_this addweapon "itemWatch";
 				};
-				if (random 1 > 0.97) then {
+				if (random 1 > 0.98) then {
 					_this addweapon "EvPhoto";
 				};
 				if (random 1 > 0.99) then {
-					_this addweapon "Evkobalt";
+					_this addweapon "EvMap";
 				};
-				switch (floor (random 9)) do {
+				if (random 1 > 0.99) then {
+					_this addweapon "EvMoscow";
+				};
+				if (random 1 > 0.96) then {
+					_this addweapon "Makarov";
+					_this addmagazine "8Rnd_9x18_Makarov";
+					_this addmagazine "8Rnd_9x18_Makarov";
+				};
+				switch (floor (random 12)) do {
 					case 0 : {
 						_this addweapon "LeeEnfield";
 						for "_i" from 1 to (2+(random 3)) do {_this addmagazine "10x_303"};
@@ -85,6 +93,17 @@ if (local _this) then {
 					case 9 : {
 						_this addweapon "AKS_74";
 						for "_i" from 1 to (2+(random 4)) do {_this addmagazine "30Rnd_545x39_AK"};
+					};
+					case 10 : {
+						_this addweapon "huntingrifle";
+						for "_i" from 1 to (2+(random 4)) do {_this addmagazine "5x_22_LR_17_HMR"};
+					};
+					case 11 : {
+						_this addweapon "RPG7V";
+						_this addmagazine "PG7V";
+						_this addmagazine "OG7";
+						_this addmagazine "OG7";
+						if (random 1 > 0.4) then {_this addmagazine "OG7"};
 					};
 				};
 			};
