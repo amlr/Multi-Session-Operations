@@ -1,10 +1,10 @@
 /*%FSM<COMPILE "C:\Program Files\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, reducer">*/
 /*%FSM<HEAD>*/
 /*
-item0[] = {"func_init",2,4346,350.000000,350.000000,450.000000,400.000000,0.000000,"func init"};
+item0[] = {"func_init",2,250,350.000000,350.000000,450.000000,400.000000,0.000000,"func init"};
 item1[] = {"not_initdone",4,218,350.000000,275.000000,450.000000,325.000000,0.000000,"not initdone"};
 item2[] = {"_",8,218,225.000000,350.000000,325.000000,400.000000,0.000000,""};
-item3[] = {"start",0,250,225.000000,275.000000,325.000000,325.000000,0.000000,"start"};
+item3[] = {"start",0,4346,225.000000,275.000000,325.000000,325.000000,0.000000,"start"};
 item4[] = {"count___0",4,218,350.000000,425.000000,450.000000,475.000000,1.000000,"count > 0"};
 item5[] = {"wait",3,250,350.000000,500.000000,450.000000,550.000000,0.000000,"wait"};
 item6[] = {"time___wait",4,218,225.000000,500.000000,325.000000,550.000000,0.000000,"time > wait"};
@@ -26,7 +26,7 @@ link10[] = {7,8};
 link11[] = {8,9};
 link12[] = {10,9};
 globals[] = {25.000000,1,0,0,0,640,480,1,195,6316128,1,8.326469,611.477417,602.185181,158.876434,1249,918,1};
-window[] = {2,-1,-1,-1,-1,993,664,2038,54,3,1267};
+window[] = {2,-1,-1,-1,-1,1171,176,1550,232,3,1267};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -220,7 +220,7 @@ class FSM
        "" \n
        "private [""_spawn_range""];" \n
        "_spawn_range = _logic getvariable ""spawn_range"";" \n
-       "if (isnil ""_spawn_range"") then {_spawn_range = 2400};"/*%FSM</STATEINIT""">*/;
+       "if (isnil ""_spawn_range"") then {_spawn_range = 1500};"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {

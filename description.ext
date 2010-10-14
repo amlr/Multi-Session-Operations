@@ -131,6 +131,7 @@ class cfgFunctions {
 #include <dialogs\debug.hpp>
 #include <dialogs\settings.hpp>
 
+#include <modules\cas\dialog.hpp>
 #include <modules\jipmarkers\dialog.hpp>
 #include <modules\logbook\dialog.hpp>
 #include <modules\logistics\dialog.hpp>
