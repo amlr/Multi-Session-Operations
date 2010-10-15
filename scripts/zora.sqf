@@ -10,5 +10,5 @@ while {true} do {
 	if (playersnumber west > 0) then {
 		BIS_Zora_mainscope setvariable ["maxgroups",round (((8+random 4) / (playersnumber west)) min 5) max 1];
 	};
-	sleep (random 3600);
+	sleep (random 7200);
 };
