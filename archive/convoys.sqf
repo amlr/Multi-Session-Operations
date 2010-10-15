@@ -19,11 +19,10 @@ _convoys = [
 	["Pickup_PK_TK_GUE_EP1","V3S_Supply_TK_GUE_EP1","V3S_Supply_TK_GUE_EP1"],
 	["Pickup_PK_TK_GUE_EP1","V3S_Supply_TK_GUE_EP1","V3S_TK_GUE_EP1"],
 	["Pickup_PK_TK_GUE_EP1","V3S_TK_GUE_EP1","Offroad_SPG9_TK_GUE_EP1"],
-	["Pickup_PK_TK_GUE_EP1","Ural_ZU23_TK_GUE_EP1","Pickup_PK_TK_GUE_EP1"],
-	["Offroad_DSHKM_TK_GUE_EP1","V3S_Refuel_TK_GUE_EP1","V3S_TK_GUE_EP1","Offroad_DSHKM_TK_GUE_EP1"]
+	["Pickup_PK_TK_GUE_EP1","Ural_ZU23_TK_GUE_EP1","Pickup_PK_TK_GUE_EP1"]
 ];
 while {true} do {
-	sleep (random 10);
+	sleep (random 14400);
 	if (playersnumber west > 0) then {
 		private ["_path","_convoy","_group","_start"];
 		_path = _paths call BIS_fnc_selectRandom;
@@ -31,21 +30,21 @@ while {true} do {
 		_group = createGroup resistance;
 		_start = (_path select 0) call RMM_fnc_getpos;
 		{
-			[[_start,50] call RMM_fnc_randPos, 0, _x, _group] call BIS_fnc_spawnVehicle;
+			[[_start,100] call RMM_fnc_randPos, 0, _x, _group] call BIS_fnc_spawnVehicle;
 		} foreach _convoy;
 		_group setFormation "COLUMN";
 		for "_i" from 1 to ((count _paths) - 1) do {
 			_group addwaypoint [(_path select _i) call RMM_fnc_getpos, 0];
 		};
-		
 		_group spawn {
 			private "_count";
 			_count = count (waypoints _this);
-			player sidechat str [_group,(str currentwaypoint _this)];
 			while {not isnull _this} do {
-				player sidechat str [_group,(str currentwaypoint _this)];
 				if ({alive _x} count (units _this) == 0) exitwith {deletegroup _this;};
-				if (currentwaypoint _this == _count) exitwith {_this call RMM_fnc_deleteentity;};
+				if (currentwaypoint _this == _count) exitwith {
+					{if (vehicle _x != _x) then {(vehicle _x) call RMM_fnc_Deleteentity;}} foreach (units _this);
+					_this call RMM_fnc_deleteentity;
+				};
 				sleep 2;
 			};
 		};
