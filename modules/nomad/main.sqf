@@ -28,7 +28,8 @@ waituntil {getplayeruid player != ""};
 		{getDir player;},
 		{[vehicle player, driver (vehicle player) == player, gunner (vehicle player) == player, commander (vehicle player) == player]},
 		{lifestate player;},
-		{rank player}
+		{units player;},
+		{rank player;}
 	],
 	[
 		{
@@ -76,22 +77,31 @@ waituntil {getplayeruid player != ""};
 			private ["_vehicle"];
 			_vehicle = _this select 0;
 			if (not isnull _vehicle || _vehicle != player) then {
-				if ((_this select 1) and (isnull(driver _vehicle)) exitwith {
+				if ((_this select 1) and (isnull(driver _vehicle))) exitwith {
 					player moveInDriver _vehicle;
 				};
-				if ((_this select 2) and (isnull(commander _vehicle)) exitwith {
+				if ((_this select 2) and (isnull(commander _vehicle))) exitwith {
 						player moveInCommander _vehicle;
 					};
-				if ((_this select 3) and (isnull(gunner _vehicle)) exitwith {
+				if ((_this select 3) and (isnull(gunner _vehicle))) exitwith {
 					player moveInGunner _vehicle;
 				};
-				player moveInCargo _vehicle
+				player moveInCargo _vehicle;
 			};
 		},
 		{
 			if (tolower(_this) == "unconscious") then {
 				[1,player] call revive_fnc_handle_events;
 			};
+		},
+		{
+			[player] joinSilent (createGroup playerSide);
+			(group player) selectLeader player;
+			{
+				if !(isplayer _x) then {
+					[_x] joinsilent (group player);
+				};
+			} foreach _this;
 		},
 		{player setunitrank _this;}
 	]
