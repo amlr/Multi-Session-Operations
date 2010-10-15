@@ -5,6 +5,11 @@ RMM_cas_types = [
 	"AH64D",
 	"AH1Z"
 ];
+RMM_cas_lines = [
+	[mapGridPosition player],
+	[str (group player)],
+	RMM_cas_types
+];
 RMM_cas_missiontime = 540;
 RMM_cas_flyinheight = 125;
 RMM_cas_frequency = 10800;

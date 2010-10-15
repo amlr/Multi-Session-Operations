@@ -79,7 +79,7 @@ class Mission
 		year=2010;
 		month=10;
 		day=15;
-		hour=11;
+		hour=5;
 		minute=45;
 	};
 	class Groups
@@ -1334,10 +1334,10 @@ class Mission
 		class Item51
 		{
 			position[]={5964.5649,83.040001,11838.378};
-			azimut=-25.233822;
+			azimut=-25.233801;
 			id=80;
 			side="EMPTY";
-			vehicle="FlagCarrierUSArmy_EP1";
+			vehicle="FlagCarrierUSA_EP1";
 			skill=0.2;
 		};
 		class Item52
@@ -2309,7 +2309,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=15;
+		items=16;
 		class Item0
 		{
 			position[]={8253.4512,296.04001,2154.7808};
@@ -2409,6 +2409,12 @@ class Mission
 			position[]={5605.9136,74.391045,9861.1758};
 			name="r4";
 			type="Empty";
+		};
+		class Item15
+		{
+			position[]={5930.7368,83.040001,11886.135};
+			name="headquarters2";
+			type="Faction_USA_EP1";
 		};
 	};
 	class Sensors

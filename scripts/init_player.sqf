@@ -93,7 +93,15 @@ if (MSO_R_Admin) then {
 if (MSO_R_Leader) then {
 	_trigger = createtrigger ["emptydetector", [0,0]];
 	_trigger settriggeractivation ["FOXTROT", "PRESENT", true];
-	_trigger settriggertext "Close Air Support";
+	_trigger settriggertext "AIRSUPREQ";
 	_trigger settriggertype "none";
 	_trigger settriggerstatements ["this","createDialog ""RMM_ui_cas""",""];
+};
+
+if (MSO_R_Leader) then {
+	_trigger = createtrigger ["emptydetector", [0,0]];
+	_trigger settriggeractivation ["GOLF", "PRESENT", true];
+	_trigger settriggertext "CASEVAC";
+	_trigger settriggertype "none";
+	_trigger settriggerstatements ["this","createDialog ""RMM_ui_casevac""",""];
 };

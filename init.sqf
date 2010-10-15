@@ -35,6 +35,7 @@ if (not isdedicated) then {
 // Modules
 
 execNow "modules\cas\main.sqf";
+execNow "modules\casevac\main.sqf";
 execNow "modules\cnstrct\main.sqf";
 execNow "modules\jipmarkers\main.sqf";
 execNow "modules\logistics\main.sqf";

@@ -119,6 +119,8 @@ class cfgFunctions {
 			class dynocreate {};
 		};
 	};
+	#include <modules\cas\functions.hpp>
+	#include <modules\casevac\functions.hpp>
 	#include <modules\cnstrct\functions.hpp>
 	#include <modules\logbook\functions.hpp>
 	#include <modules\logistics\functions.hpp>
@@ -128,12 +130,12 @@ class cfgFunctions {
 
 //http://community.bistudio.com/wiki/PreProcessor_Commands
 #include <dialogs\c_ui.hpp>
-#include <dialogs\debug.hpp>
-#include <dialogs\settings.hpp>
 
 #include <modules\cas\dialog.hpp>
+#include <modules\casevac\dialog.hpp>
+#include <modules\dialog\dialog.hpp>
 #include <modules\jipmarkers\dialog.hpp>
 #include <modules\logbook\dialog.hpp>
 #include <modules\logistics\dialog.hpp>
-#include <dialogs\recruit.hpp>
-//#include <dialogs\supplies.hpp>
+#include <modules\recruit\dialog.hpp>
+#include <modules\settings\dialog.hpp>
