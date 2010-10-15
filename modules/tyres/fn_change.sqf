@@ -20,7 +20,7 @@ if (alive _caller) then {
 		{
 			if (local (_this select 0)) then {
 				(_this select 0) sethit [(_this select 1),0];
-				_target setvectorup [0,0,1];
+				(_this select 0) setvectorup [0,0,1];
 			};
 		}
 	] call RMM_fnc_ExMP;
