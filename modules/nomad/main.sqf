@@ -81,8 +81,8 @@ waituntil {getplayeruid player != ""};
 					player moveInDriver _vehicle;
 				};
 				if ((_this select 2) and (isnull(commander _vehicle))) exitwith {
-						player moveInCommander _vehicle;
-					};
+					player moveInCommander _vehicle;
+				};
 				if ((_this select 3) and (isnull(gunner _vehicle))) exitwith {
 					player moveInGunner _vehicle;
 				};
