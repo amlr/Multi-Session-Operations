@@ -77,13 +77,11 @@ if (isnil _string) then {
 
 //settings dialog
 private "_trigger";
-/*
-// Now using the 0-8-1 Communication Menu
 _trigger = createtrigger ["emptydetector", [0,0]];
 _trigger settriggeractivation ["DELTA", "PRESENT", true];
 _trigger settriggertext "Settings";
 _trigger settriggerstatements ["this","createDialog ""RMM_ui_settings""",""];
-*/
+
 if (MSO_R_Admin) then {
 	_trigger = createtrigger ["emptydetector", [0,0]];
 	_trigger settriggeractivation ["ECHO", "PRESENT", true];

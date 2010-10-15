@@ -40,7 +40,6 @@ execNow "modules\cnstrct\main.sqf";
 execNow "modules\jipmarkers\main.sqf";
 execNow "modules\logistics\main.sqf";
 execNow "modules\nomad\main.sqf";
-execNow "modules\settings\main.sqf";
 execNow "modules\tyres\main.sqf";
 
 "RMM_MPe" addPublicVariableEventHandler {
