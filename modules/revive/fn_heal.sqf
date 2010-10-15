@@ -31,6 +31,7 @@ if not (isplayer _healer) then { //ai compatibility
 		if (lifestate _injured != "unconscious") exitwith {};
 		if (_i == _ratio) then {
 			[0,_injured,{_this call revive_fnc_conscious}] call RMM_fnc_ExMP;
+			player sidechat str [_this,"PLAYERhealed"];
 		};
 	};
 };
