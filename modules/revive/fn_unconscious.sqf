@@ -3,19 +3,19 @@ _this setvariable ["revive_eh_heal",_this addeventhandler ["handleheal", "0 = _t
 
 if (not isnil {_this getvariable "revive_act_drag"}) then {_this removeaction (_this getvariable "revive_act_drag")};
 if (isnil {_this getvariable "revive_dragged"}) then {_this setvariable ["revive_dragged", false]};
-_this setvariable ["revive_act_drag",(_this addaction [localize "BC_addActions.sqf13", "revive\fn_drag.sqf", nil, -1, false, true, "", "(_this distance _target < 3) and (lifestate _target == ""unconscious"") and not (_target getvariable ""revive_dragged"")"])];
+_this setvariable ["revive_act_drag",(_this addaction [localize "BC_addActions.sqf13", revive_fnc_drag_path, nil, -1, false, true, "", "(_this distance _target < 3) and (lifestate _target == ""unconscious"") and not (_target getvariable ""revive_dragged"")"])];
 
 if ((vehicle _this) != _this) then {
 	private ["_vehicle"];
 	_vehicle = vehicle _this;
 	if (isnil {_vehicle getvariable "revive_takeout"}) then {
-		_vehicle setvariable ["revive_takeout",_vehicle addaction [localize "str_agonytakeoutaction", "revive\fn_takeout.sqf", nil, -1, true, true, "", "{lifestate _x == ""unconscious""} count crew _target > 0"]];
+		_vehicle setvariable ["revive_takeout",_vehicle addaction [localize "str_agonytakeoutaction", revive_fnc_takeout_path, nil, -1, true, true, "", "{lifestate _x == ""unconscious""} count crew _target > 0"]];
 	};
 };
 
 if (local _this) then {
-	_unit setunconscious true;
-	_unit addrating -(rating _unit);
+	_this setunconscious true;
+	_this addrating -(rating _this);
 	if not (isplayer _this) then {
 		_this disableAI "anim";
 	};

@@ -19,7 +19,7 @@ sleep 0.1;
 [0,_unit,{_this setdir 180}] call RMM_fnc_ExMP;
 
 //drop action
-_action = _dragger addaction [localize "dragger.sqf0", "revive\fn_drop.sqf", _unit];
+_action = _dragger addaction [localize "dragger.sqf0", revive_fnc_drop_path, _unit];
 
 sleep 1;
 

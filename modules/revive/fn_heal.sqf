@@ -23,6 +23,7 @@ if (not isplayer _healer) then { //ai compatibility
 	for "_i" from 0 to _ratio do {
 		sleep 0.5;
 		private ["_string","_total"];
+		//ensure the medic is still healing
 		_string = toArray(animationstate _healer);
 		_total = (_string find ((toArray "_") select 0)) + (_string find ((toArray "e") select 0));
 		if not ((_total > 48 and _total < 52) || (_total > 72 and _total < 76)) exitwith {};

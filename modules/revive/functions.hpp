@@ -7,5 +7,8 @@ class revive {
 		class damage {};
 		class handle_events {};
 		class heal {};
+		class drag {};
+		class drop {};
+		class takeout {};
 	};
 };
