@@ -26,7 +26,7 @@ waituntil {getplayeruid player != ""};
 		{viewdistance;},
 		{if(isnil "terraindetail")then{1;}else{terraindetail;};},
 		{getDir player;},
-		{[assignedVehicle player, assignedVehicleRole player]},
+		{[vehicle player, driver (vehicle player) == player, gunner (vehicle player) == player, commander (vehicle player) == player]},
 		{lifestate player;},
 		{rank player}
 	],
@@ -73,22 +73,19 @@ waituntil {getplayeruid player != ""};
 		},
 		{player setdir _this;},
 		{
-			private ["_vehicle", "_vehpos", "_tp"];
+			private ["_vehicle"];
 			_vehicle = _this select 0;
-			_vehpos = _this select 1;
-			if (count _vehpos != 0) then {
-				switch(_vehpos select 0) do {
-					case "Driver": {
-						player moveInDriver _vehicle;
-					};
-					case "Cargo": {
-						player moveInCargo _vehicle;
-					};
-					case "Turret": {
-						_tp = _vehpos select 1;
-						player moveInTurret [_vehicle, _tp];
-					};
+			if (not isnull _vehicle || _vehicle != player) then {
+				if ((_this select 1) and (isnull(driver _vehicle)) exitwith {
+					player moveInDriver _vehicle;
 				};
+				if ((_this select 2) and (isnull(commander _vehicle)) exitwith {
+						player moveInCommander _vehicle;
+					};
+				if ((_this select 3) and (isnull(gunner _vehicle)) exitwith {
+					player moveInGunner _vehicle;
+				};
+				player moveInCargo _vehicle
 			};
 		},
 		{
