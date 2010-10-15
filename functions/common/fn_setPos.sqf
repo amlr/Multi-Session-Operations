@@ -37,16 +37,17 @@ switch (_typename) do {
 		_entity setpos _position;
 	};
 	case ("group") : {
-		_position = getpos (leader _entity);
-		_x = (_position select 0);
-		_y = (_position select 1);
-		_z = (_position select 2);
+		private ["_ldp","_dx","_dy","_dz"];
+		_ldp = getpos (leader _entity);
+		_dx = _position select 0;
+		_dy = _position select 1;
+		_dz = _position select 2;
 		{
 			private ["_txyz","_tx", "_ty", "_tz"];
-			_txyz = (_x worldtomodel _position);
-			_tx = _x + (_txyz select 0);
-			_ty = _y + (_txyz select 1);
-			_tz = _z + (_txyz select 2);
+			_txyz = _x worldtomodel _ldp;
+			_tx = _dx + (_txyz select 0);
+			_ty = _dy + (_txyz select 1);
+			_tz = _dz + (_txyz select 2);
 			_x setpos [_tx,_ty,_tz];
 		} foreach (units _entity);
 	};
