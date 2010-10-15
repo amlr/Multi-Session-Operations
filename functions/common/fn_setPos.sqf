@@ -14,7 +14,7 @@ Author:
 
 ---------------------------------------------------------------------------- */
 
-private ["_entity","_position","_radius"]
+private ["_entity","_position","_radius"];
 _entity = _this select 0;
 _position = _this select 1;
 _radius = if (count _this > 2) then {_this select 2} else {0};

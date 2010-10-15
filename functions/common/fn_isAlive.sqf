@@ -15,7 +15,7 @@ Author:
 ---------------------------------------------------------------------------- */
 
 private "_typename";
-_typename = typename _this;
+_typename = tolower(typename _this);
 
 switch (_typename) do {
 	case ("array") : {
