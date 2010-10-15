@@ -26,7 +26,7 @@ link10[] = {7,8};
 link11[] = {8,9};
 link12[] = {10,9};
 globals[] = {25.000000,1,0,0,0,640,480,1,201,6316128,1,-156.949188,436.476440,502.954590,-178.001312,800,918,1};
-window[] = {2,-1,-1,-1,-1,1113,132,1317,174,3,818};
+window[] = {2,-1,-1,-1,-1,1055,88,1273,116,3,818};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -124,10 +124,11 @@ class FSM
        "	private [""_data""];" \n
        "	_data = _reference getvariable ""RMM_frzr_grpdata"";" \n
        "" \n
-       "	private [""_list"",""_waypoints"",""_params""];" \n
+       "	private [""_list"",""_waypoints"",""_params"",""_init""];" \n
        "	_list = _data select 0;" \n
        "	_waypoints = _data select 1;" \n
        "	_params = _data select 2;" \n
+       "	_init = _data select 3;" \n
        "	" \n
        "	private [""_side"",""_behaviour"",""_combatmode"",""_speedmode"",""_formation""];" \n
        "	_side = _params select 0;" \n
@@ -167,6 +168,7 @@ class FSM
        "	} foreach _list;" \n
        "" \n
        "	{[_group,_logic] call _x} foreach (_logic getvariable ""custom_init"");" \n
+       "	_group call _init;" \n
        "" \n
        "	_reference setvariable [""RMM_frzr_frozen"",false];" \n
        "	_reference setvariable [""RMM_frzr_group"",_group];" \n
@@ -208,6 +210,8 @@ class FSM
        "			_list set [count _list, (_x call RMM_fnc_frzr_udelete)];" \n
        "		};" \n
        "	} foreach (units _group);" \n
+       "	_init = {};" \n
+       "	if (not isnil {(leader _group) getvariable ""custom_init""}) then {_init = (leader _group) getvariable ""custom_init"";};" \n
        "	{" \n
        "		if (vehicle _x != _x) then {" \n
        "			unassignvehicle _x;" \n
@@ -219,7 +223,7 @@ class FSM
        "	deletegroup _group;" \n
        "" \n
        "	_reference setvariable [""RMM_frzr_frozen"",true];" \n
-       "	_reference setvariable [""RMM_frzr_grpdata"",[_list,_waypoints,_params]];" \n
+       "	_reference setvariable [""RMM_frzr_grpdata"",[_list,_waypoints,_params,_init]];" \n
        "};" \n
        "" \n
        "RMM_fnc_frzr_refsync = {" \n
