@@ -20,7 +20,7 @@ _position = _this select 1;
 _radius = if (count _this > 2) then {_this select 2} else {0};
 
 private "_typename";
-_typename = tolower (typename _entity;
+_typename = tolower (typename _entity);
 _position = _position call RMM_fnc_getpos;
 
 if (_radius > 0) then {
