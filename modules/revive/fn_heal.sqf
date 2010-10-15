@@ -7,7 +7,7 @@ if (not isnil {_injured getvariable "revive_treating"}) exitwith {};
 _injured setvariable ["revive_treating",true];
 
 private "_ratio";
-_ratio = if (_ismedic) then {26} else {round  (56 max (114 * damage _injured))};
+_ratio = if (_ismedic) then {26} else {round (56 max (114 * damage _injured))};
 
 _healer playactionnow "medicstart";
 if (not isplayer _healer) then { //ai compatibility
@@ -16,7 +16,7 @@ if (not isplayer _healer) then { //ai compatibility
 	sleep (_ratio / 3); //take less time
 	if (lifestate _healer != "alive") exitwith {};
 	if (lifestate _injured != "unsconcious") exitwith {};
-	[0,_injured] call revive_fnc_handle_events;
+	[0,_injured,{_this call revive_fnc_conscious}] call RMM_fnc_ExMP;
 } else {
 	sleep 3;
 
@@ -30,14 +30,14 @@ if (not isplayer _healer) then { //ai compatibility
 		if (lifestate _healer != "alive") exitwith {};
 		if (lifestate _injured != "unconscious") exitwith {};
 		if (_i == _ratio) then {
-			[0,_injured] call revive_fnc_handle_events;
+			[0,_injured,{_this call revive_fnc_conscious}] call RMM_fnc_ExMP;
 		};
 	};
 };
 
 _healer playaction "medicstop";
 
-if (not isplayer _injured) then {
+if not (isplayer _injured) then {
 	_injured enableAI "anim";
 };
 

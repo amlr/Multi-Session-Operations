@@ -5,7 +5,6 @@ class revive {
 		class conscious {};
 		class unconscious {};
 		class damage {};
-		class handle_events {};
 		class heal {};
 		class drag {};
 		class drop {};

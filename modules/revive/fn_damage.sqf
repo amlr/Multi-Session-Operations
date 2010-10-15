@@ -6,7 +6,7 @@ if (_this select 4 == "" and _dmg > 10) exitwith {_dmg};
 if (_this select 1 == "head_hit") exitwith {_dmg};
 if (damage _unit + _dmg <= 0.89) exitwith {_dmg};
 if (lifestate _unit == "alive") exitwith {
-	[1,_unit] call revive_fnc_handle_events;
+	[0,_unit,{_this call revive_fnc_unconscious}] call RMM_fnc_ExMP;
 	0
 };
 _dmg

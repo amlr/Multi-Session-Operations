@@ -13,13 +13,12 @@ if ((vehicle _this) != _this) then {
 	};
 };
 
-if (local _this) then {
-	_this setunconscious true;
-	_this addrating -(rating _this);
-	if not (isplayer _this) then {
-		_this disableAI "anim";
-	};
+_this setunconscious true;
+_this addrating -(rating _this);
+if not (isplayer _this) then {
+	_this disableAI "anim";
 };
+
 _this spawn {
 	if ((vehicle _this) != _this) then {
 		_this playaction "gestureagonycargo";
