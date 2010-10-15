@@ -133,9 +133,9 @@ class cfgFunctions {
 
 #include <modules\cas\dialog.hpp>
 #include <modules\casevac\dialog.hpp>
-#include <modules\dialog\dialog.hpp>
+#include <modules\debug\dialog.hpp>
 #include <modules\jipmarkers\dialog.hpp>
 #include <modules\logbook\dialog.hpp>
 #include <modules\logistics\dialog.hpp>
-#include <modules\recruit\dialog.hpp>
+#include <modules\recruitment\dialog.hpp>
 #include <modules\settings\dialog.hpp>
