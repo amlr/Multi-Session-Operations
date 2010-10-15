@@ -1,17 +1,8 @@
 [
 	[
-		"task1", //Task Name (GLOBALVAR)
+		"task1",
 		[
-			"Kill or Capture Ex-Takistani Army Colonel Aziz; located in the Jabal as-Saraj mountains.", // Task Description Paragraph
-			"Kill or Capture Colonel Aziz", // Task Title
-			"AO" // Waypoint Title
-		],
-		getmarkerpos "task1" // Task Destination
-	],
-	[
-		"task2",
-		[
-			"You are to RTB NLT 06102000H AEST",
+			"You are to RTB NLT 25102000H AEST",
 			"RTB",
 			"RTB"
 		],

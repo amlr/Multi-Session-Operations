@@ -21,6 +21,7 @@ if (!isNil "paramsArray") then {
 
 if (isserver) then {
 	execVM "scripts\zora.sqf";
+	//execNow "scripts\init_server.sqf";
 };
 if (not isdedicated) then {
 	execNow "briefing.sqf";
