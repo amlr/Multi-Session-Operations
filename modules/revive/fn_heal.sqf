@@ -10,12 +10,12 @@ private "_ratio";
 _ratio = if (_ismedic) then {26} else {round (56 max (114 * damage _injured))};
 
 _healer playactionnow "medicstart";
-if (not isplayer _healer) then { //ai compatibility
+if not (isplayer _healer) then { //ai compatibility
 	_healer lookat _injured;
 	_healer dowatch _injured;
 	sleep (_ratio / 3); //take less time
 	if (lifestate _healer != "alive") exitwith {};
-	if (lifestate _injured != "unsconcious") exitwith {};
+	if (lifestate _injured != "unconscious") exitwith {};
 	[0,_injured,{_this call revive_fnc_conscious}] call RMM_fnc_ExMP;
 } else {
 	sleep 3;
