@@ -1,10 +1,10 @@
 /*%FSM<COMPILE "C:\Program Files\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, FTL">*/
 /*%FSM<HEAD>*/
 /*
-item0[] = {"FTL",0,4346,-175.000000,-300.000000,-75.000000,-250.000000,0.000000,"FTL"};
+item0[] = {"FTL",0,250,-175.000000,-300.000000,-75.000000,-250.000000,0.000000,"FTL"};
 item1[] = {"time2wait",4,218,-175.000000,-225.000000,-75.000000,-175.000000,0.000000,"time2wait"};
 item2[] = {"time2wait",2,250,-175.000000,-150.000000,-75.000000,-100.000000,0.000000,"time2wait"};
-item3[] = {"Town",2,250,-50.000000,-225.000000,50.000000,-175.000000,0.000000,"Town"};
+item3[] = {"Town",2,4346,-50.000000,-225.000000,50.000000,-175.000000,0.000000,"Town"};
 item4[] = {"_",8,218,-50.000000,-150.000000,50.000000,-100.000000,0.000000,""};
 link0[] = {0,1};
 link1[] = {1,3};
@@ -12,7 +12,7 @@ link2[] = {2,1};
 link3[] = {3,4};
 link4[] = {4,2};
 globals[] = {25.000000,1,0,0,16777215,640,480,1,18,6316128,1,-197.606827,30.066086,7.689711,-335.501984,609,918,1};
-window[] = {2,-1,-1,-1,-1,788,44,1304,58,3,627};
+window[] = {2,-1,-1,-1,-1,875,110,1370,145,3,627};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -70,6 +70,7 @@ class FSM
        "		_x setvariable [""RALICE_active"",false];" \n
        "		_x setvariable [""RALICE_threat"",random (_this getvariable ""RALICE_randomSeed"")];" \n
        "		_x setvariable [""RALICE_population"",[objNull]];" \n
+       "		//_x setvariable [""RALICE_houselist"",nearestObjects [_x, [""House""], 500]];" \n
        "	};" \n
        "" \n
        "	_active = _x getvariable ""ALICE_active"";" \n
