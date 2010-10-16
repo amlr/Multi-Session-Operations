@@ -1,7 +1,7 @@
 if (isdedicated) exitwith {};
 
 waituntil {not isnull player};
-waituntil {getplayeruid player != ""};
+waituntil {!isMultiplayer || getplayeruid player != ""};
 
 [
 	[
