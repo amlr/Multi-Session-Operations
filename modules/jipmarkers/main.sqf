@@ -22,6 +22,7 @@ if (isnil "RMM_jipmarkers") then {
 } else {
 	{
 		private "_mkr";
+		_mkr = createMarker [(_x select 0),(_x select 1)];
 		_mkr setmarkertypelocal (_x select 2);
 		_mkr setmarkertextlocal (_x select 3);
 	} foreach RMM_jipmarkers;

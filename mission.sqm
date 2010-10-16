@@ -79,8 +79,8 @@ class Mission
 		year=2010;
 		month=10;
 		day=15;
-		hour=5;
-		minute=45;
+		hour=16;
+		minute=0;
 	};
 	class Groups
 	{
@@ -837,7 +837,7 @@ class Mission
 					vehicle="Logic";
 					leader=1;
 					skill=0.2;
-					init="0 = execvm ""scripts\convoys.sqf""";
+					init="if(isserver)then{0 = execvm ""scripts\convoys.sqf"";};";
 				};
 			};
 		};
