@@ -2,7 +2,7 @@ if (RMM_cas_lastTime + RMM_cas_frequency < time) then {
 	RMM_cas_lastTime = time;
 	publicvariable "RMM_cas_lastTime";
 	private "_veh";
-	_veh = ([[-1000,-1000,1000], 0, RMM_cas_types select (lbCurSel 1), group player] call BIS_fnc_spawnVehicle) select 0;
+	_veh = ([[-1000,-1000,1000], 0, RMM_cas_types select (lbCurSel 2), group player] call BIS_fnc_spawnVehicle) select 0;
 	_veh flyinheight RMM_cas_flyinheight;
 	[2,_veh,{_this lockdriver true;}] call RMM_fnc_ExMP;
 	[1,_veh,{

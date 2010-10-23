@@ -28,7 +28,7 @@ class RMM_ui_cas { // by Rommel
 			text = "Transmit";
 			w = CUI_Box_W;
 			y = CUI_Row_Y(4);
-			action = "if (lbCurSel 1 > -1) then {_this call cas_fnc_call}; closeDialog 0;";
+			action = "if (lbCurSel 2 > -1) then {_this call cas_fnc_call}; closeDialog 0;";
 		};
 	};
 };
