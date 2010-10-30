@@ -1,7 +1,5 @@
 if (isdedicated) exitwith {};
 
-onMapSingleClick "if (_shift && _alt) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
-
 RMM_jipmarkers_types = [
 	"mil_objective",
 	"mil_marker",
@@ -22,7 +20,7 @@ if (isnil "RMM_jipmarkers") then {
 } else {
 	{
 		private "_mkr";
-		_mkr = createMarker [(_x select 0),(_x select 1)];
+		_mkr = createMarkerLocal [(_x select 0),(_x select 1)];
 		_mkr setmarkertypelocal (_x select 2);
 		_mkr setmarkertextlocal (_x select 3);
 	} foreach RMM_jipmarkers;

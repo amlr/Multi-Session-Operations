@@ -64,7 +64,7 @@ class RMM_ui_debug { // by Rommel
 		class DPanel : CUI_Frame {
 			y = CUI_Row_Y(0);
 			x = CUI_Box_X(2);
-			h = CUI_Row_DY(0,15);
+			h = CUI_Row_DY(0,18);
 			w = CUI_Box_W / 1.4;
 		};
 		class DPanelCaption : CUI_Caption {
@@ -117,6 +117,11 @@ class RMM_ui_debug { // by Rommel
 			text = "Count AllUnits";
 			y = CUI_Row_Y(15);
 			action = "CtrlSetText [55,str [west countside allunits, east countside allunits, resistance countside allunits, civilian countside allunits]];";
+		};
+		class DPanelAIGrpMake : DPanelCursorTarget {
+			text = "spawnGroup";
+			y = CUI_Row_Y(17);
+			action = "CtrlSetText [2,""[_this, <SIDE>, <GROUP_NAME>] call BIS_fnc_SpawnGroup;""];";
 		};
 	};
 };

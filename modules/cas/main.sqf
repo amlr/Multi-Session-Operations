@@ -15,6 +15,6 @@ RMM_cas_flyinheight = 125;
 RMM_cas_frequency = 10800;
 
 if (isnil "RMM_cas_lastTime") then {
-	RMM_cas_lastTime = -10800;
+	RMM_cas_lastTime = -RMM_cas_frequency;
 	publicvariable "RMM_cas_lastTime";
 };

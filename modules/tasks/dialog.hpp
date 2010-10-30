@@ -1,8 +1,8 @@
-class RMM_ui_jipmarkers { // by Rommel
-	idd = 80511;
+class RMM_ui_tasks { // by Rommel
+	idd = 80514;
 	movingEnable = 1;
 	enableSimulation = 1;
-	onLoad = "[] spawn {{lbAdd [1,_x];} foreach RMM_jipmarkers_types;};";
+	onLoad = "";
 
 	class controls {
 		class Background : CUI_Frame {
@@ -11,26 +11,26 @@ class RMM_ui_jipmarkers { // by Rommel
 			w = CUI_Box_W;
 		};
 		class Caption : CUI_Caption {
-			text = "JIP Markers";
+			text = "Task Creator";
 			y = CUI_Row_Y(0);
 			h = CUI_Row_DY(0,1);
 			w = CUI_Box_W;
 		};
-		class LblType : CUI_Text {
+		class LblText : CUI_Text {
 			y = CUI_Row_Y(1);
-			text = "Icon:";
+			text = "Title:";
 		};
-		class MLb : CUI_Combo {
+		class TaskText : CUI_Edit {
 			idc = 1;
 			x = CUI_Box_X(1/4);
 			y = CUI_Row_Y(1);
 			w = CUI_Box_W * 3/4;
 		};
-		class LblText : CUI_Text {
+		class LblDescription : CUI_Text {
 			y = CUI_Row_Y(2);
 			text = "Text:";
 		};
-		class MarkerText : CUI_Edit {
+		class TaskDescription : CUI_Edit {
 			idc = 2;
 			x = CUI_Box_X(1/4);
 			y = CUI_Row_Y(2);
@@ -40,13 +40,13 @@ class RMM_ui_jipmarkers { // by Rommel
 			text = "Transmit";
 			w = CUI_Box_W;
 			y = CUI_Row_Y(3);
-			action = "if ((lbCurSel 1) > -1) then {0 call jipmarkers_fnc_transmit; closeDialog 0;};";
+			action = "[str (time + random 1),[(ctrlText 2),(ctrlText 1),(ctrlText 1)],RMM_task_position] call tasks_fnc_add; closeDialog 0;";
 		};
 		class Delete : CUI_Button {
 			text = "Delete Nearest";
 			w = CUI_Box_W;
 			y = CUI_Row_Y(4);
-			action = "if (count RMM_jipmarkers > 0) then {0 call jipmarkers_fnc_deletenearest; closeDialog 0;};";
+			action = "if (count RMM_tasks > 0) then {0 call tasks_fnc_deletenearest; closeDialog 0;};";
 		};
 	};
 };
