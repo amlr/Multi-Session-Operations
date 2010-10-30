@@ -1,4 +1,5 @@
 todo:
 
-proper Armoury dialog for admins
-base log (exit/enter etc of personnel, firing within the base)
+JIP TASKS DIALOG (Like JIP MARKERS!!!)
+
+transfer m240 rounds to hummers

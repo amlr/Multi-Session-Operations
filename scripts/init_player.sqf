@@ -47,10 +47,6 @@ _exit = false;
 	["3048774",		"LIEUTENANT",	["admin"]] //Rommel
 ];
 
-if (MSO_R_Air) then {
-	"farp" setmarkertypelocal "Faction_BritishArmedForces_BAF";
-};
-
 {
 	if (_x iskindof "Air") then {
 		if (not MSO_R_Air) then {
@@ -66,8 +62,8 @@ if (MSO_R_Air) then {
 
 //default weapons
 if (isnil _string) then {
-	removeallweapons player;
-	removeallitems player;
+	//removeallweapons player;
+	//removeallitems player;
 	player switchmove "";
 	if (not isnull (unitBackpack player)) then {
 		clearWeaponCargo (unitBackpack player);
@@ -81,6 +77,12 @@ _trigger = createtrigger ["emptydetector", [0,0]];
 _trigger settriggeractivation ["DELTA", "PRESENT", true];
 _trigger settriggertext "Settings";
 _trigger settriggerstatements ["this","createDialog ""RMM_ui_settings""",""];
+
+if (MSO_R_Leader) then {
+	onMapSingleClick "if (_alt) then {RMM_task_position = _pos; createDialog ""RMM_ui_tasks"";} else {if (_shift) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};}";
+} else {
+	onMapSingleClick "if (_shift) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
+};
 
 if (MSO_R_Admin) then {
 	_trigger = createtrigger ["emptydetector", [0,0]];
@@ -104,4 +106,12 @@ if (MSO_R_Leader) then {
 	_trigger settriggertext "CASEVAC";
 	_trigger settriggertype "none";
 	_trigger settriggerstatements ["this","createDialog ""RMM_ui_casevac""",""];
+};
+
+if (MSO_R_Leader) then {
+	_trigger = createtrigger ["emptydetector", [0,0]];
+	_trigger settriggeractivation ["HOTEL", "PRESENT", true];
+	_trigger settriggertext "AAR";
+	_trigger settriggertype "none";
+	_trigger settriggerstatements ["this","createDialog ""RMM_ui_aar""",""];
 };

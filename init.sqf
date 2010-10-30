@@ -1,14 +1,14 @@
 #define execNow call compile preprocessfilelinenumbers
 
 //http://community.bistudio.com/wiki/startLoadingScreen
-startLoadingScreen ["", "RscDisplayLoadMission"];
+startLoadingScreen ["Receiving", "RscDisplayLoadMission"];
 
 //http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];
 
 waituntil {not isnil "BIS_fnc_init"};
 
-["",10] call RMM_fnc_failSafeLS;
+["Receiving",10] call RMM_fnc_failSafeLS;
 
 // ====================================================================================
 // Mission Scripts
@@ -20,26 +20,24 @@ if (!isNil "paramsArray") then {
 };
 
 if (isserver) then {
-	execVM "scripts\zora.sqf";
-	//execNow "scripts\init_server.sqf";
 };
 if (not isdedicated) then {
+	execVM "scripts\init_player.sqf";
 	execNow "briefing.sqf";
 	execNow "tasks.sqf";
-	
-	execvm "scripts\calltoprayer.sqf";
-	execNow "scripts\init_player.sqf";
 };
 
 // ====================================================================================
 // Modules
 
+execNow "modules\aar\main.sqf";
 execNow "modules\cas\main.sqf";
 execNow "modules\casevac\main.sqf";
 execNow "modules\cnstrct\main.sqf";
 execNow "modules\jipmarkers\main.sqf";
 execNow "modules\logistics\main.sqf";
 execNow "modules\nomad\main.sqf";
+execNow "modules\tasks\main.sqf";
 execNow "modules\tyres\main.sqf";
 
 "RMM_MPe" addPublicVariableEventHandler {

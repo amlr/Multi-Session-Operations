@@ -43,11 +43,7 @@ class CfgMusic {
 };
 class CfgSounds {
 	sounds[] = {};
-	class muezzin {
-		name = "muezzin";
-		sound[] = {"sounds\muezzin.ogg", 1, 1};
-		titles[] = {};
-	};
+
 };
 class CfgRadio {
 };
@@ -69,68 +65,23 @@ class Params {
 
 //http://community.bistudio.com/wiki/Functions_Library
 class cfgFunctions {
-	class TK {
-		file = "TK";
-		class Misc {
-			class takibani {};
-			class takistani {};
-			class threatFunc {};
-		};
-	};
-	class RMM {
-		class client {
-			class actionargument {};
-			class taskadd {};
-			class taskhint {};
-			class taskupdate {};
-		};
-		class common {
-			class deleteEntity {};
-			class ExMP {};
-			class failSafeLS {};
-			class findEntity {};
-			class getAlive {};
-			class getDistance {};
-			class getGroup {};
-			class getNearest {};
-			class getNearestBuilding {};
-			class getPos {};
-			class getVolume {};
-			class inArea {};
-			class isAlive {};
-			class randPos {};
-			class setHeight {};
-			class setPos {};
-			class supplyDrop {};
-			class vectRotate2D {};
-		};
-		class server {
-			class addWaypoint {};
-			class dynoCreate {};
-			class searchNearby {};
-			class spawnVehiclePath {};
-			class taskAttack {};
-			class taskDefend {};
-			class taskPatrol {};
-		};
-	};
-	class BIS {
-		class server {
-			class dynocreate {};
-		};
-	};
+	#include <functions\functions.hpp>
+	#include <modules\aar\functions.hpp>
 	#include <modules\cas\functions.hpp>
 	#include <modules\casevac\functions.hpp>
 	#include <modules\cnstrct\functions.hpp>
+	#include <modules\jipmarkers\functions.hpp>
 	#include <modules\logbook\functions.hpp>
 	#include <modules\logistics\functions.hpp>
 	#include <modules\revive\functions.hpp>
+	#include <modules\tasks\functions.hpp>
 	#include <modules\tyres\functions.hpp>
 };
 
 //http://community.bistudio.com/wiki/PreProcessor_Commands
 #include <dialogs\c_ui.hpp>
 
+#include <modules\aar\dialog.hpp>
 #include <modules\cas\dialog.hpp>
 #include <modules\casevac\dialog.hpp>
 #include <modules\debug\dialog.hpp>
@@ -139,3 +90,4 @@ class cfgFunctions {
 #include <modules\logistics\dialog.hpp>
 #include <modules\recruitment\dialog.hpp>
 #include <modules\settings\dialog.hpp>
+#include <modules\tasks\dialog.hpp>

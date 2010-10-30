@@ -1,5 +1,5 @@
 [
-	[
+	/*[
 		"Situation",
 		[
 			"Following the collapse of the Takistan Goverment, NATO forces are now conducting security and stability operations in Takistan. The Takiban maintain highly operational terrorist cells in the regional and mountainous areas; conducting small scale attacks on local populations in an attempt to overthrow the fledgling NATO backed goverment."
@@ -16,7 +16,7 @@
 		[
 			"Mission by Rommel"
 		]
-	]
+	]*/
 ]
 
 // do not edit below this

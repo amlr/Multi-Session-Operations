@@ -1,5 +1,5 @@
 [
-	[
+	/*[
 		"task1",
 		[
 			"You are to RTB NLT 25102000H AEST",
@@ -7,7 +7,7 @@
 			"RTB"
 		],
 		getmarkerpos "headquarters"
-	]
+	]*/
 ]
 
 // do not edit below this
