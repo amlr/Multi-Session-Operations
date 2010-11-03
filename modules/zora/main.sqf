@@ -30,14 +30,14 @@ waituntil {!isnil "BIS_fnc_init"};
 _fsm = _this execFSM (BIS_Zora_path + "zora.fsm");
 _logic setvariable ["fsm",_fsm];
 
-if (isnil "BIS_Zora_pause") then {BIS_Zora_pause = false};
+if (isnil "BIS_Zora_pause") then {BIS_Zora_pause = true};
 
-private ["_centerW", "_centerE", "_centerG", "_centerC"];
+/*private ["_centerW", "_centerE", "_centerG", "_centerC"];
 _centerW = createCenter west;
 _centerE = createCenter east;
 _centerG = createCenter resistance;
 _centerC = createCenter civilian;
-/*
+
 west setFriend [east, 0];
 east setFriend [west, 0];
 east setFriend [resistance, 0];
