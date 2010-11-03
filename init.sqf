@@ -20,6 +20,7 @@ if (!isNil "paramsArray") then {
 };
 
 if (isserver) then {
+	execVM "scripts\zora.sqf";
 };
 if (not isdedicated) then {
 	execVM "scripts\init_player.sqf";
