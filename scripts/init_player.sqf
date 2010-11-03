@@ -1,5 +1,5 @@
 waituntil {not isnull player};
-waituntil {getplayeruid player != ""};
+waituntil {!isMultiplayer || getplayeruid player != ""};
 
 player setskill 0;
 {player disableAI _x} foreach ["move","anim","target","autotarget"];
@@ -29,6 +29,7 @@ MSO_R_Crew = false;
 private "_exit";
 _exit = false;
 
+
 {
 	if (_uid == (_x select 0)) exitwith {
 		MSO_R = _x select 2;
@@ -44,8 +45,13 @@ _exit = false;
 	["1062145", 	"CORPORAL",		["crew"]], 	//Antipop
 	["1019521", 	"PRIVATE",		["pilot"]], //Innomadic
 	["1065345", 	"CORPORAL",		["pilot"]], //Tank
-	["3048774",		"LIEUTENANT",	["admin"]] //Rommel
+	["3048774",		"LIEUTENANT",	["admin"]], //Rommel
+	[getplayeruid player, rank player, []]
 ];
+
+if (MSO_R_Air) then {
+	"farp" setmarkertypelocal "Faction_BritishArmedForces_BAF";
+};
 
 {
 	if (_x iskindof "Air") then {
