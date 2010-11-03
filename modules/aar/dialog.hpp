@@ -53,7 +53,7 @@ class RMM_ui_aar { // by Rommel
 		class TF6 : TF4 {idc = 8; x = CUI_Box_X(2 * 3/4);};
 		class Report : CUI_Edit {
 			idc = 9;
-			y = CUI_Row_Y(5)
+			y = CUI_Row_Y(5);
 			h = CUI_Row_DY(5,20);
 			w = CUI_Box_W * 2 - CUI_Row_H;
 		};
