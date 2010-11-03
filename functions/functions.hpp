@@ -19,6 +19,7 @@ class RMM {
 		class getVolume {};
 		class inArea {};
 		class isAlive {};
+		class landForTime {};
 		class randPos {};
 		class setHeight {};
 		class setPos {};
