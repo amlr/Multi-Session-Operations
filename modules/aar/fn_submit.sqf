@@ -1,4 +1,4 @@
-[2,_this,{
+[_this select 0,_this select 1,{
 	player createDiaryRecord ["Diary", [
 		format ["%1/%2 %3 - AAR %4", (date select 2),(date select 1),([daytime] call BIS_fnc_timeToString), RMM_aar_lines select 1 select (_this select 1)],
 		format [

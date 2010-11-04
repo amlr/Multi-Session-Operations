@@ -11,6 +11,6 @@ if (isnil "RMM_aars") then {
 	publicvariable "RMM_aars";
 } else {
 	{
-		_x call aar_fnc_submit;
+		[3,_x] call aar_fnc_submit;
 	} foreach RMM_aars;
 };

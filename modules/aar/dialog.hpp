@@ -76,7 +76,7 @@ class RMM_ui_aar { // by Rommel
 			text = "Submit";
 			w = CUI_Box_W * 2;
 			y = CUI_Row_Y(20);
-			action = "if (lbCurSel 0 > -1 && lbCurSel 1 > -1 && lbCurSel 2 > -1) then {RMM_aar call aar_fnc_submit; closeDialog 0; RMM_aars set [count RMM_aars, RMM_aar]; publicvariable ""RMM_aars""; RMM_aar = nil;};";
+			action = "if (lbCurSel 0 > -1 && lbCurSel 1 > -1 && lbCurSel 2 > -1) then {[2,RMM_aar] call aar_fnc_submit; closeDialog 0; RMM_aars set [count RMM_aars, RMM_aar]; publicvariable ""RMM_aars""; RMM_aar = nil;};";
 		};
 	};
 };
