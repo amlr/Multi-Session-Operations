@@ -1,7 +1,6 @@
 class RMM {
 	class client {
 		class actionargument {};
-		class taskadd {};
 		class taskhint {};
 		class taskupdate {};
 	};

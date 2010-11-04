@@ -1,9 +1,10 @@
-private ["_cidx", "_cpos", "_i"];
+private ["_pos", "_cidx", "_cpos", "_i"];
+_pos = _this;
 _cidx = 0;
 _cpos = [0,0,0];
 _i=0;
 {
-	if ((_x select 2) distance RMM_tasks_position < _cpos distance RMM_task_position)then{
+	if ((_x select 2) distance _pos < _cpos distance _pos)then{
 		_cpos = _x select 2;
 		_cidx = _i;
 	};

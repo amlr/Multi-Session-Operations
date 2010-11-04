@@ -46,7 +46,7 @@ class RMM_ui_tasks { // by Rommel
 			text = "Delete Nearest";
 			w = CUI_Box_W;
 			y = CUI_Row_Y(4);
-			action = "if (count RMM_tasks > 0) then {0 call tasks_fnc_deletenearest; closeDialog 0;};";
+			action = "if (count RMM_tasks > 0) then {RMM_task_position call tasks_fnc_deletenearest; closeDialog 0;};";
 		};
 	};
 };
