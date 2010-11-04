@@ -46,7 +46,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={12540.729,9.5947647,9259.4756};
+					position[]={13696.849,46.116829,2891.0088};
 					id=0;
 					side="LOGIC";
 					vehicle="GarbageCollector";
@@ -65,7 +65,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={12524.543,10.182173,9233.0596};
+					position[]={13680.663,44.522404,2864.5928};
 					id=1;
 					side="LOGIC";
 					vehicle="FunctionsManager";
@@ -83,7 +83,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={12561.292,7.5629015,9247.5205};
+					position[]={13717.412,45.464943,2879.0537};
 					id=2;
 					side="LOGIC";
 					vehicle="BIS_clouds_Logic";
@@ -101,7 +101,7 @@ class Mission
 				items=2;
 				class Item0
 				{
-					position[]={12549.5,10.288441,9301.8564};
+					position[]={13705.62,46.99139,2933.3896};
 					id=3;
 					side="CIV";
 					vehicle="Woodlander1";
@@ -111,7 +111,7 @@ class Mission
 				};
 				class Item1
 				{
-					position[]={12549.164,10.293523,9300.1064};
+					position[]={13705.284,46.976826,2931.6396};
 					id=4;
 					side="CIV";
 					vehicle="Woodlander3";
@@ -128,7 +128,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={12474.438,16.487602,9232.4834};
+					position[]={13630.559,41.156879,2864.0166};
 					special="NONE";
 					id=5;
 					side="LOGIC";
@@ -145,7 +145,7 @@ class Mission
 		items=10;
 		class Item0
 		{
-			position[]={12544.95,10.517988,9332.1152};
+			position[]={13701.07,46.999104,2963.6484};
 			id=6;
 			side="EMPTY";
 			vehicle="HMMWV_DES_EP1";
@@ -153,7 +153,7 @@ class Mission
 		};
 		class Item1
 		{
-			position[]={12553.029,10.055267,9331.5967};
+			position[]={13709.149,46.98613,2963.1299};
 			id=7;
 			side="EMPTY";
 			vehicle="HMMWV_MK19_DES_EP1";
@@ -161,7 +161,7 @@ class Mission
 		};
 		class Item2
 		{
-			position[]={12558.224,9.8052788,9330.084};
+			position[]={13714.344,46.891808,2961.6172};
 			id=8;
 			side="EMPTY";
 			vehicle="HMMWV_TOW_DES_EP1";
@@ -169,7 +169,7 @@ class Mission
 		};
 		class Item3
 		{
-			position[]={12561.815,9.6480331,9326.4922};
+			position[]={13717.936,46.865513,2958.0254};
 			id=9;
 			side="EMPTY";
 			vehicle="HMMWV_Avenger_DES_EP1";
@@ -177,7 +177,7 @@ class Mission
 		};
 		class Item4
 		{
-			position[]={12566.947,9.4158754,9324.0957};
+			position[]={13723.067,46.749237,2955.6289};
 			id=10;
 			side="EMPTY";
 			vehicle="HMMWV_M998_crows_M2_DES_EP1";
@@ -185,7 +185,7 @@ class Mission
 		};
 		class Item5
 		{
-			position[]={12570.541,9.2534962,9322.7266};
+			position[]={13726.661,46.641201,2954.2598};
 			id=11;
 			side="EMPTY";
 			vehicle="HMMWV_M998_crows_MK19_DES_EP1";
@@ -193,7 +193,7 @@ class Mission
 		};
 		class Item6
 		{
-			position[]={12574.903,9.0373249,9319.9043};
+			position[]={13731.023,46.509121,2951.4375};
 			id=12;
 			side="EMPTY";
 			vehicle="HMMWV_M1151_M2_DES_EP1";
@@ -201,7 +201,7 @@ class Mission
 		};
 		class Item7
 		{
-			position[]={12579.096,8.8124514,9316.8252};
+			position[]={13735.216,46.391487,2948.3584};
 			id=13;
 			side="EMPTY";
 			vehicle="HMMWV_M998A2_SOV_DES_EP1";
@@ -209,7 +209,7 @@ class Mission
 		};
 		class Item8
 		{
-			position[]={12582.26,8.6243181,9314.6865};
+			position[]={13738.38,46.294598,2946.2197};
 			id=14;
 			side="EMPTY";
 			vehicle="HMMWV_M1035_DES_EP1";
@@ -217,7 +217,7 @@ class Mission
 		};
 		class Item9
 		{
-			position[]={12585.853,8.3796949,9312.0352};
+			position[]={13741.973,46.18441,2943.5684};
 			id=15;
 			side="EMPTY";
 			vehicle="HMMWV_Terminal_EP1";
@@ -229,7 +229,7 @@ class Mission
 		items=2;
 		class Item0
 		{
-			position[]={12558.794,6.8874941,9212.3604};
+			position[]={13714.914,43.329681,2843.8936};
 			a=0;
 			b=0;
 			interruptable=1;
@@ -243,7 +243,7 @@ class Mission
 		};
 		class Item1
 		{
-			position[]={12479.245,16.497499,9302.8564};
+			position[]={13635.365,41.265095,2934.3896};
 			interruptable=1;
 			age="UNKNOWN";
 			name="BIS_Zora_0";
