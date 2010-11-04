@@ -10,7 +10,7 @@ _i=0;
 	};
 	_i=_i+1;
 } foreach RMM_tasks;
-[2,_cidx,{RMM_mytasks = RMM_mytasks - [RMM_mytasks select _cname]; player removeSimpleTask (RMM_mytasks select _cname);}] call RMM_fnc_ExMP;
+[2,_cidx,{player removeSimpleTask (RMM_mytasks select _this); RMM_mytasks = RMM_mytasks - [RMM_mytasks select _this];}] call RMM_fnc_ExMP;
 RMM_tasks set [_cidx, objnull];
 RMM_tasks = RMM_tasks - [objnull];
 publicvariable "RMM_tasks";
