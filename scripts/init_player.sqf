@@ -1,6 +1,25 @@
 waituntil {not isnull player};
 waituntil {!isMultiplayer || getplayeruid player != ""};
 
+////////////////////////////////////////////////////////////
+// Respawn Handling
+////////////////////////////////////////////////////////////
+
+private ["_uid","_string"];
+_uid = getplayeruid player;
+_string = format ["RMM_nomad_%1",_uid];
+
+//default weapons
+if (isnil _string) then {
+	//removeallweapons player;
+	//removeallitems player;
+	player switchmove "";
+	if (not isnull (unitBackpack player)) then {
+		clearWeaponCargo (unitBackpack player);
+		clearMagazineCargo (unitBackpack player);
+	};
+};
+
 player setskill 0;
 {player disableAI _x} foreach ["move","anim","target","autotarget"];
 
@@ -15,9 +34,9 @@ player addeventhandler ["killed", {
 	};
 }];
 
-private ["_uid","_string"];
-_uid = getplayeruid player;
-_string = format ["RMM_nomad_%1",_uid];
+////////////////////////////////////////////////////////////
+// Specialty Handling
+////////////////////////////////////////////////////////////
 
 MSO_R = [];
 MSO_R_Admin = false;
@@ -45,8 +64,8 @@ _exit = false;
 	["1062145", 	"CORPORAL",		["crew"]], 	//Antipop
 	["1019521", 	"PRIVATE",		["pilot"]], //Innomadic
 	["1065345", 	"CORPORAL",		["pilot"]], //Tank
-	["3048774",		"LIEUTENANT",	["admin"]], //Rommel
-	[getplayeruid player, rank player, []]
+	["3048774",		"LIEUTENANT",	["admin"]] //Rommel
+	//[getplayeruid player, rank player, []] //careful, if pubbers around? Need discussion on limits of this first maybe
 ];
 
 if (MSO_R_Air) then {
@@ -65,17 +84,6 @@ if (MSO_R_Air) then {
 		};
 	};
 } foreach vehicles;
-
-//default weapons
-if (isnil _string) then {
-	//removeallweapons player;
-	//removeallitems player;
-	player switchmove "";
-	if (not isnull (unitBackpack player)) then {
-		clearWeaponCargo (unitBackpack player);
-		clearMagazineCargo (unitBackpack player);
-	};
-};
 
 //settings dialog
 private "_trigger";
