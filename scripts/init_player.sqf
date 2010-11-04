@@ -68,7 +68,7 @@ _exit = false;
 	//[getplayeruid player, rank player, []] //careful, if pubbers around? Need discussion on limits of this first maybe
 ];
 
-if (MSO_R_Air) then {
+if (MSO_R_Air and ((getMarkerpos "farp") distance [0,0,0] > 0)) then { //ensure marker exists
 	"farp" setmarkertypelocal "Faction_BritishArmedForces_BAF";
 };
 
