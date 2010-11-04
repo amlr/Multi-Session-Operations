@@ -93,7 +93,7 @@ class DPanelListBox : CUI_Combo {
 	w = (CUI_Box_W / 1.4) - CUI_Row_H;
 	y = CUI_Row_Y(19);
 };
-class LineBreak : CUI_Button {
+class DPanelCopyToClipboard : CUI_Button {
 	text = "^C";
 	x = CUI_Box_X(2);
 	y = CUI_Row_Y(19);

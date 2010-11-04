@@ -14,10 +14,10 @@ Author:
 
 //-----------------------------------------------------------------------------
 #define CUI_Colours_DialogBackground	CUI_Colours_Dark
-#define CUI_Colours_DialogText 			CUI_Colours_Normal
+#define CUI_Colours_DialogText			CUI_Colours_Normal
 
 #define CUI_Colours_WindowBackground	CUI_Colours_Dark
-#define CUI_Colours_WindowText 			CUI_Colours_Lighter
+#define CUI_Colours_WindowText			CUI_Colours_Lighter
 
 #define CUI_Colours_CaptionBackground	CUI_Colours_Light
 #define CUI_Colours_CaptionText			CUI_Colours_Lighter
