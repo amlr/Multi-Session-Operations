@@ -26,6 +26,7 @@ if (not isdedicated) then {
 	execVM "scripts\init_player.sqf";
 	execNow "briefing.sqf";
 	execNow "tasks.sqf";
+	player call revive_fnc_init;
 };
 
 // ====================================================================================
@@ -41,6 +42,7 @@ execNow "modules\nomad\main.sqf";
 execNow "modules\tasks\main.sqf";
 execNow "modules\tyres\main.sqf";
 execNow "modules\weather\main.sqf";
+execNow "modules\zora\main.sqf";
 
 "RMM_MPe" addPublicVariableEventHandler {
 	private ["_data","_locality","_params","_code"];
