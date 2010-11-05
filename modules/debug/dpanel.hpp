@@ -4,7 +4,7 @@
 class DPanel : CUI_Frame {
 	y = CUI_Row_Y(0);
 	x = CUI_Box_X(2);
-	h = CUI_Row_DY(0,24);
+	h = CUI_Row_DY(0,25);
 	w = CUI_Box_W / 1.4;
 };
 class DPanelCaption : CUI_Caption {
@@ -110,19 +110,24 @@ class DPanelCfgWeapons : DPanelOwnID {
 	y = CUI_Row_Y(21);
 	action = "lbClear 995; _l = configFile >> ""CfgWeapons"";for ""_i"" from 0 to ((count _l) - 1) do {lbAdd [995, configName (_l select _i)];};";
 };
+class DPanelCfgMagazines : DPanelOwnID {
+	text = "CfgMagazines";
+	y = CUI_Row_Y(22);
+	action = "lbClear 995; _l = configFile >> ""CfgMagazines"";for ""_i"" from 0 to ((count _l) - 1) do {lbAdd [995, configName (_l select _i)];};";
+};
 class DPanelCfgAmmo : DPanelOwnID {
 	text = "CfgAmmo";
-	y = CUI_Row_Y(22);
+	y = CUI_Row_Y(23);
 	action = "lbClear 995; _l = configFile >> ""CfgAmmo"";for ""_i"" from 0 to ((count _l) - 1) do {lbAdd [995, configName (_l select _i)];};";
 };
 class DPanelCaptionM : CUI_Caption {
 	text = "Misc";
 	x = CUI_Box_X(2);
-	y = CUI_Row_Y(23);
+	y = CUI_Row_Y(24);
 	w = CUI_Box_W / 1.4;
 };
 class DPanelCamera : DPanelOwnID {
 	text = "Camera";
-	y = CUI_Row_Y(24);
+	y = CUI_Row_Y(25);
 	action = "player exec ""camera.sqs""";
 };
