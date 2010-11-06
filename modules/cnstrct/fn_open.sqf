@@ -1,4 +1,4 @@
-hint parsetext format ["<t size='1.25'>CONSTRUCTION MODULE</t><br/>Note: %1 to sell", keyName ((actionKeys "Compass") select 0)];
+hint parsetext format ["<t size='1.25'>CONSTRUCTION MODULE</t><br/>Note: %1 to demolish", keyName ((actionKeys "Compass") select 0)];
 
 if (isnil {_this getvariable "cnstrct_radius"}) then {
 	if (isnil {_this getvariable "cnstrct_supplies"}) then {
