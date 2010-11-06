@@ -19,7 +19,7 @@ if (RMM_cas_lastTime + RMM_cas_frequency < time) then {
 				} foreach (units (group _this));
 				(group _this) addwaypoint [[-1000,-1000,1000],0];
 				sleep (RMM_cas_missiontime * 0.2);
-				_this call RMM_fnc_deleteEntity;
+				_this call CBA_fnc_deleteEntity;
 			}
 		}
 	}] call RMM_fnc_ExMP;

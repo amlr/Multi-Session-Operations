@@ -28,13 +28,13 @@ while {true} do {
 		_path = _paths call BIS_fnc_selectRandom;
 		_convoy = _convoys call BIS_fnc_selectRandom;
 		_group = createGroup resistance;
-		_start = (_path select 0) call RMM_fnc_getpos;
+		_start = (_path select 0) call CBA_fnc_getpos;
 		{
-			[[_start,100] call RMM_fnc_randPos, 0, _x, _group] call BIS_fnc_spawnVehicle;
+			[[_start,100] call CBA_fnc_randPos, 0, _x, _group] call BIS_fnc_spawnVehicle;
 		} foreach _convoy;
 		_group setFormation "COLUMN";
 		for "_i" from 1 to ((count _paths) - 1) do {
-			_group addwaypoint [(_path select _i) call RMM_fnc_getpos, 0];
+			_group addwaypoint [(_path select _i) call CBA_fnc_getpos, 0];
 		};
 		_group spawn {
 			private "_count";
@@ -42,8 +42,8 @@ while {true} do {
 			while {not isnull _this} do {
 				if ({alive _x} count (units _this) == 0) exitwith {deletegroup _this;};
 				if (currentwaypoint _this == _count) exitwith {
-					{if (vehicle _x != _x) then {(vehicle _x) call RMM_fnc_Deleteentity;}} foreach (units _this);
-					_this call RMM_fnc_deleteentity;
+					{if (vehicle _x != _x) then {(vehicle _x) call CBA_fnc_Deleteentity;}} foreach (units _this);
+					_this call CBA_fnc_deleteentity;
 				};
 				sleep 2;
 			};

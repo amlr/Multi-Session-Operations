@@ -9,8 +9,8 @@ _code = _this select 2;
 
 //diag_log str [_this,((not isserver) and (_locality == 1)) , (_locality in [0,2])];
 if (((not isserver) and (_locality == 1)) or (_locality in [0,2])) then {
-	RMM_MPe = _this;
-	publicvariable "RMM_MPe"; 
+	CBA_MPe = _this;
+	publicvariable "CBA_MPe"; 
 };
 
 //diag_log str [_this,(isserver and (_locality == 1)) , (_locality in [0,3]) , ((not isdedicated) and (_locality == 2))];

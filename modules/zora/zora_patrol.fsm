@@ -236,9 +236,9 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"_vehlist = [];" \n
        "{" \n
        "	if (vehicle _x != _x) then {_vehlist = _vehlist + [vehicle _x]};" \n
-       "	_x call RMM_fnc_deleteEntity;" \n
+       "	_x call CBA_fnc_deleteEntity;" \n
        "} foreach units _grp;" \n
-       "{_x call RMM_fnc_deleteEntity} foreach _vehlist;" \n
+       "{_x call CBA_fnc_deleteEntity} foreach _vehlist;" \n
        "" \n
        "_groups = _prey getvariable ""zora_groups"";" \n
        "if !(isnil ""_groups"") then {_prey setvariable [""zora_groups"",_groups - [_grp]]};" \n

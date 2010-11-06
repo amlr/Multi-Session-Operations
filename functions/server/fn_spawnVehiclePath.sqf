@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
-Function: RMM_fnc_spawnVehiclePath
+Function: CBA_fnc_spawnVehiclePath
 
 Description:
 	A function for a group to spawn and follow a set path before deleting. Inspired by Kylanias runRoute script
@@ -15,7 +15,7 @@ Parameters:
 	- Behaviour
 	- Direction
 Example:
-	["A10_US_EP1",west,["mkr1","mkr2","mkr3"],10,"FULL","RED","DANGER",markerdir "mkr1"] call RMM_fnc_spawnVehiclePath
+	["A10_US_EP1",west,["mkr1","mkr2","mkr3"],10,"FULL","RED","DANGER",markerdir "mkr1"] call CBA_fnc_spawnVehiclePath
 Returns:
 	Group
 Author:
@@ -33,7 +33,7 @@ _combat_mode = if (count _this > 5) then {_this select 5} else {"yellow"};
 _behaviour = if (count _this > 6) then {_this select 6} else {"safe"};
 _direction = if (count _this > 7) then {_this select 7} else {0};
 
-_array = [(_positions select 0) call RMM_fnc_getpos, _direction, _class, _side] call BIS_fnc_spawnVehicle;
+_array = [(_positions select 0) call CBA_fnc_getpos, _direction, _class, _side] call BIS_fnc_spawnVehicle;
 _vehicle = _array select 0;
 _group = _array select 2;
 
@@ -45,7 +45,7 @@ _waypoint setwaypointspeed _speed;
 _count = (count _positions) - 1;
 
 for "_i" from 1 to _count do {
-	(_group addwaypoint [((_positions select _i) call RMM_fnc_getpos), 0]) setwaypointcompletionradius _radius;
+	(_group addwaypoint [((_positions select _i) call CBA_fnc_getpos), 0]) setwaypointcompletionradius _radius;
 };
 
 [_group,_vehicle,_count + 1] spawn {
@@ -57,10 +57,10 @@ for "_i" from 1 to _count do {
 	while {true} do {
 		if ({alive _x} count (units _group) == 0) exitwith {
 			sleep 300;
-			_group call RMM_fnc_deleteentity;
+			_group call CBA_fnc_deleteentity;
 		};
 		if ((currentwaypoint _group == _count)) exitwith {
-			_group call RMM_fnc_deleteentity;
+			_group call CBA_fnc_deleteentity;
 			deletevehicle _vehicle;
 		};
 	};

@@ -45,11 +45,11 @@ _groups = [];
 				0,//TK_GUE_MechanizedGroup (2*BTR40),
 				0,//TK_GUE_T34Platoon(4*T34s),
 				0//TK_GUE_T55Section(2*T55s)
-			],[_x,500] call RMM_fnc_randPos] call _func_groupSpawn;
+			],[_x,500] call CBA_fnc_randPos] call _func_groupSpawn;
 			(leader _group) setBehaviour "AWARE";
 			_group setSpeedMode "LIMITED";
 			_group setFormation "STAG COLUMN";
-			[_group,_group,800,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call RMM_fnc_taskPatrol;
+			[_group,_group,800,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
 			_groups set [count _groups, _group];
 		};
 	};
@@ -69,11 +69,11 @@ _groups = [];
 				1,//TK_GUE_MechanizedGroup (2*BTR40),
 				1,//TK_GUE_T34Platoon(4*T34s),
 				3//TK_GUE_T55Section(2*T55s)
-			],[_x,800] call RMM_fnc_randPos] call _func_groupSpawn;
+			],[_x,800] call CBA_fnc_randPos] call _func_groupSpawn;
 			(leader _group) setBehaviour "COMBAT";
 			_group setSpeedMode "LIMITED";
 			_group setFormation "DIAMOND";
-			[_group,_group,800,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [240,400,560]] call RMM_fnc_taskPatrol;
+			[_group,_group,800,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [240,400,560]] call CBA_fnc_taskPatrol;
 			_groups set [count _groups, _group];
 		};
 	};
@@ -93,11 +93,11 @@ _groups = [];
 				0,//TK_GUE_MechanizedGroup (2*BTR40),
 				0,//TK_GUE_T34Platoon(4*T34s),
 				0//TK_GUE_T55Section(2*T55s)
-			],[_x,400] call RMM_fnc_randPos] call _func_groupSpawn;
+			],[_x,400] call CBA_fnc_randPos] call _func_groupSpawn;
 			(leader _group) setBehaviour "COMBAT";
 			_group setSpeedMode "LIMITED";
 			_group setFormation "DIAMOND";
-			[_group,_group,400,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [360,520,680]] call RMM_fnc_taskPatrol;
+			[_group,_group,400,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [360,520,680]] call CBA_fnc_taskPatrol;
 			_groups set [count _groups, _group];
 		};
 	};
@@ -117,11 +117,11 @@ _groups = [];
 				0,//TK_GUE_MechanizedGroup (2*BTR40),
 				0,//TK_GUE_T34Platoon(4*T34s),
 				0//TK_GUE_T55Section(2*T55s)
-			],[_x,300] call RMM_fnc_randPos] call _func_groupSpawn;
+			],[_x,300] call CBA_fnc_randPos] call _func_groupSpawn;
 			(leader _group) setBehaviour "STEALTH";
 			_group setSpeedMode "LIMITED";
 			_group setFormation "DIAMOND";
-			[_group,_group,100,4 + random 4, "MOVE", "STEALTH", "RED", "LIMITED", "DIAMOND", "", [480,800,1120]] call RMM_fnc_taskPatrol;
+			[_group,_group,100,4 + random 4, "MOVE", "STEALTH", "RED", "LIMITED", "DIAMOND", "", [480,800,1120]] call CBA_fnc_taskPatrol;
 			_groups set [count _groups, _group];
 		};
 	};

@@ -15,5 +15,5 @@ _state = _this select 1;
 
 if (taskstate _task != _state) then {
 	_task settaskstate _state;
-	_task call RMM_fnc_taskhint;
+	_task call CBA_fnc_taskhint;
 };

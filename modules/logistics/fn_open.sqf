@@ -10,11 +10,11 @@ _typeof = typeof _target;
 private ["_volume"];
 _volume = _target getvariable "logistics_volume";
 if (isnil "_volume") then {
-	_volume = ([_target] call RMM_fnc_getvolume) ^ 0.5;
+	_volume = ([_target] call CBA_fnc_getvolume) ^ 0.5;
 	_target setvariable ["logistics_volume",_volume];
 	{
 		private ["_volume_o"];
-		_volume_o = [_x] call RMM_fnc_getvolume;
+		_volume_o = [_x] call CBA_fnc_getvolume;
 		_target setvariable ["logistics_volume",_volume - _volume_o];
 	} foreach (_target getvariable "logistics_contents");
 };
@@ -35,7 +35,7 @@ _nearby = (nearestobjects [_target,[
 	_type = typeof _x;
 	_text = gettext (configfile >> "cfgvehicles" >> _type >> "displayname");
 	//_icon = gettext (configfile >> "cfgvehicles" >> _type >> "icon");
-	_tvolume = [_x] call RMM_fnc_getvolume;
+	_tvolume = [_x] call CBA_fnc_getvolume;
 	if (_volume > _tvolume) then {
 		lbadd [1, format[_text + " (%1m3)",(round (_tvolume * 10^4))/10^4]];
 	} else {
@@ -50,7 +50,7 @@ _array = _target getvariable "logistics_contents";
 	_type = typeof _x;
 	_text = gettext (configfile >> "cfgvehicles" >> _type >> "displayname");
 	//_icon = gettext (configfile >> "cfgvehicles" >> _type >> "icon");
-	lbadd [3, format[_text + " (%1m3)",(round (([_x] call RMM_fnc_getvolume) * 10^4))/10^4]];
+	lbadd [3, format[_text + " (%1m3)",(round (([_x] call CBA_fnc_getvolume) * 10^4))/10^4]];
 } foreach _array;
 
 player setvariable ["logistics_target",_target];

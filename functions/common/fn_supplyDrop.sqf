@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
-Function: RMM_fnc_supplyDrop
+Function: CBA_fnc_supplyDrop
 
 Description:
 	A function used to set the position of an entity.
@@ -7,7 +7,7 @@ Parameters:
 	Marker, Object, Location, Group or Position
 	Object or Classname
 Example:
-	[player, "MtvrRepair_DES_EP1"] call RMM_fnc_supplyDrop
+	[player, "MtvrRepair_DES_EP1"] call CBA_fnc_supplyDrop
 Returns:
 	[Position,Object Or Classname]
 Author:
@@ -16,7 +16,7 @@ Author:
 ---------------------------------------------------------------------------- */
 
 private ["_position","_object","_parachute"];
-_position = (_this select 0) call RMM_fnc_getpos;
+_position = (_this select 0) call CBA_fnc_getpos;
 _object = _this select 1;
 
 if (typename _object == "string") then {

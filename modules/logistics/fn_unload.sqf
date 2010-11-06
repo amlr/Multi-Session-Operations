@@ -17,7 +17,7 @@ detach _object;
 closeDialog 0;
 
 private ["_volume_t","_volume_o"];
-_volume_o = [_object] call RMM_fnc_getvolume;
+_volume_o = [_object] call CBA_fnc_getvolume;
 _volume_t = _target getvariable "logistics_volume";
 
 _target setvariable ["logistics_contents",_array - [_object],true];

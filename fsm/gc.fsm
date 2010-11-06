@@ -29,8 +29,8 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"_groups = allGroups;" \n
        "{" \n
        "	if (not isnull _x) then {" \n
-       "		if !(_x call RMM_fnc_isAlive) then {" \n
-       "			_x call RMM_fnc_deleteEntity;" \n
+       "		if !(_x call CBA_fnc_isAlive) then {" \n
+       "			_x call CBA_fnc_deleteEntity;" \n
        "		};" \n
        "	};" \n
        "} foreach _groups;"/*%FSM</STATEINIT""">*/;

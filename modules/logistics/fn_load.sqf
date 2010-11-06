@@ -16,7 +16,7 @@ if (_object in _array) exitwith {};
 
 private ["_volume_t","_volume_o"];
 _volume_t = _target getvariable "logistics_volume";
-_volume_o = [_object] call RMM_fnc_getvolume;
+_volume_o = [_object] call CBA_fnc_getvolume;
 if (isnil "_volume_t") exitwith {};
 if (isnil "_volume_o") exitwith {};
 if (_volume_t - _volume_o < 0) exitwith {};
