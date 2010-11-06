@@ -5,31 +5,21 @@ class Mission
 	{
 		"chernarus",
 		"cacharacters_e",
-		"ca_modules_functions",
 		"ca_missions_garbagecollector",
 		"CA_Modules_Alice2",
-		"ca_modules_clouds",
-		"cacharacters2",
-		"CAWheeled_E",
-		"cawheeled_e_hmmwv",
-		"caweapons_ammoboxes"
+		"ca_modules_clouds"
 	};
 	addOnsAuto[]=
 	{
 		"ca_missions_garbagecollector",
-		"ca_modules_functions",
 		"ca_modules_clouds",
-		"cacharacters2",
-		"CAWheeled_E",
-		"cawheeled_e_hmmwv",
-		"caweapons_ammoboxes",
+		"cacharacters_e",
 		"chernarus"
 	};
 	randomSeed=9896189;
 	class Intel
 	{
 		resistanceWest=0;
-		resistanceEast=1;
 		startWeather=0.25;
 		forecastWeather=0.25;
 		year=2008;
@@ -40,7 +30,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=6;
+		items=3;
 		class Item0
 		{
 			side="LOGIC";
@@ -49,7 +39,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={13706.123,45.658913,2879.4155};
+					position[]={13731.871,45.078449,2878.9028};
 					id=0;
 					side="LOGIC";
 					vehicle="GarbageCollector";
@@ -68,26 +58,8 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={13694.834,45.664795,2879.2769};
+					position[]={13753.424,44.146618,2879.2251};
 					id=1;
-					side="LOGIC";
-					vehicle="FunctionsManager";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item2
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={13717.412,45.464943,2879.0537};
-					id=2;
 					side="LOGIC";
 					vehicle="BIS_clouds_Logic";
 					leader=1;
@@ -96,255 +68,23 @@ class Mission
 				};
 			};
 		};
-		class Item3
+		class Item2
 		{
-			side="CIV";
-			class Vehicles
-			{
-				items=2;
-				class Item0
-				{
-					position[]={12727.264,175.88931,4043.332};
-					id=3;
-					side="CIV";
-					vehicle="Woodlander1";
-					player="PLAYER COMMANDER";
-					leader=1;
-					skill=0.60000002;
-				};
-				class Item1
-				{
-					position[]={12726.928,175.80165,4041.582};
-					id=4;
-					side="CIV";
-					vehicle="Woodlander3";
-					player="PLAY CDG";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item4
-		{
-			side="EAST";
-			class Vehicles
-			{
-				items=12;
-				class Item0
-				{
-					position[]={12742.622,172.21198,4148.8418};
-					id=16;
-					side="EAST";
-					vehicle="RU_Soldier_SL";
-					leader=1;
-					rank="LIEUTENANT";
-					skill=0.59999996;
-				};
-				class Item1
-				{
-					position[]={12745.622,172.90582,4143.8418};
-					id=17;
-					side="EAST";
-					vehicle="RU_Soldier_MG";
-					rank="SERGEANT";
-					skill=0.46666664;
-				};
-				class Item2
-				{
-					position[]={12747.622,173.38329,4143.8418};
-					id=18;
-					side="EAST";
-					vehicle="RU_Soldier_AT";
-					rank="SERGEANT";
-					skill=0.46666664;
-				};
-				class Item3
-				{
-					position[]={12749.622,173.88741,4143.8418};
-					id=19;
-					side="EAST";
-					vehicle="RU_Soldier_LAT";
-					rank="CORPORAL";
-					skill=0.33333331;
-				};
-				class Item4
-				{
-					position[]={12751.622,174.10576,4143.8418};
-					id=20;
-					side="EAST";
-					vehicle="RU_Soldier_GL";
-					rank="CORPORAL";
-					skill=0.33333331;
-				};
-				class Item5
-				{
-					position[]={12753.622,174.25778,4143.8418};
-					id=21;
-					side="EAST";
-					vehicle="RU_Soldier_Marksman";
-					rank="CORPORAL";
-					skill=0.33333331;
-				};
-				class Item6
-				{
-					position[]={12755.622,174.52249,4143.8418};
-					id=22;
-					side="EAST";
-					vehicle="RU_Soldier_MG";
-					rank="CORPORAL";
-					skill=0.33333331;
-				};
-				class Item7
-				{
-					position[]={12757.622,174.76733,4143.8418};
-					id=23;
-					side="EAST";
-					vehicle="RU_Soldier_AT";
-					rank="CORPORAL";
-					skill=0.33333331;
-				};
-				class Item8
-				{
-					position[]={12759.622,174.67931,4143.8418};
-					id=24;
-					side="EAST";
-					vehicle="RU_Soldier_AR";
-					skill=0.2;
-				};
-				class Item9
-				{
-					position[]={12761.622,174.62044,4143.8418};
-					id=25;
-					side="EAST";
-					vehicle="RU_Soldier_LAT";
-					skill=0.2;
-				};
-				class Item10
-				{
-					position[]={12763.622,174.65779,4143.8418};
-					id=26;
-					side="EAST";
-					vehicle="RU_Soldier_GL";
-					skill=0.2;
-				};
-				class Item11
-				{
-					position[]={12765.622,174.59053,4143.8418};
-					id=27;
-					side="EAST";
-					vehicle="RU_Soldier";
-					skill=0.2;
-				};
-			};
-		};
-		class Item5
-		{
-			side="LOGIC";
+			side="WEST";
 			class Vehicles
 			{
 				items=1;
 				class Item0
 				{
-					position[]={13671.567,45.151703,2883.4663};
-					special="NONE";
-					id=28;
-					side="LOGIC";
-					vehicle="Logic";
+					position[]={13707.022,46.93409,2925.304};
+					id=2;
+					side="WEST";
+					vehicle="US_Soldier_EP1";
+					player="PLAYER COMMANDER";
 					leader=1;
-					skill=0.2;
+					skill=0.60000002;
 				};
 			};
-		};
-	};
-	class Vehicles
-	{
-		items=11;
-		class Item0
-		{
-			position[]={13701.07,46.999104,2963.6484};
-			id=5;
-			side="EMPTY";
-			vehicle="HMMWV_DES_EP1";
-			skill=0.60000002;
-		};
-		class Item1
-		{
-			position[]={13709.149,46.98613,2963.1299};
-			id=6;
-			side="EMPTY";
-			vehicle="HMMWV_MK19_DES_EP1";
-			skill=0.60000002;
-		};
-		class Item2
-		{
-			position[]={13714.344,46.891808,2961.6172};
-			id=7;
-			side="EMPTY";
-			vehicle="HMMWV_TOW_DES_EP1";
-			skill=0.60000002;
-		};
-		class Item3
-		{
-			position[]={13717.936,46.865513,2958.0254};
-			id=8;
-			side="EMPTY";
-			vehicle="HMMWV_Avenger_DES_EP1";
-			skill=0.60000002;
-		};
-		class Item4
-		{
-			position[]={13723.067,46.749237,2955.6289};
-			id=9;
-			side="EMPTY";
-			vehicle="HMMWV_M998_crows_M2_DES_EP1";
-			skill=0.60000002;
-		};
-		class Item5
-		{
-			position[]={13726.661,46.641201,2954.2598};
-			id=10;
-			side="EMPTY";
-			vehicle="HMMWV_M998_crows_MK19_DES_EP1";
-			skill=0.60000002;
-		};
-		class Item6
-		{
-			position[]={13731.023,46.509121,2951.4375};
-			id=11;
-			side="EMPTY";
-			vehicle="HMMWV_M1151_M2_DES_EP1";
-			skill=0.60000002;
-		};
-		class Item7
-		{
-			position[]={13735.216,46.391487,2948.3584};
-			id=12;
-			side="EMPTY";
-			vehicle="HMMWV_M998A2_SOV_DES_EP1";
-			skill=0.60000002;
-		};
-		class Item8
-		{
-			position[]={13738.38,46.294598,2946.2197};
-			id=13;
-			side="EMPTY";
-			vehicle="HMMWV_M1035_DES_EP1";
-			skill=0.60000002;
-		};
-		class Item9
-		{
-			position[]={13741.973,46.18441,2943.5684};
-			id=14;
-			side="EMPTY";
-			vehicle="HMMWV_Terminal_EP1";
-			skill=0.60000002;
-		};
-		class Item10
-		{
-			position[]={12725.617,175.71967,4042.9531};
-			id=15;
-			side="EMPTY";
-			vehicle="RUBasicAmmunitionBox";
-			skill=0.60000002;
 		};
 	};
 	class Sensors

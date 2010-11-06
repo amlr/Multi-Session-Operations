@@ -1,0 +1,10 @@
+[3:49:10 PM] Rommel: setcaptive command gets set to true by default
+[3:49:11 PM] Rommel: so AI don't shoot you
+[3:49:18 PM] Ryan: good idea :P
+[3:49:22 PM] Rommel: when you come within x distance of an enemy, fire your weapon
+[3:49:29 PM] Rommel: or x distance of an enemy with a gun
+[3:49:35 PM] Rommel: it gets set to false
+[3:49:43 PM] Rommel: it stays persistent
+[3:49:48 PM] Rommel: so you can't logout login to reset yourself
+[3:49:58 PM] Rommel: that  way we're always enemy
+[3:50:06 PM] Rommel: no having to wrry about AI ratings etc
