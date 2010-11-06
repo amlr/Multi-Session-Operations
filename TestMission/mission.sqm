@@ -13,7 +13,8 @@ class Mission
 		"caweapons_baf",
 		"cacharacters2",
 		"camisc_e",
-		"casigns_e"
+		"casigns_e",
+		"cawheeled_e_brdm2"
 	};
 	addOnsAuto[]=
 	{
@@ -143,7 +144,7 @@ class Mission
 	};
 	class Vehicles
 	{
-		items=17;
+		items=21;
 		class Item0
 		{
 			position[]={3535.1733,22.35,4073.6177};
@@ -297,10 +298,42 @@ class Mission
 			skill=0.60000002;
 			init="this addAction [""Open logbook"", ""functions\client\fn_actionargument.sqf"", [this,{[_this] call logbook_fnc_open}]];";
 		};
+		class Item17
+		{
+			position[]={3388.6458,22.35,4204.4385};
+			id=24;
+			side="EMPTY";
+			vehicle="TargetFakeTank_EP1";
+			skill=0.60000002;
+		};
+		class Item18
+		{
+			position[]={3431.2168,22,4183.9688};
+			id=25;
+			side="EMPTY";
+			vehicle="TargetFakeTank_EP1";
+			skill=0.60000002;
+		};
+		class Item19
+		{
+			position[]={3390.2222,22.35,4166.6484};
+			id=26;
+			side="EMPTY";
+			vehicle="TargetFakeTank_Lockable_EP1";
+			skill=0.60000002;
+		};
+		class Item20
+		{
+			position[]={3424.9099,22.270384,4227.269};
+			id=27;
+			side="EMPTY";
+			vehicle="TargetFakeTank_Lockable_EP1";
+			skill=0.60000002;
+		};
 	};
 	class Markers
 	{
-		items=5;
+		items=6;
 		class Item0
 		{
 			position[]={3531.7744,22.35,4072.3828};
@@ -335,6 +368,13 @@ class Mission
 			position[]={3589.2419,22.238977,4062.8027};
 			name="logbook";
 			text="Logbook Testing";
+			type="mil_dot";
+		};
+		class Item5
+		{
+			position[]={3410.9771,22.35,4202.5923};
+			name="cas";
+			text="CAS Targets";
 			type="mil_dot";
 		};
 	};

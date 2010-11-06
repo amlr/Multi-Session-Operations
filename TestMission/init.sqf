@@ -68,6 +68,24 @@ private "_trigger";
 	_trigger settriggertext "Settings";
 	_trigger settriggerstatements ["this","createDialog ""RMM_ui_settings""",""];
 #endif
+#ifdef RMM_CAS
+	execNow "modules\cas\main.sqf";
+	
+	_trigger = createtrigger ["emptydetector", [0,0]];
+	_trigger settriggeractivation ["FOXTROT", "PRESENT", true];
+	_trigger settriggertext "AIRSUPREQ";
+	_trigger settriggertype "none";
+	_trigger settriggerstatements ["this","createDialog ""RMM_ui_cas""",""];
+#endif
+#ifdef RMM_CASEVAC
+	execNow "modules\casevac\main.sqf";
+	
+	_trigger = createtrigger ["emptydetector", [0,0]];
+	_trigger settriggeractivation ["GOLF", "PRESENT", true];
+	_trigger settriggertext "CASEVAC";
+	_trigger settriggertype "none";
+	_trigger settriggerstatements ["this","createDialog ""RMM_ui_casevac""",""];
+#endif
 #ifdef RMM_AAR
 	execNow "modules\aar\main.sqf";
 	

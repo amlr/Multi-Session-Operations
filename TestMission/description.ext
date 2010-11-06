@@ -17,6 +17,12 @@ class cfgFunctions {
 #ifdef RMM_AAR
 	#include <modules\aar\functions.hpp>
 #endif
+#ifdef RMM_CAS
+	#include <modules\cas\functions.hpp>
+#endif
+#ifdef RMM_CASEVAC
+	#include <modules\casevac\functions.hpp>
+#endif
 #ifdef RMM_JIPMARKERS
 	#include <modules\jipmarkers\functions.hpp>
 #endif
@@ -45,6 +51,12 @@ class cfgFunctions {
 
 #ifdef RMM_AAR
 	#include <modules\aar\dialog.hpp>
+#endif
+#ifdef RMM_CAS
+	#include <modules\cas\dialog.hpp>
+#endif
+#ifdef RMM_CASEVAC
+	#include <modules\casevac\dialog.hpp>
 #endif
 #ifdef RMM_SETTINGS
 	#include <modules\settings\dialog.hpp>
