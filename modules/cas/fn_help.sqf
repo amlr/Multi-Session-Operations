@@ -9,7 +9,7 @@ _string = switch (_this select 0) do {
 		"<t size='1.5'>Call Sign</t><br/>Call Sign that will be used by the ground unit. You should know this information before every operation";
 	};
 	case (_display displayCtrl 2) : {
-		"<t size='1.5'>Support Type</t><br/>Type of support to request (WIP)";
+		"<t size='1.5'>Support Type</t><br/>Type of support to request";
 	};
 	default {""};
 };
