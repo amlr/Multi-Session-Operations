@@ -14,7 +14,8 @@ class Mission
 		"cacharacters2",
 		"camisc_e",
 		"casigns_e",
-		"cawheeled_e_brdm2"
+		"cawheeled_e_brdm2",
+		"camisc_e_wf"
 	};
 	addOnsAuto[]=
 	{
@@ -27,16 +28,18 @@ class Mission
 		"caweapons_baf",
 		"camisc_e",
 		"casigns_e",
+		"camisc_e_wf",
 		"zargabad"
 	};
 	randomSeed=6553103;
 	class Intel
 	{
-		startWeather=0.25;
+		startWeather=1;
+		startFog=0.75;
 		forecastWeather=0;
 		year=2009;
 		day=29;
-		hour=11;
+		hour=9;
 	};
 	class Groups
 	{
@@ -144,7 +147,7 @@ class Mission
 	};
 	class Vehicles
 	{
-		items=21;
+		items=22;
 		class Item0
 		{
 			position[]={3535.1733,22.35,4073.6177};
@@ -236,7 +239,7 @@ class Mission
 		};
 		class Item10
 		{
-			position[]={3498.0156,22.35,3997.1765};
+			position[]={3499.4014,22.35,4004.6628};
 			azimut=89.497551;
 			id=17;
 			side="EMPTY";
@@ -245,7 +248,7 @@ class Mission
 		};
 		class Item11
 		{
-			position[]={3498.5583,22.35,3989.6616};
+			position[]={3503.5906,22.35,4005.2168};
 			azimut=89.497551;
 			id=18;
 			side="EMPTY";
@@ -254,7 +257,7 @@ class Mission
 		};
 		class Item12
 		{
-			position[]={3499.2859,22.35,3979.7737};
+			position[]={3497.9312,22.35,3980.781};
 			azimut=89.497551;
 			id=19;
 			side="EMPTY";
@@ -263,7 +266,7 @@ class Mission
 		};
 		class Item13
 		{
-			position[]={3498.4138,22.35,3970.7104};
+			position[]={3504.1951,22.35,3978.0654};
 			azimut=89.497551;
 			id=20;
 			side="EMPTY";
@@ -272,7 +275,7 @@ class Mission
 		};
 		class Item14
 		{
-			position[]={3498.4939,22.35,3961.6555};
+			position[]={3499.478,22.35,3974.3411};
 			azimut=89.497551;
 			id=21;
 			side="EMPTY";
@@ -281,12 +284,11 @@ class Mission
 		};
 		class Item15
 		{
-			position[]={3499.2512,22.35,3951.4302};
+			position[]={3495.0955,22.35,4010.6431};
 			id=22;
 			side="EMPTY";
 			vehicle="Land_Misc_Cargo1E_EP1";
 			skill=0.60000002;
-			init="this setVariable [""Construction"", true]; this setvariable [""cnstrct_supplies"",10000]; if (isnil ""supply_crates"") then {   supply_crates=[];}; supply_crates set [count supply_crates, this];";
 		};
 		class Item16
 		{
@@ -330,10 +332,19 @@ class Mission
 			vehicle="TargetFakeTank_Lockable_EP1";
 			skill=0.60000002;
 		};
+		class Item21
+		{
+			position[]={3574.4558,22.355103,4083.6157};
+			id=28;
+			side="EMPTY";
+			vehicle="US_WarfareBUAVterminal_Base_EP1";
+			skill=0.60000002;
+			init="this addAction [""Check forecast"", ""functions\client\fn_actionargument.sqf"", [this,{[_this] call weather_fnc_forecast}]];";
+		};
 	};
 	class Markers
 	{
-		items=6;
+		items=7;
 		class Item0
 		{
 			position[]={3531.7744,22.35,4072.3828};
@@ -375,6 +386,13 @@ class Mission
 			position[]={3410.9771,22.35,4202.5923};
 			name="cas";
 			text="CAS Targets";
+			type="mil_dot";
+		};
+		class Item6
+		{
+			position[]={3573.2676,22.375422,4083.521};
+			name="weather";
+			text="Weather Testing";
 			type="mil_dot";
 		};
 	};

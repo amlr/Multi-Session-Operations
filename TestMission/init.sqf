@@ -16,11 +16,11 @@ if (!isNil "paramsArray") then {
 #ifdef RMM_LOGISTICS
 	execNow "modules\logistics\main.sqf";
 #endif
+#ifdef R3F_LOGISTICS
+	execVM "R3F_ARTY_AND_LOG\init.sqf";
+#endif
 #ifdef RMM_NOMAD
 	execNow "modules\nomad\main.sqf";
-#endif
-#ifdef RMM_SETTINGS
-	execNow "modules\settings\main.sqf";
 #endif
 #ifdef RMM_CNSTRCT
 	execNow "modules\cnstrct\main.sqf";
@@ -59,6 +59,9 @@ revive_test call revive_fnc_unconscious;
 		if (isnil "_params") then {call _code} else {_params call _code};
 	};
 };
+#endif
+#ifdef RMM_WEATHER
+	execNow "modules\weather\main.sqf";
 #endif
 
 private "_trigger";

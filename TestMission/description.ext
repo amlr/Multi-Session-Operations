@@ -11,6 +11,10 @@ class Params {
 #endif
 }; 
 
+#ifdef R3F_LOGISTICS
+	#include "R3F_ARTY_AND_LOG\desc_include.h"
+#endif
+
 //http://community.bistudio.com/wiki/Functions_Library
 class cfgFunctions {
 	#include <functions\functions.hpp>
@@ -44,6 +48,9 @@ class cfgFunctions {
 #ifdef RMM_REVIVE
 	#include <modules\revive\functions.hpp>
 #endif
+#ifdef RMM_WEATHER
+	#include <modules\weather\functions.hpp>
+#endif
 };
 
 //http://community.bistudio.com/wiki/PreProcessor_Commands
@@ -66,6 +73,12 @@ class cfgFunctions {
 #endif
 #ifdef RMM_LOGISTICS
 	#include <modules\logistics\dialog.hpp>
+#endif
+#ifdef R3F_LOGISTICS
+class RscTitles
+{
+	#include "R3F_ARTY_AND_LOG\desc_rsct_include.h"
+};
 #endif
 #ifdef RMM_LOGBOOK
 	#include <modules\logbook\dialog.hpp>
