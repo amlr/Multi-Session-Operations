@@ -6,6 +6,7 @@ class RMM {
 	class common {
 		class ExMP {};
 		class failSafeLS {};
+		class isAlive {};
 		class landForTime {};
 		class supplyDrop {};
 	};
