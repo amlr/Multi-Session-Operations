@@ -4,6 +4,8 @@
 
 enableSaving [false, false];
 
+CRB_MAPCLICK = "";
+
 waituntil {not isnil "BIS_fnc_init"};
 
 if (!isNil "paramsArray") then {
@@ -12,36 +14,44 @@ if (!isNil "paramsArray") then {
 	};
 };
 
-//execNow "modules\jipmarkers\main.sqf";
+#ifdef RMM_CNSTRCT
+	execNow "modules\cnstrct\main.sqf";
+#endif
+#ifdef RMM_CTP
+	execNow "modules\ctp\main.sqf";
+#endif
 #ifdef RMM_LOGISTICS
 	execNow "modules\logistics\main.sqf";
 #endif
 #ifdef R3F_LOGISTICS
-	execVM "R3F_ARTY_AND_LOG\init.sqf";
+	execNow "R3F_ARTY_AND_LOG\init.sqf";
+#endif
+#ifdef RMM_JIPMARKERS
+	execNow "modules\jipmarkers\main.sqf";
+	CRB_MAPCLICK = CRB_MAPCLICK + "if (_shift) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
+	onMapSingleClick CRB_MAPCLICK;
 #endif
 #ifdef RMM_NOMAD
 	execNow "modules\nomad\main.sqf";
 #endif
-#ifdef RMM_CNSTRCT
-	execNow "modules\cnstrct\main.sqf";
-#endif
-#ifdef RMM_JIPMARKERS
-	execNow "modules\jipmarkers\main.sqf";
-	onMapSingleClick "if (_shift) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";}";
+#ifdef RMM_REVIVE
+	waitUntil{!isnil "revive_fnc_init"};
+	revive_test call revive_fnc_init;
+	revive_test setDamage 0.6;
+	revive_test call revive_fnc_unconscious;
 #endif
 #ifdef RMM_TASKS
 	execNow "modules\tasks\main.sqf";	
-	onMapSingleClick "if (_alt) then {RMM_task_position = _pos; createDialog ""RMM_ui_tasks"";}";
+	CRB_MAPCLICK = CRB_MAPCLICK + "if (_alt) then {RMM_task_position = _pos; createDialog ""RMM_ui_tasks"";};";
+	onMapSingleClick CRB_MAPCLICK;
 #endif
-#ifdef RMM_REVIVE
-waitUntil{!isnil "revive_fnc_init"};
-revive_test call revive_fnc_init;
-revive_test setDamage 0.6;
-revive_test call revive_fnc_unconscious;
-#endif
-
 #ifdef RMM_TYRES
 	execNow "modules\tyres\main.sqf";
+
+#endif
+#ifdef RMM_WEATHER
+	execNow "modules\weather\main.sqf";
+#endif
 
 "RMM_MPe" addPublicVariableEventHandler {
 	private ["_data","_locality","_params","_code"];
@@ -59,11 +69,7 @@ revive_test call revive_fnc_unconscious;
 		if (isnil "_params") then {call _code} else {_params call _code};
 	};
 };
-#endif
-#ifdef RMM_WEATHER
-	execNow "modules\weather\main.sqf";
-#endif
-
+	
 private "_trigger";
 #ifdef RMM_SETTINGS
 	_trigger = createtrigger ["emptydetector", [0,0]];
@@ -98,9 +104,10 @@ private "_trigger";
 	_trigger settriggertype "none";
 	_trigger settriggerstatements ["this","createDialog ""RMM_ui_aar""",""];
 #endif
-
-_trigger = createtrigger ["emptydetector", [0,0]];
-_trigger settriggeractivation ["INDIA", "PRESENT", true];
-_trigger settriggertext "Debug";
-_trigger settriggertype "none";
-_trigger settriggerstatements ["this","createDialog ""RMM_ui_debug""",""];
+#ifdef RMM_DEBUG
+	_trigger = createtrigger ["emptydetector", [0,0]];
+	_trigger settriggeractivation ["INDIA", "PRESENT", true];
+	_trigger settriggertext "Debug";
+	_trigger settriggertype "none";
+	_trigger settriggerstatements ["this","createDialog ""RMM_ui_debug""",""];
+#endif
