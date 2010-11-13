@@ -28,6 +28,7 @@
 R3F_LOG_CFG_remorqueurs =
 [
 	// e.g. : "MyTowingVehicleClassName1", "MyTowingVehicleClassName2"
+	"BAF_Jackal2_BASE_D"
 ];
 
 /**
@@ -93,6 +94,7 @@ R3F_LOG_CFG_objets_heliportables =
 R3F_LOG_CFG_transporteurs =
 [
 	// e.g. : ["MyTransporterClassName1", itsCapacity], ["MyTransporterClassName2", itsCapacity]
+	["BAF_Jackal2_BASE_D", 15]
 ];
 
 /**
@@ -105,7 +107,19 @@ R3F_LOG_CFG_transporteurs =
 R3F_LOG_CFG_objets_transportables =
 [
 	// e.g. : ["MyTransportableObjectClassName1", itsCost], ["MyTransportableObjectClassName2", itsCost]
-	["Land_Pneu", 2]
+	["Land_Pneu", 2],
+	["Land_fort_bagfence_long", 3],
+	["Land_fort_bagfence_corner", 3],
+	["Land_fort_bagfence_round", 3],
+	["Fort_RazorWire", 3],
+	["Hedgehog_EP1", 3],
+	["Land_fortified_nest_small_EP1", 6],
+	["Land_fort_artillery_nest_EP1", 12],
+	["Land_fortified_nest_big_EP1", 12],
+	["MASH_EP1", 5],
+	["Land_CamoNet_NATO_EP1", 4],
+	["Land_CamoNetB_NATO_EP1", 5],
+	["Land_CamoNetVar_NATO_EP1", 3]
 ];
 
 /****** MOVABLE-BY-PLAYER OBJECTS / OBJETS DEPLACABLES PAR LE JOUEUR ******/
@@ -117,7 +131,19 @@ R3F_LOG_CFG_objets_transportables =
 R3F_LOG_CFG_objets_deplacables =
 [
 	// e.g. : "MyMovableObjectClassName1", "MyMovableObjectClassName2"
-	"Land_Pneu"
+	"Land_Pneu",
+	"Land_fort_bagfence_long",
+	"Land_fort_bagfence_corner",
+	"Land_fort_bagfence_round",
+	"Fort_RazorWire",
+	"Hedgehog_EP1",
+	"Land_fortified_nest_small_EP1",
+	"Land_fort_artillery_nest_EP1",
+	"Land_fortified_nest_big_EP1",
+	"MASH_EP1",
+	"Land_CamoNet_NATO_EP1",
+	"Land_CamoNetB_NATO_EP1",
+	"Land_CamoNetVar_NATO_EP1"
 ];
 
 /*
