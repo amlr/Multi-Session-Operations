@@ -28,7 +28,7 @@ class RMM_ui_logbook {
 			y = CUI_Box_Row(0,2);
 			w = CUI_Box_W;
 			h = CUI_Row_DY(1,10);
-			onLBDblClick = "ctrlSetText [2, (((player getvariable ""RMM_logbook_target"") getvariable ""RMM_logbook"") select (_this select 1)) select 2];";
+			onLBSelChanged = "ctrlSetText [2, (((player getvariable ""RMM_logbook_target"") getvariable ""RMM_logbook"") select (_this select 1)) select 2];";
 		};
 		class LogEntry : CUI_Edit {
 			idc = 2;
