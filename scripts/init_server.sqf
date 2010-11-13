@@ -2,6 +2,7 @@ private ["_list"];
 _list = nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), ["FlatArea","Hill","FlatAreaCitySmall","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"], 20000];
 
 #include <takistan_cfglocations.sqf>
+#include <cfg_groups.sqf>
 
 _func_groupSpawn = {
 	private ["_max","_idx","_grp"];
