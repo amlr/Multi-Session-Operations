@@ -49,7 +49,7 @@ class RMM_ui_debug { // by Rommel
 			text = "Execute";
 			w = CUI_Box_W * 5/3;
 			y = CUI_Row_Y(30);
-			action = "CtrlSetText [3, format[""%1"",[lbCurSel 4,call compile (ctrlText 1),compile (ctrlText 2)] call RMM_fnc_ExMP]];";
+			action = "CtrlSetText [3, format[""%1"",[lbCurSel 4,call compile (ctrlText 1),compile (ctrlText 2)] call CBA_fnc_ExMP]];";
 			default = true;
 		};
 		class Locality : CUI_Combo {
