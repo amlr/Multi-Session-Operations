@@ -1,38 +1,44 @@
 private ["_fnc_between","_fnc_prayer"];
 
-_fnc_between = {
+fnc_between = {
 	_a = _this select 0;
 	_b = _this select 1;
-	(daytime > _a AND daytime < _b)
+	(daytime >= _a AND daytime < _b)
 };
-_fnc_prayer = {
+
+fnc_prayer = {
+	private ["_town"];
+	_town = _this;
 	{
 		sleep (random 5);
 		_x say3D "muezzin";
-	} foreach (_x getvariable "EP1_Minarets");
+	} foreach (_town getvariable "EP1_Minarets");
 };
 
-private "_towns";
-_towns = [["CityCenter"]] call BIS_fnc_locations;
-{
-	_list = nearestobjects [position _x,["Land_A_Minaret_EP1","Land_A_Minaret_Porto_EP1"],500];
-	if (count _list > 0) then {
-		_x setvariable ["EP1_Minarets",_list];
-	} else {
-		_towns = _towns - [_x];
-	};
-} foreach _towns;
-
-waituntil {(round time) mod 10 == 0};
-
-while {true} do {
+[] spawn {
+	private "_towns";
+	waitUntil{!isNil "BIS_fnc_init"};
+	_towns = [["CityCenter"]] call BIS_fnc_locations;
 	{
-		if (_x call _fnc_between) exitwith {
-			{
-				_x call _fnc_prayer;
-			} foreach _towns;
-			sleep 120;
+		_list = nearestobjects [position _x,["Land_A_Minaret_EP1","Land_A_Minaret_Porto_EP1"],500];
+		if (count _list > 0) then {
+			_x setvariable ["EP1_Minarets",_list];
+		} else {
+			_towns = _towns - [_x];
 		};
-	} foreach [[4.25,4.5],[5.25,5.75],[11.75,12],[15.25,15.5],[17.75,18.25],[19,19.25]];
-	sleep 10;
+	} foreach _towns;
+
+	waituntil {(round time) mod 10 == 0};
+
+	while {true} do {
+		{
+			if (_x call fnc_between) exitwith {
+				{
+					_x call fnc_prayer;
+				} foreach _towns;
+				sleep 120;
+			};
+		} foreach [[4.25,4.5],[5.25,5.75],[11.75,12],[15.25,15.5],[17.75,18.25],[19,19.25]];
+		sleep 10;
+	};
 };
