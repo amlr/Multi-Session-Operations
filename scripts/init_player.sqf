@@ -58,13 +58,26 @@ _exit = false;
 		MSO_R_Air = ("pilot" in MSO_R) || MSO_R_Admin;
 		MSO_R_Crew = ("crew" in MSO_R) || MSO_R_Admin;
 	};
+	if (!isMultiPlayer) exitWith {
+		MSO_R_Admin = true;
+		MSO_R_Leader = true;
+		MSO_R_Officer = true;
+		MSO_R_Air = true;
+		MSO_R_Crew = true;
+	};
 } foreach [
 	["822401", 		"CORPORAL",		["crew"]],	//Ryan
 	["1022977",		"PRIVATE",		["crew"]],	//Glenn
 	["1062145", 	"CORPORAL",		["crew"]], 	//Antipop
 	["1019521", 	"PRIVATE",		["pilot"]], //Innomadic
 	["1065345", 	"CORPORAL",		["pilot"]], //Tank
-	["3048774",		"LIEUTENANT",	["admin"]] //Rommel
+	["3048774",		"LIEUTENANT",	["admin"]], //Rommel
+	["3076038",		"LIEUTENANT",	["admin"]], //Wolffy.au
+	["3165254", 	"SERGEANT",		["pilot"]], //Swordsman
+	["1965894", 	"CORPORAL",		["crew"]], //Chappy
+	["3165446", 	"CORPORAL",		["crew"]], //Delta 51
+	["3158150", 	"CORPORAL",		["pilot","crew"]], //Floydii
+	["1048961", 	"CORPORAL",		["crew"]] //Swedge
 	//[getplayeruid player, rank player, []] //careful, if pubbers around? Need discussion on limits of this first maybe
 ];
 
