@@ -1,22 +1,23 @@
-private ["_fnc_between","_fnc_prayer"];
-
-fnc_between = {
-	_a = _this select 0;
-	_b = _this select 1;
-	(daytime >= _a AND daytime < _b)
-};
-
-fnc_prayer = {
-	private ["_town"];
-	_town = _this;
-	{
-		sleep (random 5);
-		_x say3D "muezzin";
-	} foreach (_town getvariable "EP1_Minarets");
-};
+if(isDedicated) exitWith{};
 
 [] spawn {
-	private "_towns";
+	private ["_fnc_between","_fnc_prayer","_towns"];
+
+	_fnc_between = {
+		_a = _this select 0;
+		_b = _this select 1;
+		(daytime >= _a AND daytime < _b)
+	};
+
+	_fnc_prayer = {
+		private ["_town"];
+		_town = _this;
+		{
+			sleep (random 5);
+			_x say3D "muezzin";
+		} foreach (_town getvariable "EP1_Minarets");
+	};
+
 	waitUntil{!isNil "BIS_fnc_init"};
 	_towns = [["CityCenter"]] call BIS_fnc_locations;
 	{
@@ -32,9 +33,9 @@ fnc_prayer = {
 
 	while {true} do {
 		{
-			if (_x call fnc_between) exitwith {
+			if (_x call _fnc_between) exitwith {
 				{
-					_x call fnc_prayer;
+					_x call _fnc_prayer;
 				} foreach _towns;
 				sleep 120;
 			};
