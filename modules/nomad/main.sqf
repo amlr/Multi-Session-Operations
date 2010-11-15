@@ -28,7 +28,8 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{getDir player;},
 		{[vehicle player, driver (vehicle player) == player, gunner (vehicle player) == player, commander (vehicle player) == player]},
 		{lifestate player;},
-		{units player;},
+		{[group player, (leader player == player)];},
+//		{units player;},
 		{rank player;}
 	],
 	[
@@ -95,6 +96,12 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 			};
 		},
 		{
+			[player] joinSilent (_this select 0);
+			if (_this select 1) then {
+				(_this select 0) selectLeader player;
+			};
+		},
+/*		{
 			[player] joinSilent (createGroup playerSide);
 			(group player) selectLeader player;
 			{
@@ -103,6 +110,6 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 				};
 			} foreach _this;
 		},
-		{player setunitrank _this;}
+*/		{player setunitrank _this;}
 	]
 ] execfsm "modules\nomad\nomad.fsm";
