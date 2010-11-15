@@ -4,6 +4,15 @@
 respawn = 3;
 respawnDelay = 10;
 
+class CfgSounds {
+#ifdef CRB_DOGS
+	#include <modules\dogs\cfgsounds.cpp>
+#endif
+#ifdef RMM_CTP
+	#include <modules\ctp\cfgsounds.cpp>
+#endif
+};
+
 //http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
 class Params {
 #ifdef RMM_NOMAD
@@ -12,7 +21,11 @@ class Params {
 }; 
 
 #ifdef R3F_LOGISTICS
-	#include "R3F_ARTY_AND_LOG\desc_include.h"
+#include "R3F_ARTY_AND_LOG\desc_include.h"
+class RscTitles
+{
+	#include "R3F_ARTY_AND_LOG\desc_rsct_include.h"
+};
 #endif
 
 //http://community.bistudio.com/wiki/Functions_Library
@@ -27,8 +40,8 @@ class cfgFunctions {
 #ifdef RMM_CASEVAC
 	#include <modules\casevac\functions.hpp>
 #endif
-#ifdef RMM_CASEVAC
-	#include <modules\casevac\functions.hpp>
+#ifdef RMM_CNSTRCT
+	#include <modules\cnstrct\functions.hpp>
 #endif
 #ifdef CRB_DOGS
 	#include <modules\dogs\functions.hpp>
@@ -42,29 +55,17 @@ class cfgFunctions {
 #ifdef RMM_LOGISTICS
 	#include <modules\logistics\functions.hpp>
 #endif
+#ifdef RMM_REVIVE
+	#include <modules\revive\functions.hpp>
+#endif
 #ifdef RMM_TASKS
 	#include <modules\tasks\functions.hpp>
 #endif
 #ifdef RMM_TYRES
 	#include <modules\tyres\functions.hpp>
 #endif
-#ifdef RMM_CNSTRCT
-	#include <modules\cnstrct\functions.hpp>
-#endif
-#ifdef RMM_REVIVE
-	#include <modules\revive\functions.hpp>
-#endif
 #ifdef RMM_WEATHER
 	#include <modules\weather\functions.hpp>
-#endif
-};
-
-class CfgSounds {
-#ifdef CRB_DOGS
-	#include <modules\dogs\cfgsounds.cpp>
-#endif
-#ifdef RMM_CTP
-	#include <modules\ctp\cfgsounds.cpp>
 #endif
 };
 
@@ -80,31 +81,25 @@ class CfgSounds {
 #ifdef RMM_CASEVAC
 	#include <modules\casevac\dialog.hpp>
 #endif
-#ifdef RMM_SETTINGS
-	#include <modules\settings\dialog.hpp>
+#ifdef RMM_DEBUG
+	#include <modules\debug\dialog.hpp>
 #endif
 #ifdef RMM_JIPMARKERS
 	#include <modules\jipmarkers\dialog.hpp>
 #endif
-#ifdef RMM_LOGISTICS
-	#include <modules\logistics\dialog.hpp>
-#endif
 #ifdef RMM_LOGBOOK
 	#include <modules\logbook\dialog.hpp>
 #endif
+#ifdef RMM_LOGISTICS
+	#include <modules\logistics\dialog.hpp>
+#endif
 #ifdef RMM_RECRUITMENT
 	#include <modules\recruitment\dialog_baf.hpp>
+	#include <modules\recruitment\TeamStatusDialog\TeamStatusDialog.hpp>
+#endif
+#ifdef RMM_SETTINGS
+	#include <modules\settings\dialog.hpp>
 #endif
 #ifdef RMM_TASKS
 	#include <modules\tasks\dialog.hpp>
-#endif
-#ifdef RMM_DEBUG
-	#include <modules\debug\dialog.hpp>
-#endif
-
-#ifdef R3F_LOGISTICS
-class RscTitles
-{
-	#include "R3F_ARTY_AND_LOG\desc_rsct_include.h"
-};
 #endif
