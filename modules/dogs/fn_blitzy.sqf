@@ -76,7 +76,7 @@ if (isServer) then {
 							_nic = [objNull, _dog, rSAY, "dog_maul01"] call RE;
 							_dog setspeedmode "FULL";
 							_dog domove position _nearest;
-							[_nearest, _dog] execvm "modules\dogs\dogattack.sqf";
+							[_nearest, _dog] spawn dogs_fnc_dogattack;
 						};	
 					};
 				sleep 2;

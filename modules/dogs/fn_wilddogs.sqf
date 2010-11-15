@@ -1,4 +1,4 @@
-if (Isserver) then {
+if (isServer) then {
 	_leader = _this select 0;
 	_list = _this select 1;
 	_list = side (_list select 0);
@@ -41,7 +41,7 @@ if (Isserver) then {
 
 			//_dog = _grp createUnit [_breed, getpos _leader,[],50,"none"];
 			_dogname = format ["k9%1",round (random 1000)];
-			call compile format ['"%2" createUnit [getpos _leader, _grp,"%1=this; this setSpeedMode ""full"";this setbehaviour ""aware""",1]',_dogname,_breed];
+			call compile format ['"%2" createUnit [position _leader, _grp,"%1=this; this setSpeedMode ""full"";this setbehaviour ""aware""",1]',_dogname,_breed];
 			_dog = call compile format ["%1",_dogname];
 			_dog addrating -1000; 
 			_dog setVariable ["_sound1", "dog_01"];
@@ -90,7 +90,7 @@ if (Isserver) then {
 							_nic = [objNull, _dog, rSAY, "dog_maul01"] call RE;
 							_dog domove position _nearest;
 							_dog setspeedmode "FULL";
-							[_nearest, _dog] execvm "scripts\dogattack.sqf";
+							[_nearest, _dog] spawn dogs_fnc_dogattack;
 						};	
 					};
 				sleep 2;
