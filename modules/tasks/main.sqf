@@ -6,6 +6,6 @@ if (isnil "RMM_tasks") then {
 	publicvariable "RMM_tasks";
 } else {
 	{
-		RMM_mytasks = [count RMM_mytasks, _x call tasks_fnc_taskAdd];
+		RMM_mytasks set [count RMM_mytasks, _x call tasks_fnc_taskAdd];
 	} foreach RMM_tasks;
 };

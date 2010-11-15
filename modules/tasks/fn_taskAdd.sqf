@@ -8,6 +8,8 @@ _task = player createsimpletask [_taskname];
 _task setsimpletaskdescription _description;
 _task setsimpletaskdestination _destination;
 _task settaskstate "created";
-missionnamespace setvariable [_taskname,_task];
+//missionnamespace setvariable [_taskname,_task];
+
+RMM_mytasks set [count RMM_mytasks, _task];
 
 _task
