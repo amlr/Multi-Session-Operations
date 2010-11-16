@@ -36,17 +36,31 @@ _logic setvariable ["fsm",_fsm];
 
 if (isnil "BIS_Zora_pause") then {BIS_Zora_pause = true};
 
-while {true} do {
-	if ((random 1 > NIGHT_POSSIBILITY) && (daytime < 5 || daytime > 18)) then {
-		BIS_Zora_pause = true;
-	} else {
-		BIS_Zora_pause = not BIS_Zora_pause;
+[] spawn {
+	_fnc_status = {
+		if (BIS_Zora_Mainscope getvariable "debug") then {
+			hint format["ZORA Pause: %1\nMaxGroups: %2", BIS_Zora_pause, BIS_Zora_mainscope getvariable "maxgroups"];
+		};
 	};
-	if (playersnumber west > 0) then {
-		BIS_Zora_mainscope setvariable ["maxgroups",round (((8+random 4) / (playersnumber west)) min 5) max 1];
+			
+	while {true} do {
+		if (count playableUnits > 0) then {
+			BIS_Zora_mainscope setvariable ["maxgroups",round (((8+random 4) / (count playableUnits)) min 5) max 1];
+		};
+		if ((random 1 > NIGHT_POSSIBILITY) && (daytime < 5 || daytime > 18)) then {
+			BIS_Zora_pause = true;
+			call _fnc_status;
+			sleep (60 * 60) + (random 60 * 60);
+		} else {
+			if(BIS_Zora_pause) then {
+				BIS_Zora_pause = false;
+				call _fnc_status;
+				sleep (60 * 15) + (random 60 * 15);
+			} else {
+				BIS_Zora_pause = true;
+				call _fnc_status;
+				sleep (60 * 30) + (random 60 * 30);
+			};
+		};
 	};
-	if (BIS_Zora_Mainscope getvariable "debug") then {
-		hint format["ZORA Pause: %1\nMaxGroups: %2", BIS_Zora_pause, BIS_Zora_mainscope getvariable "maxgroups"];
-	};
-	sleep (random 7200);
 };
