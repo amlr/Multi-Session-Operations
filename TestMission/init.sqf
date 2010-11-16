@@ -2,6 +2,7 @@
 
 #define execNow call compile preprocessfilelinenumbers
 
+//http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];
 
 _crb_mapclick = "";
@@ -37,62 +38,6 @@ if (!isNil "paramsArray") then {
 	};
 };
 
-#ifdef CRB_CIVILIANS
-	["Ambient Civilians"] call _fnc_status;
-	execNow "modules\civilians\main.sqf";
-#endif
-#ifdef RMM_CNSTRCT
-	["Construction"] call _fnc_status;
-	execNow "modules\cnstrct\main.sqf";
-#endif
-#ifdef RMM_CTP
-	["Call To Prayer"] call _fnc_status;
-	execNow "modules\ctp\main.sqf";
-#endif
-#ifdef CRB_DOGS
-	["Dogs"] call _fnc_status;
-	execNow "modules\dogs\main.sqf";
-#endif
-#ifdef RMM_JIPMARKERS
-	["JIP Markers"] call _fnc_status;
-	execNow "modules\jipmarkers\main.sqf";
-	_crb_mapclick = _crb_mapclick + "if (_shift) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
-	onMapSingleClick _crb_mapclick;
-#endif
-#ifdef RMM_LOGISTICS
-	["Logistics"] call _fnc_status;
-	execNow "modules\logistics\main.sqf";
-#endif
-#ifdef R3F_LOGISTICS
-	["R3F Logicstics"] call _fnc_status;
-	execNow "R3F_ARTY_AND_LOG\init.sqf";
-#endif
-#ifdef RMM_NOMAD
-	["NOMAD"] call _fnc_status;
-	execNow "modules\nomad\main.sqf";
-#endif
-#ifdef RMM_REVIVE
-	["Revive"] call _fnc_status;
-	waitUntil{!isnil "revive_fnc_init"};
-	revive_test call revive_fnc_init;
-	revive_test setDamage 0.6;
-	revive_test call revive_fnc_unconscious;
-#endif
-#ifdef RMM_TASKS
-	["JIP Tasks"] call _fnc_status;
-	execNow "modules\tasks\main.sqf";	
-	_crb_mapclick = _crb_mapclick + "if (_alt) then {RMM_task_position = _pos; createDialog ""RMM_ui_tasks"";};";
-	onMapSingleClick _crb_mapclick;
-#endif
-#ifdef RMM_TYRES
-	["Tyre Changing"] call _fnc_status;
-	execNow "modules\tyres\main.sqf";
-#endif
-#ifdef RMM_WEATHER
-	["Weather"] call _fnc_status;
-	execNow "modules\weather\main.sqf";
-#endif
-
 BIS_MENU_GroupCommunication = [
 	//--- Name, context sensitive
 	["User menu",false]
@@ -100,16 +45,18 @@ BIS_MENU_GroupCommunication = [
 ];
 
 private "_trigger";
-#ifdef RMM_SETTINGS
-	["View Distance Settings"] call _fnc_status;
+#ifdef RMM_AAR
+	["After Action Reports"] call _fnc_status;
+	execNow "modules\aar\main.sqf";
 /*
 	_trigger = createtrigger ["emptydetector", [0,0]];
-	_trigger settriggeractivation ["DELTA", "PRESENT", true];
-	_trigger settriggertext "Settings";
-	_trigger settriggerstatements ["this","createDialog ""RMM_ui_settings""",""];
-*/	
+	_trigger settriggeractivation ["HOTEL", "PRESENT", true];
+	_trigger settriggertext "AAR";
+	_trigger settriggertype "none";
+	_trigger settriggerstatements ["this","createDialog ""RMM_ui_aar""",""];
+*/
 	BIS_MENU_GroupCommunication = BIS_MENU_GroupCommunication + [
-		["Settings",[2],"",-5,[["expression","createDialog ""RMM_ui_settings"""]],"1","1"]
+		["AAR",[4],"",-5,[["expression","createDialog ""RMM_ui_aar"""]],"1","1"]
 	];
 #endif
 #ifdef RMM_CAS
@@ -136,19 +83,21 @@ private "_trigger";
 	_trigger settriggertype "none";
 	_trigger settriggerstatements ["this","createDialog ""RMM_ui_casevac""",""];
 #endif
-#ifdef RMM_AAR
-	["After Action Reports"] call _fnc_status;
-	execNow "modules\aar\main.sqf";
-/*
-	_trigger = createtrigger ["emptydetector", [0,0]];
-	_trigger settriggeractivation ["HOTEL", "PRESENT", true];
-	_trigger settriggertext "AAR";
-	_trigger settriggertype "none";
-	_trigger settriggerstatements ["this","createDialog ""RMM_ui_aar""",""];
-*/
-	BIS_MENU_GroupCommunication = BIS_MENU_GroupCommunication + [
-		["AAR",[4],"",-5,[["expression","createDialog ""RMM_ui_aar"""]],"1","1"]
-	];
+#ifdef CRB_CIVILIANS
+	["Ambient Civilians"] call _fnc_status;
+	execNow "modules\civilians\main.sqf";
+#endif
+#ifdef RMM_CNSTRCT
+	["Construction"] call _fnc_status;
+	execNow "modules\cnstrct\main.sqf";
+#endif
+#ifdef RMM_CONVOYS
+	["Convoys"] call _fnc_status;
+	execNow "modules\convoys\main.sqf";
+#endif
+#ifdef RMM_CTP
+	["Call To Prayer"] call _fnc_status;
+	execNow "modules\ctp\main.sqf";
 #endif
 #ifdef RMM_DEBUG
 	["Debug"] call _fnc_status;
@@ -157,6 +106,68 @@ private "_trigger";
 	_trigger settriggertext "Debug";
 	_trigger settriggertype "none";
 	_trigger settriggerstatements ["this","createDialog ""RMM_ui_debug""",""];
+#endif
+#ifdef CRB_DOGS
+	["Dogs"] call _fnc_status;
+	execNow "modules\dogs\main.sqf";
+#endif
+#ifdef RMM_JIPMARKERS
+	["JIP Markers"] call _fnc_status;
+	execNow "modules\jipmarkers\main.sqf";
+	_crb_mapclick = _crb_mapclick + "if (_shift && _alt) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
+	onMapSingleClick _crb_mapclick;
+#endif
+#ifdef RMM_LOGISTICS
+	["Logistics"] call _fnc_status;
+	execNow "modules\logistics\main.sqf";
+#endif
+#ifdef R3F_LOGISTICS
+	["R3F Logicstics"] call _fnc_status;
+	execNow "R3F_ARTY_AND_LOG\init.sqf";
+#endif
+#ifdef RMM_NOMAD
+	["NOMAD"] call _fnc_status;
+	execNow "modules\nomad\main.sqf";
+#endif
+#ifdef RMM_REVIVE
+	["Revive"] call _fnc_status;
+	waitUntil{!isnil "revive_fnc_init"};
+	if (!isDedicated) then {
+		player call revive_fnc_init;
+	};
+	revive_test call revive_fnc_init;
+	revive_test setDamage 0.6;
+	revive_test call revive_fnc_unconscious;
+#endif
+#ifdef RMM_SETTINGS
+	["View Distance Settings"] call _fnc_status;
+/*
+	_trigger = createtrigger ["emptydetector", [0,0]];
+	_trigger settriggeractivation ["DELTA", "PRESENT", true];
+	_trigger settriggertext "Settings";
+	_trigger settriggerstatements ["this","createDialog ""RMM_ui_settings""",""];
+*/	
+	BIS_MENU_GroupCommunication = BIS_MENU_GroupCommunication + [
+		["Settings",[2],"",-5,[["expression","createDialog ""RMM_ui_settings"""]],"1","1"]
+	];
+#endif
+#ifdef RMM_TASKS
+	["JIP Tasks"] call _fnc_status;
+	execNow "modules\tasks\main.sqf";	
+	_crb_mapclick = _crb_mapclick + "if (_alt) then {RMM_task_position = _pos; createDialog ""RMM_ui_tasks"";};";
+	onMapSingleClick _crb_mapclick;
+#endif
+#ifdef RMM_TYRES
+	["Tyre Changing"] call _fnc_status;
+	execNow "modules\tyres\main.sqf";
+#endif
+#ifdef RMM_WEATHER
+	["Weather"] call _fnc_status;
+	execNow "modules\weather\main.sqf";
+#endif
+#ifdef RMM_ZORA
+	["ZORA"] call _fnc_status;
+	execNow "modules\zora\main.sqf";
 #endif
 
 ["Completed"] call _fnc_status;

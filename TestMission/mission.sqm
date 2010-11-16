@@ -17,10 +17,7 @@ class Mission
 		"cawheeled_e_brdm2",
 		"camisc_e_wf",
 		"cacharacters_e",
-		"ca_baf",
 		"caweapons_e",
-		"CA_Modules_Alice2",
-		"ca_modules_silvie",
 		"ca_animals2_chicken",
 		"ca_animals2_cow",
 		"ca_animals2_sheep"
@@ -31,8 +28,6 @@ class Mission
 		"ca_modules_functions",
 		"CACharacters_BAF",
 		"cacharacters_e",
-		"CA_Modules_Alice2",
-		"ca_modules_silvie",
 		"cawheeled_d_baf",
 		"CAWheeled_E",
 		"camisc3",
@@ -58,7 +53,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=13;
+		items=12;
 		class Item0
 		{
 			side="LOGIC";
@@ -107,7 +102,7 @@ class Mission
 					id=2;
 					side="WEST";
 					vehicle="BAF_Soldier_MTP";
-					player="PLAYER COMMANDER";
+					player="PLAY CDG";
 					leader=1;
 					rank="CORPORAL";
 					skill=0.33333331;
@@ -321,37 +316,20 @@ class Mission
 		};
 		class Item11
 		{
-			side="LOGIC";
+			side="CIV";
 			class Vehicles
 			{
 				items=1;
 				class Item0
 				{
-					position[]={3512.3003,22.35,4125.9004};
+					position[]={3580.2336,22.44142,4062.481};
 					id=68;
-					side="LOGIC";
-					vehicle="Alice2Manager";
+					side="CIV";
+					vehicle="TK_CIV_Takistani01_EP1";
+					player="PLAYER COMMANDER";
 					leader=1;
-					lock="UNLOCKED";
 					skill=0.60000002;
-				};
-			};
-		};
-		class Item12
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={3523.9272,22.35,4125.9004};
-					id=69;
-					side="LOGIC";
-					vehicle="SilvieManager";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
+					init="this onMapSingleClick ""{_x setPos _pos;} forEach units player;"";";
 				};
 			};
 		};
@@ -951,16 +929,31 @@ class Mission
 	};
 	class Sensors
 	{
-		items=1;
+		items=2;
 		class Item0
 		{
 			position[]={3534.2012,22.35,4114.5107};
 			a=0;
 			b=0;
+			activationBy="ALPHA";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			expActiv="[] call bis_fnc_help;";
+			class Effects
+			{
+			};
+		};
+		class Item1
+		{
+			position[]={3424.908,22.270554,3981.5742};
+			a=500;
+			b=500;
+			activationBy="WEST";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			name="BIS_ZORA_0";
 			class Effects
 			{
 			};
