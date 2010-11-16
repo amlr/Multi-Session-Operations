@@ -4,10 +4,10 @@ _dog = _this select 1;
 
 //_victim say ["scream", 10];
 if (vehicle _victim isKindOf "CAManBase") then { 
-_nic = [objNull, _victim, rSAY, "scream"] call RE;
+	[_victim, "scream"] call CBA_fnc_globalSay3d;
 };
 if (vehicle _victim isKindOf "CAAnimalBase") then { 
-_nic = [objNull, _victim, rSAY, "dog_yelp"] call RE;
+	[_victim, "dog_yelp"] call CBA_fnc_globalSay3d;
 };
 
 _dog attachTo [_victim,[0,.8,0], "lholen"];

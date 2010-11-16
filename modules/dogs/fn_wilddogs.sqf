@@ -41,7 +41,7 @@ if (isServer) then {
 
 			//_dog = _grp createUnit [_breed, getpos _leader,[],50,"none"];
 			_dogname = format ["k9%1",round (random 1000)];
-			call compile format ['"%2" createUnit [position _leader, _grp,"%1=this; this setSpeedMode ""full"";this setbehaviour ""aware""",1]',_dogname,_breed];
+			call compile format ['"%2" createUnit [position _leader, _grp,"%1=this; this setSpeedMode ""full"";this setbehaviour ""safe""",1]',_dogname,_breed];
 			_dog = call compile format ["%1",_dogname];
 			_dog addrating -1000; 
 			_dog setVariable ["_sound1", "dog_01"];
