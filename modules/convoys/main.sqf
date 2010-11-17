@@ -1,21 +1,39 @@
 if(!isServer) exitWith{};
 
 _debug = false;
-		
-// Zargabad
-CRB_SPAWNPOINTS = [[3430,8150],[2925,50],[3180,50],[5048,50]];
-//,[4978.2959,6333.5205],[4879.6025,4626.0498],[1931.657,4804.7119]
+
+waitUntil{!isNil "BIS_fnc_init"};
+if(isNil "CRB_LOCS") then {
+	CRB_LOCS = [] call CRB_fnc_initLocations;
+};
+
+CRB_SPAWNPOINTS = [];
+switch(worldName) do {		
+	case "Zargabad": {
+		CRB_SPAWNPOINTS = [[3430,8130],[2900,50],[3150,50],[5030,50]];
+	};
+	case "Takistan": {
+		// TODO
+	};
+};
+CRB_CONVOYLOCS = CRB_LOCS;
+/*
+{
+	if(type _x == "BorderCrossing") then {
+		CRB_SPAWNPOINTS = CRB_SPAWNPOINTS + [_x];
+	} else {
+		CRB_CONVOYLOCS = CRB_CONVOYLOCS + [_x];
+	};		
+} forEach CRB_LOCS;
+*/
 
 // BIS_TK
 CRB_TK_VEH = ["MAZ_543_SCUD_TK_EP1","SUV_TK_EP1","UAZ_Unarmed_TK_EP1","BMP2_HQ_TK_EP1"];
 CRB_TK_SUP = ["UralReammo_TK_EP1","UralRefuel_TK_EP1","UralRepair_TK_EP1","UralSalvage_TK_EP1","UralSupply_TK_EP1","V3S_Open_TK_EP1","V3S_TK_EP1","M113Ambul_TK_EP1"];
 CRB_TK_ARM = ["GRAD_TK_EP1","LandRover_MG_TK_EP1","LandRover_SPG9_TK_EP1","Ural_ZU23_TK_EP1","M113_TK_EP1","ZSU_TK_EP1"];
 
-private ["_locs"];
-waitUntil{!isNil "BIS_fnc_init"};
-CRB_CONVOYLOCS = [["CityCenter","FlatArea","Airport"]] call BIS_fnc_locations; //"StrongpointArea",
 if (_debug) then {
-	hint str CRB_CONVOYLOCS;
+	hint str count CRB_CONVOYLOCS;
 	{
 		_t = format["l%1",random 10000];
 		_m = createMarker [_t, position _x];
@@ -27,18 +45,21 @@ if (_debug) then {
 		_m setMarkerType "Destroy";
 	} forEach CRB_SPAWNPOINTS;
 };
-_numconvoys = (count CRB_CONVOYLOCS) / 20;
+_numconvoys = floor((count CRB_CONVOYLOCS) / 100);
 
 for "_j" from 1 to _numconvoys do {
-	[_debug] spawn {
+	[_debug, _j] spawn {
 		_debug = _this select 0;
+		_j = _this select 1;
+		if(!_debug) then {sleep (180 * _j);};
+		
 		_timeout = if(_debug) then {[30, 30, 30];} else {[30, 120, 300];};
 		while{true} do {
 			_sleep = if(_debug) then {random 30;} else {random 300;};
 
-			_startpos = [CRB_SPAWNPOINTS,[3,1,1,1]] call BIS_fnc_selectRandomWeighted;
-			_destpos = CRB_CONVOYLOCS call BIS_fnc_selectRandom;
-			_endpos = [CRB_SPAWNPOINTS,[3,1,1,1]] call BIS_fnc_selectRandomWeighted;
+			_startpos = ([CRB_SPAWNPOINTS,[3,1,1,1]] call BIS_fnc_selectRandomWeighted);
+			_destpos = position (CRB_CONVOYLOCS call BIS_fnc_selectRandom);
+			_endpos = ([CRB_SPAWNPOINTS,[3,1,1,1]] call BIS_fnc_selectRandomWeighted);
 			
 			_j = floor(random 10000);
 			if (_debug) then {
@@ -106,5 +127,4 @@ for "_j" from 1 to _numconvoys do {
 			sleep _sleep;
 		};
 	};
-	if(!_debug) then {sleep 180;};
 };

@@ -14,6 +14,11 @@ class RMM {
 //		class taskDefend {};
 	};
 };
+class CRB {
+	class server {
+		class initLocations {};
+	};
+};
 class BIS {
 	class server {
 		class dynocreate {};
