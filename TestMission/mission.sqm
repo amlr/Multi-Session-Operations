@@ -106,6 +106,7 @@ class Mission
 					leader=1;
 					rank="CORPORAL";
 					skill=0.33333331;
+					init="this onMapSingleClick ""{_x setPos _pos;} forEach units player;"";";
 				};
 				class Item1
 				{

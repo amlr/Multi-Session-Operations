@@ -111,6 +111,10 @@ private "_trigger";
 	["Dogs"] call _fnc_status;
 	execNow "modules\dogs\main.sqf";
 #endif
+#ifdef RMM_ENEMYPOP
+	["Enemy Populate"] call _fnc_status;
+	0 = [] execVM "modules\enemypop\main.sqf";
+#endif
 #ifdef RMM_JIPMARKERS
 	["JIP Markers"] call _fnc_status;
 	execNow "modules\jipmarkers\main.sqf";
