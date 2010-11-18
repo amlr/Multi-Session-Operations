@@ -12,8 +12,6 @@ waitUntil{!isNil "BIS_alice_mainscope"};
 // Add some rare english speaking civilians to the mix
 BIS_alice_mainscope setVariable ["civilianRarity",["CIV_EuroWoman01_EP1", 0.5, "CIV_EuroWoman02_EP1", 0.5, "Dr_Annie_Baker_EP1", 0.5, "Rita_Ensler_EP1", 0.5, "CIV_EuroMan01_EP1", 0.5, "CIV_EuroMan02_EP1", 0.5, "Haris_Press_EP1", 0.5, "Dr_Hladik_EP1", 0.5, "Citizen2_EP1", 0.5, "Citizen3_EP1", 0.5, "Profiteer2_EP1", 0.5, "Functionary1_EP1", 1, "Functionary2_EP1", 1], true];
 
-//BIS_functions_mainscope setvariable ["locations",[locShabaz,locEastShabaz]]; 
-
 // See http://community.bistudio.com/wiki/Ambient_Civilians
 // Reduce spawn distance to try to reduce number of civilian units
 //BIS_alice_mainscope setvariable ["spawnDistance",400];
