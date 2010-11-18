@@ -12,6 +12,8 @@ if(isNil "CRB_LOCS") then {
 private "_groups";
 _fnc_randomGroup = compile preprocessFileLineNumbers "crB_scripts\crB_randomGroup.sqf";
 _groups = [];
+sleep 120;
+
 {
 	private "_group";
 	_group = grpNull;
@@ -69,7 +71,7 @@ _groups = [];
 			_groups set [count _groups, _group];
 		};
 	};
-	if (count _groups > 72) then {
+	if (count _groups > 36) then {
 		private "_logic";
 		_logic = (createGroup sideLogic) createUnit ["Logic",[0,0,0],[],0,"NONE"];
 		{
@@ -81,7 +83,6 @@ _groups = [];
 //		waituntil {count allunits < 150};
 		_groups = [];
 	};
-
 } foreach CRB_LOCS;
 
 if (count _groups > 0) then {
