@@ -7,6 +7,9 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 
 private ["_uid","_string"];
 _uid = getplayeruid player;
+
+// I'm sure this has already moved to NOMAD
+/*
 _string = format ["RMM_nomad_%1",_uid];
 
 //default weapons
@@ -19,6 +22,7 @@ if (isnil _string) then {
 		clearMagazineCargo (unitBackpack player);
 	};
 };
+*/
 
 player setskill 0;
 {player disableAI _x} foreach ["move","anim","target","autotarget"];
@@ -97,48 +101,3 @@ if (MSO_R_Air and ((getMarkerpos "farp") distance [0,0,0] > 0)) then { //ensure 
 		};
 	};
 } foreach vehicles;
-
-//settings dialog
-private "_trigger";
-_trigger = createtrigger ["emptydetector", [0,0]];
-_trigger settriggeractivation ["DELTA", "PRESENT", true];
-_trigger settriggertext "Settings";
-_trigger settriggerstatements ["this","createDialog ""RMM_ui_settings""",""];
-
-if (MSO_R_Leader) then {
-	onMapSingleClick "if (_alt) then {RMM_task_position = _pos; createDialog ""RMM_ui_tasks"";} else {if (_shift) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};}";
-} else {
-	onMapSingleClick "if (_shift) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
-};
-
-if (MSO_R_Admin) then {
-	_trigger = createtrigger ["emptydetector", [0,0]];
-	_trigger settriggeractivation ["ECHO", "PRESENT", true];
-	_trigger settriggertext "Debug";
-	_trigger settriggertype "none";
-	_trigger settriggerstatements ["this","createDialog ""RMM_ui_debug""",""];
-};
-
-if (MSO_R_Leader) then {
-	_trigger = createtrigger ["emptydetector", [0,0]];
-	_trigger settriggeractivation ["FOXTROT", "PRESENT", true];
-	_trigger settriggertext "AIRSUPREQ";
-	_trigger settriggertype "none";
-	_trigger settriggerstatements ["this","createDialog ""RMM_ui_cas""",""];
-};
-
-if (MSO_R_Leader) then {
-	_trigger = createtrigger ["emptydetector", [0,0]];
-	_trigger settriggeractivation ["GOLF", "PRESENT", true];
-	_trigger settriggertext "CASEVAC";
-	_trigger settriggertype "none";
-	_trigger settriggerstatements ["this","createDialog ""RMM_ui_casevac""",""];
-};
-
-if (MSO_R_Leader) then {
-	_trigger = createtrigger ["emptydetector", [0,0]];
-	_trigger settriggeractivation ["HOTEL", "PRESENT", true];
-	_trigger settriggertext "AAR";
-	_trigger settriggertype "none";
-	_trigger settriggerstatements ["this","createDialog ""RMM_ui_aar""",""];
-};
