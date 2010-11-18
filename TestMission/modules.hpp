@@ -1,10 +1,8 @@
 // - Tested
 #define RMM_AAR
-//#define RMM_CAS
 #define CRB_CIVILIANS
 #define RMM_CONVOYS
 #define RMM_CTP
-//#define RMM_DEBUG
 #define CRB_DOGS
 #define RMM_ENEMYPOP
 #define RMM_JIPMARKERS
@@ -19,6 +17,8 @@
 #define RMM_ZORA
 
 // - In progress
+//#define RMM_DEBUG
+//#define RMM_CAS
 //#define RMM_WEATHER
 
 // - On hold

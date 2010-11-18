@@ -25,7 +25,8 @@ _crb_mapclick = "";
 };
 
 _fnc_status = {
-	titleText [format["Initialising: %1", _this select 0], "PLAIN DOWN", 0.5];
+//	titleText [format["Initialising: %1", _this select 0], "PLAIN DOWN", 0.5];
+	[playerSide, "Base"] sideChat format["Initialising: %1", _this select 0];
 };
 
 ["BIS Functions"] call _fnc_status;
@@ -44,44 +45,44 @@ BIS_MENU_GroupCommunication = [
 	//--- Item name, shortcut, -5 (do not change), expression, show, enable
 ];
 
+_fnc_updateMenu = {
+	_name = _this select 0;
+	_exp = _this select 1;
+	BIS_MENU_GroupCommunication = BIS_MENU_GroupCommunication + [
+		[_name,[count BIS_MENU_GroupCommunication + 1],"",-5,[["expression",_exp]],"1","1"]
+	];
+};	
+
+MSO_R_Admin = false;
+MSO_R_Leader = false;
+MSO_R_Officer = false;
+MSO_R_Air = false;
+MSO_R_Crew = false;
+if (not isdedicated) then {
+	execNow "scripts\init_player.sqf";
+};
+
 private "_trigger";
 #ifdef RMM_AAR
+if (MSO_R_Leader) then {
 	["After Action Reports"] call _fnc_status;
 	execNow "modules\aar\main.sqf";
-/*
-	_trigger = createtrigger ["emptydetector", [0,0]];
-	_trigger settriggeractivation ["HOTEL", "PRESENT", true];
-	_trigger settriggertext "AAR";
-	_trigger settriggertype "none";
-	_trigger settriggerstatements ["this","createDialog ""RMM_ui_aar""",""];
-*/
-	BIS_MENU_GroupCommunication = BIS_MENU_GroupCommunication + [
-		["AAR",[4],"",-5,[["expression","createDialog ""RMM_ui_aar"""]],"1","1"]
-	];
+	["AAR","createDialog ""RMM_ui_aar"""] call _fnc_updateMenu;
+};
 #endif
 #ifdef RMM_CAS
-	["View Distance Settings"] call _fnc_status;
+if (MSO_R_Leader) then {
+	["Close Air Support"] call _fnc_status;
 	execNow "modules\cas\main.sqf";
-/*	
-	_trigger = createtrigger ["emptydetector", [0,0]];
-	_trigger settriggeractivation ["FOXTROT", "PRESENT", true];
-	_trigger settriggertext "AIRSUPREQ";
-	_trigger settriggertype "none";
-	_trigger settriggerstatements ["this","createDialog ""RMM_ui_cas""",""];
-*/
-	BIS_MENU_GroupCommunication = BIS_MENU_GroupCommunication + [
-		["CAS",[3],"",-5,[["expression","createDialog ""RMM_ui_cas"""]],"1","1"]
-	];
+	["CAS","createDialog ""RMM_ui_cas"""] call _fnc_updateMenu;
+};
 #endif
 #ifdef RMM_CASEVAC
+if (MSO_R_Leader) then {
 	["CASEVAC"] call _fnc_status;
 	execNow "modules\casevac\main.sqf";
-	
-	_trigger = createtrigger ["emptydetector", [0,0]];
-	_trigger settriggeractivation ["GOLF", "PRESENT", true];
-	_trigger settriggertext "CASEVAC";
-	_trigger settriggertype "none";
-	_trigger settriggerstatements ["this","createDialog ""RMM_ui_casevac""",""];
+	["CASEVAC","createDialog ""RMM_ui_casevac"""] call _fnc_updateMenu;
+};
 #endif
 #ifdef CRB_CIVILIANS
 	["Ambient Civilians"] call _fnc_status;
@@ -100,12 +101,14 @@ private "_trigger";
 	execNow "modules\ctp\main.sqf";
 #endif
 #ifdef RMM_DEBUG
+if (MSO_R_Admin) then {
 	["Debug"] call _fnc_status;
 	_trigger = createtrigger ["emptydetector", [0,0]];
 	_trigger settriggeractivation ["INDIA", "PRESENT", true];
 	_trigger settriggertext "Debug";
 	_trigger settriggertype "none";
 	_trigger settriggerstatements ["this","createDialog ""RMM_ui_debug""",""];
+};
 #endif
 #ifdef CRB_DOGS
 	["Dogs"] call _fnc_status;
@@ -116,10 +119,12 @@ private "_trigger";
 	0 = [] execVM "modules\enemypop\main.sqf";
 #endif
 #ifdef RMM_JIPMARKERS
+if (MSO_R_Leader) then {
 	["JIP Markers"] call _fnc_status;
 	execNow "modules\jipmarkers\main.sqf";
 	_crb_mapclick = _crb_mapclick + "if (_shift && _alt) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
 	onMapSingleClick _crb_mapclick;
+};
 #endif
 #ifdef RMM_LOGISTICS
 	["Logistics"] call _fnc_status;
@@ -145,21 +150,15 @@ private "_trigger";
 #endif
 #ifdef RMM_SETTINGS
 	["View Distance Settings"] call _fnc_status;
-/*
-	_trigger = createtrigger ["emptydetector", [0,0]];
-	_trigger settriggeractivation ["DELTA", "PRESENT", true];
-	_trigger settriggertext "Settings";
-	_trigger settriggerstatements ["this","createDialog ""RMM_ui_settings""",""];
-*/	
-	BIS_MENU_GroupCommunication = BIS_MENU_GroupCommunication + [
-		["Settings",[2],"",-5,[["expression","createDialog ""RMM_ui_settings"""]],"1","1"]
-	];
+	["Settings","createDialog ""RMM_ui_settings"""] call _fnc_updateMenu;
 #endif
 #ifdef RMM_TASKS
+if (MSO_R_Leader) then {
 	["JIP Tasks"] call _fnc_status;
 	execNow "modules\tasks\main.sqf";	
-	_crb_mapclick = _crb_mapclick + "if (_alt) then {RMM_task_position = _pos; createDialog ""RMM_ui_tasks"";};";
+	_crb_mapclick = _crb_mapclick + "if (!_shift && _alt) then {RMM_task_position = _pos; createDialog ""RMM_ui_tasks"";};";
 	onMapSingleClick _crb_mapclick;
+};
 #endif
 #ifdef RMM_TYRES
 	["Tyre Changing"] call _fnc_status;
@@ -174,4 +173,4 @@ private "_trigger";
 	execNow "modules\zora\main.sqf";
 #endif
 
-["Completed"] call _fnc_status;
+["Complete"] call _fnc_status;
