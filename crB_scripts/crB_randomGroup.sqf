@@ -34,8 +34,8 @@ _allfacs = [] call BIS_fnc_getFactions;
 if(typeName _fac == "ANY" || typeName _fac == "SIDE") then {
 	if(typeName _fac == "SIDE") then {
 		_side = _fac;
-		_fac = nil;
 	};
+
 	switch(_side) do {
 		case east: {
 			_sidex = 0;
@@ -57,44 +57,50 @@ if(typeName _fac == "ANY" || typeName _fac == "SIDE") then {
 			_facs = _facs + [_x];
 		};
 	} forEach _allfacs;
-};
-//hint str _facs;
-// if single faction
-if(!isNil "_fac") then {
-	if(typeName _fac == "STRING") then {
-		_facs = [_fac];
-	};
-
-	// if multiple factions
-	if(typeName _fac == "ARRAY") then {
-		_facs = _fac;
+	_fac = nil;
+} else {
+	switch(typeName _fac) do {
+		case "STRING": {
+			_facs = [_fac];
+		};
+		// if multiple factions
+		case "ARRAY": {
+			_facs = _fac;
+		};
 	};
 	_fac = nil;
 };
+//hint format["FACS1: %1", _facs];
 
-if(isNil "_fac" && !isNil "_side") then {
-	_s = switch(_side) do {
-		case resistance: {"Guerrila";};
-		case civilian: {"Civilian";};
-		default {str _side;};
-	};
-//hint str _s;
-	// Confirm there are units for this faction in this type
+if(!isNil "_facs") then {
 	_facx = [];
 	{
-		_grpx = count(configFile >> "CfgGroups" >> _s >> _x >> _type);
-		for "_y" from 1 to _grpx - 1 do {
-			if (!(_x in _facx)) then {
-				_facx = _facx + [_x];
-			};
+		_s = switch(_x) do {
+			case resistance: {"Guerrila";};
+			case civilian: {"Civilian";};
+			default {str _x;};
 		};
-	} forEach _facs;
+
+		private ["_x"];
+		// Confirm there are units for this faction in this type
+		{
+			_grpx = count(configFile >> "CfgGroups" >> _s >> _x >> _type);
+			for "_y" from 1 to _grpx - 1 do {
+				if (!(_x in _facx)) then {
+					_facx = _facx + [_x];
+				};
+			};
+		} forEach _facs;
+	} forEach [west,east,resistance,civilian];
+
 	_facs = _facx;
 };
-//hint str _facs;
+if (count _facs == 0) exitWith{nil;};
+//hint format["FACS2: %1", _facs];
+
 // pick random faction and validate
 _fac = _facs select floor(random count _facs);
-//if(!(_fac in _allfacs)) exitWith{player GlobalChat format["crB_randomGroup - ""%1"" not valid - %2", _fac, _allfacs];};
+//if(!(_fac in _allfacs)) exitWith{player globalChat format["crB_randomGroup - ""%1"" not valid - %2", _fac, _allfacs];};
 
 if(isNil "_side") then {
 	_sidex = getNumber(configFile >> "CfgFactionClasses" >> _fac >> "side");
@@ -114,15 +120,14 @@ if(isNil "_side") then {
 		};
 	};
 };
-
 //player globalChat format["Side %1 %2 Fctns: %3 This %4 Type %5", _side, _sidex, _facs, _fac, _type];
 
 _grps = [];
-	_s = switch(_side) do {
-		case resistance: {"Guerrila";};
-		case civilian: {"Civilian";};
-		default {str _side;};
-	};
+_s = switch(_side) do {
+	case resistance: {"Guerrila";};
+	case civilian: {"Civilian";};
+	default {str _side;};
+};
 //hint str _s;
 _grpx = count(configFile >> "CfgGroups" >> _s >> _fac >> _type);
 for "_y" from 1 to _grpx - 1 do {
@@ -131,7 +136,7 @@ for "_y" from 1 to _grpx - 1 do {
 //hint str _grps;
 _grp = _grps select floor(random count _grps);
 
-//hint format["%1 %2 %3", _pos, _side, _grp];
+//player globalChat format["%1 %2 %3 %4", _pos, _s, _side, _grp];
 _spawnGrp = [_pos, _side, _grp] call BIS_fnc_spawnGroup;
 
 if(_side == civilian) then {
