@@ -15,6 +15,9 @@ class RMM {
 	};
 };
 class CRB {
+	class common {
+		class selectRandomBias {};
+	};
 	class server {
 		class initLocations {};
 	};
