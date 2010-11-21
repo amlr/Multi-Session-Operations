@@ -1,48 +1,9 @@
 #include <modules.hpp>
 
-//http://community.bistudio.com/wiki/description.ext#Header_Class
-class header {
-	gametype = COOP;
-	minplayers = 1;
-	maxplayers = 24;
-};
-
-//http://community.bistudio.com/wiki/description.ext#OnLoad...
-onLoadIntro = "";
-onLoadMission = "";
-onLoadIntroTime = false;
-onLoadMissionTime = false;
-estimatedTimeLeft = 7200;
-
 //http://community.bistudio.com/wiki/Description.ext#Respawn...
 respawn = 3;
 respawnDelay = 10;
-respawnVehicleDelay = 0;
-respawnDialog = 0;
-
-//http://community.bistudio.com/wiki/description.ext#Show...
-showCompass = 1;
-showGPS = 1;
-showHUD = 1;
-showMap = 1;
-showNotePad = 0;
-showRadio = 0;
-showWatch = 1;
-
-//http://community.bistudio.com/wiki/description.ext#Miscellaneous
 disabledAI = 1;
-aiKills = 0;
-briefing = 1;
-debriefing = 1;
-
-//http://community.bistudio.com/wiki/description.ext#Score
-MinScore = 0;
-AvgScore = 50;
-MaxScore = 100;
-
-//http://community.bistudio.com/wiki/description.ext#Sounds
-class CfgMusic {
-};
 
 class CfgSounds {
 #ifdef CRB_DOGS
@@ -53,24 +14,29 @@ class CfgSounds {
 #endif
 };
 
-class CfgRadio {
-};
-
-//http://community.bistudio.com/wiki/description.ext#CfgIdentities
-class CfgIdentities {
-};
-
-//http://community.bistudio.com/wiki/description.ext#Weapons_and_Magazines
-class Weapons {
-};
-class Magazines {
-};
-
 //http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
 class Params {
 #ifdef RMM_NOMAD
 	#include <modules\nomad\params.hpp>
 #endif
+	class faction_BIS_TK {
+		title = "Enable Takistan Army"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 1;
+	};
+	class faction_BIS_TK_INS {
+		title = "Enable Takistan Insurgency"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 1;
+	};
+	class faction_BIS_TK_GUE {
+		title = "Enable Takistan Guerillas"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 1;
+	};
 }; 
 
 #ifdef R3F_LOGISTICS
@@ -98,6 +64,9 @@ class cfgFunctions {
 #endif
 #ifdef CRB_DOGS
 	#include <modules\dogs\functions.hpp>
+#endif
+#ifdef CRB_FLIPPABLE
+	#include <modules\flippable\functions.hpp>
 #endif
 #ifdef RMM_JIPMARKERS
 	#include <modules\jipmarkers\functions.hpp>
@@ -148,6 +117,7 @@ class cfgFunctions {
 #endif
 #ifdef RMM_RECRUITMENT
 	#include <modules\recruitment\dialog_baf.hpp>
+	#include <modules\recruitment\dialog_us.hpp>
 	#include <modules\recruitment\TeamStatusDialog\TeamStatusDialog.hpp>
 #endif
 #ifdef RMM_SETTINGS
@@ -156,4 +126,3 @@ class cfgFunctions {
 #ifdef RMM_TASKS
 	#include <modules\tasks\dialog.hpp>
 #endif
-
