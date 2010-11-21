@@ -107,7 +107,7 @@ class Mission
 					position[]={3553.5884,22.361914,4071.7415};
 					id=2;
 					side="WEST";
-					vehicle="BAF_Soldier_SL_MTP";
+					vehicle="BAF_Soldier_TL_MTP";
 					player="PLAYER COMMANDER";
 					leader=1;
 					rank="CORPORAL";
@@ -332,7 +332,7 @@ class Mission
 					position[]={3565.688,22.562504,4072.0208};
 					id=68;
 					side="WEST";
-					vehicle="US_Soldier_SL_EP1";
+					vehicle="US_Soldier_TL_EP1";
 					player="PLAY CDG";
 					leader=1;
 					rank="CORPORAL";

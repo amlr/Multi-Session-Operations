@@ -1,7 +1,7 @@
 waitUntil{!isNil "bis_fnc_init"};
 
-_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_baf"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && typeOf _this == ""BAF_Soldier_MTP"";"];
-_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_us"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && typeOf _this == ""US_Soldier_EP1"";"];
+_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_baf"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && typeOf _this == ""BAF_Soldier_TL_MTP"";"];
+_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_us"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && typeOf _this == ""US_Soldier_TL_EP1"";"];
 
 _this addAction ["Team Status", "modules\recruitment\TeamStatusDialog\TeamStatusDialog.sqf", [
       ["Page", "Team"], // Page to show initially (only include 1 of these 4 "Page" options)
