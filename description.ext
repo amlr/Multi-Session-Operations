@@ -23,13 +23,13 @@ class Params {
 		title = "Enable Takistan Army"; 
 		values[]= {0,1}; 
 		texts[]= {"false","true"}; 
-		default = 1;
+		default = 0;
 	};
 	class faction_BIS_TK_INS {
 		title = "Enable Takistan Insurgency"; 
 		values[]= {0,1}; 
 		texts[]= {"false","true"}; 
-		default = 1;
+		default = 0;
 	};
 	class faction_BIS_TK_GUE {
 		title = "Enable Takistan Guerillas"; 
