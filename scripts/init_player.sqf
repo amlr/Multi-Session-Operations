@@ -8,22 +8,6 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 private ["_uid","_string"];
 _uid = getplayeruid player;
 
-// I'm sure this has already moved to NOMAD
-/*
-_string = format ["RMM_nomad_%1",_uid];
-
-//default weapons
-if (isnil _string) then {
-	//removeallweapons player;
-	//removeallitems player;
-	player switchmove "";
-	if (not isnull (unitBackpack player)) then {
-		clearWeaponCargo (unitBackpack player);
-		clearMagazineCargo (unitBackpack player);
-	};
-};
-*/
-
 player setskill 0;
 {player disableAI _x} foreach ["move","anim","target","autotarget"];
 
