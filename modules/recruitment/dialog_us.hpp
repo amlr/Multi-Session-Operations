@@ -1,4 +1,4 @@
-class RMM_ui_recruitment_baf { // by Rommel
+class RMM_ui_recruitment_us { // by Rommel
 	idd = 80506;
 	movingEnable = 1;
 	enableSimulation = 1;
@@ -20,18 +20,18 @@ class RMM_ui_recruitment_baf { // by Rommel
 			w = CUI_Box_W;
 			y = CUI_Row_Y(1);
 			h = CUI_Row_DY(0,1);
-			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [""BAF_Soldier_N_MTP"", [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""]};";
+			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [""US_Soldier_EP1"", [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""]};";
 			default = true;
 		};
 		class SoldierMG : SoldierWB {
 			text = "Machinegunner";
 			y = CUI_Row_Y(2);
-			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [""BAF_Soldier_MG_MTP"", [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""]};";
+			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [""US_Soldier_MG_EP1"", [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""]};";
 		};
 		class SoldierAT : SoldierWB {
 			text = "Antitank";
 			y = CUI_Row_Y(3);
-			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [""BAF_Soldier_AT_MTP"", [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""]};";
+			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [""US_Soldier_AT_EP1"", [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""]};";
 		};
 	};
 };
