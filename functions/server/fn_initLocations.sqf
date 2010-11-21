@@ -93,6 +93,6 @@ if (_debug) then {
 	} forEach _locs;
 };
 
-_locs = _locs call CBA_fnc_shuffle;
+_locs = [_locs] call CBA_fnc_shuffle;
 
 _locs;
