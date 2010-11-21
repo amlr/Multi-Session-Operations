@@ -1,7 +1,7 @@
 if (!isServer) exitWith{};
 
 [] spawn {
-	_debug = false;
+	_debug = true;
 	
 	private ["_towns"];
 	waitUntil{!isNil "BIS_fnc_init"};
@@ -27,9 +27,8 @@ if (!isServer) exitWith{};
 			_trg setTriggerStatements ["this", format["[%1, thislist] spawn dogs_fnc_wilddogs;", _name], ""];
 			
 			if (_debug) then {
-				_m = createMarker ["m_" + _name, _pos];
-				_m setMarkerShape "ELLIPSE";
-				_m setMarkerSize [_tarea,_tarea];
+				_m = ["m_" + _name, _pos, "ELLIPSE", [_tarea,_tarea], "GLOBAL"] call CBA_fnc_createMarker;
+				[_m, true] call CBA_fnc_setMarkerPersistent;
 			};
 		};
 		_i = _i + 1;
