@@ -28,7 +28,7 @@
 R3F_LOG_CFG_remorqueurs =
 [
 	// e.g. : "MyTowingVehicleClassName1", "MyTowingVehicleClassName2"
-	"BAF_Jackal2_BASE_D", "BAF_ATV_D"
+	"Wheeled_APC"
 ];
 
 /**
@@ -38,7 +38,7 @@ R3F_LOG_CFG_remorqueurs =
 R3F_LOG_CFG_objets_remorquables =
 [
 	// e.g. : "MyTowableObjectClassName1", "MyTowableObjectClassName2"
-	"BAF_Jackal2_BASE_D", "BAF_ATV_D"
+	"Car"
 ];
 
 
@@ -51,6 +51,7 @@ R3F_LOG_CFG_objets_remorquables =
 R3F_LOG_CFG_heliporteurs =
 [
 	// e.g. : "MyLifterVehicleClassName1", "MyLifterVehicleClassName2"
+	"BAF_Merlin_HC3_D"
 ];
 
 /**
@@ -60,7 +61,7 @@ R3F_LOG_CFG_heliporteurs =
 R3F_LOG_CFG_objets_heliportables =
 [
 	// e.g. : "MyLiftableObjectClassName1", "MyLiftableObjectClassName2"
-	"BAF_Jackal2_BASE_D", "BAF_ATV_D"
+	"BAF_Jackal2_BASE_D"
 ];
 
 

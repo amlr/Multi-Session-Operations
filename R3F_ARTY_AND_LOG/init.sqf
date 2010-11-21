@@ -25,7 +25,7 @@
  *     - l'execVM est mieux connu et compris par l'éditeur de mission
  *     - l'init client de l'arty devient bloquant : il attend une PUBVAR du serveur (le point d'attache)
  */
-[] spawn
+[] call
 {
 	#include "config.sqf"
 	#include "R3F_ARTY_disable_enable.sqf"
