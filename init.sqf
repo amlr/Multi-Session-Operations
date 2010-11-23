@@ -1,8 +1,9 @@
-	#include <modules.hpp>
+#include <modules.hpp>
 
 #define execNow call compile preprocessfilelinenumbers
 
 MSO_FACTIONS = [];
+CRB_LOCS = [];
 if(!isNil "faction_BIS_TK") then {
 	if(faction_BIS_TK == 1) then {
 		MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK"];
@@ -23,6 +24,7 @@ if(count MSO_FACTIONS == 0) then {MSO_FACTIONS = ["BIS_TK_GUE"];};
 //http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];
 
+private ["_crb_mapclick","_fnc_status","_fnc_updateMenu"];
 _crb_mapclick = "";
 
 "RMM_MPe" addPublicVariableEventHandler {
@@ -42,33 +44,43 @@ _crb_mapclick = "";
 	};
 };
 
-_old_stage = "init";
+"CRB_init_status" addPublicVariableEventHandler {
+	private["_stage"];
+	_stage = _this select 1;
+//	titleText [format["Initialising: %1", _this select 0], "PLAIN DOWN", 0.5];
+	[playerSide, "Base"] sideChat format["Initialising: %1", _stage];
+};
+
 _fnc_status = {
+	private["_stage"];
 	_stage = _this;
 
 	if (isServer) then {
-		if(isNil "mission_init") then {
-			mission_init = ["init"];
-			publicVariable "mission_init";
+		if(isNil "CRB_init_status") then {
+			CRB_init_status = "Starting";
+			publicVariable "CRB_init_status";
 		};
 	};
-	waitUntil{!isNil "mission_init"};
+	waitUntil{!isNil "CRB_init_status"};
 
-	if (isServer && _old_stage != "init") then {
-		mission_init = mission_init + [_old_stage];
-		publicVariable "mission_init";
+	if (isServer) then {
+		CRB_init_status = _stage;
+		publicVariable "CRB_init_status";
+		[playerSide, "Base"] sideChat format["Initialising: %1", _stage];
 	};
-	waitUntil{_old_stage in mission_init};
-	
-//	titleText [format["Initialising: %1", _this select 0], "PLAIN DOWN", 0.5];
-	[playerSide, "Base"] sideChat format["Initialising: %1", _stage];
-
-	_old_stage = _stage;
 };
+
+"Missions" call _fnc_status;
+waitUntil{!isNil "CRB_init_status"};
+[playerSide, "Base"] sideChat format["Initialising: %1", CRB_init_status];
 
 "BIS Functions" call _fnc_status;
 waituntil {not isnil "BIS_fnc_init"};
 
+"Locations" call _fnc_status;
+if(isServer) then {
+	CRB_LOCS = [] call CRB_fnc_initLocations;
+};
 
 if (!isNil "paramsArray") then {
 	for "_i" from 0 to ((count paramsArray)-1) do {
@@ -106,7 +118,6 @@ if (not isdedicated) then {
 setViewDistance 2000;
 setTerrainGrid 25;
 
-private "_trigger";
 #ifdef RMM_DEBUG
 "Debug" call _fnc_status;
 if (MSO_R_Admin) then {
@@ -208,14 +219,15 @@ if (MSO_R_Leader) then {
 	"Convoys" call _fnc_status;
 	execNow "modules\convoys\main.sqf";
 #endif
-#ifdef RMM_ZORA
-	"ZORA" call _fnc_status;
-	execNow "modules\zora\main.sqf";
-#endif
 #ifdef RMM_ENEMYPOP
 	"Enemy Populate" call _fnc_status;
 	execNow "modules\enemypop\main.sqf";
 #endif
+#ifdef RMM_ZORA
+	"ZORA" call _fnc_status;
+	execNow "modules\zora\main.sqf";
+#endif
+
 "Completed" call _fnc_status;
 sleep 5;
 
