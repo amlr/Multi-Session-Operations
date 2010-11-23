@@ -1,61 +1,61 @@
 if(!isServer) exitWith{};
 
-_debug = false;
+private["_debug","_strategic","_spawnpoints","_convoydest","_numconvoys","_j"];
+_debug = true;
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
+	if(_debug)then{hint "Convoy: initLocations";};
 	CRB_LOCS = [] call CRB_fnc_initLocations;
 };
 
-CRB_SPAWNPOINTS = [];
-switch(worldName) do {		
-	case "Zargabad": {
-		CRB_SPAWNPOINTS = [[3430,8130],[2900,50],[3150,50],[5030,50]];
-	};
-	case "Takistan": {
-		CRB_SPAWNPOINTS = [[2057,362],[7418,44],[11943,2565],[10968,6296],[11443,8196],[12640,9830],[12749,10970],[11057,12744],[9163,12728],[7149,12744],[4560,12736],[2461,12747],[1908,12610],[883,10455],[33,7077],[96,5524],[242,2836]];
-	};
-};
 _strategic = ["Strategic","StrongpointArea","FlatArea","FlatAreaCity","Airport"];
-CRB_CONVOYLOCS = [];
+_spawnpoints = [];
+_convoydest = [];
+if(_debug)then{hint format["Convoy: filterLocations(%1)", count CRB_LOCS];};
 {
+	private["_t","_m"];
 	if(type _x in _strategic) then {
-		CRB_CONVOYLOCS = CRB_CONVOYLOCS + [position _x];
-	};		
+		_convoydest = _convoydest + [position _x];
+		if (_debug) then {
+			_t = format["convoy_d%1", floor(random 10000)];
+			_m = [_t, position _x, "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorOrange", "GLOBAL"] call CBA_fnc_createMarker;
+			[_m, true] call CBA_fnc_setMarkerPersistent;
+		};
+	} else {
+		if(type _x == "BorderCrossing") then {
+			_spawnpoints = _spawnpoints + [position _x];
+			if (_debug) then {
+				_t = format["convoy_s%1", floor(random 10000)];
+				_m = [_t, position _x, "Icon", [1,1], "TYPE:", "Destroy", "GLOBAL"] call CBA_fnc_createMarker;
+				[_m, true] call CBA_fnc_setMarkerPersistent;
+			};
+		};
+	};
 } forEach CRB_LOCS;
 
+// wolffy TODO - other factions
 // BIS_TK
 CRB_TK_VEH = ["MAZ_543_SCUD_TK_EP1","SUV_TK_EP1","UAZ_Unarmed_TK_EP1","BMP2_HQ_TK_EP1"];
 CRB_TK_SUP = ["UralReammo_TK_EP1","UralRefuel_TK_EP1","UralRepair_TK_EP1","UralSalvage_TK_EP1","UralSupply_TK_EP1","V3S_Open_TK_EP1","V3S_TK_EP1","M113Ambul_TK_EP1"];
 CRB_TK_ARM = ["GRAD_TK_EP1","LandRover_MG_TK_EP1","LandRover_SPG9_TK_EP1","Ural_ZU23_TK_EP1","M113_TK_EP1","ZSU_TK_EP1"];
 
-if (_debug) then {
-	{
-		_t = format["l%1",random 10000];
-		_m = [_t, _x, "Icon", [1,1], "TYPE:", "Dot", "GLOBAL"] call CBA_fnc_createMarker;
-		[_m, true] call CBA_fnc_setMarkerPersistent;
-	} forEach CRB_CONVOYLOCS;
-
-	{
-		_t = format["x%1",random 10000];
-		_m = [_t, _x, "Icon", [1,1], "TYPE:", "Destroy", "GLOBAL"] call CBA_fnc_createMarker;
-		[_m, true] call CBA_fnc_setMarkerPersistent;
-	} forEach CRB_SPAWNPOINTS;
-};
-_numconvoys = floor((count CRB_CONVOYLOCS) / 50);
+_numconvoys = floor((count _convoydest) / 50);
+if(_debug)then{hint format["Convoy: destinations(%1) spawns(%2) convoys(%3)", count _convoydest, count _spawnpoints, _numconvoys];};
 
 for "_j" from 1 to _numconvoys do {
-	[_debug] spawn {
-		_debug = _this select 0;
+	[_j, _spawnpoints, _convoydest, _debug] spawn {
+		private["_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_facs","_wp"];
+		_j = _this select 0;
+		_spawnpoints = _this select 1;
+		_convoydest = _this select 2;
+		_debug = _this select 3;
 		
 		_timeout = if(_debug) then {[30, 30, 30];} else {[30, 120, 300];};
 		while{true} do {
-			_sleep = if(_debug) then {random 30;} else {random 300;};
-
-			_startpos = (CRB_SPAWNPOINTS call BIS_fnc_selectRandom);
-			_destpos = (CRB_CONVOYLOCS call BIS_fnc_selectRandom);
-			_endpos = (CRB_SPAWNPOINTS call BIS_fnc_selectRandom);
-
+			_startpos = (_spawnpoints call BIS_fnc_selectRandom);
+			_destpos = (_convoydest call BIS_fnc_selectRandom);
+			_endpos = (_spawnpoints call BIS_fnc_selectRandom);
 			_grp = nil;
 			_front = "";
 			while{isNil "_grp"} do {
@@ -63,6 +63,7 @@ for "_j" from 1 to _numconvoys do {
 				_facs = MSO_FACTIONS;
 				_grp = [_startpos, _front, _facs] call compile preprocessFileLineNumbers "crB_scripts\crB_randomGroup.sqf";
 			};
+			if(_debug) then {hint format["Convoy: #%1 %2 %3 %4 %5", _j, _startpos, _destpos, _endpos, _front];};
 
 			switch(_front) do {
 				case "Motorized": {

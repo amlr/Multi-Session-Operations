@@ -1,18 +1,25 @@
 if (!isServer) exitWith{};
 
-[] spawn {
-	_debug = true;
+private["_debug","_types","_d","_tarea","_dogs"];
+_debug = true;
+
+waitUntil{!isNil "BIS_fnc_init"};
+if(isNil "CRB_LOCS") then {
+	if(_debug)then{hint "Dogs: initLocations";};
+	CRB_LOCS = [] call CRB_fnc_initLocations;
+};
 	
-	private ["_towns"];
-	waitUntil{!isNil "BIS_fnc_init"};
-	_towns = [["FlatArea"]] call BIS_fnc_locations;
-	_istart = floor(random 3);
-	_i = _istart;
-	_d = 500;
-	_tarea = 150;	
-	{
-		if (_i mod 3 == 0) then {
-			_name = format["wdtrg_%1", _i];
+_types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
+_d = 500;
+_tarea = 150;
+_dogs = [];
+if(_debug)then{hint format["Dogs: filterLocations(%1)", count CRB_LOCS];};
+{
+	if(type _x in _types) then {
+		if (random 1 > 0.75) then {
+			private["_name","_dx","_dy","_pos","_trg","_m"];
+			_name = format["wdtrg_%1", floor(random 10000)];
+			if(_debug)then{hint format["Dogs: createTrigger %1", _name];};
 			
 			// randomise wild dog positions
 			_dx = (random _d) - (_d/2);
@@ -27,34 +34,38 @@ if (!isServer) exitWith{};
 			_trg setTriggerStatements ["this", format["[%1, thislist] spawn dogs_fnc_wilddogs;", _name], ""];
 			
 			if (_debug) then {
+				hint format["Dogs: creating m_%1",  _name];
 				_m = ["m_" + _name, _pos, "ELLIPSE", [_tarea,_tarea], "GLOBAL"] call CBA_fnc_createMarker;
 				[_m, true] call CBA_fnc_setMarkerPersistent;
 			};
+			_dogs = _dogs + [[_name, _trg]];
 		};
-		_i = _i + 1;
-	} foreach _towns;
-	
+	};
+} forEach CRB_LOCS;
+
+
+[_dogs, _d, _debug] spawn {
+	private["_dogs","_dx","_dy","_pos","_d","_sleep","_name","_trg"];
+	_dogs = _this select 0;
+	_d = _this select 1;
+	_debug = _this select 2;
 	while{true} do {
-		_i = _istart;
 		{
-			if (_i mod 3 == 0) then {
-				_name = format["wdtrg_%1", _i];
+			_name = _x select 0;
+			_trg = _x select 1;
+			_sleep = if(_debug)then{30;}else{random (60 * 45);};
+			sleep _sleep;
+			// randomise wild dog positions
+			_dx = (random _d) - (_d/2);
+			_dy = (random _d) - (_d/2);
+			_pos = position _trg;
+			_pos = [(_pos select 0) + _dx, (_pos select 1) + _dy];
 
-				// randomise wild dog positions
-				_dx = (random _d) - (_d/2);
-				_dy = (random _d) - (_d/2);
-				_pos = position _x;
-				_pos = [(_pos select 0) + _dx, (_pos select 1) + _dy];
-
-				call compile format["_trg = %1;", _name];
-				_trg setPos _pos;
-
-				if (_debug) then {
-					_m setMarkerPos _pos;
-				};
+			_trg setPos _pos;
+			if(_debug)then{
+				hint format["Dogs: moving %1 to %2", _name, _pos];
+				format["m_%1", _name] setMarkerPos _pos;
 			};
-			_i = _i + 1;
-		} foreach _towns;
-		sleep (60 * 15) + random (60 * 30);
+		} foreach _dogs;
 	};
 };
