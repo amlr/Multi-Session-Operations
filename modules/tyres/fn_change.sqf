@@ -23,6 +23,6 @@ if (alive _caller) then {
 				(_this select 0) setvectorup [0,0,1];
 			};
 		}
-	] call CBA_fnc_ExMP;
+	] call RMM_fnc_ExMP;
 	deletevehicle _tyre;
 };

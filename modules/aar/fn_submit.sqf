@@ -27,4 +27,4 @@
 			_this select 9
 		]
 	]];
-}] call CBA_fnc_ExMP;
+}] call RMM_fnc_ExMP;

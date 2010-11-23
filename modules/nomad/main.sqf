@@ -92,7 +92,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		},
 		{
 			if (tolower(_this) == "unconscious") then {
-				[0,player,{_this call revive_fnc_unconscious}] call CBA_fnc_ExMP;
+				[0,player,{_this call revive_fnc_unconscious}] call RMM_fnc_ExMP;
 			};
 		},
 		{

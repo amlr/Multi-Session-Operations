@@ -16,7 +16,7 @@ if not (isplayer _healer) then { //ai compatibility
 	sleep (_ratio / 3); //take less time
 	if (lifestate _healer != "alive") exitwith {};
 	if (lifestate _injured != "unconscious") exitwith {};
-	[0,_injured,{_this call revive_fnc_conscious}] call CBA_fnc_ExMP;
+	[0,_injured,{_this call revive_fnc_conscious}] call RMM_fnc_ExMP;
 } else {
 	sleep 3;
 
@@ -30,7 +30,7 @@ if not (isplayer _healer) then { //ai compatibility
 		if (lifestate _healer != "alive") exitwith {};
 		if (lifestate _injured != "unconscious") exitwith {};
 		if (_i == _ratio) then {
-			[0,_injured,{_this call revive_fnc_conscious}] call CBA_fnc_ExMP;
+			[0,_injured,{_this call revive_fnc_conscious}] call RMM_fnc_ExMP;
 		};
 	};
 };

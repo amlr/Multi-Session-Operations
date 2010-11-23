@@ -4,6 +4,7 @@ class RMM {
 //		class taskupdate {};
 	};
 	class common {
+		class ExMP {};
 //		class failSafeLS {};
 //		class isAlive {};
 //		class landForTime {};
@@ -25,10 +26,5 @@ class CRB {
 class BIS {
 	class server {
 		class dynocreate {};
-	};
-};
-class CBA {
-	class common {
-		class ExMP {};
 	};
 };
