@@ -19,7 +19,7 @@ _names = ["NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","f
 _hills = ["Hill","ViewPoint","RockArea","BorderCrossing","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
 
 
-
+if (_debug) then {[-1, {player globalChat _this}, "initLocs: Custom Locs(" + worldName + ")"] call CBA_fnc_globalExecute;};
 switch(worldName) do {		
 	case "Zargabad": {
 		{createLocation ["BorderCrossing",_x,1,1]} foreach [[3430,8150],[2925,50],[3180,50],[5048,50]];
@@ -35,10 +35,13 @@ switch(worldName) do {
 	};
 };
 
+if (_debug) then {[-1, {player globalChat _this}, "initLocs: Find Locs"] call CBA_fnc_globalExecute;};
 _locs = nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), _strategic + _military + _names + _hills, _dist];
+if (_debug) then {[-1, {player globalChat _this}, "initLocs: Mark Locs"] call CBA_fnc_globalExecute;};
 if (_debug) then {
+	private["_t","_m"];
 	{
-		_t = format["l%1",random 10000];
+		_t = format["l%1",floor(random 10000)];
 		_m = createMarker [_t, position _x];
 		_m setMarkerType "Dot";
 		_m setMarkerText str (type _x);
@@ -60,13 +63,13 @@ if (_debug) then {
 				_m setMarkerColor "ColorBlue";
 			};
 			case "StrongpointArea": {
-				_m setMarkerColor "ColorRed";
+				_m setMarkerColor "ColorGreen";
 			};
 			case "FlatArea": {
-				_m setMarkerColor "ColorRed";
+				_m setMarkerColor "ColorGreen";
 			};
 			case "FlatAreaCitySmall": {
-				_m setMarkerColor "ColorRed";
+				_m setMarkerColor "ColorGreen";
 			};
 			case "Hill": {
 				_m setMarkerColor "ColorGreen";
@@ -92,7 +95,7 @@ if (_debug) then {
 
 	} forEach _locs;
 };
-
+if (_debug) then {[-1, {player globalChat _this}, "initLocs: Shuffle Locs"] call CBA_fnc_globalExecute;};
 _locs = [_locs] call CBA_fnc_shuffle;
 
 _locs;
