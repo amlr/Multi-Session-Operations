@@ -1,25 +1,19 @@
 if (!isServer) exitWith{};
 
-private["_debug","_types","_d","_tarea","_dogs"];
+private["_debug","_types","_d","_tarea","_dogs","_locs"];
 _debug = true;
 
-waitUntil{!isNil "BIS_fnc_init"};
-if(isNil "CRB_LOCS") then {
-	if(_debug)then{hint "Dogs: initLocations";};
-	CRB_LOCS = [] call CRB_fnc_initLocations;
-};
-	
 _types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
 _d = 500;
 _tarea = 150;
 _dogs = [];
-if(_debug)then{hint format["Dogs: filterLocations(%1)", count CRB_LOCS];};
+_locs = [nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), _types, CRB_LOC_DIST]] call CBA_fnc_shuffle;
 {
 	if(type _x in _types) then {
 		if (random 1 > 0.75) then {
 			private["_name","_dx","_dy","_pos","_trg","_m"];
 			_name = format["wdtrg_%1", floor(random 10000)];
-			if(_debug)then{hint format["Dogs: createTrigger %1", _name];};
+			diag_log format["MSO-%1 Dog Packs: createTrigger %2", time, _name];
 			
 			// randomise wild dog positions
 			_dx = (random _d) - (_d/2);
@@ -41,7 +35,7 @@ if(_debug)then{hint format["Dogs: filterLocations(%1)", count CRB_LOCS];};
 			_dogs = _dogs + [[_name, _trg]];
 		};
 	};
-} forEach CRB_LOCS;
+} forEach _locs;
 
 
 [_dogs, _d, _debug] spawn {
@@ -69,3 +63,5 @@ if(_debug)then{hint format["Dogs: filterLocations(%1)", count CRB_LOCS];};
 		} foreach _dogs;
 	};
 };
+
+diag_log format["MSO-%1 Dog Packs # %2", time, count _dogs];
