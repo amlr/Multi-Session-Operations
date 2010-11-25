@@ -1,8 +1,8 @@
 if(!isServer) exitWith{};
 
-private ["_debug", "_dist", "_locs", "_mount", "_strategic", "_military", "_names", "_hills"];
+private ["_debug", "_dist", "_locs", "_mount", "_strategic", "_military", "_names", "_hills","_result"];
 _debug = false;
-_dist = 0;
+_dist = 20000;
 
 _mount = ["Mount"];
 
@@ -19,7 +19,7 @@ _names = ["NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","f
 _hills = ["Hill","ViewPoint","RockArea","BorderCrossing","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
 
 
-if (_debug) then {[-1, {player globalChat _this}, "initLocs: Custom Locs(" + worldName + ")"] call CBA_fnc_globalExecute;};
+if (_debug) then {player globalChat "initLocs: Custom Locs(" + worldName + ")";};
 switch(worldName) do {		
 	case "Zargabad": {
 		{createLocation ["BorderCrossing",_x,1,1]} foreach [[3430,8150],[2925,50],[3180,50],[5048,50]];
@@ -35,10 +35,14 @@ switch(worldName) do {
 	};
 };
 
-if (_debug) then {[-1, {player globalChat _this}, "initLocs: Find Locs"] call CBA_fnc_globalExecute;};
-_locs = nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), _strategic + _military + _names + _hills, _dist];
-if (_debug) then {[-1, {player globalChat _this}, "initLocs: Mark Locs"] call CBA_fnc_globalExecute;};
+if (_debug) then {player globalChat "initLocs: Find Locs";};
+_locs = [];
+{
+	_locs = _locs + nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), _x , _dist];
+} forEach [_strategic, _military, _hills, _names];
+
 if (_debug) then {
+	player globalChat format["initLocs: Mark Locs(%1)", count _locs];
 	private["_t","_m"];
 	{
 		_t = format["l%1",floor(random 10000)];
@@ -95,7 +99,8 @@ if (_debug) then {
 
 	} forEach _locs;
 };
-if (_debug) then {[-1, {player globalChat _this}, "initLocs: Shuffle Locs"] call CBA_fnc_globalExecute;};
-_locs = [_locs] call CBA_fnc_shuffle;
 
+//if (_debug) then {player globalChat format["initLocs: Shuffle Locs(%1)", count _locs];};
+//_result = [_locs] call CBA_fnc_shuffle;
+if (_debug) then {player globalChat format["initLocs: Final Locs(%1)", count _locs];};
 _locs;

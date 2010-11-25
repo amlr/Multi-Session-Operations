@@ -20,7 +20,7 @@ class CRB {
 		class selectRandomBias {};
 	};
 	class server {
-		class initLocations {};
+//		class initLocations {};
 	};
 };
 class BIS {
