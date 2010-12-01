@@ -3,7 +3,7 @@
 /*
 item0[] = {"Start",0,250,-550.000000,100.000000,-450.000000,150.000000,0.000000,"Start"};
 item1[] = {"Pursuit",4,218,-425.000000,100.000000,-325.000000,150.000000,0.000000,"Pursuit"};
-item2[] = {"Pursuit",2,250,-300.000000,100.000000,-200.000000,150.000000,0.000000,"Pursuit"};
+item2[] = {"Pursuit",2,4346,-300.000000,100.000000,-200.000000,150.000000,0.000000,"Pursuit"};
 item3[] = {"Wait",8,218,-425.000000,175.000000,-325.000000,225.000000,0.000000,"Wait"};
 item4[] = {"Return",4,218,-300.000000,25.000000,-200.000000,75.000000,2.000000,"Return"};
 item5[] = {"Return",2,250,-425.000000,25.000000,-325.000000,75.000000,0.000000,"Return"};
@@ -30,8 +30,8 @@ link12[] = {8,10};
 link13[] = {9,2};
 link14[] = {10,11};
 link15[] = {12,11};
-globals[] = {25.000000,1,0,1,16777215,640,480,1,14,6316128,1,-617.398132,62.345150,614.655273,-179.243347,786,918,1};
-window[] = {2,-1,-1,-1,-1,904,132,1392,174,3,804};
+globals[] = {25.000000,1,0,1,16777215,640,480,1,14,6316128,1,-617.398132,62.345150,614.655273,-179.243347,786,634,1};
+window[] = {2,-1,-1,-1,-1,759,22,1282,29,3,804};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -146,11 +146,7 @@ class FSM
     class Pursuit
     {
       name = "Pursuit";
-      init = /*%FSM<STATEINIT""">*/"_pos = [" \n
-       "	(position _prey select 0) - _search + random _search," \n
-       "	(position _prey select 1) - _search + random _search," \n
-       "	0" \n
-       "];" \n
+      init = /*%FSM<STATEINIT""">*/"_pos = [position _prey, _search/5,  _search, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
        "(units _grp) commandmove _pos;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links

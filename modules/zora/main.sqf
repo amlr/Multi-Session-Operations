@@ -55,11 +55,11 @@ if (isnil "BIS_Zora_pause") then {BIS_Zora_pause = true};
 			if(BIS_Zora_pause) then {
 				BIS_Zora_pause = false;
 				call _fnc_status;
-				sleep (60 * 15) + (random 60 * 15);
+				sleep (60 * 15) + (random 60 * 45);
 			} else {
 				BIS_Zora_pause = true;
 				call _fnc_status;
-				sleep (60 * 30) + (random 60 * 30);
+				sleep (60 * 30) + (random 60 * 90);
 			};
 		};
 	};

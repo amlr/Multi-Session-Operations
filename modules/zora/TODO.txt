@@ -1,0 +1,2 @@
+patrol to findSafePos
+fix maxgroups
