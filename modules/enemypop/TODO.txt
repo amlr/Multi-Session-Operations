@@ -1,0 +1,3 @@
+pos use findSafePos
+static groups in defend mode
+

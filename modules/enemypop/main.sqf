@@ -1,6 +1,6 @@
 if(!isServer) exitWith{};
 
-private["_debug","_groups","_fnc_randomGroup","_locs"];
+private["_debug","_groups","_fnc_randomGroup","_locs", "_d"];
 _debug = true;
 
 if(_debug)then{hint "EnemyPop: initLocations";};
@@ -22,7 +22,8 @@ _locs = [nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "
 	_type = "";
 	_pos = [];
 	if (type _x == "Hill") then {
-		_pos = [position _x,500] call CBA_fnc_randPos;
+		_d = 500;
+		_pos = [position _x, 0, _d / 2 + random _d, 1, 0, 50, 0] call bis_fnc_findSafePos;			
 		_group = nil;
 		while{isNil "_group"} do {
 			_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[12,6,3,1]] call CRB_fnc_selectRandomBias;
@@ -31,12 +32,17 @@ _locs = [nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "
 		(leader _group) setBehaviour "AWARE";
 		_group setSpeedMode "LIMITED";
 		_group setFormation "STAG COLUMN";
-		[_group,_group,800,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+		if(random 1 > 0.5) then {
+			[_group,_group,800,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+		} else {
+			[_group,_group,800] call CBA_fnc_taskDefend;
+		};
 		_groups set [count _groups, _group];
 	};
 	if (type _x in ["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"]) then {
 		if (random 1 > 0.3) then {
-			_pos = [position _x,800] call CBA_fnc_randPos;
+			_d = 800;
+			_pos = [position _x, 0, _d / 2 + random _d, 1, 0, 50, 0] call bis_fnc_findSafePos;			
 			_group = nil;
 			while{isNil "_group"} do {
 				_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[8,6,3,1]] call CRB_fnc_selectRandomBias;
@@ -46,46 +52,52 @@ _locs = [nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "
 			(leader _group) setBehaviour "COMBAT";
 			_group setSpeedMode "LIMITED";
 			_group setFormation "DIAMOND";
-			[_group,_group,800,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [240,400,560]] call CBA_fnc_taskPatrol;
+			if(random 1 > 0.5) then {
+				[_group,_group,800,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [240,400,560]] call CBA_fnc_taskPatrol;
+			} else {
+				[_group,_group,800] call CBA_fnc_taskDefend;
+			};
 			_groups set [count _groups, _group];
 		};
 	};
 	if (type _x in ["FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown"]) then {
 		if (random 1 > 0.85) then {
-			_pos = [position _x,400] call CBA_fnc_randPos;
+			_d = 400;
+			_pos = [position _x, 0,  _d / 2 + random _d, 1, 0, 50, 0] call bis_fnc_findSafePos;			
 			_group = nil;
 			while{isNil "_group"} do {
 				_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[3,2,1,0]] call CRB_fnc_selectRandomBias;
 				_group = [_pos, _type, MSO_FACTIONS] call _fnc_randomGroup;
 			};
 			_group = _group;
+			(leader _group) setBehaviour "COMBAT";
+			_group setSpeedMode "LIMITED";
+			_group setFormation "DIAMOND";
 			if(random 1 > 0.5) then {
-				(leader _group) setBehaviour "COMBAT";
-				_group setSpeedMode "LIMITED";
-				_group setFormation "DIAMOND";
 				[_group,_group,400,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [360,520,680]] call CBA_fnc_taskPatrol;
 			} else {
-				(leader _group) setBehaviour "CARELESS";
+				[_group,_group,400] call CBA_fnc_taskDefend;
 			};
 			_groups set [count _groups, _group];
 		};
 	};
-	if (type _x in ["ViewPoint","RockArea","BorderCrossing","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"]) then {
+	if (type _x in ["ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"]) then {
 		if (random 1 > 0.9) then {
-			_pos = [position _x,300] call CBA_fnc_randPos;
+			_d = 300;
+			_pos = [position _x, 0,  _d / 2 + random _d, 1, 0, 50, 0] call bis_fnc_findSafePos;
 			_group = nil;
 			while{isNil "_group"} do {
 				_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[12,6,3,1]] call CRB_fnc_selectRandomBias;
 				_group = [_pos, _type, MSO_FACTIONS] call _fnc_randomGroup;
 			};
 			_group = _group;
+			(leader _group) setBehaviour "STEALTH";
+			_group setSpeedMode "LIMITED";
+			_group setFormation "DIAMOND";
 			if(random 1 > 0.5) then {			
-				(leader _group) setBehaviour "STEALTH";
-				_group setSpeedMode "LIMITED";
-				_group setFormation "DIAMOND";
 				[_group,_group,100,4 + random 4, "MOVE", "STEALTH", "RED", "LIMITED", "DIAMOND", "", [480,800,1120]] call CBA_fnc_taskPatrol;
 			} else {
-				(leader _group) setBehaviour "CARELESS";
+				[_group,_group,100] call CBA_fnc_taskDefend;
 			};
 			_groups set [count _groups, _group];
 		};
