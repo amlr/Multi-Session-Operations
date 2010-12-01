@@ -1,12 +1,16 @@
 if (!isServer) exitWith{};
 
-private["_debug","_types","_d","_tarea","_dogs","_locs"];
+private["_debug","_types","_d","_tarea","_dogs","_locs", "_side"];
 _debug = true;
 
 _types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
-_d = 500;
+_d = 100;
 _tarea = 150;
 _dogs = [];
+_side = "WEST";
+if(count _this > 0) then {
+	_side = _this select 0;
+};
 _locs = [nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), _types, CRB_LOC_DIST]] call CBA_fnc_shuffle;
 {
 	if(type _x in _types) then {
@@ -16,14 +20,11 @@ _locs = [nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "
 			diag_log format["MSO-%1 Dog Packs: createTrigger %2", time, _name];
 			
 			// randomise wild dog positions
-			_dx = (random _d) - (_d/2);
-			_dy = (random _d) - (_d/2);
 			_pos = position _x;
-			_pos = [(_pos select 0) + _dx, (_pos select 1) + _dy];
-			
+			_pos = [_pos, 0, _d, 1, 0, 50, 0] call bis_fnc_findSafePos;			
 			_trg = createTrigger["EmptyDetector", _pos];
 			call compile format["%1 = _trg;", _name];
-			_trg setTriggerActivation ["WEST", "PRESENT", true];
+			_trg setTriggerActivation [_side, "PRESENT", true];
 			_trg setTriggerArea [_tarea, _tarea, 0, false];
 			_trg setTriggerStatements ["this", format["[%1, thislist] spawn dogs_fnc_wilddogs;", _name], ""];
 			
@@ -50,11 +51,8 @@ _locs = [nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "
 			_sleep = if(_debug)then{30;}else{random (60 * 45);};
 			sleep _sleep;
 			// randomise wild dog positions
-			_dx = (random _d) - (_d/2);
-			_dy = (random _d) - (_d/2);
 			_pos = position _trg;
-			_pos = [(_pos select 0) + _dx, (_pos select 1) + _dy];
-
+			_pos = [_pos, 0, _d, 1, 0, 50, 0] call bis_fnc_findSafePos;			
 			_trg setPos _pos;
 			if(_debug)then{
 				hint format["Dogs: moving %1 to %2", _name, _pos];
