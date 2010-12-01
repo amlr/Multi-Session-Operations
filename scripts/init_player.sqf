@@ -61,13 +61,18 @@ _exit = false;
 	["1065345", 	"CORPORAL",		["pilot"]], //Tank
 	["3048774",		"LIEUTENANT",	["admin"]], //Rommel
 	["3076038",		"LIEUTENANT",	["admin"]], //Wolffy.au
-	["3165254", 	"SERGEANT",		["pilot"]], //Swordsman
+	["3165254", 	"SERGEANT",		["pilot","crew"]], //Swordsman
 	["1965894", 	"CORPORAL",		["crew"]], //Chappy
 	["3165446", 	"CORPORAL",		["crew"]], //Delta 51
 	["3158150", 	"CORPORAL",		["pilot","crew"]], //Floydii
 	["1048961", 	"CORPORAL",		["crew"]] //Swedge
 	//[getplayeruid player, rank player, []] //careful, if pubbers around? Need discussion on limits of this first maybe
 ];
+
+MSO_R_Leader = (rank player) in ["CORPORAL","SERGEANT","LIEUTENANT"] || MSO_R_Leader;
+MSO_R_Officer = (rank player) == "LIEUTENANT" || MSO_R_Officer;
+//MSO_R_Air = (player isKindOf "pilot") || MSO_R_Air;
+//MSO_R_Crew = (player isKindOf "crew") ||MSO_R_Crew;
 
 if (MSO_R_Air and ((getMarkerpos "farp") distance [0,0,0] > 0)) then { //ensure marker exists
 	"farp" setmarkertypelocal "Faction_BritishArmedForces_BAF";
