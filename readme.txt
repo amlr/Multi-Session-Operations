@@ -13,5 +13,9 @@ Ok, stuff to check pls:
 -Test JIP Tasks
 -Test Changing Tyres
 -Test Logistics
--Test civilians
+-Test Ambient civilians
+- Flippable Vehicles
 
+- Convoys
+- Enemy Population
+- ZORA

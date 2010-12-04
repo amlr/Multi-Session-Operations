@@ -1,2 +1,2 @@
 sleep 10;
-titleText ["Mission by AAF", "PLAIN DOWN"]; 
+titleText ["An AAF/AEF CTB Collaboration", "PLAIN DOWN"]; 
