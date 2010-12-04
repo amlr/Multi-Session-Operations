@@ -2,6 +2,11 @@ if(!isServer) exitWith{};
 
 private["_debug","_strategic","_spawnpoints","_convoydest","_numconvoys","_j"];
 _debug = true;
+	
+waitUntil{!isNil "BIS_fnc_init"};
+if(isNil "CRB_LOCS") then {
+        CRB_LOCS = [] call CRB_fnc_initLocations;
+};
 
 _strategic = ["Strategic","StrongpointArea","FlatArea","FlatAreaCity","Airport"];
 _spawnpoints = [];
@@ -19,18 +24,8 @@ _convoydest = [];
 			[_m, true] call CBA_fnc_setMarkerPersistent;
 		};
 	};
-} forEach nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), _strategic + ["BorderCrossing"], CRB_LOC_DIST];
+} forEach CRB_LOCS;
 
-
-// TODO Wolffy - for some reasons _spawnpoints gets corrupted before this point
-_spawnpoints = switch(worldName) do {		
-	case "Zargabad": {
-		[[3430,8150,0],[2925,50,0],[3180,50,0],[5048,50,0]];
-	};
-	case "Takistan": {
-		[[2057,362,0],[7418,44,0],[11943,2565,0],[10968,6296,0],[11443,8196,0],[12640,9830,0],[12749,10970,0],[11057,12744,0],[9163,12728,0],[7149,12744,0],[4560,12736,0],[2461,12747,0],[1908,12610,0],[883,10455,0],[33,7077,0],[96,5524,0],[242,2836,0]];
-	};
-};
 if (_debug) then {
 	private["_t","_m"];
 	{

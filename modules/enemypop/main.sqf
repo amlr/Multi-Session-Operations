@@ -1,7 +1,12 @@
 if(!isServer) exitWith{};
 
-private["_debug","_groups","_fnc_randomGroup","_locs", "_d"];
+private["_debug","_groups","_fnc_randomGroup","_d"];
 _debug = true;
+
+waitUntil{!isNil "BIS_fnc_init"};
+if(isNil "CRB_LOCS") then {
+        CRB_LOCS = [] call CRB_fnc_initLocations;
+};
 
 if(_debug)then{hint "EnemyPop: initLocations";};
 
@@ -15,7 +20,6 @@ _hills = ["Hill","ViewPoint","RockArea","BorderCrossing","VegetationBroadleaf","
 _fnc_randomGroup = compile preprocessFileLineNumbers "crB_scripts\crB_randomGroup.sqf";
 _groups = [];
 _total = 0;
-_locs = [nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), _strategic + _military + _hills + _names, CRB_LOC_DIST]] call CBA_fnc_shuffle;
 {
 	private ["_group","_type","_pos"];
 	_group = grpNull;
@@ -40,7 +44,7 @@ _locs = [nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "
 		_groups set [count _groups, _group];
 	};
 	if (type _x in ["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"]) then {
-		if (random 1 > 0.3) then {
+		if (random 1 > 0.5) then {
 			_d = 800;
 			_pos = [position _x, 0, _d / 2 + random _d, 1, 0, 50, 0] call bis_fnc_findSafePos;			
 			_group = nil;
@@ -123,7 +127,7 @@ _locs = [nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "
 		_total = _total + count _groups;
 		_groups = [];
 	};
-} foreach _locs;
+} foreach CRB_LOCS;
 
 if (count _groups > 0) then {
 	private ["_logic"];
