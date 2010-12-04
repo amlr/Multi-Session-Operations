@@ -1,7 +1,12 @@
 if (!isServer) exitWith{};
 
-private["_debug","_types","_d","_tarea","_dogs","_locs", "_side"];
+private["_debug","_types","_d","_tarea","_dogs", "_side"];
 _debug = true;
+
+waitUntil{!isNil "BIS_fnc_init"};
+if(isNil "CRB_LOCS") then {
+        CRB_LOCS = [] call CRB_fnc_initLocations;
+};
 
 _types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
 _d = 100;
@@ -11,7 +16,7 @@ _side = "WEST";
 if(count _this > 0) then {
 	_side = _this select 0;
 };
-_locs = [nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), _types, CRB_LOC_DIST]] call CBA_fnc_shuffle;
+
 {
 	if(type _x in _types) then {
 		if (random 1 > 0.75) then {
@@ -36,7 +41,7 @@ _locs = [nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "
 			_dogs = _dogs + [[_name, _trg]];
 		};
 	};
-} forEach _locs;
+} forEach CRB_LOCS;
 
 
 [_dogs, _d, _debug] spawn {
