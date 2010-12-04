@@ -25,7 +25,7 @@ while{true} do {
 	_Man = _Man - _Dead;
 	if(count _Dead > _maxcorpses) then{_P = _Dead select 0; _Dead = _Dead - [_P];};
 	_hidetime = _timeuntilhide;
-	if(_P isKindOf "Car" || _P isKindOf "Tank" || _P isKindOf "Air") then{_hidetime = _timeuntilhide * 10;};
+	if(_P isKindOf "Car" || _P isKindOf "Tank" || _P isKindOf "Air") then{_hidetime = _timeuntilhide * 3;};
 	sleep _hidetime;
 	hideBody _P;
 	deleteVehicle _P;
