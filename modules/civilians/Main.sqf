@@ -3,7 +3,7 @@ if(isServer) then {
 	[] call compile preprocessfilelinenumbers "modules\civilians\crB_AmbVehSetup.sqf";
 };
 
-if(worldName == "Zargabad") then {
+if(toLower(worldName) == "zargabad") then {
 	[] spawn compile preprocessFileLineNumbers "modules\civilians\CIV_City.sqf";
 };
 

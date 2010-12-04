@@ -7,7 +7,10 @@
 ///////////////////////////////////////////////////////////////////
 if(!isServer) exitWith{};
 
+waitUntil{!isNil "BIS_fnc_init"};
 waitUntil{!isNil "BIS_alice_mainscope"};
+
+BIS_alice_mainscope setvariable ["debug",true, true];
 
 // Add some rare english speaking civilians to the mix
 //BIS_alice_mainscope setVariable ["civilianRarity",["CIV_EuroWoman01_EP1", 0.5, "CIV_EuroWoman02_EP1", 0.5, "Dr_Annie_Baker_EP1", 0.5, "Rita_Ensler_EP1", 0.5, "CIV_EuroMan01_EP1", 0.5, "CIV_EuroMan02_EP1", 0.5, "Haris_Press_EP1", 0.5, "Dr_Hladik_EP1", 0.5, "Citizen2_EP1", 0.5, "Citizen3_EP1", 0.5, "Profiteer2_EP1", 0.5, "Functionary1_EP1", 1, "Functionary2_EP1", 1], true];

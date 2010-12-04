@@ -7,7 +7,10 @@
 ///////////////////////////////////////////////////////////////////
 if(!isServer) exitWith{};
 
+waitUntil{!isNil "BIS_fnc_init"};
 waitUntil{!isNil "BIS_silvie_mainscope"};
+
+BIS_silvie_mainscope setvariable ["debug",true, true];
 
 // http://community.bistudio.com/wiki/Ambient_Civilian_Vehicles
 // Reduce vehicle count formula to try to reduce number of civilian vehicles
