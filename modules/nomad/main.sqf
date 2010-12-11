@@ -23,14 +23,15 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		},
 		{damage player;},
 		{rating player;},
+		{score player;},
 		{viewdistance;},
 		{if(isnil "terraindetail")then{1;}else{terraindetail;};},
 		{getDir player;},
-		{[vehicle player, driver (vehicle player) == player, gunner (vehicle player) == player, commander (vehicle player) == player]},
+		{[vehicle player, driver (vehicle player) == player, gunner (vehicle player) == player, commander (vehicle player) == player];},
 		{lifestate player;},
-		{[group player, (leader player == player)];},
-//		{units player;},
-		{rank player;}
+		{[group player, leader player == player];},
+		{rank player;},
+		#include <mods\ace_sys_wounds_g.hpp>
 	],
 	[
 		{
@@ -68,6 +69,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{player setpos _this;},
 		{player setdamage _this;},
 		{player addrating (-(rating player) + _this);},
+		{player addscore _this;},
 		{setviewdistance _this;},
 		{
 			setterraingrid ((-10 * _this + 50) max 1);
@@ -91,8 +93,8 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 			};
 		},
 		{
-			if (tolower(_this) == "unconscious") then {
-				[0,player,{_this call revive_fnc_unconscious}] call RMM_fnc_ExMP;
+			if (_this == "UNCONCONSCIOUS") then {
+				player setUnconscious true;
 			};
 		},
 		{
@@ -101,15 +103,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 				(_this select 0) selectLeader player;
 			};
 		},
-/*		{
-			[player] joinSilent (createGroup playerSide);
-			(group player) selectLeader player;
-			{
-				if !(isplayer _x) then {
-					[_x] joinsilent (group player);
-				};
-			} foreach _this;
-		},
-*/		{player setunitrank _this;}
+		{player setunitrank _this;},
+		#include <mods\ace_sys_wounds_s.hpp>
 	]
 ] execfsm "modules\nomad\nomad.fsm";

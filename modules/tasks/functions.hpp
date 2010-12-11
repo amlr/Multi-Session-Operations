@@ -1,8 +1,9 @@
 class tasks {
 	file = "modules\tasks";
 	class functions {
-		class taskAdd {};
 		class add {};
+		class click {};
 		class deletenearest {};
+		class taskadd {};
 	};
 };

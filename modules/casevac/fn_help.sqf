@@ -24,7 +24,7 @@ _string = switch (_this select 0) do {
 	};
 	case (_display displayCtrl 3) : {
 		private "_string";
-		_string = "<t size='1.5'>Special Equipment:</t>";
+		_string = "<t size='1.5'>Special Equipment:</t><br/>Special equipment to be brought to the CASEVAC coordinates.";
 		{
 			_string = _string + format["<br/>%1 -- %2", _x select 0, _x select 1];
 		} foreach [
@@ -65,8 +65,7 @@ _string = switch (_this select 0) do {
 			["Alpha","Chemlights"],
 			["Bravo","IR Strobes"],
 			["Charlie","Smoke signal"],
-			["Delta","None"],
-			["Echo","Other"]
+			["Delta","None"]
 		];
 		_string;
 	};

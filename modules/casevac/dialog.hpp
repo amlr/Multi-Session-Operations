@@ -2,7 +2,7 @@ class RMM_ui_casevac { // by Rommel
 	idd = 80513;
 	movingEnable = 1;
 	enableSimulation = 1;
-	onLoad = "[] spawn {for ""_i"" from 0 to ((count RMM_casevac_lines)-1) do {_x = RMM_casevac_lines select _i; {lbAdd [_i,_x];} foreach _x;};};";
+	onLoad = "0 spawn casevac_fnc_onload";
 
 	class controls {
 		class Background : CUI_Frame {
@@ -20,7 +20,7 @@ class RMM_ui_casevac { // by Rommel
 			idc = 0;
 			y = CUI_Row_Y(1);
 			w = CUI_Box_W;
-			onLBSelChanged = "_this call casevac_fnc_help";
+			onLBSelChanged = "";
 		};
 		class Lb1 : Lb0 {idc = 1;y = CUI_Row_Y(2);};
 		class Lb2 : Lb0 {idc = 2;y = CUI_Row_Y(3);};

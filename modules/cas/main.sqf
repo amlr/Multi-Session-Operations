@@ -6,9 +6,9 @@ RMM_cas_types = [
 	"AH1Z"
 ];
 RMM_cas_lines = [
-	[mapGridPosition player],
-	[str (group player)],
-	RMM_cas_types
+	{[mapGridPosition player]},
+	{[str (group player)]},
+	{RMM_cas_types}
 ];
 RMM_cas_missiontime = 540;
 RMM_cas_flyinheight = 125;
@@ -18,3 +18,5 @@ if (isnil "RMM_cas_lastTime") then {
 	RMM_cas_lastTime = -RMM_cas_frequency;
 	publicvariable "RMM_cas_lastTime";
 };
+
+["player", [ace_sys_interaction_key_self], 4, ["modules\cas\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;

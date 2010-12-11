@@ -22,8 +22,7 @@ player addeventhandler ["killed", {
 
 	diag_log format["Killed: %1", player getVariable "respawn"];
 
-	{player removeweapon _x;} foreach ((weapons player) + (items player));
-	{player removemagazine _x;} foreach (magazines player);
+	removeallweapons player; removeallitems player;
 	removebackpack player;
 
 }];

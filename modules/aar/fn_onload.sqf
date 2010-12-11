@@ -1,10 +1,12 @@
-for "_i" from 0 to ((count RMM_aar_lines)-1) do {
-	private "_x";
-	_x = RMM_aar_lines select _i; 
+private "_i";
+_i = 0;
+{
 	{
-		lbAdd [_i,_x];
-	} foreach _x;
-};
+		lbAdd [_i, _x];
+	} foreach (call _x);
+	_i = _i + 1;
+} foreach RMM_aar_lines;
+
 if (not isnil "RMM_aar") then {
 	for "_i" from 0 to 2 do {
 		lbSetCurSel [_i, RMM_aar select _i];

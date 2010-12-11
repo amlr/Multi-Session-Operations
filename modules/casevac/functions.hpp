@@ -3,5 +3,6 @@ class casevac {
 	class functions {
 		class call {};
 		class help {};
+		class onload {};
 	};
 };

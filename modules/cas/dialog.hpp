@@ -2,7 +2,7 @@ class RMM_ui_cas { // by Rommel
 	idd = 80512;
 	movingEnable = 1;
 	enableSimulation = 1;
-	onLoad = "[] spawn {for ""_i"" from 0 to ((count RMM_cas_lines)-1) do {_x = RMM_cas_lines select _i; {lbAdd [_i,_x];} foreach _x;};};";
+	onLoad = "0 spawn cas_fnc_onload;";
 
 	class controls {
 		class Background : CUI_Frame {

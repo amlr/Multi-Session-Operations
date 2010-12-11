@@ -1,1 +1,1 @@
-hint "THIS COMPONENT IS WORK IN PROGRESS SORRY :P";
+_position = ctrlText 1;

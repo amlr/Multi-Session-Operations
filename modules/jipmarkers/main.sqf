@@ -25,3 +25,5 @@ if (isnil "RMM_jipmarkers") then {
 		_mkr setmarkertextlocal (_x select 3);
 	} foreach RMM_jipmarkers;
 };
+
+["player", [ace_sys_interaction_key_self], 4, ["modules\jipmarkers\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;

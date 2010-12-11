@@ -2,7 +2,7 @@ class RMM_ui_jipmarkers { // by Rommel
 	idd = 80511;
 	movingEnable = 1;
 	enableSimulation = 1;
-	onLoad = "[] spawn {{lbAdd [1,_x];} foreach RMM_jipmarkers_types;};";
+	onLoad = "0 spawn jipmarkers_fnc_onload";
 
 	class controls {
 		class Background : CUI_Frame {
