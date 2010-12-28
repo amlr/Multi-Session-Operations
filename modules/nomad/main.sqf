@@ -29,7 +29,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{getDir player;},
 		{[vehicle player, driver (vehicle player) == player, gunner (vehicle player) == player, commander (vehicle player) == player];},
 		{lifestate player;},
-		{[group player, leader player == player];},
+		{[group player, (leader player == player)];},
 		{rank player;},
 		#include <mods\ace_sys_wounds_g.hpp>
 	],
@@ -69,7 +69,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{player setpos _this;},
 		{player setdamage _this;},
 		{player addrating (-(rating player) + _this);},
-		{player addscore _this;},
+		{player addscore (-(score player) + _this;},
 		{setviewdistance _this;},
 		{
 			setterraingrid ((-10 * _this + 50) max 1);
@@ -93,7 +93,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 			};
 		},
 		{
-			if (_this == "UNCONCONSCIOUS") then {
+			if (tolower(_this) == "unconscious") then {
 				player setUnconscious true;
 			};
 		},
