@@ -1,7 +1,7 @@
 if(!isServer) exitWith{};
 
 private["_debug","_groups","_fnc_randomGroup","_d"];
-_debug = true;
+_debug = false;
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
@@ -17,7 +17,7 @@ _hills = ["Hill","ViewPoint","RockArea","BorderCrossing","VegetationBroadleaf","
 
 //		_group call TK_fnc_takibani;
 
-_fnc_randomGroup = compile preprocessFileLineNumbers "crB_scripts\crB_randomGroup.sqf";
+_fnc_randomGroup = compile preprocessFileLineNumbers "scripts\crB_scripts\crB_randomGroup.sqf";
 _groups = [];
 _total = 0;
 {

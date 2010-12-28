@@ -21,7 +21,7 @@ BIS_alice_mainscope setvariable ["debug",true, true];
 
 // Increase spawn distance for ALICE2 traffic
 //BIS_alice_mainscope setvariable ["trafficDistance",500];
-BIS_alice_mainscope setvariable ["trafficDistance",1000, true];
+BIS_alice_mainscope setvariable ["trafficDistance",2500, true];
 
 // Reduce unit count formula to try to reduce number of civilian units
 //BIS_alice_mainscope setvariable ["civilianCount","round (4 * (sqrt %1))"];

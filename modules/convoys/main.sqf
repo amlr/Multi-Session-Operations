@@ -1,7 +1,7 @@
 if(!isServer) exitWith{};
 
 private["_debug","_strategic","_spawnpoints","_convoydest","_numconvoys","_j"];
-_debug = true;
+_debug = false;
 	
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
@@ -62,7 +62,7 @@ for "_j" from 1 to _numconvoys do {
 			while{isNil "_grp"} do {
 				_front = [["Motorized","Mechanized","Armored"],[6,3,1]] call CRB_fnc_selectRandomBias;
 				_facs = MSO_FACTIONS;
-				_grp = [_startpos, _front, _facs] call compile preprocessFileLineNumbers "crB_scripts\crB_randomGroup.sqf";
+				_grp = [_startpos, _front, _facs] call compile preprocessFileLineNumbers "scripts\crB_scripts\crB_randomGroup.sqf";
 			};
 			diag_log format["MSO-%1 Convoy: #%2 %3 %4 %5 %6", time, _j, _startpos, _destpos, _endpos, _front];
 

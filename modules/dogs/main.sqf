@@ -1,7 +1,7 @@
 if (!isServer) exitWith{};
 
 private["_debug","_types","_d","_tarea","_dogs", "_side"];
-_debug = true;
+_debug = false;
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {

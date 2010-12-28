@@ -1,6 +1,6 @@
 _pos = [4134.7583,4074.6431,16.857695];
 
-["civilian_city", 0, _pos] call compile preprocessFileLineNumbers "crB_scripts\crB_createCompositionLocal.sqf";
+["civilian_city", 0, _pos] call compile preprocessFileLineNumbers "scripts\crB_scripts\crB_createCompositionLocal.sqf";
 
 _trg = createTrigger["EmptyDetector", [4139.0952,4085.3003,17.042225]];
 _trg setTriggerStatements ["true", "", ""];
