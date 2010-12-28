@@ -1,16 +1,17 @@
-scriptName "Alice2\data\scripts\main.sqf";
+scriptName "Alice\data\scripts\main.sqf";
 /*
 	File: main.sqf
 	Author: Karel Moricky
 
 	Description:
-	Init script - Ambient Life In Civilian Environment 2
+	Init script - Ambient Life In Civilian Environment
 
 	Parameter(s):
-	_this: Alice2 logic unit which triggered this script.
+	_this: Alice logic unit which triggered this script.
 */
 _logic = _this select 0;
-_logic setpos [1,1,1];
+_logic setpos [1000,10,0];
+//[_logic] join grpnull;
 
 //--- Default values
 _logic setvariable ["id",0];
@@ -22,7 +23,8 @@ createcenter resistance;
 createcenter civilian;
 
 //--- File paths
-BIS_Alice2_path = "ca\modules_e\alice2\data\";
+_BIS_Alice_path = "ca\modules\alice\data\";
+BIS_Alice_civilianInit = compile (preprocessFileLineNumbers (_BIS_Alice_path + "scripts\fnc_civilianInit.sqf"));
 
 //--- Is Garbage collector running?
 if (isnil "BIS_GC_trashItFunc") then {(group _logic) createUnit ["GarbageCollector", position player, [], 0, "NONE"]};
@@ -31,8 +33,11 @@ if (isnil "BIS_GC_trashItFunc") then {(group _logic) createUnit ["GarbageCollect
 if (isnil "bis_fnc_init") then {
 	_logicFnc = (group _logic) createunit ["FunctionsManager",position player,[],0,"none"];
 };
-waituntil {!isnil "BIS_fnc_init"};	//--- Wait for functions
-if (!isnil "bis_gita_0") then {waituntil {!isnil "bis_gita_init"}};	//--- If present, wait for GITA (town generator)
+waituntil {!isnil "BIS_fnc_init"};
+
+//--- Dummy door
+_AIdoor = "BIS_alice_emptydoor" createvehicle [1000,10,10];
+_logic setvariable ["dummydoor",_AIdoor];
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Custom params
@@ -46,19 +51,11 @@ _initArray = if (isnil {_logic getvariable "initArray"}) then {[]} else {_logic 
 _logic setvariable ["initArray",_initArray,true];
 
 //--- Spawn distance
-_distlimit = if (isnil {_logic getvariable "spawnDistance"}) then {400} else {_logic getvariable "spawnDistance"};
+_distlimit = if (isnil {_logic getvariable "spawnDistance"}) then {1000} else {_logic getvariable "spawnDistance"};
 _logic setvariable ["spawnDistance",_distLimit,true];
 
-//--- Traffic distance
-_trafficDistance = if (isnil {_logic getvariable "trafficDistance"}) then {500} else {_logic getvariable "trafficDistance"};
-_logic setvariable ["trafficDistance",_trafficDistance,true];
-
-//--- Town size
-_twnSize = if (isnil {_logic getvariable "ALICE_townsize"}) then {_distLimit * 2/3} else {_logic getvariable "ALICE_townsize";};
-_logic setvariable ["ALICE_townsize",_twnSize,true];
-
 //--- Civilian count
-_civilianCount = if (isnil {_logic getvariable "civilianCount"}) then {"round (4 * (sqrt %1))"} else {_logic getvariable "civilianCount";};
+_civilianCount = if (isnil {_logic getvariable "civilianCount"}) then {"round (2 * (sqrt %1))"} else {_logic getvariable "civilianCount";};
 _logic setvariable ["civilianCount",_civilianCount,true];
 
 //--- Civilian actions
@@ -69,15 +66,11 @@ _logic setvariable ["civilianActions",_actionCategories,true];
 _kbCategories = if (isnil {_logic getvariable "civilianConversations"}) then {["BIS"]} else {_logic getvariable "civilianConversations";};
 _logic setvariable ["civilianConversations",_kbCategories,true];
 
-//--- Towns faction
-_townsFaction = if (isnil {_logic getvariable "townsFaction"}) then {["BIS_TK_CIV"]} else {_logic getvariable "townsFaction";};
-_logic setvariable ["townsFaction",_townsFaction,true];
-
 //--- Object blacklist
 _blacklist = if (isnil {_logic getvariable "blacklist"}) then {[]} else {_logic getvariable "blacklist";};
 _logic setvariable ["blacklist",_blacklist,true];
 
-//--- Respect modify
+//--- Spawn distance
 _respectModifyCoef = if (isnil {_logic getvariable "respectModifyCoef"}) then {0.15} else {_logic getvariable "respectModifyCoef"};
 _logic setvariable ["respectModifyCoef",_respectModifyCoef,true];
 
@@ -91,11 +84,11 @@ _twnlist = [];
  if (isnil {_logic getvariable "townlist"}) then {
 	_locationParams = if (_debug) then {[["CityCenter"],[],true]} else {[["CityCenter"]]};
 	_create = _locationParams call bis_fnc_locations;
-	//waituntil {count _create > 0};
-	waituntil {count (bis_functions_mainscope getvariable "locations") > 0};
+	waituntil {count _create > 0};
 	{
 		if ((_x getvariable "type") == "CityCenter") then {_twnlist = _twnlist + [_x]};
 	} foreach (bis_functions_mainscope getvariable "locations");
+
 	_logic setvariable ["townlist",_twnlist,true];
 } else {
 	_twnlistTemp = _logic getvariable "townlist";
@@ -123,14 +116,14 @@ _twnlist = [];
 };
 _logic setvariable ["ALICE_alltowns",_twnlist];
 
+
 ///////////////////////////////////////////////////////////////////////////////////
-///// Civilian & Vehicles Classes
+///// Civilian Classes
 ///////////////////////////////////////////////////////////////////////////////////
 _unitrarity = if (format ["%1",_logic getvariable "civilianRarity"] == "<null>") then {[]} else {_logic getvariable "civilianRarity";};
 _logic setvariable ["civilianRarity",_unitrarity];
 
 _classlist = [];
-_classlistVehicles = [];
 _totobj = count (configfile >> "cfgVehicles");
 for [{_i = 0}, {_i < _totobj}, {_i = _i + 1}] do {
 	_actual = (configfile >> "cfgVehicles") select _i;
@@ -139,10 +132,6 @@ for [{_i = 0}, {_i < _totobj}, {_i = _i + 1}] do {
 		_vehicleclass = gettext (configfile >> "cfgvehicles" >> _class >> "vehicleClass");
 		if !(_vehicleclass in ["Sounds","Mines"]) then {
 			_scope = getnumber (_actual >> "scope");
-			_side = getnumber (_actual >> "side");
-			_woman = getnumber (_actual >> "woman");
-
-			//--- Civilians
 			if (_class iskindof "civilian" && _scope == 2) then {
 				_rarity = if (_class in _unitrarity) then {
 					_unitrarity select ((_unitrarity find _class)+1);
@@ -150,18 +139,11 @@ for [{_i = 0}, {_i < _totobj}, {_i = _i + 1}] do {
 					getnumber (_actual >> "rarityUrban");
 				};
 				_faction = gettext (_actual >> "faction");
-				_classlist = _classlist + [[_class,_rarity,_faction,_woman]];
-			};
-
-			//--- Civilian Cars
-			if (_vehicleclass == "Car" && _side == 3 && _scope == 2) then {
-				_classlistVehicles = _classlistVehicles + [_class];
+				_classlist = _classlist + [[_class,_rarity,_faction]];
 			};
 		};
 	};
 };
-_logic setvariable ["ALICE_classes",_classlist];
-_logic setvariable ["ALICE_classesVehicles",_classlistVehicles];
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Civilian Actions
@@ -173,7 +155,7 @@ for "_i" from 0 to 2 do {
 	_source = [configfile,missionconfigfile,campaignconfigfile] select _i;
 	_tempArrayx = [];
 	{
-		_civilianActions = _source >> "CfgCivilianActions_EP1" >> _x;
+		_civilianActions = _source >> "CfgCivilianActions" >> _x;
 		if (str _civilianActions != "") then {
 			_tempArrayx = _tempArrayx + [_civilianActions];
 			for "_i" from 0 to (count _civilianActions - 1) do {
@@ -209,6 +191,7 @@ _logic setvariable ["ALICE_actionsx",_allActionsx];
 _logic setvariable ["ALICE_actions",_allActions];
 
 
+
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Civilian Conversations
 ///////////////////////////////////////////////////////////////////////////////////
@@ -222,7 +205,7 @@ for "_i" from 0 to 2 do {
 	_source = [configfile,missionconfigfile,campaignconfigfile] select _i;
 	_tempArray = [];
 	{
-		_civilianConversations = _source >> "CfgCivilianConversations_EP1" >> _x;
+		_civilianConversations = _source >> "CfgCivilianConversations" >> _x;
 		for "_i" from 0 to (count _civilianConversations - 1) do {
 
 			_topic = "ALICE_" + (configname _civilianConversations);
@@ -244,11 +227,11 @@ for "_i" from 0 to 2 do {
 				_allConversations set [_type,_tempArray];
 			};
 
+
 		};
 
-
 		//--- Screams
-		_civilianScreams = _source >> "CfgCivilianScreams_EP1" >> _x;
+		_civilianScreams = _source >> "CfgCivilianScreams" >> _x;
 		_screams = [];
 		for "_i" from 0 to (count _civilianScreams - 1) do {
 			_scream = _civilianScreams select _i;
@@ -265,7 +248,7 @@ for "_i" from 0 to 2 do {
 		};
 
 		//--- Remarks
-		_civilianRemarks = _source >> "CfgCivilianRemarks_EP1" >> _x;
+		_civilianRemarks = _source >> "CfgCivilianRemarks" >> _x;
 		_remarks = [];
 		for "_i" from 0 to (count _civilianRemarks - 1) do {
 			_scream = _civilianRemarks select _i;
@@ -289,121 +272,43 @@ _logic setvariable ["ALICE_topics",_allTopics];
 
 
 ///////////////////////////////////////////////////////////////////////////////////
-///// Execute
-///////////////////////////////////////////////////////////////////////////////////
-_fsm = _logic execfsm (BIS_Alice2_path + "fsms\alice2.fsm");
-
-
-/*
-
-///////////////////////////////////////////////////////////////////////////////////
 ///// Towns
 ///////////////////////////////////////////////////////////////////////////////////
-debuglog format ["Log: ALICE 2: Initializing ...",_twnname];
 _factionCiv = ["CIV"] call BIS_fnc_getFactions;
 _twnrespect = ["SET"] call BIS_fnc_respect;
 _twnrespect set [_factionCiv,0.5];
 {
 	_type = _x getvariable "type";
 	_name = _x getvariable "name";
+	textLogFormat ["Log: ALICE: Initializing ...",_name];
 	_pos = position _x;
 	if (isnil {_x getvariable "respect"}) then {_x setVariable ["respect",_twnrespect,true]};
-	_x setVariable ["ALICE_active",false];
-	_x setVariable ["ALICE_active_traffic",false];
-	_x setvariable ["ALICE_threat",-1];
-	_x setvariable ["ALICE_status","black"];
-	_x setVariable ["ALICE_population",[]];
-	_x setVariable ["ALICE_populationCount",-1];
-	_fsm = [_x,_classlist] execfsm (BIS_Alice2_path + "fsms\alice2.fsm");
-	_x setvariable ["ALICE_fsm",_fsm];
+	_x setvariable ["ALICE_threat",-1,true];
+	_x setvariable ["ALICE_status","black",true];
+	_x setVariable ["ALICE_population",[],true];
+	_x setVariable ["ALICE_populationActive",[],true];
+	_x setVariable ["ALICE_populationCountDef",-1,true];
+	_x setVariable ["ALICE_populationCoef",0,true];
+	_x setVariable ["ALICE_playersNear",false,true];
+	_x setVariable ["ALICE_forcePopulation",false,true];
+	_x setvariable ["doorcountdef",0];
+	_fsm = [_x,_classlist] execfsm (_BIS_Alice_path + "fsms\alice.fsm");
+	_x setvariable ["ALICE_fsm",_fsm,true];
 	//if (_x == bis_loc_acityc_khelm) then {diag_debugfsm _fsm};
 
 	//sleep .1;
 } foreach _twnlist;
 _logic setvariable ["pause",false];
+
+textLogFormat ["Log: ALICE: Initialized (%1 towns).",count _twnlist];
+
+///////////////////////////////////////////////////////////////////////////////////
+///// Custom Civlians
+///////////////////////////////////////////////////////////////////////////////////
+/*
+{
+	if (!isnull leader _x && side _x != "sidelogic") then {
+
+	};
+} foreach (synchronizedobjects _logic);
 */
-debuglog format ["Log: ALICE 2: Initialized (%1 towns).",count _twnlist];
-bis_alice2_init = true;
-
-waituntil {!isnil "BIS_fnc_init"};
-_logic = bis_alice_mainscope;
-
-//--- Dummy door
-_AIdoor = "BIS_alice_emptydoor" createvehicle [1000,10,10];
-_logic setvariable ["dummydoor",_AIdoor];
-
-_twnEffects = [];
-while{!isNil "BIS_ALICE_fnc_houseEffects"} do {
-
-	{
-		_twn = _x;
-
-		if(!(_twn getVariable "ALICE_active") && (_twn in _twnEffects)) then {
-			_twnEffects = _twnEffects - [_twn];
-		};
-
-		if(!isNil "BIS_ALICE_fnc_houseEffects" && (_twn getVariable "ALICE_active") && !(_twn in _twnEffects)) then {
-			_twnEffects = _twnEffects + [_twn];
-			//--- Remove small objects and objects on blacklist 
-			_houselist = nearestObjects [_twn, ["Building"], 500];
-			_doorlist = []; 
-			private["_x"];
-			{ 
-				_bbox = abs((boundingbox _x select 1) select 0) min abs((boundingbox _x select 1) select 1); 
-				if (_bbox > 3) then {  
-					//--- Include 
-					_doors = _x call BIS_ALICE_fnc_doorCreate; 
-					_doorlist  = _doorlist  + _doors; 
-				}; 
-			} foreach _houselist; 
-	  
-			_doorcount = count _doorlist; 
-			_housecount = _doorcount; 
-			_twn setvariable ["doorcountdef",_doorcount]; 
-
-			_doorsAll = _twn nearentities ["bis_alice_emptydoor",500]; 
-			_doors = []; 
-			private["_x"];
-			{ 
-				_obj = _x getvariable "ALICE_obj"; 
-				if (!isnil "_obj") then { 
-					if (alive _obj) then { 
-						_doors = _doors + [_x] 
-					} else { 
-						if (count crew _obj == 0) then {deletevehicle _obj}; 
-					}; 
-				}; 
-			} foreach _doorsAll; 
-			_doorcountdef = _twn getvariable "doorcountdef"; 
-			_doorcountlimit = 0.2; 
-			_neighbours = (_twn getvariable "ALICE_population"); 
-
-			{
-				[_x] spawn {
-					private ["_door","_timeStop","_randomValue","_daytimeStart","_daytimeEnd","_rain","_overcast","_fog"];
-                    _door = _this select 0;
-//					if(isnil {bis_alice_mainscope getvariable "ALICE_houseffects"} || !(_door in (bis_alice_mainscope getvariable "ALICE_houseffects"))) then {
-							[1,_door] spawn BIS_ALICE_fnc_houseEffects;
-                                _timeStop = time + ((random 30) * 60);
-							_randomValue = random 1;
-							_daytimeStart = 5 + 4*_randomValue;
-							_daytimeEnd = 18 + 2*_randomValue;
-							_rain = 0.2*_randomValue;
-							_overcast = 0.8 + 0.2*_randomValue;
-							_fog = 0.8 + 0.2*_randomValue;
-
-							waitUntil{!alive _door || time > _timeStop || 
-								((daytime >=_daytimeStart && daytime <= _daytimeEnd) &&
-								rain <= _rain &&
-								overcast <= _overcast &&
-								fog <= _fog)
-							};
-							[0,_door] spawn BIS_ALICE_fnc_houseEffects;
-//					};
-				};
-			} forEach _doors;
-		};
-	} forEach (_logic getvariable "ALICE_alltowns");
-	sleep 1;
-
-};
