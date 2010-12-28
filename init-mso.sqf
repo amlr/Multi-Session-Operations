@@ -99,6 +99,20 @@ if (!isNil "paramsArray") then {
 };
 
 "Player" call _fnc_status;
+if (isserver) then {
+	[] spawn {
+		while {true} do {
+			MSO_playerlist = if(isDedicated) then {
+				call compile preprocessfilelinenumbers "\mso\mso_uids.txt";
+			} else {
+				call compile preprocessfilelinenumbers "mso\mso_uids.txt";
+			};
+			publicvariable "MSO_playerlist";
+			sleep 60;
+		};
+	};
+};
+
 MSO_R_Admin = false;
 MSO_R_Leader = false;
 MSO_R_Officer = false;

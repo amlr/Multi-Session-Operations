@@ -1,6 +1,6 @@
 waituntil {not isnull player};
 waituntil {!isMultiplayer || getplayeruid player != ""};
-
+waituntil {not isnil "MSO_playerlist"};
 ////////////////////////////////////////////////////////////
 // Respawn Handling
 ////////////////////////////////////////////////////////////
@@ -89,30 +89,7 @@ _exit = false;
 		MSO_R_Air = true;
 		MSO_R_Crew = true;
 	};
-} foreach [
-	["822401", 		"CORPORAL",		["crew"]],	//Ryan
-	["1022977",		"PRIVATE",		["crew"]],	//Glenn
-	["1062145", 	"CORPORAL",		["crew"]], 	//Antipop
-	["1019521", 	"PRIVATE",		["pilot"]], //Innomadic
-	["1065345", 	"CORPORAL",		["pilot"]], //Tank
-	["3048774",		"LIEUTENANT",	["admin"]], //Rommel
-	["3076038",		"LIEUTENANT",	["admin"]], //Wolffy.au
-	["3165254", 	"SERGEANT",		["pilot","crew"]], //Swordsman
-	["1965894", 	"CORPORAL",		["crew"]], //Chappy
-	["3165446", 	"CORPORAL",		["crew"]], //Delta 51
-	["3158150", 	"CORPORAL",		["pilot","crew"]], //Floydii
-	["1048961", 	"CORPORAL",		["crew"]] //Swedge
-	//[getplayeruid player, rank player, []] //careful, if pubbers around? Need discussion on limits of this first maybe
-];
-
-MSO_R_Leader = (rank player) in ["CORPORAL","SERGEANT","LIEUTENANT"] || MSO_R_Leader;
-MSO_R_Officer = (rank player) == "LIEUTENANT" || MSO_R_Officer;
-//MSO_R_Air = (player isKindOf "pilot") || MSO_R_Air;
-//MSO_R_Crew = (player isKindOf "crew") ||MSO_R_Crew;
-
-if (MSO_R_Air and ((getMarkerpos "farp") distance [0,0,0] > 0)) then { //ensure marker exists
-	"farp" setmarkertypelocal "Faction_BritishArmedForces_BAF";
-};
+} foreach MSO_playerlist;
 
 {
 	if (_x iskindof "Air") then {

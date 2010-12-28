@@ -1,0 +1,10 @@
+[
+	["822401", 	"SERGEANT",		["crew"]],	//Zomba
+	["3076038",	"SERGEANT",		["crew"]], 	//Wolffy.au
+	["3165254", 	"SERGEANT",		["pilot","SF"]], 	//Swordsman
+	["1965894", 	"SERGEANT",		["crew"]], 	//Chappy
+	["3165446", 	"SERGEANT",		["crew","SF"]], //Delta 51
+	["3158150", 	"SERGEANT",		["pilot","crew","SF"]], //Floydii
+	["897537", 	"SERGEANT",		["pilot","SF"]], 	//Rhodesy
+	["1048961", 	"SERGEANT",		["crew","SF"]]	//Swedge
+],
