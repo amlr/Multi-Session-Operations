@@ -1,7 +1,7 @@
 // #define DEBUG_MODE_FULL
 #include "\ca\editor\Data\Scripts\dikCodes.h"
 
-private ["_menuDef", "_target", "_params", "_menuName", "_menuRsc", "_menus"];
+private ["_menuDef", "_target", "_params", "_menuName", "_menuRsc", "_menus","_radio"];
 // _this==[_target, _menuNameOrParams]
 _target = _this select 0;
 _params = _this select 1;
@@ -20,11 +20,11 @@ if (typeName _params == typeName []) then {
 
 _menus = [
 	[
-		["main", "", _menuRsc],
+		["main", mso_menuname, _menuRsc],
 		[
 			["After Action Report",
 				{ createDialog "RMM_ui_aar" },
-				"", "", "", -1,	1, player call ACE_fnc_hasRadio]
+				"", "", "", -1,	1, call mso_fnc_hasRadio ]
 		]
 	]
 ];

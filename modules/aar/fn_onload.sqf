@@ -1,9 +1,13 @@
 private "_i";
 _i = 0;
 {
+	private ["_line"];
+	_line = _x;
+	private ["_x"];
 	{
+
 		lbAdd [_i, _x];
-	} foreach (call _x);
+	} foreach (call {_line});
 	_i = _i + 1;
 } foreach RMM_aar_lines;
 
