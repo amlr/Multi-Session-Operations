@@ -45,6 +45,18 @@ _crb_mapclick = "";
 	};
 };
 
+mso_menuname = "Multi-Session Operations";
+mso_interaction_key = if (!isNil "ace_sys_interaction_key_self") then {
+	ace_sys_interaction_key_self
+} else {
+	[221,[false,false,false]]
+};
+mso_fnc_hasRadio = if (!isNil "ACE_fnc_hasRadio") then {
+	{player call ACE_fnc_hasRadio}
+} else {
+	{player hasWeapon "itemRadio"}
+};
+
 BIS_MENU_GroupCommunication = [
 	//--- Name, context sensitive
 	["User menu",false]
@@ -165,7 +177,7 @@ execNow "modules\jipmarkers\main.sqf";
 #endif
 #ifdef R3F_LOGISTICS
 	"R3F Logistics" call _fnc_status;
-	execNow "R3F_ARTY_AND_LOG\init.sqf";
+	execNow "modules\R3F_logistics\init.sqf";
 #endif
 #ifdef RMM_SETTINGS
 	"View Distance Settings" call _fnc_status;

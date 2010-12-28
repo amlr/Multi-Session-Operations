@@ -1,8 +1,8 @@
 [] call compile preprocessFileLineNumbers "Init-MSO.sqf";
 
-[0, 180] execVM "crB_scripts\crB_HideCorpses.sqf";
+[0, 180] execVM "scripts\crB_scripts\crB_HideCorpses.sqf";
 
-execVM "crB_scripts\crB_staticRearm.sqf";
+execVM "scripts\crB_scripts\crB_staticRearm.sqf";
 
 if(isServer) then {
 	[] spawn {
@@ -20,8 +20,7 @@ if(isServer) then {
 	_sover = CRB_SERVERTW select 2;
 	_srain = CRB_SERVERTW select 3;
 
-//	setDate _stime;
-	serverTime;
+	setDate _stime;
 	0 setFog _sfog;
 	0 setOvercast _sover;
 	0 setRain _srain;

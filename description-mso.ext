@@ -40,10 +40,10 @@ class Params {
 }; 
 
 #ifdef R3F_LOGISTICS
-#include "R3F_ARTY_AND_LOG\desc_include.h"
+#include "modules\R3F_logistics\desc_include.h"
 class RscTitles
 {
-	#include "R3F_ARTY_AND_LOG\desc_rsct_include.h"
+	#include "modules\R3F_logistics\desc_rsct_include.h"
 };
 #endif
 
