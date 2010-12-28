@@ -6,10 +6,10 @@ class RMM {
 class CRB {
 	class common {
 		class selectRandomBias {};
+		class findVehicleType {};
 	};
 	class server {
 		class initLocations {};
-
 	};
 };
 class BIS {
@@ -17,3 +17,5 @@ class BIS {
 		class dynocreate {};
 	};
 };
+
+
