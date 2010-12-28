@@ -20,11 +20,11 @@ if (typeName _params == typeName []) then {
 
 _menus = [
 	[
-		["main", "", _menuRsc],
+		["main", mso_menuname, _menuRsc],
 		[
 			["Close Air Support",
 				{ createDialog "RMM_ui_cas" },
-				"", "", "", -1,	1, player call ACE_fnc_hasRadio]
+				"", "", "", -1,	1, call mso_fnc_hasRadio]
 		]
 	]
 ];

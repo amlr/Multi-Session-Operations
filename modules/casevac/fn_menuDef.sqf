@@ -20,11 +20,11 @@ if (typeName _params == typeName []) then {
 
 _menus = [
 	[
-		["main", "", _menuRsc],
+		["main", mso_menuname, _menuRsc],
 		[
 			["CASEVAC",
 				{ createDialog "RMM_ui_casevac" },
-				"", "", "", -1,	1, player call ACE_fnc_hasRadio]
+				"", "", "", -1,	1, call mso_fnc_hasRadio ]
 		]
 	]
 ];

@@ -26,4 +26,4 @@ if (isnil "RMM_jipmarkers") then {
 	} foreach RMM_jipmarkers;
 };
 
-["player", [ace_sys_interaction_key_self], 4, ["modules\jipmarkers\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+["player", [mso_interaction_key], 4, ["modules\jipmarkers\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;

@@ -19,4 +19,4 @@ if (isnil "RMM_cas_lastTime") then {
 	publicvariable "RMM_cas_lastTime";
 };
 
-["player", [ace_sys_interaction_key_self], 4, ["modules\cas\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+["player", [mso_interaction_key], 4, ["modules\cas\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;

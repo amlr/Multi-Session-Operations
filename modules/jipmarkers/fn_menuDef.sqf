@@ -20,11 +20,11 @@ if (typeName _params == typeName []) then {
 
 _menus = [
 	[
-		["main", "", _menuRsc],
+		["main", mso_menuname, _menuRsc],
 		[
 			["JIP Markers",
 				{ call jipmarkers_fnc_click },
-				"", "", "", -1,	1, visibleMap and (player call ACE_fnc_hasRadio)]
+				"", "", "", -1,	1, visibleMap and (call mso_fnc_hasRadio)]
 		]
 	]
 ];
