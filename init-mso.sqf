@@ -1,4 +1,4 @@
-#include <modules.hpp>
+#include <modules\modules.hpp>
 
 #ifndef execNow
 	#define execNow call compile preprocessfilelinenumbers
@@ -91,6 +91,12 @@ _fnc_status = {
 	player sideChat format["Initialising: %1", _stage];
 };
 
+"Custom Locations(" + worldName + ")" call _fnc_status;
+waitUntil{!isNil "BIS_fnc_init"};
+if(isNil "CRB_LOCS") then {
+       	CRB_LOCS = [] call CRB_fnc_initLocations;
+};
+
 "Mission Parameters" call _fnc_status;
 if (!isNil "paramsArray") then {
 	for "_i" from 0 to ((count paramsArray)-1) do {
@@ -99,40 +105,28 @@ if (!isNil "paramsArray") then {
 };
 
 "Player" call _fnc_status;
-if (isserver) then {
-	[] spawn {
-		while {true} do {
-			MSO_playerlist = if(isDedicated) then {
-				call compile preprocessfilelinenumbers "\mso\mso_uids.txt";
-			} else {
-				call compile preprocessfilelinenumbers "mso\mso_uids.txt";
-			};
-			publicvariable "MSO_playerlist";
-			sleep 60;
-		};
-	};
-};
-
-MSO_R_Admin = false;
-MSO_R_Leader = false;
-MSO_R_Officer = false;
-MSO_R_Air = false;
-MSO_R_Crew = false;
-if (not isdedicated) then {
-	execNow "scripts\init_player.sqf";
-};
-
-//player globalChat "Initialise First Aid Fix";
-//[] execVM "scripts\firstaidfix.sqf";
+execNow "scripts\init_player.sqf";
 
 setViewDistance 2000;
 setTerrainGrid 25;
 
+MSO_R_Admin = true;
+MSO_R_Leader = true;
+MSO_R_Officer = true;
+MSO_R_Air = true;
+MSO_R_Crew = true;
+
+#ifdef RMM_MP_RIGHTS
+	"MP Rights" call _fnc_status;
+	execNow "modules\mp_rights\main.sqf";
+#endif
+
+//player globalChat "Initialise First Aid Fix";
+//[] execVM "scripts\firstaidfix.sqf";
+
 #ifdef RMM_DEBUG
-"Debug" call _fnc_status;
-if (MSO_R_Admin) then {
-	["Debug","createDialog ""RMM_ui_debug"""] call _fnc_updateMenu;
-};
+	"Debug" call _fnc_status;
+	execNow "modules\debug\main.sqf";
 #endif
 #ifdef RMM_NOMAD
 	"NOMAD" call _fnc_status;
@@ -149,23 +143,16 @@ if (MSO_R_Admin) then {
 	revive_test call revive_fnc_unconscious;
 #endif
 #ifdef RMM_AAR
-"After Action Reports" call _fnc_status;
+	"After Action Reports" call _fnc_status;
 	execNow "modules\aar\main.sqf";
-	["AAR","createDialog ""RMM_ui_aar"""] call _fnc_updateMenu;
 #endif
 #ifdef RMM_CAS
-"Close Air Support" call _fnc_status;
-if (MSO_R_Leader) then {
+	"Close Air Support" call _fnc_status;
 	execNow "modules\cas\main.sqf";
-	["CAS","createDialog ""RMM_ui_cas"""] call _fnc_updateMenu;
-};
 #endif
 #ifdef RMM_CASEVAC
-"CASEVAC" call _fnc_status;
-if (MSO_R_Leader) then {
+	"CASEVAC" call _fnc_status;
 	execNow "modules\casevac\main.sqf";
-	["CASEVAC","createDialog ""RMM_ui_casevac"""] call _fnc_updateMenu;
-};
 #endif
 #ifdef RMM_CNSTRCT
 	"Construction" call _fnc_status;
@@ -180,10 +167,8 @@ if (MSO_R_Leader) then {
 	execNow "modules\flippable\main.sqf";
 #endif
 #ifdef RMM_JIPMARKERS
-"JIP Markers" call _fnc_status;
-execNow "modules\jipmarkers\main.sqf";
-	_crb_mapclick = _crb_mapclick + "if (!_shift && _alt) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
-	onMapSingleClick _crb_mapclick;
+	"JIP Markers" call _fnc_status;
+	execNow "modules\jipmarkers\main.sqf";
 #endif
 #ifdef RMM_LOGISTICS
 	"Logistics" call _fnc_status;
@@ -195,15 +180,11 @@ execNow "modules\jipmarkers\main.sqf";
 #endif
 #ifdef RMM_SETTINGS
 	"View Distance Settings" call _fnc_status;
-	["Settings","createDialog ""RMM_ui_settings"""] call _fnc_updateMenu;
+	execNow "modules\settings\main.sqf";	
 #endif
 #ifdef RMM_TASKS
-"JIP Tasks" call _fnc_status;
-execNow "modules\tasks\main.sqf";	
-if (MSO_R_Leader) then {
-	_crb_mapclick = _crb_mapclick + "if (_shift && _alt) then {RMM_task_position = _pos; createDialog ""RMM_ui_tasks"";};";
-	onMapSingleClick _crb_mapclick;
-};
+	"JIP Tasks" call _fnc_status;
+	execNow "modules\tasks\main.sqf";	
 #endif
 #ifdef RMM_TYRES
 	"Tyre Changing" call _fnc_status;
@@ -213,10 +194,6 @@ if (MSO_R_Leader) then {
 	"Weather" call _fnc_status;
 	execNow "modules\weather\main.sqf";
 #endif
-#ifdef CRB_CIVILIANS
-	"Ambient Civilians" call _fnc_status;
-	execNow "modules\civilians\main.sqf";
-#endif
 #ifdef CRB_DOGS
 	"Dogs" call _fnc_status;
 	["WEST"] execNow "modules\dogs\main.sqf";
@@ -225,13 +202,17 @@ if (MSO_R_Leader) then {
 	"Convoys" call _fnc_status;
 	execNow "modules\convoys\main.sqf";
 #endif
+#ifdef RMM_ZORA
+	"ZORA" call _fnc_status;
+	execNow "modules\zora\main.sqf";
+#endif
 #ifdef RMM_ENEMYPOP
 	"Enemy Populate" call _fnc_status;
 	execNow "modules\enemypop\main.sqf";
 #endif
-#ifdef RMM_ZORA
-	"ZORA" call _fnc_status;
-	execNow "modules\zora\main.sqf";
+#ifdef CRB_CIVILIANS
+	"Ambient Civilians" call _fnc_status;
+	execNow "modules\civilians\main.sqf";
 #endif
 
 "Completed" call _fnc_status;

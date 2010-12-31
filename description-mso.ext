@@ -1,4 +1,4 @@
-#include <modules.hpp>
+#include <modules\modules.hpp>
 
 //http://community.bistudio.com/wiki/Description.ext#Respawn...
 respawn = 3;
@@ -7,10 +7,10 @@ disabledAI = 1;
 
 class CfgSounds {
 #ifdef CRB_DOGS
-	#include <modules\dogs\cfgsounds.cpp>
+	#include <modules\dogs\cfgsounds.hpp>
 #endif
 #ifdef RMM_CTP
-	#include <modules\ctp\cfgsounds.cpp>
+	#include <modules\ctp\cfgsounds.hpp>
 #endif
 };
 
