@@ -1,3 +1,5 @@
+
+private ["_fac","_allvehs","_vehx","_sx","_fx","_cx","_cargoslots","_grpx"];
 _cargoslots = _this select 0;
 _fac = nil;
 if(count _this > 1) then {

@@ -1,4 +1,4 @@
-private ["_choices","_bias", "_result", "_j", "_i"];
+private ["_choices","_bias","_result","_j"];
 _choices = _this select 0;
 _bias = _this select 1;
 

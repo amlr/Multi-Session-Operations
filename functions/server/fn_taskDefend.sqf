@@ -18,7 +18,7 @@ Author:
 
 ---------------------------------------------------------------------------- */
 
-private ["_group","_position","_radius","_threshold"];
+private ["_group","_position","_radius","_threshold","_count","_units","_i","_buildings","_statics"];
 _group = (_this select 0) call CBA_fnc_getgroup;
 _position = (if (count _this > 1) then {_this select 1} else {_group}) call CBA_fnc_getpos;
 _radius = if (count _this > 2) then {_this select 2} else {50};
@@ -26,7 +26,7 @@ _threshold = if (count _this > 3) then {_this select 3} else {2};
 
 _group enableattack false;
 
-private ["_count", "_list", "_list2", "_units", "_i"];
+private ["_count", "_units", "_i"];
 _statics = [_position, vehicles, _radius, {(_x iskindof "StaticWeapon") && (_x emptypositions "Gunner" > 0)}] call CBA_fnc_getnearest;
 _buildings = _position nearObjects ["building",_radius];
 _units = units _group;
