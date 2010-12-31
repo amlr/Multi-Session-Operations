@@ -1,10 +1,9 @@
+
+private ["_twn","_locs","_debug","_dist","_strategic","_military","_names","_hills"];
 if(!isServer) exitWith{};
 
-private ["_debug", "_dist", "_locs", "_mount", "_strategic", "_military", "_names", "_hills"];
 _debug = false;
 _dist = 20000;
-
-_mount = ["Mount"];
 
 // Zargabad - lots
 _strategic = ["Strategic","StrongpointArea","FlatArea","FlatAreaCity","FlatAreaCitySmall","CityCenter","Airport"];
@@ -20,12 +19,22 @@ _hills = ["Hill","ViewPoint","RockArea","BorderCrossing","VegetationBroadleaf","
 
 
 if (_debug) then {player globalChat "initLocs: Custom Locs(" + worldName + ")";};
-
-"Custom Locations(" + worldName + ")" call _fnc_status;
+[] call BIS_fnc_locations;
 CRB_LOC_DIST = 20000;
 switch toLower(worldName) do {		
 	case "zargabad": {
 		{createLocation ["BorderCrossing",_x,1,1]} foreach [[3430,8150,0],[2925,50,0],[3180,50,0],[5048,50,0]];
+//		{_twn = createLocation ["CityCenter",(_x select 0),1,1]; _twn setVariable ["name", (_x select 1)];[[_twn],[],true] call BIS_fnc_locations;} foreach [
+		{_twn = (group bis_functions_mainscope) createUnit ["LOGIC", (_x select 0), [], 0, "NONE"]; _twn setVariable ["name", (_x select 1)];[[_twn]] call BIS_fnc_locations;} foreach [
+			[[3489,1983], "Shabaz"],
+			[[4053,2081,0], "East Shabaz"],
+			[[2776,3215,0], "Ab-e Shur Dam"],
+			[[4114,3582,0], "Yarum"],
+			[[4670,3860,0], "South-East Zargabad"],
+			[[4143,4872,0], "North Zargabad"],
+			[[3489,4809,0], "North-West Zargabad"],
+			[[4040,5455,0], "South Hazar Bagh"]
+		];
 		CRB_LOC_DIST = 8000;
 	};
 	case "takistan": {
