@@ -4,7 +4,7 @@ private ["_taskdescription", "_taskdestination", "_taskstatus", "_taskparams"];
 
 _taskdescription = (taskdescription _this) select 1;
 _taskdestination = mapgridposition (taskdestination _this);
-_taskstatus	= toupper(taskstate _this);
+_taskstatus	= tolower(taskstate _this);
 
 _taskparams = switch (_taskstatus) do {
 	case "created": {
