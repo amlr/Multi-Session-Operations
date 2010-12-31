@@ -46,7 +46,7 @@ class FSM
        "if (isnil ""_search"") then {_logic setvariable [""search_radius"",100]; _search = 100;};" \n
        "" \n
        "_defpos = position (leader _grp);" \n
-       "hint str _defpos;" \n
+       "//hint str _defpos;" \n
        "/*" \n
        "if (_type == ""Air"") then {" \n
        "	{_x flyinheight 50} foreach units _grp;" \n
