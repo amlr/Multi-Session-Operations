@@ -1,7 +1,7 @@
 // #define DEBUG_MODE_FULL
 #include "\ca\editor\Data\Scripts\dikCodes.h"
 
-private ["_menuDef", "_target", "_params", "_menuName", "_menuRsc", "_menus","_radio"];
+private ["_menuDef","_target","_params","_menuName","_menuRsc","_menus"];
 // _this==[_target, _menuNameOrParams]
 _target = _this select 0;
 _params = _this select 1;
