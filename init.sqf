@@ -5,12 +5,9 @@
 execVM "scripts\crB_scripts\crB_staticRearm.sqf";
 
 if(isServer) then {
-	[] spawn {
-		while{true} do{
-			serverTime = [date, fog, overcast, rain];
-			publicVariable "CRB_SERVERTW";
-			sleep 15;
-		};
+	onPlayerConnected {
+		CRB_SERVERTW = [date, fog, overcast, rain];
+		publicVariable "CRB_SERVERTW";
 	};
 } else {
 	waitUntil{!isNil "CRB_SERVERTW"};
