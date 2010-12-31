@@ -2,7 +2,7 @@ class RMM_ui_casevac { // by Rommel
 	idd = 80513;
 	movingEnable = 1;
 	enableSimulation = 1;
-	onLoad = "0 spawn casevac_fnc_onload";
+	onLoad = "0 call casevac_fnc_onload";
 
 	class controls {
 		class Background : CUI_Frame {
@@ -20,7 +20,7 @@ class RMM_ui_casevac { // by Rommel
 			idc = 0;
 			y = CUI_Row_Y(1);
 			w = CUI_Box_W;
-			onLBSelChanged = "";
+			onLBSelChanged = "_this call casevac_fnc_help";
 		};
 		class Lb1 : Lb0 {idc = 1;y = CUI_Row_Y(2);};
 		class Lb2 : Lb0 {idc = 2;y = CUI_Row_Y(3);};
@@ -34,7 +34,7 @@ class RMM_ui_casevac { // by Rommel
 			text = "Transmit";
 			w = CUI_Box_W;
 			y = CUI_Row_Y(10);
-			action = "if (lbCurSel 1 > -1) then {}; closeDialog 0;";
+			action = "if (lbCurSel 1 > -1) then {0 call casevac_fnc_call}; closeDialog 0;";
 		};
 	};
 };
