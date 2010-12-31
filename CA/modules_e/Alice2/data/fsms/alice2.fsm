@@ -136,7 +136,7 @@ class FSM
        "	_town setvariable [""ALICE_threat"",-1];" \n
        "	_town setvariable [""ALICE_status"",""black""];" \n
        "};" \n
-       "if (isnil {_town getvariable ""demography""}) then {" \n
+       "if (isnil {_town getvariable ""demography""} || count (_town getvariable ""demography"") == 0) then {" \n
        "	_town setvariable [""demography"",_logic getvariable ""townsFaction""];" \n
        "};" \n
        "" \n

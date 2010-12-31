@@ -65,7 +65,8 @@ class FSM
        "	_twn setvariable [""ALICE_group"",_grp];" \n
        "};" \n
        "" \n
-       "_neighbors = _twn getvariable ""neighbors"";"/*%FSM</STATEINIT""">*/;
+       "_neighbors = _twn getvariable ""neighbors"";" \n
+      "if(isNil ""_neighbors"") then {_neighbors = [];};"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {

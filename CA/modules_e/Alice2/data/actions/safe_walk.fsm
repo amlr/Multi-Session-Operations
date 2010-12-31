@@ -72,6 +72,7 @@ class FSM
        "" \n
        "_unit setspeedmode ""limited"";" \n
        "_unit setbehaviour ""safe"";" \n
+       "_unit forcewalk true;" \n
        "" \n
        "_delay = 5;" \n
        "_delayConversation = 120;" \n
