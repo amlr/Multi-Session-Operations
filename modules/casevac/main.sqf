@@ -12,3 +12,8 @@ RMM_casevac_lines = [
 	{["Alpha","Bravo","Charlie","Delta","Echo"]},
 	{["November","Bravo","Charlie","None"]}
 ];
+
+if (MSO_R_Leader) then {
+	["player", [mso_interaction_key], 4, ["modules\casevac\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+	["CASEVAC","createDialog ""RMM_ui_casevac"""] call fnc_updateMenu;
+};

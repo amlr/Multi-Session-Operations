@@ -1,5 +1,3 @@
-
-private ["_fnc_updateMenu"];
 if (isdedicated) exitwith {};
 
 RMM_aar_lines = [
@@ -18,4 +16,4 @@ if (isnil "RMM_aars") then {
 };
 
 ["player", [mso_interaction_key], 4, ["modules\aar\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
-["AAR","createDialog ""RMM_ui_aar"""] call _fnc_updateMenu;
+["AAR","createDialog ""RMM_ui_aar"""] call fnc_updateMenu;

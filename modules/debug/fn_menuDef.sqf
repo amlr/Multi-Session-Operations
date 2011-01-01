@@ -20,7 +20,7 @@ if (typeName _params == typeName []) then {
 
 _menus = [
 	[
-		["main", "", _menuRsc],
+		["main", mso_menuname, _menuRsc],
 		[
 			["Debug Console",
 				{ createDialog "RMM_ui_debug" },
