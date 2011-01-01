@@ -13,11 +13,21 @@ for "_y" from 1 to _grpx - 1 do {
 	_sx = getNumber(_vehx >> "transportSoldier");
 	_fx = getText(_vehx >> "faction");
 	_cx = configName _vehx;
-//	hint str _fx;
+//hint str _fx;
+//hint str typeName _fac;
 	if (_sx > _cargoslots) then {
 		if (!isNil "_fac") then {
-			if ((typeName _fac == "STRING" && _fx == _fac) || (typeName _fac == "ARRAY" && _fx in _fac)) then {
-				_allvehs = _allvehs + [_cx];
+			switch(typeName _fac) do {
+				case "STRING": {
+					if(_fx == _fac) then {
+						_allvehs = _allvehs + [_cx];
+					};
+				};
+				case "ARRAY": {
+					if(_fx in _fac) then {
+						_allvehs = _allvehs + [_cx];
+					};
+				};
 			};
 		};
 	};
