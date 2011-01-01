@@ -1,7 +1,7 @@
 if (!isServer) exitWith{};
 
 private["_debug","_types","_d","_tarea","_dogs", "_side"];
-_debug = false;
+_debug = true;
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
@@ -10,7 +10,7 @@ if(isNil "CRB_LOCS") then {
 
 _types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
 _d = 100;
-_tarea = 150;
+_tarea = 250;
 _dogs = [];
 _side = "WEST";
 if(count _this > 0) then {
