@@ -1,3 +1,5 @@
+
+private ["_display","_string"];
 disableserialization;
 
 _display = findDisplay 80512;

@@ -1,3 +1,5 @@
+
+private ["_logic","_commander","_groups"];
 _logic = createlocation ["strategic", [0,0,0], 1, 1];
 _logic setside _this;
 
