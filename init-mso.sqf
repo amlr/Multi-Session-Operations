@@ -25,7 +25,7 @@ if(count MSO_FACTIONS == 0) then {MSO_FACTIONS = ["BIS_TK_GUE"];};
 //http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];
 
-private ["_crb_mapclick","_fnc_status","_fnc_updateMenu"];
+private ["_crb_mapclick","_fnc_status"];
 _crb_mapclick = "";
 
 "RMM_MPe" addPublicVariableEventHandler {
@@ -63,7 +63,7 @@ BIS_MENU_GroupCommunication = [
 	//--- Item name, shortcut, -5 (do not change), expression, show, enable
 ];
 
-_fnc_updateMenu = {
+fnc_updateMenu = {
 	private["_name","_exp"];
 	_name = _this select 0;
 	_exp = _this select 1;
@@ -173,6 +173,10 @@ MSO_R_Crew = true;
 #ifdef RMM_LOGISTICS
 	"Logistics" call _fnc_status;
 	execNow "modules\logistics\main.sqf";
+#endif
+#ifdef RMM_NOTEBOOK
+	"Notebook" call _fnc_status;
+	execNow "modules\notebook\main.sqf";
 #endif
 #ifdef R3F_LOGISTICS
 	"R3F Logistics" call _fnc_status;

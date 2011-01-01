@@ -25,29 +25,21 @@ class Mission
 		"cawheeled_e_stryker",
 		"ca_modules_e_weather",
 		"ca_modules_marta",
-		"ca_modules_silvie",
-		"ca_modules_animals",
-		"CA_Modules_Alice2",
 		"ca_modules_clouds",
 		"BI_SRRS",
-		"cba_main",
-		"ca_modules_zora"
+		"cba_main"
 	};
 	addOnsAuto[]=
 	{
 		"CACharacters_BAF",
-		"ca_modules_functions",
 		"cacharacters_e",
+		"ca_modules_functions",
 		"ca_missions_garbagecollector",
+		"ca_modules_clouds",
 		"ca_modules_e_weather",
 		"ca_modules_marta",
-		"ca_modules_silvie",
-		"ca_modules_animals",
-		"CA_Modules_Alice2",
-		"ca_modules_clouds",
 		"BI_SRRS",
 		"cba_main",
-		"ca_modules_zora",
 		"cawheeled_d_baf",
 		"CAWheeled_E",
 		"camisc3",
@@ -66,18 +58,17 @@ class Mission
 	randomSeed=6553103;
 	class Intel
 	{
-		briefingName="MSO Testing v3.3";
+		briefingName="MSO Testing v3.3beta";
 		resistanceEast=1;
 		startWeather=0;
 		forecastWeather=0;
 		year=2009;
 		day=29;
-		hour=18;
-		minute=40;
+		hour=17;
 	};
 	class Groups
 	{
-		items=24;
+		items=15;
 		class Item0
 		{
 			side="WEST";
@@ -94,7 +85,7 @@ class Mission
 					leader=1;
 					rank="CORPORAL";
 					skill=0.33333331;
-					init="this onMapSingleClick ""{_x setPos _pos;} forEach units _this;"";";
+					init="this onMapSingleClick {{_x setPos _pos;} forEach units _this;};";
 				};
 				class Item1
 				{
@@ -154,7 +145,7 @@ class Mission
 					position[]={3588.627,22.214375,4062.001};
 					id=14;
 					side="LOGIC";
-					vehicle="LocationLogic";
+					vehicle="Logic";
 					leader=1;
 					skill=0.2;
 					init="if(isserver)then{(createvehicle [""Land_Lampa_Ind_EP1"",getpos this,[],0,""NONE""]) setdir ((getdir this)+90)}";
@@ -354,7 +345,7 @@ class Mission
 			side="LOGIC";
 			class Vehicles
 			{
-				items=1;
+				items=2;
 				class Item0
 				{
 					position[]={3511.6592,22.35,4143.5151};
@@ -365,6 +356,15 @@ class Mission
 					skill=0.60000002;
 					init="BIS_fnc_locations = compile preprocessFileLineNumbers ""CA\modules\functions\systems\fn_locations.sqf"";";
 				};
+				class Item1
+				{
+					position[]={3523.8633,22.35,4143.5396};
+					id=74;
+					side="LOGIC";
+					vehicle="GarbageCollector";
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
 			};
 		};
 		class Item11
@@ -372,14 +372,51 @@ class Mission
 			side="LOGIC";
 			class Vehicles
 			{
-				items=1;
+				items=5;
 				class Item0
 				{
-					position[]={3523.8633,22.35,4143.5396};
-					id=74;
+					position[]={3597.8535,22.197565,4144.0962};
+					id=79;
 					side="LOGIC";
-					vehicle="GarbageCollector";
+					vehicle="BIS_clouds_Logic";
 					leader=1;
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+				class Item1
+				{
+					position[]={3584.6897,22.25518,4143.8589};
+					id=76;
+					side="LOGIC";
+					vehicle="WeatherParticlesManager";
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+				class Item2
+				{
+					position[]={3570.4636,22.218693,4143.7979};
+					id=75;
+					side="LOGIC";
+					vehicle="WeatherPostprocessManager";
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+				class Item3
+				{
+					position[]={3570.5671,22.39452,4130.3022};
+					id=77;
+					side="LOGIC";
+					vehicle="MartaManager";
+					lock="UNLOCKED";
+					skill=0.60000002;
+					init="setGroupIconsVisible [true, false]; BIS_marta_mainscope setvariable [""delay"", 300];";
+				};
+				class Item4
+				{
+					position[]={3584.8188,22.39452,4130.3022};
+					id=78;
+					side="LOGIC";
+					vehicle="BIS_SRRS_Logic";
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
@@ -393,10 +430,10 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={3584.6897,22.25518,4143.8589};
-					id=79;
+					position[]={3535.8608,22.35,4143.4497};
+					id=80;
 					side="LOGIC";
-					vehicle="WeatherParticlesManager";
+					vehicle="CBA_main_require";
 					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;
@@ -411,14 +448,14 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={3570.5671,22.39452,4130.3022};
-					id=80;
+					position[]={3578.238,22.445333,4062.0571};
+					id=81;
 					side="LOGIC";
-					vehicle="MartaManager";
+					vehicle="Logic";
 					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-					init="setGroupIconsVisible [true, false]; BIS_marta_mainscope setvariable [""delay"", 300];";
+					skill=0.2;
+					init="if(isserver)then{(createvehicle [""Land_Lamp_Street2_EP1"",getpos this,[],0,""NONE""]) setdir ((getdir this)+90)}";
+					description="Lamp";
 				};
 			};
 		};
@@ -430,173 +467,10 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={3524.1938,22.35,4130.6792};
-					id=77;
-					side="LOGIC";
-					vehicle="SilvieManager";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item15
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={3536.7244,22.35,4130.75};
-					id=76;
-					side="LOGIC";
-					vehicle="BIS_animals_Logic";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item16
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={3511.4585,22.35,4130.6533};
-					id=75;
-					side="LOGIC";
-					vehicle="Alice2Manager";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item17
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={3570.4636,22.218693,4143.7979};
-					id=78;
-					side="LOGIC";
-					vehicle="WeatherPostprocessManager";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item18
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={3597.8535,22.197565,4144.0962};
+					position[]={3567.9937,22.498932,4061.7832};
 					id=82;
 					side="LOGIC";
-					vehicle="BIS_clouds_Logic";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item19
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={3584.8188,22.39452,4130.3022};
-					id=81;
-					side="LOGIC";
-					vehicle="BIS_SRRS_Logic";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item20
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={3535.8608,22.35,4143.4497};
-					id=83;
-					side="LOGIC";
-					vehicle="CBA_main_require";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item21
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={3598.0227,22.237423,4130.4531};
-					id=84;
-					side="LOGIC";
-					vehicle="ZoraManager";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item22
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={3588.6274,21.948692,4051.124};
-					id=85;
-					side="LOGIC";
-					vehicle="LocationLogic";
-					leader=1;
-					skill=0.2;
-					init="if(isserver)then{(createvehicle [""Land_Lamp_Street2_EP1"",getpos this,[],0,""NONE""]) setdir ((getdir this)+90)}";
-					description="Lamp";
-				};
-			};
-		};
-		class Item23
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={3588.884,22.169434,4040.6973};
-					id=86;
-					side="LOGIC";
-					vehicle="LocationLogic";
+					vehicle="Logic";
 					leader=1;
 					skill=0.2;
 					init="if(isserver)then{(createvehicle [""Land_Lamp_Street1_EP1"",getpos this,[],0,""NONE""]) setdir ((getdir this)+90)}";
@@ -607,7 +481,7 @@ class Mission
 	};
 	class Vehicles
 	{
-		items=56;
+		items=57;
 		class Item0
 		{
 			position[]={3543.6902,22.35,4080.1206};
@@ -1138,10 +1012,19 @@ class Mission
 			vehicle="M1126_ICV_M2_EP1";
 			skill=0.60000002;
 		};
+		class Item56
+		{
+			position[]={3565.9275,22.474817,4049.2207};
+			id=83;
+			side="EMPTY";
+			vehicle="M1030_US_DES_EP1";
+			skill=0.60000002;
+			init="this setVectorUp [0,0,-1];";
+		};
 	};
 	class Markers
 	{
-		items=12;
+		items=13;
 		class Item0
 		{
 			position[]={3515.6721,22.35,3992.2153};
@@ -1210,7 +1093,7 @@ class Mission
 		};
 		class Item9
 		{
-			position[]={3474.9412,22,4119.4194};
+			position[]={3475.9707,22,4119.9331};
 			name="dog";
 			text="Dog Patrol Testing";
 			type="mil_dot";
@@ -1231,6 +1114,13 @@ class Mission
 			text="Tow Testing";
 			type="mil_dot";
 			angle=89.497597;
+		};
+		class Item12
+		{
+			position[]={3565.3103,22.473274,4049.7515};
+			name="flippable";
+			text="Flippable Testing";
+			type="mil_dot";
 		};
 	};
 	class Sensors

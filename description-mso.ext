@@ -68,11 +68,17 @@ class cfgFunctions {
 #ifdef CRB_FLIPPABLE
 	#include <modules\flippable\functions.hpp>
 #endif
+#ifdef RMM_HELP
+	#include <modules\help\functions.hpp>
+#endif
 #ifdef RMM_JIPMARKERS
 	#include <modules\jipmarkers\functions.hpp>
 #endif
 #ifdef RMM_LOGBOOK
 	#include <modules\logbook\functions.hpp>
+#endif
+#ifdef RMM_NOTEBOOK
+	#include <modules\notebook\functions.hpp>
 #endif
 #ifdef RMM_LOGISTICS
 	#include <modules\logistics\functions.hpp>
@@ -106,6 +112,9 @@ class cfgFunctions {
 #ifdef RMM_DEBUG
 	#include <modules\debug\dialog.hpp>
 #endif
+#ifdef RMM_HELP
+	#include <modules\help\dialog.hpp>
+#endif
 #ifdef RMM_JIPMARKERS
 	#include <modules\jipmarkers\dialog.hpp>
 #endif
@@ -114,6 +123,9 @@ class cfgFunctions {
 #endif
 #ifdef RMM_LOGISTICS
 	#include <modules\logistics\dialog.hpp>
+#endif
+#ifdef RMM_NOTEBOOK
+	#include <modules\notebook\dialog.hpp>
 #endif
 #ifdef RMM_RECRUITMENT
 	#include <modules\recruitment\dialog_baf.hpp>
