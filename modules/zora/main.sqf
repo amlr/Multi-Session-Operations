@@ -31,7 +31,9 @@ BIS_Zora_Mainscope setvariable ["maxdist", 2500];
 			
 	while {true} do {
 		if (count playableUnits > 0) then {
-			BIS_Zora_mainscope setvariable ["maxgroups",round (((8+random 4) / (count playableUnits)) min 1) max 5];
+			_mx = floor( sqrt (count playableUnits) + random 1);
+			if(_mx > 5) then {_mx = 5;};
+			BIS_Zora_mainscope setvariable ["maxgroups", _mx];
 		};
 		if ((random 1 > NIGHT_POSSIBILITY) && (daytime < 5 || daytime > 18)) then {
 			BIS_Zora_pause = true;
