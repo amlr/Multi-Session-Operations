@@ -1,14 +1,15 @@
 if (isserver) then {
-	RMM_w = [
-		overcast, //oldovercast% (0-1)
-		fog, //old fog% (0-1)
-		overcast, //new overcast% (0-1)
-		fog, //new fog% (0-1)
-		time, // start
-		time // finish
-	];
-	publicvariable "RMM_w";
 	[] spawn {
+		sleep 5;
+		RMM_w = [
+			overcast, //oldovercast% (0-1)
+			fog, //old fog% (0-1)
+			overcast, //new overcast% (0-1)
+			fog, //new fog% (0-1)
+			time, // start
+			time // finish
+		];
+		publicvariable "RMM_w";
 		while {true} do {
 			if (time > (RMM_w select 5)) then {
 				RMM_w = [RMM_w select 2, RMM_w select 3, random 1, ((random 1) - (random 1)) max 0, time, time + 3600];
