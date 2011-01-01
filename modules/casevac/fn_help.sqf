@@ -91,7 +91,8 @@ _string = switch (_this select 0) do {
 		} foreach [
 			["November","Nuclear"],
 			["Bravo","Biological"],
-			["Charlie","Chemical"]
+			["Charlie","Chemical"],
+			["Zero","None"]
 		];
 		_string;
 	};
