@@ -15,4 +15,4 @@
 {player getVariable "ace_w_cutofftime";},
 {player getVariable "ace_w_carry";},
 {player getVariable "ace_w_revive";},
-{player getVariable "ace_w_wakeup";}
+{player getVariable "ace_w_wakeup";},

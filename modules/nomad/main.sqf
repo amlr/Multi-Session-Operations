@@ -30,8 +30,8 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{[vehicle player, driver (vehicle player) == player, gunner (vehicle player) == player, commander (vehicle player) == player];},
 		{lifestate player;},
 		{[group player, (leader player == player)];},
-		{rank player;},
 		#include <mods\ace_sys_wounds_g.hpp>
+		{rank player;}
 	],
 	[
 		{
@@ -69,7 +69,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{player setpos _this;},
 		{player setdamage _this;},
 		{player addrating (-(rating player) + _this);},
-		{player addscore (-(score player) + _this;},
+		{player addscore (-(score player) + _this);},
 		{setviewdistance _this;},
 		{
 			setterraingrid ((-10 * _this + 50) max 1);
@@ -103,7 +103,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 				(_this select 0) selectLeader player;
 			};
 		},
-		{player setunitrank _this;},
 		#include <mods\ace_sys_wounds_s.hpp>
+		{player setunitrank _this;}
 	]
 ] execfsm "modules\nomad\nomad.fsm";

@@ -15,4 +15,4 @@
 {player setVariable ["ace_w_cutofftime", _this];},
 {player setVariable ["ace_w_carry", _this, true];},
 {player setVariable ["ace_w_revive", _this];},
-{player setVariable ["ace_w_wakeup", _this];}
+{player setVariable ["ace_w_wakeup", _this];},
