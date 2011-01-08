@@ -6,32 +6,16 @@
 // Purpose: Hide corpses
 ///////////////////////////////////////////////////////////////////
 if (!isServer) exitWith{};
-_maxcorpses = _this select 0;
-_timeuntilhide = _this select 1;
-_Dead = [];
-_Man = [];
-_P = nil;
 
-waitUntil{typeName allUnits == "ARRAY"};
+[_this select 0] spawn {
+	_timeuntilhide = _this select 0;
 
-while{true} do {
-	_cMan = allUnits;
-	_Man = _Man - _cMan;
-	_Man = _Man + _cMan;
-		
-	{
-		if(!alive _x) then{_Dead = _Dead + [_x];};
-	} forEach _Man;
-	_Man = _Man - _Dead;
-	if(count _Dead > _maxcorpses) then{_P = _Dead select 0; _Dead = _Dead - [_P];};
-	_hidetime = _timeuntilhide;
-	if(_P isKindOf "Car" || _P isKindOf "Tank" || _P isKindOf "Air") then{_hidetime = _timeuntilhide * 3;};
-	sleep _hidetime;
-	hideBody _P;
-	deleteVehicle _P;
-	_P = objNull;
+	while{true} do {
+		sleep _timeuntilhide;
+		{
+			if !(_x call CBA_fnc_isAlive) then{
+				_x call CBA_fnc_deleteEntity;
+			};
+		} forEach nearestObjects [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), ["Man","Car","Tank","Air"] , 20000] + allGroups;
+	};
 };
-
-/*
-{if(!alive _x) then{hideBody _x;deleteVehicle _x;_x = objNull;};} forEach nearestObjects [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), ["Man"] , 20000];
-*/
