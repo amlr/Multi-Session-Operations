@@ -26,7 +26,7 @@ switch toLower(worldName) do {
 		{createLocation ["BorderCrossing",_x,1,1]} foreach [[3430,8150,0],[2925,50,0],[3180,50,0],[5048,50,0]];
 //		{_twn = createLocation ["CityCenter",(_x select 0),1,1]; _twn setVariable ["name", (_x select 1)];[[_twn],[],true] call BIS_fnc_locations;} foreach [
 		{_twn = (group bis_functions_mainscope) createUnit ["LOGIC", (_x select 0), [], 0, "NONE"]; _twn setVariable ["name", (_x select 1)];[[_twn]] call BIS_fnc_locations;} foreach [
-			[[3489,1983], "Shabaz"],
+			[[3489,1983,0], "Shabaz"],
 			[[4053,2081,0], "East Shabaz"],
 			[[2776,3215,0], "Ab-e Shur Dam"],
 			[[4114,3582,0], "Yarum"],
@@ -46,7 +46,11 @@ switch toLower(worldName) do {
 		CRB_LOC_DIST = 16000;
 	};
 	case "utes": {
-		{createLocation ["CityCenter",_x,1,1]} foreach [[2551,3835,0]];
+		{_twn = (group bis_functions_mainscope) createUnit ["LOGIC", (_x select 0), [], 0, "NONE"]; _twn setVariable ["name", (_x select 1)]; _twn setVariable ["demography", (_x select 2)]; [[_twn]] call BIS_fnc_locations;} foreach [
+			[[2526,3821,0], "Lighthouse", ["CIV",0,"CIV_RU",1]],
+			[[2948,4532,0], "Military Base", ["CIV",0,"CIV_RU",0]],
+			[[4418,3571,0], "Hamlet", ["CIV",1,"CIV_RU",0]]
+		];
 		CRB_LOC_DIST = 2500;
 	};
 };
