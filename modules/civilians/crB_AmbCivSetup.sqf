@@ -34,7 +34,7 @@ BIS_alice_mainscope setvariable ["threatDecay", 0.000005, true];
 
 // Add some rare english speaking civilians to the mix
 BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"], true];
-[BIS_alice_mainscope, "civilianRarity",["CIV_EuroWoman01_EP1", 1, "CIV_EuroWoman02_EP1", 1, "Dr_Annie_Baker_EP1", 3, "Rita_Ensler_EP1", 3, "CIV_EuroMan01_EP1", 1, "CIV_EuroMan02_EP1", 1, "Haris_Press_EP1", 3, "Dr_Hladik_EP1", 3, "Citizen2_EP1", 1, "Citizen3_EP1", 1, "Profiteer2_EP1", 1, "Functionary1_EP1", 1, "Functionary2_EP1", 1]] call BIS_fnc_variableSpaceAdd;
+[BIS_alice_mainscope, "civilianRarity",["CIV_EuroWoman01_EP1", 3, "CIV_EuroWoman02_EP1", 3, "Dr_Annie_Baker_EP1", 6, "Rita_Ensler_EP1", 6, "CIV_EuroMan01_EP1", 3, "CIV_EuroMan02_EP1", 3, "Haris_Press_EP1", 6, "Dr_Hladik_EP1", 6, "Citizen2_EP1", 3, "Citizen3_EP1", 3, "Profiteer2_EP1", 3, "Functionary1_EP1", 3, "Functionary2_EP1", 3]] call BIS_fnc_variableSpaceAdd;
 
 /*
 //[BIS_alice_mainscope,"ALICE_civilianinit",[{_this call TK_fnc_takistani}]] call BIS_fnc_variableSpaceAdd;

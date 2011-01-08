@@ -217,7 +217,6 @@ class FSM
        "" \n
        "//debuglog [""Log:::::::::::::::::"",_classlist];" \n
        "" \n
-       "_house call BIS_ALICE_fnc_doorCreate;" \n
        "[_class,_twn,_house] spawn BIS_ALICE2_fnc_civilianSet;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -293,6 +292,8 @@ class FSM
        "	_point = _x selectionposition ""AIspawnpos_0"";" \n
        "	if (_bbox > 3 && _point distance [0,0,0] > 0.1) then {" \n
        "		_houselist = _houselist + [_x]" \n
+       "	} else {" \n
+       "		_x call BIS_ALICE_fnc_doorCreate;" \n
        "	};" \n
        "	_point = _x selectionposition ""AIdoor1"";" \n
        "	if (_bbox > 3 && _point distance [0,0,0] > 0.1) then {" \n
