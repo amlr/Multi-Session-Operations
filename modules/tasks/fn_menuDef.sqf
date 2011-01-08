@@ -23,8 +23,8 @@ _menus = [
 		["main", mso_menuname, _menuRsc],
 		[
 			["Task Management",
-				{ call tasks_fnc_click },
-				"", "", "", -1,	1, visibleMap and (call mso_fnc_hasRadio)]
+				{ if(call mso_fnc_hasRadio) then { call tasks_fnc_click } },
+				"", "", "", -1,	1, visibleMap]
 		]
 	]
 ];

@@ -2,7 +2,7 @@ class RMM_ui_cas { // by Rommel
 	idd = 80512;
 	movingEnable = 1;
 	enableSimulation = 1;
-	onLoad = "0 call cas_fnc_onload;";
+	onLoad = "0 spawn cas_fnc_onload;";
 
 	class controls {
 		class Background : CUI_Frame {

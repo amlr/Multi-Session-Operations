@@ -1,9 +1,3 @@
-[] call compile preprocessFileLineNumbers "Init-MSO.sqf";
-
-[0, 180] execVM "scripts\crB_scripts\crB_HideCorpses.sqf";
-
-execVM "scripts\crB_scripts\crB_staticRearm.sqf";
-
 if(isServer) then {
 	onPlayerConnected {
 		CRB_SERVERTW = [date, fog, overcast, rain];
@@ -22,3 +16,10 @@ if(isServer) then {
 	0 setOvercast _sover;
 	0 setRain _srain;
 };
+
+[300] call compile preprocessFileLineNumbers "scripts\crB_scripts\crB_HideCorpses.sqf";
+
+[] call compile preprocessFileLineNumbers "Init-MSO.sqf";
+
+execVM "scripts\crB_scripts\crB_staticRearm.sqf";
+

@@ -2,7 +2,7 @@ class RMM_ui_aar { // by Rommel
 	idd = 80515;
 	movingEnable = 1;
 	enableSimulation = 1;
-	onLoad = "0 call aar_fnc_onload;";
+	onLoad = "0 spawn aar_fnc_onload;";
 
 	class controls {
 		class Background : CUI_Frame {

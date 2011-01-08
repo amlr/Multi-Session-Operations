@@ -52,9 +52,9 @@ mso_interaction_key = if (!isNil "ace_sys_interaction_key_self") then {
 	[221,[false,false,false]]
 };
 mso_fnc_hasRadio = if (!isNil "ACE_fnc_hasRadio") then {
-	{player call ACE_fnc_hasRadio}
+	{if(player call ACE_fnc_hasRadio) then {true} else {hint "You require a radio.";false;};}
 } else {
-	{player hasWeapon "itemRadio"}
+	{if(player hasWeapon "itemRadio") then {true} else {hint "You require a radio.";false;};}
 };
 
 BIS_MENU_GroupCommunication = [
@@ -132,6 +132,10 @@ MSO_R_Crew = true;
 	"NOMAD" call _fnc_status;
 	execNow "modules\nomad\main.sqf";
 #endif
+#ifdef CRB_CIVILIANS
+	"Ambient Civilians" call _fnc_status;
+	execNow "modules\civilians\main.sqf";
+#endif
 #ifdef RMM_REVIVE
 	"Revive" call _fnc_status;
 	waitUntil{!isnil "revive_fnc_init"};
@@ -165,6 +169,10 @@ MSO_R_Crew = true;
 #ifdef CRB_FLIPPABLE
 	"Flippable Vehicles" call _fnc_status;
 	execNow "modules\flippable\main.sqf";
+#endif
+#ifdef GC_PACK_COW
+	"Gen Carver's Pack Cow" call _fnc_status;
+	execNow "modules\gc_pack_cow\main.sqf";
 #endif
 #ifdef RMM_JIPMARKERS
 	"JIP Markers" call _fnc_status;
@@ -214,12 +222,15 @@ MSO_R_Crew = true;
 	"Enemy Populate" call _fnc_status;
 	execNow "modules\enemypop\main.sqf";
 #endif
-#ifdef CRB_CIVILIANS
-	"Ambient Civilians" call _fnc_status;
-	execNow "modules\civilians\main.sqf";
-#endif
 
 "Completed" call _fnc_status;
 sleep 5;
+
+// AAW INKO Fix
+waitUntil{!isNil "inko_disposable_ammo_player" && !isNil "inko_disposable_ammo_ai"};
+{terminate _x;} foreach [inko_disposable_ammo_player,inko_disposable_ammo_ai];
+inko_disposable_throw = {};
+inko_disposable_fired = {};
+inko_disposable_oa = false;
 
 hint "Change your View Distance Settings using the 0-8 Communications menu.";

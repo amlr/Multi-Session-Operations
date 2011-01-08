@@ -15,5 +15,5 @@ RMM_casevac_lines = [
 
 if (MSO_R_Leader) then {
 	["player", [mso_interaction_key], 4, ["modules\casevac\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
-	["CASEVAC","createDialog ""RMM_ui_casevac"""] call fnc_updateMenu;
+	["CASEVAC","if(call mso_fnc_hasRadio) then {createDialog ""RMM_ui_casevac""}"] call fnc_updateMenu;
 };

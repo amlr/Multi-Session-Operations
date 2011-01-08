@@ -16,4 +16,4 @@ if (isnil "RMM_aars") then {
 };
 
 ["player", [mso_interaction_key], 4, ["modules\aar\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
-["AAR","createDialog ""RMM_ui_aar"""] call fnc_updateMenu;
+["AAR","if(call mso_fnc_hasRadio) then {createDialog ""RMM_ui_aar""}"] call fnc_updateMenu;

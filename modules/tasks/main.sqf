@@ -11,6 +11,7 @@ if (isnil "RMM_tasks") then {
 };
 if (MSO_R_Leader) then {
 	["player", [mso_interaction_key], 4, ["modules\tasks\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
-	_crb_mapclick = _crb_mapclick + "if (_shift && _alt) then {RMM_task_position = _pos; createDialog ""RMM_ui_tasks"";};";
-	onMapSingleClick _crb_mapclick;
+// Pointless as Rommel over-writes the onMapSingleClick
+//	_crb_mapclick = _crb_mapclick + "if (_shift && _alt) then {RMM_task_position = _pos; createDialog ""RMM_ui_tasks"";};";
+//	onMapSingleClick _crb_mapclick;
 };

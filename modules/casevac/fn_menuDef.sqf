@@ -23,8 +23,8 @@ _menus = [
 		["main", mso_menuname, _menuRsc],
 		[
 			["CASEVAC",
-				{ createDialog "RMM_ui_casevac" },
-				"", "", "", -1,	1, call mso_fnc_hasRadio ]
+				{ if(call mso_fnc_hasRadio) then { createDialog "RMM_ui_casevac" } }
+			]
 		]
 	]
 ];

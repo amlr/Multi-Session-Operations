@@ -2,7 +2,7 @@ class RMM_ui_casevac { // by Rommel
 	idd = 80513;
 	movingEnable = 1;
 	enableSimulation = 1;
-	onLoad = "0 call casevac_fnc_onload";
+	onLoad = "0 spawn casevac_fnc_onload";
 
 	class controls {
 		class Background : CUI_Frame {
