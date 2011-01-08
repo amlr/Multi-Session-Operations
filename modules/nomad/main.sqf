@@ -98,9 +98,16 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 			};
 		},
 		{
-			[player] joinSilent (_this select 0);
 			if (_this select 1) then {
-				(_this select 0) selectLeader player;
+				[player] joinSilent (createGroup playerSide);
+				(group player) selectLeader player;
+				{
+					if !(isplayer _x) then {
+						[_x] joinsilent (group player);
+					};
+				} foreach units (_this select 0);
+			} else {
+				[player] joinSilent (_this select 0);
 			};
 		},
 		#include <mods\ace_sys_wounds_s.hpp>

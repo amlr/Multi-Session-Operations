@@ -1,7 +1,7 @@
 if (!isServer) exitWith{};
 
 private["_debug","_types","_d","_tarea","_dogs", "_side"];
-_debug = true;
+_debug = false;
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
@@ -22,7 +22,10 @@ if(count _this > 0) then {
 		if (random 1 > 0.75) then {
 			private["_name","_dx","_dy","_pos","_trg","_m"];
 			_name = format["wdtrg_%1", floor(random 10000)];
-			diag_log format["MSO-%1 Dog Packs: createTrigger %2", time, _name];
+			if(_debug) then {
+				diag_log format["MSO-%1 Dog Packs: createTrigger %2", time, _name];
+				hint format["MSO-%1 Dog Packs: createTrigger %2", time, _name];
+			};
 			
 			// randomise wild dog positions
 			_pos = position _x;
@@ -68,3 +71,4 @@ if(count _this > 0) then {
 };
 
 diag_log format["MSO-%1 Dog Packs # %2", time, count _dogs];
+if(_debug) then {hint format["MSO-%1 Dog Packs # %2", time, count _dogs];};

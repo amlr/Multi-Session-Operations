@@ -8,8 +8,10 @@
 #define CRB_DOGS
 #define RMM_ENEMYPOP
 #define CRB_FLIPPABLE
+#define GC_PACK_COW
 #define RMM_JIPMARKERS
 #define RMM_LOGBOOK
+#define RMM_MP_RIGHTS
 #define RMM_NOMAD
 #define RMM_RECRUITMENT
 #define RMM_REVIVE
@@ -23,7 +25,6 @@
 // - In progress
 //#define RMM_CASEVAC
 //#define RMM_EODD
-//#define RMM_MP_RIGHTS
 //#define RMM_OSL
 //#define CRB_SOM
 

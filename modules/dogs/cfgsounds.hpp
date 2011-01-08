@@ -10,6 +10,6 @@ class dog_maul01 {
 };
 class dog_yelp {
 	name = "dog_yelp01";
-	sound[] = {modules\dogs\sounds\dog_yelp,0.5,1};
+	sound[] = {modules\dogs\sounds\dog_yelp.ogg,0.5,1};
 	titles[] = {};
 };

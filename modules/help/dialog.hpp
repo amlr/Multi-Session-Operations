@@ -2,7 +2,7 @@ class RMM_ui_help { // by Rommel
 	idd = 80599;
 	movingEnable = 1;
 	enableSimulation = 1;
-	onLoad = "0 call help_fnc_onload;";
+	onLoad = "0 spawn help_fnc_onload;";
 	
 
 	class controls {
