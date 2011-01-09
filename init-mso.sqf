@@ -226,6 +226,7 @@ MSO_R_Crew = true;
 "Completed" call _fnc_status;
 sleep 5;
 
+"AAW INKO Fix" call _fnc_status;
 // AAW INKO Fix
 waitUntil{!isNil "inko_disposable_ammo_player" && !isNil "inko_disposable_ammo_ai"};
 {terminate _x;} foreach [inko_disposable_ammo_player,inko_disposable_ammo_ai];
