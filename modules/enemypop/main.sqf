@@ -287,15 +287,16 @@ _total = 0;
 			_groups set [count _groups, _group];
 		};
 	};
-	if (_debug && count _pos != 0) then {
-		private["_t","_m"];
-		_t = format["op%1",floor(random 10000)];
-		_m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL"] call CBA_fnc_createMarker;
-		[_m, true] call CBA_fnc_setMarkerPersistent;
+	if (count _pos != 0) then {
 		diag_log format["MSO-%1 Enemy Population # %2 %3", time, type _x, _type];
-		hint format["MSO-%1 Enemy Population # %2 %3", time, type _x, _type];
+		if(_debug) then {
+			private["_t","_m"];
+			_t = format["op%1",floor(random 10000)];
+			_m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL"] call CBA_fnc_createMarker;
+			[_m, true] call CBA_fnc_setMarkerPersistent;
+			hint format["MSO-%1 Enemy Population # %2 %3", time, type _x, _type];
+		};
 	};
-
 	if (count allunits > 100) then {
 		private ["_logic"];
 		_logic = (createGroup sideLogic) createUnit ["Logic",[0,0,0],[],0,"NONE"];
