@@ -38,7 +38,6 @@ if(count _this > 1) then {
 _grp setBehaviour "SAFE";
 
 private ["_list", "_units","_staticWeapons"];
-sleep 15;
 _list = _pos nearObjects ["LandVehicle", 50];
 _units = (units _grp) - [leader _grp]; // The leader should not man defenses
 _staticWeapons = [];
