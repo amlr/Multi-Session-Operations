@@ -27,7 +27,9 @@ class Mission
 		"ca_modules_marta",
 		"ca_modules_clouds",
 		"BI_SRRS",
-		"cba_main"
+		"cba_main",
+		"CAAir_E_AH6J",
+		"CATracked_E"
 	};
 	addOnsAuto[]=
 	{
@@ -53,6 +55,8 @@ class Mission
 		"ca_animals2_sheep",
 		"cawheeled_e_hmmwv",
 		"cawheeled_e_stryker",
+		"CAAir_E_AH6J",
+		"CATracked_E",
 		"zargabad"
 	};
 	randomSeed=6553103;
@@ -68,7 +72,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=15;
+		items=16;
 		class Item0
 		{
 			side="WEST";
@@ -478,10 +482,28 @@ class Mission
 				};
 			};
 		};
+		class Item15
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={3499.9512,22.35,4189.5894};
+					id=87;
+					side="WEST";
+					vehicle="US_Soldier_EP1";
+					leader=1;
+					skill=0.60000002;
+					health=0;
+				};
+			};
+		};
 	};
 	class Vehicles
 	{
-		items=57;
+		items=60;
 		class Item0
 		{
 			position[]={3543.6902,22.35,4080.1206};
@@ -546,7 +568,7 @@ class Mission
 			side="EMPTY";
 			vehicle="SignM_FOB_Blanik_EP1";
 			skill=0.60000002;
-			init="0 = this execVM ""modules\logbook\addAction.sqf"";";
+			init="this setVariable [""R3F_LOG_disabled"", true]; 0 = this execVM ""modules\logbook\addAction.sqf"";";
 		};
 		class Item7
 		{
@@ -1021,10 +1043,37 @@ class Mission
 			skill=0.60000002;
 			init="this setVectorUp [0,0,-1];";
 		};
+		class Item57
+		{
+			position[]={3500.9092,22.35,4204.8828};
+			id=84;
+			side="EMPTY";
+			vehicle="AH6J_EP1";
+			skill=0.60000002;
+			health=0;
+		};
+		class Item58
+		{
+			position[]={3509.2598,22.369448,4200.231};
+			id=85;
+			side="EMPTY";
+			vehicle="M1A1_US_DES_EP1";
+			skill=0.60000002;
+			health=0;
+		};
+		class Item59
+		{
+			position[]={3491.6499,22.35,4199.4028};
+			id=86;
+			side="EMPTY";
+			vehicle="MTVR_DES_EP1";
+			skill=0.60000002;
+			health=0;
+		};
 	};
 	class Markers
 	{
-		items=13;
+		items=14;
 		class Item0
 		{
 			position[]={3515.6721,22.35,3992.2153};
@@ -1120,6 +1169,13 @@ class Mission
 			position[]={3565.3103,22.473274,4049.7515};
 			name="flippable";
 			text="Flippable Testing";
+			type="mil_dot";
+		};
+		class Item13
+		{
+			position[]={3505.3992,22.353498,4199.7949};
+			name="destroyed";
+			text="Cleanup of Destroyed Objects";
 			type="mil_dot";
 		};
 	};
