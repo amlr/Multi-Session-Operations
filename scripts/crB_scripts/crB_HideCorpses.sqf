@@ -7,15 +7,28 @@
 ///////////////////////////////////////////////////////////////////
 if (!isServer) exitWith{};
 
-[_this select 0] spawn {
+waitUntil{!isNil "bis_fnc_init"};
+
+_this spawn {
 	_timeuntilhide = _this select 0;
+	_dist = _this select 1;
 
 	while{true} do {
 		sleep _timeuntilhide;
 		{
-			if !(_x call CBA_fnc_isAlive) then{
-				_x call CBA_fnc_deleteEntity;
+			_obj = _x;
+			private["_x"];
+			if (!(_obj call CBA_fnc_isAlive) && {_obj distance _x < _dist} count ([] call BIS_fnc_listPlayers) == 0) then {
+				_obj call CBA_fnc_deleteEntity;
 			};
-		} forEach nearestObjects [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), ["Man","Car","Tank","Air"] , 20000] + allGroups;
+		} forEach nearestObjects [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), ["Man","Car","Tank","Air"], 20000];
+
+		{
+			if (not isnull _x) then {
+				if !(_x call CBA_fnc_isAlive) then {
+					_x call CBA_fnc_deleteEntity;
+				};
+			};
+		} foreach allGroups;
 	};
 };

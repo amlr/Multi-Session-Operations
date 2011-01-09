@@ -17,7 +17,7 @@ if(isServer) then {
 	0 setRain _srain;
 };
 
-[300] call compile preprocessFileLineNumbers "scripts\crB_scripts\crB_HideCorpses.sqf";
+[300,500] call compile preprocessFileLineNumbers "scripts\crB_scripts\crB_HideCorpses.sqf";
 
 [] call compile preprocessFileLineNumbers "Init-MSO.sqf";
 
