@@ -1,12 +1,20 @@
-if (isDedicated) exitWith{};
-waituntil {not isnull player};
+waituntil {!isnull player};
+waituntil {getplayeruid player != ""};
 
-////////////////////////////////////////////////////////////
-// Respawn Handling
-////////////////////////////////////////////////////////////
+_fnc_Killed = {
+	removeallweapons player;
+	removeallitems player;
+	removebackpack player;
 
-player setskill 0;
-{player disableAI _x} foreach ["move","anim","target","autotarget"];
+	player switchmove "";
+	player setskill 0;
+	{player disableAI _x} foreach ["move","anim","target","autotarget"];
+};
+
+call _fnc_Killed;
+player addeventhandler ["respawn", _fnc_Killed];
+
+//// WEAPONS RESPAWN (below)
 
 player addeventhandler ["killed", {
 	player setVariable ["respawn", [
@@ -18,9 +26,6 @@ player addeventhandler ["killed", {
 	], true];
 
 	diag_log format["Killed: %1", player getVariable "respawn"];
-
-	removeallweapons player; removeallitems player;
-	removebackpack player;
 
 }];
 
