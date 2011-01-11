@@ -36,7 +36,7 @@ Author:
 //Rows
 
 #ifndef CUI_Rows
-	#define CUI_Rows 42
+#define CUI_Rows 42
 #endif
 
 #define CUI_Row_H	((safeH / CUI_Rows) / 0.8)
@@ -47,7 +47,7 @@ Author:
 //Boxes
 
 #ifndef CUI_Boxes
-	#define CUI_Boxes 4
+#define CUI_Boxes 4
 #endif
 
 #define CUI_Box_H	(CUI_Row_H * (CUI_Rows / CUI_Boxes))
@@ -197,6 +197,7 @@ class CUI_Edit {
 	x = CUI_Box_X(0); y = CUI_Box_Row(0,1);
 	w = CUI_Box_W; h = CUI_Row_H;
 	
+	htmlControl = true;
 	type = 2; style = 16;
 	sizeEx = 0.028;	font = "BitStream";
 
@@ -230,4 +231,46 @@ class CUI_Text {
 
 	colorBackground[] = {0,0,0,0};
 	colorText[] = {CUI_Colours_WindowText, 1};
+};
+
+class CUI_StructText {
+	idc = -1;
+	x = CUI_Box_X(0); y = CUI_Box_Row(0,1);
+	w = CUI_Box_W; h = CUI_Row_H;
+	
+	type = 13; style = 0x00;
+	size = 0.032;	font = "Zeppelin32";
+
+	colorBackground[] = {0,0,0,0};
+	colorText[] = {CUI_Colours_WindowText, 1};
+};
+
+class CUI_ControlGroup {
+	idc = -1;
+	x = CUI_Box_X(0); y = CUI_Box_Row(0,1);
+	w = CUI_Box_W; h = CUI_Row_H;
+	
+	type = 15; style = 0x00;
+
+	class VScrollbar {
+		color[] = {1, 1, 1, 1};
+		width = 0.021;
+		autoScrollSpeed = -1;
+		autoScrollDelay = 5;
+		autoScrollRewind = 0;
+	};
+	class HScrollbar {
+		color[] = {1, 1, 1, 1};
+		height = 0.028;
+	};
+	class ScrollBar {
+		color[] = {1,1,1,0.6};
+		colorActive[] = {1,1,1,1};
+		colorDisabled[] = {1,1,1,0.3};
+		thumb = "#(argb,8,8,3)color(1,1,1,1)";
+		arrowEmpty = "#(argb,8,8,3)color(1,1,1,1)";
+		arrowFull = "#(argb,8,8,3)color(1,1,1,1)";
+		border = "#(argb,8,8,3)color(1,1,1,1)";
+	};
+	class controls {};
 };
