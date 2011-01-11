@@ -23,7 +23,7 @@ Author:
 
 ---------------------------------------------------------------------------- */
 
-private ["_class","_side","_positions","_radius","_speed","_behaviour","_direction","_array","_vehicle","_group","_waypoint","_count","_combat_mode"];
+private ["_class", "_side", "_positions", "_radius", "_speed", "_behaviour", "_direction", "_array", "_vehicle", "_group", "_waypoint", "_count"];
 _class = _this select 0;
 _side = _this select 1;
 _positions = _this select 2;

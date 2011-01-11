@@ -6,7 +6,7 @@ _group = group driver _helicopter;
 _group lockWP true;
 _helicopter land "getout";
 _dt = time + 300;
-waituntil {landResult _helicopter == "Found" || landResult _helicopter == "NotFound" || not alive _helicopter || {alive _x} count (crew _helicopter) == 0 || _dt < time};
+waituntil {landResult _helicopter == "Found" || landResult _helicopter == "NotFound" || !alive _helicopter || {alive _x} count (crew _helicopter) == 0 || _dt < time};
 
 if (landResult _helicopter == "Found") then {
 	waituntil {count ([_helicopter] unitsBelowHeight 2) > 0};

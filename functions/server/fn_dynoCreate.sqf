@@ -14,8 +14,6 @@
 	
 */
 
-
-private ["_posX","_posY","_multiplyMatrixFunc","_newObjs","_script","_azi","_pos","_objs"];
 _script = _this select 0;
 _azi 	= _this select 1;
 _pos 	= _this select 2;
