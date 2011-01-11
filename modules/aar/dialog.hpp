@@ -15,6 +15,13 @@ class RMM_ui_aar { // by Rommel
 			y = CUI_Row_Y(0);
 			w = CUI_Box_W * 2;
 		};
+		class Help: CUI_Button {
+			text = "?";
+			x = CUI_Box_X(2) - CUI_Row_H;
+			y = CUI_Row_Y(0);
+			w = CUI_Row_H;
+			action = """modules\aar\help.html"" call help_fnc_display;";
+		};
 		class Lb0 : CUI_Combo {
 			idc = 0;
 			x = CUI_Box_X(2 * 1/4);

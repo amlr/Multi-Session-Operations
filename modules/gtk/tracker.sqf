@@ -28,7 +28,11 @@ _array = [];
 	_ref = createlocation ["strategic", _x call CBA_fnc_getpos, 1, 1];
 	_ref setside (side _x);
 	_ref setvariable ["active", true];
-	_ref setvariable ["group", group _x];
+	if (tolower(typename _x) == "group") then {
+		_ref setvariable ["group", _x];
+	} else {
+		_ref setvariable ["group", group _x];
+	};
 	_ref setvariable ["forced", false];
 	_array set [count _array,_ref];
 } foreach _groups;
@@ -54,6 +58,5 @@ while {count _array > 0} do {
 			};
 		};
 	} foreach _array;
-	if (count (call 
 	sleep (call RMM_fnc_playersNumber);
 };

@@ -22,7 +22,7 @@ notebook_target = _target;
 
 _menus = [
 	[
-		["main",  mso_menuname, _menuRsc],
+		["main", "", _menuRsc],
 		[
 			["Read/Write Log Entries",
 				{ [notebook_target] spawn notebook_fnc_open; },

@@ -21,7 +21,7 @@ class RMM_ui_help { // by Rommel
 					text = "Error";
 					x = 0;
 					y = 0;
-					w = safeW;
+					w = safeW * 2;
 					h = safeH * 4;
 				};
 			};

@@ -1,25 +1,39 @@
 if (isdedicated) exitwith {};
 
-waituntil {not isnull player};
+waituntil {!isnull player};
 waituntil {!isMultiplayer || getplayeruid player != ""};
 
 [
 	[
-		/*{deaths player} //auto-integrated*/
+		{
+			if (count units (group player) > 1) then {
+				[player] joinsilent (createGroup playerSide);
+				(group player) selectLeader player;
+			};
+			_this + 1;
+		},
 		{typeof player;},
 		{magazines player;},
 		{weapons player;},
 		{typeof (unitbackpack player);},
 		{getmagazinecargo (unitbackpack player);},
 		{getweaponcargo (unitbackpack player);},
+		{[group player, leader player == player];},
 		{
-			private "_pos";
+			private ["_group","_pos"];
+			_group = group player;
 			_pos = getpos player;
-			if (_pos distance _this > 1) then {
-				_pos;
+			if (leader (group player) == player) then {
+				if (_pos distance (_group getvariable ["position",[0,0,0]]) > 10) then {
+					_group setvariable ["position",_pos,true];
+				};	
 			} else {
-				_this;
-			};
+				if (_pos distance (_group getvariable ["position",[0,0,0]]) > 500) then {
+					[player] joinsilent (createGroup playerSide);
+					(group player) selectLeader player;
+				};
+			};				
+			if (_pos distance _this > 1) then {_pos;} else {_this;};	
 		},
 		{damage player;},
 		{rating player;},
@@ -29,13 +43,13 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{getDir player;},
 		{[vehicle player, driver (vehicle player) == player, gunner (vehicle player) == player, commander (vehicle player) == player];},
 		{lifestate player;},
-		{[group player, (leader player == player)];},
+		{rank player;},
+		#include <mods\aaw_g.hpp>
 		#include <mods\ace_sys_wounds_g.hpp>
-		{rank player;}
 	],
 	[
 		{
-			if (_this > (nomadRespawns)) then {_disconnect = true;};
+			if (_this > nomadRespawns) then {_disconnect = true;};
 		},
 		{
 			if (typeof player != _this) then {_disconnect = true;};
@@ -66,10 +80,20 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 				(unitbackpack player) addweaponcargo [(_this select 0) select _i,(_this select 1) select _i];
 			};
 		},
-		{player setpos _this;},
+		{
+			[player] joinSilent (_this select 0);
+			if (_this select 1) then {(_this select 0) selectLeader player;};
+		},
+		{
+			private ["_group","_gpos","_pos"];
+			_group = group player;
+			_gpos = _group getvariable ["position",_this];
+			_pos = if (_gpos distance _this > 200) then {_gpos;} else {_this;};
+			player setpos _pos;
+		},
 		{player setdamage _this;},
 		{player addrating (-(rating player) + _this);},
-		{player addscore (-(score player) + _this);},
+		{player addscore _this;},
 		{setviewdistance _this;},
 		{
 			setterraingrid ((-10 * _this + 50) max 1);
@@ -79,7 +103,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{
 			private ["_vehicle"];
 			_vehicle = _this select 0;
-			if (not isnull _vehicle || _vehicle != player) then {
+			if (!isnull _vehicle || _vehicle != player) then {
 				if ((_this select 1) and (isnull(driver _vehicle))) exitwith {
 					player moveInDriver _vehicle;
 				};
@@ -93,24 +117,12 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 			};
 		},
 		{
-			if (tolower(_this) == "unconscious") then {
+			if (_this == "UNCONCONSCIOUS") then {
 				player setUnconscious true;
 			};
 		},
-		{
-			if (_this select 1) then {
-				[player] joinSilent (createGroup playerSide);
-				(group player) selectLeader player;
-				{
-					if !(isplayer _x) then {
-						[_x] joinsilent (group player);
-					};
-				} foreach units (_this select 0);
-			} else {
-				[player] joinSilent (_this select 0);
-			};
-		},
+		{player setunitrank _this;},
+		#include <mods\aaw_s.hpp>
 		#include <mods\ace_sys_wounds_s.hpp>
-		{player setunitrank _this;}
 	]
 ] execfsm "modules\nomad\nomad.fsm";

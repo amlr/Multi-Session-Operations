@@ -22,9 +22,9 @@ _menus = [
 	[
 		["main", "", _menuRsc],
 		[
-			["Transmit Map Coordinates",
-				{ call jipmarkers_fnc_click },
-				"", "", "", -1,	1, visibleMap and (player hasWeapon "itemRadio")]
+			["Dump pack",
+				{ player action ["putBag", player] },
+				"", "", "", 0x20,	1, !isnull (unitBackpack player)]
 		]
 	]
 ];

@@ -1,4 +1,4 @@
-if(isDedicated) exitWith{};
+if (isdedicated) exitwith {};
 
 [] spawn {
 	private ["_fnc_between","_fnc_prayer","_towns"];
@@ -18,7 +18,6 @@ if(isDedicated) exitWith{};
 		} foreach (_town getvariable "EP1_Minarets");
 	};
 
-	waitUntil{!isNil "BIS_fnc_init"};
 	_towns = [["CityCenter"]] call BIS_fnc_locations;
 	{
 		_list = nearestobjects [position _x,["Land_A_Minaret_EP1","Land_A_Minaret_Porto_EP1"],500];
@@ -30,7 +29,6 @@ if(isDedicated) exitWith{};
 	} foreach _towns;
 
 	waituntil {(round time) mod 10 == 0};
-
 	while {true} do {
 		{
 			if (_x call _fnc_between) exitwith {

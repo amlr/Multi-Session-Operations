@@ -1,5 +1,5 @@
 player createDiaryRecord ["Diary", [
-	format ["%1/%2 %3 - AAR %4", (date select 2),(date select 1),([daytime] call BIS_fnc_timeToString), call (RMM_aar_lines select 1) select (_this select 1)],
+	format ["%1/%2 %3 - AAR %4", (date select 2),(date select 1),([daytime] call BIS_fnc_timeToString), RMM_aar_lines select 1 select (_this select 1)],
 	format [
 		"Callsign: %1<br/>" +
 		"Category: %2<br/>" +
@@ -14,9 +14,9 @@ player createDiaryRecord ["Diary", [
 		(if (_this select 8 != "") then {"Civilian WIA: %9<br/>"} else {""}) +
 		"<br/>" +
 		"Report: <br/>%10<br/>",
-		call (RMM_aar_lines select 0) select (_this select 0),
-		call (RMM_aar_lines select 1) select (_this select 1),
-		call (RMM_aar_lines select 2) select (_this select 2),
+		(RMM_aar_lines select 0) select (_this select 0),
+		(RMM_aar_lines select 1) select (_this select 1),
+		(RMM_aar_lines select 2) select (_this select 2),
 		_this select 3,
 		_this select 4,
 		_this select 5,

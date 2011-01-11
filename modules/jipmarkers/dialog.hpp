@@ -16,6 +16,13 @@ class RMM_ui_jipmarkers { // by Rommel
 			h = CUI_Row_DY(0,1);
 			w = CUI_Box_W;
 		};
+		class Help: CUI_Button {
+			text = "?";
+			x = CUI_Box_X(1) - CUI_Row_H;
+			y = CUI_Row_Y(0);
+			w = CUI_Row_H;
+			action = """modules\jipmarkers\help.html"" call help_fnc_display;";
+		};
 		class LblType : CUI_Text {
 			y = CUI_Row_Y(1);
 			text = "Icon:";

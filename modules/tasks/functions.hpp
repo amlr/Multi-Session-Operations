@@ -1,9 +1,7 @@
-class tasks {
+class MP_Tasks {
 	file = "modules\tasks";
 	class functions {
-		class add {};
-		class click {};
-		class deletenearest {};
-		class taskadd {};
+		class taskAdd {};
+		class taskUpdate {};
 	};
 };

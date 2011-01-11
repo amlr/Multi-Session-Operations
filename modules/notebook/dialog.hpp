@@ -10,11 +10,18 @@ class RMM_ui_logbook {
 			w = CUI_Box_W * 2;
 			h = CUI_Row_DY(0,10);
 		};
-		class WindowCaption : CUI_Caption {
+		class Caption : CUI_Caption {
 			x = CUI_Box_X(1);
 			y = CUI_Box_Row(0,0);
 			w = CUI_Box_W * 2;
 			text = "Log Book";
+		};
+		class Help: CUI_Button {
+			text = "?";
+			x = CUI_Box_X(1) - CUI_Row_H;
+			y = CUI_Row_Y(0);
+			w = CUI_Row_H;
+			action = """modules\jipmarkers\help.html"" call help_fnc_display;";
 		};
 		class SText : CUI_Text {
 			x = CUI_Box_X(1);
