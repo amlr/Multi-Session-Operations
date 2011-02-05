@@ -10,7 +10,7 @@ if(isNil "CRB_LOCS") then {
 
 _types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
 _d = 100;
-_tarea = 250;
+_tarea = 110;
 _dogs = [];
 _side = "WEST";
 if(count _this > 0) then {
@@ -19,7 +19,7 @@ if(count _this > 0) then {
 
 {
 	if(type _x in _types) then {
-		if (random 1 > 0.75) then {
+		if (random 1 > 0.8) then {
 			private["_name","_dx","_dy","_pos","_trg","_m"];
 			_name = format["wdtrg_%1", floor(random 10000)];
 			if(_debug) then {
@@ -34,7 +34,7 @@ if(count _this > 0) then {
 			call compile format["%1 = _trg;", _name];
 			_trg setTriggerActivation [_side, "PRESENT", true];
 			_trg setTriggerArea [_tarea, _tarea, 0, false];
-			_trg setTriggerStatements ["this", format["[%1, thislist] spawn dogs_fnc_wilddogs;", _name], ""];
+			_trg setTriggerStatements ["isServer", format["wdgrp_%1 = [%1, thislist] call dogs_fnc_wilddogs;", _name], format["{deleteVehicle _x} foreach units wdgrp_%1; deleteGroup wdgrp_%1;", _name]];
 			
 			if (_debug) then {
 				hint format["Dogs: creating m_%1",  _name];
