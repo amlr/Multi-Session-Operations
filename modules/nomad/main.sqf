@@ -31,6 +31,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{lifestate player;},
 		{[group player, (leader player == player)];},
 		#include <mods\ace_sys_wounds_g.hpp>
+		#include <mods\aaw_g.hpp>
 		{rank player;}
 	],
 	[
@@ -111,6 +112,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 			};
 		},
 		#include <mods\ace_sys_wounds_s.hpp>
+		#include <mods\aaw_s.hpp>
 		{player setunitrank _this;}
 	]
 ] execfsm "modules\nomad\nomad.fsm";
