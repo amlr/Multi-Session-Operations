@@ -76,7 +76,7 @@ _wp1 setWaypointType "MOVE";
 [_grp, 1] setWaypointCombatMode "YELLOW";
 [_grp, 1] setWaypointFormation "STAG COLUMN";
 [_grp, 1] setWaypointCompletionRadius 50;
-[_grp, 1] setWaypointStatements ["true", "null = [this] spawn {
+[_grp, 1] setWaypointStatements ["true", "0 = [this] spawn {
         _grp = group (_this select 0);
         sleep (30+(random 60));
         {doStop _x} forEach units _grp;
@@ -90,7 +90,7 @@ _wp1 setWaypointType "MOVE";
 
 _wp2 = _grp addWaypoint [_pos, 0];
 _wp2 setWaypointType "DISMISS";
-[_grp, 2] setWaypointStatements ["true", "null = [this] spawn {
+[_grp, 2] setWaypointStatements ["true", "0 = [this] spawn {
         _grp = group (_this select 0);
         {_x forceSpeed -1 } forEach units _grp;
 }; "];
@@ -102,7 +102,7 @@ _wp3 setWaypointType "SAD";
 [_grp, 3] setWaypointCombatMode "RED";
 [_grp, 3] setWaypointFormation "VEE";
 [_grp, 3] setWaypointCompletionRadius 50;
-[_grp, 3] setWaypointStatements ["true", "null = [this] spawn {
+[_grp, 3] setWaypointStatements ["true", "0 = [this] spawn {
         _grp = group (_this select 0);
         _list = position (_this select 0) nearObjects ['LandVehicle', 30];
         _static_weapons = [];

@@ -1,4 +1,6 @@
 if(isServer) then {
+	CRB_SERVERTW = [date, fog, overcast, rain];
+	publicVariable "CRB_SERVERTW";
 	onPlayerConnected {
 		CRB_SERVERTW = [date, fog, overcast, rain];
 		publicVariable "CRB_SERVERTW";

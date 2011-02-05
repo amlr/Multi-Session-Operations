@@ -206,6 +206,10 @@ MSO_R_Crew = true;
 	"Weather" call _fnc_status;
 	execNow "modules\weather\main.sqf";
 #endif
+#ifdef CEP_CACHE
+	"CEP AI Unit Caching" call _fnc_status;
+	execNow "modules\CEP_caching\main.sqf";
+#endif
 #ifdef CRB_DOGS
 	"Dogs" call _fnc_status;
 	["WEST"] execNow "modules\dogs\main.sqf";
@@ -223,15 +227,15 @@ MSO_R_Crew = true;
 	execNow "modules\enemypop\main.sqf";
 #endif
 
-"Completed" call _fnc_status;
-sleep 5;
-
-"AAW INKO Fix" call _fnc_status;
 // AAW INKO Fix
-waitUntil{!isNil "inko_disposable_ammo_player" && !isNil "inko_disposable_ammo_ai"};
-{terminate _x;} foreach [inko_disposable_ammo_player,inko_disposable_ammo_ai];
+"AAW INKO Fix" call _fnc_status;
+if(!isNil "inko_disposable_ammo_player") then {terminate inko_disposable_ammo_player;};
+if(!isNil "inko_disposable_ammo_ai") then {terminate inko_disposable_ammo_ai;};
 inko_disposable_throw = {};
 inko_disposable_fired = {};
 inko_disposable_oa = false;
+
+"Completed" call _fnc_status;
+sleep 5;
 
 hint "Change your View Distance Settings using the 0-8 Communications menu.";

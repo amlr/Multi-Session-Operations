@@ -1,16 +1,6 @@
 [
-	["822401", 	"CORPORAL",		["crew"]],	/*Ryan*/
-	["1022977",	"PRIVATE",		["crew"]],	/*Glenn*/
-	["1062145", 	"CORPORAL",		["crew"]], 	/*Antipop*/
-	["1019521", 	"PRIVATE",		["pilot"]],	/*Innomadic*/
-	["1065345", 	"CORPORAL",		["pilot"]],	/*Tank*/
-	["3048774",	"LIEUTENANT",		["admin"]],	/*Rommel*/
-	["822401", 	"PRIVATE",		["crew"]],	/*Zomba*/
-	["3076038",	"LIEUTENANT",		["admin"]], 	/*Wolffy.au*/
-	["3165254", 	"SERGEANT",		["pilot","crew"]],	/*Swordsman*/
-	["1965894", 	"CORPORAL",		["crew"]], 	/*Chappy*/
-	["3165446", 	"CORPORAL",		["crew"]], /*Delta 51*/
-	["3158150", 	"CORPORAL",		["pilot","crew"]], /*Floydii*/
-	["897537", 	"PRIVATE",		["pilot"]], 	/*Rhodesy*/
-	["1048961", 	"CORPORAL",		["crew"]]	/*Swedge*/
+	["1234", 	"CORPORAL",	["crew"]],	/*namex*/
+	["4567", 	"PRIVATE",		["pilot"]],	/*namey*/
+	["7890",	"LIEUTENANT",	["admin"]],	/*adminx*/
+	["6789", "SERGEANT",	["pilot","crew"]] /*namez*/
 ]

@@ -68,6 +68,9 @@ class cfgFunctions {
 #ifdef CRB_FLIPPABLE
 	#include <modules\flippable\functions.hpp>
 #endif
+#ifdef RMM_GTK
+	#include <modules\gtk\functions.hpp>
+#endif
 #ifdef RMM_HELP
 	#include <modules\help\functions.hpp>
 #endif
@@ -77,11 +80,14 @@ class cfgFunctions {
 #ifdef RMM_LOGBOOK
 	#include <modules\logbook\functions.hpp>
 #endif
+#ifdef RMM_LOGISTICS
+	#include <modules\logistics\functions.hpp>
+#endif
 #ifdef RMM_NOTEBOOK
 	#include <modules\notebook\functions.hpp>
 #endif
-#ifdef RMM_LOGISTICS
-	#include <modules\logistics\functions.hpp>
+#ifdef RMM_OSOM
+	#include <modules\osom\functions.hpp>
 #endif
 #ifdef RMM_REVIVE
 	#include <modules\revive\functions.hpp>
