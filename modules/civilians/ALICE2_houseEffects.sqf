@@ -8,9 +8,10 @@ _logic setvariable ["dummydoor",_AIdoor];
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Civilian Actions
 ///////////////////////////////////////////////////////////////////////////////////
-
-_allActionsx = _logic getvariable "ALICE_actionsx";
-_allActions = _logic getvariable "ALICE_actions";
+/*
+_allActionsx = _logic getvariable ["ALICE_actionsx", []];
+_allActions = _logic getvariable ["ALICE_actions", []];
+_actionCategories = _logic getvariable "civilianActions";
 
 for "_i" from 0 to 2 do {
 	_source = [configfile,missionconfigfile,campaignconfigfile] select _i;
@@ -31,15 +32,15 @@ for "_i" from 0 to 2 do {
 					_init = gettext(_action >> "init");
 					_allActions = _allActions + [
 						[
-							/* 0 */ _action,
-							/* 1 */ configname _action,
-							/* 2 */ _condition,
-							/* 3 */ _fsm,
-							/* 4 */ _rarity,
-							/* 5 */ _locked,
-							/* 6 */ _canrepeat,
-							/* 7 */ _initVariables,
-							/* 8 */ _init
+							_action, // 0
+							configname _action, // 1
+							_condition, // 2
+							_fsm, // 3
+							_rarity, // 4
+							_locked, // 5
+							_canrepeat, // 6
+							_initVariables, // 7
+							_init // 8
 						]
 					];
 				};
@@ -50,16 +51,17 @@ for "_i" from 0 to 2 do {
 };
 _logic setvariable ["ALICE_actionsx",_allActionsx];
 _logic setvariable ["ALICE_actions",_allActions];
-
+*/
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Civilian Conversations
 ///////////////////////////////////////////////////////////////////////////////////
 
-_allConversations = _logic getvariable "ALICE_conversations";
-_allTopics = _logic getvariable "ALICE_topics";
-_allScreams = _logic getvariable "ALICE_screams";
-_allRemarks = _logic getvariable "ALICE_remarks";
+_allConversations = _logic getvariable ["ALICE_conversations", [[],[],[],[]]];
+_allTopics = _logic getvariable ["ALICE_topics", []];
+_allScreams = _logic getvariable ["ALICE_screams", []];
+_allRemarks = _logic getvariable ["ALICE_remarks", []];
+_kbCategories = _logic getvariable "civilianConversations";
 
 _t = 0;
 for "_i" from 0 to 2 do {
