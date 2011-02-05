@@ -252,8 +252,8 @@ class FSM
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
           condition=/*%FSM<CONDITION""">*/"!(_twn getvariable ""ALICE_active"")" \n
            " && " \n
-           "(_twn getvariable ""ALICE_threat"") <= 0" \n
-           " && " \n
+           "//(_twn getvariable ""ALICE_threat"") <= 0" \n
+           "// && " \n
            "(time - _timeNow > _delay)" \n
            "&&" \n
            "{(position _twn) distance _x < _spawnDistance} count ([] call BIS_fnc_listPlayers) == 0"/*%FSM</CONDITION""">*/;

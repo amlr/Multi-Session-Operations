@@ -86,6 +86,7 @@ if (_movein && _house isKindOf "house") then {
 
 [_unit] join (_twn getvariable "ALICE_group");
 _unit forcewalk true;
+_unit setspeedmode "limited";
 _unit setbehaviour "safe";
 _unit setvariable ["ALICE_id",_id];
 _unit setvariable ["ALICE_twn",_twn];
@@ -109,7 +110,6 @@ for "_i" from 0 to (count _allTopics - 1) step 2 do {
     
     _bikb = _path + "CfgCivilianConversations.bikb";
     _fsm = _path + "CfgCivilianConversations.fsm";
-    
     _unit kbaddtopic [_topic, _bikb, _fsm];
 };
 
