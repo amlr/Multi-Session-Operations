@@ -24,7 +24,7 @@ if (isserver) then {
         _update_rate = _this select 1;
         while {true} do {
             private "_contents";
-            _contents = compile loadFile _server_file;
+            _contents = call compile preprocessFileLineNumbers _server_file;
             if (!([_contents, MP_rights_list] call BIS_fnc_areEqual)) then {
                 MP_rights_list = _contents;
                 publicvariable "MP_rights_list";
@@ -34,12 +34,8 @@ if (isserver) then {
     };
 } else {
     waitUntil{!isNil "MP_rights_list"};
-//    player globalChat str MP_rights_list;
-    waitUntil{count (call compile MP_rights_list) > 0};
-//    player globalChat str (call compile MP_rights_list);
-//    player globalChat str (getplayeruid player);
+    waitUntil{count MP_rights_list > 0};
     waituntil {getplayeruid player != ""};
-//    player globalChat str (getplayeruid player);
     
     private ["_uid"];
     _uid = getplayeruid player;
@@ -67,7 +63,7 @@ if (isserver) then {
                 MSO_R_Air = ("pilot" in MSO_R) || MSO_R_Admin;
                 MSO_R_Crew = ("crew" in MSO_R) || MSO_R_Admin;
             };
-        } foreach call compile MP_rights_list;
+        } foreach MP_rights_list;
 
 		{
 			if (_x iskindof "Air") then {
