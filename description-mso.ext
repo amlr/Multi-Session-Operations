@@ -5,6 +5,16 @@ respawn = 3;
 respawnDelay = 10;
 disabledAI = 1;
 
+//http://community.bistudio.com/wiki/description.ext#OnLoad...
+onLoadIntro = "An AAF/AEF CTB Collaboration";
+onLoadMission = "An AAF/AEF CTB Collaboration";
+onLoadIntroTime = true;
+onLoadMissionTime = true;
+
+aiKills = 0;
+briefing = 1;
+debriefing = 1;
+
 class CfgSounds {
 #ifdef CRB_DOGS
 	#include <modules\dogs\cfgsounds.hpp>
@@ -19,6 +29,30 @@ class Params {
 #ifdef RMM_NOMAD
 	#include <modules\nomad\params.hpp>
 #endif
+	class faction_RU {
+		title = "Enable Russians"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_ACE_RU {
+		title = "Enable ACE Russians"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_INS {
+		title = "Enable Insurgents"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_GUE {
+		title = "Enable Guerillas"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
 	class faction_BIS_TK {
 		title = "Enable Takistan Army"; 
 		values[]= {0,1}; 

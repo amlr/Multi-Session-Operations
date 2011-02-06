@@ -5,7 +5,7 @@ _destination = _this select 2;
 
 private "_task";
 _task = player createsimpletask [_taskname];
-_task setsimpletaskdescription _description;
+_task setsimpletaskdescription [_description,_taskname,_taskname];
 _task setsimpletaskdestination _destination;
 _task settaskstate "created";
 missionnamespace setvariable [_taskname,_task];

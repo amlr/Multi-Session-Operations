@@ -4,29 +4,11 @@
 	#define execNow call compile preprocessfilelinenumbers
 #endif
 
-MSO_FACTIONS = [];
-if(!isNil "faction_BIS_TK") then {
-	if(faction_BIS_TK == 1) then {
-		MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK"];
-	};
-};
-if(!isNil "faction_BIS_TK_INS") then {
-	if(faction_BIS_TK_INS == 1) then {
-		MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK_INS"];
-	};
-};
-if(!isNil "faction_BIS_TK_GUE") then {
-	if(faction_BIS_TK_GUE == 1) then {
-		MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK_GUE"];
-	};
-};
-if(count MSO_FACTIONS == 0) then {MSO_FACTIONS = ["BIS_TK_GUE"];};
-
 //http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];
 
-private ["_crb_mapclick","_fnc_status"];
-_crb_mapclick = "";
+private ["_fnc_status"];
+CRB_MAPCLICK = "";
 
 "RMM_MPe" addPublicVariableEventHandler {
 	private ["_data","_locality","_params","_code"];
@@ -103,6 +85,43 @@ if (!isNil "paramsArray") then {
 		missionNamespace setVariable [configName ((missionConfigFile/"Params") select _i),paramsArray select _i];
 	};
 };
+MSO_FACTIONS = [];
+if(!isNil "faction_RU") then {
+	if(faction_RU == 1) then {
+		MSO_FACTIONS = MSO_FACTIONS + ["RU"];
+	};
+};
+if(!isNil "faction_ACE_RU") then {
+	if(faction_ACE_RU == 1) then {
+		MSO_FACTIONS = MSO_FACTIONS + ["ACE_VDV","ACE_GRU","ACE_MVD"];
+	};
+};
+if(!isNil "faction_INS") then {
+	if(faction_INS == 1) then {
+		MSO_FACTIONS = MSO_FACTIONS + ["INS"];
+	};
+};
+if(!isNil "faction_GUE") then {
+	if(faction_GUE == 1) then {
+		MSO_FACTIONS = MSO_FACTIONS + ["GUE"];
+	};
+};
+if(!isNil "faction_BIS_TK") then {
+	if(faction_BIS_TK == 1) then {
+		MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK"];
+	};
+};
+if(!isNil "faction_BIS_TK_INS") then {
+	if(faction_BIS_TK_INS == 1) then {
+		MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK_INS"];
+	};
+};
+if(!isNil "faction_BIS_TK_GUE") then {
+	if(faction_BIS_TK_GUE == 1) then {
+		MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK_GUE"];
+	};
+};
+if(count MSO_FACTIONS == 0) then {MSO_FACTIONS = ["BIS_TK_GUE"];};
 
 "Player" call _fnc_status;
 execNow "scripts\init_player.sqf";
@@ -142,9 +161,11 @@ MSO_R_Crew = true;
 	if (!isDedicated) then {
 		player call revive_fnc_init;
 	};
-	revive_test call revive_fnc_init;
-	revive_test setDamage 0.6;
-	revive_test call revive_fnc_unconscious;
+	if (!isNil "revive_test") then {
+		revive_test call revive_fnc_init;
+		revive_test setDamage 0.6;
+		revive_test call revive_fnc_unconscious;
+	};
 #endif
 #ifdef RMM_AAR
 	"After Action Reports" call _fnc_status;
@@ -229,13 +250,52 @@ MSO_R_Crew = true;
 
 // AAW INKO Fix
 "AAW INKO Fix" call _fnc_status;
-if(!isNil "inko_disposable_ammo_player") then {terminate inko_disposable_ammo_player;};
-if(!isNil "inko_disposable_ammo_ai") then {terminate inko_disposable_ammo_ai;};
-inko_disposable_throw = {};
-inko_disposable_fired = {};
-inko_disposable_oa = false;
+//AAWinf_HelmChangeAnyWhere = true; 
+execNow "scripts\ace_aaw_fix.sqf";
+
+"Time Sync" call _fnc_status;
+if(isServer) then {
+	CRB_SERVERTW = [date, fog, overcast, rain];
+	publicVariable "CRB_SERVERTW";
+	onPlayerConnected {
+		[] spawn {
+			sleep 30;
+			CRB_SERVERTW = [date, fog, overcast, rain];
+			publicVariable "CRB_SERVERTW";
+		};
+	};
+} else {
+	waitUntil{!isNil "CRB_SERVERTW"};
+	waitUntil{typeName CRB_SERVERTW == "ARRAY"};
+
+	_stime = CRB_SERVERTW select 0;
+	_sfog = CRB_SERVERTW select 1;
+	_sover = CRB_SERVERTW select 2;
+	_srain = CRB_SERVERTW select 3;
+
+	setDate _stime;
+	0 setFog _sfog;
+	0 setOvercast _sover;
+	0 setRain _srain;
+
+	"CRB_SERVERTW" addPublicVariableEventHandler {
+		_stime = CRB_SERVERTW select 0;
+		_sfog = CRB_SERVERTW select 1;
+		_sover = CRB_SERVERTW select 2;
+		_srain = CRB_SERVERTW select 3;
+		if((((datetonumber date) - (datetonumber _stime)) * 365 * 24 * 60) > 5) then {
+			player sideChat "Time and weather syncing...";
+			setDate _stime;
+			0 setFog _sfog;
+			0 setOvercast _sover;
+			0 setRain _srain;
+		};
+	};
+};
+
+"Remove Destroyed Objects" call _fnc_status;
+[300,500] call compile preprocessFileLineNumbers "scripts\crB_scripts\crB_HideCorpses.sqf";
 
 "Completed" call _fnc_status;
 sleep 5;
-
-hint "Change your View Distance Settings using the 0-8 Communications menu.";
+execNow "scripts\intro.sqf";

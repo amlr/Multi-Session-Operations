@@ -5,5 +5,7 @@ class tasks {
 		class click {};
 		class deletenearest {};
 		class taskadd {};
+		class taskhint {};
+		class taskupdate {};
 	};
 };

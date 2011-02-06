@@ -27,6 +27,6 @@ if (isnil "RMM_jipmarkers") then {
 };
 
 ["player", [mso_interaction_key], 4, ["modules\jipmarkers\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
-// Pointless as Rommel over-writes the onMapSingleClick
-//_crb_mapclick = _crb_mapclick + "if (!_shift && _alt) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
-//onMapSingleClick _crb_mapclick;
+
+CRB_MAPCLICK = CRB_MAPCLICK + "if (!_shift && _alt) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
+onMapSingleClick CRB_MAPCLICK;

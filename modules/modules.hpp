@@ -1,6 +1,6 @@
 // - Tested
 #define RMM_AAR
-#define RMM_CAS
+//#define RMM_CAS
 #define CEP_CACHE
 #define CRB_CIVILIANS
 #define RMM_CONVOYS
@@ -9,7 +9,7 @@
 #define CRB_DOGS
 #define RMM_ENEMYPOP
 #define CRB_FLIPPABLE
-#define GC_PACK_COW
+//#define GC_PACK_COW
 #define RMM_JIPMARKERS
 #define RMM_LOGBOOK
 #define RMM_MP_RIGHTS
