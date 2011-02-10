@@ -15,7 +15,7 @@ for "_y" from 1 to _grpx - 1 do {
 	_cx = configName _vehx;
 //hint str _fx;
 //hint str typeName _fac;
-	if (_sx > _cargoslots) then {
+        if (_sx > _cargoslots && !(_cx isKindOf "StaticWeapon")) then {
 		if (!isNil "_fac") then {
 			switch(typeName _fac) do {
 				case "STRING": {

@@ -1,6 +1,6 @@
 // - Tested
 #define RMM_AAR
-//#define RMM_CAS
+#define RMM_CAS
 #define CEP_CACHE
 #define CRB_CIVILIANS
 #define RMM_CONVOYS
