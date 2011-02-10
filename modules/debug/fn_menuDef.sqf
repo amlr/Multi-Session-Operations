@@ -24,7 +24,7 @@ _menus = [
 		[
 			["Debug Console",
 				{ createDialog "RMM_ui_debug" },
-				"", "", "", -1,	1, true]
+				"", "", "", -1,	1, (getPlayerUID player) in MSO_R_Admin]
 		]
 	]
 ];

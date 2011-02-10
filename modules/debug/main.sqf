@@ -1,6 +1,5 @@
 if (isdedicated) exitwith {};
 
-if (MSO_R_Admin) then {
-	["player", [mso_interaction_key], 4, ["modules\debug\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
-	["Debug","createDialog ""RMM_ui_debug"""] call fnc_updateMenu;
-};
+waitUntil{!isNil "MSO_R_Admin"};
+["player", [mso_interaction_key], 4, ["modules\debug\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+["Debug","if((getPlayerUID player) in MSO_R_Admin) then {createDialog ""RMM_ui_debug""};"] call fnc_updateMenu;
