@@ -11,7 +11,7 @@ RMM_cas_lines = [
 	{RMM_cas_types}
 ];
 RMM_cas_missiontime = 540;
-RMM_cas_flyinheight = 125;
+RMM_cas_flyinheight = 500;
 RMM_cas_frequency = 10800;
 
 if (isnil "RMM_cas_lastTime") then {
@@ -19,7 +19,6 @@ if (isnil "RMM_cas_lastTime") then {
 	publicvariable "RMM_cas_lastTime";
 };
 
-if (MSO_R_Leader) then {
-	["player", [mso_interaction_key], 4, ["modules\cas\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
-	["CAS","if(call mso_fnc_hasRadio) then {createDialog ""RMM_ui_cas""}"] call fnc_updateMenu;
-};
+waitUntil{!isNil "MSO_R_Leader"};
+["player", [mso_interaction_key], 4, ["modules\cas\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+["CAS","if(call mso_fnc_hasRadio && ((getPlayerUID player) in MSO_R_Leader)) then {createDialog ""RMM_ui_cas""}"] call fnc_updateMenu;
