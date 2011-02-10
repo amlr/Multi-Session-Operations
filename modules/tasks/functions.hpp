@@ -1,11 +1,11 @@
 class tasks {
-	file = "modules\tasks";
-	class functions {
-		class add {};
-		class click {};
-		class deletenearest {};
-		class taskadd {};
-		class taskhint {};
-		class taskupdate {};
-	};
+        file = "modules\tasks";
+        class functions {
+                class add {};
+                class click {};
+                class deletenearest {};
+                class taskadd {};
+                class taskhint {};
+                class taskupdate {};
+        };
 };

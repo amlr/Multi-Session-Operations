@@ -24,7 +24,7 @@ _menus = [
                 [
                         ["Task Management",
                         { if(call mso_fnc_hasRadio) then { call tasks_fnc_click } },
-                        "", "", "", -1,	1, visibleMap]
+                        "", "", "", -1,	1, visibleMap && ((getPlayerUID player) in MSO_R_Leader)]
                 ]
         ]
 ];
