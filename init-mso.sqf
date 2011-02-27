@@ -132,18 +132,18 @@ setTerrainGrid 25;
 
 #ifdef RMM_MP_RIGHTS
 if(!isMultiplayer) then {mprightsDisable = 1;};
-if(mprightsDisable == 1) then {
+if(mprightsDisable == 1) then {
         "MP Rights disabled" call _fnc_status;
-        _uid = getPlayerUID player;
-        MSO_R_Admin = [_uid];
-        MSO_R_Leader = [_uid];
-        MSO_R_Officer = [_uid];
-        MSO_R_Air = [_uid];
-        MSO_R_Crew = [_uid];
+        _uid = getPlayerUID player;
+        MSO_R_Admin = [_uid];
+	MSO_R_Leader = [_uid];
+        MSO_R_Officer = [_uid];
+        MSO_R_Air = [_uid];
+        MSO_R_Crew = [_uid];
 } else {
         "MP Rights" call _fnc_status;
         execNow "modules\mp_rights\main.sqf";
-};
+};
 #endif
 if(isNil "mprightsDisable") then {
         "Default Rights" call _fnc_status;
@@ -242,6 +242,18 @@ execNow "modules\tyres\main.sqf";
 "Weather" call _fnc_status;
 execNow "modules\weather\main.sqf";
 #endif
+#ifdef CRB_CROWS
+"Crows" call _fnc_status;
+execNow "modules\crb_crows\main.sqf";
+#endif
+#ifdef CRB_FLIES
+"Flies" call _fnc_status;
+execNow "modules\crb_flies\main.sqf";
+#endif
+#ifdef CRB_SANDSTORM
+"Sandstorms" call _fnc_status;
+execNow "modules\crb_sandstorms\main.sqf";
+#endif
 #ifdef CEP_CACHE
 "CEP AI Unit Caching" call _fnc_status;
 execNow "modules\CEP_caching\main.sqf";
@@ -249,6 +261,12 @@ execNow "modules\CEP_caching\main.sqf";
 #ifdef CRB_DOGS
 "Dogs" call _fnc_status;
 ["WEST"] execNow "modules\dogs\main.sqf";
+#endif
+#ifdef CRB_TERRORISTS
+"Terrorist Cells" call _fnc_status;
+execVM "modules\CRB_Terrorists\main.sqf";
+execVM "modules\CRB_Terrorists\main.sqf";
+execVM "modules\CRB_Terrorists\main.sqf";
 #endif
 #ifdef RMM_CONVOYS
 "Convoys" call _fnc_status;
@@ -264,9 +282,9 @@ execNow "modules\enemypop\main.sqf";
 #endif
 
 // AAW INKO Fix
-"AAW INKO Fix" call _fnc_status;
+//"AAW INKO Fix" call _fnc_status;
 //AAWinf_HelmChangeAnyWhere = true; 
-execNow "scripts\ace_aaw_fix.sqf";
+//execNow "scripts\ace_aaw_fix.sqf";
 
 "Time Sync" call _fnc_status;
 if(isServer) then {
