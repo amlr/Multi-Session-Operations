@@ -11,8 +11,8 @@
 //   OR	single faction = USMC,RU,INS,GUE,etc e.g. "INS"
 //   OR	multiple factions = USMC,RU,INS,GUE,etc e.g. ["RU","INS"]
 ///////////////////////////////////////////////////////////////////
+private ["_pos","_type","_fac","_facs","_sidex","_side","_grpx","_grps","_grp","_fx","_facx","_s","_allfacs","_spawnGrp"];
 if(!isServer) exitWith{};
-private["_pos","_type","_fac","_facs","_sidex","_side","_grpx","_grps","_grp","_radius"];
 
 _pos = _this select 0;
 _type = _this select 1;
@@ -141,7 +141,8 @@ _spawnGrp = [_pos, _side, _grp] call BIS_fnc_spawnGroup;
 
 if(_side == civilian) then {
 	[_spawnGrp, _pos] spawn {
-		_spawnGrp = _this select 0;
+                private ["_wp","_spawnGrp","_pos"];
+                _spawnGrp = _this select 0;
 		_pos = _this select 1;		
 		while{true} do {
 			_wp = _spawnGrp addWaypoint [_pos, 0];
