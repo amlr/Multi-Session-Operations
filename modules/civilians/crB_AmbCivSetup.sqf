@@ -45,7 +45,7 @@ switch toLower(worldName) do {
 
 // Dumb down civilian units to use less CPU (see http://creobellum.org/node/175)
 /*{(group _this) setVariable ["CEP_disableCache",true]),*/
-[BIS_alice_mainscope,"ALICE_civilianinit",[{_this setSkill 0},{{_this disableAI _x} count ["AUTOTARGET","TARGET"]},{_this allowFleeing 1;},{removeAllWeapons _this;},{removeAllItems _this;}]] call BIS_fnc_variableSpaceAdd;
+[BIS_alice_mainscope,"ALICE_civilianinit",[{group _this setVariable ["CEP_disableCache", true]},{_this setSkill 0},{{_this disableAI _x} count ["AUTOTARGET","TARGET"]},{_this allowFleeing 1;},{removeAllWeapons _this;},{removeAllItems _this;}]] call BIS_fnc_variableSpaceAdd;
 
 // Artificial coeficient to set how much will be town's respect decreased once some civilian is hit or killed.
 // The higher the number is, the more is respect towards killer's faction decreased. 

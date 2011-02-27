@@ -39,11 +39,12 @@ if(isServer) then {
 		private ["_ok"];
 		_ok = [_logicAni] execVM "CA\Modules\Animals\Data\scripts\init.sqf";
 	};
+
 };
 
 switch(toLower(worldName)) do {
 	case "zargabad": {
-		[] spawn compile preprocessFileLineNumbers "modules\civilians\CIV_City.sqf";
+		[] call compile preprocessFileLineNumbers "modules\civilians\CIV_City.sqf";
 	};
 	case "chernarus": {
 		[] spawn compile preprocessfilelinenumbers "modules\civilians\ALICE2_houseEffects.sqf";

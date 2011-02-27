@@ -32,10 +32,11 @@ _trg setSoundEffect ["Env102", "", "", "CockSfx"];
 _trg = createTrigger["EmptyDetector", [4012.7036,3974.646,16.233406]];
 _trg setTriggerStatements ["true", "", ""];
 _trg setSoundEffect ["Env102", "", "", "CowSfx"];
-
+/*
 _objs = _pos nearObjects ["S1203_ambulance_EP1",200];
 {
 	_wp = (group _x) addWaypoint [position _x, 0];
 	_wp setWaypointType "SUPPORT";
 	_wp setWaypointBehaviour "SAFE";
 } forEach _objs;
+*/
