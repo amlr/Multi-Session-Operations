@@ -112,9 +112,9 @@ class FSM
        "//---------------" \n
        "// user var" \n
        "//---------------" \n
-       "_SpawnRadius = 1500;" \n
-       "_DensityReduction = 100;" \n
-       "_FindPlaceRadius = 400;    " \n
+       "_SpawnRadius = 750;" \n
+       "_DensityReduction = 200;" \n
+       "_FindPlaceRadius = 200;    " \n
        "" \n
        "" \n
        "" \n
