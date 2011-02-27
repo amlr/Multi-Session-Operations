@@ -1,3 +1,5 @@
+
+private ["_logicFnc","_twnlist","_locationParams","_create","_twnlistTemp","_i","_rarity","_faction","_classlist","_classlistVehicles","_scope","_side","_woman","_class","_vehicleclass","_actual","_condition","_fsm","_locked","_canrepeat","_initVariables","_init","_allActions","_action","_tempArrayx","_civilianActions","_source","_allActionsx","_allTopics","_endSentences","_tempArray","_element","_type","_topic","_path","_category","_screams","_scream","_categoryId","_oldScreams","_allScreams","_Remarks","_oldRemarks","_allRemarks","_civilianConversations","_civilianScreams","_civilianRemarks","_factionCiv","_logic","_debug","_initArray","_distlimit","_trafficDistance","_twnSize","_civilianCount","_actionCategories","_kbCategories","_townsFaction","_blacklist","_respectModifyCoef","_threatDecay","_unitrarity","_totobj","_allConversations","_twnrespect"];
 scriptName "Alice2\data\scripts\main.sqf";
 /*
 	File: main.sqf
@@ -217,7 +219,6 @@ _allConversations = [[],[],[],[]];
 _allTopics = [];
 _allScreams = [];
 _allRemarks = [];
-_t = 0;
 for "_i" from 0 to 2 do {
 	_source = [configfile,missionconfigfile,campaignconfigfile] select _i;
 	_tempArray = [];
@@ -294,22 +295,25 @@ _logic setvariable ["ALICE_topics",_allTopics];
 _fsm = _logic execfsm (BIS_Alice2_path + "fsms\alice2.fsm");
 
 
-/*
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Towns
 ///////////////////////////////////////////////////////////////////////////////////
-debuglog format ["Log: ALICE 2: Initializing ...",_twnname];
-_factionCiv = ["CIV"] call BIS_fnc_getFactions;
+//debuglog format ["Log: ALICE 2: Initializing ...",_twnname];
 _twnrespect = ["SET"] call BIS_fnc_respect;
-_twnrespect set [_factionCiv,0.5];
+{
+	_factionCiv = [_x] call BIS_fnc_getFactions;
+	_twnrespect set [_factionCiv,0.5];
+} forEach _townsFaction;
+/*
 {
 	_type = _x getvariable "type";
 	_name = _x getvariable "name";
 	_pos = position _x;
 	if (isnil {_x getvariable "respect"}) then {_x setVariable ["respect",_twnrespect,true]};
 	_x setVariable ["ALICE_active",false];
-	_x setVariable ["ALICE_active_traffic",false];
+	_x setVariable ["ALICE_active_traffic",0];
 	_x setvariable ["ALICE_threat",-1];
 	_x setvariable ["ALICE_status","black"];
 	_x setVariable ["ALICE_population",[]];

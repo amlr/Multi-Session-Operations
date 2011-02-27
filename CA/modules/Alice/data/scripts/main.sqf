@@ -274,9 +274,11 @@ _logic setvariable ["ALICE_topics",_allTopics];
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Towns
 ///////////////////////////////////////////////////////////////////////////////////
-_factionCiv = ["CIV"] call BIS_fnc_getFactions;
 _twnrespect = ["SET"] call BIS_fnc_respect;
-_twnrespect set [_factionCiv,0.5];
+{
+	_factionCiv = [_x] call BIS_fnc_getFactions;
+	_twnrespect set [_factionCiv,0.5];
+} forEach _townsFaction;
 {
 	_type = _x getvariable "type";
 	_name = _x getvariable "name";

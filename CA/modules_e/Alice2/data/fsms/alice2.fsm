@@ -132,7 +132,7 @@ class FSM
        "//--- Virgin - define variables for first time" \n
        "if (isnil {_town getvariable ""ALICE_active""}) then {" \n
        "	_town setvariable [""ALICE_active"",false];" \n
-       "	_town setvariable [""ALICE_active_traffic"",false];" \n
+       "	_town setvariable [""ALICE_active_traffic"",0];" \n
        "	_town setvariable [""ALICE_threat"",-1];" \n
        "	_town setvariable [""ALICE_status"",""black""];" \n
        "};" \n
@@ -167,15 +167,16 @@ class FSM
        "_trafficDisMax = _trafficDisMin * 1.2;" \n
        "" \n
        "//--- Start " \n
-       "if (!_activeTraffic && {_town distance _x < _trafficDisMin} count ([] call BIS_fnc_listPlayers) > 0) then {" \n
-       "	_town setvariable [""ALICE_active_traffic"",true];" \n
+       "_maxtraffic = 3;" \n
+       "if (_activeTraffic < _maxtraffic && {_town distance _x < _trafficDisMin} count ([] call BIS_fnc_listPlayers) > 0) then {" \n
+       "	_town setvariable [""ALICE_active_traffic"",_activeTraffic + 1];" \n
        "	textLogFormat [""Log: [ALICE 2]: %1 traffic start."",_name];" \n
        "	_fsmTraffic = [_logic,_town] execfsm (BIS_Alice2_path + ""fsms\alice2_traffic.fsm"");" \n
        "};" \n
        "" \n
        "//--- End" \n
-       "if (_activeTraffic && {_town distance _x > _trafficDisMax} count ([] call BIS_fnc_listPlayers) > 0) then {" \n
-       "	_town setvariable [""ALICE_active_traffic"",false];" \n
+       "if (_activeTraffic > 0 && {_town distance _x > _trafficDisMax} count ([] call BIS_fnc_listPlayers) > 0) then {" \n
+       "	_town setvariable [""ALICE_active_traffic"",_activeTraffic - 1];" \n
        "	textLogFormat [""Log: [ALICE 2]: %1 traffic end."",_name];" \n
        "};" \n
        "////////////////////////////////////////////////////////////////////////////////////////////////" \n

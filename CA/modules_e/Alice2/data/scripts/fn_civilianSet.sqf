@@ -80,7 +80,7 @@ if (_movein && _house isKindOf "house") then {
     
     _spawnpos = _house modeltoworld (_posList call bis_fnc_selectrandom);
     _unit setposatl _spawnpos;
-    _unit setskill (random 1);
+    _unit setskill (random 0.5);
     _unit setvelocity [0,0,0];
 };
 
