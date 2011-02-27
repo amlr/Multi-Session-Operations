@@ -3,6 +3,9 @@
 #define RMM_CAS
 #define CEP_CACHE
 #define CRB_CIVILIANS
+#define CRB_CROWS
+#define CRB_FLIES
+#define CRB_SANDSTORM
 #define RMM_CONVOYS
 #define RMM_CTP
 #define RMM_DEBUG
