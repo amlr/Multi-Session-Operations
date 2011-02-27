@@ -10,7 +10,7 @@ if(isNil "CRB_LOCS") then {
 
 _types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
 _d = 100;
-_tarea = 110;
+_tarea = 100;
 _dogs = [];
 _side = "WEST";
 if(count _this > 0) then {

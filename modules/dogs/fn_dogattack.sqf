@@ -3,10 +3,10 @@ _victim = _this select 0;
 _dog = _this select 1;
 
 //_victim say ["scream", 10];
-if (vehicle _victim isKindOf "CAManBase") then { 
+if (vehicle _victim isKindOf "CAManBase" && random 1 < 0.25) then { 
 	[_victim, "scream"] call CBA_fnc_globalSay3d;
 };
-if (vehicle _victim isKindOf "CAAnimalBase") then { 
+if (vehicle _victim isKindOf "CAAnimalBase" && random 1 < 0.25) then { 
 	[_victim, "dog_yelp"] call CBA_fnc_globalSay3d;
 };
 
