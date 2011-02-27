@@ -11,6 +11,9 @@
 
 private ["_trigDist","_delay"];
 if (!isServer) exitwith {};
+
+_debug = false;
+
 _trigDist = 1000;
 if(count _this > 0) then {
         _trigDist = _this select 0;
@@ -26,10 +29,11 @@ cep_tls = 0;
 waitUntil{!isNil "bis_fnc_init"};
 waitUntil{typeName allGroups == "ARRAY"};
 
-[_trigDist, _delay] spawn {
+[_trigDist, _delay, _debug] spawn {
         private ["_disable","_str","_timex","_allunitsx","_trigDist","_delay"];
         _trigDist = _this select 0;
         _delay = _this select 1;
+        _debug = _this select 2;
         _str = "";
         while{count allGroups > 0} do {
                 if(time > 0 && _delay > 0) then {sleep _delay;};
@@ -61,7 +65,7 @@ waitUntil{typeName allGroups == "ARRAY"};
                 if(_str != format["%1/%2 Cached Groups %3/%4/%5 Active/Suspended/Cached Units", count cep_cached_grps, count allGroups, (count allUnits) - cep_tls, cep_tls, cep_unit_count]) then {
                         _str = format["%1/%2 Cached Groups %3/%4/%5 Active/Suspended/Cached Units", count cep_cached_grps, count allGroups, (count allUnits) - cep_tls, cep_tls, cep_unit_count];
                         diag_log format["MSO-%1 CEP Caching # %2", time, _str];
-                        hint format["MSO-%1 CEP Caching # %2", time, _str];;
+                        if(_debug) then {hint format["MSO-%1 CEP Caching # %2", time, _str];};
                 };
                 _timex = time + 5;
                 _allunitsx = count allUnits;
