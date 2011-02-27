@@ -47,7 +47,8 @@ R3F_LOG_CFG_remorqueurs =
 	"BTR90_Base",
 	"GAZ_Vodnik_HMG",
 	"LAV25_Base",
-	"MLRS"
+	"MLRS",
+	"LandRover_Base"
 ];
 
 /**
@@ -73,7 +74,8 @@ R3F_LOG_CFG_heliporteurs =
 [
 	// e.g. : "MyLifterVehicleClassName1", "MyLifterVehicleClassName2"
 	"BAF_Merlin_HC3_D",
-	"CH_47F_EP1"
+	"CH_47F_EP1",
+	"AAW_CH47"
 ];
 
 /**
@@ -142,7 +144,15 @@ R3F_LOG_CFG_transporteurs =
 	// e.g. : ["MyTransporterClassName1", itsCapacity], ["MyTransporterClassName2", itsCapacity]
 	["BAF_Jackal2_BASE_D", 15],
 	["CH_47F_EP1", 50],
-
+	
+	["AAW_CH47", 50],
+	["AAW_s70bh_mg",25],
+	["AAW_s70",25],
+	
+	["aawBushmaster_ECM", 13],
+	["aawBushmaster_pws_ECM", 12],
+	["aawBushmaster", 15],
+	
 	["ATV_US_EP1", 10],
 
 	["hilux1_civil_1_open", 10],
@@ -212,6 +222,12 @@ R3F_LOG_CFG_transporteurs =
 R3F_LOG_CFG_objets_transportables =
 [
 	// e.g. : ["MyTransportableObjectClassName1", itsCost], ["MyTransportableObjectClassName2", itsCost]
+	
+	["aawWpnsBox_F88SA2", 6],
+	["aawWpnsBox_F88_1", 6],
+	["aawWpnsBox_LMG", 8],
+	["aawWpnsBox_AA_D", 8],
+	
 	["Land_Pneu", 2],
 	["Land_fort_bagfence_long", 3],
 	["Land_fort_bagfence_corner", 3],
@@ -357,6 +373,12 @@ R3F_LOG_CFG_objets_deplacables =
 	"Land_Pneu",
 	"SatPhone", // Needed for the R3F_ARTY module (arty HQ) (nécessaire pour le module R3F_ARTY (PC d'arti))
 	"StaticWeapon",
+	
+	"aawWpnsBox_F88SA2",
+	"aawWpnsBox_F88_1",
+	"aawWpnsBox_LMG",
+	"aawWpnsBox_AA_D",
+	
 	
 	"RubberBoat",
 	
