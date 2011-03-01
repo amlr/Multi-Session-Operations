@@ -32,6 +32,9 @@ class Params {
 #ifdef RMM_NOMAD
 	#include <modules\nomad\params.hpp>
 #endif
+#ifdef RMM_WEATHER
+	#include <modules\weather\params.hpp>
+#endif
 	class faction_RU {
 		title = "Enable Russians"; 
 		values[]= {0,1}; 
