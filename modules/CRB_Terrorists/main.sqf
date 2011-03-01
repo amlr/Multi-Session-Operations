@@ -10,11 +10,11 @@
 private ["_spawnpoints","_debug","_spawn","_classMan","_terrorcrgo","_terrorlead","_vehicle","_vcargo","_twn","_grp","_terrorunit"];
 if(!isServer) exitWith{};
 
-_debug = true;
+_debug = false;
 
 // Thanks to Pogoman's Insurgency for this code
 #define intelMarkerType "hd_unknown"
-#define intelRadius 750
+#define intelRadius 1000
 PGM_fnc_CreateIntel = { 
         private ["_i","_sign","_sign2","_radius","_cache","_pos","_range"];
         
