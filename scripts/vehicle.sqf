@@ -1,7 +1,7 @@
 /*  
 =========================================================
   Simple Vehicle Respawn Script v1.6
-  by Tophe of Östgöta Ops [OOPS]
+  by Tophe of ï¿½stgï¿½ta Ops [OOPS]
   
   Put this in the vehicles init line:
   veh = [this] execVM "vehicle.sqf"
@@ -56,7 +56,8 @@ Contact & Bugreport: harlechin@hotmail.com
 
 =========================================================
 */
-  
+
+private ["_hasname","_delay","_deserted","_respawns","_noend","_dead","_nodelay","_timeout","_position","_dir","_effect","_rounds","_run","_unit","_explode","_dynamic","_unitinit","_haveinit","_unitname","_type","_weapons","_mags","_max"];
 if (!isServer) exitWith {};
 
 // Define variables
@@ -71,7 +72,7 @@ _haveinit = if (count _this > 6) then {true} else {false};
 
 _hasname = false;
 _unitname = vehicleVarName _unit;
-if (isNil _unitname) then {_hasname = false;} else {_hasname = true;};
+if (_unitname == "") then {_hasname = false;} else {_hasname = true;};
 _noend = true;
 _run = true;
 _rounds = 0;
@@ -87,6 +88,8 @@ _type = typeOf _unit;
 _dead = false;
 _nodelay = false;
 
+_weapons = getWeaponCargo _unit;
+_mags = getMagazineCargo _unit;
 
 // Start monitoring the vehicle
 while {_run} do 
@@ -120,12 +123,23 @@ while {_run} do
 		_unit setPosASL _position;
 		_unit setDir _dir;
 
+                clearWeaponCargo _unit;
+                clearMagazineCargo _unit;
+ 
+                _max = count(_weapons select 0);
+                for "_i" from 0 to _max do {
+                        _unit addWeaponCargo [(_weapons select 0) select _i, (_weapons select 1) select _i];
+                };
+
+                _max = count(_mags select 0);
+                for "_i" from 0 to _max do {
+                        _unit addMagazineCargo [(_mags select 0) select _i, (_mags select 1) select _i];
+                };
+
 		if (_haveinit) then 
 					{_unit setVehicleInit format ["%1;", _unitinit];
 					processInitCommands;};
-		if (_hasname) then 
-					{_unit setVehicleInit format ["%1 = this; this setVehicleVarName ""%1""",_unitname];
-					processInitCommands;};
+		if (_hasname) then {_unit setVehicleVarName _unitname;};
 		_dead = false;
 
 		// Check respawn amount

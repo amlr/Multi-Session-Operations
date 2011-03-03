@@ -1,7 +1,7 @@
 /*  
 =========================================================
   Based on Simple Vehicle Respawn Script v1.6
-  by Tophe of Östgöta Ops [OOPS]
+  by Tophe of ï¿½stgï¿½ta Ops [OOPS]
   
   Put this in the vehicles init line:
   veh = [this, Delay] execVM "respawn.sqf"
@@ -13,7 +13,8 @@
 
 =========================================================
 */
-  
+
+private ["_hasname","_delay","_unit","_weapons","_mags","_unitname","_run","_dir","_position","_type","_max"];
 if (!isServer) exitWith {};
 
 // Define variables
@@ -22,18 +23,16 @@ _delay = if (count _this > 1) then {_this select 1} else {30};
 
 _hasname = false;
 _unitname = vehicleVarName _unit;
-if (isNil _unitname) then {_hasname = false;} else {_hasname = true;};
-_noend = true;
+if (_unitname == "") then {_hasname = false;} else {_hasname = true;};
 _run = true;
-_rounds = 0;
 
 if (_delay < 0) then {_delay = 0};
 
 _dir = getDir _unit;
 _position = getPosASL _unit;
 _type = typeOf _unit;
-_dead = false;
-_nodelay = false;
+_weapons = getWeaponCargo _unit;
+_mags = getMagazineCargo _unit;
 
 
 // Start monitoring the vehicle
@@ -45,12 +44,20 @@ while {_run} do
 	_unit setPosASL _position;
 	_unit setDir _dir;
 
-	if (_haveinit) then {
-		_unit setVehicleInit format ["%1;", _unitinit];
-		processInitCommands;
-	};
-	if (_hasname) then {
-		_unit setVehicleInit format ["%1 = this; this setVehicleVarName ""%1""",_unitname];
-		processInitCommands;
+	clearWeaponCargo _unit;
+	clearMagazineCargo _unit;
+
+        _max = count(_weapons select 0);
+        for "_i" from 0 to _max do {
+                _unit addWeaponCargo [(_weapons select 0) select _i, (_weapons select 1) select _i];
+        };
+
+        _max = count(_mags select 0);
+        for "_i" from 0 to _max do {
+                _unit addMagazineCargo [(_mags select 0) select _i, (_mags select 1) select _i];
+        };
+
+        if (_hasname) then {
+		_unit setVehicleVarName _unitname;
 	};
 };
