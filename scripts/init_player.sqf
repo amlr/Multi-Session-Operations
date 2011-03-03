@@ -20,6 +20,13 @@ player addeventhandler ["respawn", {
 	{_unit addweapon _x;} foreach ((weapons _corpse) + (items _corpse));
 	_unit selectweapon (primaryweapon _unit);
 
+//	_ace = isClass (configFile>>"cfgWeapons" >> "ACE_B61BombLauncher");
+//	if (_ace) then {
+	if(!isNil "ace_main") then {
+
+		[_unit, _corpse] call compile preprocessFileLineNumbers "init_player_ace.sqf";
+	};
+
 	_bp = typeof (unitbackpack _corpse);
 	if (_bp != "") then {
 		_bpm = getmagazinecargo (unitbackpack _corpse);

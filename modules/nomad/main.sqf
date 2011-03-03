@@ -30,13 +30,16 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{[vehicle player, driver (vehicle player) == player, gunner (vehicle player) == player, commander (vehicle player) == player];},
 		{lifestate player;},
 		{[group player, (leader player == player)];},
+		#include <mods\ace_sys_ruck_g.hpp>
 		#include <mods\ace_sys_wounds_g.hpp>
 		#include <mods\aaw_g.hpp>
 		{rank player;}
 	],
 	[
 		{
-			if (_this > (nomadRespawns)) then {_disconnect = true;};
+			_dayspassed = time / 86400;
+			_maxLives = nomadRespawns * (nomadReinforcements * _dayspassed);
+			if (_this > _maxLives) then {_disconnect = true;};
 		},
 		{
 			if (typeof player != _this) then {_disconnect = true;};
@@ -111,6 +114,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 				[player] joinSilent (_this select 0);
 			};
 		},
+		#include <mods\ace_sys_ruck_s.hpp>
 		#include <mods\ace_sys_wounds_s.hpp>
 		#include <mods\aaw_s.hpp>
 		{player setunitrank _this;}
