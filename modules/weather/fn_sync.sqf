@@ -1,20 +1,27 @@
-private ["_x0", "_y0", "_x1", "_y1", "_t0", "_t1"];
-_x0 = _this select 0;
-_y0 = _this select 1;
-_x1 = (_this select 2) max 0.01;
-_y1 = (_this select 3) max 0.01 min 0.5;
-_t0 = _this select 4;
-_t1 = (_this select 5) max 3600 min 300;
+private ["_ocurrent","_oforecast","_ostart","_oend","_fcurrent","_fforecast","_fstart","_fend","_rcurrent","_rforecast","_rstart","_rend"];
+_ocurrent = _this select 0;
+_oforecast = _this select 1;
+_ostart = _this select 2;
+_oend = _this select 3;
 
-diag_log format["MSO-%1 Weather Sync: x0=%2 y0=%3 x1=%4 y1=%5 t0=%6 t1=%7", time, _x0, _y0, _x1, _y1, _t0, _t1];
+_fcurrent = _this select 4;
+_fforecast = _this select 5;
+_fstart = _this select 6;
+_fend = _this select 7;
 
-//Linear interpolation
-//0 setovercast (_x0 + (time - _t0) * ((_x1 - _x0)/(_t1 - _t0)));
-//0 setfog (_y0 + (time - _t0) * ((_y1 - _y0)/(_t1 - _t0)));
+_rcurrent = _this select 8;
+_rforecast = _this select 9;
+_rstart = _this select 10;
+_rend = _this select 11;
 
-(_t1 - time) setovercast _x1;
-//temp until BIS lift their game, no transition of fog
+diag_log format["MSO-%1 Weather Sync: O=[%2,%3,%4,%5]", time, _ocurrent,_oforecast,_ostart,_oend];
+diag_log format["MSO-%1 Weather Sync: F=[%2,%3,%4,%5]", time, _fcurrent,_fforecast,_fstart,_fend];
+diag_log format["MSO-%1 Weather Sync: R=[%2,%3,%4,%5]", time, _rcurrent,_rforecast,_rstart,_rend];
+
+(_oend - time) setOvercast _oforecast;
+//temp until BIS lift their game, no transition of fog - Rommel
 //0 setfog _y1;
 if(disableFog == 0) then {
-	(_t1 - time) setfog _y1;
+        (_fend - time) setFog _fforecast;
 };
+(_rend - time) setRain _rforecast;
