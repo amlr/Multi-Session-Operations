@@ -36,6 +36,19 @@ CRB_randomRain = {
 
 if (isserver) then {
         
+        if(isNil "disableFog") then {
+                disableFog = 0;
+        };
+        if(isNil "timeOptions") then {
+                timeOptions = 0;
+        };
+        if(isNil "timeHour") then {
+                timeHour = 8;
+        };
+        if(isNil "timeMinute") then {
+                timeMinute = 0;
+        };
+        
         // Set server time if required
         switch (timeOptions) do {
                 // Original
