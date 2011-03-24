@@ -308,11 +308,8 @@ class FSM
        "	if (_bbox > 3 && _point distance [0,0,0] > 0.1) then {" \n
        "		_houselist = _houselist + [_x]" \n
        "	} else {" \n
-       "		_x call BIS_ALICE_fnc_doorCreate;" \n
-       "	};" \n
-       "	_point = _x selectionposition ""AIdoor1"";" \n
-       "	if (_bbox > 3 && _point distance [0,0,0] > 0.1) then {" \n
-       "		_houselist = _houselist + [_x]" \n
+       "		_doors = _x call BIS_ALICE_fnc_doorCreate;" \n
+       "		_houselist = _houselist + _doors" \n
        "	};" \n
        "} foreach _houselistRaw;" \n
        "_housecount = count _houselist;" \n

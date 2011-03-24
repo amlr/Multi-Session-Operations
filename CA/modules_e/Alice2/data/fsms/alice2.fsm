@@ -170,14 +170,16 @@ class FSM
        "_maxtraffic = 3;" \n
        "if (_activeTraffic < _maxtraffic && {_town distance _x < _trafficDisMin} count ([] call BIS_fnc_listPlayers) > 0) then {" \n
        "	_town setvariable [""ALICE_active_traffic"",_activeTraffic + 1];" \n
-       "	textLogFormat [""Log: [ALICE 2]: %1 traffic start."",_name];" \n
+       "	diag_log Format [""Log: [ALICE 2]: %1-%2 traffic start."",_name,_activeTraffic];" \n
+       "	textLogFormat [""Log: [ALICE 2]: %1-%2 traffic start."",_name,_activeTraffic];" \n
        "	_fsmTraffic = [_logic,_town] execfsm (BIS_Alice2_path + ""fsms\alice2_traffic.fsm"");" \n
        "};" \n
        "" \n
        "//--- End" \n
        "if (_activeTraffic > 0 && {_town distance _x > _trafficDisMax} count ([] call BIS_fnc_listPlayers) > 0) then {" \n
        "	_town setvariable [""ALICE_active_traffic"",_activeTraffic - 1];" \n
-       "	textLogFormat [""Log: [ALICE 2]: %1 traffic end."",_name];" \n
+       "	diag_log Format [""Log: [ALICE 2]: %1-%2 traffic end."",_name,_activeTraffic];" \n
+       "	textLogFormat [""Log: [ALICE 2]: %1-%2 traffic end."",_name,_activeTraffic];" \n
        "};" \n
        "////////////////////////////////////////////////////////////////////////////////////////////////" \n
        "" \n

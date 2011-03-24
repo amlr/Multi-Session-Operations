@@ -16,8 +16,7 @@ scriptName "Functions\systems\fn_locations.sqf";
 	
 	Note: If locations given by type (String) only config locations are used (not custom locations created via createLocation - because there is no way to get unique id/name for them). For script created locations - give list of them to this function.
 */
-
-private ["_types","_area","_debug","_logicFnc","_center","_maxdis","_locations","_logics","_result","_current","_classname","_position","_type","_logic","_name","_neighbors","_neighborsLogic","_neighbor","_marker","_pos1","_pos2","_diffX","_diffY","_lx","_ly","_dis","_dir","_class","_typeLogic","_mode","_pos","_maxvalue","_houselist","_houselistnew","_housecount","_rarityurban"];
+private ["_types","_typeLogic","_name","_marker","_logic","_logics","_result","_neighbors","_demography","_current","_classname","_position","_type","_inArea","_n","_location","_center","_maxdis","_locations","_houselistnew","_rarityurban","_pos","_houselist","_housecount","_mode","_maxvalue","_area","_debug","_logicFnc","_setNeigbors"];
 if (typename _this == typename "") then {_this = ["citycenter",[],true]}; //--- Debug
 
 _types = if (count _this > 0) then {_this select 0} else {["citycenter"]};
@@ -28,9 +27,11 @@ _result = [];
 
 if (typename _types in [typename "",typename locationnull]) then {_types = [_types]};
 
+
 //--- Parallel code to set neighbor connections
 _setNeigbors = {
-    _logic = _this select 0;
+	private ["_markera","_marker","_pos1","_pos2","_difX","_difY","_lx","_ly","_dis","_dir","_neighbor","_logic","_neighbors","_debug","_neighborsLogic"];
+        _logic = _this select 0;
 	_neighbors = _this select 1;
 	_debug = _this select 2;
 	_neighborsLogic = [];
@@ -160,7 +161,7 @@ switch (typename _types) do {
 					_position = position _location;
 					_classname = "BIS_loc_" + name _location;
 					_name = name _location;
-					_class = _classname;
+					//_class = _classname;
 					_type = type _location;
 					_typeLogic = gettext (configFile >> "cfgLocationTypes" >> _type >> "logicClass");				
 					if (_typeLogic == "") then {_typeLogic = "LocationLogic"};		    
