@@ -40,13 +40,21 @@ if(isServer) then {
 		_ok = [_logicAni] execVM "CA\Modules\Animals\Data\scripts\init.sqf";
 	};
 
+		BIS_ALICE2_fnc_civilianSet = compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\fn_civilianSet.sqf";
+//		_ok = [_logicCiv] execVM "ca\modules\alice\data\scripts\main.sqf";
 };
 
 switch(toLower(worldName)) do {
+	case "fallujah": {
+		[] spawn compile preprocessfilelinenumbers "modules\civilians\ALICE2_houseEffects.sqf";
+	};
 	case "zargabad": {
 		[] call compile preprocessFileLineNumbers "modules\civilians\CIV_City.sqf";
 	};
 	case "chernarus": {
+		[] spawn compile preprocessfilelinenumbers "modules\civilians\ALICE2_houseEffects.sqf";
+	};
+	case "eden": {
 		[] spawn compile preprocessfilelinenumbers "modules\civilians\ALICE2_houseEffects.sqf";
 	};
 	case "utes": {
