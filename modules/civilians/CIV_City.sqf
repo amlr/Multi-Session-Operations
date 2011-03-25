@@ -1,3 +1,4 @@
+private ["_pos","_trg"];
 _pos = [4134.7583,4074.6431,16.857695];
 
 ["civilian_city", 0, _pos] call compile preprocessFileLineNumbers "scripts\crB_scripts\crB_createCompositionLocal.sqf";
