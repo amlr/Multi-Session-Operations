@@ -6,7 +6,7 @@
 
 //http://community.bistudio.com/wiki/enableSaving
 
-private ["_fnc_status","_stime","_sfog","_sover","_srain","_uid"];
+private ["_fnc_status","_uid"];
 enableSaving [false, false];
 
 CRB_MAPCLICK = "";
@@ -105,6 +105,8 @@ if(!isNil "faction_INS") then {
 if(!isNil "faction_GUE") then {
         if(faction_GUE == 1) then {
                 MSO_FACTIONS = MSO_FACTIONS + ["GUE"];
+                playerSide setFriend [resistance, 0];
+                resistance setFriend [playerSide, 0];
         };
 };
 if(!isNil "faction_BIS_TK") then {
@@ -120,9 +122,15 @@ if(!isNil "faction_BIS_TK_INS") then {
 if(!isNil "faction_BIS_TK_GUE") then {
         if(faction_BIS_TK_GUE == 1) then {
                 MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK_GUE"];
+                playerSide setFriend [resistance, 0];
+                resistance setFriend [playerSide, 0];
         };
 };
-if(count MSO_FACTIONS == 0) then {MSO_FACTIONS = ["BIS_TK_GUE"];};
+if(count MSO_FACTIONS == 0) then {
+        MSO_FACTIONS = ["BIS_TK_GUE"];
+        playerSide setFriend [resistance, 0];
+        resistance setFriend [playerSide, 0];
+};
 
 "Player" call _fnc_status;
 execNow "scripts\init_player.sqf";
@@ -161,6 +169,10 @@ if(isNil "mprightsDisable") then {
 #ifdef RMM_DEBUG
 "Debug" call _fnc_status;
 execNow "modules\debug\main.sqf";
+#endif
+#ifdef RMM_WEATHER
+"Weather" call _fnc_status;
+execNow "modules\weather\main.sqf";
 #endif
 #ifdef RMM_NOMAD
 "NOMAD" call _fnc_status;
@@ -238,10 +250,6 @@ execNow "modules\tasks\main.sqf";
 "Tyre Changing" call _fnc_status;
 execNow "modules\tyres\main.sqf";
 #endif
-#ifdef RMM_WEATHER
-"Weather" call _fnc_status;
-execNow "modules\weather\main.sqf";
-#endif
 #ifdef CRB_CROWS
 "Crows" call _fnc_status;
 execNow "modules\crb_crows\main.sqf";
@@ -285,46 +293,6 @@ execNow "modules\enemypop\main.sqf";
 //"AAW INKO Fix" call _fnc_status;
 //AAWinf_HelmChangeAnyWhere = true; 
 //execNow "scripts\ace_aaw_fix.sqf";
-
-"Time Sync" call _fnc_status;
-if(isServer) then {
-        CRB_SERVERTW = [date, fog, overcast, rain];
-        publicVariable "CRB_SERVERTW";
-        onPlayerConnected {
-                [] spawn {
-                        sleep 30;
-                        CRB_SERVERTW = [date, fog, overcast, rain];
-                        publicVariable "CRB_SERVERTW";
-                };
-        };
-} else {
-        waitUntil{!isNil "CRB_SERVERTW"};
-        waitUntil{typeName CRB_SERVERTW == "ARRAY"};
-        
-        _stime = CRB_SERVERTW select 0;
-        _sfog = CRB_SERVERTW select 1;
-        _sover = CRB_SERVERTW select 2;
-        _srain = CRB_SERVERTW select 3;
-        
-        setDate _stime;
-        0 setFog _sfog;
-        0 setOvercast _sover;
-        0 setRain _srain;
-        
-        "CRB_SERVERTW" addPublicVariableEventHandler {
-                _stime = CRB_SERVERTW select 0;
-                _sfog = CRB_SERVERTW select 1;
-                _sover = CRB_SERVERTW select 2;
-                _srain = CRB_SERVERTW select 3;
-                if((((datetonumber date) - (datetonumber _stime)) * 365 * 24 * 60) > 5) then {
-                        player sideChat "Time and weather syncing...";
-                        setDate _stime;
-                        0 setFog _sfog;
-                        0 setOvercast _sover;
-                        0 setRain _srain;
-                };
-        };
-};
 
 "Remove Destroyed Objects" call _fnc_status;
 [300,500] call compile preprocessFileLineNumbers "scripts\crB_scripts\crB_HideCorpses.sqf";
