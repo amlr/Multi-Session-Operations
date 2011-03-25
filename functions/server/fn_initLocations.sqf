@@ -5,6 +5,20 @@ if(!isServer) exitWith{};
 _debug = false;
 _dist = 20000;
 
+_initNeighbors = {
+	{
+		_twn = _x;
+		if (isnil {_twn getvariable "neighbors"}) then {
+			_twn setvariable ["neighbors",[],true];
+		};
+		{
+			if (_x distance _twn < 2500) then {
+				[_x,"neighbors",[_twn],true,true] call bis_fnc_variablespaceadd;
+			};
+		} foreach (bis_functions_mainscope getvariable "locations");
+	} foreach (bis_functions_mainscope getvariable "locations");
+};
+
 // Zargabad - lots
 _strategic = ["Strategic","StrongpointArea","FlatArea","FlatAreaCity","FlatAreaCitySmall","CityCenter","Airport"];
 
@@ -22,6 +36,9 @@ if (_debug) then {player globalChat "initLocs: Custom Locs(" + worldName + ")";}
 [] call BIS_fnc_locations;
 CRB_LOC_DIST = 20000;
 switch toLower(worldName) do {		
+	case "fallujah": {
+		CRB_LOC_DIST = 15000;
+	};
 	case "zargabad": {
 		{createLocation ["BorderCrossing",_x,1,1]} foreach [[3430,8150,0],[2925,50,0],[3180,50,0],[5048,50,0]];
 //		{_twn = createLocation ["CityCenter",(_x select 0),1,1]; _twn setVariable ["name", (_x select 1)];[[_twn],[],true] call BIS_fnc_locations;} foreach [
@@ -35,6 +52,7 @@ switch toLower(worldName) do {
 			[[3489,4809,0], "North-West Zargabad"],
 			[[4040,5455,0], "South Hazar Bagh"]
 		];
+		[] call _initNeighbors;
 		CRB_LOC_DIST = 8000;
 	};
 	case "takistan": {
@@ -63,11 +81,17 @@ switch toLower(worldName) do {
 			[[6496.12,2108.43,0], "x18"],
 			[[8999.51,1875.36,0], "x19"]
 		];
+		[] call _initNeighbors;
 		CRB_LOC_DIST = 16000;
 	};
 	case "chernarus": {
 		{createLocation ["BorderCrossing",_x,1,1]} foreach [[48.716465,1614.6689,0],[1823.8114,5080.3926,0],[1648.1056,7808.8857,0],[1964.0529,9121.2988,0],[2257.4221,15234.31,0],[9683.6787,13556.688,0],[11955.002,13150.367,0],[13388.054,12853.484,0],[4980.04,12584.29,0]];
 		CRB_LOC_DIST = 8000;
+	};
+	case "eden": {
+		CRB_LOC_DIST = 9000;
+		{_twn = (group bis_functions_mainscope) createUnit ["LOGIC", position _x, [], 0, "NONE"]; _twn setVariable ["name", name _x]; _twn setVariable ["demography", ["CIV",0,"CIV_RU",0]]; [[_twn], [], true] call BIS_fnc_locations;} foreach nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), ["NameCityCapital","NameCity","NameVillage"] , CRB_LOC_DIST];
+		[] call _initNeighbors;
 	};
 	case "utes": {
 		{_twn = (group bis_functions_mainscope) createUnit ["LOGIC", (_x select 0), [], 0, "NONE"]; _twn setVariable ["name", (_x select 1)]; _twn setVariable ["demography", (_x select 2)]; [[_twn]] call BIS_fnc_locations;} foreach [
@@ -75,14 +99,20 @@ switch toLower(worldName) do {
 			[[2948,4532,0], "Military Base", ["CIV",0,"CIV_RU",0]],
 			[[4418,3571,0], "Hamlet", ["CIV",1,"CIV_RU",0]]
 		];
+		[] call _initNeighbors;
 		CRB_LOC_DIST = 2500;
+	};
+	case "torabora": {
+//		{createLocation ["BorderCrossing",_x,1,1]} foreach [[48.716465,1614.6689,0],[1823.8114,5080.3926,0],[1648.1056,7808.8857,0],[1964.0529,9121.2988,0],[2257.4221,15234.31,0],[9683.6787,13556.688,0],[11955.002,13150.367,0],[13388.054,12853.484,0],[4980.04,12584.29,0]];
+		[] call _initNeighbors;
+		CRB_LOC_DIST = 8000;
 	};
 };
 
 if (_debug) then {player globalChat "initLocs: Find Locs";};
 _locs = [];
 {
-	_locs = _locs + nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), _x , _dist];
+	_locs = _locs + nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), _x , CRB_LOC_DIST];
 } forEach [_strategic, _military, _hills, _names];
 
 if (_debug) then {
