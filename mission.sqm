@@ -62,7 +62,7 @@ class Mission
 	randomSeed=6553103;
 	class Intel
 	{
-		briefingName="MSO Testing v3.31";
+		briefingName="MSO Testing v3.4";
 		resistanceEast=1;
 		startWeather=0;
 		forecastWeather=0;
@@ -502,7 +502,7 @@ class Mission
 	};
 	class Vehicles
 	{
-		items=62;
+		items=63;
 		class Item0
 		{
 			position[]={3543.6902,22.35,4080.1206};
@@ -785,13 +785,14 @@ class Mission
 		};
 		class Item30
 		{
-			position[]={3515.7888,22.401316,3950.2632};
-			azimut=266.57227;
+			position[]={3507.8289,22.344578,3950.3398};
+			azimut=266.57199;
 			id=39;
 			side="EMPTY";
 			vehicle="BAF_VehicleBox";
 			skill=0.2;
-			init="0 = [this, 30] execVM ""scripts\resupply.sqf"";";
+			text="customresupplytest";
+			init="clearWeaponCargo this; clearMagazineCargo this; this addWeaponCargo [""M16A2"",1]; this addMagazineCargo [""30Rnd_556x45_Stanag"", 15]; 0 = [this, 30] execVM ""scripts\resupply.sqf"";";
 		};
 		class Item31
 		{
@@ -1085,10 +1086,20 @@ class Mission
 			vehicle="MH6J_EP1";
 			skill=0.60000002;
 		};
+		class Item62
+		{
+			position[]={3502.3948,22.35,3950.5698};
+			id=90;
+			side="EMPTY";
+			vehicle="BAF_Offroad_D";
+			skill=0.2;
+			text="customrespawntest";
+			init="clearWeaponCargo this; clearMagazineCargo this; this addWeaponCargo [""M16A2"",1]; this addMagazineCargo [""30Rnd_556x45_Stanag"", 15]; 0 = [this, 30, 99999] execVM ""scripts\vehicle.sqf"";";
+		};
 	};
 	class Markers
 	{
-		items=15;
+		items=17;
 		class Item0
 		{
 			position[]={3515.6721,22.35,3992.2153};
@@ -1200,6 +1211,20 @@ class Mission
 			text="MP Rights Testing";
 			type="mil_dot";
 			angle=89.497597;
+		};
+		class Item15
+		{
+			position[]={3507.6658,22.348297,3949.0156};
+			name="resupply_1";
+			text="Custom Resupply Testing";
+			type="mil_dot";
+		};
+		class Item16
+		{
+			position[]={3502.155,22.35,3952.918};
+			name="respawn";
+			text="Custom Respawn Testing";
+			type="mil_dot";
 		};
 	};
 	class Sensors
