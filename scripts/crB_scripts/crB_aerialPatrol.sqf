@@ -1,14 +1,15 @@
 //////////////////////////////////////////////////////////////////
 // Function file for Armed Assault
-// Created by: (AEF)Wolffy.au [2CAV]
+// Created by: (AEF)Wolffy.au [CTB]
 // Created: 20090910
 // Contact: http://creobellum.org
 // Purpose: Setup aerial patrol across map
 // Usage: call{[rectMarker, spawnPos, spawnDelay(opt 600s default), faction(optional)] execVM "scripts\crB_scripts\crB_aerialPatrol.sqf";};
 ///////////////////////////////////////////////////////////////////
-private ["_delay","_fac","_grp","_pos","_px","_py","_sx","_sy","_mkr","_startpos"];
+
 if (!isServer) exitWith{};
 
+private ["_delay","_fac","_grp","_pos","_px","_py","_sx","_sy","_mkr","_startpos"];
 _mkr = _this select 0;
 _startpos = _this select 1;
 _delay = 600;

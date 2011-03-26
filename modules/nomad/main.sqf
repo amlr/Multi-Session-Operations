@@ -1,6 +1,6 @@
 if (isdedicated) exitwith {};
 
-waituntil {!isnull player};
+waituntil {not isnull player};
 waituntil {!isMultiplayer || getplayeruid player != ""};
 
 [
@@ -13,20 +13,13 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{getmagazinecargo (unitbackpack player);},
 		{getweaponcargo (unitbackpack player);},
 		{
-			private ["_group","_pos"];
-			_group = group player;
+			private "_pos";
 			_pos = getpos player;
-			if (leader (group player) == player) then {
-				if (_pos distance (_group getvariable ["position",[0,0,0]]) > 10) then {
-					_group setvariable ["position",_pos,true];
-				};	
+			if (_pos distance _this > 1) then {
+				_pos;
 			} else {
-				if (_pos distance (_group getvariable ["position",[0,0,0]]) > 500) then {
-					[player] joinsilent (createGroup playerSide);
-					(group player) selectLeader player;
-				};
-			};				
-			if (_pos distance _this > 1) then {_pos;} else {_this;};	
+				_this;
+			};
 		},
 		{damage player;},
 		{rating player;},
@@ -93,7 +86,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{
 			private ["_vehicle"];
 			_vehicle = _this select 0;
-			if (!isnull _vehicle || _vehicle != player) then {
+			if (not isnull _vehicle || _vehicle != player) then {
 				if ((_this select 1) and (isnull(driver _vehicle))) exitwith {
 					player moveInDriver _vehicle;
 				};

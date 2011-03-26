@@ -26,5 +26,8 @@ if (_fTime > 18) then {_tStat = _tStat + "evening"} else {
 	if (_fTime > 12) then {_tStat = _tStat + "afternoon"} else {
 		if (_fTime > 0) then {_tStat = _tStat + "morning"}}};
 
-_string = format ["%1's forecast is %2%3", _tStat, _oStat, _fStat];
+_string = parseText format ["<img size='3' image='%1'/><br/>%2's forecast is %3%4", _img, _tStat, _oStat, _fStat];
+
 hint _string;
+
+

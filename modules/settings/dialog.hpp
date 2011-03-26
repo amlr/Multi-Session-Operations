@@ -2,7 +2,7 @@ class RMM_ui_settings {
 	idd = 80508;
 	movingEnable = 1;
 	enableSimulation = 1;
-	onLoad = "[] spawn {if (isnil ""terraindetail"") then {terraindetail = 1; setterraingrid ((-10 * terraindetail + 50) max 1);}; ctrlSetText [1,format['%1/%2 m', viewdistance, 10000]]; ctrlSetText [3,format['%1/%2', terraindetail, 5]]; sliderSetRange [2, 500, 10000];sliderSetRange [4, 0, 5];sliderSetSpeed [2, 50, 100];sliderSetSpeed [4, 1, 1];sliderSetPosition [2, viewdistance];sliderSetPosition [4, terraindetail];};";
+	onLoad = "[] spawn {if (isnil ""terraindetail"") then {terraindetail = 1}; ctrlSetText [1,format['%1/%2 m', viewdistance, 10000]]; ctrlSetText [3,format['%1/%2', terraindetail, 5]]; sliderSetRange [2, 500, 10000];sliderSetRange [4, 0, 5];sliderSetSpeed [2, 50, 100];sliderSetSpeed [4, 1, 1];sliderSetPosition [2, viewdistance];sliderSetPosition [4, terraindetail];};";
 	
 	class controls {
 		class Background : CUI_Frame {

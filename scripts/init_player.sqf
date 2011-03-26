@@ -19,8 +19,7 @@ player addeventhandler ["respawn", {
 
 	{_unit removeweapon _x;} foreach ((weapons _unit) + (items _unit));
 	{_unit removemagazine _x;} foreach (magazines _unit);
-	removeallweapons player; removeallitems player;
-	removebackpack player;
+	removebackpack _unit;
 
 	{_unit addmagazine _x;} foreach (magazines _corpse);
 	{_unit addweapon _x;} foreach ((weapons _corpse) + (items _corpse));
