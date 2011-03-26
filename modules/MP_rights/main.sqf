@@ -5,85 +5,79 @@ _update_rate = 30; //minimum 30 seconds
 
 // do not edit below this
 
-if (!isMultiPlayer) exitWith {
-    MSO_R_Admin = true;
-    MSO_R_Leader = true;
-    MSO_R_Officer = true;
-    MSO_R_Air = true;
-    MSO_R_Crew = true;
-};
-
-if (isserver) then {
-    MP_rights_list = [];
-    publicvariable "MP_rights_list";
-    
-    [_server_file, _update_rate min 30] spawn {
-        
-        private ["_server_file","_update_rate"];
-        _server_file = _this select 0;
-        _update_rate = _this select 1;
-        while {true} do {
-            private "_contents";
-            _contents = compile loadFile _server_file;
-            if (!([_contents, MP_rights_list] call BIS_fnc_areEqual)) then {
-                MP_rights_list = _contents;
-                publicvariable "MP_rights_list";
-            };
-            sleep _update_rate;
+if (isserver) then {        
+        [_server_file, _update_rate max 30] spawn {
+                
+                private ["_server_file","_update_rate","_uid"];
+                _server_file = _this select 0;
+                _update_rate = _this select 1;
+                
+                {
+                        if (_x iskindof "Air") then {
+                                _x addEventhandler ["GetIn", {[_this,{MSO_R_Air}] execFSM "scripts\bon\vehicledrivercheck.fsm"}];
+                        };
+                        if (_x iskindof "Tank") then {
+                                _x addEventhandler ["GetIn", {[_this,{MSO_R_Crew}] execFSM "scripts\bon\vehicledrivercheck.fsm"}];
+                        };
+                } foreach vehicles;
+                
+                while {true} do {
+                        private "_contents";
+                        _contents = call compile preprocessFileLineNumbers _server_file;
+                        if(isNil "_contents") exitWith {
+                                MSO_R_Admin = [""];
+                                MSO_R_Leader = [""];
+                                MSO_R_Officer = [""];
+                                MSO_R_Air = [""];
+                                MSO_R_Crew = [""];
+                        };
+                        
+                        if (!([_contents, MP_rights_list] call BIS_fnc_areEqual)) then {
+                                MP_rights_list = _contents;
+                                MSO_R_Admin = [];
+                                MSO_R_Leader = [];
+                                MSO_R_Officer = [];
+                                MSO_R_Air = [];
+                                MSO_R_Crew = [];
+                                {
+                                        _uid = _x select 0;
+                                        MSO_R = _x select 2;
+                                        if ("admin" in MSO_R) then {
+                                                MSO_R_Admin = MSO_R_Admin + [_uid];
+                                        } else {
+                                                MSO_R_Admin = MSO_R_Admin  - [_uid];
+                                        };
+                                        if (toUpper(_x select 1) in ["CORPORAL","SERGEANT","LIEUTENANT"] || "admin" in MSO_R) then {
+                                                MSO_R_Leader = MSO_R_Leader + [_uid];
+                                        } else {
+                                                MSO_R_Leader = MSO_R_Leader  - [_uid];
+                                        };
+                                        if (toUpper(_x select 1) == "LIEUTENANT" || "admin" in MSO_R) then {
+                                                MSO_R_Officer = MSO_R_Officer + [_uid];
+                                        } else {
+                                                MSO_R_Officer = MSO_R_Officer  - [_uid];
+                                        };
+                                        if ("pilot" in MSO_R || "admin" in MSO_R) then {
+                                                MSO_R_Air = MSO_R_Air + [_uid];
+                                        } else {
+                                                MSO_R_Air = MSO_R_Air  - [_uid];
+                                        };
+                                        if ("crew" in MSO_R || "admin" in MSO_R) then {
+                                                MSO_R_Crew = MSO_R_Crew + [_uid];
+                                        } else {
+                                                MSO_R_Crew = MSO_R_Crew  - [_uid];
+                                        };
+                                } foreach MP_rights_list;
+                                publicVariable "MSO_R_Admin";
+                                publicVariable "MSO_R_Leader";
+                                publicVariable "MSO_R_Officer";
+                                publicVariable "MSO_R_Air";
+                                publicVariable "MSO_R_Crew";
+                                
+                        };                
+                        sleep _update_rate;
+                };
         };
-    };
-} else {
-    waitUntil{!isNil "MP_rights_list"};
-//    player globalChat str MP_rights_list;
-    waitUntil{count (call compile MP_rights_list) > 0};
-//    player globalChat str (call compile MP_rights_list);
-//    player globalChat str (getplayeruid player);
-    waituntil {getplayeruid player != ""};
-//    player globalChat str (getplayeruid player);
-    
-    private ["_uid"];
-    _uid = getplayeruid player;
-    
-    ////////////////////////////////////////////////////////////
-    // Specialty Handling
-    ////////////////////////////////////////////////////////////
-    
-    fnc_updateRights = {
-        
-        private ["_uid"];
-        _uid = _this select 0;
-        MSO_R = [];
-        MSO_R_Admin = false;
-        MSO_R_Leader = false;
-        MSO_R_Officer = false;
-        MSO_R_Air = false;
-        MSO_R_Crew = false;
-        {
-            if (_uid == (_x select 0)) exitwith {
-                MSO_R = _x select 2;
-                MSO_R_Admin = "admin" in MSO_R;
-                MSO_R_Leader = (_x select 1) in ["CORPORAL","SERGEANT","LIEUTENANT"] || MSO_R_Admin;
-                MSO_R_Officer = (_x select 1) == "LIEUTENANT" || MSO_R_Admin;
-                MSO_R_Air = ("pilot" in MSO_R) || MSO_R_Admin;
-                MSO_R_Crew = ("crew" in MSO_R) || MSO_R_Admin;
-            };
-        } foreach call compile MP_rights_list;
-
-		{
-			if (_x iskindof "Air") then {
-				if (not MSO_R_Air) then {
-					_x lockdriver true;
-				};
-			};
-			if (_x iskindof "Tank") then {
-				if (not MSO_R_Crew) then {
-					_x lockdriver true;
-				};
-			};
-		} foreach vehicles;
-	};
-    
-    "MP_rights_list" addPublicVariableEventHandler {
-        [_uid] call fnc_updateRights;
-    };
 };
+
+true;

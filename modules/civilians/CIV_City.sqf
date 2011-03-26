@@ -1,3 +1,4 @@
+private ["_pos","_trg"];
 _pos = [4134.7583,4074.6431,16.857695];
 
 ["civilian_city", 0, _pos] call compile preprocessFileLineNumbers "scripts\crB_scripts\crB_createCompositionLocal.sqf";
@@ -32,10 +33,11 @@ _trg setSoundEffect ["Env102", "", "", "CockSfx"];
 _trg = createTrigger["EmptyDetector", [4012.7036,3974.646,16.233406]];
 _trg setTriggerStatements ["true", "", ""];
 _trg setSoundEffect ["Env102", "", "", "CowSfx"];
-
+/*
 _objs = _pos nearObjects ["S1203_ambulance_EP1",200];
 {
 	_wp = (group _x) addWaypoint [position _x, 0];
 	_wp setWaypointType "SUPPORT";
 	_wp setWaypointBehaviour "SAFE";
 } forEach _objs;
+*/

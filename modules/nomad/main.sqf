@@ -5,20 +5,13 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 
 [
 	[
-		{
-			if (count units (group player) > 1) then {
-				[player] joinsilent (createGroup playerSide);
-				(group player) selectLeader player;
-			};
-			_this + 1;
-		},
+		/*{deaths player} //auto-integrated*/
 		{typeof player;},
 		{magazines player;},
 		{weapons player;},
 		{typeof (unitbackpack player);},
 		{getmagazinecargo (unitbackpack player);},
 		{getweaponcargo (unitbackpack player);},
-		{[group player, leader player == player];},
 		{
 			private ["_group","_pos"];
 			_group = group player;
@@ -43,13 +36,20 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{getDir player;},
 		{[vehicle player, driver (vehicle player) == player, gunner (vehicle player) == player, commander (vehicle player) == player];},
 		{lifestate player;},
-		{rank player;},
+		{[group player, (leader player == player)];},
 		#include <mods\aaw_g.hpp>
-		#include <mods\ace_sys_wounds_g.hpp>
+		{rank player;}
+	] + [
+		if(!isNil "ace_main") then {
+			#include <mods\ace_sys_ruck_g.hpp>
+			#include <mods\ace_sys_wounds_g.hpp>
+		}
 	],
 	[
 		{
-			if (_this > nomadRespawns) then {_disconnect = true;};
+			_dayspassed = 1 + time / 86400;
+			_maxLives = nomadRespawns * (nomadReinforcements * _dayspassed);
+			if (_this > _maxLives) then {_disconnect = true;};
 		},
 		{
 			if (typeof player != _this) then {_disconnect = true;};
@@ -80,20 +80,10 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 				(unitbackpack player) addweaponcargo [(_this select 0) select _i,(_this select 1) select _i];
 			};
 		},
-		{
-			[player] joinSilent (_this select 0);
-			if (_this select 1) then {(_this select 0) selectLeader player;};
-		},
-		{
-			private ["_group","_gpos","_pos"];
-			_group = group player;
-			_gpos = _group getvariable ["position",_this];
-			_pos = if (_gpos distance _this > 200) then {_gpos;} else {_this;};
-			player setpos _pos;
-		},
+		{player setpos _this;},
 		{player setdamage _this;},
 		{player addrating (-(rating player) + _this);},
-		{player addscore _this;},
+		{player addscore (-(score player) + _this);},
 		{setviewdistance _this;},
 		{
 			setterraingrid ((-10 * _this + 50) max 1);
@@ -117,12 +107,29 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 			};
 		},
 		{
-			if (_this == "UNCONCONSCIOUS") then {
+			if (tolower(_this) == "unconscious") then {
 				player setUnconscious true;
 			};
 		},
-		{player setunitrank _this;},
+		{
+			if (_this select 1) then {
+				[player] joinSilent (createGroup playerSide);
+				(group player) selectLeader player;
+				{
+					if !(isplayer _x) then {
+						[_x] joinsilent (group player);
+					};
+				} foreach units (_this select 0);
+			} else {
+				[player] joinSilent (_this select 0);
+			};
+		},
 		#include <mods\aaw_s.hpp>
-		#include <mods\ace_sys_wounds_s.hpp>
+		{player setunitrank _this;}
+	] + [
+		if(!isNil "ace_main") then {
+			#include <mods\ace_sys_ruck_s.hpp>
+			#include <mods\ace_sys_wounds_s.hpp>
+		}
 	]
 ] execfsm "modules\nomad\nomad.fsm";

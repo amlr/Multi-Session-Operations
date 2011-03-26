@@ -10,7 +10,7 @@ scriptName "Silvie\data\scripts\main.sqf";
 	_this: the Zora logic unit which triggered this script.
 */
 
-
+private ["_logicFnc","_twnlist","_locationParams","_create","_twnlistTemp","_i","_rarityNumber","_rarity","_classlist","_vehicleclass","_actual","_fsm","_logic","_defaultBlacklist","_debug","_vehicleCountFormula","_roaddis","_attemptsTotal","_blacklist","_vehiclerarity","_vehicleinit","_totobj"];
 _logic = _this select 0;
 
 //--- Is Garbage collector running?

@@ -1,10 +1,10 @@
-/*%FSM<COMPILE "C:\Program Files\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, Animals Main">*/
+/*%FSM<COMPILE "c:\Bis\fsmeditor\scriptedFSM.cfg, Animals Main">*/
 /*%FSM<HEAD>*/
 /*
-item0[] = {"Start_",3,250,-60.442757,-617.781311,29.557251,-567.781311,0.000000,"Start" \n ""};
-item1[] = {"_",8,250,-61.452065,-512.217407,28.547979,-462.217346,0.000000,""};
-item2[] = {"Set_Timer",2,250,-61.609619,-405.296356,28.390396,-355.296356,0.000000,"Set Timer"};
-item3[] = {"choose_animal_ty",2,250,570.319641,-325.587158,660.319702,-275.587189,0.000000,"choose animal type"};
+item0[] = {"Start_",0,250,-60.442757,-591.081604,29.557222,-541.081604,0.000000,"Start" \n ""};
+item1[] = {"_",8,250,-61.452087,-495.786835,28.547922,-445.786774,0.000000,""};
+item2[] = {"Set_Timer",2,250,-61.609619,-405.296356,28.390409,-355.296417,0.000000,"Set Timer"};
+item3[] = {"choose_animal_ty",2,4346,570.319641,-325.587158,660.319702,-275.587189,0.000000,"choose animal type"};
 item4[] = {"_",-1,250,36.528553,437.695923,93.549850,437.695923,0.000000,""};
 item5[] = {"Timer",8,250,-59.650597,-325.281647,30.349508,-275.281647,0.000000,"Timer"};
 item6[] = {"Spawn",2,250,-88.102356,208.914841,1.897823,258.914673,0.000000,"Spawn"};
@@ -20,10 +20,10 @@ item15[] = {"Spawn_2",2,250,-213.479080,207.824615,-123.478897,257.824463,0.0000
 item16[] = {"_",8,250,-214.590469,126.139633,-124.590446,176.139648,0.000000,""};
 item17[] = {"sheep",4,218,-215.732559,-43.607948,-125.732559,6.392052,0.000000,"sheep"};
 item18[] = {"type_2",2,250,-214.138321,39.752365,-124.138344,89.752350,0.000000,"type"};
-item19[] = {"Spawn_3",2,4346,-475.605927,210.943970,-385.605743,260.943848,0.000000,"Spawn"};
-item20[] = {"_",8,250,-476.717377,129.258972,-386.717316,179.259003,0.000000,""};
-item21[] = {"wilboar",4,218,-477.859467,-40.488594,-387.859406,9.511410,0.000000,"wilboar"};
-item22[] = {"type_3",2,250,-476.265228,42.871719,-386.265167,92.871689,0.000000,"type"};
+item19[] = {"Spawn_3",2,250,-709.741699,215.051620,-619.741516,265.051483,0.000000,"Spawn"};
+item20[] = {"_",8,250,-710.853149,133.366623,-620.853088,183.366653,0.000000,""};
+item21[] = {"wilboar",4,218,-711.995239,-36.380943,-621.995178,13.619061,0.000000,"wilboar"};
+item22[] = {"type_3",2,250,-710.401001,46.979370,-620.400940,96.979340,0.000000,"type"};
 item23[] = {"Spawn_4",2,250,-341.318817,206.355194,-251.318634,256.355042,0.000000,"Spawn"};
 item24[] = {"_",8,250,-342.430206,124.670212,-252.430176,174.670227,0.000000,""};
 item25[] = {"goat",4,218,-343.572296,-45.077370,-253.572296,4.922630,0.000000,"goat"};
@@ -38,7 +38,7 @@ class LayoutItems
 		class ItemInfo
 		{
 			FontFace="Arial";
-			FontHeight=9;
+			FontHeight=9.000000;
 			lStyle=1;
 		};
 	};
@@ -75,8 +75,8 @@ link28[] = {25,26};
 link29[] = {26,24};
 link30[] = {27,28};
 link31[] = {28,0};
-globals[] = {0.000000,0,0,0,0,640,480,1,55,6316128,1,-650.905396,295.077148,624.869202,-841.837708,654,1014,1};
-window[] = {2,-1,-1,-1,-1,1192,28,988,28,3,676};
+globals[] = {0.000000,0,0,0,0,640,480,1,53,6316128,1,-616.769409,1020.127197,717.567505,-1063.096802,797,867,1};
+window[] = {2,-1,-1,-32000,-32000,1138,184,1476,184,3,815};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -112,9 +112,9 @@ class FSM
        "//---------------" \n
        "// user var" \n
        "//---------------" \n
-       "_SpawnRadius = 1500;" \n
-       "_DensityReduction = 100;" \n
-       "_FindPlaceRadius = 400;    " \n
+       "_SpawnRadius = 750;" \n
+       "_DensityReduction = 200;" \n
+       "_FindPlaceRadius = 200;    " \n
        "" \n
        "" \n
        "" \n
@@ -155,6 +155,25 @@ class FSM
        "" \n
        "_WillboarMaxDensity = 0.1;" \n
        "_WillboarMaxGroupInArea = _WillboarMaxDensity * BIS_MaxAnimalsGroupInArea;" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "// DEBUG" \n
+       "" \n
+       "// radius marker" \n
+       "" \n
+       "//_radiusmark = createMarkerLocal [""animalsspawnradius"", (Getpos player) ];" \n
+       "//_radiusmark setMarkerTypeLocal ""Empty"";" \n
+       "//_radiusmark setMarkerShapeLocal ""ELLIPSE"";" \n
+       "//_radiusmark setMarkerBrushLocal ""Border"";" \n
+       "//_radiusmark setMarkerSizeLocal [_SpawnRadius, _SpawnRadius];" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -225,19 +244,25 @@ class FSM
        "" \n
        "" \n
        "// update radius" \n
+       "//_radiusmark setmarkerposlocal (getpos player);" \n
        "// DEBUG" \n
        "// radius marker" \n
        "{" \n
-       "	_radiusmark = ""animalsspawnradius"" + str _x;" \n
-       "	if(str getMarkerPos _radiusmark == ""[0,0,0]"") then {" \n
-       "		_radiusmark = createMarker [_radiusmark, (Getpos _x) ];" \n
-       "		if (_debug) then {_radiusmark setMarkerShape ""ELLIPSE"";} else {_radiusmark setMarkerType ""Empty"";};" \n
-       "		_radiusmark setMarkerBrush ""Border"";" \n
-       "		_radiusmark setMarkerSize [_SpawnRadius, _SpawnRadius];" \n
-       "	} else {" \n
-       "		_radiusmark setMarkerPos (getPos _x);" \n
-       "	};" \n
+       "       _radiusmark = ""animalsspawnradius"" + str _x;" \n
+       "       if(str getMarkerPos _radiusmark == ""[0,0,0]"") then {" \n
+       "              _radiusmark = createMarker [_radiusmark, (Getpos _x) ];" \n
+       "              if (_debug) then {_radiusmark setMarkerShape ""ELLIPSE"";} else {_radiusmark setMarkerType ""Empty"";};" \n
+       "              _radiusmark setMarkerBrush ""Border"";" \n
+       "              _radiusmark setMarkerSize [_SpawnRadius, _SpawnRadius];" \n
+       "       } else {" \n
+       "              _radiusmark setMarkerPos (getPos _x);" \n
+       "       };" \n
        "} forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -300,51 +325,108 @@ class FSM
     {
       name = "Spawn";
       init = /*%FSM<STATEINIT""">*/"if  ( (BIS_AnimalsGroupInArea < BIS_MaxAnimalsGroupInArea)     AND     (BIS_HenGroupInArea <   _HenMaxGroupInArea)     ) then {" \n
-       "	//--------------------------------" \n
-       "	// vars" \n
-       "	//--------------------------------	" \n
-       "	_agentnumber = floor (2 + random 3);	 " \n
        "" \n
-       "	// --------------------------------" \n
-       "	// Select Favourite places" \n
-       "	// --------------------------------" \n
-       "	_root = configFile >> ""CfgVehicles"" >> ""hen"";" \n
-       "	_favouritezones = getText ( _root >> ""favouritezones"");" \n
        "" \n
-       "	// --------------------------------" \n
-       "	// Lauch Spawn function" \n
-       "	// --------------------------------" \n
        "" \n
-       "	{" \n
-       "		if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
-       "	} foreach _triglist;" \n
        "" \n
-       "	{" \n
-       "		_PosList = [];" \n
-       "		{" \n
-       "	            _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
-       "      	      _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
-       "		} forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "" \n
+       "//--------------------------------" \n
+       "// vars" \n
+       "//--------------------------------	" \n
+       "_agentnumber = floor (2 + random 3);	 " \n
+       "           " \n
+       "" \n
+       "" \n
+       "" \n
+       "// --------------------------------" \n
+       "// Select Favourite places" \n
+       "// --------------------------------" \n
+       "            " \n
+       "		_root = configFile >> ""CfgVehicles"" >> ""hen"";" \n
+       "            _favouritezones = getText ( _root >> ""favouritezones"");" \n
+       "" \n
+       "" \n
+       "           " \n
+       "    " \n
+       "" \n
+       "// --------------------------------" \n
+       "// Lauch Spawn function" \n
+       "// --------------------------------" \n
+       "" \n
+       "{" \n
+       "" \n
+       "" \n
+       " if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
+       "" \n
+       "" \n
+       "} foreach _triglist;" \n
+       "" \n
+       "       {" \n
+       "              _PosList = [];" \n
+       "              {" \n
+       "                   _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
+       "                   _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
+       "              } forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "" \n
        "" \n
        "            _PosSelect = _PosList select (floor random (count _PosList));" \n
        "            _Pos =  _PosSelect select 0;        " \n
        "" \n
-       "		if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
-       "			//DEBUG" \n
-       "			_GroupMarker = (str (random 9999));" \n
-       "			createMarker [_GroupMarker, _Pos ];" \n
-       "			if (_debug) then {_GroupMarker setMarkerType ""Dot"";} else {_GroupMarker setMarkerType ""Empty"";};" \n
-       "			_GroupMarker setMarkerColor ""ColorRed"";" \n
-       "			_GroupMarker setMarkerText (str (_agentnumber + 1));             " \n
+       "	if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
+       "" \n
+       "" \n
+       "          		//DEBUG" \n
+       "              _GroupMarker = (str (random 9999));" \n
+       "              createMarker [_GroupMarker, _Pos ];" \n
+       "              if (_debug) then {_GroupMarker setMarkerType ""Dot"";} else {_GroupMarker setMarkerType ""Empty"";};" \n
+       "              _GroupMarker setMarkerColor ""ColorRed"";" \n
+       "             _GroupMarker setMarkerText (str (_agentnumber + 1));             " \n
+       "" \n
+       "" \n
+       "" \n
        "			for ""_i"" from 0 to _agentnumber do" \n
        "			{" \n
-       "            		 [ _type, _Pos, _SpawnRadius, _GroupMarker] execFSM ""CA\Modules\Animals\data\fsms\Animals_spawn.fsm"";" \n
-       "            		 [ _GroupMarker, _SpawnRadius, _type] execFSM ""CA\Modules\Animals\data\fsms\Delete_group.fsm"";" \n
-       "			};		" \n
-       "		};" \n
-       "	} forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "		" \n
+       "" \n
+       "            		 _fsm = [_type, _Pos, _SpawnRadius, _GroupMarker] execfsm ""CA\Modules\Animals\data\fsms\Animals_spawn.fsm"";" \n
+       "		" \n
+       "" \n
+       "" \n
+       "              [ _GroupMarker, _SpawnRadius, _type] execFSM ""CA\Modules\Animals\data\fsms\Delete_group.fsm"";" \n
+       "" \n
+       "      };" \n
+       "" \n
+       " };" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "       } forEach ([] call BIS_fnc_listPlayers);" \n
        "};" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        "_timeNow = time;" \n
+       "" \n
+       "" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -367,51 +449,112 @@ class FSM
     {
       name = "Spawn_1";
       init = /*%FSM<STATEINIT""">*/"if  (    (BIS_AnimalsGroupInArea < BIS_MaxAnimalsGroupInArea)     AND     (BIS_CowGroupInArea <   _CowMaxGroupInArea)     ) then {" \n
-       "	//--------------------------------" \n
-       "	// vars" \n
-       "	//--------------------------------" \n
-       "	_agentnumber = floor (2 + random 3);	 " \n
        "" \n
-       "	// --------------------------------" \n
-       "	// Favourite places" \n
-       "	// --------------------------------" \n
-       "	_root = configFile >> ""CfgVehicles"" >> ""Cow"";" \n
-       "	_favouritezones = getText ( _root >> ""favouritezones"");" \n
        "" \n
-       "	// --------------------------------" \n
-       "	// Lauch Spawn function" \n
-       "	// --------------------------------" \n
        "" \n
-       "	{" \n
-       "		if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
-       "	} foreach _triglist;" \n
        "" \n
-       "	{" \n
-       "		_PosList = [];" \n
-       "		{" \n
-       "	            _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
-       "      	      _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
-       "		} forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "//--------------------------------" \n
+       "// vars" \n
+       "//--------------------------------" \n
+       "		" \n
+       "_agentnumber = floor (2 + random 3);	 " \n
+       "     " \n
+       "      " \n
+       "" \n
+       "" \n
+       "// --------------------------------" \n
+       "// Favourite places" \n
+       "// --------------------------------" \n
+       "            " \n
+       "            _root = configFile >> ""CfgVehicles"" >> ""Cow"";" \n
+       "            _favouritezones = getText ( _root >> ""favouritezones"");" \n
+       "" \n
+       "   " \n
+       "" \n
+       "" \n
+       "// --------------------------------" \n
+       "// Lauch Spawn function" \n
+       "// --------------------------------" \n
+       "" \n
+       "" \n
+       "{" \n
+       "" \n
+       "" \n
+       " if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
+       "" \n
+       "" \n
+       "} foreach _triglist;" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "       {" \n
+       "              _PosList = [];" \n
+       "              {" \n
+       "                   _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
+       "                   _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
+       "              } forEach ([] call BIS_fnc_listPlayers);" \n
        "" \n
        "            _PosSelect = _PosList select (floor random (count _PosList));" \n
        "            _Pos =  _PosSelect select 0;        " \n
        "" \n
-       "		if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
-       "			//DEBUG" \n
-       "			_GroupMarker = (str (random 9999));" \n
-       "			createMarker [_GroupMarker, _Pos ];" \n
-       "			if (_debug) then {_GroupMarker setMarkerType ""Dot"";} else {_GroupMarker setMarkerType ""Empty"";};" \n
-       "			_GroupMarker setMarkerColor ""ColorBlue"";" \n
-       "			_GroupMarker setMarkerText (str (_agentnumber + 1));             " \n
+       "	if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
+       "" \n
+       "" \n
+       "          		//DEBUG" \n
+       "              _GroupMarker = (str (random 9999));" \n
+       "                     createMarker [_GroupMarker, _Pos ];" \n
+       "                     if (_debug) then {_GroupMarker setMarkerType ""Dot"";} else {_GroupMarker setMarkerType ""Empty"";};" \n
+       "                     _GroupMarker setMarkerColor ""ColorBlue"";" \n
+       "                     _GroupMarker setMarkerText (str (_agentnumber + 1));             " \n
+       "" \n
+       "" \n
+       "" \n
        "			for ""_i"" from 0 to _agentnumber do" \n
        "			{" \n
-       "            		 [ _type, _Pos, _SpawnRadius, _GroupMarker] execFSM ""CA\Modules\Animals\data\fsms\Animals_spawn.fsm"";" \n
-       "            		 [ _GroupMarker, _SpawnRadius, _type] execFSM ""CA\Modules\Animals\data\fsms\Delete_group.fsm"";" \n
+       "" \n
+       "		" \n
+       "" \n
+       "" \n
+       "" \n
+       "            		 _fsm = [_type, _Pos, _SpawnRadius, _GroupMarker] execfsm ""CA\Modules\Animals\data\fsms\Animals_spawn.fsm"";" \n
+       "                           [ _GroupMarker, _SpawnRadius, _type] execFSM ""CA\Modules\Animals\data\fsms\Delete_group.fsm"";" \n
+       "		" \n
+       "" \n
        "			};		" \n
-       "		};" \n
-       "	} forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "" \n
+       "      };" \n
+       "" \n
+       "" \n
+       "       } forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        "};" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        "_timeNow = time;" \n
+       "" \n
+       "" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -477,51 +620,106 @@ class FSM
     {
       name = "Spawn_2";
       init = /*%FSM<STATEINIT""">*/"if (   (BIS_AnimalsGroupInArea < BIS_MaxAnimalsGroupInArea)      AND     (BIS_SheepGroupInArea <   _SheepMaxGroupInArea)    ) then {" \n
-       "	//--------------------------------" \n
-       "	// vars" \n
-       "	//--------------------------------	" \n
-       "	_agentnumber = floor (2 + random 4);	 " \n
        "" \n
-       "	// --------------------------------" \n
-       "	// Select Favourite places" \n
-       "	// --------------------------------" \n
-       "	_root = configFile >> ""CfgVehicles"" >> ""Sheep"";" \n
-       "	_favouritezones = getText ( _root >> ""favouritezones"");" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "//--------------------------------" \n
+       "// vars" \n
+       "//--------------------------------	" \n
+       "_agentnumber = floor (2 + random 4);	 " \n
+       "           " \n
+       "" \n
+       "" \n
+       "" \n
+       "// --------------------------------" \n
+       "// Select Favourite places" \n
+       "// --------------------------------" \n
+       "            " \n
+       "            _root = configFile >> ""CfgVehicles"" >> ""Sheep"";" \n
+       "            _favouritezones = getText ( _root >> ""favouritezones"");" \n
        " " \n
-       "	// --------------------------------" \n
-       "	// Lauch Spawn function" \n
-       "	// --------------------------------" \n
+       "           " \n
+       "            " \n
        "" \n
-       "	{" \n
-       "		if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
-       "	} foreach _triglist;" \n
+       "      " \n
+       "// --------------------------------" \n
+       "// Lauch Spawn function" \n
+       "// --------------------------------" \n
        "" \n
-       "	{" \n
-       "		_PosList = [];" \n
-       "		{" \n
-       "			_randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
-       "			_PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
-       "		} forEach ([] call BIS_fnc_listPlayers);" \n
+       "{" \n
+       "" \n
+       "" \n
+       " if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
+       "" \n
+       "" \n
+       "} foreach _triglist;" \n
+       "" \n
+       "" \n
+       "" \n
+       "       {" \n
+       "              _PosList = [];" \n
+       "              {" \n
+       "                     _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
+       "                     _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
+       "              } forEach ([] call BIS_fnc_listPlayers);" \n
        "" \n
        "            _PosSelect = _PosList select (floor random (count _PosList));" \n
        "            _Pos =  _PosSelect select 0;        " \n
        "" \n
-       "		if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
-       "			//DEBUG" \n
-       "			_GroupMarker = (str (random 9999));" \n
-       "			createMarker [_GroupMarker, _Pos ];" \n
-       "			if (_debug) then {_GroupMarker setMarkerType ""Dot"";} else {_GroupMarker setMarkerType ""Empty"";};" \n
-       "			_GroupMarker setMarkerColor ""ColorGreen"";" \n
-       "			_GroupMarker setMarkerText (str (_agentnumber + 1));             " \n
+       "              if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
+       "" \n
+       "" \n
+       "          		//DEBUG" \n
+       "              _GroupMarker = (str (random 9999));" \n
+       "                     createMarker [_GroupMarker, _Pos ];" \n
+       "                     if (_debug) then {_GroupMarker setMarkerType ""Dot"";} else {_GroupMarker setMarkerType ""Empty"";};" \n
+       "                     _GroupMarker setMarkerColor ""ColorGreen"";" \n
+       "                     _GroupMarker setMarkerText (str (_agentnumber + 1));             " \n
+       "" \n
+       "" \n
+       "" \n
        "			for ""_i"" from 0 to _agentnumber do" \n
        "			{" \n
-       "            		 [ _type, _Pos, _SpawnRadius, _GroupMarker] execFSM ""CA\Modules\Animals\data\fsms\Animals_spawn.fsm"";" \n
-       "            		 [ _GroupMarker, _SpawnRadius, _type] execFSM ""CA\Modules\Animals\data\fsms\Delete_group.fsm"";" \n
+       "" \n
+       "		" \n
+       "" \n
+       "            		 _fsm = [_type, _Pos, _SpawnRadius, _GroupMarker] execfsm ""CA\Modules\Animals\data\fsms\Animals_spawn.fsm"";" \n
+       "                           [ _GroupMarker, _SpawnRadius, _type] execFSM ""CA\Modules\Animals\data\fsms\Delete_group.fsm"";" \n
+       "		" \n
+       "" \n
        "			};		" \n
-       "		};" \n
-       "	} forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "" \n
+       "      };" \n
+       "" \n
+       "       } forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        "};" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        "_timeNow = time;" \n
+       "" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -584,37 +782,77 @@ class FSM
        "            _root = configFile >> ""CfgVehicles"" >> ""WildBoar"";" \n
        "            _favouritezones = getText ( _root >> ""favouritezones"");" \n
        "" \n
-       "	// --------------------------------" \n
-       "	// Lauch Spawn function" \n
-       "	// --------------------------------" \n
-       "	" \n
-       "	{" \n
-       "		 if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
-       "	} foreach _triglist;" \n
+       "           " \n
+       "            " \n
        "" \n
-       "	{" \n
-       "		_PosList = [];" \n
-       "		_randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
-       "		_PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
-       "		_PosSelect = _PosList select (floor random (count _PosList));" \n
-       "		_Pos =  _PosSelect select 0;        " \n
+       "      " \n
+       "// --------------------------------" \n
+       "// Lauch Spawn function" \n
+       "// --------------------------------" \n
        "" \n
-       "		if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
-       "			//DEBUG" \n
-       "			_GroupMarker = (str (random 9999));" \n
-       "			createMarker [_GroupMarker, _Pos ];" \n
-       "			if (_debug) then {_GroupMarker setMarkerType ""Dot"";} else {_GroupMarker setMarkerType ""Empty"";};" \n
-       "			_GroupMarker setMarkerColor ""ColorOrange"";" \n
-       "			_GroupMarker setMarkerText (str (_agentnumber + 1));             " \n
+       "{" \n
+       "" \n
+       "" \n
+       " if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
+       "" \n
+       "" \n
+       "} foreach _triglist;" \n
+       "" \n
+       "" \n
+       "" \n
+       "       {" \n
+       "              _PosList = [];" \n
+       "              _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
+       "              _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
+       "              _PosSelect = _PosList select (floor random (count _PosList));" \n
+       "              _Pos =  _PosSelect select 0;        " \n
+       "" \n
+       "              if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
+       "" \n
+       "" \n
+       "          		//DEBUG" \n
+       "              _GroupMarker = (str (random 9999));" \n
+       "                     createMarker [_GroupMarker, _Pos ];" \n
+       "                     if (_debug) then {_GroupMarker setMarkerType ""Dot"";} else {_GroupMarker setMarkerType ""Empty"";};" \n
+       "                     _GroupMarker setMarkerColor ""ColorOrange"";" \n
+       "                     _GroupMarker setMarkerText (str (_agentnumber + 1));             " \n
+       "" \n
+       "" \n
+       "" \n
        "			for ""_i"" from 0 to _agentnumber do" \n
        "			{" \n
-       "            		 [ _type, _Pos, _SpawnRadius, _GroupMarker] execFSM ""CA\Modules\Animals\data\fsms\Animals_spawn.fsm"";" \n
-       "            		 [ _GroupMarker, _SpawnRadius, _type] execFSM ""CA\Modules\Animals\data\fsms\Delete_group.fsm"";" \n
-       "		      };" \n
-       "		 };" \n
-       "	} forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "		" \n
+       "" \n
+       "            		 _fsm = [_type, _Pos, _SpawnRadius, _GroupMarker] execfsm ""CA\Modules\Animals\data\fsms\Animals_spawn.fsm"";" \n
+       "                           [ _GroupMarker, _SpawnRadius, _type] execFSM ""CA\Modules\Animals\data\fsms\Delete_group.fsm"";" \n
+       "		" \n
+       "" \n
+       "			};		" \n
+       "" \n
+       "" \n
+       "      };" \n
+       "" \n
+       "" \n
+       "       } forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        "};" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        "_timeNow = time;" \n
+       "" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -659,51 +897,102 @@ class FSM
     {
       name = "Spawn_4";
       init = /*%FSM<STATEINIT""">*/"if (   (BIS_AnimalsGroupInArea < BIS_MaxAnimalsGroupInArea)      AND     (BIS_GoatInArea <   _GoatMaxGroupInArea)    ) then {" \n
-       "	//--------------------------------" \n
-       "	// vars" \n
-       "	//--------------------------------	" \n
-       "	_agentnumber = floor (2 + random 4);	 " \n
        "" \n
-       "	// --------------------------------" \n
-       "	// Select Favourite places" \n
-       "	// --------------------------------" \n
-       "	_root = configFile >> ""CfgVehicles"" >> ""Goat"";" \n
-       "	_favouritezones = getText ( _root >> ""favouritezones"");" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "//--------------------------------" \n
+       "// vars" \n
+       "//--------------------------------	" \n
+       "_agentnumber = floor (2 + random 4);	 " \n
+       "           " \n
+       "" \n
+       "" \n
+       "" \n
+       "// --------------------------------" \n
+       "// Select Favourite places" \n
+       "// --------------------------------" \n
+       "            " \n
+       "            _root = configFile >> ""CfgVehicles"" >> ""Goat"";" \n
+       "            _favouritezones = getText ( _root >> ""favouritezones"");" \n
        " " \n
-       "	// --------------------------------" \n
-       "	// Lauch Spawn function" \n
-       "	// --------------------------------" \n
+       "           " \n
+       "            " \n
        "" \n
-       "	{" \n
-       "		if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
-       "	} foreach _triglist;" \n
+       "      " \n
+       "// --------------------------------" \n
+       "// Lauch Spawn function" \n
+       "// --------------------------------" \n
        "" \n
-       "	{" \n
-       "		_PosList = [];" \n
-       "		{" \n
-       "	            _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
-       "      	      _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
-       "		} forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "{" \n
+       "" \n
+       "" \n
+       " if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
+       "" \n
+       "" \n
+       "} foreach _triglist;" \n
+       "" \n
+       "" \n
+       "       {" \n
+       "              _PosList = [];" \n
+       "              {" \n
+       "                   _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
+       "                   _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
+       "              } forEach ([] call BIS_fnc_listPlayers);" \n
        "" \n
        "            _PosSelect = _PosList select (floor random (count _PosList));" \n
        "            _Pos =  _PosSelect select 0;        " \n
        "" \n
-       "		if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
-       "			//DEBUG" \n
-       "			_GroupMarker = (str (random 9999));" \n
-       "			createMarker [_GroupMarker, _Pos ];" \n
-       "			if (_debug) then {_GroupMarker setMarkerType ""Dot"";} else {_GroupMarker setMarkerType ""Empty"";};" \n
-       "			_GroupMarker setMarkerColor ""ColorYellow"";" \n
-       "			_GroupMarker setMarkerText (str (_agentnumber + 1));             " \n
+       "              if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
+       "" \n
+       "" \n
+       "          		//DEBUG" \n
+       "              _GroupMarker = (str (random 9999));" \n
+       "                     createMarker [_GroupMarker, _Pos ];" \n
+       "                     if (_debug) then {_GroupMarker setMarkerType ""Dot"";} else {_GroupMarker setMarkerType ""Empty"";};" \n
+       "                     _GroupMarker setMarkerColor ""ColorYellow"";" \n
+       "                     _GroupMarker setMarkerText (str (_agentnumber + 1));             " \n
+       "" \n
+       "" \n
+       "" \n
        "			for ""_i"" from 0 to _agentnumber do" \n
        "			{" \n
-       "            		 [ _type, _Pos, _SpawnRadius, _GroupMarker] execFSM ""CA\Modules\Animals\data\fsms\Animals_spawn.fsm"";" \n
-       "            		 [ _GroupMarker, _SpawnRadius, _type] execFSM ""CA\Modules\Animals\data\fsms\Delete_group.fsm"";" \n
+       "" \n
+       "		" \n
+       "" \n
+       "            		 _fsm = [_type, _Pos, _SpawnRadius, _GroupMarker] execfsm ""CA\Modules\Animals\data\fsms\Animals_spawn.fsm"";" \n
+       "                           [ _GroupMarker, _SpawnRadius, _type] execFSM ""CA\Modules\Animals\data\fsms\Delete_group.fsm"";" \n
+       "		" \n
+       "" \n
        "			};		" \n
-       "		};" \n
-       "	} forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "" \n
+       "      };" \n
+       "" \n
+       "" \n
+       "       } forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        "};" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        "_timeNow = time;" \n
+       "" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -748,7 +1037,7 @@ class FSM
     {
       name = "Start__1";
       init = /*%FSM<STATEINIT""">*/"if (isnil ""bis_fnc_init"") then {" \n
-       "	_logicFnc = (createGroup sideLogic) createunit [""FunctionsManager"",position player,[],0,""none""];" \n
+       "       _logicFnc = (createGroup sideLogic) createunit [""FunctionsManager"",position player,[],0,""none""];" \n
        "};" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;

@@ -1,12 +1,19 @@
-[2,_this,{
-	[missionnamespace getvariable (_this select 0), _this select 1] call RMM_fnc_taskUpdate;
-}] call RMM_fnc_ExMP;
+/*
+states
+* none
+* created
+* assigned
+* succeeded
+* failed
+* canceled
+*/
 
-{
-	if (((_x select 0) select 0) == (_this select 0)) then {
-		_x set [1, _this select 1];
-	};
-} foreach MP_tasks;
-publicvariable "MP_tasks";
+private ["_task","_state"];
 
-_task
+_task = _this select 0;
+_state = _this select 1;
+
+if (taskstate _task != _state) then {
+        _task settaskstate _state;
+        _task call tasks_fnc_taskHint;
+};

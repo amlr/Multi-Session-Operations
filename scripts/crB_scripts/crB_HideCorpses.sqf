@@ -10,7 +10,8 @@ if (!isServer) exitWith{};
 waitUntil{!isNil "bis_fnc_init"};
 
 _this spawn {
-	_timeuntilhide = _this select 0;
+	private ["_obj","_timeuntilhide","_dist"];
+        _timeuntilhide = _this select 0;
 	_dist = _this select 1;
 
 	while{true} do {

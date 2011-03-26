@@ -3,33 +3,32 @@ class Mission
 {
 	addOns[]=
 	{
-		"ca_missions_garbagecollector",
-		"ca_modules_functions",
 		"CACharacters_BAF",
-		"zargabad",
+		"cacharacters_e",
+		"ca_modules_functions",
+		"ca_missions_garbagecollector",
+		"ca_modules_clouds",
+		"ca_modules_e_weather",
+		"ca_modules_marta",
+		"BI_SRRS",
+		"cba_main",
 		"cawheeled_d_baf",
-		"camisc3",
 		"CAWheeled_E",
-		"caweapons_baf",
-		"cacharacters2",
+		"camisc3",
 		"camisc_e",
 		"casigns_e",
-		"cawheeled_e_brdm2",
 		"camisc_e_wf",
-		"cacharacters_e",
 		"caweapons_e",
+		"caweapons_baf",
 		"ca_animals2_chicken",
 		"ca_animals2_cow",
 		"ca_animals2_sheep",
 		"cawheeled_e_hmmwv",
 		"cawheeled_e_stryker",
-		"ca_modules_e_weather",
-		"ca_modules_marta",
-		"ca_modules_clouds",
-		"BI_SRRS",
-		"cba_main",
 		"CAAir_E_AH6J",
-		"CATracked_E"
+		"CATracked_E",
+		"CATracked_E_M2A2_Bradley",
+		"zargabad"
 	};
 	addOnsAuto[]=
 	{
@@ -57,12 +56,13 @@ class Mission
 		"cawheeled_e_stryker",
 		"CAAir_E_AH6J",
 		"CATracked_E",
+		"CATracked_E_M2A2_Bradley",
 		"zargabad"
 	};
 	randomSeed=6553103;
 	class Intel
 	{
-		briefingName="MSO Testing v3.3beta";
+		briefingName="MSO Testing v3.4";
 		resistanceEast=1;
 		startWeather=0;
 		forecastWeather=0;
@@ -89,7 +89,6 @@ class Mission
 					leader=1;
 					rank="CORPORAL";
 					skill=0.33333331;
-					init="this onMapSingleClick {{_x setPos _pos;} forEach units _this;};";
 				};
 				class Item1
 				{
@@ -503,7 +502,7 @@ class Mission
 	};
 	class Vehicles
 	{
-		items=60;
+		items=63;
 		class Item0
 		{
 			position[]={3543.6902,22.35,4080.1206};
@@ -786,13 +785,14 @@ class Mission
 		};
 		class Item30
 		{
-			position[]={3515.7888,22.401316,3950.2632};
-			azimut=266.57227;
+			position[]={3507.8289,22.344578,3950.3398};
+			azimut=266.57199;
 			id=39;
 			side="EMPTY";
 			vehicle="BAF_VehicleBox";
 			skill=0.2;
-			init="0 = [this, 30] execVM ""scripts\resupply.sqf"";";
+			text="customresupplytest";
+			init="clearWeaponCargo this; clearMagazineCargo this; this addWeaponCargo [""M16A2"",1]; this addMagazineCargo [""30Rnd_556x45_Stanag"", 15]; 0 = [this, 30] execVM ""scripts\resupply.sqf"";";
 		};
 		class Item31
 		{
@@ -1070,10 +1070,36 @@ class Mission
 			skill=0.60000002;
 			health=0;
 		};
+		class Item60
+		{
+			position[]={3513.7351,22.35,4080.501};
+			id=88;
+			side="EMPTY";
+			vehicle="M2A3_EP1";
+			skill=0.60000002;
+		};
+		class Item61
+		{
+			position[]={3507.2544,22.35,4079.8643};
+			id=89;
+			side="EMPTY";
+			vehicle="MH6J_EP1";
+			skill=0.60000002;
+		};
+		class Item62
+		{
+			position[]={3502.3948,22.35,3950.5698};
+			id=90;
+			side="EMPTY";
+			vehicle="BAF_Offroad_D";
+			skill=0.2;
+			text="customrespawntest";
+			init="clearWeaponCargo this; clearMagazineCargo this; this addWeaponCargo [""M16A2"",1]; this addMagazineCargo [""30Rnd_556x45_Stanag"", 15]; 0 = [this, 30, 99999] execVM ""scripts\vehicle.sqf"";";
+		};
 	};
 	class Markers
 	{
-		items=14;
+		items=17;
 		class Item0
 		{
 			position[]={3515.6721,22.35,3992.2153};
@@ -1178,19 +1204,42 @@ class Mission
 			text="Cleanup of Destroyed Objects";
 			type="mil_dot";
 		};
+		class Item14
+		{
+			position[]={3509.6663,22.35,4080.5989};
+			name="mprights";
+			text="MP Rights Testing";
+			type="mil_dot";
+			angle=89.497597;
+		};
+		class Item15
+		{
+			position[]={3507.6658,22.348297,3949.0156};
+			name="resupply_1";
+			text="Custom Resupply Testing";
+			type="mil_dot";
+		};
+		class Item16
+		{
+			position[]={3502.155,22.35,3952.918};
+			name="respawn";
+			text="Custom Respawn Testing";
+			type="mil_dot";
+		};
 	};
 	class Sensors
 	{
-		items=2;
+		items=4;
 		class Item0
 		{
-			position[]={3534.2012,22.35,4114.5107};
+			position[]={3631.9448,17.798231,4120.6187};
 			a=0;
 			b=0;
 			activationBy="ALPHA";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
+			text="BIS FNC Help";
 			expActiv="[] call bis_fnc_help;";
 			class Effects
 			{
@@ -1206,6 +1255,36 @@ class Mission
 			interruptable=1;
 			age="UNKNOWN";
 			name="BIS_ZORA_0";
+			class Effects
+			{
+			};
+		};
+		class Item2
+		{
+			position[]={3648.4492,16.183819,4118.7026};
+			a=0;
+			b=0;
+			activationBy="BRAVO";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="MPRights";
+			expActiv="player globalChat format[""UID: %1 Admin: %2 Air: %3 Crew: %4"", getplayerUID player, MSO_R_Admin, MSO_R_Air, MSO_R_Crew];";
+			class Effects
+			{
+			};
+		};
+		class Item3
+		{
+			position[]={3667.3159,15.948899,4120.7983};
+			a=0;
+			b=0;
+			activationBy="CHARLIE";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Teleport";
+			expActiv="player onMapSingleClick {{_x setPos _pos;} forEach units player; onMapSingleClick CRB_MAPCLICK;};";
 			class Effects
 			{
 			};

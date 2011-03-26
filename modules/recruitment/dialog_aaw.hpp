@@ -20,18 +20,18 @@ class RMM_ui_recruitment_aaw { // by Rommel
 			w = CUI_Box_W;
 			y = CUI_Row_Y(1);
 			h = CUI_Row_DY(0,1);
-			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [""aawInfantryRifleman1_dpdu"", [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""]};";
+			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [""aawInfantryRifleman1"", [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""]};";
 			default = true;
 		};
 		class SoldierMG : SoldierWB {
 			text = "Machinegunner";
 			y = CUI_Row_Y(2);
-			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [""aawInfantrySectGunner1_dpdu"", [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""]};";
+			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [""aawInfantrySectGunner1"", [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""]};";
 		};
 		class SoldierAT : SoldierWB {
 			text = "Antitank";
 			y = CUI_Row_Y(3);
-			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [""aawInfantryAntiTank1_dpdu"", [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""]};";
+			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [""aawInfantryAntiTank1"", [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""]};";
 		};
 	};
 };

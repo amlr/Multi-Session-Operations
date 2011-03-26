@@ -23,7 +23,7 @@ _menus = [
 		["main", mso_menuname, _menuRsc],
 		[
 			["Close Air Support",
-				{ if(call mso_fnc_hasRadio) then { createDialog "RMM_ui_cas" } }
+				{ if(call mso_fnc_hasRadio && ((getPlayerUID player) in MSO_R_Leader)) then { createDialog "RMM_ui_cas" } }
 			]
 		]
 	]

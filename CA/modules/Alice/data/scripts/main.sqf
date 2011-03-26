@@ -9,6 +9,7 @@ scriptName "Alice\data\scripts\main.sqf";
 	Parameter(s):
 	_this: Alice logic unit which triggered this script.
 */
+private ["_logicFnc","_twnlist","_locationParams","_create","_twnlistTemp","_i","_rarity","_faction","_classlist","_scope","_class","_vehicleclass","_actual","_condition","_fsm","_locked","_canrepeat","_initVariables","_init","_allActions","_action","_tempArrayx","_civilianActions","_source","_allActionsx","_allTopics","_endSentences","_tempArray","_element","_type","_topic","_path","_category","_screams","_scream","_categoryId","_oldScreams","_allScreams","_Remarks","_oldRemarks","_allRemarks","_civilianConversations","_civilianScreams","_civilianRemarks","_factionCiv","_name","_logic","_BIS_Alice_path","_AIdoor","_debug","_initArray","_distlimit","_civilianCount","_actionCategories","_kbCategories","_blacklist","_respectModifyCoef","_threatDecay","_unitrarity","_totobj","_allConversations","_twnrespect"];
 _logic = _this select 0;
 _logic setpos [1000,10,0];
 //[_logic] join grpnull;
@@ -200,7 +201,7 @@ _allConversations = [[],[],[],[]];
 _allTopics = [];
 _allScreams = [];
 _allRemarks = [];
-_t = 0;
+//_t = 0;
 for "_i" from 0 to 2 do {
 	_source = [configfile,missionconfigfile,campaignconfigfile] select _i;
 	_tempArray = [];
@@ -274,14 +275,16 @@ _logic setvariable ["ALICE_topics",_allTopics];
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Towns
 ///////////////////////////////////////////////////////////////////////////////////
-_factionCiv = ["CIV"] call BIS_fnc_getFactions;
 _twnrespect = ["SET"] call BIS_fnc_respect;
-_twnrespect set [_factionCiv,0.5];
+{
+	_factionCiv = [_x] call BIS_fnc_getFactions;
+	_twnrespect set [_factionCiv,0.5];
+} forEach ["CIV","CIV_RU"];
 {
 	_type = _x getvariable "type";
 	_name = _x getvariable "name";
 	textLogFormat ["Log: ALICE: Initializing ...",_name];
-	_pos = position _x;
+//	_pos = position _x;
 	if (isnil {_x getvariable "respect"}) then {_x setVariable ["respect",_twnrespect,true]};
 	_x setvariable ["ALICE_threat",-1,true];
 	_x setvariable ["ALICE_status","black",true];

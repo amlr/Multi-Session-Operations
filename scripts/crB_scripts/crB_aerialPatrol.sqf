@@ -6,6 +6,7 @@
 // Purpose: Setup aerial patrol across map
 // Usage: call{[rectMarker, spawnPos, spawnDelay(opt 600s default), faction(optional)] execVM "scripts\crB_scripts\crB_aerialPatrol.sqf";};
 ///////////////////////////////////////////////////////////////////
+private ["_delay","_fac","_grp","_pos","_px","_py","_sx","_sy","_mkr","_startpos"];
 if (!isServer) exitWith{};
 
 _mkr = _this select 0;

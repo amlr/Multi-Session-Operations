@@ -3,40 +3,39 @@ class Mission
 {
 	addOns[]=
 	{
-		"ca_missions_garbagecollector",
-		"ca_modules_functions",
 		"CACharacters_BAF",
-		"zargabad",
+		"cacharacters_e",
+		"ca_modules_functions",
+		"ca_missions_garbagecollector",
+		"ca_modules_clouds",
+		"ca_modules_e_weather",
+		"ca_modules_marta",
+		"BI_SRRS",
+		"ace_sys_aitalk",
+		"ace_sys_repair",
+		"ace_sys_tracking",
+		"ace_main",
+		"ace_sys_wounds",
+		"ace_sys_playerhud",
+		"cba_main",
 		"cawheeled_d_baf",
-		"camisc3",
 		"CAWheeled_E",
-		"caweapons_baf",
-		"cacharacters2",
+		"camisc3",
 		"camisc_e",
 		"casigns_e",
-		"cawheeled_e_brdm2",
 		"camisc_e_wf",
-		"cacharacters_e",
 		"caweapons_e",
+		"camisc3",
+		"caweapons_baf",
 		"ca_animals2_chicken",
 		"ca_animals2_cow",
 		"ca_animals2_sheep",
 		"cawheeled_e_hmmwv",
 		"cawheeled_e_stryker",
-		"ca_modules_e_weather",
-		"ca_modules_marta",
-		"ca_modules_clouds",
-		"BI_SRRS",
-		"cba_main",
 		"CAAir_E_AH6J",
 		"CATracked_E",
-		"ace_sys_aitalk",
-		"ace_sys_map",
-		"ace_sys_repair",
-		"ace_sys_tracking",
-		"ace_main",
-		"ace_sys_wounds",
-		"ace_sys_weapons"
+		"CATracked_E_M2A2_Bradley",
+		"zargabad"
 	};
 	addOnsAuto[]=
 	{
@@ -49,11 +48,11 @@ class Mission
 		"ca_modules_marta",
 		"BI_SRRS",
 		"ace_sys_aitalk",
-		"ace_sys_map",
 		"ace_sys_repair",
 		"ace_sys_tracking",
 		"ace_main",
 		"ace_sys_wounds",
+		"ace_sys_playerhud",
 		"cba_main",
 		"cawheeled_d_baf",
 		"CAWheeled_E",
@@ -70,13 +69,13 @@ class Mission
 		"cawheeled_e_stryker",
 		"CAAir_E_AH6J",
 		"CATracked_E",
-		"ace_sys_weapons",
+		"CATracked_E_M2A2_Bradley",
 		"zargabad"
 	};
 	randomSeed=6553103;
 	class Intel
 	{
-		briefingName="MSO Testing v3.3beta";
+		briefingName="MSO Testing v3.31";
 		resistanceEast=1;
 		startWeather=0;
 		forecastWeather=0;
@@ -103,7 +102,6 @@ class Mission
 					leader=1;
 					rank="CORPORAL";
 					skill=0.33333331;
-					init="this onMapSingleClick {{_x setPos _pos;} forEach units _this;};";
 				};
 				class Item1
 				{
@@ -390,7 +388,7 @@ class Mission
 			side="LOGIC";
 			class Vehicles
 			{
-				items=13;
+				items=15;
 				class Item0
 				{
 					position[]={3597.8535,22.197565,4144.0962};
@@ -449,65 +447,83 @@ class Mission
 				};
 				class Item6
 				{
-					presence=0;
-					position[]={3634.3914,16.609575,4144.7764};
-					id=89;
-					side="LOGIC";
-					vehicle="ACE_Map_Logic";
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-				class Item7
-				{
 					position[]={3644.3977,15.721883,4144.5493};
-					id=90;
+					id=89;
 					side="LOGIC";
 					vehicle="ACE_RadioTalk_Logic";
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
-				class Item8
+				class Item7
 				{
 					position[]={3624.1575,18.377934,4133.8633};
-					id=91;
+					id=90;
 					side="LOGIC";
 					vehicle="ace_sys_repair_tyres";
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
-				class Item9
+				class Item8
 				{
 					position[]={3634.3914,16.891146,4134.0903};
-					id=92;
+					id=91;
 					side="LOGIC";
-					vehicle="ACE_ForceGroupMarkersOn_Logic";
+					vehicle="ACE_ForceGroupMarkersOff_Logic";
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
-				class Item10
+				class Item9
 				{
 					position[]={3644.8523,15.874224,4134.0903};
-					id=93;
+					id=92;
 					side="LOGIC";
 					vehicle="ACE_Required_Logic";
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
-				class Item11
+				class Item10
 				{
 					position[]={3625.0671,18.496645,4124.3135};
-					id=94;
+					id=93;
 					side="LOGIC";
 					vehicle="ACE_Wounds_Logic";
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
+				class Item11
+				{
+					presence=0;
+					position[]={3635.5283,17.118277,4124.0869};
+					id=94;
+					side="LOGIC";
+					vehicle="ACE_Wounds_FullHeal";
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
 				class Item12
 				{
-					position[]={3635.5283,17.118277,4124.0869};
+					position[]={3644.6804,16.258852,4124.1221};
 					id=95;
 					side="LOGIC";
-					vehicle="ACE_Wounds_MedicsOnly_Logic";
+					vehicle="ACE_SYS_PRespawn_Logic";
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+				class Item13
+				{
+					position[]={3634.4597,16.598993,4144.8696};
+					id=96;
+					side="LOGIC";
+					vehicle="ACE_SYS_Force1st_Logic";
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+				class Item14
+				{
+					position[]={3655.248,15.821651,4124.0918};
+					id=97;
+					side="LOGIC";
+					vehicle="ACE_Wounds_EveryoneMedic";
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
@@ -590,7 +606,7 @@ class Mission
 	};
 	class Vehicles
 	{
-		items=61;
+		items=62;
 		class Item0
 		{
 			position[]={3543.6902,22.35,4080.1206};
@@ -668,7 +684,7 @@ class Mission
 		};
 		class Item8
 		{
-			position[]={3531.2361,22.35,4080.52};
+			position[]={3531.0913,22.35,4080.52};
 			id=13;
 			side="EMPTY";
 			vehicle="US_WarfareBBarracks_Base_EP1";
@@ -1159,16 +1175,24 @@ class Mission
 		};
 		class Item60
 		{
-			position[]={3549.134,22.360891,4061.5522};
-			id=96;
+			position[]={3513.7351,22.35,4080.501};
+			id=88;
 			side="EMPTY";
-			vehicle="ace_sys_weapons_magicbox";
+			vehicle="M2A3_EP1";
+			skill=0.60000002;
+		};
+		class Item61
+		{
+			position[]={3507.2544,22.35,4079.8643};
+			id=89;
+			side="EMPTY";
+			vehicle="MH6J_EP1";
 			skill=0.60000002;
 		};
 	};
 	class Markers
 	{
-		items=14;
+		items=15;
 		class Item0
 		{
 			position[]={3515.6721,22.35,3992.2153};
@@ -1221,7 +1245,7 @@ class Mission
 		};
 		class Item7
 		{
-			position[]={3531.0864,22.35,4080.3606};
+			position[]={3530.8689,22.35,4077.3123};
 			name="recruitment";
 			text="Recruitment Testing";
 			type="mil_dot";
@@ -1273,19 +1297,28 @@ class Mission
 			text="Cleanup of Destroyed Objects";
 			type="mil_dot";
 		};
+		class Item14
+		{
+			position[]={3510.0288,22.35,4083.7922};
+			name="mprights";
+			text="MP Rights Testing";
+			type="mil_dot";
+			angle=89.497597;
+		};
 	};
 	class Sensors
 	{
-		items=2;
+		items=4;
 		class Item0
 		{
-			position[]={3534.2012,22.35,4114.5107};
+			position[]={3631.9448,17.798231,4120.6187};
 			a=0;
 			b=0;
 			activationBy="ALPHA";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
+			text="BIS FNC Help";
 			expActiv="[] call bis_fnc_help;";
 			class Effects
 			{
@@ -1301,6 +1334,36 @@ class Mission
 			interruptable=1;
 			age="UNKNOWN";
 			name="BIS_ZORA_0";
+			class Effects
+			{
+			};
+		};
+		class Item2
+		{
+			position[]={3648.4492,16.183819,4118.7026};
+			a=0;
+			b=0;
+			activationBy="BRAVO";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="MPRights";
+			expActiv="player globalChat format[""UID: %1 Admin: %2 Air: %3 Crew: %4"", getplayerUID player, MSO_R_Admin, MSO_R_Air, MSO_R_Crew];";
+			class Effects
+			{
+			};
+		};
+		class Item3
+		{
+			position[]={3667.3159,15.948899,4120.7983};
+			a=0;
+			b=0;
+			activationBy="CHARLIE";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Teleport";
+			expActiv="player onMapSingleClick {{_x setPos _pos;} forEach units player; onMapSingleClick CRB_MAPCLICK;};";
 			class Effects
 			{
 			};

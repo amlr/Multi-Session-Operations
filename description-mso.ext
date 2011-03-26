@@ -5,6 +5,16 @@ respawn = 3;
 respawnDelay = 10;
 disabledAI = 1;
 
+//http://community.bistudio.com/wiki/description.ext#OnLoad...
+onLoadIntro = "An AAF/AEF CTB Collaboration";
+onLoadMission = "An AAF/AEF CTB Collaboration";
+onLoadIntroTime = true;
+onLoadMissionTime = true;
+
+aiKills = 0;
+briefing = 1;
+debriefing = 1;
+
 class CfgSounds {
 #ifdef CRB_DOGS
 	#include <modules\dogs\cfgsounds.hpp>
@@ -16,9 +26,39 @@ class CfgSounds {
 
 //http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
 class Params {
+#ifdef RMM_MP_RIGHTS
+	#include <modules\mp_rights\params.hpp>
+#endif
 #ifdef RMM_NOMAD
 	#include <modules\nomad\params.hpp>
 #endif
+#ifdef RMM_WEATHER
+	#include <modules\weather\params.hpp>
+#endif
+	class faction_RU {
+		title = "Enable Russians"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_ACE_RU {
+		title = "Enable ACE Russians"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_INS {
+		title = "Enable Insurgents"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_GUE {
+		title = "Enable Guerillas"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
 	class faction_BIS_TK {
 		title = "Enable Takistan Army"; 
 		values[]= {0,1}; 
@@ -68,6 +108,9 @@ class cfgFunctions {
 #ifdef CRB_FLIPPABLE
 	#include <modules\flippable\functions.hpp>
 #endif
+#ifdef RMM_GTK
+	#include <modules\gtk\functions.hpp>
+#endif
 #ifdef RMM_HELP
 	#include <modules\help\functions.hpp>
 #endif
@@ -77,11 +120,14 @@ class cfgFunctions {
 #ifdef RMM_LOGBOOK
 	#include <modules\logbook\functions.hpp>
 #endif
+#ifdef RMM_LOGISTICS
+	#include <modules\logistics\functions.hpp>
+#endif
 #ifdef RMM_NOTEBOOK
 	#include <modules\notebook\functions.hpp>
 #endif
-#ifdef RMM_LOGISTICS
-	#include <modules\logistics\functions.hpp>
+#ifdef RMM_OSOM
+	#include <modules\osom\functions.hpp>
 #endif
 #ifdef RMM_REVIVE
 	#include <modules\revive\functions.hpp>
@@ -130,6 +176,7 @@ class cfgFunctions {
 #ifdef RMM_RECRUITMENT
 	#include <modules\recruitment\dialog_baf.hpp>
 	#include <modules\recruitment\dialog_us.hpp>
+	#include <modules\recruitment\dialog_cz.hpp>
 	#include <modules\recruitment\dialog_aaw.hpp>
 	#include <modules\recruitment\TeamStatusDialog\TeamStatusDialog.hpp>
 #endif

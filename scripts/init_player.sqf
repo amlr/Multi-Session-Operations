@@ -1,61 +1,57 @@
-waituntil {!isnull player};
-waituntil {getplayeruid player != ""};
+if (isDedicated) exitWith{};
+waituntil {not isnull player};
 
-_fnc_Killed = {
-	removeallweapons player;
-	removeallitems player;
-	removebackpack player;
+////////////////////////////////////////////////////////////
+// Respawn Handling
+////////////////////////////////////////////////////////////
 
 	player switchmove "";
 	player setskill 0;
 	{player disableAI _x} foreach ["move","anim","target","autotarget"];
-};
-
-call _fnc_Killed;
-player addeventhandler ["respawn", _fnc_Killed];
-
-//// WEAPONS RESPAWN (below)
-
-player addeventhandler ["killed", {
-	player setVariable ["respawn", [
-		magazines player,
-		weapons player,
-		typeof (unitbackpack player),
-		getmagazinecargo (unitbackpack player),
-		getweaponcargo (unitbackpack player)
-	], true];
-
-	diag_log format["Killed: %1", player getVariable "respawn"];
-
-}];
+player addRating -2500;
 
 player addeventhandler ["respawn", {
-	diag_log format["Respawn: %1", player getVariable "respawn"];
-	private["_obj", "_mags","_weps","_bp","_bpm","_bpw"];
-	_obj = player getVariable "respawn";
-	_mags = _obj select 0;
-	_weps = _obj select 1;
-	_bp = _obj select 2;
+	_unit = _this select 0;
+	_corpse = _this select 1;
+	diag_log format["Respawn: %1", _unit];
 
-	{player removeweapon _x;} foreach ((weapons player) + (items player));
-	{player removemagazine _x;} foreach (magazines player);
+	player addRating -2500;
 
-	{player addmagazine _x;} foreach _mags;
-	{player addweapon _x;} foreach _weps;
-	player selectweapon (primaryweapon player);
+	{_unit removeweapon _x;} foreach ((weapons _unit) + (items _unit));
+	{_unit removemagazine _x;} foreach (magazines _unit);
+	removeallweapons player; removeallitems player;
+	removebackpack player;
+
+	{_unit addmagazine _x;} foreach (magazines _corpse);
+	{_unit addweapon _x;} foreach ((weapons _corpse) + (items _corpse));
+	_unit selectweapon (primaryweapon _unit);
+
+//	_ace = isClass (configFile>>"cfgWeapons" >> "ACE_B61BombLauncher");
+//	if (_ace) then {
+	if(!isNil "ace_main") then {
+
+		[_unit, _corpse] call compile preprocessFileLineNumbers "init_player_ace.sqf";
+	};
+
+	_bp = typeof (unitbackpack _corpse);
 	if (_bp != "") then {
-		_bpm = _obj select 3;
-		_bpw = _obj select 4;
+		_bpm = getmagazinecargo (unitbackpack _corpse);
+		_bpw = getweaponcargo (unitbackpack _corpse);
 
-		player addbackpack _bp;
-		clearweaponcargo (unitbackpack player);
-		clearmagazinecargo (unitbackpack player);
+		_unit addbackpack _bp;
+		clearweaponcargo (unitbackpack _unit);
+		clearmagazinecargo (unitbackpack _unit);
 
 		for "_i" from 0 to ((count (_bpm select 0))-1) do {
-			(unitbackpack player) addmagazinecargo [(_bpm select 0) select _i,(_bpm select 1) select _i];
+			(unitbackpack _unit) addmagazinecargo [(_bpm select 0) select _i,(_bpm select 1) select _i];
 		};
 		for "_i" from 0 to ((count (_bpw select 0))-1) do {
-			(unitbackpack player) addweaponcargo [(_bpw select 0) select _i,(_bpw select 1) select _i];
+			(unitbackpack _unit) addweaponcargo [(_bpw select 0) select _i,(_bpw select 1) select _i];
 		};
 	};
+
+	removeallweapons _corpse;
+	removeallitems _corpse;
+	removebackpack _corpse;
+
 }];

@@ -1,14 +1,18 @@
 // - Tested
 #define RMM_AAR
 #define RMM_CAS
+#define CEP_CACHE
 #define CRB_CIVILIANS
+#define CRB_CROWS
+#define CRB_FLIES
+#define CRB_SANDSTORM
 #define RMM_CONVOYS
 #define RMM_CTP
 #define RMM_DEBUG
 #define CRB_DOGS
 #define RMM_ENEMYPOP
 #define CRB_FLIPPABLE
-#define GC_PACK_COW
+//#define GC_PACK_COW
 #define RMM_JIPMARKERS
 #define RMM_LOGBOOK
 #define RMM_MP_RIGHTS
@@ -23,9 +27,14 @@
 #define RMM_ZORA
 
 // - In progress
+//#define RMM_GTK
+//#define RMM_OSL
+//#define RMM_OSOM
+//#define RMM_NOTEBOOK
+
+//#define RMM_HELP
 //#define RMM_CASEVAC
 //#define RMM_EODD
-//#define RMM_OSL
 //#define CRB_SOM
 
 // - On hold
@@ -39,7 +48,3 @@
 // - To test
 //#define RMM_CA
 //#define RMM_DAC
-//#define RMM_GTK
-//#define RMM_HELP
-//#define RMM_NOTEBOOK
-//#define RMM_OSOM

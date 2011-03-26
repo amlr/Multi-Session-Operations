@@ -2,31 +2,10 @@ if(isServer) then {
 	private["_debug"];
 	_debug = false;
 
-
 	waitUntil{!isNil "BIS_fnc_init"};
 	if(isNil "CRB_LOCS") then {
         	CRB_LOCS = [] call CRB_fnc_initLocations;
 	};
-
-	_logicAni = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
-	if (isnil 'BIS_Animals_debug') then {
-		private ["_ok"];
-		BIS_Animals_debug = _debug;
-		_ok = [_logicAni] execVM "CA\Modules\Animals\Data\scripts\init.sqf";
-	};
-
-	_logicVeh = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
-	if (isnil 'BIS_silvie_mainscope') then {
-		BIS_silvie_mainscope = _logicVeh;
-		publicvariable 'BIS_silvie_mainscope';
-		private ["_ok"];
-		if(_debug) then {
-			_logicVeh setvariable ["debug", true];
-		};
-		BIS_silvie_mainscope setVariable ["townlist",(BIS_functions_mainscope getVariable "locations")];
-		_ok = [_logicVeh] execVM "ca\modules\silvie\data\scripts\main.sqf";
-	};
-	[] call compile preprocessfilelinenumbers "modules\civilians\crB_AmbVehSetup.sqf";
 
 	_logicCiv = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
 	if (isnil 'BIS_alice_mainscope') then {
@@ -41,13 +20,41 @@ if(isServer) then {
 	};
 	[] call compile preprocessfilelinenumbers "modules\civilians\crB_AmbCivSetup.sqf";
 
+	_logicVeh = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
+	if (isnil 'BIS_silvie_mainscope') then {
+		BIS_silvie_mainscope = _logicVeh;
+		publicvariable 'BIS_silvie_mainscope';
+		private ["_ok"];
+		if(_debug) then {
+			_logicVeh setvariable ["debug", true];
+		};
+		BIS_silvie_mainscope setVariable ["townlist",(BIS_functions_mainscope getVariable "locations")];
+		_ok = [_logicVeh] execVM "ca\modules\silvie\data\scripts\main.sqf";
+	};
+	[] call compile preprocessfilelinenumbers "modules\civilians\crB_AmbVehSetup.sqf";
+
+	_logicAni = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
+	if (isnil 'BIS_Animals_debug') then {
+		BIS_Animals_debug = _debug;
+		private ["_ok"];
+		_ok = [_logicAni] execVM "CA\Modules\Animals\Data\scripts\init.sqf";
+	};
+
+		BIS_ALICE2_fnc_civilianSet = compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\fn_civilianSet.sqf";
+//		_ok = [_logicCiv] execVM "ca\modules\alice\data\scripts\main.sqf";
 };
 
 switch(toLower(worldName)) do {
+	case "fallujah": {
+		[] spawn compile preprocessfilelinenumbers "modules\civilians\ALICE2_houseEffects.sqf";
+	};
 	case "zargabad": {
-		[] spawn compile preprocessFileLineNumbers "modules\civilians\CIV_City.sqf";
+		[] call compile preprocessFileLineNumbers "modules\civilians\CIV_City.sqf";
 	};
 	case "chernarus": {
+		[] spawn compile preprocessfilelinenumbers "modules\civilians\ALICE2_houseEffects.sqf";
+	};
+	case "eden": {
 		[] spawn compile preprocessfilelinenumbers "modules\civilians\ALICE2_houseEffects.sqf";
 	};
 	case "utes": {

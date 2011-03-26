@@ -45,7 +45,7 @@ if (isServer) then {
 					_alive_humans = [];
 					_distance = 1000;
 					_neareast = objNull;
-					_near_humans = position _dog nearEntities ["man",100];
+					_near_humans = (position _dog nearEntities ["Man",100]) + (position _dog nearEntities ["Car",100]);
 						//{if ((side _x != side _leader) && (side _x != side _dog)) then {_alive_humans = _alive_humans + [_x];_dog knowsabout _x;}}forEach _near_humans;
 						{if ((side _dog)getFriend (side _x) <0.6) then {_alive_humans = _alive_humans + [_x];_dog knowsabout _x;}}forEach _near_humans;
 						

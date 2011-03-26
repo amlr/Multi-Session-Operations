@@ -6,13 +6,3 @@ class header {
 	minplayers = 1;
 	maxplayers = 8;
 };
-
-//http://community.bistudio.com/wiki/description.ext#OnLoad...
-onLoadIntro = "An AAF/AEF CTB Collaboration";
-onLoadMission = "An AAF/AEF CTB Collaboration";
-onLoadIntroTime = true;
-onLoadMissionTime = true;
-
-aiKills = 0;
-briefing = 1;
-debriefing = 1;

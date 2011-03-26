@@ -1,5 +1,7 @@
 /* (C)Rommel || http://creativecommons.org/licenses/by-nc-sa/2.5/au/ */
 
+
+private ["_oStat","_fStat","_tStat","_hPaa","_fTime","_overcast","_fog","_img","_string"];
 _overcast = overcastForecast;
 _fog = fogForecast;
 

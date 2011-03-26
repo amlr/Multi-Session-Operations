@@ -40,5 +40,6 @@ if (_typeof iskindof "Air") then {
 			RMM_cas_available set [count RMM_cas_available, _typeof];
 			publicvariable "RMM_cas_available";
 		};
-	};
-}] call RMM_fnc_ExMP;
+} else {
+	hint format["CAS not available until %1", [if(daytime < 21)then{daytime+3}else{daytime-21}] call BIS_fnc_timeToString];
+};

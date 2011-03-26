@@ -1,11 +1,16 @@
-if (isnil "MP_tasks") then {
-	MP_tasks = [];
-	publicvariable "MP_tasks";
+if (isdedicated) exitwith {};
+
+RMM_mytasks = [];
+if (isnil "RMM_tasks") then {
+        RMM_tasks = [];
+        publicvariable "RMM_tasks";
+} else {
+        {
+                RMM_mytasks set [count RMM_mytasks, _x call tasks_fnc_taskAdd];
+        } foreach RMM_tasks;
 };
 
-{
-	[
-		(_x select 0) call RMM_fnc_taskAdd,
-		(_x select 1)
-	] call RMM_fnc_taskUpdate;
-} foreach MP_tasks;
+waitUntil{!isNil "MSO_R_Leader"};
+["player", [mso_interaction_key], 4, ["modules\tasks\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+CRB_MAPCLICK = CRB_MAPCLICK + "if (_shift && _alt && ((getPlayerUID player) in MSO_R_Leader)) then {RMM_task_position = _pos; createDialog ""RMM_ui_tasks"";};";
+onMapSingleClick CRB_MAPCLICK;

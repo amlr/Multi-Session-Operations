@@ -1,4 +1,5 @@
 waituntil {!isnil "BIS_fnc_init"};
+private ["_allTopics","_endSentences","_tempArray","_element","_type","_topic","_path","_category","_screams","_scream","_categoryId","_oldScreams","_allScreams","_Remarks","_oldRemarks","_allRemarks","_civilianConversations","_civilianScreams","_civilianRemarks","_source","_twnEffects","_doors","_doorlist","_bbox","_obj","_houselist","_doorcount","_doorsAll","_twn","_logic","_AIdoor","_allConversations","_kbCategories"];
 _logic = bis_alice_mainscope;
 
 //--- Dummy door
@@ -8,9 +9,10 @@ _logic setvariable ["dummydoor",_AIdoor];
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Civilian Actions
 ///////////////////////////////////////////////////////////////////////////////////
-
-_allActionsx = _logic getvariable "ALICE_actionsx";
-_allActions = _logic getvariable "ALICE_actions";
+/*
+_allActionsx = _logic getvariable ["ALICE_actionsx", []];
+_allActions = _logic getvariable ["ALICE_actions", []];
+_actionCategories = _logic getvariable "civilianActions";
 
 for "_i" from 0 to 2 do {
 	_source = [configfile,missionconfigfile,campaignconfigfile] select _i;
@@ -31,15 +33,15 @@ for "_i" from 0 to 2 do {
 					_init = gettext(_action >> "init");
 					_allActions = _allActions + [
 						[
-							/* 0 */ _action,
-							/* 1 */ configname _action,
-							/* 2 */ _condition,
-							/* 3 */ _fsm,
-							/* 4 */ _rarity,
-							/* 5 */ _locked,
-							/* 6 */ _canrepeat,
-							/* 7 */ _initVariables,
-							/* 8 */ _init
+							_action, // 0
+							configname _action, // 1
+							_condition, // 2
+							_fsm, // 3
+							_rarity, // 4
+							_locked, // 5
+							_canrepeat, // 6
+							_initVariables, // 7
+							_init // 8
 						]
 					];
 				};
@@ -50,18 +52,18 @@ for "_i" from 0 to 2 do {
 };
 _logic setvariable ["ALICE_actionsx",_allActionsx];
 _logic setvariable ["ALICE_actions",_allActions];
-
+*/
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Civilian Conversations
 ///////////////////////////////////////////////////////////////////////////////////
 
-_allConversations = _logic getvariable "ALICE_conversations";
-_allTopics = _logic getvariable "ALICE_topics";
-_allScreams = _logic getvariable "ALICE_screams";
-_allRemarks = _logic getvariable "ALICE_remarks";
+_allConversations = _logic getvariable ["ALICE_conversations", [[],[],[],[]]];
+_allTopics = _logic getvariable ["ALICE_topics", []];
+_allScreams = _logic getvariable ["ALICE_screams", []];
+_allRemarks = _logic getvariable ["ALICE_remarks", []];
+_kbCategories = _logic getvariable "civilianConversations";
 
-_t = 0;
 for "_i" from 0 to 2 do {
 	_source = [configfile,missionconfigfile,campaignconfigfile] select _i;
 	_tempArray = [];
@@ -148,7 +150,7 @@ while{!isNil "BIS_ALICE_fnc_houseEffects"} do {
 			_doorlist = []; 
 			private["_x"];
 			{ 
-				_bbox = abs((boundingbox _x select 1) select 0) min abs((boundingbox _x select 1) select 1); 
+                                _bbox = abs(((boundingbox _x) select 1) select 0) min abs(((boundingbox _x) select 1) select 1); 
 				if (_bbox > 3) then {  
 					//--- Include 
 					_doors = _x call BIS_ALICE_fnc_doorCreate; 
@@ -157,7 +159,6 @@ while{!isNil "BIS_ALICE_fnc_houseEffects"} do {
 			} foreach _houselist; 
 	  
 			_doorcount = count _doorlist; 
-			_housecount = _doorcount; 
 			_twn setvariable ["doorcountdef",_doorcount]; 
 
 			_doorsAll = _twn nearentities ["bis_alice_emptydoor",500]; 
@@ -173,9 +174,6 @@ while{!isNil "BIS_ALICE_fnc_houseEffects"} do {
 					}; 
 				}; 
 			} foreach _doorsAll; 
-			_doorcountdef = _twn getvariable "doorcountdef"; 
-			_doorcountlimit = 0.2; 
-			_neighbours = (_twn getvariable "ALICE_population"); 
 
 			{
 				[_x] spawn {

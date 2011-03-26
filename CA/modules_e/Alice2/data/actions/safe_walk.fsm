@@ -68,9 +68,9 @@ class FSM
        "	_houses =  (position _twn) nearobjects [""House"",_twnSize];" \n
        "	_houses call BIS_fnc_selectRandom;" \n
        "};" \n
+       "_unit setspeedmode ""limited"";" \n
        "_unit domove position _destination;" \n
        "" \n
-       "_unit setspeedmode ""limited"";" \n
        "_unit setbehaviour ""safe"";" \n
        "_unit forcewalk true;" \n
        "" \n
@@ -156,6 +156,7 @@ class FSM
        "if !(isnil ""_neighbour"") then {" \n
        "	_neighbour setvariable [""ALICE_action_fsm"",-1];" \n
        "	_neighbour = nil;" \n
+       "	_unit setspeedmode ""limited"";" \n
        "	_unit domove position _destination;" \n
        "" \n
        "	if (bis_alice_mainscope getvariable ""debug"") then {" \n
@@ -199,7 +200,8 @@ class FSM
     {
       name = "Talk";
       itemno = 6;
-      init = /*%FSM<STATEINIT""">*/"_unit domove position _unit;" \n
+      init = /*%FSM<STATEINIT""">*/"_unit setspeedmode ""limited"";" \n
+	"_unit domove position _unit;" \n
        "_neighbour domove position _neighbour;" \n
        "" \n
        "//--- Speak" \n
@@ -310,6 +312,7 @@ class FSM
        "" \n
        "_unit setvariable [""ALICE_action_locked"",1];" \n
        "" \n
+       "_unit setspeedmode ""limited"";" \n
        "_unit domove position _unit;" \n
        "_unit dowatch _neighbour;" \n
        "_unit domove position _neighbour;" \n
