@@ -215,8 +215,8 @@ for "_j" from 0 to (_destinations-1) do {
                 
                 _facs = [_factions,_factionsCount] call CRB_fnc_selectRandomBias;
                 _vehiclelist =  [0, _facs,_front] call compile preprocessFileLineNumbers "modules\AirTraffic\fn_findVehicleType2.sqf"; 
-//                _vehiclelist =  [0, _facs,_front] call CRB_fnc_findVehicleType; 
-              
+                //                _vehiclelist =  [0, _facs,_front] call CRB_fnc_findVehicleType; 
+                
                 if (count _vehiclelist > 0) then {
                     if (_debug) then {
                         diag_log format ["MSO-%1 Air Traffic: %4 %2 Faction: %5 Vehicle list: %3", time, _j, _vehiclelist, _destination, _facs];
@@ -225,8 +225,8 @@ for "_j" from 0 to (_destinations-1) do {
                 } else {
                     _facs = ["BIS_TK_CIV","BIS_CIV_special","CIV", "CIV_RU"];
                     _vehicle =  ([0, _facs,_front] call compile preprocessFileLineNumbers "modules\AirTraffic\fn_findVehicleType2.sqf") call BIS_fnc_selectRandom;
-//			_vehicle =  ([0, _facs,_front] call CRB_fnc_findVehicleType) call BIS_fnc_selectRandom;
-
+                    //			_vehicle =  ([0, _facs,_front] call CRB_fnc_findVehicleType) call BIS_fnc_selectRandom;
+                    
                     _airfieldside = civilian;
                     if (_debug) then {
                         diag_log format ["MSO-%1 Air Traffic: %4 %2  Could not find suitable military aircraft, civilian aircraft found: %3", time, _j, _vehicle, _destination];
@@ -287,11 +287,13 @@ for "_j" from 0 to (_destinations-1) do {
                 
                 waitUntil{ (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
                 
-                // Remove aircraft 
+                // Remove aircraft and crew
                 
                 if (_debug) then {
                     diag_log format["MSO-%1 Air Traffic: %3 %4 deleting %2", time, TypeOf _aircraftVehicle, _destination, _j];
                 };
+                
+                { deleteVehicle _x } forEach _aircraftCrew;
                 deleteVehicle _aircraftVehicle;
                 deletegroup _grp;
                 

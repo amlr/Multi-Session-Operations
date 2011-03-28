@@ -1,8 +1,10 @@
 
-private ["_fac","_allvehs","_vehx","_sx","_fx","_cx","_cargoslots","_grpx","_type"];
+private ["_fac","_allvehs","_vehx","_sx","_fx","_cx","_cargoslots","_grpx","_type","_nonconfigs","_nonsims","_tx"];
 _cargoslots = _this select 0;
 _fac = nil;
 _type = nil;
+_nonConfigs = ["StaticWeapon","CruiseMissile1","CruiseMissile2","Chukar_EP1","Chukar_AllwaysEnemy_EP1"];
+_nonSims = ["parachute"];
 
 if(count _this > 1) then {
     _fac = _this select 1;
@@ -18,10 +20,11 @@ for "_y" from 1 to _grpx - 1 do {
     _vehx = (configFile >> "CfgVehicles") select _y;
     _sx = getText(_vehx >> "simulation");
     _fx = getText(_vehx >> "faction");
+    _tx = getNumber(_vehx >> "TransportSoldier");
     _cx = configName _vehx;
     //hint str _fx;
     //hint str typeName _fac;
-    if (!(_cx isKindOf "StaticWeapon") && !(_sx == "parachute") && !(_cx == "CruiseMissile1")) then {
+    if (!(_cx in _nonconfigs) && !(_sx in _nonsims)) then {
         if (!isNil "_fac") then {
             switch(typeName _fac) do {
                 case "STRING": {
