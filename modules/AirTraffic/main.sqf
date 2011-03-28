@@ -151,7 +151,7 @@ for "_j" from 0 to (_destinations-1) do {
                 diag_log format ["MSO-%1 Air Traffic: %4 #%2 has %3 units", time, _j, str(count _units), _destination];
             };
             
-            // Work out side that controls airport (based on unit numbers)
+            // Work out side that controls destination (based on unit numbers)
             {
                 _currentSideCount = _x countSide _units;
                 if ((_debug) && (_currentSideCount > 0)) then {
@@ -214,13 +214,19 @@ for "_j" from 0 to (_destinations-1) do {
                 };
                 
                 _facs = [_factions,_factionsCount] call CRB_fnc_selectRandomBias;
-                _vehiclelist =  [0, _facs,_front] call compile preprocessFile "modules\AirTraffic\fn_findVehicleType2.sqf"; 
-                
+                _vehiclelist =  [0, _facs,_front] call compile preprocessFileLineNumbers "modules\AirTraffic\fn_findVehicleType2.sqf"; 
+//                _vehiclelist =  [0, _facs,_front] call CRB_fnc_findVehicleType; 
+              
                 if (count _vehiclelist > 0) then {
+                    if (_debug) then {
+                        diag_log format ["MSO-%1 Air Traffic: %4 %2 Faction: %5 Vehicle list: %3", time, _j, _vehiclelist, _destination, _facs];
+                    };
                     _vehicle = (_vehiclelist) call BIS_fnc_selectRandom;
                 } else {
                     _facs = ["BIS_TK_CIV","BIS_CIV_special","CIV", "CIV_RU"];
-                    _vehicle =  ([0, _facs,_front] call compile preprocessFile "modules\AirTraffic\fn_findVehicleType2.sqf") call BIS_fnc_selectRandom;
+                    _vehicle =  ([0, _facs,_front] call compile preprocessFileLineNumbers "modules\AirTraffic\fn_findVehicleType2.sqf") call BIS_fnc_selectRandom;
+//			_vehicle =  ([0, _facs,_front] call CRB_fnc_findVehicleType) call BIS_fnc_selectRandom;
+
                     _airfieldside = civilian;
                     if (_debug) then {
                         diag_log format ["MSO-%1 Air Traffic: %4 %2  Could not find suitable military aircraft, civilian aircraft found: %3", time, _j, _vehicle, _destination];
@@ -260,8 +266,14 @@ for "_j" from 0 to (_destinations-1) do {
                     waitUntil{((position _aircraftVehicle) select 2 <= 5) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
                 } else {
                     _aircraftVehicle action ["Land", _aircraftVehicle];
-                    waitUntil{(_aircraftVehicle distance _destpos < 50)  && ((position _aircraftVehicle) select 2 <= 2) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
+                    waitUntil{(_aircraftVehicle distance _destpos < 30)  && ((position _aircraftVehicle) select 2 <= 2) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
                 };			
+                
+                If ((TypeOf _aircraftVehicle) == "MV22") then {
+                    _wp = _grp addwaypoint [_destpos, 0];
+                    _wp setWayPointType "MOVE";
+                    waitUntil{(_aircraftVehicle distance _destpos < 5)  && ((position _aircraftVehicle) select 2 <= 2) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
+                };
                 
                 _aircraftVehicle engineOn false;
                 

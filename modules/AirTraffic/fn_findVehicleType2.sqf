@@ -16,12 +16,12 @@ _allvehs = [];
 _grpx = count(configFile >> "CfgVehicles");
 for "_y" from 1 to _grpx - 1 do {
     _vehx = (configFile >> "CfgVehicles") select _y;
-    _sx = getNumber(_vehx >> "transportSoldier");
+    _sx = getText(_vehx >> "simulation");
     _fx = getText(_vehx >> "faction");
     _cx = configName _vehx;
     //hint str _fx;
     //hint str typeName _fac;
-    if (_sx > _cargoslots && !(_cx isKindOf "StaticWeapon") ) then {
+    if (!(_cx isKindOf "StaticWeapon") && !(_sx == "parachute") && !(_cx == "CruiseMissile1")) then {
         if (!isNil "_fac") then {
             switch(typeName _fac) do {
                 case "STRING": {
