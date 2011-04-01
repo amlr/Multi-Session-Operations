@@ -1,188 +1,52 @@
-#include <modules\modules.hpp>
+#include <core\modules\modules.hpp>
 
 //http://community.bistudio.com/wiki/Description.ext#Respawn...
 respawn = 3;
 respawnDelay = 10;
 disabledAI = 1;
 
-//http://community.bistudio.com/wiki/description.ext#OnLoad...
-onLoadIntro = "An AAF/AEF CTB Collaboration";
-onLoadMission = "An AAF/AEF CTB Collaboration";
-onLoadIntroTime = true;
-onLoadMissionTime = true;
-
-aiKills = 0;
-briefing = 1;
-debriefing = 1;
-
 class CfgSounds {
-#ifdef CRB_DOGS
-	#include <modules\dogs\cfgsounds.hpp>
-#endif
-#ifdef RMM_CTP
-	#include <modules\ctp\cfgsounds.hpp>
-#endif
 };
 
 //http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
 class Params {
 #ifdef RMM_MP_RIGHTS
-	#include <modules\mp_rights\params.hpp>
+	#include <core\modules\mp_rights\params.hpp>
 #endif
 #ifdef RMM_NOMAD
-	#include <modules\nomad\params.hpp>
+	#include <core\modules\nomad\params.hpp>
 #endif
 #ifdef RMM_WEATHER
-	#include <modules\weather\params.hpp>
+	#include <core\modules\weather\params.hpp>
 #endif
-	class faction_RU {
-		title = "Enable Russians"; 
-		values[]= {0,1}; 
-		texts[]= {"false","true"}; 
-		default = 0;
-	};
-	class faction_ACE_RU {
-		title = "Enable ACE Russians"; 
-		values[]= {0,1}; 
-		texts[]= {"false","true"}; 
-		default = 0;
-	};
-	class faction_INS {
-		title = "Enable Insurgents"; 
-		values[]= {0,1}; 
-		texts[]= {"false","true"}; 
-		default = 0;
-	};
-	class faction_GUE {
-		title = "Enable Guerillas"; 
-		values[]= {0,1}; 
-		texts[]= {"false","true"}; 
-		default = 0;
-	};
-	class faction_BIS_TK {
-		title = "Enable Takistan Army"; 
-		values[]= {0,1}; 
-		texts[]= {"false","true"}; 
-		default = 0;
-	};
-	class faction_BIS_TK_INS {
-		title = "Enable Takistan Insurgency"; 
-		values[]= {0,1}; 
-		texts[]= {"false","true"}; 
-		default = 0;
-	};
-	class faction_BIS_TK_GUE {
-		title = "Enable Takistan Guerillas"; 
-		values[]= {0,1}; 
-		texts[]= {"false","true"}; 
-		default = 1;
-	};
 }; 
-
-#ifdef R3F_LOGISTICS
-#include "modules\R3F_logistics\desc_include.h"
-class RscTitles
-{
-	#include "modules\R3F_logistics\desc_rsct_include.h"
-};
-#endif
 
 //http://community.bistudio.com/wiki/Functions_Library
 class cfgFunctions {
-	#include <functions\functions.hpp>
-#ifdef RMM_AAR
-	#include <modules\aar\functions.hpp>
-#endif
-#ifdef RMM_CAS
-	#include <modules\cas\functions.hpp>
-#endif
-#ifdef RMM_CASEVAC
-	#include <modules\casevac\functions.hpp>
-#endif
-#ifdef RMM_CNSTRCT
-	#include <modules\cnstrct\functions.hpp>
-#endif
-#ifdef CRB_DOGS
-	#include <modules\dogs\functions.hpp>
-#endif
-#ifdef CRB_FLIPPABLE
-	#include <modules\flippable\functions.hpp>
-#endif
+	#include <core\functions\functions.hpp>
 #ifdef RMM_GTK
-	#include <modules\gtk\functions.hpp>
+	#include <core\modules\gtk\functions.hpp>
 #endif
 #ifdef RMM_HELP
-	#include <modules\help\functions.hpp>
-#endif
-#ifdef RMM_JIPMARKERS
-	#include <modules\jipmarkers\functions.hpp>
-#endif
-#ifdef RMM_LOGBOOK
-	#include <modules\logbook\functions.hpp>
-#endif
-#ifdef RMM_LOGISTICS
-	#include <modules\logistics\functions.hpp>
-#endif
-#ifdef RMM_NOTEBOOK
-	#include <modules\notebook\functions.hpp>
+	#include <core\modules\help\functions.hpp>
 #endif
 #ifdef RMM_OSOM
-	#include <modules\osom\functions.hpp>
-#endif
-#ifdef RMM_REVIVE
-	#include <modules\revive\functions.hpp>
-#endif
-#ifdef RMM_TASKS
-	#include <modules\tasks\functions.hpp>
-#endif
-#ifdef RMM_TYRES
-	#include <modules\tyres\functions.hpp>
+	#include <core\modules\osom\functions.hpp>
 #endif
 #ifdef RMM_WEATHER
-	#include <modules\weather\functions.hpp>
+	#include <core\modules\weather\functions.hpp>
 #endif
 };
 
 //http://community.bistudio.com/wiki/PreProcessor_Commands
-#include <dialogs\c_ui.hpp>
+#include <core\dialogs\c_ui.hpp>
 
-#ifdef RMM_AAR
-	#include <modules\aar\dialog.hpp>
-#endif
-#ifdef RMM_CAS
-	#include <modules\cas\dialog.hpp>
-#endif
-#ifdef RMM_CASEVAC
-	#include <modules\casevac\dialog.hpp>
-#endif
 #ifdef RMM_DEBUG
-	#include <modules\debug\dialog.hpp>
+	#include <core\modules\debug\dialog.hpp>
 #endif
 #ifdef RMM_HELP
-	#include <modules\help\dialog.hpp>
-#endif
-#ifdef RMM_JIPMARKERS
-	#include <modules\jipmarkers\dialog.hpp>
-#endif
-#ifdef RMM_LOGBOOK
-	#include <modules\logbook\dialog.hpp>
-#endif
-#ifdef RMM_LOGISTICS
-	#include <modules\logistics\dialog.hpp>
-#endif
-#ifdef RMM_NOTEBOOK
-	#include <modules\notebook\dialog.hpp>
-#endif
-#ifdef RMM_RECRUITMENT
-	#include <modules\recruitment\dialog_baf.hpp>
-	#include <modules\recruitment\dialog_us.hpp>
-	#include <modules\recruitment\dialog_cz.hpp>
-	#include <modules\recruitment\dialog_aaw.hpp>
-	#include <modules\recruitment\TeamStatusDialog\TeamStatusDialog.hpp>
+	#include <core\modules\help\dialog.hpp>
 #endif
 #ifdef RMM_SETTINGS
-	#include <modules\settings\dialog.hpp>
-#endif
-#ifdef RMM_TASKS
-	#include <modules\tasks\dialog.hpp>
+	#include <core\modules\settings\dialog.hpp>
 #endif
