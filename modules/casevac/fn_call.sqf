@@ -1,1 +1,0 @@
-_position = ctrlText 1;
