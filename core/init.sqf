@@ -36,6 +36,12 @@ mso_interaction_key = if (!isNil "ace_sys_interaction_key_self") then {
         [221,[false,false,false]]
 };
 
+mso_fnc_hasRadio = if (!isNil "ACE_fnc_hasRadio") then {
+        {if(player call ACE_fnc_hasRadio) then {true} else {hint "You require a radio.";false;};}
+} else {
+        {if(player hasWeapon "itemRadio") then {true} else {hint "You require a radio.";false;};}
+};
+
 BIS_MENU_GroupCommunication = [
         //--- Name, context sensitive
         ["User menu",false]
@@ -52,7 +58,11 @@ if (!isNil "paramsArray") then {
 "Player" call mso_core_fnc_initStat;
 execNow "core\scripts\init_player.sqf";
 
-setViewDistance 2000;
+if(isDedicated) then {
+	setViewDistance 10000;
+} else {
+	setViewDistance 2500;
+};
 setTerrainGrid 25;
 
 #ifdef RMM_MP_RIGHTS
