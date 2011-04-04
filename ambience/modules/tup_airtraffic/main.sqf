@@ -47,7 +47,7 @@ _planedest = [];
 waitUntil{!isNil "BIS_fnc_init"};
 
 if(isNil "CRB_LOCS") then {
-        CRB_LOCS = [] call CRB_fnc_initLocations;
+        CRB_LOCS = [] call mso_ambience_fnc_initLocations;
 };
 
 TUP_findAirports = {
