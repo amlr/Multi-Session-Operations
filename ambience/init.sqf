@@ -16,7 +16,7 @@ execNow "ambience\modules\crb_crows\main.sqf";
 #endif
 #ifdef CRB_DOGS
 "Dogs" call mso_core_fnc_initStat;
-["WEST"] execNow "ambience\modules\crb_dogs\main.sqf";
+[east] execNow "ambience\modules\crb_dogs\main.sqf";
 #endif
 #ifdef CRB_FLIES
 "Flies" call mso_core_fnc_initStat;

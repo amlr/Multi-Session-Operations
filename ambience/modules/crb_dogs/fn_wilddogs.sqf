@@ -1,19 +1,19 @@
-private ["_side","_breed","_type","_dogname","_dog","_list","_grp","_random","_leader","_handle"];
+private ["_side","_breed","_type","_dogname","_dog","_grp","_random","_pos","_handle","_gs"];
 
-_leader = _this select 0;
-_list = _this select 1;
-_list = side (_list select 0);
-_side = east;
-switch (_list) do {
-        case west: {
-                _side = east;
-        };
-        case east: {
-                _side = west;
-        };
-};	
+_pos = _this select 0;
+_gs = _this select 1;
 
-_grp = creategroup _side;
+switch (typeName _gs) do {
+        case "SIDE": {
+                _side = _gs;
+                _grp = creategroup _side;
+        };
+        case "GROUP": {
+                _grp = _gs;
+                _side = side _grp;
+        };
+};
+
 //_grp = creategroup Resistance;
 
 //player sidechat format ["%1 - %2 - %3",_list,_side,_grp];
@@ -34,7 +34,7 @@ for "_i" from 1 to _random do {
         };	
         
         _dogname = format ["k9%1",round (random 1000)];
-        call compile format ['"%2" createUnit [position _leader, _grp,"%1=this;
+        call compile format ['"%2" createUnit [_pos, _grp,"%1=this;
         this setSpeedMode ""full"";
         this setbehaviour ""safe""",1]',_dogname,_breed];
         _dog = call compile format ["%1",_dogname];
@@ -73,23 +73,27 @@ _handle = [{
                         if (count _alive_humans >0)  then {
                                 _nearest = _alive_humans select 0;
                                 _distance = (position _dog) distance (_nearest);
-                                if (_distance < 100 && random 1 > 0.33) then {
+                                _dog setspeedmode "FULL";
+                                if (_distance < 100 && random 1 > 0.25) then {
                                         _dog domove position _nearest;
-                                        _dog setspeedmode "FULL";
                                 };
-                                if ((_distance > 75) && (_distance < 100) && random 1 > 0.5) then {
+                                if ((_distance >= 75) && (_distance < 100) && random 1 > 0.25) then {
                                         [_dog, _nearest] say3D "dog_01";
+                                        _dog domove position _nearest;
                                 };
-                                if ((_distance > 50) && (_distance < 75) && random 1 > 0.5) then {
+                                if ((_distance >= 50) && (_distance < 75) && random 1 > 0.25) then {
                                         [_dog, _nearest] say3D "dog_01";
+                                        _dog domove position _nearest;
                                 };
-                                if ((_distance > 15) && (_distance < 50) && random 1 > 0.5) then {
+                                if ((_distance >= 15) && (_distance < 50) && random 1 > 0.25) then {
                                         [_dog, _nearest] say3D "dog_yelp";
+                                        _dog domove position _nearest;
                                 };
-                                if ((_distance > 10) && (_distance < 15) && random 1 > 0.5) then {
+                                if ((_distance >= 1) && (_distance < 15) && random 1 > 0.25) then {
                                         [_dog, _nearest] say3D "dog_02";
+                                        _dog domove position _nearest;
                                 };
-                                if (_distance < 2) then {
+                                if (_distance < 1) then {
                                         [_dog, _nearest] say3D "dog_maul01";
                                         [_nearest, _dog] spawn dogs_fnc_dogattack;
                                 };	
@@ -105,7 +109,7 @@ _handle = [{
                         };
                 };
         } forEach units _grp;
-}, 5, [_grp]] call CBA_fnc_addPerFrameHandler;
+}, 2, [_grp]] call CBA_fnc_addPerFrameHandler;
 
 _grp setVariable ["handle", _handle, true];
 _grp;

@@ -3,14 +3,6 @@ _victim = _this select 0;
 _dog = _this select 1;
 _dog setVariable ["attacking", true, true];
 
-//_victim say ["scream", 10];
-if (vehicle _victim isKindOf "CAManBase") then { 
-        _victim say3D "scream";
-};
-if (vehicle _victim isKindOf "CAAnimalBase") then { 
-        _victim say3D "dog_yelp";
-};
-
 _dog attachTo [_victim,[0,1,0], "lholen"];
 _dog setDir 180;
 
