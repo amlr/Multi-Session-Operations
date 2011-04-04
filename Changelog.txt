@@ -1,0 +1,26 @@
+Change Log:
+v3.31
+- Added Convoy tasks (thanks Kieran)
+- Fixed CAS
+- CAS Increased fly height to 500m
+- Changed caching based on Groups instead of Team Leaders
+- Removed disable simulation of Team Leaders to allow them to continue patrolling
+- Exits caching FSM if all units dead (hopefully fix the zombie respawn bug)
+- Fixed MP rights (mso\mso_uids.txt)
+- Added disable MP Rights mission parameter
+- Implemented Bon's Pilot/Crew checking FSM
+- Added infinite lives mission parameter
+- Renabled ALT+Click and SHIFT+ALT+Click functionality for JIP Tasks and Markers 
+
+Sample missions included:
+- AAW/ACE vs TK_GUE on Takistan
+- BAF vs RU/INS on Chernarus
+- GUE/PMC vs RU/INS on Utes
+- BAF/USA vs TK_GUE on Takistan
+- AAW/ACE vs RU/INS on Chernarus
+
+v3.3 - Initial Release
+Sample missions included:
+- GUE/PMC vs RU/INS on Utes
+- BAF/USA vs TK_GUE on Takistan
+- AAW/ACE vs GUE on Chernarus

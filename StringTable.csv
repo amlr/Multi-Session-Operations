@@ -1,2 +1,2 @@
 ﻿Language,English,German
-#include "modules\recruitment\TeamStatusDialog\stringtable.csv"
+#include <support\stringtable.csv>
