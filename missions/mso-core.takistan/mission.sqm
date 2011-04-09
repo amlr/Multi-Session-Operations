@@ -44,7 +44,7 @@ class Mission
 	randomSeed=4564339;
 	class Intel
 	{
-		briefingName="MSO Core Testing v3.4alpha2";
+		briefingName="MSO Core Testing v3.4beta1";
 		resistanceEast=1;
 		startWeather=0.39999998;
 		forecastWeather=0.39999998;
@@ -73,7 +73,6 @@ class Mission
 					leader=1;
 					rank="CORPORAL";
 					skill=0.33333331;
-					init="onMapSingleClick {player setPos _pos};";
 				};
 				class Item1
 				{
@@ -653,7 +652,7 @@ class Mission
 			side="EMPTY";
 			vehicle="US_WarfareBUAVterminal_Base_EP1";
 			skill=0.60000002;
-			init="this call compile preprocessFileLineNumbers ""core\modules\weather\addAction.sqf"";";
+			init="0 = this execVM ""core\modules\weather\addAction.sqf"";";
 		};
 		class Item2
 		{
@@ -791,7 +790,6 @@ class Mission
 			position[]={8220.2461,296.04001,2012.0355};
 			a=0;
 			b=0;
-			angle=1.1023238;
 			activationBy="ALPHA";
 			repeating=1;
 			interruptable=1;
@@ -807,7 +805,6 @@ class Mission
 			position[]={8236.7109,296.04001,2009.7985};
 			a=0;
 			b=0;
-			angle=1.1023238;
 			activationBy="BRAVO";
 			repeating=1;
 			interruptable=1;
@@ -823,7 +820,6 @@ class Mission
 			position[]={8255.6133,296.04001,2011.5321};
 			a=0;
 			b=0;
-			angle=1.1023238;
 			activationBy="CHARLIE";
 			repeating=1;
 			interruptable=1;
