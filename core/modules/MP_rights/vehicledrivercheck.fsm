@@ -57,10 +57,10 @@ class FSM
        "// DEBUG" \n
        "if (_debug) then" \n
        "{" \n
-       "	diag_log format [""DEBUG (scripts\bon\vehicledrivercheck.fsm): _fromEH = %1"",_fromEH];" \n
-       "	diag_log format [""DEBUG (scripts\bon\vehicledrivercheck.fsm): _vehicle = %1"",_vehicle];" \n
-       "	diag_log format [""DEBUG (scripts\bon\vehicledrivercheck.fsm): _unit = %1"",_unit];" \n
-       "	diag_log format [""DEBUG (scripts\bon\vehicledrivercheck.fsm): _restrictedCrew = %1 (%2)"",(call _restrictedCrew),_restrictedCrew];" \n
+       "	diag_log format [""DEBUG (vehicledrivercheck.fsm): _fromEH = %1"",_fromEH];" \n
+       "	diag_log format [""DEBUG (vehicledrivercheck.fsm): _vehicle = %1"",_vehicle];" \n
+       "	diag_log format [""DEBUG (vehicledrivercheck.fsm): _unit = %1"",_unit];" \n
+       "	diag_log format [""DEBUG (vehicledrivercheck.fsm): _restrictedCrew = %1 (%2)"",(call _restrictedCrew),_restrictedCrew];" \n
        "};" \n
        "" \n
        "_isplayable =" \n
@@ -174,7 +174,7 @@ class FSM
        "" \n
        "	_allowed_driver = ""Crewman"";" \n
        "	if(_vehicle isKindOf ""Air"") then {_allowed_driver = ""Pilot""};" \n
-       "	hintSilent format[""Only a %1 can operate this vehicle."",_allowed_driver];" \n
+       "	[2, [_unit, _allowed_driver], {if(local (_this select 0)) then {hint format[""Only a %1 can operate this vehicle."",_this select 1];};}] call mso_core_fnc_ExMP;" \n
        "};" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
