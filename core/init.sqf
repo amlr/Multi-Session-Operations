@@ -48,6 +48,12 @@ BIS_MENU_GroupCommunication = [
         //--- Item name, shortcut, -5 (do not change), expression, show, enable
 ];
 
+"Custom Locations(" + worldName + ")" call mso_core_fnc_initStat;
+waitUntil{!isNil "BIS_fnc_init"};
+if(isNil "CRB_LOCS") then {
+        CRB_LOCS = [] call mso_core_fnc_initLocations;
+};
+
 "Mission Parameters" call mso_core_fnc_initStat;
 if (!isNil "paramsArray") then {
         for "_i" from 0 to ((count paramsArray)-1) do {
