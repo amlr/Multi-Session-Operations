@@ -15,7 +15,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{typeof (unitbackpack player);},
 		{getmagazinecargo (unitbackpack player);},
 		{getweaponcargo (unitbackpack player);},
-		{getpos player;},
+		{getposATL player;},
 		{damage player;},
 		{rating player;},
 		{score player;},
@@ -68,7 +68,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 				(unitbackpack player) addweaponcargo [(_this select 0) select _i,(_this select 1) select _i];
 			};
 		},
-		{player setpos _this;},
+		{player setposATL _this;},
 		{player setdamage _this;},
 		{player addrating (-(rating player) + _this);},
 		{player addscore (-(score player) + _this);},
