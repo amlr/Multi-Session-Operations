@@ -4,12 +4,6 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
-"Custom Locations(" + worldName + ")" call mso_core_fnc_initStat;
-waitUntil{!isNil "BIS_fnc_init"};
-if(isNil "CRB_LOCS") then {
-        CRB_LOCS = [] call mso_ambience_fnc_initLocations;
-};
-
 #ifdef CRB_CROWS
 "Crows" call mso_core_fnc_initStat;
 execNow "ambience\modules\crb_crows\main.sqf";
