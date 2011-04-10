@@ -4,7 +4,7 @@ if(isServer) then {
         _debug = true;
         waitUntil{!isNil "BIS_fnc_init"};
         if(isNil "CRB_LOCS") then {
-                CRB_LOCS = [] call mso_ambience_fnc_initLocations;
+                CRB_LOCS = [] call mso_core_fnc_initLocations;
         };
         
         _logicCiv = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];

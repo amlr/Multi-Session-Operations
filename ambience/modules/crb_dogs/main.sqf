@@ -1,11 +1,11 @@
 private ["_debug","_types","_dogs","_side","_grp","_maxdist"];
 if (!isServer) exitWith{};
 
-_debug = false;
+_debug = true;
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
-        CRB_LOCS = [] call mso_ambience_fnc_initLocations;
+        CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
 _types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
