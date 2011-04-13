@@ -34,7 +34,7 @@ class Mission
 	randomSeed=3869952;
 	class Intel
 	{
-		briefingName="MSO Ambience Testing v3.4alpha3";
+		briefingName="MSO Ambience Testing v3.4beta1";
 		resistanceEast=1;
 		startWeather=0.39999998;
 		forecastWeather=0.25;

@@ -34,13 +34,13 @@ class Mission
 	randomSeed=4564339;
 	class Intel
 	{
-		briefingName="MSO Ambience Testing v3.4alpha3";
+		briefingName="MSO Ambience Testing v3.4beta1";
 		resistanceEast=1;
 		startWeather=0.39999998;
 		forecastWeather=0.39999998;
 		year=2009;
 		day=28;
-		hour=18;
+		hour=17;
 		minute=50;
 	};
 	class Groups
@@ -380,7 +380,6 @@ class Mission
 			side="EMPTY";
 			vehicle="BAF_Offroad_D";
 			skill=0.60000002;
-			init="this setVariable [""Logistics"", true];";
 		};
 		class Item1
 		{
@@ -415,10 +414,10 @@ class Mission
 	};
 	class Sensors
 	{
-		items=3;
+		items=4;
 		class Item0
 		{
-			position[]={8220.2461,296.04001,2012.0355};
+			position[]={8220.7695,296.04001,2009.9398};
 			a=0;
 			b=0;
 			angle=1.1023238;
@@ -434,7 +433,7 @@ class Mission
 		};
 		class Item1
 		{
-			position[]={8236.7109,296.04001,2009.7985};
+			position[]={8230.9453,296.04001,2010.0602};
 			a=0;
 			b=0;
 			angle=1.1023238;
@@ -450,16 +449,32 @@ class Mission
 		};
 		class Item2
 		{
-			position[]={8255.6133,296.04001,2011.5321};
+			position[]={8240.9385,296.04001,2010.2222};
 			a=0;
 			b=0;
-			angle=1.1023238;
+			angle=1.10232;
 			activationBy="CHARLIE";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
-			text="Teleport";
+			text="Teleport Group";
 			expActiv="player onMapSingleClick {{_x setPos _pos;} forEach units player; onMapSingleClick CRB_MAPCLICK;};";
+			class Effects
+			{
+			};
+		};
+		class Item3
+		{
+			position[]={8250.373,296.04001,2011.0072};
+			a=0;
+			b=0;
+			angle=1.10232;
+			activationBy="DELTA";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Teleport Player";
+			expActiv="player onMapSingleClick {player setPos _pos; onMapSingleClick CRB_MAPCLICK;};";
 			class Effects
 			{
 			};
