@@ -5,6 +5,7 @@
 waitUntil{!isNil "BIS_fnc_init"};
 
 execNow "core\init.sqf";
+execNow "ambience\init.sqf";
 execNow "support\init.sqf";
 execNow "init-custom.sqf";
 

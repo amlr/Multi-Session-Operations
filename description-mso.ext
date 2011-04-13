@@ -1,4 +1,5 @@
 #include <core\modules\modules.hpp>
+#include <ambience\modules\modules.hpp>
 #include <support\modules\modules.hpp>
 
 //http://community.bistudio.com/wiki/Description.ext#Respawn...
@@ -7,6 +8,12 @@ respawnDelay = 10;
 disabledAI = 1;
 
 class CfgSounds {
+#ifdef CRB_DOGS
+	#include <ambience\modules\crb_dogs\cfgsounds.hpp>
+#endif
+#ifdef RMM_CTP
+	#include <ambience\modules\rmm_ctp\cfgsounds.hpp>
+#endif
 };
 
 //http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
@@ -33,6 +40,10 @@ class RscTitles
 //http://community.bistudio.com/wiki/Functions_Library
 class cfgFunctions {
 	#include <core\functions\functions.hpp>
+	#include <ambience\functions\functions.hpp>
+#ifdef CRB_DOGS
+	#include <ambience\modules\crb_dogs\functions.hpp>
+#endif
 #ifdef RMM_GTK
 	#include <core\modules\gtk\functions.hpp>
 #endif
