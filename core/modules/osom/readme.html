@@ -1,0 +1,32 @@
+﻿<html>
+<h1>Outta Sight Outta Mind (OSOM)</h1>
+<h2>Author(s) and Acknoledgement(s):</h2>
+<ul>Rommel</ul>
+<h2>Requirements:</h2>
+<ul>
+	<li>CBA</li>
+	<li>GTK Module</li>
+</ul>
+<h2>Description:</h2>
+<pre>
+The out of sight of mind (OSOM) module uses the group tracking (GTK) module to monitor the positions of all groups relative to the player, and then delete or create them. This allows the player to see a seamlessly persistent enemy, whilst reducing load on the server enormously.
+</pre>
+<h2>How-to-use:</h2>
+<pre>
+In the GTK config.hpp file, insert the following code, with a case number of your choice. Remember this case number for later.
+
+	case (YOUR_CASE_NUMBER) : { // Outta Sight Outta Mind
+		[
+			{_this call OSOM_fnc_sync},
+			{_this call OSOM_fnc_active},
+			{_this call OSOM_fnc_inactive}
+		]
+	};
+
+Also place the following line in the description.ext
+
+	#include "modules\osom\functions.hpp"
+
+Now to use this in the editor, use the case number as the GTK config number. Read the GTK readme for more information.
+</pre>
+</html>
