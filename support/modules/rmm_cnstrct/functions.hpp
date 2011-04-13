@@ -1,5 +1,5 @@
 class cnstrct {
-	file = "modules\cnstrct";
+	file = "support\modules\rmm_cnstrct";
 	class functions {
 		class create {};
 		class handler {};

@@ -56,7 +56,7 @@ class cfgFunctions {
 	#include <support\modules\casevac\functions.hpp>
 #endif
 #ifdef RMM_CNSTRCT
-	#include <support\modules\cnstrct\functions.hpp>
+	#include <support\modules\rmm_cnstrct\functions.hpp>
 #endif
 #ifdef CRB_FLIPPABLE
 	#include <support\modules\flippable\functions.hpp>

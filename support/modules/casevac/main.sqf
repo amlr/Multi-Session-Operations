@@ -13,6 +13,5 @@ RMM_casevac_lines = [
 	{["November","Bravo","Charlie","None"]}
 ];
 
-waitUntil{!isNil "MSO_R_Leader"};
 ["player", [mso_interaction_key], 4, ["support\modules\casevac\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
 ["CASEVAC","if(call mso_fnc_hasRadio && ((getPlayerUID player) in MSO_R_Leader)) then {createDialog ""RMM_ui_casevac""}"] call mso_core_fnc_updateMenu;

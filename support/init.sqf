@@ -35,11 +35,6 @@ execNow "support\modules\cas\main.sqf";
 execNow "support\modules\casevac\main.sqf";
 #endif
 
-#ifdef RMM_CNSTRCT
-"Construction" call mso_core_fnc_initStat;
-execNow "support\modules\cnstrct\main.sqf";
-#endif
-
 #ifdef CRB_FLIPPABLE
 "Flippable Vehicles" call mso_core_fnc_initStat;
 execNow "support\modules\flippable\main.sqf";

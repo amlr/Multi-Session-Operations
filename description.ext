@@ -4,7 +4,7 @@
 class header {
 	gametype = COOP;
 	minplayers = 1;
-	maxplayers = 8;
+	maxplayers = 12;
 };
 
 //http://community.bistudio.com/wiki/description.ext#OnLoad...

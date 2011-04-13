@@ -1,6 +1,7 @@
 // - Tested
 #define RMM_AAR
 #define RMM_CAS
+#define RMM_CNSTRCT
 #define CRB_FLIPPABLE
 #define RMM_JIPMARKERS
 #define RMM_LOGBOOK
@@ -12,4 +13,4 @@
 
 // WIP
 //#define RMM_CASEVAC
-//#define RMM_CNSTRCT
+//#define GC_PACK_COW
