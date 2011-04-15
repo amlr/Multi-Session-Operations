@@ -28,7 +28,7 @@ player addeventhandler ["respawn", {
 //	if (_ace) then {
 	if(!isNil "ace_main") then {
 
-		[_unit, _corpse] call compile preprocessFileLineNumbers "init_player_ace.sqf";
+		[_unit, _corpse] call compile preprocessFileLineNumbers "core\scripts\init_player_ace.sqf";
 	};
 
 	_bp = typeof (unitbackpack _corpse);
