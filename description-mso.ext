@@ -1,6 +1,7 @@
 #include <core\modules\modules.hpp>
 #include <ambience\modules\modules.hpp>
 #include <support\modules\modules.hpp>
+#include <enemy\modules\modules.hpp>
 
 //http://community.bistudio.com/wiki/Description.ext#Respawn...
 respawn = 3;
