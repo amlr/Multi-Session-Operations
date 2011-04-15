@@ -8,14 +8,13 @@ waituntil {not isnull player};
 	player switchmove "";
 	player setskill 0;
 	{player disableAI _x} foreach ["move","anim","target","autotarget"];
-player addRating -2500;
+	player addRating -(rating player);
 
 player addeventhandler ["respawn", {
 	_unit = _this select 0;
 	_corpse = _this select 1;
 	diag_log format["Respawn: %1", _unit];
-
-	player addRating -2500;
+	player addRating -(rating player);
 
 	{_unit removeweapon _x;} foreach ((weapons _unit) + (items _unit));
 	{_unit removemagazine _x;} foreach (magazines _unit);
