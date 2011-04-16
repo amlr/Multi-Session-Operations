@@ -478,8 +478,7 @@ for "_i" from 1 to _numcells do {
                 // Pick a spawn point
                 _spawn =  _spawnpoints call BIS_fnc_selectRandom;
                 
-                //DEBUG:
-                player setPos _spawn;
+                //DEBUG:player setPos _spawn;
                 //DEBUG:sleep 15;
                 
                 // Create terrorist leader and vehicle
