@@ -466,7 +466,7 @@ if(isNil "CRB_classlistFaction") then {
 };        
 waitUntil{typeName CRB_classlistFaction == "ARRAY"};
 
-_numcells = floor((count _spawnpoints) / 5);
+_numcells = ceil((count _spawnpoints) / 5);
 diag_log format["MSO-%1 TerrorCells: spawns(%2) cells(%3)", time, count _spawnpoints, _numcells];
 
 for "_i" from 1 to _numcells do {

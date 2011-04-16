@@ -28,6 +28,48 @@ class Params {
 #ifdef RMM_WEATHER
 	#include <core\modules\weather\params.hpp>
 #endif
+	class faction_RU {
+		title = "Enable Russians"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 1;
+	};
+	class faction_ACE_RU {
+		title = "Enable ACE Russians"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_INS {
+		title = "Enable Insurgents"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 1;
+	};
+	class faction_GUE {
+		title = "Enable Guerillas"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_BIS_TK {
+		title = "Enable Takistan Army"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_BIS_TK_INS {
+		title = "Enable Takistan Insurgency"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_BIS_TK_GUE {
+		title = "Enable Takistan Guerillas"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
 }; 
 
 #ifdef R3F_LOGISTICS
