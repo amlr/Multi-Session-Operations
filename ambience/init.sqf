@@ -4,6 +4,10 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
+civilian setFriend [west, 1];
+civilian setFriend [east, 1];
+civilian setFriend [resistance, 1];
+
 #ifdef CRB_CROWS
 "Crows" call mso_core_fnc_initStat;
 execNow "ambience\modules\crb_crows\main.sqf";
