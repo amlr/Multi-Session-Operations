@@ -3,7 +3,7 @@ private ["_fac","_allvehs","_vehx","_sx","_fx","_cx","_cargoslots","_grpx","_typ
 _cargoslots = _this select 0;
 _fac = nil;
 _type = nil;
-_nonConfigs = ["StaticWeapon","CruiseMissile1","CruiseMissile2","Chukar_EP1","Chukar_AllwaysEnemy_EP1"];
+_nonConfigs = ["StaticWeapon","CruiseMissile1","CruiseMissile2","Chukar_EP1","Chukar","Chukar_AllwaysEnemy_EP1"];
 _nonSims = ["parachute"];
 
 if(count _this > 1) then {

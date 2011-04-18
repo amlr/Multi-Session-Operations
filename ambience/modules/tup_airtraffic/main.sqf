@@ -74,7 +74,7 @@ for "_j" from 0 to (_destinations-1) do
         
         [_j, _helidest, _planedest, _debug, _mapsize] spawn 
 		{
-                private ["_vehicle","_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_facs","_wp","_j","_spawnpos","_debug","_mapsize","_currentairfield","_units","_name","_airfieldSide","_factions","_factionsCount","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight"];
+                private ["_vehicle","_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_facs","_wp","_j","_spawnpos","_debug","_mapsize","_currentairfield","_units","_name","_airfieldSide","_factions","_factionsCount","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight","_controltowers","_controlTowerTypes","_controltw","_housepos"];
                 _j = _this select 0;
                 _helidest = _this select 1;
                 _planedest = _this select 2;
@@ -187,17 +187,19 @@ for "_j" from 0 to (_destinations-1) do
 						diag_log format["MSO-%1 Air Traffic: %10 #%2, Vehicle: %6 Group: %9 Faction: %7 Start: %3 Landing: %4 End: %5 Stop: %8", time, _j, _startpos, _destpos, _endpos, typeOf _aircraftVehicle, _facs, _stopTime, _grp, _destination];
 						
 						// Set aircraft waypoints
+						
+						// Starting waypoint
 						_wp = _grp addwaypoint [_startpos, 0];
 						_wp setWayPointType "MOVE";
 						_wp setWaypointFormation "FILE";
 						_wp setWaypointBehaviour "SAFE";
 						_wp setWaypointCombatMode "BLUE";
 						
+						// Destination Waypoint
 						_wp = _grp addwaypoint [_destpos, 0];
 						_wp setWayPointType "MOVE";
-						
+						// Wait until the aircraft is close to the airfield
 						waitUntil{(_aircraftVehicle distance _destpos < 500) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
-						
 						// Once near destination, action a landing.
 						_landEnd = "HeliHEmpty" createVehicle _destpos;
 						if (_aircraftVehicle iskindof "Helicopter") then {
@@ -205,7 +207,7 @@ for "_j" from 0 to (_destinations-1) do
 								waitUntil{((position _aircraftVehicle) select 2 <= 5) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
 						} else {
 								_aircraftVehicle action ["Land", _aircraftVehicle];
-								waitUntil{(_aircraftVehicle distance _destpos < 30)  && ((position _aircraftVehicle) select 2 <= 2) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
+								waitUntil{(_aircraftVehicle distance _destpos < 5)  && ((position _aircraftVehicle) select 2 <= 2) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
 						};			
 						deleteVehicle _landEnd;
 												
@@ -213,21 +215,54 @@ for "_j" from 0 to (_destinations-1) do
 						If ((TypeOf _aircraftVehicle) == "MV22") then {
 								_wp = _grp addwaypoint [_destpos, 0];
 								_wp setWayPointType "MOVE";
-								waitUntil{(_aircraftVehicle distance _destpos < 5)  && ((position _aircraftVehicle) select 2 <= 2) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
+								waitUntil{(_aircraftVehicle distance _destpos < 5)  && ((position _aircraftVehicle) select 2 <= 1) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
 						};
 						
 						// Turnoff the aircraft engines
 						_aircraftVehicle engineOn false;
+						
+						sleep (_timeout select (random 2));
+						
+						// Check to see if aircraft is near Control Tower, if so, crew may get out and go for a chat
+						_controlTowerTypes = ["Land_Mil_ControlTower","Land_Mil_ControlTower_EP1"];
+						_controltowers = nearestObjects [position _aircraftVehicle, _controlTowerTypes, 200]; 
+						diag_log format ["MSO-%1 Air Traffic: %5 %2 %3 Found ControlTowers: %4", time, _j, typeOf _aircraftVehicle, count _controltowers, _destination];
+						If (count _controltowers > 0) then 
+						{
+							if (random 1 > 0.6) then 
+							{
+								// Set time for pilots to leave
+								_scrambleTime = time + random 180;
+								
+								// Get Crew out of vehicle
+								_wp = _grp addwaypoint [position _aircraftVehicle, 0];
+								_wp setWayPointType "GETOUT";
+								
+								sleep 1;
+								// Move crew to Control Tower room
+								_controltw = _controltowers call BIS_fnc_selectRandom;
+								_housepos = round (random 15); //Control tower positions are 0-15
+								_wp = _grp addwaypoint [(_controltw buildingPos _housepos), 0];
+								_wp setWayPointType "MOVE";
+								
+								// Get crew to chat once at controltower
+								_wp setWayPointStatements ["true","{_x playMove 'AidlPercSnonWnonDnon_talk1'} foreach _aircraftCrew;"];
+																	
+								// Pause then send the crew back to the vehicle
+								sleep (_timeout select (random 2));
+								_wp = _grp addwaypoint [position _aircraftVehicle, 0];
+								_wp setWayPointType "GETIN";
+							};
+						};
 						
 						// Pause before moving to end position
 						sleep (_timeout select (random 2));
 						
 						// Create end position waypoint
 						_wp = _grp addwaypoint [_endpos, 0];
-						_wp setWaypointType "MOVE";
-						_wp setWaypointTimeout _timeout;                                 
+						_wp setWaypointType "MOVE";                               
 						
-						waitUntil{ (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
+						waitUntil{(_aircraftVehicle distance _endpos < 50) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
 						
 						// Check to see if vehicle was killed/died/crashed
 						if (!(_grp call CBA_fnc_isAlive) && (_debug)) then {
