@@ -143,6 +143,11 @@ class FSM
        "_car setdir direction _twnPos;" \n
        "_grp = _twn getvariable ""ALICE_group"";" \n
        "_driver = _grp createunit [_classMan,position _car,[],0,""none""];" \n
+       "//--- Custom init" \n
+       "_globalInit = _logic getvariable ""ALICE_civilianinit"";" \n
+       "_localInit = _twn getvariable ""ALICE_civilianinit"";" \n
+       "if !(isnil ""_globalInit"") then {{_driver call _x} foreach _globalInit};" \n
+       "if !(isnil ""_localInit"") then {{_driver call _x} foreach _localInit};" \n
        "_driver setSkill 0.5;" \n
        "{_driver disableAI _x} count [""AUTOTARGET"",""TARGET""];" \n
        "_driver allowFleeing 0;" \n
@@ -160,8 +165,6 @@ class FSM
        "	_cargoMan moveincargo _car;	" \n
        "" \n
        "	//--- Custom init" \n
-       "	_globalInit = _logic getvariable ""ALICE_civilianinit"";" \n
-       "	_localInit = _twn getvariable ""ALICE_civilianinit"";" \n
        "	if !(isnil ""_globalInit"") then {{_cargoMan call _x} foreach _globalInit};" \n
        "	if !(isnil ""_localInit"") then {{_cargoMan call _x} foreach _localInit};" \n
        "};" \n
