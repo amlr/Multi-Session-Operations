@@ -9,5 +9,7 @@
 #define RMM_CTP
 
 // -- Pending --
-//#define TUP_AIRTRAFFIC
+
+#define TUP_AIRTRAFFIC
+
 //#define TUP_SEATRAFFIC

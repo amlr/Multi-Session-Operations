@@ -17,6 +17,13 @@ class CfgSounds {
 #endif
 };
 
+// Add BAF and TK Flight groups
+class CfgGroups {
+#ifdef TUP_AIRTRAFFIC
+	#include <ambience\modules\tup_airtraffic\cfggroups.hpp>
+#endif
+};
+
 //http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
 class Params {
 #ifdef RMM_MP_RIGHTS
@@ -27,6 +34,9 @@ class Params {
 #endif
 #ifdef RMM_WEATHER
 	#include <core\modules\weather\params.hpp>
+#endif
+#ifdef TUP_AIRTRAFFIC
+	#include <ambience\modules\tup_airtraffic\params.hpp>
 #endif
 }; 
 

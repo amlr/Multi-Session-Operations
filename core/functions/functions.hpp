@@ -11,6 +11,12 @@ class mso_core {
 		class randomGroup {};
 		class selectRandomBias {};
 		class updateMenu {};
+		class findLocationsByType {};
+		class findObjectsByType {};
+		class randomEdgePos {};
+		class getUnitsInArea {};
+		class getDominantSide {};
+		class getFactions {};
 	};
 	class server {
 		file = "core\functions\server";

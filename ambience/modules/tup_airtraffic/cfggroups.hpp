@@ -1,6 +1,5 @@
 // Add BIS_BAF and BIS_TK_GUE Air groups for Ambient Aircraft
-class CfgGroups
-{
+
 	class West
 	{
 		name = "$STR_WEST";
@@ -96,4 +95,3 @@ class CfgGroups
 			};
 		};
 	};
-};
