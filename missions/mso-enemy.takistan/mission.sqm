@@ -42,7 +42,7 @@ class Mission
 	randomSeed=4564339;
 	class Intel
 	{
-		briefingName="MSO Enemy Testing v3.4beta1";
+		briefingName="MSO Enemy Testing v3.4beta2";
 		resistanceEast=1;
 		startWeather=0.39999998;
 		forecastWeather=0.39999998;
@@ -67,6 +67,7 @@ class Mission
 					id=0;
 					side="WEST";
 					vehicle="BAF_Soldier_TL_MTP";
+					player="PLAYER COMMANDER";
 					leader=1;
 					rank="CORPORAL";
 					skill=0.33333331;
@@ -164,7 +165,7 @@ class Mission
 					id=23;
 					side="CIV";
 					vehicle="CIV_EuroMan01_EP1";
-					player="PLAYER COMMANDER";
+					player="PLAY CDG";
 					skill=0.60000002;
 				};
 			};

@@ -54,7 +54,7 @@ if(_patrol) then {
 	_obj setSpeedMode "LIMITED";
 } else {
 	if(_obj isKindOf "Man") then {
-		[_obj] spawn compile preprocessFileLineNumbers "support\scripts\GuardPost.sqf";
+		[_obj] call compile preprocessFileLineNumbers "support\scripts\GuardPost.sqf";
 	} else {
 		_obj setDir (random 360);
 	};

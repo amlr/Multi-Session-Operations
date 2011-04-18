@@ -57,7 +57,7 @@ Contact & Bugreport: harlechin@hotmail.com
 =========================================================
 */
 
-private ["_hasname","_delay","_deserted","_respawns","_noend","_dead","_nodelay","_timeout","_position","_dir","_effect","_rounds","_run","_unit","_explode","_dynamic","_unitinit","_haveinit","_unitname","_type","_weapons","_mags","_max"];
+private ["_hasname","_delay","_deserted","_respawns","_noend","_unit","_explode","_dynamic","_unitinit","_haveinit","_unitname","_run","_dir","_position","_type","_weapons","_mags","_id"];
 if (!isServer) exitWith {};
 
 // Define variables
@@ -75,7 +75,6 @@ _unitname = vehicleVarName _unit;
 if (_unitname == "") then {_hasname = false;} else {_hasname = true;};
 _noend = true;
 _run = true;
-_rounds = 0;
 
 if (_delay < 0) then {_delay = 0};
 if (_deserted < 0) then {_deserted = 0};
@@ -85,65 +84,94 @@ if (_respawns > 0) then {_noend = false};
 _dir = getDir _unit;
 _position = getPosASL _unit;
 _type = typeOf _unit;
-_dead = false;
-_nodelay = false;
 
 _weapons = getWeaponCargo _unit;
 _mags = getMagazineCargo _unit;
+_id = floor(random 10000);
+missionNamespace setVariable[format["vehicle_%1",_id], time +  _delay];
 
-// Start monitoring the vehicle
-while {_run} do 
-{	
-	sleep (2 + random 10);
-      if ((getDammage _unit > 0.8) and ({alive _x} count crew _unit == 0)) then {_dead = true};
-
-	// Check if the vehicle is deserted.
-	if ((getPosASL _unit distance _position > 10) and ({alive _x} count crew _unit == 0) and (getDammage _unit < 0.8)) then 
-	{
-		_timeout = time + _deserted;
-		sleep 0.1;
-	 	waitUntil {_timeout < time or !alive _unit or {alive _x} count crew _unit > 0};
-		if ({alive _x} count crew _unit > 0) then {_dead = false}; 
-		if ({alive _x} count crew _unit == 0) then {_dead = true; _nodelay =true}; 
-		if !(alive _unit) then {_dead = true; _nodelay = false}; 
-	};
-
-
-	// Respawn vehicle
-      if (_dead) then 
-	{	
-		if (_nodelay) then {sleep 0.1; _nodelay = false;} else {sleep _delay;};
-		if (_dynamic) then {_position = getPosASL _unit; _dir = getDir _unit;};
-		if (_explode) then {_effect = "M_TOW_AT" createVehicle getPosASL _unit; _effect setPosASL getPosASL _unit;};
-		sleep 0.1;
-
-		deleteVehicle _unit;
-		sleep 2;
-		_unit = _type createVehicle _position;
-		_unit setPosASL _position;
-		_unit setDir _dir;
-
-                clearWeaponCargo _unit;
-                clearMagazineCargo _unit;
- 
-                _max = count(_weapons select 0);
-                for "_i" from 0 to _max do {
-                        _unit addWeaponCargo [(_weapons select 0) select _i, (_weapons select 1) select _i];
-                };
-
-                _max = count(_mags select 0);
-                for "_i" from 0 to _max do {
-                        _unit addMagazineCargo [(_mags select 0) select _i, (_mags select 1) select _i];
-                };
-
-		if (_haveinit) then 
-					{_unit setVehicleInit format ["%1;", _unitinit];
-					processInitCommands;};
-		if (_hasname) then {_unit setVehicleVarName _unitname;};
-		_dead = false;
-
-		// Check respawn amount
-		if !(_noend) then {_rounds = _rounds + 1};
-		if ((_rounds == _respawns) and !(_noend)) then {_run = false;};
-	};
-};
+[{
+        private ["_dead","_nodelay","_timeout","_position","_dir","_effect","_rounds","_run","_unit","_max","_params","_handle","_id","_deserted","_delay","_dynamic","_explode","_type","_weapons","_mags","_haveinit","_unitinit","_hasname","_unitname","_noend","_respawns"];
+        _params = _this select 0;
+        _handle = _this select 1;
+        _id = _params select 0;
+        _run = _params select 1;
+        _unit = _params select 2;
+        _position = _params select 3;
+        _deserted = _params select 4;
+        _delay = _params select 5;
+        _dynamic = _params select 6;
+        _explode = _params select 7;
+        _type = _params select 8;
+        _dir = _params select 9;
+        _weapons = _params select 10;
+        _mags = _params select 11;
+        _haveinit = _params select 12;
+        _unitinit= _params select 13;
+        _hasname = _params select 14;
+        _unitname = _params select 15;
+        _noend = _params select 16;
+        _respawns = _params select 17;
+        
+        // Start monitoring the vehicle
+        if(!_run) exitWith {[_handle] call CBA_fnc_removePerFrameHandler;};
+        
+        _dead = false;
+        _nodelay = false;
+        if (missionNamespace getVariable format["vehicle_%1",_id] < time) then {	
+                if ((getDammage _unit > 0.8) and ({alive _x} count crew _unit == 0)) then {_dead = true};
+                
+                // Check if the vehicle is deserted.
+                if(
+                        getPosASL _unit distance _position > 10 && 
+                        ({alive _x} count crew _unit == 0) &&
+                        (getDammage _unit < 0.8)
+                ) then {
+                        _timeout = time + _deserted;
+                        sleep 0.1;
+                        waitUntil {_timeout < time or !alive _unit or {alive _x} count crew _unit > 0};
+                        if ({alive _x} count crew _unit > 0) then {_dead = false}; 
+                        if ({alive _x} count crew _unit == 0) then {_dead = true; _nodelay =true}; 
+                        if !(alive _unit) then {_dead = true; _nodelay = false}; 
+                };
+                
+                // Respawn vehicle
+                if (_dead) then 
+                {	
+                        if (_nodelay) then {sleep 0.1; _nodelay = false;} else {sleep _delay;};
+                        if (_dynamic) then {_position = getPosASL _unit; _dir = getDir _unit;};
+                        if (_explode) then {_effect = "M_TOW_AT" createVehicle getPosASL _unit; _effect setPosASL getPosASL _unit;};
+                        sleep 0.1;
+                        
+                        deleteVehicle _unit;
+                        sleep 2;
+                        _unit = _type createVehicle _position;
+                        _unit setPosASL _position;
+                        _unit setDir _dir;
+                        
+                        clearWeaponCargo _unit;
+                        clearMagazineCargo _unit;
+                        
+                        _max = count(_weapons select 0);
+                        for "_i" from 0 to _max do {
+                                _unit addWeaponCargo [(_weapons select 0) select _i, (_weapons select 1) select _i];
+                        };
+                        
+                        _max = count(_mags select 0);
+                        for "_i" from 0 to _max do {
+                                _unit addMagazineCargo [(_mags select 0) select _i, (_mags select 1) select _i];
+                        };
+                        
+                        if (_haveinit) then 
+                        {_unit setVehicleInit format ["%1;", _unitinit];
+                        processInitCommands;};
+                        if (_hasname) then {_unit setVehicleVarName _unitname;};
+                        _dead = false;
+                        
+                        // Check respawn amount
+                        if !(_noend) then {_rounds = _rounds + 1};
+                        if ((_rounds == _respawns) and !(_noend)) then {_run = false;};
+                };
+                missionNamespace setVariable[format["resupply_%1",_id], time +  (2 + random 10)];
+        };
+}, 5, [_id, _run, _unit, _position,  _deserted, _delay, _dynamic, _explode, _type, _dir, _weapons, _mags, _haveinit, _unitinit, _hasname, _unitname, _noend, _respawns]] call CBA_fnc_addPerFrameHandler;

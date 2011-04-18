@@ -4,10 +4,10 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
-#ifdef TUP_AIRTRAFFIC
-"Ambient Airports" call mso_core_fnc_initStat;
-execNow "ambience\modules\tup_airtraffic\main.sqf";
-#endif
+civilian setFriend [west, 1];
+civilian setFriend [east, 1];
+civilian setFriend [resistance, 1];
+
 #ifdef CRB_CROWS
 "Crows" call mso_core_fnc_initStat;
 execNow "ambience\modules\crb_crows\main.sqf";
@@ -40,4 +40,7 @@ execNow "ambience\modules\crb_civilians\main.sqf";
 "Shepherds" call mso_core_fnc_initStat;
 execNow "ambience\modules\crb_shepherds\main.sqf";
 #endif
-
+#ifdef TUP_AIRTRAFFIC
+"Ambient Airports" call mso_core_fnc_initStat;
+execNow "ambience\modules\tup_airtraffic\main.sqf";
+#endif

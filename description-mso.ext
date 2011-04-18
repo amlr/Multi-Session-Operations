@@ -17,13 +17,6 @@ class CfgSounds {
 #endif
 };
 
-// Add BAF and TK Flight groups
-class CfgGroups {
-#ifdef TUP_AIRTRAFFIC
-	#include <ambience\modules\tup_airtraffic\cfggroups.hpp>
-#endif
-};
-
 //http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
 class Params {
 #ifdef RMM_MP_RIGHTS
@@ -38,6 +31,49 @@ class Params {
 #ifdef TUP_AIRTRAFFIC
 	#include <ambience\modules\tup_airtraffic\params.hpp>
 #endif
+
+	class faction_RU {
+		title = "Enable Russians"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 1;
+	};
+	class faction_ACE_RU {
+		title = "Enable ACE Russians"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_INS {
+		title = "Enable Insurgents"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 1;
+	};
+	class faction_GUE {
+		title = "Enable Guerillas"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_BIS_TK {
+		title = "Enable Takistan Army"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_BIS_TK_INS {
+		title = "Enable Takistan Insurgency"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_BIS_TK_GUE {
+		title = "Enable Takistan Guerillas"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
 }; 
 
 #ifdef R3F_LOGISTICS
@@ -150,3 +186,10 @@ class cfgFunctions {
 #ifdef RMM_TASKS
 	#include <support\modules\tasks\dialog.hpp>
 #endif
+
+// Add BAF and TK Flight groups
+class CfgGroups {
+#ifdef TUP_AIRTRAFFIC
+	#include <ambience\modules\tup_airtraffic\cfggroups.hpp>
+#endif
+};
