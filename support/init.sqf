@@ -70,6 +70,11 @@ execNow "support\modules\R3F_logistics\init.sqf";
 execNow "support\modules\tasks\main.sqf";	
 #endif
 
+#ifdef CRB_TWNMGR
+"Town Manager" call mso_core_fnc_initStat;
+execNow "support\modules\crb_twnmgr\main.sqf";	
+#endif
+
 #ifdef RMM_TYRES
 "Tyre Changing" call mso_core_fnc_initStat;
 execNow "support\modules\tyres\main.sqf";

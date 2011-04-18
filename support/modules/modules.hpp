@@ -8,6 +8,7 @@
 #define RMM_RECRUITMENT
 #define RMM_REVIVE
 #define RMM_TASKS
+#define CRB_TWNMGR
 #define RMM_TYRES
 #define R3F_LOGISTICS
 
