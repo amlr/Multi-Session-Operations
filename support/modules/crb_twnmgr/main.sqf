@@ -1,5 +1,5 @@
 private ["_debug"];
-if(isDedicated) exitWith{};
+if(!isServer) exitWith{};
 
 waitUntil{!isNil "bis_alice_mainscope"};
 waitUntil{typeName (bis_alice_mainscope getVariable "townlist") == "ARRAY"};
@@ -27,7 +27,7 @@ _debug = false;
         "STATE:", [
                 "this", 
 //                format["""%1_mgr""", _name] + " setMarkerColor ""ColorBlue""; player sideChat format[""[%1%2] has been secured"", (format[""%1_mgr"", _name] call BIS_fnc_PosToGrid) select 0, (format[""%1_mgr"", _name] call BIS_fnc_PosToGrid) select 1]",
-                format["""%1_mgr""", _name] + " setMarkerColor ""ColorBlue""; player sideChat ""Area has been secured - map updated"";",
+                format["""%1_mgr""", _name] + " setMarkerColor ""ColorBlue""; [2,[], {player sideChat ""Area has been secured - map updated"";}] call mso_core_fnc_ExMP;",
                 format["""%1_mgr""", _name] + " setMarkerColor ""ColorWhite"";"
         ]] call CBA_fnc_createTrigger;
 	_trg = _trg select 0;
@@ -38,7 +38,7 @@ _debug = false;
         "STATE:",  [
                 "this", 
 //                format["""%1_mgr""", _name] + " setMarkerColor ""ColorRed""; player sideChat format[""Enemy spotted at [%1%2]"", (format[""%1_mgr"", _name] call BIS_fnc_PosToGrid) select 0, (format[""%1_mgr"", _name] call BIS_fnc_PosToGrid) select 1]",
-                format["""%1_mgr""", _name] + " setMarkerColor ""ColorRed""; player sideChat ""Enemy spotted - map updated"";",
+                format["""%1_mgr""", _name] + " setMarkerColor ""ColorRed""; [2,[], {player sideChat ""Enemy spotted - map updated"";}] call mso_core_fnc_ExMP;",
                 ""
         ]] call CBA_fnc_createTrigger;
         
@@ -47,7 +47,7 @@ _debug = false;
         "STATE:",  [
                 "this", 
 //                format["""%1_mgr""", _name] + " setMarkerColor ""ColorRed""; player sideChat format[""Enemy sightings at [%1%2]"", (format[""%1_mgr"", _name] call BIS_fnc_PosToGrid) select 0, (format[""%1_mgr"", _name] call BIS_fnc_PosToGrid) select 1]",
-                format["""%1_mgr""", _name] + " setMarkerColor ""ColorRed""; player sideChat ""Enemy sightings - map updated"";",
+                format["""%1_mgr""", _name] + " setMarkerColor ""ColorRed""; [2,[], {player sideChat ""Enemy sightings - map updated"";}] call mso_core_fnc_ExMP;",
                 ""
         ]] call CBA_fnc_createTrigger;
 	_trg = _trg select 0;
