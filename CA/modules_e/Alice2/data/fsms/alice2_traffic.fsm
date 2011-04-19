@@ -156,7 +156,7 @@ class FSM
        "_driver moveindriver _car;" \n
        "" \n
        "_cargo = getNumber(configFile >> ""CfgVehicles"" >> _classVehicle >> ""transportSoldier"");" \n
-       "for ""_i"" from 0 to floor(random _cargo) do {" \n
+       "for ""_i"" from 1 to floor(random _cargo) do {" \n
        "	_classManx = _classlistMen call bis_fnc_selectrandom;" \n
        "	_cargoMan = _grp createunit [_classManx,position _car,[],0,""none""];" \n
        "	_cargoMan setSkill 0;" \n
