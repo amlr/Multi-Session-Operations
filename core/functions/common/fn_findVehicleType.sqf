@@ -1,9 +1,9 @@
 
-private ["_fac","_allvehs","_vehx","_sx","_fx","_cx","_cargoslots","_grpx","_type","_nonconfigs","_nonsims","_tx"];
+private ["_fac","_allvehs","_vehx","_sx","_fx","_cx","_cargoslots","_grpx","_type","_nonconfigs","_nonsims","_tx","_scope"];
 _cargoslots = _this select 0;
 _fac = nil;
 _type = nil;
-_nonConfigs = ["StaticWeapon","CruiseMissile1","CruiseMissile2","Chukar_EP1","Chukar_AllwaysEnemy_EP1"];
+_nonConfigs = ["StaticWeapon","CruiseMissile1","CruiseMissile2","Chukar_EP1","Chukar","Chukar_AllwaysEnemy_EP1"];
 _nonSims = ["parachute"];
 
 if(count _this > 1) then {
@@ -21,10 +21,11 @@ for "_y" from 1 to _grpx - 1 do {
     _sx = getText(_vehx >> "simulation");
     _fx = getText(_vehx >> "faction");
     _tx = getNumber(_vehx >> "TransportSoldier");
+	_scope = getNumber (_vehx >> "scope");
     _cx = configName _vehx;
     //hint str _fx;
     //hint str typeName _fac;
-    if (_tx > _cargoslots && {!(_cx isKindOf _x)} count _nonconfigs > 0 && !(_sx in _nonsims)) then {
+    if (_tx >= _cargoslots && !(_cx in _nonconfigs) && !(_sx in _nonsims) && (_scope > 1)) then {
         if (!isNil "_fac") then {
             switch(typeName _fac) do {
                 case "STRING": {

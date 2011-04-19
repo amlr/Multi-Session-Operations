@@ -28,6 +28,10 @@ class Params {
 #ifdef RMM_WEATHER
 	#include <core\modules\weather\params.hpp>
 #endif
+#ifdef TUP_AIRTRAFFIC
+	#include <ambience\modules\tup_airtraffic\params.hpp>
+#endif
+
 	class faction_RU {
 		title = "Enable Russians"; 
 		values[]= {0,1}; 
@@ -182,3 +186,10 @@ class cfgFunctions {
 #ifdef RMM_TASKS
 	#include <support\modules\tasks\dialog.hpp>
 #endif
+
+// Add BAF and TK Flight groups
+class CfgGroups {
+#ifdef TUP_AIRTRAFFIC
+	#include <ambience\modules\tup_airtraffic\cfggroups.hpp>
+#endif
+};
