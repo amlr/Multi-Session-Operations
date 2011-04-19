@@ -34,6 +34,7 @@ PGM_fnc_CreateIntel = {
         _range  = round sqrt(_radius^2*2);
         _range  = _range - (_range % 50);
         [format["%1intel%2", _cache, _i], _pos, "Icon", [0.5,0.5], "TEXT:", format["%1m", _range], "TYPE:", intelMarkerType, "COLOR:", "ColorRed", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
+	[2,[],{player sideChat "Intelligence received - map updated";}] call mso_core_fnc_ExMP;
 }; 
 
 CRB_fnc_FindVehicle = {
@@ -139,7 +140,7 @@ CRB_fnc_GetBuildingPosForTown = {
                 _bldgpos = [];
                 _i = 0;
                 _j = 0;
-                _nearbldgs = nearestObjects [position _twn, ["Building"], 500];
+                _nearbldgs = nearestObjects [position _twn, ["Building"], 250];
                 {
                         if(!surfaceIsWater position _x) then {
                                 private["_y"];
@@ -164,6 +165,7 @@ CRB_fnc_GetNearestTown = {
         _pos = _this select 0;
                 
         waitUntil{!isNil "bis_alice_mainscope"};
+        waitUntil{typeName (bis_alice_mainscope getvariable "townlist") == "ARRAY"};
         _nearest = (bis_alice_mainscope getvariable "townlist") select 0;
         {
                 if(_nearest distance _pos > _x distance _pos) then {
@@ -173,7 +175,7 @@ CRB_fnc_GetNearestTown = {
 
         _neighbours = _nearest getVariable "neighbors";
         {
-                if(_nearest distance _x < 2500 && !(_x in _neighbours)) then {
+                if(_nearest distance _x < 1000 && !(_x in _neighbours)) then {
                         _neighbours set [count _neighbours, _x];
                 };
         } forEach (bis_alice_mainscope getvariable "townlist") - [_nearest];
@@ -258,7 +260,7 @@ CRB_fnc_RecruitMember = {
         
         _classMan = CRB_classlistFaction call BIS_fnc_selectRandom;        
         _recruit = (createGroup civilian) createUnit [_classMan, _recpos, [], 0, "NONE"];
-        _recruit setSkill (random 0.5);
+        _recruit setSkill (random 1);
         _recruit allowDamage false;
         _recruit move position _ammo;
         _waittime = time + 300;
@@ -326,7 +328,7 @@ CRB_fnc_SplitCell = {
         waitUntil{_newlead distance _pos < 50 || _waittime < time};
         sleep 15;
         
-/*        _newtwn = [];
+        _newtwn = [];
         waitUntil{!isNil "bis_alice_mainscope"};
         {
                 if(_pos distance _x < (BIS_alice_mainscope getvariable "trafficDistance")) then {
@@ -335,8 +337,8 @@ CRB_fnc_SplitCell = {
         } forEach (bis_alice_mainscope getvariable "townlist");
         
         _newtwn = _newtwn call BIS_fnc_selectRandom;
-*/        
-        _newtwn = [_pos] call CRB_fnc_GetNearestTown;
+        
+//        _newtwn = [_pos] call CRB_fnc_GetNearestTown;
 
         if (_debug) then {
                 deleteMarker _tcrm;
@@ -367,7 +369,7 @@ CRB_fnc_SpawnNewCell = {
         _terrorlead setSpeedMode "FULL";
         _terrorlead allowFleeing 0;
         (group _terrorlead) setVariable ["CEP_disableCache", true, true];
-        _maxgroupsize = 4 + floor(random 11);
+        _maxgroupsize = 6 + floor(random 10);
         
         _ammo = [_spawn] call CRB_fnc_SpawnRandomAmmo;
         (group _terrorlead) setVariable ["Ammunition", _ammo, true];
@@ -380,7 +382,7 @@ CRB_fnc_SpawnNewCell = {
         _terrorcrgo = units _terrorlead - [_terrorlead];
         {
                 _x assignAsCargo _vehicle;
-                _x setSkill (random 0.5);
+                _x setSkill random 1;
                 _x setBehaviour "ALERT";
                 _x setSpeedMode "FULL";
         } forEach _terrorcrgo;        
@@ -418,7 +420,7 @@ CRB_fnc_SpawnNewCell = {
         //{alive _x} count units _grp> 0 && 
         while{count((getWeaponCargo _ammo) select 0) != 0 || count((getMagazineCargo _ammo) select 0) != 0} do {
                 _forcesplit = false;
-                if(_debug) then {sleep 15} else {sleep 300 + random 300};
+                if(_debug) then {sleep 15} else {random 180};
                 waitUntil{count ([] call BIS_fnc_listPlayers) > 0};
                 if(count units _grp < _maxgroupsize) then {
                         [_grp, _debug] call CRB_fnc_RecruitMember;
@@ -466,7 +468,7 @@ if(isNil "CRB_classlistFaction") then {
 };        
 waitUntil{typeName CRB_classlistFaction == "ARRAY"};
 
-_numcells = ceil((count _spawnpoints) / 5);
+_numcells = 1 + random 2 + ceil((count _spawnpoints) / 5);
 diag_log format["MSO-%1 TerrorCells: spawns(%2) cells(%3)", time, count _spawnpoints, _numcells];
 
 for "_i" from 1 to _numcells do {
@@ -478,7 +480,8 @@ for "_i" from 1 to _numcells do {
                 // Pick a spawn point
                 _spawn =  _spawnpoints call BIS_fnc_selectRandom;
                 
-                //DEBUG:player setPos _spawn;
+                //DEBUG:
+		if(_debug) then {player setPos _spawn;};
                 //DEBUG:sleep 15;
                 
                 // Create terrorist leader and vehicle
