@@ -2,7 +2,7 @@ private ["_debug","_mapsize","_helidest","_planedest","_destinations","_destairf
 if(!isServer) exitWith{};
 if (isNil "factionsMask") then {factionsMask = 1;};
 if (factionsMask == 2) exitWith{};
-_debug = true;
+_debug = false;
 
 switch toLower(worldName) do {		
 	case "zargabad": {
@@ -225,12 +225,12 @@ for "_j" from 0 to (_destinations-1) do
 						};			
 						deleteVehicle _landEnd;
 						
-						// As the MV22 does not taxi, make sure it moves off the runway
+						// As the MV22 does not taxi, make sure it does not stop - move onto end pos
 						If ((TypeOf _aircraftVehicle) == "MV22") then 
 						{
-								_wp = _grp addwaypoint [_destpos, 0];
+								_wp = _grp addwaypoint [_endpos, 0];
 								_wp setWayPointType "MOVE";
-								waitUntil{(_aircraftVehicle distance _destpos < 5)  && ((position _aircraftVehicle) select 2 <= 1) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
+								waitUntil{(_aircraftVehicle distance _endpos < 10) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
 						};
 						
 						// Turnoff the aircraft engines
@@ -240,8 +240,11 @@ for "_j" from 0 to (_destinations-1) do
 						
 						// Check to see if aircraft is near Control Tower, if so, crew may get out and go for a chat
 						_controlTowerTypes = ["Land_Mil_ControlTower","Land_Mil_ControlTower_EP1"];
-						_controltowers = nearestObjects [position _aircraftVehicle, _controlTowerTypes, 200]; 
-						diag_log format ["MSO-%1 Air Traffic: %5 %2 %3 Found ControlTowers: %4", time, _j, typeOf _aircraftVehicle, count _controltowers, _destination];
+						_controltowers = nearestObjects [position _aircraftVehicle, _controlTowerTypes, 200];
+						if (_debug) then 
+						{						
+							diag_log format ["MSO-%1 Air Traffic: %5 %2 %3 Found ControlTowers: %4", time, _j, typeOf _aircraftVehicle, count _controltowers, _destination];
+						};
 						If (count _controltowers > 0) then 
 						{
 								if (random 1 > 0.6) then 
@@ -264,7 +267,9 @@ for "_j" from 0 to (_destinations-1) do
 										_wp setWayPointStatements ["true","{_x playMove 'AidlPercSnonWnonDnon_talk1'} foreach _aircraftCrew;"];
 										
 										// Pause then send the crew back to the vehicle
-										sleep (_timeout select (random 2));
+										_wp setWayPointTimeout _timeout;
+										
+										sleep 1;
 										_wp = _grp addwaypoint [position _aircraftVehicle, 0];
 										_wp setWayPointType "GETIN";
 								};
