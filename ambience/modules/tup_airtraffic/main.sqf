@@ -138,25 +138,22 @@ for "_j" from 0 to (_destinations-1) do
                         _airfieldside =  [_currentairfield, 1000, format["%1 %2",_destination,_j],_debug] call mso_core_fnc_getDominantSide;
                         
                         // If we are counting all factions then work out controlling side, otherwise default to civilian
-                        if (factionsMask == 0 || _airfieldSide == civilian) then {
+                        if (factionsMask == 0 || _airfieldSide == civilian) then 
+						{
                                 // Get the factions for the controlling side and count their units
                                 _factions = [_airfieldside, _currentairfield, 1000,"factions",_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
                                 _factionsCount = [_airfieldside, _currentairfield, 1000,"count",_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
                                 
-                                // Mark Destination on Map						
-                                if (_debug) then 
-                                {
-                                        private["_t","_m"];
-                                        _t = format["AirTraffic_s%1", floor(random 10000)];
-                                        _m = [_t, _destpos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", str _j, "COLOR:", "ColorBlack", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;							
-                                };
-                                
+                                // Mark Destination on Map
+								                                if (_debug) then                                 {                                        private["_t","_m"];                                        _t = format["AirTraffic_s%1", floor(random 10000)];                                        _m = [_t, _destpos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", str _j, "COLOR:", "ColorBlack", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;							
+                                };                                
                                 // Create aircraft 
                                 _aircraft = [];
                                 _front = "";
                                 
                                 // Check to see if we need a plane or helicopter
-                                if (_isPlane) then {
+                                if (_isPlane) then 
+								{
                                         _front = "Plane";
                                 } else {
                                         _front = "Helicopter";
@@ -167,8 +164,10 @@ for "_j" from 0 to (_destinations-1) do
                                 _vehiclelist =  [0, _facs,_front] call mso_core_fnc_findVehicleType; 
                                 
                                 // Select a vehicle from the list - if no valid vehicle selet a civilian aircraft
-                                if (count _vehiclelist > 0) then {
-                                        if (_debug) then {
+                                if (count _vehiclelist > 0) then 
+								{
+                                        if (_debug) then 
+										{
                                                 diag_log format ["MSO-%1 Air Traffic: %4 %2 Faction: %5 Vehicle list: %3", time, _j, _vehiclelist, _destination, _facs];
                                         };
                                         _vehicle = (_vehiclelist) call BIS_fnc_selectRandom;
@@ -177,12 +176,14 @@ for "_j" from 0 to (_destinations-1) do
                                         _vehicle =  ([0, _facs,_front] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
                                         
                                         _airfieldside = civilian;
-                                        if (_debug) then {
+                                        if (_debug) then 
+										{
                                                 diag_log format ["MSO-%1 Air Traffic: %4 %2  Could not find suitable military aircraft, civilian aircraft found: %3", time, _j, _vehicle, _destination];
                                         };
                                 };
                                 
-                                if (_debug) then {
+                                if (_debug) then 
+								{
                                         diag_log format ["MSO-%1 Air Traffic: %4 %2  Found Aircraft %3", time, _j, _vehicle, _destination];
                                 };
                                 
@@ -211,7 +212,8 @@ for "_j" from 0 to (_destinations-1) do
                                 waitUntil{(_aircraftVehicle distance _destpos < 500) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
                                 // Once near destination, action a landing.
                                 _landEnd = "HeliHEmpty" createVehicle _destpos;
-                                if (_aircraftVehicle iskindof "Helicopter") then {
+                                if (_aircraftVehicle iskindof "Helicopter") then 
+								{
                                         _aircraftVehicle land "LAND";
                                         waitUntil{((position _aircraftVehicle) select 2 <= 5) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
                                 } else {
@@ -221,7 +223,8 @@ for "_j" from 0 to (_destinations-1) do
                                 deleteVehicle _landEnd;
                                 
                                 // As the MV22 does not taxi, make sure it moves off the runway
-                                If ((TypeOf _aircraftVehicle) == "MV22") then {
+                                If ((TypeOf _aircraftVehicle) == "MV22") then 
+								{
                                         _wp = _grp addwaypoint [_destpos, 0];
                                         _wp setWayPointType "MOVE";
                                         waitUntil{(_aircraftVehicle distance _destpos < 5)  && ((position _aircraftVehicle) select 2 <= 1) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
@@ -279,16 +282,19 @@ for "_j" from 0 to (_destinations-1) do
                                 };
                                 
                                 // Remove aircraft and crew
-                                if (_debug) then {
+                                if (_debug) then 
+								{
                                         diag_log format["MSO-%1 Air Traffic: %3 %4 deleting %2", time, TypeOf _aircraftVehicle, _destination, _j];
                                 };
-                                { deleteVehicle _x } forEach _aircraftCrew;
+                                {
+									deleteVehicle _x;
+								} forEach _aircraftCrew;
                                 deleteVehicle _aircraftVehicle;
                                 deletegroup _grp;
                                 
                                 // Pause before creating another aircraft for destination
-                                _sleep = if(_debug) then {10;} else {random 300;};
-                                sleep _sleep;	
+                                _sleep = if (_debug) then {10;} else {random 300;};
+                                sleep _sleep;
                         };
                 };
         };

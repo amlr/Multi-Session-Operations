@@ -11,5 +11,4 @@
 // -- Pending --
 
 #define TUP_AIRTRAFFIC
-
-//#define TUP_SEATRAFFIC
+#define TUP_SEATRAFFIC

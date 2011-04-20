@@ -1,4 +1,4 @@
-private ["_mapsize","_height","_debug","_name","_color","_icon","_edgepos","_edge"];
+private ["_mapsize","_height","_debug","_name","_color","_icon","_edgepos","_edge","_ex","_ey","_ez"];
 _mapsize = _this select 0;
 _height = _this select 1;
 _debug = _this select 2;
@@ -11,14 +11,14 @@ _edgepos = [];
 _edge = round(random 3);
 switch (_edge) do 
 {
-		case 0: {x = (random _mapsize)-10; y = _mapsize;}; // top edge
-		case 1: {x = _mapsize; y = (random _mapsize)-10;}; // right edge
-		case 2: {x = (random _mapsize); y = 10;}; // bottom edge
-		case 3: {x = 10; y = (random _mapsize);}; // left edge
+		case 0: {_ex = (random _mapsize)-10; _ey = _mapsize;}; // top edge
+		case 1: {_ex = _mapsize; _ey = (random _mapsize)-10;}; // right edge
+		case 2: {_ex = (random _mapsize); _ey = 10;}; // bottom edge
+		case 3: {_ex = 10; _ey = (random _mapsize);}; // left edge
 };
-z = _height;
+_ez = _height;
 
-_edgepos = [x,y,z];
+_edgepos = [_ex,_ey,_ez];
 
 if (_debug) then 
 {
