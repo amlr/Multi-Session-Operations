@@ -2,8 +2,9 @@ private ["_hospitals","_police","_repairs","_id","_debug"];
 if(!isServer) exitWith{};
 
 waitUntil{!isNil "bis_functions_mainscope"};
+waitUntil{typeName (bis_functions_mainscope getVariable "locations") == "ARRAY"};
 
-_debug = true;
+_debug = false;
 _hospitals = [];
 _police = [];
 _repairs = [];
@@ -11,13 +12,14 @@ _repairs = [];
 // Find & mark hospitals, Police Stations and Repair centres
 {
         private["_h","_hf","_pf"];
-        _h = nearestObjects [position _x, ["Land_A_Hospital","Land_A_Office01","Land_A_Office01_EP1","Land_A_Stationhouse","Land_A_Stationhouse_ep1","Land_Mil_House_EP1","Land_repair_center","Land_Mil_Repair_center_EP1"], 250];
+        _h = nearestObjects [position _x, ["Land_A_Hospital","Land_A_Office01","Land_A_Office01_EP1","Land_A_Stationhouse","Land_A_Stationhouse_ep1","Land_Mil_House_EP1","Land_repair_center","Land_Mil_Repair_center_EP1"], 500];
 
 	_hf = 0;
 	_pf = 0;
 	_hp = [];
 	_pp = [];
         {
+		if (!(_x in _hospitals || _x in _police || _x in _repairs)) then {
                 if(typeOf _x == "Land_A_Hospital") then {
 			if(_hf < 2) then {_hp = [];};
                         _hp = _hp + [_x];
@@ -53,6 +55,7 @@ _repairs = [];
                 if(typeOf _x == "Land_repair_center" || typeOf _x == "Land_Mil_Repair_center_EP1") then {
                         _repairs =  _repairs + [_x];
                 };
+		};
         } forEach _h;
 	_hospitals = _hospitals + _hp;
 	_police = _police + _pp;
