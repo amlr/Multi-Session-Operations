@@ -1,6 +1,6 @@
 private ["_debug","_mapsize","_helidest","_planedest","_destinations","_destairfield","_helilandings","_center","_airports","_planelandings"];
 if(!isServer) exitWith{};
-if (isNil "factionsMask") then {factionsMask = 1;};
+if (isNil "factionsMask") then {factionsMask = 0;};
 if (factionsMask == 2) exitWith{};
 _debug = false;
 
@@ -125,6 +125,7 @@ for "_j" from 0 to (_destinations-1) do
                                 //  _destpos = [position _currentairfield, 0, 20, 10, 0, 0, 0] call BIS_fnc_findSafePos;
                                 _destpos = position _currentairfield;
                                 _destination = "HeliPad";
+				waitUntil{count (nearestObjects [_destpos, ["Helicopter"], 5]) == 0};
                         } else {
                                 _destpos = position _currentairfield;
                                 _destination = "Hangar";
