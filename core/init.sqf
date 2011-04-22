@@ -65,7 +65,7 @@ if (!isNil "paramsArray") then {
 execNow "core\scripts\init_player.sqf";
 
 if(isDedicated) then {
-	setViewDistance 10000;
+	setViewDistance 5000;
 } else {
 	setViewDistance 2500;
 };
