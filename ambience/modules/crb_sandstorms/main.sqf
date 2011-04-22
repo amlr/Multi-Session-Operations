@@ -21,7 +21,7 @@ for "_id" from 0 to _storms do {
                 _debug = _params select 2;
                 
                 _pos = missionNamespace getVariable format["sandstorms%1", _id];
-                if(random 1 > 0.9) then {
+                if(random 1 > 0.7) then {
                         _dest = position ((bis_functions_mainscope getVariable "locations") call BIS_fnc_selectRandom);
                         _pos = [_pos, _d / 2,[_pos, _dest] call BIS_fnc_dirTo] call BIS_fnc_relPos;
                         missionNamespace setVariable [format["sandstorms%1", _id], _pos];
