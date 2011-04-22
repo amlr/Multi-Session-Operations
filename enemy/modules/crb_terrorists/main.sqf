@@ -1,16 +1,40 @@
 //execVM "modules\crb_terrorists\main.sqf";
-//[position player, 1] call CRB_fnc_FindVehicle;
+//[position player, 1,_debug] call CRB_fnc_FindVehicle;
 //[position player, 1] call CRB_fnc_SpawnVehicle
 //(group player) setVariable ["Ammunition", [position player] call CRB_fnc_SpawnRandomAmmo, true];
 //[units player, CIVAMMO] spawn CRB_fnc_ArmFromAmmo;
-//[position player] call CRB_fnc_GetNearestTown;
-//[[position ((group player) getVariable "Ammunition")] call CRB_fnc_GetNearestTown] call CRB_fnc_GetBuildingPosForTown;
+//[position player, true] call CRB_fnc_GetNearestTown;
+//[[position ((group player) getVariable "Ammunition"), true] call CRB_fnc_GetNearestTown,true] call CRB_fnc_GetBuildingPosForTown;
 //[group player, true] spawn CRB_fnc_RecruitMember;
 
 private ["_spawnpoints","_debug","_numcells"];
 if(!isServer) exitWith{};
 
 _debug = true;
+
+CRB_fnc_debugPositions = {
+        private ["_positions","_debug","_text"];
+        _positions = _this select 0;
+        _text = _this select 1;
+        _debug = _this select 2;
+        if(_debug) then {
+                hint format["Marking %1...", _text];
+                private["_i","_m","_p"];
+                _i = 0;
+                {
+                        _p = if(typeName _x == "ARRAY") then {_x} else {position _x};
+                        _m = createMarkerLocal [format["tmptc%1", _i], _p];
+                        _m setMarkerTypeLocal "Dot";
+                        _i = _i + 1;
+                } forEach _positions;
+                sleep 5;
+                _i = 0;
+                {
+                        deleteMarkerLocal format["tmptc%1", _i];
+                        _i = _i + 1;
+                } forEach _positions;
+        };
+};
 
 // Thanks to Pogoman's Insurgency for this code
 #define intelMarkerType "hd_unknown"
@@ -20,7 +44,7 @@ PGM_fnc_CreateIntel = {
         
         _cache  = _this;	
         _i      = 0; 
-        while{ (getMarkerPos format["%1intel%2", _cache, _i] select 0) != 0}do{ _i = _i + 1; sleep 0.1;}; 	
+        while{ (getMarkerPos format["%1intel%2", _cache, _i] select 0) != 0}do{ _i = _i + 1;}; 	
         _sign   = 1; 
         if (random 100 > 50) then { _sign = -1; }; 
         _sign2  = 1; 
@@ -34,21 +58,24 @@ PGM_fnc_CreateIntel = {
         _range  = round sqrt(_radius^2*2);
         _range  = _range - (_range % 50);
         [format["%1intel%2", _cache, _i], _pos, "Icon", [0.5,0.5], "TEXT:", format["%1m", _range], "TYPE:", intelMarkerType, "COLOR:", "ColorRed", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
-	[2,[],{player sideChat "Intelligence received - map updated";}] call mso_core_fnc_ExMP;
+        [2,[],{player sideChat "Intelligence received - map updated";}] call mso_core_fnc_ExMP;
 }; 
 
 CRB_fnc_FindVehicle = {
-        private ["_newveh","_vdist","_pos","_vcargo"];
+        private ["_newveh","_vdist","_pos","_vcargo","_vehs","_debug"];
         _pos = _this select 0;
         _vcargo = _this select 1;
+        _debug = _this select 2;
         _vdist = 500;
         _newveh = objNull;
+        _vehs = nearestObjects [_pos, ["Car"], 250];
+        [_vehs, "vehicles", _debug] call CRB_fnc_debugPositions;
         {
                 if((_x emptyPositions "cargo") >= _vcargo && ((_x distance _pos) < _vdist) && isNull (assignedDriver _x)) then {
                         _newveh = _x;
                         _vdist = _x distance _pos;
                 };
-        } forEach nearestObjects [_pos, ["Car"], 500];
+        } forEach _vehs;
         
         if(!isNull _newveh) then {
                 //DEBUG:player sideChat format["Found vehicle: %1", _newveh];
@@ -97,7 +124,7 @@ CRB_fnc_SpawnRandomAmmo = {
                 [1,5,5]
         ] call mso_core_fnc_selectRandomBias;
         _ammo = createVehicle [_aclass, _pos, [], 0, "NONE"];
-//        _ammo setPos _pos;
+        //        _ammo setPos _pos;
         _ammo setVectorUp [0, 0, 1];
         _ammo;
 };
@@ -131,8 +158,9 @@ CRB_fnc_ArmFromAmmo = {
 };
 
 CRB_fnc_GetBuildingPosForTown = {
-        private ["_i","_j","_twn","_bldgpos","_nearbldgs"];
+        private ["_i","_j","_twn","_bldgpos","_nearbldgs","_debug"];
         _twn = _this select 0;
+        _debug = _this select 1;
         _bldgpos = _twn getVariable "BuldingPositions";
         if(!isNil "_bldgpos") then {
                 _bldgpos = _twn getVariable "BuldingPositions";
@@ -150,20 +178,21 @@ CRB_fnc_GetBuildingPosForTown = {
                                         _i = _i + 1;
                                         _j = _j + 1;
                                         _y = _x buildingPos _i;
-                                        sleep 0.1;
                                 };
                                 _i = 0;
                         };
                 } forEach _nearbldgs;
-                _twn setVariable ["BuldingPositions", _bldgpos];
+                _twn setVariable ["BuldingPositions", _bldgpos, true];
         };
+        [_bldgpos,"building positions",_debug] call CRB_fnc_debugPositions;
         _bldgpos;
 };
 
 CRB_fnc_GetNearestTown = {
-        private ["_nearest","_pos","_neighbours"];
+        private ["_nearest","_pos","_neighbours","_debug"];
         _pos = _this select 0;
-                
+        _debug = _this select 1;
+        
         waitUntil{!isNil "bis_alice_mainscope"};
         waitUntil{typeName (bis_alice_mainscope getvariable "townlist") == "ARRAY"};
         _nearest = (bis_alice_mainscope getvariable "townlist") select 0;
@@ -172,15 +201,21 @@ CRB_fnc_GetNearestTown = {
                         _nearest = _x;
                 };
         } forEach (bis_alice_mainscope getvariable "townlist");
-
+        
         _neighbours = _nearest getVariable "neighbors";
         {
-                if(_nearest distance _x < 1000 && !(_x in _neighbours)) then {
+                if(_nearest distance _x < 500 && !(_x in _neighbours)) then {
                         _neighbours set [count _neighbours, _x];
                 };
         } forEach (bis_alice_mainscope getvariable "townlist") - [_nearest];
 
-        _neighbours call BIS_fnc_selectRandom;
+	_neighbours = _neighbours + [_nearest];
+        
+        [_neighbours, "neighbours", _debug] call CRB_fnc_debugPositions;
+        
+        _nearest = _neighbours call BIS_fnc_selectRandom;
+	if(isNil "_nearest") exitWith {hint "Error: Nearest town not found";};
+	_nearest;
 };
 
 CRB_fnc_InitClassLists = {
@@ -231,7 +266,7 @@ CRB_fnc_GetUnitClass = {
 
 
 CRB_fnc_RecruitMember = {
-        private ["_t","_tcrm","_tcid","_bldgpos","_ammo","_grp","_debug","_recpos","_classMan","_recruit","_pos","_twn","_waittime"];
+        private ["_t","_tcrm","_tcid","_bldgpos","_ammo","_grp","_debug","_recpos","_classMan","_recruit","_twn","_waittime"];
         _grp = _this select 0;
         _debug = _this select 1;
         _ammo = _grp getVariable "Ammunition";
@@ -241,11 +276,17 @@ CRB_fnc_RecruitMember = {
         };
         _tcid = _grp getVariable "ID";
         if(isNil "_tcid") then {_tcid = 0;};
-        _pos = position _ammo;
-        _twn = [_pos] call CRB_fnc_GetNearestTown;
-        _bldgpos = [_twn] call CRB_fnc_GetBuildingPosForTown;
-        _recpos = _bldgpos select floor(random count _bldgpos);
-        if(isNil "_recpos") exitWith {hint "No recruit spawn position";};
+        _twn = _grp getVariable "nearestTown";
+	if(isNil "_twn") then {
+		_twn = [position leader _grp, _debug] call CRB_fnc_GetNearestTown;
+		_grp setVariable ["nearestTown", _twn, true];
+	};
+        _bldgpos = [_twn,_debug] call CRB_fnc_GetBuildingPosForTown;
+        _recpos = _bldgpos call BIS_fnc_selectRandom;
+        if(isNil "_recpos") exitWith {
+		hint "No recruit spawn position";
+		diag_log format["MSO-%1 TerrorCells: No recruit spawn position (%2)", time, _twn];
+		};
         _tcrm = "";
         if (_debug) then {
                 _t = format["tcell_r%1", _tcid];
@@ -294,7 +335,7 @@ CRB_fnc_SplitCell = {
         for "_i" from 0 to _split do {
                 [(units _grp - [_terrorlead]) call BIS_fnc_selectRandom] joinSilent _newcell;
         };
-        _newveh = [_pos, (count units _newcell) - 1] call CRB_fnc_FindVehicle;
+        _newveh = [_pos, (count units _newcell) - 1,_debug] call CRB_fnc_FindVehicle;
         
         if(isNull _newveh) then {
                 _newveh = [_pos, (count units _newcell) - 1] call CRB_fnc_SpawnVehicle;
@@ -328,7 +369,7 @@ CRB_fnc_SplitCell = {
         waitUntil{_newlead distance _pos < 50 || _waittime < time};
         sleep 15;
         
-        _newtwn = [];
+        /*        _newtwn = [];
         waitUntil{!isNil "bis_alice_mainscope"};
         {
                 if(_pos distance _x < (BIS_alice_mainscope getvariable "trafficDistance")) then {
@@ -337,9 +378,10 @@ CRB_fnc_SplitCell = {
         } forEach (bis_alice_mainscope getvariable "townlist");
         
         _newtwn = _newtwn call BIS_fnc_selectRandom;
+        */        
+        _newtwn = [_pos, _debug] call CRB_fnc_GetNearestTown;
+        _newcell setVariable ["nearestTown", _newtwn, true];
         
-//        _newtwn = [_pos] call CRB_fnc_GetNearestTown;
-
         if (_debug) then {
                 deleteMarker _tcrm;
         };
@@ -348,7 +390,7 @@ CRB_fnc_SplitCell = {
 };
 
 CRB_fnc_SpawnNewCell = {
-        private ["_terrorcrgo","_pos","_count","_terrorlead","_maxgroupsize","_ammo","_spawn","_vehicle","_twn","_bldgpos","_grp","_debug","_t","_tcid","_tcsm","_tcdm","_forcesplit","_waittime"];
+        private ["_terrorcrgo","_pos","_count","_terrorlead","_maxgroupsize","_ammo","_spawn","_vehicle","_twn","_bldgpos","_grp","_debug","_t","_tcid","_tcsm","_tcdm","_forcesplit","_waittime","_wait"];
         _terrorlead = _this select 0;
         _vehicle = _this select 1;
         _twn = _this select 2;
@@ -387,21 +429,23 @@ CRB_fnc_SpawnNewCell = {
                 _x setSpeedMode "FULL";
         } forEach _terrorcrgo;        
         
-        units _terrorlead orderGetIn true;
-        waitUntil{{!unitReady _x} count units _terrorlead == 0};
-        
-        
-        _bldgpos = [_twn] call CRB_fnc_GetBuildingPosForTown;
+        _bldgpos = [_twn,_debug] call CRB_fnc_GetBuildingPosForTown;
         _pos = _bldgpos call BIS_fnc_selectRandom;
         if (_debug) then {
                 _t = format["tcell_d%1", _tcid];
                 _tcdm = [_t, _pos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Dot", "COLOR:", "ColorRed", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
         };
-        
+
+        units _terrorlead orderGetIn true;
+        _wait = time + 120;
+        waitUntil{{!unitReady _x} count units _terrorlead == 0 || _wait < time};
+        if(!((group _terrorlead) call CBA_fnc_isAlive)) exitWith {deleteVehicle _ammo;};
+
         _terrorlead move _pos;
         _terrorlead setBehaviour "SAFE";
         _waittime = time + 300;
         waitUntil{_terrorlead distance _pos < 50 || _waittime < time};
+        if(!((group _terrorlead) call CBA_fnc_isAlive)) exitWith {deleteVehicle _ammo;};
         sleep 15;
         
         _ammo setPos _pos;
@@ -416,12 +460,12 @@ CRB_fnc_SpawnNewCell = {
         
         [group _terrorlead, _pos] execVM "enemy\scripts\BIN_taskDefend.sqf";
         
-        _grp = group _terrorlead;
         //{alive _x} count units _grp> 0 && 
         while{count((getWeaponCargo _ammo) select 0) != 0 || count((getMagazineCargo _ammo) select 0) != 0} do {
                 _forcesplit = false;
                 if(_debug) then {sleep 15} else {random 180};
                 waitUntil{count ([] call BIS_fnc_listPlayers) > 0};
+                _grp = group _terrorlead;
                 if(count units _grp < _maxgroupsize) then {
                         [_grp, _debug] call CRB_fnc_RecruitMember;
                 } else {
@@ -432,7 +476,15 @@ CRB_fnc_SpawnNewCell = {
                 if((random 3 > 2  && _count >= 6) || _forcesplit) then {
                         _ammo call PGM_fnc_CreateIntel;
                         [_grp, _debug] spawn CRB_fnc_SplitCell;
-                };                
+                };
+		if(!alive _ammo) exitWith {
+			private ["_i"];
+		        _i = 0; 
+		        while{str (getMarkerPos format["%1intel%2", _ammo, _i]) != "[0,0,0]"} do {
+				deleteMarker format["%1intel%2", _ammo, _i];
+				_i = _i + 1;
+			};
+		};
         };
         
         _ammo call PGM_fnc_CreateIntel;
@@ -481,7 +533,7 @@ for "_i" from 1 to _numcells do {
                 _spawn =  _spawnpoints call BIS_fnc_selectRandom;
                 
                 //DEBUG:
-		if(_debug) then {player setPos _spawn;};
+                if(_debug) then {player setPos _spawn;};
                 //DEBUG:sleep 15;
                 
                 // Create terrorist leader and vehicle
@@ -497,10 +549,11 @@ for "_i" from 1 to _numcells do {
                 
                 _vcargo = _vehicle emptyPositions "cargo";
                 //DEBUG:_twn = nearestLocation [_spawn, "CityCenter"];
-                _twn = [_spawn] call CRB_fnc_GetNearestTown;
+                _twn = [_spawn, _debug] call CRB_fnc_GetNearestTown;
+                _grp setVariable ["nearestTown", _twn, true];
                 
                 _terrorcrgo = [];
-                for "_i" from 1 to floor(random _vcargo) do {
+                for "_i" from 0 to floor(random _vcargo) do {
                         _classMan  = CRB_classlistFaction call BIS_fnc_selectRandom;
                         _terrorunit = (createGroup civilian) createUnit [_classMan, _spawn, [], 0, "NONE"];
                         [_terrorunit] joinSilent _grp;
@@ -516,9 +569,7 @@ for "_i" from 1 to _numcells do {
                 // Remember original terrorlead weapon loadout
                 _tlmags = magazines _terrorlead;
                 _tlweps = weapons _terrorlead;
-                */
                 
-                /*
                 // Wait for weapon to transfer
                 waitUntil{count(weapons _terrorlead) > count(_tlweps)};
                 player globalChat str (count(weapons _terrorlead) > count(_tlweps));
