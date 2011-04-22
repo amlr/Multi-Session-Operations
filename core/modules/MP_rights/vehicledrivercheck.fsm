@@ -46,7 +46,7 @@ class FSM
       name = "start";
       init = /*%FSM<STATEINIT""">*/"private [""_vehicle""];" \n
        "" \n
-       "_debug = true;" \n
+       "_debug = false;" \n
        "" \n
        "_fromEH = _this select 0;" \n
        "_vehicle = _fromEH select 0;" \n
@@ -68,7 +68,7 @@ class FSM
        "		if(_unit in playableUnits) then{true} else{false};" \n
        "	} else {	false};" \n
        "" \n
-       "_allowed_crew = ((getPlayerUID _unit) in (call _restrictedCrew));" \n
+       "_allowed_crew = ((getPlayerUID _unit) in (call _restrictedCrew) || (getPlayerUID leader _unit) in (call _restrictedCrew));" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
