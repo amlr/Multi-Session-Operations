@@ -21,11 +21,12 @@ for "_y" from 1 to _grpx - 1 do {
     _sx = getText(_vehx >> "simulation");
     _fx = getText(_vehx >> "faction");
     _tx = getNumber(_vehx >> "TransportSoldier");
-	_scope = getNumber (_vehx >> "scope");
+    _scope = getNumber (_vehx >> "scope");
     _cx = configName _vehx;
     //hint str _fx;
     //hint str typeName _fac;
-    if (_tx >= _cargoslots && !(_cx in _nonconfigs) && !(_sx in _nonsims) && (_scope > 1)) then {
+//    if (_tx >= _cargoslots && !(_cx in _nonconfigs) && !(_sx in _nonsims) && (_scope > 1)) then {
+    if (_tx > _cargoslots && {(_cx isKindOf _x)} count _nonconfigs == 0 && !(_sx in _nonsims) && (_scope > 1)) then {
         if (!isNil "_fac") then {
             switch(typeName _fac) do {
                 case "STRING": {
