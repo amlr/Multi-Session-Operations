@@ -87,7 +87,8 @@ switch toLower(worldName) do {
         },
         {_this allowFleeing 1}, 
         {removeAllWeapons _this}, 
-        {removeAllItems _this},
+        {removeAllItems _this}
+/*,
         {
                 if (random 1 > 0.95) then {
                         if (random 1 > 0.5) then {
@@ -101,6 +102,7 @@ switch toLower(worldName) do {
                         };
                 };
         }
+*/
 ]] call BIS_fnc_variableSpaceAdd;
 
 // Artificial coeficient to set how much will be town's respect decreased once some civilian is hit or killed.
