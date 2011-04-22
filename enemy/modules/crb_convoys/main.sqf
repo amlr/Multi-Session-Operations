@@ -36,7 +36,7 @@ _convoydest = [];
         };
 } forEach CRB_LOCS;
 
-_numconvoys = floor((count _convoydest) / 25);
+_numconvoys = ceil((count _convoydest) / 25);
 diag_log format["MSO-%1 Convoy: destinations(%2) spawns(%3) convoys(%4)", time, count _convoydest, count _spawnpoints, _numconvoys];
 
 for "_j" from 1 to _numconvoys do {
