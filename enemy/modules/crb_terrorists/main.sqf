@@ -10,7 +10,7 @@
 private ["_spawnpoints","_debug","_numcells"];
 if(!isServer) exitWith{};
 
-_debug = true;
+_debug = false;
 
 CRB_fnc_debugPositions = {
         private ["_positions","_debug","_text"];
@@ -214,7 +214,10 @@ CRB_fnc_GetNearestTown = {
         [_neighbours, "neighbours", _debug] call CRB_fnc_debugPositions;
         
         _nearest = _neighbours call BIS_fnc_selectRandom;
-	if(isNil "_nearest") exitWith {hint "Error: Nearest town not found";};
+	if(isNil "_nearest") exitWith {
+		hint "Error: Nearest town not found";
+		diag_log format["MSO-%1 TerrorCells: Nearest town not found", time];
+	};
 	_nearest;
 };
 
@@ -463,7 +466,7 @@ CRB_fnc_SpawnNewCell = {
         //{alive _x} count units _grp> 0 && 
         while{count((getWeaponCargo _ammo) select 0) != 0 || count((getMagazineCargo _ammo) select 0) != 0} do {
                 _forcesplit = false;
-                if(_debug) then {sleep 15} else {random 180};
+                if(_debug) then {sleep 15} else {300 + random 600};
                 waitUntil{count ([] call BIS_fnc_listPlayers) > 0};
                 _grp = group _terrorlead;
                 if(count units _grp < _maxgroupsize) then {
