@@ -31,7 +31,7 @@ _debug = false;
                 format["""%1_mgr""", _name] + " setMarkerColor ""ColorWhite"";"
         ]] call CBA_fnc_createTrigger;
 	_trg = _trg select 0;
-	_trg setTriggerTimeout [5, 10, 30, true];
+	_trg setTriggerTimeout [15, 30, 90, true];
 
         // Create the OPFOR trigger 
         [_pos, "AREA:", [_size, _size, 0, false], "ACT:", ["EAST","WEST D", true], 
@@ -51,6 +51,6 @@ _debug = false;
                 ""
         ]] call CBA_fnc_createTrigger;
 	_trg = _trg select 0;
-	_trg setTriggerTimeout [60, 120, 300, true];
+	_trg setTriggerTimeout [180, 360, 900, true];
 
 } forEach (bis_alice_mainscope getVariable "townlist");
