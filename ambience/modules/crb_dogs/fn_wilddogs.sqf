@@ -109,7 +109,7 @@ _handle = [{
                         };
                 };
         } forEach units _grp;
-}, 2, [_grp]] call CBA_fnc_addPerFrameHandler;
+}, 1, [_grp]] call CBA_fnc_addPerFrameHandler;
 
 _grp setVariable ["handle", _handle, true];
 _grp;

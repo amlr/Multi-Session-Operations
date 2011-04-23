@@ -1,7 +1,7 @@
 private ["_debug","_types","_dogs","_side","_grp","_maxdist"];
 if (!isServer) exitWith{};
 
-_debug = true;
+_debug = false;
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
@@ -81,7 +81,7 @@ if(count _this > 0) then {
                                         };
                                 };
                                 
-                        }, 2, [_name, _grp, _maxdist, _debug]] call CBA_fnc_addPerFrameHandler;
+                        }, 1, [_name, _grp, _maxdist, _debug]] call CBA_fnc_addPerFrameHandler;
                 };
         };
 } forEach CRB_LOCS;
