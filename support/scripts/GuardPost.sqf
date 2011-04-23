@@ -78,4 +78,4 @@ _unit setUnitPos _stance;
                 
                 _unit setVariable ["GuardPosWait", (random 10) + _delay + time];
         };
-}, 1, [_unit, _startdir, _range, _height, _enemy, _delay]] call CBA_fnc_addPerFrameHandler;
+}, 3, [_unit, _startdir, _range, _height, _enemy, _delay]] call CBA_fnc_addPerFrameHandler;

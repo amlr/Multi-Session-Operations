@@ -77,5 +77,5 @@ missionNamespace setVariable[format["resupply_%1",_id], time +  _delay];
 
                 missionNamespace setVariable[format["resupply_%1",_id], time +  _delay];
         };
-}, 5, [_id, _unit, _position, _type, _dir, _weapons, _mags, _hasname, _unitname]] call CBA_fnc_addPerFrameHandler;
+}, 15, [_id, _unit, _position, _type, _dir, _weapons, _mags, _hasname, _unitname]] call CBA_fnc_addPerFrameHandler;
 

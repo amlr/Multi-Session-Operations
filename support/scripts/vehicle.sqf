@@ -174,4 +174,4 @@ missionNamespace setVariable[format["vehicle_%1",_id], time +  _delay];
                 };
                 missionNamespace setVariable[format["resupply_%1",_id], time +  (2 + random 10)];
         };
-}, 5, [_id, _run, _unit, _position,  _deserted, _delay, _dynamic, _explode, _type, _dir, _weapons, _mags, _haveinit, _unitinit, _hasname, _unitname, _noend, _respawns]] call CBA_fnc_addPerFrameHandler;
+}, 15, [_id, _run, _unit, _position,  _deserted, _delay, _dynamic, _explode, _type, _dir, _weapons, _mags, _haveinit, _unitinit, _hasname, _unitname, _noend, _respawns]] call CBA_fnc_addPerFrameHandler;
