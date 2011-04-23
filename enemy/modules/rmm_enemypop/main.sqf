@@ -11,8 +11,8 @@
 if(!isServer) exitWith{};
 
 private ["_debug","_d","_camp","_flag"];
-_debug = true;
-ep_dist = 2000;
+_debug = false;
+ep_dist = 2500;
 ep_groups = [];
 ep_total = 0;
 
@@ -117,7 +117,7 @@ fPlayersInside = {
                                                 ep_groups set [count ep_groups, _group];
                                                 [_handle] call CBA_fnc_removePerFrameHandler;
                                         };
-                                }, 0.5, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
+                                }, 3, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
                         };
                 };
                 if (type _x in ["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"]) then {
@@ -191,7 +191,7 @@ fPlayersInside = {
                                                 ep_groups set [count ep_groups, _group];
                                                 [_handle] call CBA_fnc_removePerFrameHandler;
                                         };
-                                }, 0.5, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
+                                }, 3, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
                         };
                 };
                 if (type _x in ["FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown"]) then {
@@ -271,7 +271,7 @@ fPlayersInside = {
                                                         [_handle] call CBA_fnc_removePerFrameHandler;
                                                 };
                                         };
-                                }, 0.5, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
+                                }, 3, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
                         };
                 };
                 if (type _x in ["ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"]) then {
@@ -349,7 +349,7 @@ fPlayersInside = {
                                                 ep_groups set [count ep_groups, _group];
                                                 [_handle] call CBA_fnc_removePerFrameHandler;
                                         };
-                                }, 0.5, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
+                                }, 3, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
                         };
                 };
         };
