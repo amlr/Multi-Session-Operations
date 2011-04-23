@@ -2,7 +2,7 @@
 {player getVariable "ace_w_body";},
 {player getVariable "ace_w_hands";},
 {player getVariable "ace_w_legs";},
-{player getVariable "ace_w_state";},
+{player getVariable ["ace_w_state",0];},
 {player getVariable "ace_sys_wounds_uncon";},
 {player getVariable "ace_w_bleed";},
 {player getVariable "ace_w_bleed_add";},
