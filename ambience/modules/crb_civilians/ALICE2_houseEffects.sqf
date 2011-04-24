@@ -168,28 +168,28 @@ waitUntil {!isNil "BIS_ALICE_fnc_houseEffects"};
                                         private ["_door","_timeStop","_randomValue","_daytimeStart","_daytimeEnd",/*"_rain","_overcast","_fog",*/"_twn"];
                                         _door = _this select 0;
                                         _twn = _this select 1;
-                                        diag_log format["MSO-%1 houseEffect: started %2", time, _door];
+                                        //diag_log format["MSO-%1 houseEffect: started %2", time, _door];
                                         [1,_door] spawn BIS_ALICE_fnc_houseEffects;
                                         _timeStop = time + ((random 30) * 60);
                                         _randomValue = random 1;
                                         _daytimeStart = 5 + 4*_randomValue;
                                         _daytimeEnd = 18 + 2*_randomValue;
-                                        /*_rain = 0.2*_randomValue;
+                                        _rain = 0.2*_randomValue;
                                         _overcast = 0.8 + 0.2*_randomValue;
-                                        _fog = 0.8 + 0.2*_randomValue;*/
+                                        _fog = 0.8 + 0.2*_randomValue;
                                         
                                         waitUntil{
                                                 !alive _door || time > _timeStop || 
-                                                ((daytime >=_daytimeStart && daytime <= _daytimeEnd) /*&&
+                                                ((daytime >=_daytimeStart && daytime <= _daytimeEnd) &&
                                                 rain <= _rain &&
                                                 overcast <= _overcast &&
-                                                fog <= _fog*/) ||
+                                                fog <= _fog) ||
                                                 !(_twn getVariable "ALICE_active")
                                         };
-                                        diag_log format["MSO-%1 houseEffect: ended %2", time, _door];
+                                        //diag_log format["MSO-%1 houseEffect: ended %2", time, _door];
                                         [0,_door] spawn BIS_ALICE_fnc_houseEffects;
                                 };
                         } forEach _doors;
                 };
         } forEach (_logic getvariable "ALICE_alltowns");        
-}, 3, [_logic,_twnEffects]] call CBA_fnc_addPerFrameHandler;
+}, 15, [_logic,_twnEffects]] call CBA_fnc_addPerFrameHandler;
