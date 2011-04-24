@@ -55,14 +55,14 @@ execNow "support\modules\jipmarkers\main.sqf";
 execNow "support\modules\logistics\main.sqf";
 #endif
 
-#ifdef RMM_NOTEBOOK
-"Notebook" call mso_core_fnc_initStat;
-execNow "support\modules\notebook\main.sqf";
-#endif
-
 #ifdef R3F_LOGISTICS
 "R3F Logistics" call mso_core_fnc_initStat;
 execNow "support\modules\R3F_logistics\init.sqf";
+#endif
+
+#ifdef RMM_NOTEBOOK
+"Notebook" call mso_core_fnc_initStat;
+execNow "support\modules\notebook\main.sqf";
 #endif
 
 #ifdef RMM_TASKS
@@ -81,6 +81,8 @@ execNow "support\modules\tyres\main.sqf";
 #endif
 
 // AAW INKO Fix
-//"AAW INKO Fix" call mso_core_fnc_initStat;
-//AAWinf_HelmChangeAnyWhere = true; 
-//execNow "scripts\ace_aaw_fix.sqf";
+if(!isNil "ace_main") then {
+	"AAW INKO Fix" call mso_core_fnc_initStat;
+	AAWinf_HelmChangeAnyWhere = true; 
+	execNow "support\scripts\ace_aaw_fix.sqf";
+};
