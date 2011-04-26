@@ -21,5 +21,6 @@ class mso_core {
 	class server {
 		file = "core\functions\server";
 		class initLocations {};
+		class createLocations {};
 	};
 };
