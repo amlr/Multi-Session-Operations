@@ -95,7 +95,7 @@ for "_j" from 0 to (_destinations-1) do
         
         [_j, _helidest, _planedest, _debug, _mapsize] spawn 
         {
-                private ["_vehicle","_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_facs","_wp","_j","_debug","_mapsize","_currentairfield","_airfieldSide","_factions","_factionsCount","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight","_controltowers","_controlTowerTypes","_controltw","_housepos","_scrambleTime"];
+                private ["_vehicle","_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_facs","_wp","_j","_debug","_mapsize","_currentairfield","_airfieldSide","_factions","_factionsCount","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight","_controltowers","_controlTowerTypes","_controltw","_housepos","_scrambleTime","_mv22pos"];
                 _j = _this select 0;
                 _helidest = _this select 1;
                 _planedest = _this select 2;
@@ -216,8 +216,13 @@ for "_j" from 0 to (_destinations-1) do
                                 // Wait until the aircraft is close to the airfield
                                 waitUntil{(_aircraftVehicle distance _destpos < 500) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
                                 // Once near destination, action a landing.
-                                _landEnd = "HeliHEmpty" createVehicle _destpos;
-                                if (_aircraftVehicle iskindof "Helicopter") then {
+                                if (typeof _aircraftVehicle == "MV22") then {
+									_mv22pos = [_destpos, 0, 45, 15, 0, 0, 0] call BIS_fnc_findSafePos;
+									_landEnd = "HeliHEmpty" createVehicle _mv22pos;
+								} else {
+									_landEnd = "HeliHEmpty" createVehicle _destpos;
+								};
+                                if (_aircraftVehicle iskindof "Helicopter" or typeof _aircraftVehicle == "MV22") then {
                                         _aircraftVehicle land "LAND";
                                         waitUntil{((position _aircraftVehicle) select 2 <= 5) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
                                 } else {
@@ -225,14 +230,7 @@ for "_j" from 0 to (_destinations-1) do
                                         waitUntil{(_aircraftVehicle distance _destpos < 5)  && ((position _aircraftVehicle) select 2 <= 2) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
                                 };			
                                 deleteVehicle _landEnd;
-                                
-                                // As the MV22 does not taxi, make sure it moves off the runway
-                                If ((TypeOf _aircraftVehicle) == "MV22") then {
-                                        _wp = _grp addwaypoint [_destpos, 0];
-                                        _wp setWayPointType "MOVE";
-                                        waitUntil{(_aircraftVehicle distance _destpos < 5)  && ((position _aircraftVehicle) select 2 <= 1) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
-                                };
-                                
+                                                               
                                 // Turnoff the aircraft engines
                                 _aircraftVehicle engineOn false;
                                 
