@@ -1,17 +1,12 @@
 // Create locations for use by MSO on custom islands
 // Will scan island and create all keypoints where possible
 
-private ["_ctypes", "_objs", "_size","_twn","_tempObjs","_cx","_cy","_ax","_ay","_bestplaces","_temploc","_Pos","_debug","_citycenters","_nearlocs","_exp","_position","_name","_currentPosition","_done","_loop","_northpoint","_southpoint","_eastpoint","_westpoint"];
+private ["_ctypes", "_objs", "_size","_twn","_tempObjs","_cx","_cy","_ax","_ay","_bestplaces","_temploc","_Pos","_debug","_citycenters","_nearlocs","_exp","_position","_name","_currentPosition","_done","_loop","_northpoint","_southpoint","_eastpoint","_westpoint","_edge"];
 if(!isServer) exitWith{};
 
 _debug = true;
 
 if (_debug) then {player globalChat format["Create Locations: %1", worldname];};
-
-if (_debug) then 
-{
-        diag_log format ["MSO-%1 Create Locations: Mapsize is %2", time, CRB_LOC_DIST];
-};
 
 // Airports
 
@@ -231,9 +226,42 @@ if (_debug) then
 
 // BorderCrossing - road within x meters of edge of map
 // For each edge of map, 
-//check every 100 meters for road
-//get closest road point
-// Place Bordercrossing if none exist
+if (count (nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), ["BorderCrossing"],CRB_LOC_DIST]) == 0) then
+{
+	_edge = ["north","east","west","south"];
+	{
+		private ["_incr","_by","_bx","_rad"];
+		_rad = 300;
+		_bx = 10;
+		_by = 10;
+		if (_x == "north") then {_by = CRB_LOC_DIST-10; _incr = "horz";};
+		if (_x == "south") then {_incr = "horz";};
+		if (_x == "east") then {_bx = CRB_LOC_DIST-10; _incr = "vert";};
+		if (_x == "west") then {_incr = "vert";};
+		for "_i" from 0 to round(CRB_LOC_DIST/_rad) do
+		{
+			//check every 100 meters for road
+			_list = [_bx,_by,0] nearRoads _rad;
+			//get closest road point
+			if (count _list > 0) then 
+			{
+				// Place Bordercrossing if none exist
+				_Pos =  position (_list select random(floor(count _list)));
+				if (count (nearestLocations [_Pos, ["BorderCrossing"], _rad]) == 0) then	
+				{
+					createLocation ["BorderCrossing",_Pos,25,25];
+					if (_debug) then 
+					{
+						diag_log format ["MSO-%1 Create Locations: Creating %3 BorderCrossing at %2", time, _Pos,_x];
+					};
+				};
+			};		
+			// increment 
+			if (_incr == "horz") then {_bx = (_i * _rad);};
+			if (_incr == "vert") then {_by = (_i * _rad);};
+		};
+	} foreach _edge;
+};
 
 // Heliport - Find helipads on map
 
