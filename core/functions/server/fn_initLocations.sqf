@@ -111,7 +111,6 @@ switch toLower(worldName) do {
 				default {
 					CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2;
 					[] call mso_core_fnc_createLocations;
-					[] call _initNeighbors;
 				};
         };
         
