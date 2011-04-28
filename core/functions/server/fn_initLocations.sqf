@@ -2,7 +2,7 @@
 private ["_twn","_locs","_debug","_strategic","_military","_names","_hills","_initNeighbors"];
 if(!isServer) exitWith{};
 
-_debug = true;
+_debug = false;
 
 _initNeighbors = {
         private ["_twn"];
