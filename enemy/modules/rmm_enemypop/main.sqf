@@ -12,9 +12,10 @@ if(!isServer) exitWith{};
 
 private ["_debug","_d","_camp","_flag"];
 _debug = false;
-ep_dist = 2500;
+ep_dist = 2000;
 ep_groups = [];
 ep_total = 0;
+ep_campprob = 0.25;
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
@@ -46,7 +47,7 @@ fPlayersInside = {
                                 _d = 500;
                                 _pos = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                                 _flag = random 1;
-                                if(_flag < 0.25) then {
+                                if(_flag < ep_campprob) then {
                                         _camp = [];
                                         if("RU" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
@@ -89,6 +90,7 @@ fPlayersInside = {
                                         _flag = _params select 1;
                                         _type= _params select 2;
                                         if(([_pos, ep_dist] call fPlayersInside)) then {
+                                                [_handle] call CBA_fnc_removePerFrameHandler;
                                                 _group = nil;
                                                 _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 while{isNil "_group"} do {
@@ -97,25 +99,24 @@ fPlayersInside = {
                                                 (leader _group) setBehaviour "AWARE";
                                                 _group setSpeedMode "LIMITED";
                                                 _group setFormation "STAG COLUMN";
-                                                if(_flag > 0.5 || count units _group <= 2) then {
+                                                if(_flag >= ep_campprob || count units _group <= 2) then {
                                                         [_group,_group,800,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-                                                } else {
-                                                        if(_type == "Infantry") then {
-                                                                leader _group setPos _pos;
-                                                                [_group] call BIN_fnc_taskDefend;
-                                                        } else {
-                                                                [_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-                                                                _grp2 = grpNull;
-                                                                while{count units _grp2 <= 2} do {
-                                                                        {deleteVehicle _x} count units _grp2;
-                                                                        _grp2 = [_pos, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
-                                                                };
-                                                                [_grp2] call BIN_fnc_taskDefend;
-                                                                ep_groups set [count ep_groups, _grp2];
+                                                };
+                                                if(_flag < ep_campprob && _type == "Infantry") then {
+                                                        leader _group setPos _pos;
+                                                        [_group] call BIN_fnc_taskDefend;
+                                                };
+                                                if(_flag < ep_campprob && _type != "Infantry") then {
+                                                        [_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                                        _grp2 = grpNull;
+                                                        while{count units _grp2 <= 2} do {
+                                                                {deleteVehicle _x} count units _grp2;
+                                                                _grp2 = [_pos, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
                                                         };
+                                                        [_grp2] call BIN_fnc_taskDefend;
+                                                        ep_groups set [count ep_groups, _grp2];
                                                 };
                                                 ep_groups set [count ep_groups, _group];
-                                                [_handle] call CBA_fnc_removePerFrameHandler;
                                         };
                                 }, 3, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
                         };
@@ -126,7 +127,7 @@ fPlayersInside = {
                                 _d = 800;
                                 _pos = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
                                 _flag = random 1;
-                                if(_flag < 0.25) then {
+                                if(_flag < ep_campprob) then {
                                         _camp = [];
                                         if("RU" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1","fuel_dump_ru1","vehicle_park_ru1","weapon_store_ru1"];
@@ -163,6 +164,7 @@ fPlayersInside = {
                                         _flag = _params select 1;
                                         _type= _params select 2;
                                         if(([_pos, ep_dist] call fPlayersInside)) then {
+                                                [_handle] call CBA_fnc_removePerFrameHandler;
                                                 _group = nil;
                                                 _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 while{isNil "_group"} do {
@@ -171,26 +173,25 @@ fPlayersInside = {
                                                 (leader _group) setBehaviour "COMBAT";
                                                 _group setSpeedMode "LIMITED";
                                                 _group setFormation "DIAMOND";
-                                                if(_flag > 0.5 || count units _group <= 2) then {
+                                                if(_flag >= ep_campprob || count units _group <= 2) then {
                                                         [_group,_group,800,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [240,400,560]] call CBA_fnc_taskPatrol;
-                                                } else {
-                                                        if(_type == "Infantry") then {
-                                                                leader _group setPos _pos;
-                                                                [_group] call BIN_fnc_taskDefend;
-                                                        } else {
-                                                                [_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-                                                                _grp2 = grpNull;
-                                                                while{count units _grp2 <= 2} do {
-                                                                        {deleteVehicle _x} count units _grp2;
-                                                                        _grp2 = [_pos, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
-                                                                };
-                                                                [_grp2] call BIN_fnc_taskDefend;
-                                                                ep_groups set [count ep_groups, _grp2];
-                                                        };
                                                 };
-                                                ep_groups set [count ep_groups, _group];
-                                                [_handle] call CBA_fnc_removePerFrameHandler;
+                                                if(_flag < ep_campprob && _type == "Infantry") then {
+                                                        leader _group setPos _pos;
+                                                        [_group] call BIN_fnc_taskDefend;
+                                                };
+                                                if(_flag < ep_campprob && _type != "Infantry") then {
+                                                        [_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                                        _grp2 = grpNull;
+                                                        while{count units _grp2 <= 2} do {
+                                                                {deleteVehicle _x} count units _grp2;
+                                                                _grp2 = [_pos, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
+                                                        };
+                                                        [_grp2] call BIN_fnc_taskDefend;
+                                                        ep_groups set [count ep_groups, _grp2];
+                                                };
                                         };
+                                        ep_groups set [count ep_groups, _group];
                                 }, 3, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
                         };
                 };
@@ -200,7 +201,7 @@ fPlayersInside = {
                                 _d = 400;
                                 _pos = [position _x, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
                                 _flag = random 1;
-                                if(_flag < 0.25) then {
+                                if(_flag < ep_campprob) then {
                                         _camp = [];
                                         if("RU" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
@@ -243,6 +244,7 @@ fPlayersInside = {
                                         _flag = _params select 1;
                                         _type= _params select 2;
                                         if(([_pos, ep_dist] call fPlayersInside)) then {
+                                                [_handle] call CBA_fnc_removePerFrameHandler;
                                                 _group = nil;
                                                 _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 while{isNil "_group"} do {
@@ -251,26 +253,25 @@ fPlayersInside = {
                                                 (leader _group) setBehaviour "COMBAT";
                                                 _group setSpeedMode "LIMITED";
                                                 _group setFormation "DIAMOND";
-                                                if(_flag > 0.5 || count units _group <= 2) then {
+                                                if(_flag >= ep_campprob || count units _group <= 2) then {
                                                         [_group,_group,400,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [360,520,680]] call CBA_fnc_taskPatrol;
-                                                } else {
-                                                        if(_type == "Infantry") then {
-                                                                leader _group setPos _pos;
-                                                                [_group] call BIN_fnc_taskDefend;
-                                                        } else {
-                                                                [_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-                                                                _grp2 = grpNull;
-                                                                while{count units _grp2 <= 2} do {
-                                                                        {deleteVehicle _x} count units _grp2;
-                                                                        _grp2 = [_pos, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
-                                                                };
-                                                                [_grp2] call BIN_fnc_taskDefend;
-                                                                ep_groups set [count ep_groups, _grp2];
+                                                };
+                                                if(_flag < ep_campprob && _type == "Infantry") then {
+                                                        leader _group setPos _pos;
+                                                        [_group] call BIN_fnc_taskDefend;
+                                                };
+                                                if(_flag < ep_campprob && _type != "Infantry") then {
+                                                        [_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                                        _grp2 = grpNull;
+                                                        while{count units _grp2 <= 2} do {
+                                                                {deleteVehicle _x} count units _grp2;
+                                                                _grp2 = [_pos, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
                                                         };
-                                                        ep_groups set [count ep_groups, _group];
-                                                        [_handle] call CBA_fnc_removePerFrameHandler;
+                                                        [_grp2] call BIN_fnc_taskDefend;
+                                                        ep_groups set [count ep_groups, _grp2];
                                                 };
                                         };
+                                        ep_groups set [count ep_groups, _group];
                                 }, 3, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
                         };
                 };
@@ -280,7 +281,7 @@ fPlayersInside = {
                                 _d = 300;
                                 _pos = [position _x, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                                 _flag = random 1;
-                                if(_flag < 0.25) then {
+                                if(_flag < ep_campprob) then {
                                         _camp = [];
                                         if("RU" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["camp_ru1","camp_ru2"];
@@ -321,6 +322,7 @@ fPlayersInside = {
                                         _flag = _params select 1;
                                         _type= _params select 2;
                                         if(([_pos, ep_dist] call fPlayersInside)) then {
+                                                [_handle] call CBA_fnc_removePerFrameHandler;
                                                 _group = nil;
                                                 _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 while{isNil "_group"} do {
@@ -329,26 +331,25 @@ fPlayersInside = {
                                                 (leader _group) setBehaviour "STEALTH";
                                                 _group setSpeedMode "LIMITED";
                                                 _group setFormation "DIAMOND";
-                                                if(_flag > 0.5 || count units _group <= 2) then {
+                                                if(_flag >= ep_campprob || count units _group <= 2) then {
                                                         [_group,_group,100,4 + random 4, "MOVE", "STEALTH", "RED", "LIMITED", "DIAMOND", "", [480,800,1120]] call CBA_fnc_taskPatrol;
-                                                } else {
-                                                        if(_type == "Infantry") then {
-                                                                leader _group setPos _pos;
-                                                                [_group] call BIN_fnc_taskDefend;
-                                                        } else {
-                                                                [_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-                                                                _grp2 = grpNull;
-                                                                while{count units _grp2 <= 2} do {
-                                                                        {deleteVehicle _x} count units _grp2;
-                                                                        _grp2 = [_pos, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
-                                                                };
-                                                                [_grp2] call BIN_fnc_taskDefend;
-                                                                ep_groups set [count ep_groups, _grp2];
-                                                        };
                                                 };
-                                                ep_groups set [count ep_groups, _group];
-                                                [_handle] call CBA_fnc_removePerFrameHandler;
+                                                if(_flag < ep_campprob && _type == "Infantry") then {
+                                                        leader _group setPos _pos;
+                                                        [_group] call BIN_fnc_taskDefend;
+                                                };
+                                                if(_flag < ep_campprob && _type != "Infantry") then {
+                                                        [_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                                        _grp2 = grpNull;
+                                                        while{count units _grp2 <= 2} do {
+                                                                {deleteVehicle _x} count units _grp2;
+                                                                _grp2 = [_pos, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
+                                                        };
+                                                        [_grp2] call BIN_fnc_taskDefend;
+                                                        ep_groups set [count ep_groups, _grp2];
+                                                };
                                         };
+                                        ep_groups set [count ep_groups, _group];
                                 }, 3, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
                         };
                 };
