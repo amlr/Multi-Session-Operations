@@ -72,7 +72,7 @@ if(isDedicated) then {
 setTerrainGrid 25;
 
 #ifdef RMM_MP_RIGHTS
-if(!isMultiplayer) then {mprightsDisable = 1;};
+if(isNil "mprightsDisable") then {mprightsDisable = 1;};
 if(mprightsDisable == 1) then {
         "MP Rights disabled" call mso_core_fnc_initStat;
         _uid = getPlayerUID player;
