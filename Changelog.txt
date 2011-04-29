@@ -1,4 +1,137 @@
 Change Log:
+v3.4
+- Split MSO into Core, Ambient, Support and Enemy components
+
+Core
+====
+- Complete re-write of scheduling to reduce number of spawns/execVMs and use scheduled server loops
+- Added bordercrossings to Utes for Convoys and Terrorist Cells
+- Added AAW Inko fix to automatically detect ACE
+- Fixed if ACE state is set to nil previously - thanks Sickboy (#18935)
+- Fixed wrong path (#18934)
+- Adjusted player rating to 0, so that any negative activity (killing civilians, animals, stealing civvy cars) has instant repercussions regardless of rank.
+- Committed Rockfakey's fix for ACE backpacks (#17389 rockfakey)
+- Added Everon support (inc auto-creation of CityCenters)
+- Added Torabra support (inc Border Crossings)
+- Added createLocations function for maps that do not have keypoints defined (Tupolov)
+- Updated createLocations to include CityCenters and output auto created locations in config format to the rpt
+- Updated createLocations to create BorderCrossings on roads within 300 meters of edge of map
+- Updated initLocations to call createLocations for maps that are not defined in the case statement
+
+MP_Rights
+- Changed if group leader has rights, group members can pilot and crew
+- Disable MP rights by default
+
+NOMAD
+- Committed Rommel's NOMAD lives reset after 12, 24 and 48 hrs (#17420 Rommel)
+
+Weather
+- Move Timesync to weather module
+- Included rain values in the server weather forecast
+- Max 50% fog density and min 5 mins weather change time(#17886)
+- Client time will sync if +/- 2 mins from server (#17207)
+- Max 4 hrs overcast forecast
+- Max 2 hrs fog and rain forecast
+- Implemented mission time parameters (#18335 - thanks Fogu, Shuko & Muzzleflash)
+- Added DisableFog to mission parameters
+- Disable Fog on by default
+- Disabled instant weather setting
+
+Ambience
+========
+- Updated kylania's Zargabad city bazaar
+
+Ambient Civilians
+- Added randomness to house effects to ensure not every house has their chimney and lights going
+- Fixed to sometimes allow no passengers
+- Always set civilians to be friendly to all sides (see http://creobellum.org/node/185)
+- Removed BIS_CIV_SPECIAL from ambient civilians as rarity is currently not working
+- Added Resistance Friendly settings to prevent civilians disliking BLUFOR (http://creobellum.org/node/185)
+- Updated to BIS MIP Project release 20110315
+- Added Everon HouseFX support
+- Added ALICE2 Traffic passengers
+- Changed ALICE2 Traffic to 3 cars per town (rather than default single car per town)
+- Fixed town faction settings for all ALICE2 Factions for Respect to work correctly
+- Added Limited SpeedMode to civilian walking
+- Fixed Traffic drivers to be of ALICE2 Factions only
+- Set driver skill to 0.5, disableAI and disable Fleeing (to reduce CPU stress)
+- Set max ambient civilian skill level to 0.5 (to reduce CPU stress)
+
+*NEW* Air/Sea Traffic (Tupolov)
+- Added Ambient Sea Traffic Module, contains main.sqf that spawns ships near piers (ends and fuel stations) and boathouses on a map. Boats are spawned based on faction that controls the pier/boathouse. Boats will cycle between its "home" pier/boathouse and a random other.
+- Setup custom island helipad creator (until BIS bug is fixed)
+- Update air traffic to include pilots meeting at Control Tower randomly.
+- Fixed MV22 so that it lands near a hangar rather than on a runway.
+
+Wild dogs
+- Decreased iteration time to ensure pursuit of wilddogs
+- Changed wild dogs parameter to be side dogs spawn as
+- Remove extra sounds from dog attack file
+- Improved wild dogs actions when not active
+- Changed wild dogs from using trigger to using distance to players method (same as Shepherds)- performance improvement
+- Added Cars to objects approached, so dogs will approach you if you're in a vehicle
+- Randomised screaming and yelping consistency (stops the non-stop screaming once the attack is over)
+- Reduced trigger area to 100m
+
+*NEW* Shepherds (Wolffy - concept by PRYMSUSPEC)
+- Use MPKilled EH on dedicated or Killed EH if not
+- Randomly spawn reinforcement shepherd within 500m
+- Changed spawn method so that flock spawns when player within 800m and despawn once out of range (like Wild dogs)
+
+*NEW* Emergency Services (Wolffy)
+- Added civilian ambulances/doctors on SUPPORT waypoints (called in automatically by hurt ambient civilians)
+- Added civilian police on GUARD waypoints (called in automatically by scared ambient civilians)
+
+*NEW* Flocks of crows
+
+*NEW* Swarms of flies
+- Ensure that flies are only triggered once by players
+
+*NEW* Random Sandstorms
+- Ensure that sandstorms are only triggered once by players
+
+Enemy
+=====
+Enemy Populator
+- Changed Camp probability to 1 in 4
+- Always ensure infantry defending camp
+
+Convoys
+- Enabled minimum 1 convoy
+
+*NEW* Terrorist Cells
+- Fixed minimum 1 terrorist cell
+- Fixed delay to 10 - 20 mins recruitment time
+
+
+Support
+=======
+- Optimised Tophe's GuardPost, Vehicle respawn and custom resupply scripts to use PerFrame
+- Changed RESUPPLY and vehicle RESPAWN to support custom weapon cargo/ammo crates
+- Re-wrote Resupply and Vehicle respawn scripts as FSM's
+
+Tasks
+- Move position to terrain level
+- Fixed SHIFT+ALT+Click functionality
+
+*NEW* Town Manager (Wolffy)
+- Added Town Manager support module
+
+JIP Markers
+- Moved time stamp into text field for optional editing
+
+Recruitment
+- Added CZ recruitment
+- Separated AAW DPDUDPCU and DPCU recruitment actions
+
+R3F Logistics
+- Added Landrovers to towing vehicles
+- Added AAW CH47 to lifting vehicles
+- Added AAW CH47, S70 and Bushmasters to cargo transporters
+- Added AAW weapons crates to transportable and liftable contents
+
+--------------------------------------------------------------------------------
+
 v3.31
 - Added Convoy tasks (thanks Kieran)
 - Fixed CAS
@@ -18,6 +151,8 @@ Sample missions included:
 - GUE/PMC vs RU/INS on Utes
 - BAF/USA vs TK_GUE on Takistan
 - AAW/ACE vs RU/INS on Chernarus
+
+--------------------------------------------------------------------------------
 
 v3.3 - Initial Release
 Sample missions included:
