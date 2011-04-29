@@ -1,0 +1,371 @@
+/*%FSM<COMPILE "C:\Program Files\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, Vehicle Respawn">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Start",0,250,-33.294189,-126.209648,56.705811,-76.209633,0.000000,"Start"};
+item1[] = {"Out_of_Respawns",4,218,-162.760742,-56.350056,-72.760727,-6.350046,0.000000,"Out of" \n "Respawns?"};
+item2[] = {"Exit",1,250,-163.189270,13.935662,-73.189262,63.935650,0.000000,"Exit"};
+item3[] = {"Damaged___Deserted",4,218,-43.714294,-55.000000,46.285706,-5.000000,0.000000,"Damaged &" \n "Deserted?"};
+item4[] = {"Dead",2,250,-44.142807,11.857147,45.857178,61.857109,0.000000,"Dead"};
+item5[] = {"Moved___Deserted",4,218,93.000000,-51.571442,183.000000,-1.571430,0.000000,"Moved &" \n "Deserted?"};
+item6[] = {"Start_Timer",2,250,90.857132,17.857147,180.857147,67.857132,0.000000,"Start Timer"};
+item7[] = {"Timer_End_",4,218,147.857147,91.142860,237.857147,141.142822,1.000000,"Timer End?"};
+item8[] = {"Dead_",4,218,49.285706,89.000000,139.285736,139.000031,0.000000,"Dead?"};
+item9[] = {"Respawn_Delay",2,250,51.857155,159.285706,141.857178,209.285706,0.000000,"Respawn" \n "Delay"};
+item10[] = {"Respawn_Delay_End",4,218,-44.571453,89.857155,45.428547,139.857147,0.000000,"Respawn" \n "Delay End?"};
+item11[] = {"Occupied_",4,218,213.814270,-125.825653,303.814026,-75.825661,0.000000,"Occupied?"};
+item12[] = {"No_Respawn_Delay",2,250,150.428589,157.142868,240.428604,207.142868,0.000000,"No Respawn" \n "Delay"};
+item13[] = {"",7,210,-203.258560,189.191162,-195.258545,197.191132,0.000000,""};
+item14[] = {"_",8,218,-243.894928,-126.492157,-153.894928,-76.492165,0.000000,""};
+item15[] = {"_",8,218,-168.999588,96.459900,-78.999588,146.459900,0.000000,""};
+item16[] = {"Respawn_vehicle",2,4346,-168.570999,168.031311,-78.570984,218.031326,0.000000,"Respawn" \n "vehicle"};
+link0[] = {0,1};
+link1[] = {0,3};
+link2[] = {0,5};
+link3[] = {1,2};
+link4[] = {3,4};
+link5[] = {4,15};
+link6[] = {5,6};
+link7[] = {6,7};
+link8[] = {6,8};
+link9[] = {6,11};
+link10[] = {7,12};
+link11[] = {8,9};
+link12[] = {9,10};
+link13[] = {10,4};
+link14[] = {11,0};
+link15[] = {12,10};
+link16[] = {13,14};
+link17[] = {14,0};
+link18[] = {15,16};
+link19[] = {16,13};
+globals[] = {0.000000,0,0,0,0,640,480,1,25,6316128,1,-347.142700,399.856873,286.879517,-195.057846,1400,1014,1};
+window[] = {2,-1,-1,-1,-1,1103,252,1692,252,3,1422};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "Vehicle Respawn";
+  class States
+  {
+    /*%FSM<STATE "Start">*/
+    class Start
+    {
+      name = "Start";
+      init = /*%FSM<STATEINIT""">*/"/*  " \n
+       "=========================================================" \n
+       "Simple Vehicle Respawn Script v1.6" \n
+       "by Tophe of ?stg?ta Ops [OOPS]" \n
+       "" \n
+       "Put this in the vehicles init line:" \n
+       "veh = [this] execVM ""vehicle.sqf""" \n
+       "" \n
+       "" \n
+       "Options:" \n
+       "There are some optional settings. The format for these are:" \n
+       "veh = [this, Delay, Deserted timer, Respawns, Effect, Static] execVM ""vehicle.sqf""" \n
+       "" \n
+       "" \n
+       "Default respawn delay is 30 seconds, to set a custom" \n
+       "respawn delay time, put that in the init as well. " \n
+       "Like this:" \n
+       "veh = [this, 15] execVM ""vehicle.sqf""" \n
+       "" \n
+       "Default respawn time when vehicle is deserted, but not" \n
+       "destroyed is 120 seconds. To set a custom timer for this " \n
+       "first put the respawn delay, then the deserted vehicle timer-" \n
+       "Like this:  " \n
+       "veh = [this, 15, 10] execVM ""vehicle.sqf""" \n
+       "" \n
+       "By default the number of respawns is infinite. To set a limit" \n
+       "First set the other values then the number of respawns you want (0 = infinite)." \n
+       "Like this:" \n
+       "veh = [this, 15, 10, 5] execVM ""vehicle.sqf""" \n
+       "" \n
+       "" \n
+       "Set this value to TRUE to add a special explosion effect to the wreck when respawning." \n
+       "Default value is FALSE, which will simply have the wreck disappear." \n
+       "Like this:" \n
+       "veh = [this, 15, 10, 5, TRUE] execVM ""vehicle.sqf""" \n
+       "" \n
+       "By default the vehicle will respawn to the point where it first" \n
+       "was when the mission started (static). This can be changed to " \n
+       "dynamic. Then the vehicle will respawn to the position where it was destroyed. " \n
+       "First set all the other values then set TRUE for dynamic or FALSE for static." \n
+       "Like this:" \n
+       "veh = [this, 15, 10, 5, TRUE, TRUE] execVM ""vehicle.sqf""" \n
+       "" \n
+       "If you you want to set the INIT field of the respawned vehicle, first set all other " \n
+       "values, then set init commands. Those must be inside quotations." \n
+       "Like this:" \n
+       "veh = [this, 15, 10, 5, TRUE, FALSE, ""this setDammage 0.5""] execVM ""vehicle.sqf""" \n
+       "" \n
+       "Default values of all settings are:" \n
+       "veh = [this, 30, 120, 0, FALSE, FALSE] execVM ""vehicle.sqf""" \n
+       "" \n
+       "Contact & Bugreport: harlechin@hotmail.com" \n
+       "" \n
+       "=========================================================" \n
+       "*/" \n
+       "" \n
+       "private [""_hasname"",""_delay"",""_deserted"",""_respawns"",""_noend"",""_unit"",""_explode"",""_dynamic"",""_unitinit"",""_haveinit"",""_unitname"",""_dir"",""_position"",""_type"",""_weapons"",""_mags""];" \n
+       "if (!isServer) exitWith {};" \n
+       "" \n
+       "// Define variables" \n
+       "_unit = _this select 0;" \n
+       "_delay = if (count _this > 1) then {_this select 1} else {30};" \n
+       "_deserted = if (count _this > 2) then {_this select 2} else {120};" \n
+       "_respawns = if (count _this > 3) then {_this select 3} else {0};" \n
+       "_explode = if (count _this > 4) then {_this select 4} else {false};" \n
+       "_dynamic = if (count _this > 5) then {_this select 5} else {false};" \n
+       "_unitinit = if (count _this > 6) then {_this select 6} else {};" \n
+       "_haveinit = if (count _this > 6) then {true} else {false};" \n
+       "" \n
+       "_hasname = false;" \n
+       "_unitname = vehicleVarName _unit;" \n
+       "if (_unitname == """") then {_hasname = false;} else {_hasname = true;};" \n
+       "_noend = true;" \n
+       "_run = true;" \n
+       "_rounds = 0;" \n
+       "" \n
+       "if (_delay < 0) then {_delay = 0};" \n
+       "if (_deserted < 0) then {_deserted = 0};" \n
+       "if (_respawns <= 0) then {_respawns= 0; _noend = true;};" \n
+       "if (_respawns > 0) then {_noend = false};" \n
+       "" \n
+       "_dir = getDir _unit;" \n
+       "_position = getPosASL _unit;" \n
+       "_type = typeOf _unit;" \n
+       "_dead = false;" \n
+       "_nodelay = false;" \n
+       "" \n
+       "_weapons = getWeaponCargo _unit;" \n
+       "_mags = getMagazineCargo _unit;" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Damaged___Deserted">*/
+        class Damaged___Deserted
+        {
+          priority = 0.000000;
+          to="Dead";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(getDammage _unit > 0.8) and ({alive _x} count crew _unit == 0)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Moved___Deserted">*/
+        class Moved___Deserted
+        {
+          priority = 0.000000;
+          to="Start_Timer";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(getPosASL _unit distance _position > 10) &&" \n
+           "({alive _x} count crew _unit == 0) &&" \n
+           "(getDammage _unit < 0.8)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Out_of_Respawns">*/
+        class Out_of_Respawns
+        {
+          priority = 0.000000;
+          to="Exit";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!_run"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Exit">*/
+    class Exit
+    {
+      name = "Exit";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Dead">*/
+    class Dead
+    {
+      name = "Dead";
+      init = /*%FSM<STATEINIT""">*/"_dead = true;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="Respawn_vehicle";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Start_Timer">*/
+    class Start_Timer
+    {
+      name = "Start_Timer";
+      init = /*%FSM<STATEINIT""">*/"_timeout = time + _deserted;" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Timer_End_">*/
+        class Timer_End_
+        {
+          priority = 1.000000;
+          to="No_Respawn_Delay";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_timeout < time"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Occupied_">*/
+        class Occupied_
+        {
+          priority = 0.000000;
+          to="Start";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"{alive _x} count crew _unit > 0"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Dead_">*/
+        class Dead_
+        {
+          priority = 0.000000;
+          to="Respawn_Delay";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!alive _unit"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Respawn_Delay">*/
+    class Respawn_Delay
+    {
+      name = "Respawn_Delay";
+      init = /*%FSM<STATEINIT""">*/"_timeout = time + _delay;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Respawn_Delay_End">*/
+        class Respawn_Delay_End
+        {
+          priority = 0.000000;
+          to="Dead";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_timeout < time"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "No_Respawn_Delay">*/
+    class No_Respawn_Delay
+    {
+      name = "No_Respawn_Delay";
+      init = /*%FSM<STATEINIT""">*/"_timeout = time;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Respawn_Delay_End">*/
+        class Respawn_Delay_End
+        {
+          priority = 0.000000;
+          to="Dead";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_timeout < time"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Respawn_vehicle">*/
+    class Respawn_vehicle
+    {
+      name = "Respawn_vehicle";
+      init = /*%FSM<STATEINIT""">*/"if (_nodelay) then {" \n
+       "	_nodelay = false;" \n
+       "} else {" \n
+       "	sleep _delay;" \n
+       "};" \n
+       "if (_dynamic) then {" \n
+       "	_position = getPosASL _unit;" \n
+       "	_dir = getDir _unit;" \n
+       "};" \n
+       "if (_explode) then {" \n
+       "	_effect = ""M_TOW_AT"" createVehicle getPosASL _unit;" \n
+       "	_effect setPosASL getPosASL _unit;" \n
+       "};" \n
+       "" \n
+       "deleteVehicle _unit;" \n
+       "" \n
+       "_unit = _type createVehicle _position;" \n
+       "_unit setPosASL _position;" \n
+       "_unit setDir _dir;" \n
+       "" \n
+       "clearWeaponCargo _unit;" \n
+       "clearMagazineCargo _unit;" \n
+       " " \n
+       "_max = count(_weapons select 0);" \n
+       "for ""_i"" from 0 to _max do {" \n
+       "	_unit addWeaponCargo [(_weapons select 0) select _i, (_weapons select 1) select _i];" \n
+       "};" \n
+       "" \n
+       "_max = count(_mags select 0);" \n
+       "for ""_i"" from 0 to _max do {" \n
+       "	_unit addMagazineCargo [(_mags select 0) select _i, (_mags select 1) select _i];" \n
+       "};" \n
+       "" \n
+       "if (_haveinit) then {" \n
+       "	_unit setVehicleInit format [""%1;"", _unitinit];" \n
+       "	processInitCommands;" \n
+       "};" \n
+       "if (_hasname) then {" \n
+       "	_unit setVehicleInit format [""%1 = this; this setVehicleVarName """"%1"""""",_unitname];" \n
+       "	processInitCommands;" \n
+       "};" \n
+       "_dead = false;" \n
+       "" \n
+       "// Check respawn amount" \n
+       "if !(_noend) then {_rounds = _rounds + 1};" \n
+       "if ((_rounds == _respawns) and !(_noend)) then {_run = false;};" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="Start";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Start";
+  finalStates[] =
+  {
+    "Exit",
+  };
+};
+/*%FSM</COMPILE>*/
