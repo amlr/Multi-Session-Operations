@@ -1,7 +1,7 @@
 private ["_debug","_d","_pos","_storms"];
 if (!isServer) exitWith{};
 
-_debug = true;
+_debug = false;
 _d = 500;
 _storms = ceil(count(bis_functions_mainscope getVariable "locations") / 8);
 
@@ -14,7 +14,7 @@ for "_id" from 0 to _storms do {
         };                
         
         [{
-                private ["_params","_id","_d","_debug","_pos","_dest"];
+                private ["_params","_id","_d","_debug","_pos","_dest","_flag"];
                 _params = _this select 0;
                 _id = _params select 0;
                 _d = _params select 1;
@@ -31,13 +31,15 @@ for "_id" from 0 to _storms do {
                                 format["t_sandstorms%1", _id] setMarkerPos _pos;
                         };
                 };
-                
+
+		_flag = false;                
                 {
-                        if(_x distance _pos < _d) then {
+                        if(_x distance _pos < _d && !_flag) then {
                                 [2, [_x,_debug],{
 	                                if(_this select 1)then{hint "Sandstorm!";};
                                         [_this select 0] call BIS_fnc_sandstorm;
                                 }] call mso_core_fnc_ExMP;
+				_flag = true;
                         };
                 } forEach ([] call BIS_fnc_listPlayers);
         }, 15, [_id, _d, _debug]] call CBA_fnc_addPerFrameHandler;
