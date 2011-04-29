@@ -1,5 +1,5 @@
 // Simple Guard Post Script 1.0
-// by Tophe of ï¿½stgï¿½ta Ops
+// by Tophe of Östgöta Ops
 //
 // Usage with default values:
 // nul = [this] execVM "GuardPost.sqf"
