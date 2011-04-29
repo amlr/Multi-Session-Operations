@@ -1,6 +1,6 @@
 private ["_debug","_types","_name","_pos","_grp","_shepherds"];
 if (!isServer) exitWith{};
-_debug = true;
+_debug = false;
 
 waitUntil{!isNil "BIS_fnc_init"};
 
@@ -100,7 +100,7 @@ CRB_fnc_shepherdAttack = {
         if(_shepherd getVariable "attacking") exitWith{};
         _shepherd setVariable ["attacking", true, true];
         _target = _this select 1;
-        player globalChat format["%1 Attacking %2!", _shepherd, _target];
+        if(_debug) then {player globalChat format["%1 Attacking %2!", _shepherd, _target];};
         
         _target addRating -400;
         _delaytime = time + 30;
