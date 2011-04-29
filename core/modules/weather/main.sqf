@@ -38,7 +38,7 @@ CRB_randomRain = {
 
 if (isserver) then {        
         if(isNil "disableFog") then {
-                disableFog = 0;
+                disableFog = 1;
         };
 
         if(isNil "timeOptions") then {
@@ -82,7 +82,7 @@ if (isserver) then {
         diag_log format["MSO-%1 Weather Sync: Overcast=%2", time, _overcast];
         0 setOvercast _overcast;
         
-        _fog = random 0.5;
+        _fog = if(disableFog == 0) then {random 0.5;} else {0};
         diag_log format["MSO-%1 Weather Sync: Fog=%2", time, _fog];
         0 setFog _fog;
         
@@ -160,7 +160,9 @@ if (isserver) then {
         diag_log format["MSO-%1 Weather Sync: Overcast=%2", time, _overcast];
         0 setOvercast _overcast;
         
-        _fog = ((time - _fstart) * (_fforecast - _fcurrent)/(_fend - _fstart)) + _fcurrent;
+        _fog = if(disableFog == 0) then {
+		((time - _fstart) * (_fforecast - _fcurrent)/(_fend - _fstart)) + _fcurrent;
+	} else {0};
         diag_log format["MSO-%1 Weather Sync: Fog=%2", time, _fog];
         0 setFog _fog;
         

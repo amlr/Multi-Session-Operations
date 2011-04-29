@@ -2,7 +2,7 @@ class disableFog {
         title = "Disable Fog"; 
         values[]= {0,1}; 
         texts[]= {"false","true"}; 
-        default = 0;
+        default = 1;
 };
 
 class timeOptions {
