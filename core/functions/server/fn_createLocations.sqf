@@ -11,7 +11,10 @@ _output = false;
 
 _debug = false;
 
-if (_debug) then {player globalChat format["Create Locations: %1", worldname];};
+if (_debug) then {
+	player globalChat format["Create Locations: %1 Mapsize is %2", worldname, CRB_LOC_DIST];
+        diag_log format ["MSO-%1 Create Locations: %2 Mapsize is %3", time, worldname, CRB_LOC_DIST];
+};
 
 _initNeighbors = {
         private ["_twn"];

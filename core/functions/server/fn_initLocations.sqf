@@ -108,10 +108,10 @@ switch toLower(worldName) do {
                         [] call _initNeighbors;
                         CRB_LOC_DIST = 8000;
                 };
-				default {
-					CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2;
-					[] call mso_core_fnc_createLocations;
-				};
+		default {
+			CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2;
+			[] call mso_core_fnc_createLocations;
+		};
         };
         
         if (_debug) then {player globalChat "initLocs: Find Locs";};
