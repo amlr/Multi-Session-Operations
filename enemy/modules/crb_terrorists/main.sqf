@@ -466,8 +466,8 @@ CRB_fnc_SpawnNewCell = {
         //{alive _x} count units _grp> 0 && 
         while{count((getWeaponCargo _ammo) select 0) != 0 || count((getMagazineCargo _ammo) select 0) != 0} do {
                 _forcesplit = false;
-                if(_debug) then {sleep 15} else {300 + random 600};
                 waitUntil{count ([] call BIS_fnc_listPlayers) > 0};
+                if(_debug) then {sleep 15} else {sleep (600 + random 600)};
                 _grp = group _terrorlead;
                 if(count units _grp < _maxgroupsize) then {
                         [_grp, _debug] call CRB_fnc_RecruitMember;
