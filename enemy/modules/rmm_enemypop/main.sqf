@@ -12,6 +12,7 @@ if(!isServer) exitWith{};
 
 private ["_debug","_d","_camp","_flag"];
 _debug = false;
+if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 1;};
 ep_dist = 2000;
 ep_groups = [];
 ep_total = 0;
@@ -42,7 +43,7 @@ fPlayersInside = {
         
         if(!([position _x, ep_dist] call fPlayersInside)) then {
                 if (type _x == "Hill") then {
-                        if (random 1 > 0.33) then {
+                        if (random 1 > 0.33 / rmm_ep_intensity) then {
                                 ep_total = ep_total + 1;
                                 _d = 500;
                                 _pos = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
@@ -122,7 +123,7 @@ fPlayersInside = {
                         };
                 };
                 if (type _x in ["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"]) then {
-                        if (random 1 > 0.6) then {
+                        if (random 1 > 0.6 / rmm_ep_intensity) then {
                                 ep_total = ep_total + 1;
                                 _d = 800;
                                 _pos = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
@@ -196,7 +197,7 @@ fPlayersInside = {
                         };
                 };
                 if (type _x in ["FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown"]) then {
-                        if (random 1 > 0.9) then {
+                        if (random 1 > 0.8 / rmm_ep_intensity) then {
                                 ep_total = ep_total + 1;
                                 _d = 400;
                                 _pos = [position _x, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
@@ -276,7 +277,7 @@ fPlayersInside = {
                         };
                 };
                 if (type _x in ["ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"]) then {
-                        if (random 1 > 0.95) then {
+                        if (random 1 > 0.9 / rmm_ep_intensity) then {
                                 ep_total = ep_total + 1;
                                 _d = 300;
                                 _pos = [position _x, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;

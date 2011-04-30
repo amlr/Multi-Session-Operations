@@ -37,6 +37,10 @@ class Params {
 #ifdef CRB_TERRORISTS
 	#include <enemy\modules\crb_terrorists\params.hpp>
 #endif
+#ifdef RMM_ENEMYPOP
+	#include <enemy\modules\rmm_enemypop\params.hpp>
+#endif
+
 
 	class faction_RU {
 		title = "Enable Russians"; 
