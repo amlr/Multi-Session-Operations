@@ -12,7 +12,7 @@
 private ["_trigDist","_delay","_debug"];
 if (!isServer) exitwith {};
 
-_debug = true;
+_debug = false;
 
 _trigDist = if(_debug) then {100} else {1000};
 if(isNil "_this") then {_this = [];};

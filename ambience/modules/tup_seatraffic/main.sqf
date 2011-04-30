@@ -4,7 +4,7 @@ if(!isServer) exitWith{};
 if (isNil "amount") then {amount = 1;};
 if (amount == 2) exitWith{};
 
-_debug = true;
+_debug = false;
 
 waitUntil{!isNil "BIS_fnc_init"};
 // Get center of map

@@ -1,7 +1,7 @@
 private ["_debug","_d","_pos","_flocks"];
 if (!isServer) exitWith{};
 
-_debug = true;
+_debug = false;
 _d = 250;
 
 _flocks = ceil(count(bis_functions_mainscope getVariable "locations") / 6);

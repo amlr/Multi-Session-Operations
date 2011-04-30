@@ -15,7 +15,7 @@ waitUntil{!isNil "BIS_Zora_Mainscope"};
 
 #define NIGHT_POSSIBILITY 0.2 //Percentage (0.2 == 20%)
 
-BIS_Zora_Mainscope setVariable ["debug",true];
+BIS_Zora_Mainscope setVariable ["debug",false];
 BIS_Zora_Mainscope setvariable ["bordersize",10000];
 BIS_Zora_Mainscope setvariable ["factionlist",MSO_FACTIONS];
 BIS_Zora_Mainscope setvariable ["search_radius",1000];
