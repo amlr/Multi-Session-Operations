@@ -34,6 +34,9 @@ class Params {
 #ifdef TUP_SEATRAFFIC
 	#include <ambience\modules\tup_seatraffic\params.hpp>
 #endif
+#ifdef CRB_TERRORISTS
+	#include <enemy\modules\crb_terrorists\params.hpp>
+#endif
 
 	class faction_RU {
 		title = "Enable Russians"; 

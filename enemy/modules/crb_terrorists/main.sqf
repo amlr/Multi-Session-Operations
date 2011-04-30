@@ -11,6 +11,8 @@ private ["_spawnpoints","_debug","_numcells"];
 if(!isServer) exitWith{};
 
 _debug = false;
+if(isNil "crb_tc_intensity")then{crb_tc_intensity = 1;};
+if(isNil "crb_tc_markers")then{crb_tc_markers = 1;};
 
 CRB_fnc_debugPositions = {
         private ["_positions","_debug","_text"];
@@ -466,8 +468,8 @@ CRB_fnc_SpawnNewCell = {
         //{alive _x} count units _grp> 0 && 
         while{count((getWeaponCargo _ammo) select 0) != 0 || count((getMagazineCargo _ammo) select 0) != 0} do {
                 _forcesplit = false;
-                waitUntil{count ([] call BIS_fnc_listPlayers) > 0};
-                if(_debug) then {sleep 15} else {sleep (600 + random 600)};
+                waitUntil{count ([] call BIS_fnc_listPlayers) > 1 || !isMultiplayer};
+                if(_debug) then {sleep 15} else {sleep (1800 + random 1800) * crb_tc_intensity};
                 _grp = group _terrorlead;
                 if(count units _grp < _maxgroupsize) then {
                         [_grp, _debug] call CRB_fnc_RecruitMember;
@@ -477,7 +479,7 @@ CRB_fnc_SpawnNewCell = {
                 
                 _count = count(units _grp);
                 if((random 3 > 2  && _count >= 6) || _forcesplit) then {
-                        _ammo call PGM_fnc_CreateIntel;
+                        if(crb_tc_markers==1)then{_ammo call PGM_fnc_CreateIntel;};
                         [_grp, _debug] spawn CRB_fnc_SplitCell;
                 };
 		if(!alive _ammo) exitWith {
@@ -490,7 +492,7 @@ CRB_fnc_SpawnNewCell = {
 		};
         };
         
-        _ammo call PGM_fnc_CreateIntel;
+        if(crb_tc_markers==1)then{_ammo call PGM_fnc_CreateIntel;};
         
         if (_debug) then {
                 hint format["Cell#%1 - no longer recruiting", _tcid];
@@ -535,8 +537,7 @@ for "_i" from 1 to _numcells do {
                 // Pick a spawn point
                 _spawn =  _spawnpoints call BIS_fnc_selectRandom;
                 
-                //DEBUG:
-                if(_debug) then {player setPos _spawn;};
+                //DEBUG:player setPos _spawn;
                 //DEBUG:sleep 15;
                 
                 // Create terrorist leader and vehicle
