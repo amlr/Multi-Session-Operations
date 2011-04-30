@@ -95,14 +95,17 @@ Enemy
 Enemy Populator
 - Changed Camp probability to 1 in 4
 - Always ensure infantry defending camp
+- Created mission parameter for Enemy Population Intensity
 
 Convoys
 - Enabled minimum 1 convoy
+- Fixed convoy task update
 
 *NEW* Terrorist Cells
 - Fixed minimum 1 terrorist cell
-- Fixed delay to 10 - 20 mins recruitment time
-
+- Created mission parameters for markers and intensity
+- Fixed bug to stop Terrorist Recruiting on dedicated server
+- Increased default recruitment per cell to 30min to 1hr
 
 Support
 =======
