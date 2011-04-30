@@ -14,11 +14,5 @@
 =========================================================
 */
 
-private ["_delay","_unit"];
 if (!isServer) exitWith {};
-
-// Define variables
-_unit = _this select 0;
-_delay = if (count _this > 1) then {_this select 1} else {30};
-
-[_unit, _delay] execFSM "support\scripts\resupply.fsm";
+_this execFSM "support\scripts\resupply.fsm";

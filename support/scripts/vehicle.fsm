@@ -106,9 +106,6 @@ class FSM
        "=========================================================" \n
        "*/" \n
        "" \n
-       "private [""_hasname"",""_delay"",""_deserted"",""_respawns"",""_noend"",""_unit"",""_explode"",""_dynamic"",""_unitinit"",""_haveinit"",""_unitname"",""_dir"",""_position"",""_type"",""_weapons"",""_mags""];" \n
-       "if (!isServer) exitWith {};" \n
-       "" \n
        "// Define variables" \n
        "_unit = _this select 0;" \n
        "_delay = if (count _this > 1) then {_this select 1} else {30};" \n
@@ -298,12 +295,7 @@ class FSM
     class Respawn_vehicle
     {
       name = "Respawn_vehicle";
-      init = /*%FSM<STATEINIT""">*/"if (_nodelay) then {" \n
-       "	_nodelay = false;" \n
-       "} else {" \n
-       "	sleep _delay;" \n
-       "};" \n
-       "if (_dynamic) then {" \n
+      init = /*%FSM<STATEINIT""">*/"if (_dynamic) then {" \n
        "	_position = getPosASL _unit;" \n
        "	_dir = getDir _unit;" \n
        "};" \n

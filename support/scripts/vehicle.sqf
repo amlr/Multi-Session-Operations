@@ -57,16 +57,5 @@ Contact & Bugreport: harlechin@hotmail.com
 =========================================================
 */
 
-private ["_unit","_delay","_deserted","_respawns","_explode","_dynamic","_unitinit"];
 if (!isServer) exitWith {};
-
-// Define variables
-_unit = _this select 0;
-_delay = if (count _this > 1) then {_this select 1} else {30};
-_deserted = if (count _this > 2) then {_this select 2} else {120};
-_respawns = if (count _this > 3) then {_this select 3} else {0};
-_explode = if (count _this > 4) then {_this select 4} else {false};
-_dynamic = if (count _this > 5) then {_this select 5} else {false};
-_unitinit = if (count _this > 6) then {_this select 6} else {};
-
-[_unit, _delay, _deserted, _respawns, _explode, _dynamic, _unitinit] execFSM "support\scripts\vehicle.fsm";
+_this execFSM "support\scripts\vehicle.fsm";

@@ -50,9 +50,6 @@ class FSM
        "=========================================================" \n
        "*/" \n
        "" \n
-       "private [""_hasname"",""_delay"",""_unit"",""_weapons"",""_mags"",""_unitname"",""_dir"",""_position"",""_type""];" \n
-       "if (!isServer) exitWith {};" \n
-       "" \n
        "// Define variables" \n
        "_unit = _this select 0;" \n
        "_delay = if (count _this > 1) then {_this select 1} else {30};" \n
