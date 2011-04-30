@@ -184,7 +184,8 @@ for "_j" from 1 to _numconvoys do {
                         //setup task
                         //_taskid = player createSimpleTask [_taskname];
                         //_taskid setSimpleTaskDescription[_taskmessage, _tasktitle, _taskhud];
-                        _taskid = [_tasktitle, [_taskmessage,_tasktitle,_tasktitle], getMarkerPos format["d%1", _cid]] call tasks_fnc_add;
+			[_tasktitle, [_taskmessage,_tasktitle,_tasktitle], getMarkerPos format["d%1", _cid]] call tasks_fnc_add;
+                        _taskid = missionnamespace getvariable _tasktitle;
                         
                         //DEBUG
                         if(_debug) then {diag_log format["MSO-%1 Convoy %2 Task ID: %3", time, _cid, _taskid];};
@@ -207,9 +208,15 @@ for "_j" from 1 to _numconvoys do {
                                 //player removeSimpleTask _task;
                                 //diag_log Format["MSO-%1 Convoy %2 Task Deleted", time, _id];
                         };
+			sleep random 15;
                         
                         //alert the players
-                        [-1, {[west, "Base"] sideChat (_this select 0); [(_this select 1), "SUCCEEDED"] call tasks_fnc_taskUpdate;}, [format["All teams, this is Command, UAV scans indicates convoy #%1 has been destroyed! Out.",_taskid], _cid]] call CBA_fnc_globalExecute;
+                        [-1, {
+				[west, "Base"] sideChat (_this select 0);
+				[(_this select 1), "SUCCEEDED"] call tasks_fnc_taskUpdate;
+			},
+			[format["All teams, this is Command, UAV scans indicates convoy #%1 has been destroyed! Out.", _cid], _taskid]
+			] call CBA_fnc_globalExecute;
                         
                         //END KIERANS ADDITION
                         
