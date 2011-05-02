@@ -1,7 +1,11 @@
 private ["_debug","_mapsize","_helidest","_planedest","_destinations","_destairfield","_helilandings","_center","_airports","_planelandings"];
 if(!isServer) exitWith{};
+
 if (isNil "factionsMask") then {factionsMask = 0;};
 if (factionsMask == 2) exitWith{};
+
+if(isNil "AirIntensity")then{AirIntensity = 1;};
+
 _debug = false;
 
 {
@@ -119,7 +123,7 @@ for "_j" from 0 to (_destinations-1) do
                 _timeout = if(_debug) then {[30, 30, 30];} else {[30, 60, 90];};
                 
                 //Loop continuously and create aircraft for the destination		
-                while{true} do 
+                while {true} do 
                 {
                         // Wait a random amount of time before starting
                         sleep (random 90);
@@ -147,6 +151,8 @@ for "_j" from 0 to (_destinations-1) do
                         
                         // If we are counting all factions then work out controlling side, otherwise default to civilian
                         if (factionsMask == 0 || _airfieldSide == civilian) then {
+							if (random 1 < AirIntensity) then
+							{
                                 // Get the factions for the controlling side and count their units
                                 _factions = [_airfieldside, _currentairfield, 1000,"factions",_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
                                 _factionsCount = [_airfieldside, _currentairfield, 1000,"count",_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
@@ -239,10 +245,10 @@ for "_j" from 0 to (_destinations-1) do
                                 // Check to see if aircraft is near Control Tower, if so, crew may get out and go for a chat
                                 _controlTowerTypes = ["Land_Mil_ControlTower","Land_Mil_ControlTower_EP1"];
                                 _controltowers = nearestObjects [position _aircraftVehicle, _controlTowerTypes, 200]; 
-                                diag_log format ["MSO-%1 Air Traffic: %5 %2 %3 Found ControlTowers: %4", time, _j, typeOf _aircraftVehicle, count _controltowers, _destination];
+                                if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %5 %2 %3 Found ControlTowers: %4", time, _j, typeOf _aircraftVehicle, count _controltowers, _destination];};
                                 If (count _controltowers > 0) then 
                                 {
-                                        if (random 1 > 0.6) then 
+                                        if (random 1 > 0.5) then 
                                         {
                                                 // Set time for pilots to leave
                                                 _scrambleTime = time + random 180;
@@ -289,11 +295,12 @@ for "_j" from 0 to (_destinations-1) do
                                 { deleteVehicle _x } forEach _aircraftCrew;
                                 deleteVehicle _aircraftVehicle;
                                 deletegroup _grp;
-                                
+                            };   
                                 // Pause before creating another aircraft for destination
                                 _sleep = if(_debug) then {10;} else {random 300;};
                                 sleep _sleep;	
-                        };
+                        
+						};
                 };
         };
 };
