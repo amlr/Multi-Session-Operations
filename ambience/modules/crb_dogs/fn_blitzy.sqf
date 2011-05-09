@@ -65,25 +65,26 @@ if (isServer) then {
                                 //                                _pos = [position _nearest, 80,[position _nearest, _pos] call BIS_fnc_dirTo] call BIS_fnc_relPos;
                                 //                                _dog domove _pos;
                                 //                                _dog setspeedmode "NORMAL";
-                                _dog say3D "dog_01";
+                                
+                                [2, _dog,{_this say3D "dog_01";}] call mso_core_fnc_ExMP
                         };
                         if ((_distance > 50) && (_distance < 75)) then {
                                 //                                _pos = [position _nearest, 55,[position _nearest, _pos] call BIS_fnc_dirTo] call BIS_fnc_relPos;
                                 //                                _dog domove _pos;
                                 //                                _dog setspeedmode "NORMAL";
-                                _dog say3D "dog_01";
+                                [2, _dog,{_this say3D "dog_01";}] call mso_core_fnc_ExMP
                         };
                         if ((_distance > 15) && (_distance < 50)) then {
                                 //                                _pos = [position _nearest, 20,[position _nearest, _pos] call BIS_fnc_dirTo] call BIS_fnc_relPos;
                                 //                                _dog domove _pos;
                                 //                                _dog setspeedmode "NORMAL";
-                                _dog say3D "dog_yelp";
+                                [2, _dog,{_this say3D "dog_yelp";}] call mso_core_fnc_ExMP
                         };
                         if ((_distance > 10) && (_distance < 15)) then {
                                 _pos = [position _nearest, 12,[position _nearest, _pos] call BIS_fnc_dirTo] call BIS_fnc_relPos;
                                 _dog domove _pos;
                                 _dog setspeedmode "NORMAL";
-                                _dog say3D "dog_02";
+                                [2, _dog,{_this say3D "dog_02";}] call mso_core_fnc_ExMP
                         };
                         if (_distance < 10) then {
                                 _dog domove position _nearest;
@@ -96,8 +97,8 @@ if (isServer) then {
                                 _dog domove position _leader;
                         };
                         if (_r > 0.85) then {
-                                _dog say3D "dog_01";
+                                [2, _dog,{_this say3D "dog_01";}] call mso_core_fnc_ExMP
                         };
                 };
         };
-}, 1, [_leader]] call CBA_fnc_addPerFrameHandler;
+}, 1, [_leader]] call mso_core_fnc_addLoopHandler;

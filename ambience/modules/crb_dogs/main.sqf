@@ -66,7 +66,7 @@ if(count _this > 0) then {
                                                 if(_debug) then {player globalChat format["Destroying %1", _name];};
 						diag_log format["MSO-%1 Dog Packs destroying %2", time, _name];
                                                 {deleteVehicle _x} foreach units _grp;
-                                                [_grp getVariable "handle"] call CBA_fnc_removePerFrameHandler;
+                                                [_grp getVariable "handle"] call mso_core_fnc_removeLoopHandler;
                                         };
                                         
                                         if (_grp getVariable "wait" < time) then {
@@ -81,7 +81,7 @@ if(count _this > 0) then {
                                         };
                                 };
                                 
-                        }, 1, [_name, _grp, _maxdist, _debug]] call CBA_fnc_addPerFrameHandler;
+                        }, 1, [_name, _grp, _maxdist, _debug]] call mso_core_fnc_addLoopHandler;
                 };
         };
 } forEach CRB_LOCS;

@@ -78,23 +78,23 @@ _handle = [{
                                         _dog domove position _nearest;
                                 };
                                 if ((_distance >= 75) && (_distance < 100) && random 1 > 0.25) then {
-                                        [_dog, _nearest] say3D "dog_01";
+			                [2, _dog,{_this say3D "dog_01";}] call mso_core_fnc_ExMP;
                                         _dog domove position _nearest;
                                 };
                                 if ((_distance >= 50) && (_distance < 75) && random 1 > 0.25) then {
-                                        [_dog, _nearest] say3D "dog_01";
+			                [2, _dog,{_this say3D "dog_01";}] call mso_core_fnc_ExMP;
                                         _dog domove position _nearest;
                                 };
                                 if ((_distance >= 15) && (_distance < 50) && random 1 > 0.25) then {
-                                        [_dog, _nearest] say3D "dog_yelp";
+			                [2, _dog,{_this say3D "dog_yelp";}] call mso_core_fnc_ExMP;
                                         _dog domove position _nearest;
                                 };
                                 if ((_distance >= 1) && (_distance < 15) && random 1 > 0.25) then {
-                                        [_dog, _nearest] say3D "dog_02";
+			                [2, _dog,{_this say3D "dog_02";}] call mso_core_fnc_ExMP;
                                         _dog domove position _nearest;
                                 };
                                 if (_distance < 1) then {
-                                        [_dog, _nearest] say3D "dog_maul01";
+			                [2, _dog,{_this say3D "dog_maul01";}] call mso_core_fnc_ExMP;
                                         [_nearest, _dog] spawn dogs_fnc_dogattack;
                                 };	
                         } else {
@@ -104,12 +104,12 @@ _handle = [{
                                         _dog setspeedmode (["LIMITED","NORMAL","FULL"]call BIS_fnc_selectRandom);
                                 };
                                 if (_r > 0.5) then {
-                                        _dog say3D "dog_01";
+			                [2, _dog,{_this say3D "dog_01";}] call mso_core_fnc_ExMP;
                                 };
                         };
                 };
         } forEach units _grp;
-}, 1, [_grp]] call CBA_fnc_addPerFrameHandler;
+}, 1, [_grp]] call mso_core_fnc_addLoopHandler;
 
 _grp setVariable ["handle", _handle, true];
 _grp;
