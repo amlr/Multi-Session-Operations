@@ -60,6 +60,31 @@ execNow "enemy\modules\zora\main.sqf";
 execNow "enemy\modules\crb_terrorists\main.sqf";
 #endif
 
+#ifdef SR5_IEDS
+// MANDATORY!
+"SR5 IEDs" call mso_core_fnc_initStat;
+execNow "enemy\modules\SR5_IEDdetect\IEDdetect_init.sqf";
+
+// AMBIENT BOMBERS (optional)
+"SR5 Ambient Bombers" call mso_core_fnc_initStat;
+0 = [500,10,50,30,[
+	"Car",
+	"Garbage_can",
+	"Garbage_container",
+	"Land_Misc_Garb_3_EP1",
+	"Land_Misc_Garb_4_EP1",
+	"Land_Misc_Garb_Heap_EP1",
+	"Land_Misc_Rubble_EP1",
+	"Misc_TyreHeap",
+	"Misc_TyreHeapEP1",
+	"Land_Misc_Garb_Square_EP1"
+],0,50,50,25,50,WEST] execVM "enemy\modules\SR5_IEDdetect\IEDdetect_ambientBombers.sqf";
+
+//AMBIENT PROXIMITY IEDs (optional)
+"SR5 Ambient Proxy IEDs" call mso_core_fnc_initStat;
+0 = [500,20,30,0,50,WEST] execVM "enemy\modules\SR5_IEDdetect\IEDdetect_ambientProxyIEDs.sqf";
+#endif
+
 #ifdef RMM_ENEMYPOP
 "Enemy Populate" call mso_core_fnc_initStat;
 execNow "enemy\modules\rmm_enemypop\main.sqf";

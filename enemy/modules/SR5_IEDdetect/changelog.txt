@@ -1,0 +1,80 @@
+V1.6RC4
+  - ADDED: EOD units now respawn with full detection capabilities
+  - ADDED: Proximity IED Scatter Script
+  - FIXED: Detection not working when EOD units get in a detector Vehicle
+  - FIXED: Beeping IEDs not working in MP
+  - IMPROVED: Cross-script global arrays handling
+  - CHANGED: Nomad dialog images slightly reduced and moved back to the bottom-right of the screen
+  - IMPROVED: Miscellaneous code optimization
+V1.6RC3
+  - IMPROVED: Detonation caused by damage
+  - IMPROVED: Roadside Proximity IEDs placement
+  - IMPROVED: Detector vehicles
+  - IMPROVED: Proximity detection and behavior
+  - IMPROVED: Triggerman Spawn (via Trigger)
+V1.6RC2
+  - FIXED: Nomad detector going crazy in some triggermen detonation situations
+  - IMPROVED: IED detector behavior when multiple detectors present
+  - FIXED: Triggermen not detonating with cars or tanks of their enemy side
+  - FIXED: Ambient Bombers reacting to flying vehicles of their enemy side
+  - FIXED: Triggermen attaching IEDs to vehicles of their enemy side
+  - ADDED: Detector vehicles, activating with and for the vehicle driver
+  - ADDED: % for the triggerman to be a suicide bomber instead
+  - ADDED: Ambient Proximity IEDs
+  - CHANGED: Increased compatibility with 4:3 resolutions
+
+V1.6RC1
+  - ADDED: "Ambient Bombers" Script: dynamic random creation of suicide bombers and triggermen among civilian (from ALICE or editor-placed)
+  - ADDED: Pressure plate/proximity IED, can be set to anti-personnel or anti-vehicle, detonates on pressure
+  - ADDED: Altitude check for Ambient Bombers script, to prevent aircrafts from triggering the script
+  - ADDED: Side check to potential IED attaching, to avoid triggermen attaching their bombs to vehicles belonging to their enemy side
+  - ADDED: Performance optimization when no IEDs are present in the scenario
+  - FIXED: Nomad detector going crazy with multiple IEDs present or after some triggermen detonations
+
+V1.5RC8:
+  - FIXED: Various bugfixes in the triggerman and triggerman-spawn scripts
+  - IMPROVED: More realistic behavior and decision-making for the triggerman
+  - IMPROVED: Better handling of damage for attached IEDs and the related detonation
+  - IMPROVED: Optimized code 
+  - CHANGED: Attached IEDs no longer visible on the roof of a vehicle
+  
+V1.5RC7:
+  - ADDED: If a triggerman is still alive after a detonation or defusal, behaviour will be random between fleeing, fighting or surrendering
+  - ADDED: Triggerman_Spawn script. Usable with a trigger, this script works with ALICE and SILVIE. The script will randomly make a civilian a triggerman and will randomly pick if the explosive is the triggerman himself or a civilian vehicle in town
+
+V1.5RC6:
+  - FIXED: Detached IEDs with remote Det possibility could not be disarmed manually
+  - FIXED: Objects hosting attached IEDs exploded if damaged even when their attached IED had been disarmed
+  - ADDED: triggerman.sqf - an AI unit can now be responsible for triggering a bomb (can be either an object or himself)
+  - ADDED: Sounds and animations for triggermen
+  - ADDED: James' IED script now works with triggerman.sqf behaviour (read the readme.txt for more info)
+
+V1.5RC5:
+  - ADDED: Lots of local checks to force scripts being run on a single machine
+  - FIXED: Random reports and Nomad dialogs for non-EOD units when an EOD was around
+  - ADDED: By large request, the tweaked version of James' IED script to make it work with my scripts suite
+
+V1.5RC4:
+  - CHANGED: Marker now local to the detector unit
+  - FIXED: Fake IED behavior hopefully working now :)
+
+V1.5RC3:
+  - IMPROVED:improved behaviour for "Detach IED" action in the object the IED is attached to
+  - FIXED: Bomb beeping is now audible only when in close range
+  - ADDED: Global array for attached IEDs and the objects hosting them
+  - ADDED: IEDs and bombs of any kind (added or attached) can blow up when damaged (checked at every damage change)
+  - ADDED: changelog.txt
+
+V1.5RC2 - Lots of MP compatibility testing, tweaks and optimizations
+
+v1.5RC1 - Major rewriting: sleeker, more solid code with more MP compatibility benefits.
+
+v1.4 - Added Manual Defuse via code injection, more MP improvements, additional graphics and dialog. Fixed problem where "Remote Det" would stay available if an IED got destroyed by external causes
+
+v1.3 - Added fake IED reports, more MP improvements for multiple IEDs and EOD units, optimized graphics, added Remote Det "too close" and "too far" abort messages
+
+v1.2 - Improved MP compatibility for multiple IEDs, script now works with any kind of object
+
+v1.1 - Added custom graphics and sounds
+
+v1.0 - Initial release
