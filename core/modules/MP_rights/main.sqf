@@ -70,7 +70,7 @@ if (isserver) then {
                         publicVariable "MSO_R_Crew";
                         
                 };                
-        }, _update_rate, [_server_file]] call CBA_fnc_addPerFrameHandler;
+        }, _update_rate, [_server_file]] call mso_core_fnc_addLoopHandler;
 };
 
 true;

@@ -10,6 +10,66 @@ private ["_uid"];
 //http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];
 
+MSO_Loop_Funcs = [];
+MSO_useCBA = false;
+
+// Thanks to Nou for this code
+mso_core_fnc_addLoopHandler = {
+        private ["_id","_forEachIndex","_return"];
+        _return = -1;
+        if(MSO_useCBA) then {
+                player sideChat format["cba"];
+                _this call cba_fnc_addPerFrameHandler;
+        } else {
+                _id = -1;
+                {
+                        if((count _x) == 0) exitWith {
+                                _id = _forEachIndex;
+                        };
+                } forEach MSO_Loop_Funcs;
+                if(_id == -1) then {
+                        _id = (count MSO_Loop_Funcs);
+                };
+                MSO_Loop_Funcs set[_id, [_this, 0]];
+		_return = _id;
+        };        
+        _return;
+};
+
+// Thanks to Nou for this code
+mso_core_fnc_removeLoopHandler = {
+        private ["_id"];
+        if(MSO_useCBA) then {
+                _this call cba_fnc_removePerFrameHandler;
+        } else {
+                _id = _this select 0;
+                MSO_Loop_Funcs set[_id, []];
+        };
+};
+
+// Thanks to Nou for this code
+[] spawn {
+        private ["_forEachIndex","_f","_delta"];
+        if(!MSO_useCBA) then {
+                if(!isDedicated) then {
+                        waitUntil { player == player && alive player };
+                };
+                waitUntil {
+                        {
+                                if((count _x) > 0) then {
+                                        _f = _x select 0;
+                                        _delta = _x select 1;
+                                        if(diag_tickTime >= _delta) then {
+                                                [(_f select 2), _forEachIndex] call (_f select 0);
+                                                _x set[1, diag_tickTime + (_f select 1)];
+                                        };
+                                };
+                        } forEach MSO_Loop_Funcs;
+                        false;
+                };
+        };
+};
+
 CRB_MAPCLICK = "";
 
 "RMM_MPe" addPublicVariableEventHandler {
@@ -77,7 +137,7 @@ if(mprightsDisable == 1) then {
         "MP Rights disabled" call mso_core_fnc_initStat;
         _uid = getPlayerUID player;
         MSO_R_Admin = [_uid];
-	MSO_R_Leader = [_uid];
+        MSO_R_Leader = [_uid];
         MSO_R_Officer = [_uid];
         MSO_R_Air = [_uid];
         MSO_R_Crew = [_uid];

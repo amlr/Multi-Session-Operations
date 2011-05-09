@@ -40,4 +40,4 @@ if(isServer) then  {
                 };
         } foreach [[4.25,4.5],[5.25,5.75],[11.75,12],[15.25,15.5],[17.75,18.25],[19,19.25]];
         
-}, 60, []] call CBA_fnc_addPerFrameHandler;
+}, 60, []] call mso_core_fnc_addLoopHandler;

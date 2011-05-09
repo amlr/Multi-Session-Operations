@@ -32,5 +32,5 @@ for "_id" from 0 to _flocks do {
                 };
                 
                 [2, [_pos],{if(player distance (_this select 0) < 500)  then {_this call bis_fnc_crows;};}] call mso_core_fnc_ExMP;
-        }, 60, [_id, _d, _debug]] call CBA_fnc_addPerFrameHandler;
+        }, 60, [_id, _d, _debug]] call mso_core_fnc_addLoopHandler;
 };

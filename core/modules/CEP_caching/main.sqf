@@ -68,4 +68,4 @@ waitUntil{typeName allGroups == "ARRAY"};
                 diag_log format["MSO-%1 CEP Caching # %2", time, cep_stats];
                 if(_debug) then {hint format["MSO-%1 CEP Caching # %2", time, cep_stats];};
         };
-}, 1, [_trigDist, _delay, _debug]] call CBA_fnc_addPerFrameHandler;
+}, 1, [_trigDist, _delay, _debug]] call mso_core_fnc_addLoopHandler;

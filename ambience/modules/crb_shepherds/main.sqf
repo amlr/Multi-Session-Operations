@@ -364,7 +364,7 @@ _shepherds = [];
                                                 };
                                         };
                                 };
-                        },  2, [_name, _grp, _debug]] call CBA_fnc_addPerFrameHandler;
+                        },  2, [_name, _grp, _debug]] call mso_core_fnc_addLoopHandler;
                 };
         };
 } forEach CRB_LOCS;

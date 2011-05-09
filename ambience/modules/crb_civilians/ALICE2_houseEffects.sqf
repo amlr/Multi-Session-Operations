@@ -192,4 +192,4 @@ waitUntil {!isNil "BIS_ALICE_fnc_houseEffects"};
                         } forEach _doors;
                 };
         } forEach (_logic getvariable "ALICE_alltowns");        
-}, 15, [_logic,_twnEffects]] call CBA_fnc_addPerFrameHandler;
+}, 15, [_logic,_twnEffects]] call mso_core_fnc_addLoopHandler;
