@@ -60,6 +60,12 @@ execNow "support\modules\logistics\main.sqf";
 execNow "support\modules\R3F_logistics\init.sqf";
 #endif
 
+// FOB HQ MultiSpawn
+#ifdef WHB_MULTISPAWN
+"FOB HQ Multispawn" call mso_core_fnc_initStat;
+execNow "support\modules\FOB_spawn\common\initMain.sqf";
+#endif
+
 #ifdef RMM_NOTEBOOK
 "Notebook" call mso_core_fnc_initStat;
 execNow "support\modules\notebook\main.sqf";

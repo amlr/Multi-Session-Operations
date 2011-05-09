@@ -13,5 +13,6 @@
 #define R3F_LOGISTICS
 
 // WIP
+#define WHB_MULTISPAWN
 //#define RMM_CASEVAC
 //#define GC_PACK_COW
