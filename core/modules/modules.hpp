@@ -1,4 +1,5 @@
-#define CEP_CACHE
+//#define CEP_CACHE
+#define NOU_CACHE
 #define RMM_DEBUG
 #define RMM_HELP
 #define RMM_MP_RIGHTS

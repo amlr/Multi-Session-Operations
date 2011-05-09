@@ -161,6 +161,16 @@ if(isNil "mprightsDisable") then {
 execNow "core\modules\debug\main.sqf";
 #endif
 
+#ifdef CEP_CACHE
+"CEP AI Unit Caching" call mso_core_fnc_initStat;
+execNow "core\modules\CEP_caching\main.sqf";
+#endif
+
+#ifdef NOU_CACHE
+"Nou AI Unit Caching" call mso_core_fnc_initStat;
+execNow "core\modules\Nou_caching\main.sqf";
+#endif
+
 #ifdef RMM_WEATHER
 "Weather" call mso_core_fnc_initStat;
 execNow "core\modules\weather\main.sqf";
@@ -174,11 +184,6 @@ execNow "core\modules\nomad\main.sqf";
 #ifdef RMM_SETTINGS
 "View Distance Settings" call mso_core_fnc_initStat;
 execNow "core\modules\settings\main.sqf";	
-#endif
-
-#ifdef CEP_CACHE
-"CEP AI Unit Caching" call mso_core_fnc_initStat;
-execNow "core\modules\CEP_caching\main.sqf";
 #endif
 
 "Remove Destroyed Objects" call mso_core_fnc_initStat;
