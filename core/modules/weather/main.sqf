@@ -6,8 +6,8 @@ CRB_timeSync = {
         private["_stime","_sdiff"];
         _stime = _this select 0;
         _sdiff = (((datetonumber date) - (datetonumber _stime)) * 365 * 24 * 60);
-        if(_sdiff > 2 || _sdiff < -2) then {
-                player sideChat "Time syncing...";
+        if(abs(_sdiff) > 2) then {
+                player sideChat format["Time syncing (%1=>%2)...", date, _stime];
                 setDate _stime;
         };
 };
@@ -45,6 +45,10 @@ if (isserver) then {
                 timeOptions = 0;
         };
 
+        if(isNil "timeSeasons") then {
+                timeHour = 3;
+        };
+
         if(isNil "timeHour") then {
                 timeHour = 8;
         };
@@ -61,6 +65,8 @@ if (isserver) then {
                 // Random
                 case 1: {
                         _currentDate = date;
+			_currentDate set [1, [12,3,6,9] call BIS_fnc_selectRandom];
+			_currentDate set [2, 22];
                         _currentDate set [3, floor(random 24)];
                         _currentDate set [4, floor(random 60)];
                         setDate _currentDate;
@@ -68,6 +74,8 @@ if (isserver) then {
                 // Custom
                 case 2: {
                         _currentDate = date;
+			_currentDate set [1, timeSeasons];
+			_currentDate set [2, 22];
                         _currentDate set [3, timeHour];
                         _currentDate set [4, timeMinute];
                         setDate _currentDate;
@@ -122,9 +130,9 @@ if (isserver) then {
         	        RMM_w call weather_fnc_sync;
                 	publicVariable "RMM_w";
 		};
-        }, 30, []] call CBA_fnc_addPerFrameHandler;
+        }, 30, []] call mso_core_fnc_addLoopHandler;
         
-	[{CRB_t = [date]; publicvariable "CRB_t";}, 60, []] call CBA_fnc_addPerFrameHandler;
+	[{CRB_t = [date]; publicvariable "CRB_t";}, 60, []] call mso_core_fnc_addLoopHandler;
         
         // On every JIP connect, publish latest time
         onPlayerConnected {
