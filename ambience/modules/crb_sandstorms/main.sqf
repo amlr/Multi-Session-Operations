@@ -14,14 +14,14 @@ for "_id" from 0 to _storms do {
         };                
         
         [{
-                private ["_params","_id","_d","_debug","_pos","_dest","_flag"];
+                private ["_params","_id","_d","_debug","_pos","_dest"];
                 _params = _this select 0;
                 _id = _params select 0;
                 _d = _params select 1;
                 _debug = _params select 2;
                 
                 _pos = missionNamespace getVariable format["sandstorms%1", _id];
-                if(random 1 > 0.7) then {
+                if(random 1 > 0.9) then {
                         _dest = position ((bis_functions_mainscope getVariable "locations") call BIS_fnc_selectRandom);
                         _pos = [_pos, _d / 2,[_pos, _dest] call BIS_fnc_dirTo] call BIS_fnc_relPos;
                         missionNamespace setVariable [format["sandstorms%1", _id], _pos];
@@ -31,18 +31,16 @@ for "_id" from 0 to _storms do {
                                 format["t_sandstorms%1", _id] setMarkerPos _pos;
                         };
                 };
-
-		_flag = false;                
+                
                 {
-                        if(_x distance _pos < _d && !_flag) then {
+                        if(_x distance _pos < _d) then {
                                 [2, [_x,_debug],{
 	                                if(_this select 1)then{hint "Sandstorm!";};
                                         [_this select 0] call BIS_fnc_sandstorm;
                                 }] call mso_core_fnc_ExMP;
-				_flag = true;
                         };
                 } forEach ([] call BIS_fnc_listPlayers);
-        }, 15, [_id, _d, _debug]] call CBA_fnc_addPerFrameHandler;
+        }, 15, [_id, _d, _debug]] call mso_core_fnc_addLoopHandler;
 };
 
 
