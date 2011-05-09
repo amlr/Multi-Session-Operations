@@ -19,6 +19,9 @@ class CfgSounds {
 
 //http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
 class Params {
+#ifdef RMM_DEBUG
+	#include <core\modules\debug\params.hpp>
+#endif
 #ifdef RMM_MP_RIGHTS
 	#include <core\modules\mp_rights\params.hpp>
 #endif
