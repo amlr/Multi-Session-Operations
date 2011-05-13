@@ -4,14 +4,14 @@ if (!isdedicated) then {
 };
 
 displayStats = {
-	_maxF = SERVERFPS select 0;
-	_avgF = SERVERFPS select 1;
-	_minF = SERVERFPS select 2;
-	_maxU = SERVERFPS select 3;
-	_avgU = SERVERFPS select 4;
-	_curU = SERVERFPS select 5;
+	_maxF = CRBSERVERFPS select 0;
+	_avgF = CRBSERVERFPS select 1;
+	_minF = CRBSERVERFPS select 2;
+	_maxU = CRBSERVERFPS select 3;
+	_avgU = CRBSERVERFPS select 4;
+	_curU = CRBSERVERFPS select 5;
 	hint format["Server FPS(Max/Avg/Min): %1/%2/%3\nUnits(Max/Avg/Cur): %4/%5/%6\nGroups: %7", _maxF, _avgF, _minF, _maxU, _avgU, _curU, count allGroups];
-	diag_log format["MSO-%1 Debug Server FPS: %2,%3,%4,%5,%6,%7,%8", time, _maxF, _avgF, _minF, _maxU, _avgU, _curU, count allGroups];
+	diag_log format["CRBSERVERFPS,%2,%3,%4,%5,%6,%7,%8", time, _maxF, _avgF, _minF, _maxU, _avgU, _curU, count allGroups];
 };	
 
 if(isNil "debug_serverfps") then {debug_serverfps = 60;};
@@ -68,14 +68,14 @@ if(isServer && debug_serverfps != 0) then{
 			_avgU = (_avgU *  _i + _allunits) / (_i + 1);
 			_i = _i + 1;
 			
-			SERVERFPS = [_fpsmax, _fpsavg, _fpsmin, _maxU, _avgU, _allunits];
-			publicVariable "SERVERFPS";
+			CRBSERVERFPS = [_fpsmax, _fpsavg, _fpsmin, _maxU, _avgU, _allunits];
+			publicVariable "CRBSERVERFPS";
 			call displayStats;
 		};
 	};
 };
 
-diag_log "Time,FPSMax,FPSAvg,FPSMin,UnitsMax,UnitsAvg,UnitsCur,allGroups";
-"SERVERFPS" addPublicVariableEventHandler {
+diag_log "CRBSERVERFPS,Time,FPSMax,FPSAvg,FPSMin,UnitsMax,UnitsAvg,UnitsCur,allGroups";
+"CRBSERVERFPS" addPublicVariableEventHandler {
 	call displayStats;
 };
