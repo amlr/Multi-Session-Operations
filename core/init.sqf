@@ -5,8 +5,6 @@
 #endif
 
 
-private ["_uid"];
-
 //http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];
 
@@ -14,47 +12,13 @@ MSO_Loop_Funcs = [];
 MSO_useCBA = false;
 
 // Thanks to Nou for this code
-mso_core_fnc_addLoopHandler = {
-        private ["_id","_forEachIndex","_return"];
-        _return = -1;
-        if(MSO_useCBA) then {
-                player sideChat format["cba"];
-                _this call cba_fnc_addPerFrameHandler;
-        } else {
-                _id = -1;
-                {
-                        if((count _x) == 0) exitWith {
-                                _id = _forEachIndex;
-                        };
-                } forEach MSO_Loop_Funcs;
-                if(_id == -1) then {
-                        _id = (count MSO_Loop_Funcs);
-                };
-                MSO_Loop_Funcs set[_id, [_this, 0]];
-		_return = _id;
-        };        
-        _return;
-};
-
-// Thanks to Nou for this code
-mso_core_fnc_removeLoopHandler = {
-        private ["_id"];
-        if(MSO_useCBA) then {
-                _this call cba_fnc_removePerFrameHandler;
-        } else {
-                _id = _this select 0;
-                MSO_Loop_Funcs set[_id, []];
-        };
-};
-
-// Thanks to Nou for this code
 [] spawn {
-        private ["_forEachIndex","_f","_delta"];
         if(!MSO_useCBA) then {
                 if(!isDedicated) then {
                         waitUntil { player == player && alive player };
                 };
                 waitUntil {
+		        private ["_f","_delta"];
                         {
                                 if((count _x) > 0) then {
                                         _f = _x select 0;
@@ -132,6 +96,7 @@ if(isDedicated) then {
 setTerrainGrid 25;
 
 #ifdef RMM_MP_RIGHTS
+private ["_uid"];
 if(isNil "mprightsDisable") then {mprightsDisable = 1;};
 if(mprightsDisable == 1) then {
         "MP Rights disabled" call mso_core_fnc_initStat;

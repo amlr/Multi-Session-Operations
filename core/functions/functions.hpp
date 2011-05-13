@@ -17,6 +17,9 @@ class mso_core {
 		class getUnitsInArea {};
 		class getDominantSide {};
 		class getFactions {};
+		class profiler {};
+		class addLoopHandler {};
+		class removeLoopHandler {};
 	};
 	class server {
 		file = "core\functions\server";
