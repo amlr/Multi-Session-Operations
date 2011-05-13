@@ -1,4 +1,9 @@
-private ["_position","_radius","_name","_debug","_currentSideCount","_maxSideCount","_side"];
+#include <crbprofiler.hpp>
+
+private ["_position","_radius","_name","_debug","_currentSideCount","_maxSideCount","_side","_units"];
+
+CRBPROFILERSTART("mso_core_fnc_getDominantSide")
+
 _position = _this select 0;
 _radius = _this select 1;
 _name = _this select 2;
@@ -37,5 +42,7 @@ if (_debug) then
 {
 		diag_log format ["MSO-%1 Dominant Side: %2 Dominant side is %3 and has %4 units", time, _name, _side, _maxSideCount];
 };
+
+CRBPROFILERSTOP
 
 _side;

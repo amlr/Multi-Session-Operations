@@ -1,4 +1,9 @@
+#include <crbprofiler.hpp>
+
 private ["_types","_locations","_radius","_debug","_color","_icon","_objects","_objpos","_objcenter"];
+
+CRBPROFILERSTART("mso_core_fnc_findObjectsByType")
+
 _types = _this select 0;
 _locations = _this select 1;
 _radius = _this select 2;
@@ -27,5 +32,7 @@ if (_debug) then
 		[_t, position _x, "Icon", [0.5,0.5], "TYPE:", _icon, "COLOR:", _color, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
 	} forEach _objects;
 };
+
+CRBPROFILERSTOP
 
 _objects;

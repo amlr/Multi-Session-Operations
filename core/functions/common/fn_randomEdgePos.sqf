@@ -1,4 +1,9 @@
+#include <crbprofiler.hpp>
+
 private ["_mapsize","_height","_debug","_name","_color","_icon","_edgepos","_edge","_ex","_ey","_ez"];
+
+CRBPROFILERSTART("mso_core_fnc_randomEdgePos")
+
 _mapsize = _this select 0;
 _height = _this select 1;
 _debug = _this select 2;
@@ -27,5 +32,7 @@ if (_debug) then
 		_t = format["%1", floor(random 10000)];
 		_m = [_t, _edgepos, "Icon", [0.5,0.5], "TYPE:", _icon, "TEXT:", _name, "COLOR:", _color, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
 };
+
+CRBPROFILERSTOP
 
 _edgepos;

@@ -1,10 +1,14 @@
+#include <crbprofiler.hpp>
+
 // Create locations for use by MSO on custom islands
 // Will scan island and create all keypoints where possible
 // Relies on towns having been set on terrain
 // Will create CityCenters, Strategic, StrongPointArea, FlatArea, FlatAreaCity, FlatAreaCitySmall, BorderCrossing 
 
-private ["_ctypes", "_objs", "_size","_twn","_tempObjs","_cx","_cy","_ax","_ay","_bestplaces","_temploc","_debug","_Posi","_citycenters","_nearlocs","_exp","_position","_name","_currentPosition","_done","_loop","_northpoint","_southpoint","_eastpoint","_westpoint","_edge","_incr","_by","_bx","_rad","_list","_twnlist","_loc","_output","_newlocs","_twn","_neigh","_neighbors"];
+private ["_ctypes","_objs","_size","_twn","_tempObjs","_cx","_cy","_ax","_ay","_bestplaces","_temploc","_debug","_Posi","_nearlocs","_exp","_position","_name","_done","_loop","_northpoint","_southpoint","_eastpoint","_westpoint","_edge","_incr","_by","_bx","_rad","_list","_twnlist","_loc","_output","_neigh","_neighbors","_currentPos","_Pos","_initNeighbors"];
 if(!isServer) exitWith{};
+
+CRBPROFILERSTART("mso_core_fnc_createLocations")
 
 // Choose whether or not to output the location configs
 _output = false;
@@ -349,3 +353,5 @@ if (_output) then
 		diag_log format ["}"];
 	} foreach (bis_functions_mainscope getvariable "locations");
 };
+
+CRBPROFILERSTOP

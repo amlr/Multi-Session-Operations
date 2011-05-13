@@ -1,6 +1,8 @@
+#include <crbprofiler.hpp>
+
 private ["_trigDist","_debug","_delay"];
 
-_debug = true;
+_debug = false;
 
 _trigDist = if(_debug) then {100} else {1000};
 if(isNil "_this") then {_this = [];};
@@ -18,13 +20,15 @@ nou_suspended = 0;
 nou_stats = "";
 
 Nou_cacheGroup = {
+        CRBPROFILERSTART("Nou Caching cacheGroup")
+        
         if(!(_this getVariable ["Cached", false])) then {
                 _this setVariable ["Cached", true];
                 {
                         private["_pos"];
                         if(vehicle _x == _x) then {
                                 _x enableSimulation false;
-				_x allowDamage false;
+                                _x allowDamage false;
                                 _x setVariable ["pos", leader _x worldToModel position _x, true];
                                 _pos = getPosATL _x;
                                 _pos set [2, -2];
@@ -32,11 +36,14 @@ Nou_cacheGroup = {
                                 nou_cached = nou_cached + 1;
                         };
                 } forEach units _this - [leader _this];
-		publicVariable "nou_cached";
+                publicVariable "nou_cached";
         };
+        CRBPROFILERSTOP
 };
 
 Nou_uncacheGroup = {
+        CRBPROFILERSTART("Nou Caching uncacheGroup")
+        
         if(_this getVariable ["Cached",true]) then {
                 _this setVariable ["Cached", false];
                 {
@@ -45,16 +52,19 @@ Nou_uncacheGroup = {
                                 _pos = leader _x modelToWorld (_x getVariable "pos");
                                 _x setVariable ["pos", nil];
                                 _x setPosATL _pos;
-				_x allowDamage true;
+                                _x allowDamage true;
                                 _x enableSimulation true;
-	                        if(nou_cached > 0) then {nou_cached = nou_cached - 1;};
+                                if(nou_cached > 0) then {nou_cached = nou_cached - 1;};
                         };
                 } forEach units _this - [leader _this];
-		publicVariable "nou_cached";
+                publicVariable "nou_cached";
         };
+        CRBPROFILERSTOP
 };
 
 Nou_suspendGroup = {
+        CRBPROFILERSTART("Nou Caching suspendGroup")
+        
         if(!(_this getVariable ["Suspended", false])) then {
                 _this setVariable ["Suspended", true];
                 {
@@ -62,9 +72,12 @@ Nou_suspendGroup = {
                         nou_suspended = nou_suspended + 1;
                 } forEach units _this - [leader _this];
         };
+        CRBPROFILERSTOP
 };
 
 Nou_unsuspendGroup = {
+        CRBPROFILERSTART("Nou Caching unsuspendGroup")
+        
         if(_this getVariable ["Suspended", true]) then {
                 _this setVariable ["Suspended", false];
                 {
@@ -72,9 +85,12 @@ Nou_unsuspendGroup = {
                         if(nou_suspended > 0) then {nou_suspended = nou_suspended - 1;};
                 } forEach units _this - [leader _this];
         };
+        CRBPROFILERSTOP
 };
 
 Nou_closestUnit = {
+        CRBPROFILERSTART("Nou Caching closestUnit")
+        
         private["_units", "_unit", "_dist", "_udist"];
         _units = _this select 0;
         _unit = _this select 1;
@@ -84,21 +100,23 @@ Nou_closestUnit = {
                 _udist = _x distance _unit;
                 if (_udist < _dist) then {_dist = _udist;};
         } forEach _units;
+        CRBPROFILERSTOP
         _dist;
 };
 
 Nou_triggerUnits = {
+        CRBPROFILERSTART("Nou Caching triggerUnits")
+        
         private ["_nou_leader","_trigUnits"];
         _nou_leader = _this select 0;
         _trigUnits = [];
         {
-                if (leader _x == _x) then {
-                        if ((((side _x) getFriend (side _nou_leader)) <= 0.6)) then {
-                                _trigUnits set [count _trigUnits, _x];
-                        };
+                if ((((side _x) getFriend (side _nou_leader)) <= 0.6)) then {
+                        _trigUnits set [count _trigUnits, leader _x];
                 };
-        } forEach allUnits;
+        } forEach allGroups;
         _trigUnits = _trigUnits + ([] call BIS_fnc_listPlayers);
+        CRBPROFILERSTOP
         _trigUnits;
 };
 
@@ -111,7 +129,9 @@ waitUntil{typeName playableUnits == "ARRAY"};
 if(!isServer) then {
         diag_log format["MSO-%1 Nou Caching (%2) Starting", time, name player];
         [{
+                CRBPROFILERSTART("Nou Caching player")
                 private ["_params","_nou_cache_dist","_debug"];
+                
                 _params = _this select 0;
                 _nou_cache_dist = _params select 0;
                 _debug = _params select 1;
@@ -132,13 +152,18 @@ if(!isServer) then {
                         diag_log format["MSO-%1 Nou Caching (%2) # %3", time, name player, nou_stats];
                         if(_debug) then {hint format["MSO-%1 Nou Caching # %2", time, nou_stats];};
                 };
+                
+                CRBPROFILERSTOP
         }, 1, [_trigDist, _debug]] call mso_core_fnc_addLoopHandler;
 };
 
 if(isServer) then {
         diag_log format["MSO-%1 Nou Caching (%2) Starting", time,"SERVER"];
         [{
+                CRBPROFILERSTART("Nou Caching server")
+                
                 private ["_params","_nou_cache_dist","_debug"];
+                
                 _params = _this select 0;
                 _nou_cache_dist = _params select 0;
                 _debug = _params select 1;
@@ -159,5 +184,7 @@ if(isServer) then {
                         diag_log format["MSO-%1 Nou Caching (%2) # %3", time,"SERVER", nou_stats];
                         if(_debug) then {hint format["MSO-%1 Nou Caching # %2", time, nou_stats];};
                 };
-        }, 1, [_trigDist, _debug]] call mso_core_fnc_addLoopHandler;
+                
+                CRBPROFILERSTOP
+        }, 3, [_trigDist, _debug]] call mso_core_fnc_addLoopHandler;
 };

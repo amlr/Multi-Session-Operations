@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 /*
 Original Script 
 objectMapper.sqf Author: Joris-Jan van 't Land
@@ -15,6 +17,9 @@ Edited by armatec
 	["fuelDepot_us", 0, getpos player] execVM "Createcomposition.sqf";
 */
 private ["_posX","_posY","_multiplyMatrixFunc","_newObjs","_script","_azi","_pos","_objs"];
+
+CRBPROFILERSTART("mso_core_fnc_createComposition")
+
 _script = _this select 0;
 _azi 	= _this select 1;
 _pos 	= _this select 2;
@@ -62,3 +67,4 @@ for "_i" from 0 to ((count _objs) - 1) do
 			_newObjs = _newObjs + [_newObj];				
 		};
 };
+CRBPROFILERSTOP

@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 private ["_server_file","_update_rate"];
 _server_file = "\mso\mso_uids.txt"; //File path relative to ArmA2 directory
 _update_rate = 30; //minimum 30 seconds
@@ -15,6 +17,8 @@ if (isserver) then {
         } foreach vehicles;
         
         [{
+                CRBPROFILERSTART("MP Rights")
+
                 private ["_server_file","_contents","_params"];
                 _params = _this select 0;
                 _server_file = _params select 0;
@@ -70,6 +74,7 @@ if (isserver) then {
                         publicVariable "MSO_R_Crew";
                         
                 };                
+                CRBPROFILERSTOP
         }, _update_rate, [_server_file]] call mso_core_fnc_addLoopHandler;
 };
 

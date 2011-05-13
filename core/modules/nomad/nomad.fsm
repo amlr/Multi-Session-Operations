@@ -75,7 +75,7 @@ class FSM
     class wait
     {
       name = "wait";
-      init = /*%FSM<STATEINIT""">*/"_wait = time + 5 + (random 10);"/*%FSM</STATEINIT""">*/;
+      init = /*%FSM<STATEINIT""">*/"_wait = time + 3;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
