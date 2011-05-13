@@ -59,6 +59,6 @@ for "_i" from 0 to ((count _queue) - 1) do
 };
 
 _queue = _queue - [-1];
-BIS_GC setVariable ["queue", _queue];
+BIS_GC setVariable ["queue", _queue, true];
 
 true
