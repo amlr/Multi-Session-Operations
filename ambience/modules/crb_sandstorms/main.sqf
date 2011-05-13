@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 private ["_debug","_d","_pos","_storms"];
 if (!isServer) exitWith{};
 
@@ -14,6 +16,8 @@ for "_id" from 0 to _storms do {
         };                
         
         [{
+		CRBPROFILERSTART("CRB Sandstorms")
+
                 private ["_params","_id","_d","_debug","_pos","_dest"];
                 _params = _this select 0;
                 _id = _params select 0;
@@ -40,8 +44,7 @@ for "_id" from 0 to _storms do {
                                 }] call mso_core_fnc_ExMP;
                         };
                 } forEach ([] call BIS_fnc_listPlayers);
-        }, 15, [_id, _d, _debug]] call mso_core_fnc_addLoopHandler;
+
+		CRBPROFILERSTOP
+        }, 60, [_id, _d, _debug]] call mso_core_fnc_addLoopHandler;
 };
-
-
-

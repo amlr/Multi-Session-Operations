@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 private ["_debug","_types","_dogs","_side","_grp","_maxdist"];
 if (!isServer) exitWith{};
 
@@ -38,6 +40,8 @@ if(count _this > 0) then {
                         };
                         
                         [{
+				CRBPROFILERSTART("Wild dogs")
+
                                 private ["_pos","_name","_debug","_params","_grp","_maxdist","_leader"];
                                 _params = _this select 0;
                                 _name = _params select 0;
@@ -80,8 +84,9 @@ if(count _this > 0) then {
                                                 };
                                         };
                                 };
-                                
-                        }, 1, [_name, _grp, _maxdist, _debug]] call mso_core_fnc_addLoopHandler;
+
+				CRBPROFILERSTOP
+                        }, 3, [_name, _grp, _maxdist, _debug]] call mso_core_fnc_addLoopHandler;
                 };
         };
 } forEach CRB_LOCS;

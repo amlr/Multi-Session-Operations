@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 waitUntil{!isNil "BIS_fnc_init"};
 
 if(isServer) then  {
@@ -14,6 +16,8 @@ if(isServer) then  {
 };
 
 [{
+	CRBPROFILERSTART("RMM Call To Prayer")
+
         private ["_fnc_between","_fnc_prayer","_towns"];
         _towns = BIS_functions_mainscope getVariable "locations";
         
@@ -40,4 +44,5 @@ if(isServer) then  {
                 };
         } foreach [[4.25,4.5],[5.25,5.75],[11.75,12],[15.25,15.5],[17.75,18.25],[19,19.25]];
         
+	CRBPROFILERSTOP
 }, 60, []] call mso_core_fnc_addLoopHandler;

@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 /*
 	Author(s): Joris-Jan van 't Land and ArmAtec
 
@@ -14,6 +16,7 @@
 	
 */
 
+CRBPROFILERSTART("mso_ambience_fnc_dynoCreate")
 
 private ["_posX","_posY","_multiplyMatrixFunc","_newObjs","_script","_azi","_pos","_objs"];
 _script = _this select 0;
@@ -60,3 +63,5 @@ for "_i" from 0 to ((count _objs) - 1) do
 		if (!isNil "_damage") then {_newObj setDamage _damage};
 		_newObjs = _newObjs + [_newObj];
 };
+
+CRBPROFILERSTOP

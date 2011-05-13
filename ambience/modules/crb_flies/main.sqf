@@ -1,8 +1,10 @@
+#include <crbprofiler.hpp>
+
 private ["_debug","_d","_pos","_swarms"];
 if (!isServer) exitWith{};
 
 _debug = false;
-_d = 50;
+_d = 500;
 _swarms = ceil(count(bis_functions_mainscope getVariable "locations") / 6);
 
 for "_id" from 0 to _swarms do { 
@@ -14,6 +16,8 @@ for "_id" from 0 to _swarms do {
         };                
         
         [{
+		CRBPROFILERSTART("CRB Flies")
+
                 private ["_params","_id","_d","_debug","_pos","_dest"];
                 _params = _this select 0;
                 _id = _params select 0;
@@ -43,6 +47,7 @@ for "_id" from 0 to _swarms do {
                                 }] call mso_core_fnc_ExMP;
                         };
                 } forEach ([] call BIS_fnc_listPlayers);
-                
-        }, 1, [_id, _d, _debug]] call mso_core_fnc_addLoopHandler;
+
+		CRBPROFILERSTOP                
+        }, 60, [_id, _d, _debug]] call mso_core_fnc_addLoopHandler;
 };

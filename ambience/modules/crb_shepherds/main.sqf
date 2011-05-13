@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 private ["_debug","_types","_name","_pos","_grp","_shepherds"];
 if (!isServer) exitWith{};
 _debug = false;
@@ -5,6 +7,8 @@ _debug = false;
 waitUntil{!isNil "BIS_fnc_init"};
 
 CRB_fnc_createShepherd = {
+	CRBPROFILERSTART("CRB Shepherds createShepherd")
+
         private ["_civfaction","_shepherdClasses","_shepherdClass","_shepherd","_pos","_grp"];
         _pos = _this select 0;
         _grp = if(count _this > 1) then {_this select 1} else {createGroup civilian};
@@ -75,10 +79,14 @@ CRB_fnc_createShepherd = {
         } else {
                 _shepherd addEventHandler ["Killed",{[([position (_this select 0), group (_this select 0)] call CRB_fnc_createShepherd)] call CRB_fnc_armShepherd;}];
         };
+
+	CRBPROFILERSTOP
         _shepherd;
 };
 
 CRB_fnc_armShepherd = {
+	CRBPROFILERSTART("CRB Shepherds armShepherd")
+
         private ["_shepherd","_arm"];
         // Arm shepherd
         _shepherd = _this select 0;
@@ -91,9 +99,13 @@ CRB_fnc_armShepherd = {
         };
         _shepherd addWeapon (_arm select 0);
         _shepherd action ["WeaponOnBack", _shepherd];
+
+	CRBPROFILERSTOP
 };
 
 CRB_fnc_shepherdAttack = {
+	CRBPROFILERSTART("CRB Shepherds shepherdAttack")
+
         private ["_shepherd","_target","_delaytime","_unit"];
         _unit = _this select 0;
         _shepherd = _unit getVariable "Shepherd";
@@ -111,16 +123,20 @@ CRB_fnc_shepherdAttack = {
                 _shepherd doWatch position _target;
                 _shepherd doTarget _target;
                 _shepherd doFire _target;
-                sleep 1;
+                sleep random 1;
         };
         _shepherd setUnitPos "AUTO";
         _shepherd setSpeedMode "LIMITED";
         _shepherd setBehaviour "SAFE";
         _shepherd setVariable ["attacking", false, true];
         _shepherd action ["WeaponOnBack", _shepherd];
+
+	CRBPROFILERSTOP
 };
 
 CRB_fnc_createDogs = {
+	CRBPROFILERSTART("CRB Shepherds createDogs")
+
         private ["_dogClass","_dog","_pos","_dogs"];
         _pos = _this select 0;
         _dogs = [];
@@ -141,10 +157,13 @@ CRB_fnc_createDogs = {
                 _dogs set [count _dogs, _dog];
         };
         
+	CRBPROFILERSTOP
         _dogs;
 };
 
 CRB_fnc_createHerd = {
+	CRBPROFILERSTART("CRB Shepherds createHerd")
+
         private ["_herdClass","_h","_herd","_pos","_herdType"];
         // Create herd       
         _pos = _this select 0;
@@ -188,6 +207,7 @@ CRB_fnc_createHerd = {
                 _herd set [count _herd, _h];
         };
         
+	CRBPROFILERSTOP
         _herd;
 };
 
@@ -220,6 +240,8 @@ _shepherds = [];
                         };                      
                         
                         [{
+				CRBPROFILERSTART("CRB Shepherds")
+
                                 private ["_h","_leader","_pos","_params","_maxdist","_grp","_last","_dist","_actions","_wait","_herd","_dogs","_shepherd","_name","_debug"];
                                 _params = _this select 0;
                                 _name = _params select 0;
@@ -236,7 +258,7 @@ _shepherds = [];
                                 };
                                 
                                 
-                                if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) > 0) then {
+                                if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) > 0 && count(units _grp) > 0) then {
                                         if(count(units _grp) == 0) then {
                                                 if(_debug) then {player globalChat format["Creating %1", _name];};
 						diag_log format["MSO-%1 Shepherds creating %2", time, _name];
@@ -347,12 +369,13 @@ _shepherds = [];
                                                 if(_debug) then {player globalChat format["%1 Attacking!", _name] ;};
                                         };
                                 }  else {
+/*
                                         if(count(units _grp) > 0) then {
                                                 if(_debug) then {player globalChat format["Destroying %1", _name];};
                                                 {deleteVehicle _x} foreach units _grp;
 						diag_log format["MSO-%1 Shepherds destroying %2", time, _name];
                                         };
-                                        
+*/
                                         if (_grp getVariable "wait" < time) then {
                                                 private["_oldpos"];
                                                 _oldpos = _pos;
@@ -364,6 +387,8 @@ _shepherds = [];
                                                 };
                                         };
                                 };
+
+				CRBPROFILERSTOP
                         },  2, [_name, _grp, _debug]] call mso_core_fnc_addLoopHandler;
                 };
         };

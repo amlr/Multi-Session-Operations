@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 /* ----------------------------------------------------------------------------
 Function: CBA_fnc_spawnVehiclePath
 
@@ -22,6 +24,8 @@ Author:
 	Rommel
 
 ---------------------------------------------------------------------------- */
+
+CRBPROFILERSTART("mso_ambience_fnc_spawnVehiclePath")
 
 private ["_class","_side","_positions","_radius","_speed","_behaviour","_direction","_array","_vehicle","_group","_waypoint","_count","_combat_mode"];
 _class = _this select 0;
@@ -65,3 +69,5 @@ for "_i" from 1 to _count do {
 		};
 	};
 };
+
+CRBPROFILERSTOP

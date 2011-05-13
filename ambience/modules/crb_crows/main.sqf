@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 private ["_debug","_d","_pos","_flocks"];
 if (!isServer) exitWith{};
 
@@ -15,6 +17,8 @@ for "_id" from 0 to _flocks do {
         };
         
         [{
+		CRBPROFILERSTART("CRB Crows")
+
                 private ["_params","_id","_d","_debug","_pos","_dest"];
                 _params = _this select 0;
                 _id = _params select 0;
@@ -32,5 +36,7 @@ for "_id" from 0 to _flocks do {
                 };
                 
                 [2, [_pos],{if(player distance (_this select 0) < 500)  then {_this call bis_fnc_crows;};}] call mso_core_fnc_ExMP;
+
+		CRBPROFILERSTOP
         }, 60, [_id, _d, _debug]] call mso_core_fnc_addLoopHandler;
 };

@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 private ["_allTopics","_endSentences","_tempArray","_element","_type","_topic","_path","_category","_screams","_scream","_categoryId","_oldScreams","_allScreams","_Remarks","_oldRemarks","_allRemarks","_civilianConversations","_civilianScreams","_civilianRemarks","_source","_twnEffects","_logic","_AIdoor","_allConversations","_kbCategories"];
 waituntil {!isnil "BIS_fnc_init"};_logic = bis_alice_mainscope;
 
@@ -136,6 +138,8 @@ _twnEffects = [];
 waitUntil {!isNil "BIS_ALICE_fnc_houseEffects"};
 
 [{ 
+	CRBPROFILERSTART("ALICE2_houseEffects")
+
         private ["_twnEffects","_doors","_obj","_doorsAll","_twn","_logic","_params"];
         _params = _this select 0;
         _logic = _params select 0;
@@ -191,5 +195,6 @@ waitUntil {!isNil "BIS_ALICE_fnc_houseEffects"};
                                 };
                         } forEach _doors;
                 };
-        } forEach (_logic getvariable "ALICE_alltowns");        
+        } forEach (_logic getvariable "ALICE_alltowns");
+	CRBPROFILERSTOP
 }, 15, [_logic,_twnEffects]] call mso_core_fnc_addLoopHandler;

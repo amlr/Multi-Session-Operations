@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 private ["_breed","_leader","_vari","_type","_grp","_dogname","_dog"];
 _leader = _this select 0;
 
@@ -38,6 +40,8 @@ if (isServer) then {
 };
 
 [{
+	CRBPROFILERSTART("Blitzy")
+
         private ["_alive_humans","_nearest","_distance","_near_humans","_dog","_leader","_params","_pos","_r"];
         _params = _this select 0;
         _leader = _params select 0;
@@ -101,4 +105,6 @@ if (isServer) then {
                         };
                 };
         };
+
+	CRBPROFILERSTOP
 }, 1, [_leader]] call mso_core_fnc_addLoopHandler;

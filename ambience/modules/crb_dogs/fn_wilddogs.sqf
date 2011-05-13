@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 private ["_side","_breed","_type","_dogname","_dog","_grp","_random","_pos","_handle","_gs"];
 
 _pos = _this select 0;
@@ -47,6 +49,8 @@ for "_i" from 1 to _random do {
 };
 
 _handle = [{
+	CRBPROFILERSTART("Wild dogs Active")
+
         private ["_alive_humans","_nearest","_distance","_near_humans","_grp","_params","_r","_dog"];
         _params = _this select 0;
         _grp = _params select 0;
@@ -58,7 +62,7 @@ _handle = [{
                         _alive_humans = [];
                         _distance = 1000;
                         _nearest = objNull;
-                        _near_humans = (position _dog nearEntities ["Man",100]) + (position _dog nearEntities ["Car",100]);
+                        _near_humans = nearestObjects [(position _dog), ["Man","Car"],100];
                         
                         {
                                 if ((side _dog)getFriend (side _x) <0.6) then {
@@ -109,6 +113,8 @@ _handle = [{
                         };
                 };
         } forEach units _grp;
+
+	CRBPROFILERSTOP
 }, 1, [_grp]] call mso_core_fnc_addLoopHandler;
 
 _grp setVariable ["handle", _handle, true];
