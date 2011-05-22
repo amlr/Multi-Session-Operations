@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 //#squint filter Unknown variable MSO_FACTIONS
 //#squint filter Unknown variable mso_core_fnc_initLocations
 //#squint filter Unknown variable mso_core_fnc_selectRandomBias
@@ -6,7 +8,7 @@
 //#squint filter Unknown variable mso_core_fnc_createCompositionE
 //#squint filter Careful - string searches using 'in' are case-sensitive
 //#squint filter Unknown variable CBA_fnc_addPerFrameHandler
-//#squint filter Unknown variable CBA_fnc_removePerFrameHandler
+//#squint filter Unknown variable mso_core_fnc_removeLoopHandler
 
 if(!isServer) exitWith{};
 
@@ -84,6 +86,8 @@ fPlayersInside = {
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[4,3,2,1]] call mso_core_fnc_selectRandomBias;
                                 
                                 [{
+					CRBPROFILERSTART("RMM EnemyPop Hill")
+
                                         private ["_pos","_pos2","_flag","_group","_grp2","_type","_params","_handle"];
                                         _params = _this select 0;
                                         _handle = _this select 1;
@@ -91,7 +95,7 @@ fPlayersInside = {
                                         _flag = _params select 1;
                                         _type= _params select 2;
                                         if(([_pos, ep_dist] call fPlayersInside)) then {
-                                                [_handle] call CBA_fnc_removePerFrameHandler;
+                                                [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
                                                 _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 while{isNil "_group"} do {
@@ -119,7 +123,8 @@ fPlayersInside = {
                                                 };
                                                 ep_groups set [count ep_groups, _group];
                                         };
-                                }, 3, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
+					CRBPROFILERSTOP
+                                }, 3, [_pos, _flag, _type]] call mso_core_fnc_addLoopHandler;
                         };
                 };
                 if (type _x in ["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"]) then {
@@ -158,6 +163,8 @@ fPlayersInside = {
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[8,6,3,1]] call mso_core_fnc_selectRandomBias;
                                 
                                 [{
+					CRBPROFILERSTART("RMM EnemyPop Strategic")
+
                                         private ["_pos","_pos2","_flag","_group","_grp2","_type","_params","_handle"];
                                         _params = _this select 0;
                                         _handle = _this select 1;
@@ -165,7 +172,7 @@ fPlayersInside = {
                                         _flag = _params select 1;
                                         _type= _params select 2;
                                         if(([_pos, ep_dist] call fPlayersInside)) then {
-                                                [_handle] call CBA_fnc_removePerFrameHandler;
+                                                [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
                                                 _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 while{isNil "_group"} do {
@@ -193,7 +200,8 @@ fPlayersInside = {
                                                 };
                                         };
                                         ep_groups set [count ep_groups, _group];
-                                }, 3, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
+					CRBPROFILERSTOP
+                                }, 3, [_pos, _flag, _type]] call mso_core_fnc_addLoopHandler;
                         };
                 };
                 if (type _x in ["FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown"]) then {
@@ -238,6 +246,8 @@ fPlayersInside = {
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[4,3,2,1]] call mso_core_fnc_selectRandomBias;
                                 
                                 [{
+					CRBPROFILERSTART("RMM EnemyPop FlatArea")
+
                                         private ["_pos","_pos2","_flag","_group","_grp2","_type","_params","_handle"];
                                         _params = _this select 0;
                                         _handle = _this select 1;
@@ -245,7 +255,7 @@ fPlayersInside = {
                                         _flag = _params select 1;
                                         _type= _params select 2;
                                         if(([_pos, ep_dist] call fPlayersInside)) then {
-                                                [_handle] call CBA_fnc_removePerFrameHandler;
+                                                [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
                                                 _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 while{isNil "_group"} do {
@@ -273,7 +283,8 @@ fPlayersInside = {
                                                 };
                                         };
                                         ep_groups set [count ep_groups, _group];
-                                }, 3, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
+					CRBPROFILERSTOP
+                                }, 3, [_pos, _flag, _type]] call mso_core_fnc_addLoopHandler;
                         };
                 };
                 if (type _x in ["ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"]) then {
@@ -316,6 +327,8 @@ fPlayersInside = {
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[8,6,3,1]] call mso_core_fnc_selectRandomBias;
                                 
                                 [{
+					CRBPROFILERSTART("RMM EnemyPop ViewPoint")
+
                                         private ["_pos","_pos2","_flag","_group","_grp2","_type","_params","_handle"];
                                         _params = _this select 0;
                                         _handle = _this select 1;
@@ -323,7 +336,7 @@ fPlayersInside = {
                                         _flag = _params select 1;
                                         _type= _params select 2;
                                         if(([_pos, ep_dist] call fPlayersInside)) then {
-                                                [_handle] call CBA_fnc_removePerFrameHandler;
+                                                [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
                                                 _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 while{isNil "_group"} do {
@@ -351,7 +364,8 @@ fPlayersInside = {
                                                 };
                                         };
                                         ep_groups set [count ep_groups, _group];
-                                }, 3, [_pos, _flag, _type]] call CBA_fnc_addPerFrameHandler;
+					CRBPROFILERSTOP
+                                }, 3, [_pos, _flag, _type]] call mso_core_fnc_addLoopHandler;
                         };
                 };
         };

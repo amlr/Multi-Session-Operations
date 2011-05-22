@@ -58,13 +58,13 @@ for "_i" from 0 to ((count _objs) - 1) do
 		if ((count _relPos) > 2) then {_z = _relPos select 2} else {_z = 0};
 		_newPos = [_posX + (_newRelPos select 0), _posY + (_newRelPos select 1), _z];
 		if (isServer) then {
-			_newObj = _type createVehicle _newPos;
+			_newObj = createVehicle [_type, _newPos, [], 0, "NONE"];
 			_newObj setDir (_azi + _azimuth);
 			_newObj setPos _newPos;
 			_newObj setVariable ["R3F_LOG_disabled", true];
 			if (!isNil "_fuel") then {_newObj setFuel _fuel};
 			if (!isNil "_damage") then {_newObj setDamage _damage};
-			_newObjs = _newObjs + [_newObj];				
+//			_newObjs set [count _newObjs, _newObj];
 		};
 };
 CRBPROFILERSTOP

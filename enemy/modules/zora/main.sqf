@@ -15,7 +15,7 @@ waitUntil{!isNil "BIS_Zora_Mainscope"};
 
 #define NIGHT_POSSIBILITY 0.2 //Percentage (0.2 == 20%)
 
-BIS_Zora_Mainscope setVariable ["debug",false];
+BIS_Zora_Mainscope setVariable ["debug",true];
 BIS_Zora_Mainscope setvariable ["bordersize",10000];
 BIS_Zora_Mainscope setvariable ["factionlist",MSO_FACTIONS];
 BIS_Zora_Mainscope setvariable ["search_radius",1000];
@@ -53,4 +53,4 @@ BIS_Zora_Mainscope setvariable ["maxdist", 2500];
                         };
                 };
         };
-}, 60, []] call CBA_fnc_addPerFrameHandler;
+}, 60, []] call mso_core_fnc_addLoopHandler;

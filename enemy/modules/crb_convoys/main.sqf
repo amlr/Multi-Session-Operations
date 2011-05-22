@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 //#squint filter Unknown variable mso_core_fnc_findVehicleType
 //#squint filter Unknown variable MSO_FACTIONS
 //#squint filter Unknown variable mso_core_fnc_selectRandomBias
@@ -49,6 +51,8 @@ for "_j" from 1 to _numconvoys do {
                 
                 _timeout = if(_debug) then {[30, 30, 30];} else {[30, 120, 300];};
                 while{true} do {
+			CRBPROFILERSTART("CRB Convoys")
+
                         _startpos = (_spawnpoints call BIS_fnc_selectRandom);
                         _startpos = [_startpos, 0, 0, 0, 0, 10, 0] call BIS_fnc_findSafePos;
                         _destpos = (_convoydest call BIS_fnc_selectRandom);
@@ -192,7 +196,9 @@ for "_j" from 1 to _numconvoys do {
                         
                         //END KIERANS ADDITION	   
                         
-                        waitUntil{!(_grp call CBA_fnc_isAlive)};        
+			CRBPROFILERSTOP
+
+                        waitUntil{sleep 15;!(_grp call CBA_fnc_isAlive)};        
                         
                         //KIERANS ADDITION - task deletion
                         
@@ -208,7 +214,6 @@ for "_j" from 1 to _numconvoys do {
                                 //player removeSimpleTask _task;
                                 //diag_log Format["MSO-%1 Convoy %2 Task Deleted", time, _id];
                         };
-			sleep random 15;
                         
                         //alert the players
                         [-1, {
@@ -230,6 +235,7 @@ for "_j" from 1 to _numconvoys do {
                         _t = format["e%1",_cid];
                         deleteMarker _t;
                         
+
                         _sleep = if(_debug) then {30;} else {random 300;};
                         sleep _sleep;                
                 };

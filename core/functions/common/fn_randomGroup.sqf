@@ -13,7 +13,7 @@
 //   OR	single faction = USMC,RU,INS,GUE,etc e.g. "INS"
 //   OR	multiple factions = USMC,RU,INS,GUE,etc e.g. ["RU","INS"]
 ///////////////////////////////////////////////////////////////////
-private ["_pos","_type","_fac","_facs","_sidex","_side","_grpx","_grps","_grp","_fx","_facx","_s","_allfacs","_spawnGrp","_wp"];
+private ["_pos","_type","_fac","_facs","_sidex","_side","_grpx","_grps","_grp","_fx","_facx","_s","_spawnGrp","_wp"];
 if(!isServer) exitWith{};
 
 CRBPROFILERSTART("mso_core_fnc_randomGroup")
@@ -32,8 +32,10 @@ waitUntil {!isNil "bis_fnc_init"};
 _facs = [];
 _side = nil;
 // get all factions
-_allfacs = [] call BIS_fnc_getFactions;
-//hint str _allfacs;
+if(isNil "CRB_ALLFACS") then {
+	CRB_ALLFACS = [] call BIS_fnc_getFactions;
+	//hint str CRB_ALLFACS;
+};
 // if default or selection by side
 if(typeName _fac == "ANY" || typeName _fac == "SIDE") then {
         if(typeName _fac == "SIDE") then {
@@ -58,9 +60,9 @@ if(typeName _fac == "ANY" || typeName _fac == "SIDE") then {
         {
                 _fx = getNumber(configFile >> "CfgFactionClasses" >> _x >> "side");
                 if (_fx == _sidex) then {
-                        _facs = _facs + [_x];
+                        _facs set [count _facs, _x];
                 };
-        } forEach _allfacs;
+        } forEach CRB_ALLFACS;
         _fac = nil;
 } else {
         switch(toUpper(typeName _fac)) do {
@@ -91,7 +93,7 @@ if(!isNil "_facs") then {
                         _grpx = count(configFile >> "CfgGroups" >> _s >> _x >> _type);
                         for "_y" from 1 to _grpx - 1 do {
                                 if (!(_x in _facx)) then {
-                                        _facx = _facx + [_x];
+                                        _facx set [count _facx, _x];
                                 };
                         };
                 } forEach _facs;
@@ -104,7 +106,7 @@ if (count _facs == 0) exitWith{nil;};
 
 // pick random faction and validate
 _fac = _facs select floor(random count _facs);
-//if(!(_fac in _allfacs)) exitWith{player globalChat format["crB_randomGroup - ""%1"" not valid - %2", _fac, _allfacs];};
+//if(!(_fac in CRB_ALLFACS)) exitWith{player globalChat format["crB_randomGroup - ""%1"" not valid - %2", _fac, CRB_ALLFACS];};
 
 if(isNil "_side") then {
         _sidex = getNumber(configFile >> "CfgFactionClasses" >> _fac >> "side");
@@ -135,7 +137,7 @@ _s = switch(_side) do {
 //hint str _s;
 _grpx = count(configFile >> "CfgGroups" >> _s >> _fac >> _type);
 for "_y" from 1 to _grpx - 1 do {
-        _grps = _grps + [(configFile >> "CfgGroups" >> _s >> _fac >> _type) select _y];
+        _grps set [count _grps, (configFile >> "CfgGroups" >> _s >> _fac >> _type) select _y];
 };
 //hint str _grps;
 _grp = _grps select floor(random count _grps);

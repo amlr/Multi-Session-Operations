@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 //execVM "modules\crb_terrorists\main.sqf";
 //[position player, 1,_debug] call CRB_fnc_FindVehicle;
 //[position player, 1] call CRB_fnc_SpawnVehicle
@@ -15,6 +17,8 @@ if(isNil "crb_tc_intensity")then{crb_tc_intensity = 1;};
 if(isNil "crb_tc_markers")then{crb_tc_markers = 1;};
 
 CRB_fnc_debugPositions = {
+	CRBPROFILERSTART("CRB Terrorists debugPositions")
+
         private ["_positions","_debug","_text"];
         _positions = _this select 0;
         _text = _this select 1;
@@ -36,12 +40,16 @@ CRB_fnc_debugPositions = {
                         _i = _i + 1;
                 } forEach _positions;
         };
+
+	CRBPROFILERSTOP
 };
 
 // Thanks to Pogoman's Insurgency for this code
 #define intelMarkerType "hd_unknown"
 #define intelRadius 1000
 PGM_fnc_CreateIntel = { 
+	CRBPROFILERSTART("CRB Terrorists createIntel")
+
         private ["_i","_sign","_sign2","_radius","_cache","_pos","_range"];
         
         _cache  = _this;	
@@ -61,9 +69,13 @@ PGM_fnc_CreateIntel = {
         _range  = _range - (_range % 50);
         [format["%1intel%2", _cache, _i], _pos, "Icon", [0.5,0.5], "TEXT:", format["%1m", _range], "TYPE:", intelMarkerType, "COLOR:", "ColorRed", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
         [2,[],{player sideChat "Intelligence received - map updated";}] call mso_core_fnc_ExMP;
+
+	CRBPROFILERSTOP
 }; 
 
 CRB_fnc_FindVehicle = {
+	CRBPROFILERSTART("CRB Terrorists findVehicle")
+
         private ["_newveh","_vdist","_pos","_vcargo","_vehs","_debug"];
         _pos = _this select 0;
         _vcargo = _this select 1;
@@ -87,10 +99,13 @@ CRB_fnc_FindVehicle = {
                 //DEBUG:player sideChat "No vehicle found";
         };
         
+	CRBPROFILERSTOP
         _newveh;
 };
 
 CRB_fnc_SpawnVehicle = {
+	CRBPROFILERSTART("CRB Terrorists spawnVehicle")
+
         private ["_vehicle","_vcargo","_tmp","_pos","_crew"];
         _pos = _this select 0;
         _crew = 1;
@@ -107,13 +122,18 @@ CRB_fnc_SpawnVehicle = {
                         _vehicle = _tmp createVehicle _pos;
                         _vcargo = _vehicle emptyPositions "cargo";
                 };
-                sleep 0.1;
+//                sleep 0.1;
         };
         //DEBUG:player sideChat format["Spawned vehicle: %1", _vehicle];
+
+	CRBPROFILERSTOP
+
         _vehicle;
 };
 
 CRB_fnc_SpawnRandomAmmo = {
+	CRBPROFILERSTART("CRB Terrorists spawnRandomAmmo")
+
         /*
         ["BAF_IEDBox","GuerillaCacheBox_EP1","GuerillaCacheBox","LocalBasicWeaponsBox","LocalBasicAmmunitionBox"],
         [1,1,5,5,10]
@@ -128,10 +148,14 @@ CRB_fnc_SpawnRandomAmmo = {
         _ammo = createVehicle [_aclass, _pos, [], 0, "NONE"];
         //        _ammo setPos _pos;
         _ammo setVectorUp [0, 0, 1];
+
+	CRBPROFILERSTOP
         _ammo;
 };
 
 CRB_fnc_ArmFromAmmo = {
+	CRBPROFILERSTART("CRB Terrorists armFromAmmo")
+
         // Arm with weapons
         private ["_srcwep","_ammo","_units"];
         _units = _this select 0;
@@ -157,9 +181,13 @@ CRB_fnc_ArmFromAmmo = {
                 _x setBehaviour "ALERT";
                 _x setSpeedMode "FULL";
         } forEach _units;
+
+	CRBPROFILERSTOP
 };
 
 CRB_fnc_GetBuildingPosForTown = {
+	CRBPROFILERSTART("CRB Terrorists getBuildingPosForTown")
+
         private ["_i","_j","_twn","_bldgpos","_nearbldgs","_debug"];
         _twn = _this select 0;
         _debug = _this select 1;
@@ -187,10 +215,14 @@ CRB_fnc_GetBuildingPosForTown = {
                 _twn setVariable ["BuldingPositions", _bldgpos, true];
         };
         [_bldgpos,"building positions",_debug] call CRB_fnc_debugPositions;
+
+	CRBPROFILERSTOP
         _bldgpos;
 };
 
 CRB_fnc_GetNearestTown = {
+	CRBPROFILERSTART("CRB Terrorists getNearestTown")
+
         private ["_nearest","_pos","_neighbours","_debug"];
         _pos = _this select 0;
         _debug = _this select 1;
@@ -211,7 +243,7 @@ CRB_fnc_GetNearestTown = {
                 };
         } forEach (bis_alice_mainscope getvariable "townlist") - [_nearest];
 
-	_neighbours = _neighbours + [_nearest];
+	_neighbours set [count _neighbours, _nearest];
         
         [_neighbours, "neighbours", _debug] call CRB_fnc_debugPositions;
         
@@ -220,10 +252,14 @@ CRB_fnc_GetNearestTown = {
 		hint "Error: Nearest town not found";
 		diag_log format["MSO-%1 TerrorCells: Nearest town not found", time];
 	};
+
+	CRBPROFILERSTOP
 	_nearest;
 };
 
 CRB_fnc_InitClassLists = {
+	CRBPROFILERSTART("CRB Terrorists initClassLists")
+
         private ["_class","_faction","_woman","_classlist"];
         waitUntil{!isNil "bis_alice_mainscope"};
         waitUntil{typeName (bis_alice_mainscope getvariable "ALICE_classes") == "ARRAY"};
@@ -246,9 +282,13 @@ CRB_fnc_InitClassLists = {
                         };
                 };
         } foreach _classlist;
+
+	CRBPROFILERSTOP
 };
 
 CRB_fnc_GetUnitClass = {
+	CRBPROFILERSTART("CRB Terrorists getUnitclass")
+
         private ["_classMan","_classList","_rarity","_bldgposcount","_twnRarityUrban","_rarityRange","_unitrarity"];
         _classList = _this select 0;
         _bldgposcount = _this select 1;
@@ -263,14 +303,16 @@ CRB_fnc_GetUnitClass = {
         while{abs(_twnRarityUrban - _rarity) > _rarityRange} do {
                 _classMan = _classList call BIS_fnc_selectRandom;
                 _rarity = _unitrarity select ((_unitrarity find _classMan)+1);
-                sleep 0.1;
         };
         
+	CRBPROFILERSTOP
         _classMan;
 };
 
 
 CRB_fnc_RecruitMember = {
+	CRBPROFILERSTART("CRB Terrorists recruitMember")
+
         private ["_t","_tcrm","_tcid","_bldgpos","_ammo","_grp","_debug","_recpos","_classMan","_recruit","_twn","_waittime"];
         _grp = _this select 0;
         _debug = _this select 1;
@@ -304,13 +346,13 @@ CRB_fnc_RecruitMember = {
         };
         waitUntil{typeName CRB_classlistFaction == "ARRAY"};
         
-        _classMan = CRB_classlistFaction call BIS_fnc_selectRandom;        
+        _classMan = CRB_classlistMen call BIS_fnc_selectRandom;        
         _recruit = (createGroup civilian) createUnit [_classMan, _recpos, [], 0, "NONE"];
         _recruit setSkill (random 1);
         _recruit allowDamage false;
         _recruit move position _ammo;
         _waittime = time + 300;
-        waitUntil{unitReady _recruit || _waittime < time};
+        waitUntil{sleep 1;unitReady _recruit || _waittime < time};
         _recruit allowDamage true;
         
         // Pick a random weapon from crate
@@ -319,9 +361,13 @@ CRB_fnc_RecruitMember = {
         if (_debug) then {
                 deleteMarker _tcrm;
         };
+
+	CRBPROFILERSTOP
 };
 
 CRB_fnc_SplitCell = {
+	CRBPROFILERSTART("CRB Terrorists splitCell")
+
         private ["_newveh","_t","_tcrm","_tcid","_grp","_debug","_terrorlead","_pos","_count","_split","_newcell","_newtwn","_str","_newlead","_waittime"];
         _grp = _this select 0;
         _debug = _this select 1;
@@ -367,11 +413,17 @@ CRB_fnc_SplitCell = {
         _newcell addVehicle _newveh;
         _newlead move position _newveh;
         _waittime = time + 300;
-        waitUntil{_newlead distance _newveh < 15 || _waittime < time};
+
+	CRBPROFILERSTOP
+
+        waitUntil{sleep 1;_newlead distance _newveh < 15 || _waittime < time};
+
         [_newlead] orderGetIn true;
         _newlead move _pos;
         _waittime = time + 300;
-        waitUntil{_newlead distance _pos < 50 || _waittime < time};
+
+        waitUntil{sleep 1;_newlead distance _pos < 50 || _waittime < time};
+
         sleep 15;
         
         /*        _newtwn = [];
@@ -395,6 +447,8 @@ CRB_fnc_SplitCell = {
 };
 
 CRB_fnc_SpawnNewCell = {
+	CRBPROFILERSTART("CRB Terrorists spawnNewCell")
+
         private ["_terrorcrgo","_pos","_count","_terrorlead","_maxgroupsize","_ammo","_spawn","_vehicle","_twn","_bldgpos","_grp","_debug","_t","_tcid","_tcsm","_tcdm","_forcesplit","_waittime","_wait"];
         _terrorlead = _this select 0;
         _vehicle = _this select 1;
@@ -443,13 +497,16 @@ CRB_fnc_SpawnNewCell = {
 
         units _terrorlead orderGetIn true;
         _wait = time + 120;
-        waitUntil{{!unitReady _x} count units _terrorlead == 0 || _wait < time};
+
+	CRBPROFILERSTOP
+
+        waitUntil{sleep 1;{!unitReady _x} count units _terrorlead == 0 || _wait < time};
         if(!((group _terrorlead) call CBA_fnc_isAlive)) exitWith {deleteVehicle _ammo;};
 
         _terrorlead move _pos;
         _terrorlead setBehaviour "SAFE";
         _waittime = time + 300;
-        waitUntil{_terrorlead distance _pos < 50 || _waittime < time};
+        waitUntil{sleep 1;_terrorlead distance _pos < 50 || _waittime < time};
         if(!((group _terrorlead) call CBA_fnc_isAlive)) exitWith {deleteVehicle _ammo;};
         sleep 15;
         
@@ -468,7 +525,7 @@ CRB_fnc_SpawnNewCell = {
         //{alive _x} count units _grp> 0 && 
         while{count((getWeaponCargo _ammo) select 0) != 0 || count((getMagazineCargo _ammo) select 0) != 0} do {
                 _forcesplit = false;
-                waitUntil{count ([] call BIS_fnc_listPlayers) > 1 || !isMultiplayer};
+                waitUntil{sleep 1;count ([] call BIS_fnc_listPlayers) > 1 || !isMultiplayer};
                 if(_debug) then {sleep 15} else {sleep (1800 + random 1800) * crb_tc_intensity};
                 _grp = group _terrorlead;
                 if(count units _grp < _maxgroupsize) then {
@@ -558,7 +615,7 @@ for "_i" from 1 to _numcells do {
                 
                 _terrorcrgo = [];
                 for "_i" from 0 to floor(random _vcargo) do {
-                        _classMan  = CRB_classlistFaction call BIS_fnc_selectRandom;
+                        _classMan  = CRB_classlistMen call BIS_fnc_selectRandom;
                         _terrorunit = (createGroup civilian) createUnit [_classMan, _spawn, [], 0, "NONE"];
                         [_terrorunit] joinSilent _grp;
                         _terrorcrgo = _terrorcrgo + [_terrorunit];
@@ -575,7 +632,7 @@ for "_i" from 1 to _numcells do {
                 _tlweps = weapons _terrorlead;
                 
                 // Wait for weapon to transfer
-                waitUntil{count(weapons _terrorlead) > count(_tlweps)};
+                waitUntil{sleep 1;count(weapons _terrorlead) > count(_tlweps)};
                 player globalChat str (count(weapons _terrorlead) > count(_tlweps));
                 // Check weapon and mag capacity in vehicle not yet reached
                 //if(_dstwep == 0) then { //skip to end
@@ -586,7 +643,7 @@ for "_i" from 1 to _numcells do {
                         for "_i" from 0 to _extra do {
                                 _tlmagsx = magazines _terrorlead;
                                 _terrorlead action ["dropweapon", _ammo, ((magazines _terrorlead) - _tlmags) select 0];
-                                waitUntil{count(magazines _terrorlead) < count(_tlmagsx)};
+                                waitUntil{sleep 1; count(magazines _terrorlead) < count(_tlmagsx)};
                         };
                 };
                 player globalChat str _dstmags;

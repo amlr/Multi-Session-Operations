@@ -1,6 +1,6 @@
 #include <crbprofiler.hpp>
 
-private ["_side","_position","_radius","_switch","_debug","_name","_currentFaction","_currentFactionCount","_factions","_afactions","_units","_facs","_factionsCount","_sidex","_allfacs"];
+private ["_side","_position","_radius","_switch","_debug","_name","_currentFaction","_currentFactionCount","_factions","_afactions","_units","_facs","_factionsCount","_sidex"];
 
 CRBPROFILERSTART("mso_core_fnc_getFactions")
 
@@ -17,7 +17,11 @@ _factions = [];
 _factionsCount = [];
 _facs = [];
 
-_allfacs = [] call BIS_fnc_getFactions;
+// get all factions
+if(isNil "CRB_ALLFACS") then {
+	CRB_ALLFACS = [] call BIS_fnc_getFactions;
+	//hint str CRB_ALLFACS;
+};
 
 // Set factions to count
 _sidex = 0;
@@ -43,7 +47,7 @@ _afactions = [];
         if (_fx == _sidex) then {
                 _afactions = _afactions + [_x];
         };
-} forEach _allfacs;
+} forEach CRB_ALLFACS;
 _facs = _afactions;
 
 if(count _this > 1) then {
