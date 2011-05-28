@@ -27,7 +27,7 @@ for "_y" from 1 to _grpx - 1 do {
                 if (!(getText(_vehx >> "simulation") in _nonsims))  then {
                         _cx = configName _vehx;
                         if ({(_cx isKindOf _x)} count _nonconfigs == 0) then {
-                                if (getNumber(_vehx >> "TransportSoldier") > _cargoslots) then {
+                                if (getNumber(_vehx >> "TransportSoldier") >= _cargoslots) then {
                                         if (!isNil "_fac") then {
                                                 _fx = getText(_vehx >> "faction");
                                                 switch(toUpper(typeName _fac)) do {

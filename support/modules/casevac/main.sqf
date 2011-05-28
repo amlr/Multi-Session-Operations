@@ -4,14 +4,18 @@ if (isdedicated) exitwith {};
 RMM_casevac_lines = [
 	{[mapGridPosition player]},
 	{[str (group player)]},
-	{["Alpha","Bravo","Charlie","Delta","Echo"]},
-	{["Alpha"]},
-	{["Alpha","Lima"]},
-	{["November","Papa","Echo","X-Ray"]},
-	{["Alpha","Bravo","Charlie","Delta"]},
-	{["Alpha","Bravo","Charlie","Delta","Echo"]},
-	{["November","Bravo","Charlie","None"]}
+	{["Urgent","Urgent Surgical","Priority","Routine","Convenience"]},
+	{["None","MASH Unit"]},
+	{["1","4","7","12","16","23"]},
+	{["No Enemy","Possible Enemy","Enemy","Heavy Enemy"]},
+	{["Chem-lights","IR Strobe","Smoke","Nothing"]},
+	{["BLUFOR Mil","BLUFOR Civ","Mil","Civ","OPFOR"]}
 ];
+
+RMM_casevac_speed = "NORMAL";
+RMM_casevac_behav = "AWARE";
+RMM_casevac_flyinheight = 500;
+RMM_casevac_active = false;
 
 ["player", [mso_interaction_key], 4, ["support\modules\casevac\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
 ["CASEVAC","if(call mso_fnc_hasRadio && ((getPlayerUID player) in MSO_R_Leader)) then {createDialog ""RMM_ui_casevac""}"] call mso_core_fnc_updateMenu;
