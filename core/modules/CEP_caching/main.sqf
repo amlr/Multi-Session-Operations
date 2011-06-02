@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 // _________________________________________________________________________________________________________________
 // | Coop Essential Pack by -eutf-Myke                                                                             |
 // |_______________________________________________________________________________________________________________|
@@ -32,6 +34,8 @@ waitUntil{!isNil "bis_fnc_init"};
 waitUntil{typeName allGroups == "ARRAY"};
 
 [{
+	CRBPROFILERSTART("CEP Caching")
+
         private ["_params","_trigDist","_delay","_debug","_disable"];
         _params = _this select 0;
         _trigDist = _params select 0;
@@ -68,4 +72,5 @@ waitUntil{typeName allGroups == "ARRAY"};
                 diag_log format["MSO-%1 CEP Caching # %2", time, cep_stats];
                 if(_debug) then {hint format["MSO-%1 CEP Caching # %2", time, cep_stats];};
         };
+	CRBPROFILERSTOP
 }, 1, [_trigDist, _delay, _debug]] call mso_core_fnc_addLoopHandler;
