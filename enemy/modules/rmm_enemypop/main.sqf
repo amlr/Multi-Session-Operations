@@ -7,7 +7,7 @@
 //#squint filter Unknown variable mso_core_fnc_createComposition
 //#squint filter Unknown variable mso_core_fnc_createCompositionE
 //#squint filter Careful - string searches using 'in' are case-sensitive
-//#squint filter Unknown variable CBA_fnc_addPerFrameHandler
+//#squint filter Unknown variable mso_core_fnc_addLoopHandler
 //#squint filter Unknown variable mso_core_fnc_removeLoopHandler
 
 if(!isServer) exitWith{};
