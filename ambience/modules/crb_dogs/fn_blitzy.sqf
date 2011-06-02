@@ -26,6 +26,7 @@ if (isServer) then {
         
         _dogname = format ["k9%1",round (random 1000)];
         call compile format ['"%2" createUnit [getpos _leader, _grp,"%1=this;
+        this setSkill 0.2; 
         this disableAI ""AUTOTARGET"" ; 
         this disableAI ""TARGET"" ; 
         this setCombatMode ""BLUE"";

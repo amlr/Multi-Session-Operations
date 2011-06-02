@@ -37,6 +37,7 @@ for "_i" from 1 to _random do {
         
         _dogname = format ["k9%1",round (random 1000)];
         call compile format ['"%2" createUnit [_pos, _grp,"%1=this;
+        this setSkill 0.2;
         this setSpeedMode ""full"";
         this setbehaviour ""safe""",1]',_dogname,_breed];
         _dog = call compile format ["%1",_dogname];
@@ -77,7 +78,7 @@ _handle = [{
                         if (count _alive_humans >0)  then {
                                 _nearest = _alive_humans select 0;
                                 _distance = (position _dog) distance (_nearest);
-                                _dog setspeedmode "FULL";
+                                _dog setspeedmode "FULL";
                                 if (_distance < 100 && random 1 > 0.25) then {
                                         _dog domove position _nearest;
                                 };
