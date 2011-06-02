@@ -1,12 +1,14 @@
 #include <crbprofiler.hpp>
 
-private ["_debug","_mapsize","_helidest","_planedest","_destinations","_destairfield","_helilandings","_center","_airports","_planelandings"];
+private ["_debug","_mapsize","_helidest","_planedest","_destinations","_destairfield","_helilandings","_center","_airports","_planelandings","_combatMode"];
 if(!isServer) exitWith{};
 
 if (isNil "factionsMask") then {factionsMask = 0;};
 if (factionsMask == 2) exitWith{};
 
 if(isNil "AirIntensity")then{AirIntensity = 1;};
+
+if(isNil "AirROE")then{AirROE = 1;};
 
 _debug = false;
 
@@ -105,7 +107,7 @@ for "_j" from 0 to (_destinations-1) do
         
         [_j, _helidest, _planedest, _debug, _mapsize] spawn 
         {
-                private ["_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_wp","_j","_debug","_mapsize","_currentairfield","_airfieldSide","_factions","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight","_controltowers","_controlTowerTypes","_controltw","_housepos","_mv22pos","_aircraftClass"];
+                private ["_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_wp","_j","_debug","_mapsize","_currentairfield","_airfieldSide","_factions","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight","_controltowers","_controlTowerTypes","_controltw","_housepos","_mv22pos","_aircraftClass","_combatMode"];
                 _j = _this select 0;
                 _helidest = _this select 1;
                 _planedest = _this select 2;
@@ -114,6 +116,24 @@ for "_j" from 0 to (_destinations-1) do
                 
                 _isPlane = false;
                 _startHeight = 500 + (random 200);
+				
+				switch(AirROE) do {
+						case "1": {
+								_combatMode = "BLUE";
+						};
+						case "2": {
+								_combatMode = "GREEN";
+						};
+						case "3": {
+								_combatMode = "WHITE";
+						};
+						case "4": {
+								_combatMode = "YELLOW";
+						};
+						case "5": {
+								_combatMode = "RED";
+						};
+				};
                 
                 // Work out if current destination is for a plane or helicopter
                 if (_j < count _planedest) then 
@@ -220,13 +240,13 @@ for "_j" from 0 to (_destinations-1) do
                                         // Destination Waypoint
                                         _wp = _grp addwaypoint [_destpos, 0];
                                         _wp setWaypointBehaviour "SAFE";
-                                        _wp setWaypointCombatMode "BLUE";
+                                        _wp setWaypointCombatMode _combatMode;
                                         
                                         // Wait until the aircraft is close to the airfield
                                         
                                         CRBPROFILERSTOP
                                         
-                                        waitUntil{(_aircraftVehicle distance _destpos < 500) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
+                                        waitUntil{(_aircraftVehicle distance _destpos < 500) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
                                         // Once near destination, action a landing.
                                         if (typeof _aircraftVehicle == "MV22") then {
                                                 _mv22pos = [_destpos, 0, 45, 15, 0, 0, 0] call BIS_fnc_findSafePos;
@@ -236,12 +256,12 @@ for "_j" from 0 to (_destinations-1) do
                                         };
                                         if (_aircraftVehicle iskindof "Helicopter" or typeof _aircraftVehicle == "MV22") then {
                                                 _aircraftVehicle land "LAND";
-                                                waitUntil{((position _aircraftVehicle) select 2 <= 5) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
+                                                waitUntil{((position _aircraftVehicle) select 2 <= 5) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
                                         } else {
                                                 _aircraftVehicle action ["Land", _aircraftVehicle];
-                                                waitUntil{((position _aircraftVehicle) select 2 <= 2) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
+                                                waitUntil{((position _aircraftVehicle) select 2 <= 2) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
         	                                _wp = _grp addwaypoint [_destpos, 0];
-                                                waitUntil{(_aircraftVehicle distance _destpos < 50) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) };
+                                                waitUntil{(_aircraftVehicle distance _destpos < 50) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
                                         };			
                                         deleteVehicle _landEnd;
                                         
@@ -289,17 +309,24 @@ for "_j" from 0 to (_destinations-1) do
                                         _wp = _grp addwaypoint [_endpos, 0];
                                         _wp setWaypointType "MOVE";                               
                                         
-                                        waitUntil{(_aircraftVehicle distance _endpos < 50) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive)};
+                                        waitUntil{(_aircraftVehicle distance _endpos < 50) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
                                         
                                         // Check to see if vehicle was killed/died/crashed
                                         if (!(_grp call CBA_fnc_isAlive) && (_debug)) then {
                                                 diag_log format["MSO-%1 Air Traffic: %3 %4, %2 Died!", time, TypeOf _aircraftVehicle, _destination, _j];
                                         };
-                                        
+										
+										// Check to see if vehicle was damaged
+										
+                                        if ((damage _aircraftVehicle > 0.4) && (_debug)) then {
+                                                diag_log format["MSO-%1 Air Traffic: %3 %4, %2 Damaged!", time, TypeOf _aircraftVehicle, _destination, _j];
+                                        };
+										
                                         // Remove aircraft and crew
                                         if (_debug) then {
                                                 diag_log format["MSO-%1 Air Traffic: %3 %4 deleting %2", time, TypeOf _aircraftVehicle, _destination, _j];
                                         };
+										
                                         { deleteVehicle _x } forEach _aircraftCrew;
                                         deleteVehicle _aircraftVehicle;
                                         deletegroup _grp;

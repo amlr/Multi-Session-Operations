@@ -7,7 +7,7 @@ class RMM_ui_casevac { // by Rommel
 	class controls {
 		class Background : CUI_Frame {
 			y = CUI_Row_Y(0);
-			h = CUI_Row_DY(0,11);
+			h = CUI_Row_DY(0,10);
 			w = CUI_Box_W;
 		};
 		class Caption : CUI_Caption {
@@ -29,11 +29,10 @@ class RMM_ui_casevac { // by Rommel
 		class Lb5 : Lb0 {idc = 5;y = CUI_Row_Y(6);};
 		class Lb6 : Lb0 {idc = 6;y = CUI_Row_Y(7);};
 		class Lb7 : Lb0 {idc = 7;y = CUI_Row_Y(8);};
-		class Lb8 : Lb0 {idc = 8;y = CUI_Row_Y(9);};
 		class Transmit : CUI_Button {
 			text = "Transmit";
 			w = CUI_Box_W;
-			y = CUI_Row_Y(10);
+			y = CUI_Row_Y(9);
 			action = "if (lbCurSel 1 > -1) then {0 call casevac_fnc_call}; closeDialog 0;";
 		};
 	};

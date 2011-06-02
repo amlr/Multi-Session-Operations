@@ -34,12 +34,11 @@ _string = switch (_this select 0) do {
 	};
 	case (_display displayCtrl 4) : {
 		private "_string";
-		_string = "<t size='1.5'>Patients by Type:</t>";
+		_string = "<t size='1.5'>Number of Injured:</t>";
 		{
 			_string = _string + format["<br/>%1 -- %2", _x select 0, _x select 1];
 		} foreach [
-			["Lima","Litter Patients"],
-			["Alpha","Ambulatory"]
+			["1","2","3","4","8","9+"]
 		];
 		_string;
 	};
@@ -64,8 +63,8 @@ _string = switch (_this select 0) do {
 		} foreach [
 			["Alpha","Chemlights"],
 			["Bravo","IR Strobes"],
-			["Charlie","Smoke signal"],
-			["Delta","None"]
+			["Charlie","Smoke Signal"],
+			["Delta","Nothing"]
 		];
 		_string;
 	};
@@ -75,24 +74,11 @@ _string = switch (_this select 0) do {
 		{
 			_string = _string + format["<br/>%1 -- %2", _x select 0, _x select 1];
 		} foreach [
-			["Alpha","AU Military"],
-			["Bravo","AU Citizen"],
-			["Charlie","Non AU Military"],
-			["Delta","Non AU Citizen"],
-			["Echo","Enemy Prisoner of War"]
-		];
-		_string;
-	};
-	case (_display displayCtrl 8) : {
-		private "_string";
-		_string = "<t size='1.5'>NBC Contamination:</t>";
-		{
-			_string = _string + format["<br/>%1 -- %2", _x select 0, _x select 1];
-		} foreach [
-			["November","Nuclear"],
-			["Bravo","Biological"],
-			["Charlie","Chemical"],
-			["Zero","None"]
+			["Alpha","BLUFOR Military"],
+			["Bravo","BLUFOR Citizen"],
+			["Charlie","Non BLUFOR Military"],
+			["Delta","Non BLUFOR Citizen"],
+			["Echo","OPFOR"]
 		];
 		_string;
 	};

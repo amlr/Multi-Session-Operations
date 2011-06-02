@@ -6,6 +6,8 @@ if(!isServer) exitWith{};
 if (isNil "amount") then {amount = 1;};
 if (amount == 2) exitWith{};
 
+if(isNil "SeaROE")then{SeaROE = 1;};
+
 _debug = false;
 
 waitUntil{!isNil "BIS_fnc_init"};
@@ -45,7 +47,7 @@ if(isNil "TUP_CIVFACS") then {
 for "_j" from 0 to (_destinations-1) do {
         
         [_j, _seadest, _mapsize, _debug] spawn {
-                private ["_timeout","_sleep","_startpos","_destpos","_grp","_front","_wp","_j","_spawnpos","_debug","_factions","_stopTime","_seadest","_vehiclelist","_seaportside","_ship","_shipVehicle","_shipCrew","_currentseadest","_endpos","_mapsize","_shipClass"];
+                private ["_timeout","_sleep","_startpos","_destpos","_grp","_front","_wp","_j","_spawnpos","_debug","_factions","_stopTime","_seadest","_vehiclelist","_seaportside","_ship","_shipVehicle","_shipCrew","_currentseadest","_endpos","_mapsize","_shipClass","_combatMode"];
                 _j = _this select 0;
                 _seadest = _this select 1;
                 _mapsize = _this select 2;
@@ -54,6 +56,24 @@ for "_j" from 0 to (_destinations-1) do {
                 _currentseadest = _seadest select _j;           
                 _timeout = if(_debug) then {[0, 0, 0];} else {[30, 60, 90];};
                 _spawnpos = [];
+				
+				switch(SeaROE) do {
+						case "1": {
+								_combatMode = "BLUE";
+						};
+						case "2": {
+								_combatMode = "GREEN";
+						};
+						case "3": {
+								_combatMode = "WHITE";
+						};
+						case "4": {
+								_combatMode = "YELLOW";
+						};
+						case "5": {
+								_combatMode = "RED";
+						};
+				};
                 
                 //Loop continuously and create ships for the destination		
                 while{true} do {
@@ -141,6 +161,7 @@ for "_j" from 0 to (_destinations-1) do {
                         _wp setWayPointType "MOVE";
                         _wp setWaypointFormation "FILE";
                         _wp setWaypointBehaviour "SAFE";
+						_wp setWaypointBehaviour _combatMode;
                         _wp setWaypointTimeout _timeout;   
                         
                         _wp = _grp addwaypoint [_endpos, 0];
