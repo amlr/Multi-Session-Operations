@@ -1,3 +1,5 @@
+#include <crbprofiler.hpp>
+
 // Simple Guard Post Script 1.0
 // by Tophe of Östgöta Ops
 //
@@ -35,6 +37,8 @@ then
 _unit setUnitPos _stance;
 
 [{
+	CRBPROFILERSTART("GuardPost")
+
         private ["_left","_right","_dir","_zaxis","_pos","_params","_handle","_unit","_startdir","_range","_height","_enemy","_delay"];
         _params = _this select 0;
         _handle = _this select 1;
@@ -46,7 +50,7 @@ _unit setUnitPos _stance;
         _delay = _params select 5;
         
         if(!alive _unit) exitWith {
-                [_handle] call CBA_fnc_removePerFrameHandler;
+                [_handle] call mso_core_fnc_removeLoopHandler;
         };
         
         // Start scanning 
@@ -78,4 +82,5 @@ _unit setUnitPos _stance;
                 
                 _unit setVariable ["GuardPosWait", (random 10) + _delay + time];
         };
-}, 3, [_unit, _startdir, _range, _height, _enemy, _delay]] call CBA_fnc_addPerFrameHandler;
+	CRBPROFILERSTOP
+}, 3, [_unit, _startdir, _range, _height, _enemy, _delay]] call mso_core_fnc_addLoopHandler;

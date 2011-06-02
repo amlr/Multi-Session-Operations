@@ -62,7 +62,7 @@ if(_patrol) then {
 _obj setCombatMode "YELLOW";
 _obj setPos _pos;
 //waitUntil{unitReady _obj;};
-while{_patrol && alive _obj} do {
+while{sleep 15;_patrol && alive _obj} do {
 	sleep (random _maxwait);
 	_pos = _bldgpos select floor(random count _bldgpos);
 	_obj move _pos;
