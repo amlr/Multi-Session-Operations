@@ -56,27 +56,30 @@ for "_j" from 0 to (_destinations-1) do {
                 _currentseadest = _seadest select _j;           
                 _timeout = if(_debug) then {[0, 0, 0];} else {[30, 60, 90];};
                 _spawnpos = [];
-				
-				switch(SeaROE) do {
-						case "1": {
-								_combatMode = "BLUE";
-						};
-						case "2": {
-								_combatMode = "GREEN";
-						};
-						case "3": {
-								_combatMode = "WHITE";
-						};
-						case "4": {
-								_combatMode = "YELLOW";
-						};
-						case "5": {
-								_combatMode = "RED";
-						};
-				};
+                
+                switch(SeaROE) do {
+                        case 1: {
+                                _combatMode = "BLUE";
+                        };
+                        case 2: {
+                                _combatMode = "GREEN";
+                        };
+                        case 3: {
+                                _combatMode = "WHITE";
+                        };
+                        case 4: {
+                                _combatMode = "YELLOW";
+                        };
+                        case 5: {
+                                _combatMode = "RED";
+                        };
+                };
                 
                 //Loop continuously and create ships for the destination		
                 while{true} do {
+                        // Wait a random amount of time before starting
+                        sleep (random 90);
+
                         CRBPROFILERSTART("TUP Sea Traffic")
                         
                         // Work out side that controls destination (based on unit numbers)
@@ -161,7 +164,7 @@ for "_j" from 0 to (_destinations-1) do {
                         _wp setWayPointType "MOVE";
                         _wp setWaypointFormation "FILE";
                         _wp setWaypointBehaviour "SAFE";
-						_wp setWaypointBehaviour _combatMode;
+                        _wp setWaypointBehaviour _combatMode;
                         _wp setWaypointTimeout _timeout;   
                         
                         _wp = _grp addwaypoint [_endpos, 0];
@@ -177,7 +180,7 @@ for "_j" from 0 to (_destinations-1) do {
                         
                         CRBPROFILERSTOP
                         
-                        waitUntil{ (time > _stopTime)};
+                        waitUntil{sleep 15;(time > _stopTime)};
                         
                         // Remove ship and crew
                         
