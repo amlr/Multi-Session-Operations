@@ -35,7 +35,7 @@ _setNeigbors = {
 	_neighbors = _this select 1;
 	_debug = _this select 2;
 	_neighborsLogic = [];
-	waituntil {isnil {bis_functions_mainscope getvariable "BIS_fnc_locations_pending"}};
+	waituntil {sleep 1;isnil {bis_functions_mainscope getvariable "BIS_fnc_locations_pending"}};
 	{
 		call compile format ["if !(isnil 'BIS_loc_%1') then {_neighborsLogic = _neighborsLogic + [BIS_loc_%1]}",_x];	
 	} foreach _neighbors;

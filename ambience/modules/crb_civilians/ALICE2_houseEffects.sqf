@@ -182,7 +182,7 @@ waitUntil {!isNil "BIS_ALICE_fnc_houseEffects"};
                                         _overcast = 0.8 + 0.2*_randomValue;
                                         _fog = 0.8 + 0.2*_randomValue;
                                         
-                                        waitUntil{!alive _door || time > _timeStop || 
+                                        waitUntil{sleep 15;!alive _door || time > _timeStop || 
                                         ((daytime >=_daytimeStart && daytime <= _daytimeEnd) &&
                                         rain <= _rain &&
                                         overcast <= _overcast &&

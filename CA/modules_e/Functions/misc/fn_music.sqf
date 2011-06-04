@@ -59,6 +59,7 @@ bis_fnc_music_spawn = [_trackList,_durationList,_delay] spawn {
 
 		//--- Select track
 		waituntil {
+			sleep 1;
 			_ran = floor random _trackCount;
 			_ran != _oldRan || _trackCount == 1
 		};

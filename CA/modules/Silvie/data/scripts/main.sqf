@@ -129,7 +129,7 @@ _twnlist = [];
  if (isnil {_logic getvariable "townlist"}) then {
 	_locationParams = if (_debug) then {[["CityCenter"],[],true]} else {[["CityCenter"]]};
 	_create = _locationParams call bis_fnc_locations;
-	waituntil {count _create > 0};
+	waituntil {sleep 1;count _create > 0};
 	{
 		if ((_x getvariable "type") == "CityCenter") then {_twnlist = _twnlist + [_x]};
 	} foreach (bis_functions_mainscope getvariable "locations");

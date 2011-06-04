@@ -25,7 +25,7 @@ _zgb_hitparts_car = ["HitEngine","HitRGlass","HitLGlass","HitBody","HitFuel","Hi
 if (_debug) then {textLogFormat ["Log: [SILVIE] #%1 at %2",_id, time];};
 
 //--- Clear
-waituntil {{_x distance _pos < 1000} count switchableunits == 0 || _init};
+waituntil {sleep 1;{_x distance _pos < 1000} count switchableunits == 0 || _init};
 _car = createvehicle [_class, _pos, [], _radius, "none"];
 _car setdir (_dir - 10 + random 20);
 _car setvelocity [0,0,-0.2];
@@ -36,7 +36,7 @@ _car addeventhandler ["killed",{
 	_this spawn {
 		_car = _this select 0;
 		_logic = BIS_silvie_mainscope;
-		waituntil {_logic getvariable "id" > 0};
+		waituntil {sleep 1;_logic getvariable "id" > 0};
 		_id = _logic getvariable "id";
 		_id = -_id;
 		_twn = (_car getvariable "SILVIE_twn");
