@@ -82,16 +82,20 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 			private ["_vehicle"];
 			_vehicle = _this select 0;
 			if (not isnull _vehicle || _vehicle != player) then {
+				player assignAsCargo _vehicle;
+				player moveInCargo _vehicle;
 				if ((_this select 1) and (isnull(driver _vehicle))) exitwith {
+					player assignAsDriver _vehicle;
 					player moveInDriver _vehicle;
 				};
-				if ((_this select 2) and (isnull(commander _vehicle))) exitwith {
-					player moveInCommander _vehicle;
-				};
-				if ((_this select 3) and (isnull(gunner _vehicle))) exitwith {
+				if ((_this select 2) and (isnull(gunner _vehicle))) exitwith {
+					player assignAsGunner _vehicle;
 					player moveInGunner _vehicle;
 				};
-				player moveInCargo _vehicle;
+				if ((_this select 3) and (isnull(commander _vehicle))) exitwith {
+					player assignAsCommander _vehicle;
+					player moveInCommander _vehicle;
+				};
 			};
 		},
 		{
