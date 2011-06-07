@@ -89,6 +89,12 @@ switch toLower(worldName) do {
         {removeAllWeapons _this}, 
         {removeAllItems _this},
         {
+				if (random 1 > 0.07) then {
+								{_this enableAI _x} count ["AUTOTARGET","TARGET"];
+                                _this addMagazine "HandGrenade_Stone";
+                                _this addMagazine "HandGrenade_Stone";
+                                _this addWeapon "throw";
+				};
                 if (random 1 > 0.95 && (_this isKindOf "Woman_EP1" || _this isKindOf "Woman")) then {
                         if (random 1 > 0.5) then {
                                 _this addMagazine "8Rnd_9x18_Makarov";
