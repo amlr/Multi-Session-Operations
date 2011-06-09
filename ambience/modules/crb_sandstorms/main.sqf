@@ -1,7 +1,8 @@
 #include <crbprofiler.hpp>
 
 private ["_debug","_d","_pos","_storms"];
-if (!isServer) exitWith{};
+if(isNil "ambientSandstorms")then{ambientSandstorms = 0;};
+if (!isServer || ambientSandstorms == 0) exitWith{};
 
 _debug = false;
 _d = 500;

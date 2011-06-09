@@ -1,7 +1,8 @@
 #include <crbprofiler.hpp>
 
 private ["_debug","_d","_pos","_swarms"];
-if (!isServer) exitWith{};
+if(isNil "ambientFlies")then{ambientFlies = 0;};
+if (!isServer || ambientFlies == 0) exitWith{};
 
 _debug = false;
 _d = 500;
