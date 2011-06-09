@@ -31,6 +31,12 @@ class Params {
 #ifdef RMM_WEATHER
 	#include <core\modules\weather\params.hpp>
 #endif
+#ifdef CRB_FLIES
+	#include <ambience\modules\crb_flies\params.hpp>
+#endif
+#ifdef CRB_SANDSTORM
+	#include <ambience\modules\crb_sandstorms\params.hpp>
+#endif
 #ifdef TUP_AIRTRAFFIC
 	#include <ambience\modules\tup_airtraffic\params.hpp>
 #endif
