@@ -66,8 +66,8 @@ _camo allowDamage false;
 
 	if !isDedicated then {
 	player sideChat format ["FOB HQ has now been setup..."];
-	_signInAction = (_fobHQ addAction [("<t color=""#dddd00"">" + "Sign in at FOB" + "</t>"), "support\modules\FOB_spawn\common\fn_addAction_SignInFOB.sqf"]);
-	_undeployAction = (_fobHQ addAction [("<t color=""#dddd00"">" + "Pack up FOB HQ" + "</t>"), "support\modules\FOB_spawn\common\fn_addAction_unDeploy.sqf"]);
+	_signInAction = (_fobHQ addAction [("<t color=""#dddd00"">" + "Sign in at FOB" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_SignInFOB.sqf"]);
+	_undeployAction = (_fobHQ addAction [("<t color=""#dddd00"">" + "Pack up FOB HQ" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_unDeploy.sqf"]);
 	};
 	
 	// 0 - Reset (All done now tell the clients to reset their state listeners)

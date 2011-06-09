@@ -11,13 +11,13 @@ _vehicles = _this select 0;
 	//-------------------------------------------------------------------------------------------------
 		case "LAV25_HQ":
 		{
-			_x addAction [("<t color=""#dddd00"">" + "Deploy FOB HQ" + "</t>"), "support\modules\FOB_spawn\common\fn_addAction_Deploy.sqf"]; 
+			_x addAction [("<t color=""#dddd00"">" + "Deploy FOB HQ" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_Deploy.sqf"]; 
 		};
 	//-------------------------------------------------------------------------------------------------
 		case "LAV25_HQ_unfolded":
 		{
-			_x addAction [("<t color=""#dddd00"">" + "Sign in at FOB" + "</t>"), "support\modules\FOB_spawn\common\fn_addAction_SignInFOB.sqf"];
-			_x addAction [("<t color=""#dddd00"">" + "Pack up FOB HQ" + "</t>"), "support\modules\FOB_spawn\common\fn_addAction_unDeploy.sqf"];
+			_x addAction [("<t color=""#dddd00"">" + "Sign in at FOB" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_SignInFOB.sqf"];
+			_x addAction [("<t color=""#dddd00"">" + "Pack up FOB HQ" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_unDeploy.sqf"];
 		};
 	//-------------------------------------------------------------------------------------------------
 		Default 

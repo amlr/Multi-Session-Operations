@@ -9,30 +9,30 @@ if isServer then {
 		PV_Server_SyncHQState = [0, ""]; 
 	};
 	publicvariable "PV_Server_SyncHQState";
-	//_initMHQs = [vehicles] execVM "support\modules\FOB_spawn\server\init_Server_MHQs.sqf";
-	_initMHQs = [vehicles] call compile preprocessFile "support\modules\FOB_spawn\server\init_Server_MHQs.sqf";
+	//_initMHQs = [vehicles] execVM "support\modules\WHB_FOBspawn\server\init_Server_MHQs.sqf";
+	_initMHQs = [vehicles] call compile preprocessFile "support\modules\WHB_FOBspawn\server\init_Server_MHQs.sqf";
 	
 	//Removing this as I dont think its necessary here, need to test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	//publicvariable "PV_hqArray";
 	
 	// Function that the Server will call on MHQ objects to deploy them into Static FOB HQs
-	fn_DeployHQ = compile preprocessFileLineNumbers "support\modules\FOB_spawn\server\fn_DeployHQ.sqf";
+	fn_DeployHQ = compile preprocessFileLineNumbers "support\modules\WHB_FOBspawn\server\fn_DeployHQ.sqf";
 	
 	// Function that the Server will call on FOB objects to unDeploy them into MHQs
-	fn_unDeployHQ = compile preprocessFileLineNumbers "support\modules\FOB_spawn\server\fn_unDeployHQ.sqf";
+	fn_unDeployHQ = compile preprocessFileLineNumbers "support\modules\WHB_FOBspawn\server\fn_unDeployHQ.sqf";
 	
 	// Simple and slightly redundant function that determines which HQ Fuction to call based on the 'State' sent in from a client
 	// I've done it this way as I will be adding more actions to the MHQ at a later date and this simplifies the code a little...
-	fn_Server_SyncHQState = compile preprocessFileLineNumbers "support\modules\FOB_spawn\server\fn_Server_SyncHQState.sqf";
+	fn_Server_SyncHQState = compile preprocessFileLineNumbers "support\modules\WHB_FOBspawn\server\fn_Server_SyncHQState.sqf";
 	
 	"PV_Server_SyncHQState" addPublicVariableEventHandler {(_this select 1) call fn_Server_SyncHQState;};
 	
     if !isDedicated then {
 		// Initialise the default spawn location
-		[] execvm "support\modules\FOB_spawn\common\init_Client_DefaultSpawnLocations.sqf";
+		[] execvm "support\modules\WHB_FOBspawn\common\init_Client_DefaultSpawnLocations.sqf";
 		
 		//local player
-		//_dummy = [] execvm "support\modules\FOB_spawn\common\init_Client_DefaultSpawnLocations.sqf"
+		//_dummy = [] execvm "support\modules\WHB_FOBspawn\common\init_Client_DefaultSpawnLocations.sqf"
 		
 		// Event Handler that calls the player relocation on respawn (For host machines)
 		player addEventhandler ["respawn", {[player] call fn_playerRespawn}];
@@ -41,7 +41,7 @@ if isServer then {
 // Non-server clients
 } else {
 	// Initialise the default spawn location
-	[] execvm "support\modules\FOB_spawn\common\init_Client_DefaultSpawnLocations.sqf";
+	[] execvm "support\modules\WHB_FOBspawn\common\init_Client_DefaultSpawnLocations.sqf";
 	
 	if (isNil "PV_Client_SyncHQState") then
 	{
@@ -50,7 +50,7 @@ if isServer then {
 	};
 	
 	// Function that gets called on Client when the Server updates the state of an HQ
-	fn_Client_SyncHQState = compile preprocessFileLineNumbers  "support\modules\FOB_spawn\common\fn_Client_SyncHQState.sqf";
+	fn_Client_SyncHQState = compile preprocessFileLineNumbers  "support\modules\WHB_FOBspawn\common\fn_Client_SyncHQState.sqf";
 	
 	// PublicVariable eventhandler to catch the message sent by the server.
 	"PV_Client_SyncHQState" addPublicVariableEventHandler {(_this select 1) call fn_Client_SyncHQState};
@@ -60,4 +60,4 @@ if isServer then {
 };
 
 // All Machines
-fn_playerRespawn = compile preprocessFileLineNumbers "support\modules\FOB_spawn\common\fn_playerRespawn.sqf";
+fn_playerRespawn = compile preprocessFileLineNumbers "support\modules\WHB_FOBspawn\common\fn_playerRespawn.sqf";

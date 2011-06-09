@@ -48,7 +48,7 @@ _fobHQ removeAction 1;
 	if !isDedicated then {
 		player sideChat format ["FOB HQ has now been packed up..."];
 	};
-	_deployAction = (_mhq addAction [("<t color=""#dddd00"">" + "Deploy FOB HQ" + "</t>"), "support\modules\FOB_spawn\common\fn_addAction_Deploy.sqf"]);
+	_deployAction = (_mhq addAction [("<t color=""#dddd00"">" + "Deploy FOB HQ" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_Deploy.sqf"]);
 
 	// 0 - Reset (All done now tell the clients to reset their state listeners)
 	sleep 1;

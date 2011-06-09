@@ -44,7 +44,7 @@ class Params {
 	#include <ambience\modules\tup_seatraffic\params.hpp>
 #endif
 #ifdef WHB_MULTISPAWN
-	#include <support\modules\FOB_spawn\params.hpp>
+	#include <support\modules\WHB_FOBspawn\params.hpp>
 #endif
 #ifdef CRB_TERRORISTS
 	#include <enemy\modules\crb_terrorists\params.hpp>

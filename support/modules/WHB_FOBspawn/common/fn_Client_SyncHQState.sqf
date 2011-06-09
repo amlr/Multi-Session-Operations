@@ -31,8 +31,8 @@ switch (_hqState) do
 	case 2: //Finnished Deployment
 	{
 		player sideChat format ["FOB HQ has been setup."];
-		_signInAction = (_hqObject addAction [("<t color=""#dddd00"">" + "Sign in at FOB" + "</t>"), "support\modules\FOB_spawn\common\fn_addAction_SignInFOB.sqf"]);
-		_undeployAction = (_hqObject addAction [("<t color=""#dddd00"">" + "Pack up FOB HQ" + "</t>"), "support\modules\FOB_spawn\common\fn_addAction_unDeploy.sqf"]);
+		_signInAction = (_hqObject addAction [("<t color=""#dddd00"">" + "Sign in at FOB" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_SignInFOB.sqf"]);
+		_undeployAction = (_hqObject addAction [("<t color=""#dddd00"">" + "Pack up FOB HQ" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_unDeploy.sqf"]);
 	};
 //-------------------------------------------------------------------------------------------------
 	case 3: //Pack up
@@ -45,7 +45,7 @@ switch (_hqState) do
 	case 4: //Finnished Pack up
 	{
 		player sideChat format ["FOB HQ has now been packed up."];
-		_deployAction = (_hqObject addAction [("<t color=""#dddd00"">" + "Deploy FOB HQ" + "</t>"), "support\modules\FOB_spawn\common\fn_addAction_Deploy.sqf"]); 
+		_deployAction = (_hqObject addAction [("<t color=""#dddd00"">" + "Deploy FOB HQ" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_Deploy.sqf"]); 
 	};
 //-------------------------------------------------------------------------------------------------
 	Default 

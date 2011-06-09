@@ -7,7 +7,7 @@ private ["_syncActions"];
 myRespawnPoint = [0,0,0];
 
 // Apply Deploy/Undeploy/SignIn actions to all HQ objects on JIP
-_syncActions = [PV_hqArray] execVM "support\modules\FOB_spawn\common\fn_JIP_HQSync.sqf";
+_syncActions = [PV_hqArray] execVM "support\modules\WHB_FOBspawn\common\fn_JIP_HQSync.sqf";
 
 switch(faction player) do
 {
