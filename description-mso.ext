@@ -15,6 +15,9 @@ class CfgSounds {
 #ifdef RMM_CTP
 	#include <ambience\modules\rmm_ctp\cfgsounds.hpp>
 #endif
+#ifdef SR5_IEDS
+	#include <enemy\modules\SR5_IEDdetect\IEDdetect_sounds.cpp>
+#endif
 };
 
 //http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
@@ -100,11 +103,17 @@ class Params {
 
 #ifdef R3F_LOGISTICS
 #include "support\modules\R3F_logistics\desc_include.h"
+#endif
+
 class RscTitles
 {
+#ifdef R3F_LOGISTICS
 	#include <support\modules\R3F_logistics\desc_rsct_include.h>
-};
 #endif
+#ifdef SR5_IEDS
+	#include <enemy\modules\SR5_IEDdetect\IEDdetect_screens.cpp>
+#endif
+};
 
 //http://community.bistudio.com/wiki/Functions_Library
 class cfgFunctions {
@@ -176,7 +185,9 @@ class cfgFunctions {
 #ifdef RMM_SETTINGS
 	#include <core\modules\settings\dialog.hpp>
 #endif
-
+#ifdef SR5_IEDS
+	#include "enemy\modules\SR5_IEDdetect\IEDdetect_dialog.h"
+#endif
 #ifdef RMM_AAR
 	#include <support\modules\aar\dialog.hpp>
 #endif
