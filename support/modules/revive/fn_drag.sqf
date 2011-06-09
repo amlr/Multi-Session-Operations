@@ -24,7 +24,7 @@ _action = _dragger addaction [localize "dragger.sqf0", revive_fnc_drop_path, _un
 sleep 1;
 
 //waituntil stopped dragging
-while {_unit getvariable "revive_dragged"} do {
+while {sleep 0.5;_unit getvariable "revive_dragged"} do {
 	if (lifestate _dragger != "alive") exitwith {};
 	if not (animationstate _dragger in ["acinpknlmstpsraswrfldnon","acinpknlmwlksraswrfldb"]) exitwith {};
 	sleep 0.5;

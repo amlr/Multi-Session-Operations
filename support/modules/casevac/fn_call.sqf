@@ -168,7 +168,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 				private ["_wp","_hospital","_destpos","_behav","_speed"];
 				if (alive _this) then 
 				{
-					waitUntil {{isplayer _x} count (crew _this) == 0};
+					waitUntil {sleep 5;{isplayer _x} count (crew _this) == 0};
 					(crew _this) join (createGroup (side (driver _this)));
 					{
 						_x setskill 0.8;
@@ -180,17 +180,17 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 					_wp setWaypointBehaviour RMM_casevac_behav;
 					_wp setWaypointSpeed RMM_casevac_speed;
 					
-					waitUntil {(RMM_casevac_return) || !(alive _this)};
+					waitUntil {sleep 3;(RMM_casevac_return) || !(alive _this)};
 					_hospital = [markerpos "hospital", 0, 50, 15, 0, 0, 0] call BIS_fnc_findSafePos;
 					_wp = (group _this) addwaypoint [_hospital,0];
 					_wp setWaypointType "MOVE";
 					_wp setWaypointBehaviour RMM_casevac_behav;
 					_wp setWaypointSpeed RMM_casevac_speed;
 					
-					waitUntil {( _this distance _hospital < 200) || !(alive _this)};	
+					waitUntil {sleep 3;( _this distance _hospital < 200) || !(alive _this)};	
 					(group _this) addwaypoint [[0,0,0],0];
 					
-					waitUntil {( _this distance player > 1500) || !(alive _this)};
+					waitUntil {sleep 3;( _this distance player > 1500) || !(alive _this)};
 					
 					// Check for death of chopper
 					if !(alive _this) then {
@@ -239,7 +239,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 				_hospital = [markerpos "hospital", 0, 50, 15, 0, 0, 0] call BIS_fnc_findSafePos;
 
 				// Check no players are crew members?
-				waitUntil {{isplayer _x} count (crew _this) == 0};
+				waitUntil {sleep 5;{isplayer _x} count (crew _this) == 0};
 				(crew _this) join (createGroup (side (driver _this)));
 				{
 					_x setskill 0.8;
@@ -252,7 +252,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 				_wp setWaypointSpeed RMM_casevac_speed;
 				
 				// Check for LZ marker	
-				waitUntil {( _this distance position player <= 600) || !(alive _this)};
+				waitUntil {sleep 3;( _this distance position player <= 600) || !(alive _this)};
 				if (alive _this) then {_this sideChat format ["%1 this is Pedro One. 600 meters out. Over.", group player];};
 				diag_log format ["MSO-%1 CASEVAC: Looking for LZ marker: %2", time, str _marker];
 				if (str _marker != "Nothing") then {
@@ -265,7 +265,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 				_this land "GET IN";
 					
 				// Wait for helicopter landing
-				waitUntil {((position _this) select 2 <= 3) || !(alive _this)};
+				waitUntil {sleep 3;((position _this) select 2 <= 3) || !(alive _this)};
 				
 				if (alive _this) then 
 				{
@@ -351,7 +351,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 									_medic moveTo (position _this);
 								};
 								
-								waitUntil {((_medic distance _this) < 10) || !(alive _medic)};								
+								waitUntil {sleep 3;((_medic distance _this) < 10) || !(alive _medic)};
 								//detach
 								detach _x;
 								detach _medic;
@@ -376,7 +376,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 					
 					// Waituntil wounded loaded then give the players 30 seconds to get in helicopter
 					if (count _wounded > 0) then {
-						waitUntil {{!(_x in _this)} count _wounded == 0};
+						waitUntil {sleep 3;{!(_x in _this)} count _wounded == 0};
 						_this sideChat format ["%1 this is Pedro One. Wounded now onboard. Over.", group player];
 					};
 					
@@ -392,13 +392,13 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 				_wp setWaypointBehaviour RMM_casevac_behav;
 				_wp setWaypointSpeed RMM_casevac_speed;
 				RMM_casevac_return = true;
-				waitUntil {( _this distance _hospital <= 500) || !(alive _this)};
+				waitUntil {sleep 3;( _this distance _hospital <= 500) || !(alive _this)};
 				
 				// Setup Heli landing
 				_landEnd = "HeliHEmpty" createVehicle _hospital;
 				_this land "GET OUT";
 				
-				waitUntil {((position _this) select 2 <= 3) || !(alive _this)};
+				waitUntil {sleep 3;((position _this) select 2 <= 3) || !(alive _this)};
 				if (alive _this) then {
 					
 					_this sideChat format ["%1 this is Pedro One. Arrived at Field Hospital. Over.", group player];
@@ -412,13 +412,13 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 								doGetOut _x;
 								[0,_x,{_this switchmove "ainjppnemstpsnonwrfldb_still"}] call mso_core_fnc_ExMP;
 								_medic moveTo position _x;
-								waitUntil {(_medic distance _x < 3) || !(alive _medic)};
+								waitUntil {sleep 3;(_medic distance _x < 3) || !(alive _medic)};
 								_x attachto [_medic, [0.1, 1.01, 0]];
 								sleep 0.1;
 								//orientation
 								[0,_x,{_this setdir 180}] call mso_core_fnc_ExMP;
 								_medic moveTo _hospital;
-								waitUntil {(_medic distance _hospital < 5) || !(alive _medic)};
+								waitUntil {sleep 3;(_medic distance _hospital < 5) || !(alive _medic)};
 								detach _x;
 								detach _medic;
 							};
@@ -428,16 +428,16 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 					};*/
 				
 					// Wait for any players to getout
-					waitUntil {{(_x in _this)} count _wounded == 0};
+					waitUntil {sleep 5;{(_x in _this)} count _wounded == 0};
 					_this sideChat format ["%1 this is Pedro One. Wounded have been moved to the field hospital. We are RTB. Over.", group player];
-					waitUntil {{isplayer _x} count (crew _this) == 0};
+					waitUntil {sleep 5;{isplayer _x} count (crew _this) == 0};
 					
 					deleteVehicle _landEnd;
 				};
 				
 				// Fly away
 				(group _this) addwaypoint [[0,0,0],0];
-				waitUntil {( _this distance player > 1500) || !(alive _this)};
+				waitUntil {sleep 5;( _this distance player > 1500) || !(alive _this)};
 				
 				// Check for death of chopper
 				if !(alive _this) then {

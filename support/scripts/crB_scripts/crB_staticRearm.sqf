@@ -11,8 +11,7 @@ if (!isServer) exitWith{};
 {
 	_x spawn {
 		while {_this isKindOf "StaticWeapon" && side _this != west && alive _this} do {
-			waitUntil{!someAmmo _this};
-			sleep 5;
+			waitUntil{sleep 5;!someAmmo _this};
 			_this setVehicleAmmo 1;
 			sleep 1;
 		};

@@ -99,7 +99,7 @@ class FSM
        "			_pmarker = _this select 3;" \n
        "			_lmarker = _this select 4;" \n
        "			while {!isnull _grp} do {" \n
-       "				waituntil {!isnull (leader _grp)};" \n
+       "				waituntil {sleep 3;!isnull (leader _grp)};" \n
        "				_gpos = position (leader _grp);" \n
        "				_ppos = expecteddestination (vehicle leader _grp) select 0;" \n
        "" \n

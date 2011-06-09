@@ -10,7 +10,7 @@ if (RMM_cas_lastTime + RMM_cas_frequency < time) then {
 		_this spawn {
 			sleep (RMM_cas_missiontime + random 70);
 			if (alive _this) then {
-				waituntil {{isplayer _x} count (crew _this) == 0};
+				waituntil {sleep 5;{isplayer _x} count (crew _this) == 0};
 				(crew _this) join (createGroup (side (driver _this)));
 				{
 					_x setskill 0;

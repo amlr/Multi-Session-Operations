@@ -12,7 +12,7 @@ _radio = _this select 8;
 
 sleep 3;
 
-waituntil {(((_caller distance _Cargo) > 7) or !(alive _caller) or !(alive _Cargo) or (_Cargo animationPhase "door_1_2" > 0.5) or (((getposATL _Cargo) select 2) > 1))};
+waituntil {sleep 0.5;(((_caller distance _Cargo) > 7) or !(alive _caller) or !(alive _Cargo) or (_Cargo animationPhase "door_1_2" > 0.5) or (((getposATL _Cargo) select 2) > 1))};
 
 
 deletevehicle _coin;

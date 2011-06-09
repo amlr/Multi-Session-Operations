@@ -28,13 +28,13 @@ _this spawn {
 			};
 			sleep 0.1;
 		};
-		waituntil {(vehicle _this) == _this || isnull _this};
+		waituntil {sleep 0.5;(vehicle _this) == _this || isnull _this};
 		_this playaction "gesturenod";
 	};
 	if not (alive _this) exitwith {};
 	_this playaction "agonystart";
-	waituntil {animationstate _this == "ainjppnemstpsnonwrfldnon" or not alive _this};
+	waituntil {sleep 0.5;animationstate _this == "ainjppnemstpsnonwrfldnon" or not alive _this};
 	_this playaction "gesturespasm" + str floor random 7;
-	waituntil {animationstate _this != "ainjppnemstpsnonwrfldnon" or not alive _this};
+	waituntil {sleep 0.5;animationstate _this != "ainjppnemstpsnonwrfldnon" or not alive _this};
 	_this playaction "gesturenod";
 };

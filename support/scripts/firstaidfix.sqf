@@ -58,7 +58,7 @@ BIS_fnc_FA_MPFix_initUnit = {
 };
 
 BIS_fnc_FA_MPFix_killed = {
-	waituntil {alive player};
+	waituntil {sleep 0.5;alive player};
 	player call BIS_fnc_FA_MPFix_initUnit; //init for the player
 
 	BIS_FA_MPFix_newunit = player;

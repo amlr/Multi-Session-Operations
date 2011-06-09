@@ -1539,7 +1539,7 @@ TSD9_DrawPage_MyVehicle = {
 		TSD9_VehicleSearchComplete = false;
 		[_vehicleNameToFind] call TSD9_GetVehicleByName;
 		//['TeamStatusDialog.sqf', format["TSD9_Vehicle=%1,%2,%3,%4", typeName TSD9_Vehicle, TSD9_Vehicle, _vehicleNameToFind, TSD9_VehicleSearchComplete]] call fn_DebugAppend;
-		waitUntil { TSD9_VehicleSearchComplete };
+		waitUntil {sleep 0.5; TSD9_VehicleSearchComplete };
 	};
 
 	if (typeName TSD9_Vehicle != "ARRAY") then {

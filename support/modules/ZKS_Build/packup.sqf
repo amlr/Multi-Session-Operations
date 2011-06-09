@@ -38,6 +38,6 @@ _Cargo setVariable ["MyCargo", _MyCargo, false];
 
 sleep 2;
 
-waituntil {(!(alive _Cargo) or !(alive _Hauler) or (((getposATL _Cargo) select 2) < 1))};
+waituntil {sleep 0.5;(!(alive _Cargo) or !(alive _Hauler) or (((getposATL _Cargo) select 2) < 1))};
 detach _Cargo;
 _Cargo setpos [(getpos _Cargo select 0),(getpos _Cargo select 1), 0]; 
