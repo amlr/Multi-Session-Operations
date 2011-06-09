@@ -11,7 +11,7 @@ displayStats = {
 	_avgU = CRBSERVERFPS select 4;
 	_curU = CRBSERVERFPS select 5;
 	hint format["Server FPS(Max/Avg/Min): %1/%2/%3\nUnits(Max/Avg/Cur): %4/%5/%6\nGroups: %7", _maxF, _avgF, _minF, _maxU, _avgU, _curU, count allGroups];
-	diag_log format["CRBSERVERFPS,%2,%3,%4,%5,%6,%7,%8", time, _maxF, _avgF, _minF, _maxU, _avgU, _curU, count allGroups];
+	diag_log format["CRBSERVERFPS,%1,%2,%3,%4,%5,%6,%7,%8", time, _maxF, _avgF, _minF, _maxU, _avgU, _curU, count allGroups];
 };	
 
 if(isNil "debug_serverfps") then {debug_serverfps = 30;};
