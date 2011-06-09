@@ -23,12 +23,12 @@ if (isserver) then
 {
 	if (_side == "west") then 
 	{
-	_Cargo setVehicleInit "_nil = [this,'west'] execFSM 'support\modules\ZKS_Build\SpawnStd.fsm';";
+	_Cargo setVehicleInit "0 = [this,'west'] execFSM 'support\modules\ZKS_Build\SpawnStd.fsm';";
 	};
 
 	if (_side == "east") then 
 	{
-	_Cargo setVehicleInit "_nil = [this,'east'] execFSM 'support\modules\ZKS_Build\SpawnStd.fsm';";
+	_Cargo setVehicleInit "0 = [this,'east'] execFSM 'support\modules\ZKS_Build\SpawnStd.fsm';";
 	};
 
 processInitCommands;
