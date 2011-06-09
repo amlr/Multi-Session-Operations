@@ -1,6 +1,6 @@
 #include <crbprofiler.hpp>
 
-private ["_debug","_sealandings","_center","_seadest","_destinations","_mapsize"];
+private ["_debug","_sealandings","_center","_seadest","_destinations","_mapsize","_LHD","_LHDdir","_LHDspawnpoint","_parts","_dummy","_LHDLand","_unit","_group","_logic"];
 if(!isServer) exitWith{};
 
 if (isNil "amount") then {amount = 1;};
@@ -9,6 +9,8 @@ if (amount == 2) exitWith{};
 if(isNil "SeaROE")then{SeaROE = 1;};
 
 _debug = false;
+if(isNil "AmbientLHD")then{AmbientLHD = 0;};
+
 
 waitUntil{!isNil "BIS_fnc_init"};
 // Get center of map
@@ -37,6 +39,27 @@ if (count _seadest < 1) exitWith {
         diag_log format ["MSO-%1 Sea Traffic: Cannot find any sea landing objects. Exiting.", time];
 };
 
+// Randomly place LHD
+if (((random 1 < 0.5) && (AmbientLHD == 2)) || (AmbientLHD == 1)) then {
+	_logic = createCenter sideLogic;
+	_group = createGroup _logic;
+	_LHD = _group createUnit ["LOGIC",([_center, 2000, _mapsize, 500, 2, 0, 0] call BIS_fnc_findSafePos), [], 0, ""]; ;
+	_LHD setdir (random 359);
+	
+	_LHD call bis_ew_fnc_createLHD;
+
+	// Add Heli pad and crewman for each LHD 
+	_LHDLand = [["Land_LHD_1"], [], _mapsize, _debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType;
+	{
+		_dummy = createVehicle ["HeliHRescue", [getposasl _x select 0, getposasl _x select 1, 16], [],0,'NONE'];
+		_unit = group _dummy createUnit ["USMC_LHD_Crew_Yellow", [getposasl _x select 0, getposasl _x select 1, 17], [], 10, ""];
+	} foreach _LHDLand;
+	
+	if (_debug) then {
+		diag_log format ["MSO-%1 Sea Traffic: LHD at: %2", time, mapgridposition _LHD];
+    };
+};
+
 _destinations = count _seadest;
 
 if(isNil "TUP_CIVFACS") then {
@@ -56,30 +79,29 @@ for "_j" from 0 to (_destinations-1) do {
                 _currentseadest = _seadest select _j;           
                 _timeout = if(_debug) then {[0, 0, 0];} else {[30, 60, 90];};
                 _spawnpos = [];
-                
-                switch(SeaROE) do {
-                        case 1: {
-                                _combatMode = "BLUE";
-                        };
-                        case 2: {
-                                _combatMode = "GREEN";
-                        };
-                        case 3: {
-                                _combatMode = "WHITE";
-                        };
-                        case 4: {
-                                _combatMode = "YELLOW";
-                        };
-                        case 5: {
-                                _combatMode = "RED";
-                        };
-                };
+				
+				switch(SeaROE) do {
+						case "1": {
+								_combatMode = "BLUE";
+						};
+						case "2": {
+								_combatMode = "GREEN";
+						};
+						case "3": {
+								_combatMode = "WHITE";
+						};
+						case "4": {
+								_combatMode = "YELLOW";
+						};
+						case "5": {
+								_combatMode = "RED";
+						};
+				};
                 
                 //Loop continuously and create ships for the destination		
                 while{true} do {
                         // Wait a random amount of time before starting
                         sleep (random 90);
-
                         CRBPROFILERSTART("TUP Sea Traffic")
                         
                         // Work out side that controls destination (based on unit numbers)
@@ -165,7 +187,7 @@ for "_j" from 0 to (_destinations-1) do {
                         _wp setWayPointType "MOVE";
                         _wp setWaypointFormation "FILE";
                         _wp setWaypointBehaviour "SAFE";
-                        _wp setWaypointBehaviour _combatMode;
+						_wp setWaypointBehaviour _combatMode;
                         _wp setWaypointTimeout _timeout;   
                         
                         _wp = _grp addwaypoint [_endpos, 0];
