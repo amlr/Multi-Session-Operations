@@ -88,6 +88,8 @@ for "_j" from 1 to _numconvoys do {
                                 };
                         };
                         
+                        {_x setSkill 0.2;} forEach units _grp;
+
                         _wp = _grp addwaypoint [_startpos, 0];
                         _wp setWaypointFormation "FILE";
                         _wp setWaypointSpeed "LIMITED";

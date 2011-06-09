@@ -230,6 +230,7 @@ for "_j" from 0 to (_destinations-1) do
                                         _aircraft = [[_startpos, 10] call CBA_fnc_randPos, 0,_aircraftClass, _airfieldside] call BIS_fnc_spawnVehicle;         
                                         _aircraftVehicle = _aircraft select 0;
                                         _aircraftCrew = _aircraft select 1;
+                                        {_x setSkill 0.1;} forEach _aircraftCrew;
                                         _grp = _aircraft select 2;
                                         _stoptime = time + 900;
                                         diag_log format["MSO-%1 Air Traffic: %10 #%2, Vehicle: %6 Group: %9 Faction: %7 Start: %3 Landing: %4 End: %5 Stop: %8", time, _j, _startpos, _destpos, _endpos, typeOf _aircraftVehicle, _factions, _stopTime, _grp, _destination];

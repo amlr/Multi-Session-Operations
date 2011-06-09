@@ -220,7 +220,7 @@ _shepherds = [];
 {
         // find a spawn area
         if(type _x in _types) then {
-                if (random 1 > 0.9) then {
+                if (random 1 > 0.8) then {
                         _name = format["shepherd_%1", floor(random 10000)];
                         if(_debug) then {
                                 diag_log format["MSO-%1 shepherds: create %2", time, _name];

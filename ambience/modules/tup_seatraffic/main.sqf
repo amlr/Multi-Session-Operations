@@ -152,6 +152,7 @@ for "_j" from 0 to (_destinations-1) do {
                         
                         _shipVehicle = _ship select 0;
                         _shipCrew = _ship select 1;
+                        {_x setSkill 0.1} forEach _shipCrew;
                         _grp = _ship select 2;
                         _stoptime = time + 600 + random 300;
                         
