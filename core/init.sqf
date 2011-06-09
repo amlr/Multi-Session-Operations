@@ -66,11 +66,13 @@ mso_fnc_hasRadio = if (!isNil "ACE_fnc_hasRadio") then {
         {if(player hasWeapon "itemRadio") then {true} else {hint "You require a radio.";false;};}
 };
 
-BIS_MENU_GroupCommunication = [
-        //--- Name, context sensitive
-        ["User menu",false]
-        //--- Item name, shortcut, -5 (do not change), expression, show, enable
-];
+if(isNil "BIS_MENU_GroupCommunication") then {
+	BIS_MENU_GroupCommunication = [
+        	//--- Name, context sensitive
+	        ["User menu",false]
+	        //--- Item name, shortcut, -5 (do not change), expression, show, enable
+	];
+};
 
 "Custom Locations(" + worldName + ")" call mso_core_fnc_initStat;
 waitUntil{!isNil "BIS_fnc_init"};
