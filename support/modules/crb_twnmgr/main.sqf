@@ -1,7 +1,7 @@
 private ["_debug"];
 if(!isServer) exitWith{};
 
-waitUntil{!isNil "bis_alice_mainscope"};
+if(isNil "bis_alice_mainscope") exitWith{};
 waitUntil{typeName (bis_alice_mainscope getVariable "townlist") == "ARRAY"};
 waitUntil{typeName (bis_alice_mainscope getVariable "ALICE_townsize") == "SCALAR"};
 
