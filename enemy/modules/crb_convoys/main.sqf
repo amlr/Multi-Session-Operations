@@ -11,6 +11,19 @@ private ["_debug","_strategic","_spawnpoints","_convoydest","_numconvoys"];
 if(!isServer) exitWith{};
 
 _debug = false;
+if(isNil "crb_convoy_intensity")then{crb_convoy_intensity = 1;};
+crb_convoy_intensity = switch(crb_convoy_intensity) do {
+	case 0: {
+		0;
+	};
+	case 1: {
+		0.5;
+	};
+	case 2: {
+		1;
+	};
+};
+
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
@@ -38,7 +51,7 @@ _convoydest = [];
         };
 } forEach CRB_LOCS;
 
-_numconvoys = ceil((count _convoydest) / 25);
+_numconvoys = ceil((count _convoydest) * crb_convoy_intensity / 25);
 diag_log format["MSO-%1 Convoy: destinations(%2) spawns(%3) convoys(%4)", time, count _convoydest, count _spawnpoints, _numconvoys];
 
 for "_j" from 1 to _numconvoys do {
