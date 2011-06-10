@@ -40,11 +40,11 @@ execNow "ambience\modules\crb_civilians\main.sqf";
 "Shepherds" call mso_core_fnc_initStat;
 execNow "ambience\modules\crb_shepherds\main.sqf";
 #endif
-#ifdef TUP_AIRTRAFFIC
-"Ambient Airports" call mso_core_fnc_initStat;
-execNow "ambience\modules\tup_airtraffic\main.sqf";
-#endif
 #ifdef TUP_SEATRAFFIC
 "Ambient Sea" call mso_core_fnc_initStat;
 execNow "ambience\modules\tup_seatraffic\main.sqf";
+#endif
+#ifdef TUP_AIRTRAFFIC
+"Ambient Airports" call mso_core_fnc_initStat;
+execNow "ambience\modules\tup_airtraffic\main.sqf";
 #endif
