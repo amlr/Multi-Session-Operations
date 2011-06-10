@@ -1,7 +1,8 @@
 #include <crbprofiler.hpp>
 
 private ["_debug","_d","_pos","_flocks"];
-if (!isServer) exitWith{};
+if(isNil "ambientCrows")then{ambientCrows = 0;};
+if (!isServer || ambientCrows == 0) exitWith{};
 
 _debug = false;
 _d = 250;
