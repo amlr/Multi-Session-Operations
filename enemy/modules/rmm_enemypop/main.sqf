@@ -15,6 +15,21 @@ if(!isServer) exitWith{};
 private ["_debug","_d","_camp","_flag"];
 _debug = false;
 if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 1;};
+rmm_ep_intensity = switch(rmm_ep_intensity) do {
+	case 0: {
+		0.25;
+	};
+	case 1: {
+		0.5;
+	};
+	case 2: {
+		1;
+	};
+	case 3: {
+		1.5;
+	};
+};
+
 ep_dist = 2000;
 ep_groups = [];
 ep_total = 0;
