@@ -232,3 +232,17 @@ class CfgGroups {
 	#include <ambience\modules\tup_airtraffic\cfggroups.hpp>
 #endif
 };
+
+class CfgAmmo
+{
+ class Default;
+ class BulletBase;
+ class GrenadeHand;
+ class GrenadeHand_stone: GrenadeHand
+ {
+  hit = 7;
+  indirectHit = 0.2;
+  indirectHitRange = 1;
+  soundHit[] = {"Ca\sounds\Weapons\hits\rico_hit_wood_08",15.848933,1};
+ };
+};
