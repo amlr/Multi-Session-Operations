@@ -121,12 +121,13 @@ for "_j" from 0 to (_destinations-1) do
         
         [_j, _helidest, _planedest, _debug, _mapsize] spawn 
         {
-                private ["_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_wp","_j","_debug","_mapsize","_currentairfield","_airfieldSide","_factions","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight","_controltowers","_controlTowerTypes","_controltw","_housepos","_mv22pos","_aircraftClass","_combatMode"];
+                private ["_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_wp","_j","_debug","_mapsize","_currentairfield","_airfieldSide","_factions","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight","_controltowers","_controlTowerTypes","_controltw","_housepos","_mv22pos","_aircraftClass","_combatMode","_landed"];
                 _j = _this select 0;
                 _helidest = _this select 1;
                 _planedest = _this select 2;
                 _debug = _this select 3;
                 _mapsize = _this select 4;
+				_landed = false;
                 
                 _isPlane = false;
                 _startHeight = 500 + (random 200);
@@ -262,21 +263,23 @@ for "_j" from 0 to (_destinations-1) do
                                         CRBPROFILERSTOP
                                         
                                         waitUntil{sleep 1;(_aircraftVehicle distance _destpos < 500) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
-                                        // Once near destination, action a landing.
-                                        if (typeof _aircraftVehicle == "MV22") then {
+                                        
+										// Once near destination, action a landing.
+                                        // Make sure MV22 lands near hangar and not on runway as it doesn't taxi
+										if (typeof _aircraftVehicle == "MV22") then {
                                                 _mv22pos = [_destpos, 0, 45, 15, 0, 0, 0] call BIS_fnc_findSafePos;
                                                 _landEnd = "HeliHEmpty" createVehicle _mv22pos;
-                                        } else {
-                                                _landEnd = "HeliHEmpty" createVehicle _destpos;
+										} else {
+												_landEnd = objNull;
                                         };
+										
                                         if (_aircraftVehicle iskindof "Helicopter" or typeof _aircraftVehicle == "MV22") then {
                                                 _aircraftVehicle land "LAND";
                                                 waitUntil{sleep 1;((position _aircraftVehicle) select 2 <= 5) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
                                         } else {
+												_aircraftVehicle addEventHandler ["LandedStopped", {_landed = true}]; 
                                                 _aircraftVehicle action ["Land", _aircraftVehicle];
-                                                waitUntil{sleep 1;((position _aircraftVehicle) select 2 <= 2) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
-                                                _wp = _grp addwaypoint [_destpos, 0];
-                                                waitUntil{sleep 1;(_aircraftVehicle distance _destpos < 50) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
+                                                waitUntil{sleep 1; _landed || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};                                   
                                         };			
                                         deleteVehicle _landEnd;
                                         
@@ -307,6 +310,7 @@ for "_j" from 0 to (_destinations-1) do
                                                         _wp = _grp addwaypoint [(_controltw buildingPos _housepos), 0];
                                                         _wp setWayPointType "MOVE";
                                                         
+														
                                                         // Get crew to chat once at controltower
                                                         _wp setWayPointStatements ["true","{_x playMove 'AidlPercSnonWnonDnon_talk1'} foreach _aircraftCrew;"];
                                                         
