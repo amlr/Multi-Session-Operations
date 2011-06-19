@@ -10,7 +10,7 @@ _Cargo animate ["door_1_2", 1];
 
 if (_side == "west") then 
 {
-_truck = ["MTVR"];
+_truck = ["MTVR","MTVR_DES_EP1"];
 };
 
 if (_side == "east") then 
