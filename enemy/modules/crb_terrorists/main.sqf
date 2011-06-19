@@ -198,7 +198,7 @@ CRB_fnc_GetBuildingPosForTown = {
                 _bldgpos = [];
                 _i = 0;
                 _j = 0;
-                _nearbldgs = nearestObjects [position _twn, ["Building"], 250];
+                _nearbldgs = nearestObjects [ _twn, ["Building"], 250];
                 {
                         if(!surfaceIsWater position _x) then {
                                 private["_y"];
