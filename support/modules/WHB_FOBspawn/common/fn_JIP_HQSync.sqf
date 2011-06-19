@@ -20,6 +20,17 @@ _vehicles = _this select 0;
 			_x addAction [("<t color=""#dddd00"">" + "Pack up FOB HQ" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_unDeploy.sqf"];
 		};
 	//-------------------------------------------------------------------------------------------------
+		case "M1130_CV_EP1":
+		{
+			_x addAction [("<t color=""#dddd00"">" + "Deploy FOB HQ" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_Deploy.sqf"]; 
+		};
+	//-------------------------------------------------------------------------------------------------
+		case "M1130_HQ_unfolded_Base_EP1":
+		{
+			_x addAction [("<t color=""#dddd00"">" + "Sign in at FOB" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_SignInFOB.sqf"];
+			_x addAction [("<t color=""#dddd00"">" + "Pack up FOB HQ" + "</t>"), "support\modules\WHB_FOBspawn\common\fn_addAction_unDeploy.sqf"];
+		};
+	//-------------------------------------------------------------------------------------------------
 		Default 
 		{
 			//Do nothing for all other vehicles

@@ -10,7 +10,14 @@ private ["_mhq","_locationHQ","_camotype","_camo"];
 
 _mhq = _this select 0;
 _locationHQ = position _mhq;
-_camotype = "Land_CamoNetB_NATO";
+_camotype = switch(typeOf _mhq) do {
+		case "LAV25_HQ": {
+			"Land_CamoNetB_NATO";
+		};
+		case "M1130_CV_EP1": {
+			"Land_CamoNetB_NATO_EP1";
+		};
+	};
 
 // 1 - Start Deployment (Tell the clients)
 PV_Client_SyncHQState = [1, _mhq];
@@ -36,7 +43,15 @@ _camo allowDamage false;
 	_mhq = _this select 0;
 	_locationHQ = _this select 1;
 	_camo = _this select 2;
-	_fobHQtype = "LAV25_HQ_unfolded";
+	_fobHQtype = switch(typeOf _mhq) do {
+		case "LAV25_HQ": {
+			"LAV25_HQ_unfolded";
+		};
+		case "M1130_CV_EP1": {
+			"M1130_HQ_unfolded_Base_EP1";
+		};
+	};
+
 	
 	//Wait a while - Parameter Specified Setup Delay
 	sleep deployment_Time;

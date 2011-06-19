@@ -12,20 +12,30 @@ PV_hqArray = [];
 	//-------------------------------------------------------------------------------------------------
 		case "LAV25_HQ":
 		{
-			_array1 = PV_hqArray;
-			//player sideChat format ["PV HQ Array: %1", _array1];
-			_array2 = [_x];
-			//player sideChat format ["Adding object: %1", _array2];
-			PV_hqArray = _array1 + _array2;
+			//player sideChat format ["PV HQ Array: %1", PV_hqArray];
+			//player sideChat format ["Adding object: %1", _x];
+			PV_hqArray set [count PV_hqArray, _x];
 		};
 	//-------------------------------------------------------------------------------------------------
 		case "LAV25_HQ_UNFOLDED":
 		{
-			_array1 = PV_hqArray;
-			//player sideChat format ["PV HQ Array: %1", _array1];
-			_array2 = [_x];
-			//player sideChat format ["Adding object: %1", _array2];
-			PV_hqArray = _array1 + _array2;
+			//player sideChat format ["PV HQ Array: %1", PV_hqArray];
+			//player sideChat format ["Adding object: %1", _x];
+			PV_hqArray set [count PV_hqArray, _x];
+		};
+	//-------------------------------------------------------------------------------------------------
+		case "M1130_CV_EP1":
+		{
+			//player sideChat format ["PV HQ Array: %1", PV_hqArray];
+			//player sideChat format ["Adding object: %1", _x];
+			PV_hqArray set [count PV_hqArray, _x];
+		};
+	//-------------------------------------------------------------------------------------------------
+		case "M1130_HQ_unfolded_Base_EP1":
+		{
+			//player sideChat format ["PV HQ Array: %1", PV_hqArray];
+			//player sideChat format ["Adding object: %1", _x];
+			PV_hqArray set [count PV_hqArray, _x];
 		};
 	//-------------------------------------------------------------------------------------------------
 		Default 
@@ -35,5 +45,5 @@ PV_hqArray = [];
 	};
 	
 	//Broadcast the new list out to everyone.
-	publicvariable "PV_hqArray";
 } forEach _vehicles;
+publicvariable "PV_hqArray";

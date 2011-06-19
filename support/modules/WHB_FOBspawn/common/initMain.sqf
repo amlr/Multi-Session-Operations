@@ -2,14 +2,17 @@
 // Author: WobbleyheadedBob aka CptNoPants
 
 // Server
+
+
 if isServer then {
 	private ["_initMHQs"];
-	if (isNil "PV_Server_SyncHQState") then {
+        if (isNil "PV_Server_SyncHQState") then {
 		// set the nil variable with a default value for server and both JIP & 'join at mission start' 
 		PV_Server_SyncHQState = [0, ""]; 
 	};
 	publicvariable "PV_Server_SyncHQState";
 	//_initMHQs = [vehicles] execVM "support\modules\WHB_FOBspawn\server\init_Server_MHQs.sqf";
+
 	_initMHQs = [vehicles] call compile preprocessFile "support\modules\WHB_FOBspawn\server\init_Server_MHQs.sqf";
 	
 	//Removing this as I dont think its necessary here, need to test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

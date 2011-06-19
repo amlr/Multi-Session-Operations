@@ -24,7 +24,14 @@ _fobHQ removeAction 1;
 	private ["_fobHQ","_mhq","_mhqType","_locationHQ","_deployAction"];
 	_fobHQ = _this select 0;
 	_locationHQ = _this select 1;
-	_mhqType = "LAV25_HQ";
+	_mhqType = switch(typeOf _fobHQ) do {
+		case "LAV25_HQ_unfolded": {
+			"LAV25_HQ";
+		};
+		case "M1130_HQ_unfolded_Base_EP1": {
+			"M1130_CV_EP1";
+		};
+	};
 	
 	//Wait a while...
 	sleep undeployment_Time;
