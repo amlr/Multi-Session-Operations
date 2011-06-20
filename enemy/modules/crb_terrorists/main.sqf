@@ -198,21 +198,26 @@ CRB_fnc_GetBuildingPosForTown = {
                 _bldgpos = [];
                 _i = 0;
                 _j = 0;
-                _nearbldgs = nearestObjects [ _twn, ["Building"], 250];
-                {
-                        if(!surfaceIsWater position _x) then {
-                                private["_y"];
-                                _y = _x buildingPos _i;
-                                while {format["%1", _y] != "[0,0,0]"} do {
-                                        _bldgpos set [_j, _y];
-                                        _i = _i + 1;
-                                        _j = _j + 1;
-                                        _y = _x buildingPos _i;
-                                };
-                                _i = 0;
-                        };
-                } forEach _nearbldgs;
-                _twn setVariable ["BuldingPositions", _bldgpos, true];
+                _nearbldgs = nearestObjects [ position _twn, ["Building"], 400];
+				if (count _nearbldgs > 0) then
+				{				
+					{
+						if(!surfaceIsWater position _x) then {
+							private["_y"];
+							_y = _x buildingPos _i;
+							while {format["%1", _y] != "[0,0,0]"} do {
+									_bldgpos set [_j, _y];
+									_i = _i + 1;
+									_j = _j + 1;
+									_y = _x buildingPos _i;
+							};
+							_i = 0;
+						};
+					} forEach _nearbldgs;
+					_twn setVariable ["BuldingPositions", _bldgpos, true];
+				} else {
+					diag_log format["MSO-%1 TerrorCells: Cannot find buildings in %2", time, name _twn];
+				};
         };
         [_bldgpos,"building positions",_debug] call CRB_fnc_debugPositions;
 
@@ -229,6 +234,7 @@ CRB_fnc_GetNearestTown = {
         
         waitUntil{!isNil "bis_alice_mainscope"};
         waitUntil{typeName (bis_alice_mainscope getvariable "townlist") == "ARRAY"};
+		
         _nearest = (bis_alice_mainscope getvariable "townlist") select 0;
         {
                 if(_nearest distance _pos > _x distance _pos) then {
@@ -236,22 +242,26 @@ CRB_fnc_GetNearestTown = {
                 };
         } forEach (bis_alice_mainscope getvariable "townlist");
         
-        _neighbours = _nearest getVariable "neighbors";
+ //      _neighbours = _nearest getVariable "neighbors"; // Removed this as it was not compatible with towns without neighbours defined - was causing issues/errors.
+
+		_neighbours = [];
+		
         {
-                if(_nearest distance _x < 500 && !(_x in _neighbours)) then {
+                if(_nearest distance _x < 1000) then {
                         _neighbours set [count _neighbours, _x];
                 };
         } forEach (bis_alice_mainscope getvariable "townlist") - [_nearest];
-
-	_neighbours set [count _neighbours, _nearest];
+		
+		_neighbours set [count _neighbours, _nearest];
         
         [_neighbours, "neighbours", _debug] call CRB_fnc_debugPositions;
         
         _nearest = _neighbours call BIS_fnc_selectRandom;
-	if(isNil "_nearest") exitWith {
-		hint "Error: Nearest town not found";
+	
+	if(isNil "_nearest") then {
+		_nearest = (bis_alice_mainscope getvariable "townlist") select 0;
 		diag_log format["MSO-%1 TerrorCells: Nearest town not found", time];
-	};
+	}; 
 
 	CRBPROFILERSTOP
 	_nearest;
@@ -324,10 +334,10 @@ CRB_fnc_RecruitMember = {
         _tcid = _grp getVariable "ID";
         if(isNil "_tcid") then {_tcid = 0;};
         _twn = _grp getVariable "nearestTown";
-	if(isNil "_twn") then {
-		_twn = [position leader _grp, _debug] call CRB_fnc_GetNearestTown;
-		_grp setVariable ["nearestTown", _twn, true];
-	};
+		if(isNil "_twn") then {
+			_twn = [position leader _grp, _debug] call CRB_fnc_GetNearestTown;
+			_grp setVariable ["nearestTown", _twn, true];
+		};
         _bldgpos = [_twn,_debug] call CRB_fnc_GetBuildingPosForTown;
         _recpos = _bldgpos call BIS_fnc_selectRandom;
         if(isNil "_recpos") exitWith {
@@ -582,7 +592,7 @@ if(isNil "CRB_classlistFaction") then {
 };        
 waitUntil{typeName CRB_classlistFaction == "ARRAY"};
 
-_numcells = 1 + random 2 + ceil((count _spawnpoints) / 5);
+_numcells = ceil(1 + random 2 + ceil((count _spawnpoints) / 5));
 diag_log format["MSO-%1 TerrorCells: spawns(%2) cells(%3)", time, count _spawnpoints, _numcells];
 
 for "_i" from 1 to _numcells do {
