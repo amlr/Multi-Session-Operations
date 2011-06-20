@@ -254,7 +254,7 @@ for "_j" from 0 to (_destinations-1) do
                                         
                                         // Starting waypoint
                                         // Destination Waypoint
-                                        _wp = _grp addwaypoint [_destpos, 0];
+                                        _wp = _grp addwaypoint [_destpos, 300];
                                         _wp setWaypointBehaviour "SAFE";
                                         _wp setWaypointCombatMode _combatMode;
                                         
@@ -262,7 +262,7 @@ for "_j" from 0 to (_destinations-1) do
                                         
                                         CRBPROFILERSTOP
                                         
-                                        waitUntil{sleep 1;(_aircraftVehicle distance _destpos < 500) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
+                                        waitUntil{sleep 1;(_aircraftVehicle distance _destpos < 300) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
                                         
 										// Once near destination, action a landing.
                                         // Make sure MV22 lands near hangar and not on runway as it doesn't taxi
@@ -285,9 +285,7 @@ for "_j" from 0 to (_destinations-1) do
                                         
                                         // Turnoff the aircraft engines
                                         _aircraftVehicle engineOn false;
-                                        
-                                        sleep (_timeout select (random 2));
-                                        
+                                     
                                         // Check to see if aircraft is near Control Tower, if so, crew may get out and go for a chat
                                         _controlTowerTypes = ["Land_Mil_ControlTower","Land_Mil_ControlTower_EP1"];
                                         _controltowers = nearestObjects [position _aircraftVehicle, _controlTowerTypes, 200]; 
@@ -328,7 +326,7 @@ for "_j" from 0 to (_destinations-1) do
                                         _wp = _grp addwaypoint [_endpos, 0];
                                         _wp setWaypointType "MOVE";                               
                                         
-                                        waitUntil{sleep 1;(_aircraftVehicle distance _endpos < 50) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
+                                        waitUntil{sleep 1;(_aircraftVehicle distance _endpos < 150) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
                                         
                                         // Check to see if vehicle was killed/died/crashed
                                         if (!(_grp call CBA_fnc_isAlive) && (_debug)) then {
@@ -347,7 +345,9 @@ for "_j" from 0 to (_destinations-1) do
                                         };
                                         
                                         { deleteVehicle _x } forEach _aircraftCrew;
+										sleep 0.1;
                                         deleteVehicle _aircraftVehicle;
+										sleep 0.1;
                                         deletegroup _grp;
                                 };   
                                 // Pause before creating another aircraft for destination
