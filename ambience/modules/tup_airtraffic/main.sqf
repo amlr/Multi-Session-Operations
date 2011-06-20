@@ -285,6 +285,9 @@ for "_j" from 0 to (_destinations-1) do
                                         
                                         // Turnoff the aircraft engines
                                         _aircraftVehicle engineOn false;
+										
+										// Pause before moving to end position
+                                        sleep (_timeout select (random 2));
                                      
                                         // Check to see if aircraft is near Control Tower, if so, crew may get out and go for a chat
                                         _controlTowerTypes = ["Land_Mil_ControlTower","Land_Mil_ControlTower_EP1"];
@@ -319,9 +322,9 @@ for "_j" from 0 to (_destinations-1) do
                                                 };
                                         };
                                         
-                                        // Pause before moving to end position
+										// Pause before moving to end position
                                         sleep (_timeout select (random 2));
-                                        
+                                                                               
                                         // Create end position waypoint
                                         _wp = _grp addwaypoint [_endpos, 0];
                                         _wp setWaypointType "MOVE";                               

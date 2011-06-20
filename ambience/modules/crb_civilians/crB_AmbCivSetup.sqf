@@ -99,7 +99,7 @@ switch toLower(worldName) do {
                                 _this addMagazine "HandGrenade_Stone";
 								_this addMagazine "HandGrenade_Stone";
 								_this addMagazine "HandGrenade_Stone";
-                                _this addWeapon "throw";
+ //				                               _this addWeapon "throw";
 				};
                 if (random 1 > 0.95 && (_this isKindOf "Woman_EP1" || _this isKindOf "Woman")) then {
                         if (random 1 > 0.5) then {
