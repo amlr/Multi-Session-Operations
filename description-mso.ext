@@ -108,7 +108,7 @@ class Params {
 }; 
 
 #ifdef R3F_LOGISTICS
-#include "support\modules\R3F_logistics\desc_include.h"
+#include <support\modules\R3F_logistics\desc_include.h>
 #endif
 
 class RscTitles
@@ -192,7 +192,7 @@ class cfgFunctions {
 	#include <core\modules\settings\dialog.hpp>
 #endif
 #ifdef SR5_IEDS
-	#include "enemy\modules\SR5_IEDdetect\IEDdetect_dialog.h"
+	#include <enemy\modules\SR5_IEDdetect\IEDdetect_dialog.h>
 #endif
 #ifdef RMM_AAR
 	#include <support\modules\aar\dialog.hpp>
