@@ -402,8 +402,8 @@ class FSM
        "};" \n
        "" \n
        "if (_twnstatuschanged) then {_action = """"};" \n
-       "if (isnil ""_action"") then {hintc str [""A"",_unit,_action,_fsm];_action = """"};" \n
-       "if (isnil ""_fsm"") then {hintc str [""B"",_unit,_action,_fsm];_fsm = -1};" \n
+       "if (isnil ""_action"") then {/*hintc str [""A"",_unit,_action,_fsm];*/_action = """"};" \n
+       "if (isnil ""_fsm"") then {/*hintc str [""B"",_unit,_action,_fsm];*/_fsm = -1};" \n
        "" \n
        "if ((_action == """" || completedFSM _fsm) && alive _unit && !isnull _unit) then {" \n
        "" \n
