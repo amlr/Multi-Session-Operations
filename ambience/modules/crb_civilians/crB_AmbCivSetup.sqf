@@ -76,7 +76,7 @@ switch toLower(worldName) do {
 
 // Reduce unit count formula to try to reduce number of civilian units
 //BIS_alice_mainscope setvariable ["civilianCount","round (4 * (sqrt %1))"];
-//BIS_alice_mainscope setvariable ["civilianCount","round (3 * (sqrt %1))", true];
+BIS_alice_mainscope setvariable ["civilianCount","round (2.5 * (sqrt %1))", true];
 
 // Dumb down civilian units to use less CPU (see http://creobellum.org/node/175)
 [BIS_alice_mainscope,"ALICE_civilianinit",[
