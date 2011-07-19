@@ -87,7 +87,7 @@ BIS_alice_mainscope setvariable ["civilianCount","round (2.5 * (sqrt %1))", true
         },
         {_this allowFleeing 1}, 
         {removeAllWeapons _this}, 
-       {removeAllItems _this},
+        {removeAllItems _this},
         {
 		if (random 1 > 0.1) then {
 			{_this enableAI _x} count ["AUTOTARGET","TARGET"];
@@ -99,7 +99,7 @@ BIS_alice_mainscope setvariable ["civilianCount","round (2.5 * (sqrt %1))", true
 			_this addMagazine "HandGrenade_Stone";
 			_this addMagazine "HandGrenade_Stone";
 			_this addMagazine "HandGrenade_Stone";
-			_this addWeapon "throw";
+			if(!("Throw" in weapons _this) then {_this addWeapon "Throw";};
 		};
                 if (random 1 > 0.95 && (_this isKindOf "Woman_EP1" || _this isKindOf "Woman")) then {
                         if (random 1 > 0.5) then {
