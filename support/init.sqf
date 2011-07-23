@@ -87,7 +87,7 @@ execNow "support\modules\tyres\main.sqf";
 #endif
 
 // AAW INKO Fix
-if(!isNil "ace_main") then {
+if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 	"AAW INKO Fix" call mso_core_fnc_initStat;
 	AAWinf_HelmChangeAnyWhere = true; 
 	execNow "support\scripts\ace_aaw_fix.sqf";

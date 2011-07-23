@@ -25,7 +25,7 @@ player addeventhandler ["respawn", {
         {_unit addweapon _x;} foreach ((weapons _corpse) + (items _corpse));
         _unit selectweapon (primaryweapon _unit);
         
-        if(!isNil "ace_main") then {        
+	if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
                 [_unit, _corpse] call compile preprocessFileLineNumbers "core\scripts\init_player_ace.sqf";
         };
         

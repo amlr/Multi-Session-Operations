@@ -28,9 +28,12 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		#include <mods\aaw_g.hpp>
 		{rank player;}
 	] + [
-		if(!isNil "ace_main") then {
+		if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 			#include <mods\ace_sys_ruck_g.hpp>
 			#include <mods\ace_sys_wounds_g.hpp>
+			#include <mods\ace_earplugs_g.hpp>
+			#include <mods\ace_glasses_g.hpp>
+			#include <mods\ace_rangefinder_g.hpp>
 		}
 	],
 	[
@@ -119,9 +122,12 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		#include <mods\aaw_s.hpp>
 		{player setunitrank _this;}
 	] + [
-		if(!isNil "ace_main") then {
+		if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 			#include <mods\ace_sys_ruck_s.hpp>
 			#include <mods\ace_sys_wounds_s.hpp>
+			#include <mods\ace_earplugs_s.hpp>
+			#include <mods\ace_glasses_s.hpp>
+			#include <mods\ace_rangefinder_s.hpp>
 		}
 	]
 ] execfsm "core\modules\nomad\nomad.fsm";
