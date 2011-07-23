@@ -11,9 +11,21 @@ _syncActions = [PV_hqArray] execVM "support\modules\WHB_FOBspawn\common\fn_JIP_H
 
 switch(faction player) do
 {
-	case "USMC":	{myRespawnPoint = (markerPos "respawn_USMC");}; 
-	case "BIS_BAF":	{myRespawnPoint = (markerPos "respawn_BAF");}; 
+	case "USMC":	{myRespawnPoint = (markerPos "respawn_US");};
+	case "BIS_BAF":	{myRespawnPoint = (markerPos "respawn_UK");}; 
+	default {
+		myRespawnPoint = (markerPos format["respawn_%1", faction player]);
+	};
 }; //Assign Default Spawn Point based on your faction
+
+if (str myRespawnPoint == "[0,0,0]") then {
+	myRespawnPoint = (markerPos format["respawn_%1", faction player]);
+};
+
+
+if (str myRespawnPoint == "[0,0,0]") then {
+	myRespawnPoint = position player;
+};
 
 //player sideChat format ["Debug : Respawn Coords: %1", myRespawnPoint]; 
 
