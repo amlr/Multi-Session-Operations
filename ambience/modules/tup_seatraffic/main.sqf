@@ -214,7 +214,7 @@ for "_j" from 0 to (_destinations-1) do {
                         { deleteVehicle _x } forEach _shipCrew;
                         deleteVehicle _shipVehicle;
                         deletegroup _grp;
-                        
+	                waitUntil{sleep 60;count ([] call BIS_fnc_listPlayers) > 1 || !isMultiplayer};
                         _sleep = if(_debug) then {10;} else {random 300;};
                         sleep _sleep;
                 };

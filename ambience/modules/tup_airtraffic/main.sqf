@@ -6,7 +6,7 @@ if(!isServer) exitWith{};
 if (isNil "factionsMask") then {factionsMask = 0;};
 if (factionsMask == 2) exitWith{};
 
-if(isNil "AirIntensity")then{AirIntensity = 1;};
+if(isNil "AirIntensity")then{AirIntensity = 0.5;};
 AirIntensity = switch(AirIntensity) do {
 	case 0: {
 		0.25;
@@ -352,7 +352,8 @@ for "_j" from 0 to (_destinations-1) do
                                         deleteVehicle _aircraftVehicle;
 										sleep 0.1;
                                         deletegroup _grp;
-                                };   
+                                };
+		                waitUntil{sleep 60;count ([] call BIS_fnc_listPlayers) > 1 || !isMultiplayer};
                                 // Pause before creating another aircraft for destination
                                 _sleep = if(_debug) then {10;} else {random 300;};
                                 sleep _sleep;	
