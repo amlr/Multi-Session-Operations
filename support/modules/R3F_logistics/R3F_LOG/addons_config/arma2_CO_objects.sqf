@@ -41,7 +41,9 @@ R3F_LOG_CFG_objets_remorquables = R3F_LOG_CFG_objets_remorquables +
 [
 	"M119",
 	"D30_base",
-	"ZU23_base"
+	"ZU23_base",
+	"A10",
+	"A10_US_EP1"
 ];
 
 
