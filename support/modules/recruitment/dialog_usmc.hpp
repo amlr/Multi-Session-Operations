@@ -1,4 +1,4 @@
-class RMM_ui_recruitment_us { // by Rommel
+class RMM_ui_recruitment_usmc { // by Rommel
 	idd = 80506;
 	movingEnable = 1;
 	enableSimulation = 1;
