@@ -166,6 +166,10 @@ for "_j" from 0 to (_destinations-1) do
                 //Loop continuously and create aircraft for the destination		
                 while {true} do 
                 {
+                        _destpos = position _currentairfield;
+
+	                waitUntil{sleep 60;{(_x distance _destpos < 2000)} count ([] call BIS_fnc_listPlayers) > 1 || !isMultiplayer};
+
                         // Wait a random amount of time before starting
                         sleep (random 90);
                         
@@ -178,12 +182,11 @@ for "_j" from 0 to (_destinations-1) do
                         If (!_isPlane) then 
                         {
                                 //  _destpos = [position _currentairfield, 0, 20, 10, 0, 0, 0] call BIS_fnc_findSafePos;
-                                _destpos = position _currentairfield;
                                 _destination = "HeliPad";
                                 waitUntil{sleep 15;count (nearestObjects [_destpos, ["Helicopter"], 5]) == 0};
                         } else {
-                                _destpos = position _currentairfield;
                                 _destination = "Hangar";
+                                waitUntil{sleep 15;count (nearestObjects [_destpos, ["Air"], 15]) == 0};
                         };
                         
                         // Define a random place at the edge of the map to fly to
@@ -353,7 +356,6 @@ for "_j" from 0 to (_destinations-1) do
 										sleep 0.1;
                                         deletegroup _grp;
                                 };
-		                waitUntil{sleep 60;count ([] call BIS_fnc_listPlayers) > 1 || !isMultiplayer};
                                 // Pause before creating another aircraft for destination
                                 _sleep = if(_debug) then {10;} else {random 300;};
                                 sleep _sleep;	
