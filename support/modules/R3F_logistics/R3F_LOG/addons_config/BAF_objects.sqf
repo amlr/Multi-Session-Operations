@@ -40,7 +40,7 @@ R3F_LOG_CFG_objets_remorquables = R3F_LOG_CFG_objets_remorquables +
  */
 R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
 [
-	
+	"BAF_Merlin_HC3_D"	
 ];
 
 /**
@@ -49,7 +49,8 @@ R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
  */
 R3F_LOG_CFG_objets_heliportables = R3F_LOG_CFG_objets_heliportables +
 [
-	
+	"BAF_Jackal2_Base",
+	"BAF_Offroad_Base"	
 ];
 
 
@@ -84,7 +85,7 @@ R3F_LOG_CFG_objets_heliportables = R3F_LOG_CFG_objets_heliportables +
  */
 R3F_LOG_CFG_transporteurs = R3F_LOG_CFG_transporteurs +
 [
-	
+	["BAF_Merlin_HC3_D", 50]	
 ];
 
 /**
