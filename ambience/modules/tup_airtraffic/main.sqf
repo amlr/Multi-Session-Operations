@@ -6,21 +6,8 @@ if(!isServer) exitWith{};
 if (isNil "factionsMask") then {factionsMask = 0;};
 if (factionsMask == 2) exitWith{};
 
-if(isNil "AirIntensity")then{AirIntensity = 0.5;};
-AirIntensity = switch(AirIntensity) do {
-	case 0: {
-		0.25;
-	};
-	case 1: {
-		0.5;
-	};
-	case 2: {
-		0.75;
-	};
-	case 3: {
-		1;
-	};
-};
+if(isNil "AirIntensity")then{AirIntensity = 1;};
+AirIntensity = (AirIntensity + 1) / 4;
 
 if(isNil "AirROE")then{AirROE = 1;};
 
