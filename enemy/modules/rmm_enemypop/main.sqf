@@ -17,10 +17,10 @@ _debug = false;
 if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 1;};
 rmm_ep_intensity = switch(rmm_ep_intensity) do {
 	case 0: {
-		0.25;
+		0.5;
 	};
 	case 1: {
-		0.5;
+		0.75;
 	};
 	case 2: {
 		1;
