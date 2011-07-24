@@ -138,6 +138,11 @@ execNow "core\modules\CEP_caching\main.sqf";
 execNow "core\modules\Nou_caching\main.sqf";
 #endif
 
+#ifdef JCACHE
+"Jaynus AI Unit Caching" call mso_core_fnc_initStat;
+execNow "core\modules\jcache\init.sqf";
+#endif
+
 #ifdef RMM_WEATHER
 "Weather" call mso_core_fnc_initStat;
 execNow "core\modules\weather\main.sqf";
