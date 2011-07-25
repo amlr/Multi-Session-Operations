@@ -18,6 +18,9 @@ class CfgSounds {
 #ifdef SR5_IEDS
 	#include <enemy\modules\SR5_IEDdetect\IEDdetect_sounds.cpp>
 #endif
+#ifdef RMM_CAS
+	#include <support\modules\cas\LDL_ac130\Includes\CfgSounds.hpp>
+#endif
 };
 
 //http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
@@ -48,6 +51,9 @@ class Params {
 #endif
 #ifdef TUP_SEATRAFFIC
 	#include <ambience\modules\tup_seatraffic\params.hpp>
+#endif
+#ifdef RMM_CAS
+	#include <support\modules\cas\params.hpp>
 #endif
 #ifdef WHB_MULTISPAWN
 	#include <support\modules\WHB_FOBspawn\params.hpp>
@@ -108,7 +114,12 @@ class Params {
 }; 
 
 #ifdef R3F_LOGISTICS
-#include <support\modules\R3F_logistics\desc_include.h>
+	#include <support\modules\R3F_logistics\desc_include.h>
+#endif
+
+#ifdef RMM_CAS
+	#include <support\modules\cas\LDL_ac130\Includes\uiDefines.hpp>
+	#include <support\modules\cas\LDL_ac130\Includes\define.hpp>
 #endif
 
 class RscTitles
@@ -118,6 +129,9 @@ class RscTitles
 #endif
 #ifdef SR5_IEDS
 	#include <enemy\modules\SR5_IEDdetect\IEDdetect_screens.cpp>
+#endif
+#ifdef RMM_CAS
+	#include <support\modules\cas\LDL_ac130\Includes\RscTitles.hpp>
 #endif
 };
 
@@ -199,6 +213,10 @@ class cfgFunctions {
 #endif
 #ifdef RMM_CAS
 	#include <support\modules\cas\dialog.hpp>
+	#include <support\modules\cas\LDL_ac130\Includes\dialogParent.hpp>
+	#include <support\modules\cas\LDL_ac130\Includes\dialogAC130.hpp>
+	#include <support\modules\cas\LDL_ac130\Includes\dialogUAV.hpp>
+	#include <support\modules\cas\LDL_ac130\Includes\dialogMap.hpp>
 #endif
 #ifdef RMM_CASEVAC
 	#include <support\modules\casevac\dialog.hpp>

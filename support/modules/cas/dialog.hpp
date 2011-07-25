@@ -32,3 +32,4 @@ class RMM_ui_cas { // by Rommel
 		};
 	};
 };
+

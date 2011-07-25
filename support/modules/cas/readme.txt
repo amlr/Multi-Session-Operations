@@ -11,3 +11,5 @@ Questions
 - when does the unit leave the squad?
 
 Wolffy - 
+
+Added General Carver's AC130 script (Tupolov)

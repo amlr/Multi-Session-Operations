@@ -1,9 +1,16 @@
 if (isdedicated) exitwith {};
 
+LDL_init = compile preprocessFileLineNumbers "support\modules\cas\LDL_ac130\LDL_init.sqf";
+[]spawn LDL_init;	
+waitUntil {!isNil "LDL_initDone"};
+waitUntil {LDL_initDone};
+
 RMM_cas_types = [
 	"A10",
 	"AH64D",
-	"AH1Z"
+	"AH1Z",
+	"C130J",
+	"MQ9PredatorB"
 ];
 RMM_cas_lines = [
 	{[mapGridPosition player]},
@@ -12,7 +19,6 @@ RMM_cas_lines = [
 ];
 RMM_cas_missiontime = 540;
 RMM_cas_flyinheight = 500;
-RMM_cas_frequency = 10800;
 
 if (isnil "RMM_cas_lastTime") then {
 	RMM_cas_lastTime = -RMM_cas_frequency;
