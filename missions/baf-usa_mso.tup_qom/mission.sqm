@@ -38,7 +38,8 @@ class Mission
 		"CAAir",
 		"CAA10",
 		"CAAir2_F35B",
-		"caair_baf_ch_47f"
+		"caair_baf_ch_47f",
+		"caair_e"
 	};
 	addOnsAuto[]=
 	{
@@ -75,12 +76,13 @@ class Mission
 		"CAAir",
 		"CAA10",
 		"CAAir2_F35B",
+		"caair_e",
 		"tup_qom"
 	};
 	randomSeed=10170483;
 	class Intel
 	{
-		briefingName="BAF/USA vs TK_GUE MSO v3.43";
+		briefingName="BAF/USA vs TK_GUE MSO v3.45";
 		briefingDescription="An AAF/AEF CTB Collaboration";
 		resistanceWest=0;
 		startWeather=0.28730148;
@@ -1623,7 +1625,7 @@ class Mission
 	};
 	class Vehicles
 	{
-		items=266;
+		items=267;
 		class Item0
 		{
 			position[]={3267.0811,657.82458,8824.4004};
@@ -4238,10 +4240,20 @@ class Mission
 			skill=0.2;
 			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";";
 		};
+		class Item266
+		{
+			position[]={3032.3755,669.01434,8961.8086};
+			azimut=155.55315;
+			id=352;
+			side="EMPTY";
+			vehicle="C130J_US_EP1";
+			skill=0.2;
+			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf""; nul = [this] execVM ""support\modules\cas\LDL_ac130\Addon\ac130_init_AC130.sqf"";";
+		};
 	};
 	class Markers
 	{
-		items=26;
+		items=28;
 		class Item0
 		{
 			position[]={3275.4336,658.91974,8840.1123};
@@ -4304,7 +4316,7 @@ class Mission
 		};
 		class Item7
 		{
-			position[]={3343.3057,662.78931,8851.4219};
+			position[]={3249.3977,657.18884,8798.8955};
 			name="trucks";
 			text="Trucks";
 			type="hd_dot";
@@ -4312,7 +4324,7 @@ class Mission
 		};
 		class Item8
 		{
-			position[]={3238.3801,657.2066,8803.3359};
+			position[]={3226.5422,657.49805,8808.6846};
 			name="cars";
 			text="Cars";
 			type="hd_dot";
@@ -4320,7 +4332,7 @@ class Mission
 		};
 		class Item9
 		{
-			position[]={3228.5522,657.00482,8830.2129};
+			position[]={3217.8789,657.32214,8836.1953};
 			name="csw";
 			text="Crew Served Weapons";
 			type="hd_dot";
@@ -4328,7 +4340,7 @@ class Mission
 		};
 		class Item10
 		{
-			position[]={3243.1685,656.86768,8820.3721};
+			position[]={3237.7729,656.91962,8815.4463};
 			name="service";
 			text="Vehicle Service Point";
 			type="hd_dot";
@@ -4336,7 +4348,7 @@ class Mission
 		};
 		class Item11
 		{
-			position[]={3252.7683,658.47583,8859.5762};
+			position[]={3259.3291,659.44879,8880.8984};
 			name="ammo";
 			text="Ammunition";
 			type="hd_dot";
@@ -4344,7 +4356,7 @@ class Mission
 		};
 		class Item12
 		{
-			position[]={3287.1108,660.76746,8859.084};
+			position[]={3285.918,661.01453,8867.1367};
 			name="recruitment";
 			text="Recruitment and Team Status";
 			type="hd_dot";
@@ -4360,7 +4372,7 @@ class Mission
 		};
 		class Item14
 		{
-			position[]={3283.8845,659.25854,8832.5459};
+			position[]={3282.9368,659.12549,8831.2188};
 			name="logbook";
 			text="Logbook";
 			type="hd_dot";
@@ -4376,7 +4388,7 @@ class Mission
 		};
 		class Item16
 		{
-			position[]={3547.1484,643.3985,9129.8613};
+			position[]={3552.3328,643.56342,9123.6113};
 			name="trucks_1";
 			text="Trucks";
 			type="hd_dot";
@@ -4392,7 +4404,7 @@ class Mission
 		};
 		class Item18
 		{
-			position[]={3557.0251,645.27765,9079.6875};
+			position[]={3551.8059,645.21814,9084.0117};
 			name="csw_1";
 			text="Crew Served Weapons";
 			type="hd_dot";
@@ -4416,7 +4428,7 @@ class Mission
 		};
 		class Item21
 		{
-			position[]={3506.7317,644.45557,9120.7256};
+			position[]={3500.5942,644.99957,9117.1885};
 			name="recruitment_1";
 			text="Recruitment and Team Status";
 			type="hd_dot";
@@ -4424,7 +4436,7 @@ class Mission
 		};
 		class Item22
 		{
-			position[]={3525.5051,644.77289,9111.0859};
+			position[]={3522.2803,645.01886,9105.9883};
 			name="hospital_1";
 			text="Hospital";
 			type="hd_dot";
@@ -4453,6 +4465,22 @@ class Mission
 			text="Helipad";
 			type="hd_dot";
 			angle=-207.64035;
+		};
+		class Item26
+		{
+			position[]={3026.5789,669.01434,8975.9854};
+			name="AC130";
+			text="AC130 - Spectre Gunship";
+			type="hd_dot";
+			angle=-207.64;
+		};
+		class Item27
+		{
+			position[]={2822.9312,674.32941,9132.0918};
+			name="Air";
+			text="Aircraft";
+			type="hd_dot";
+			angle=-207.64;
 		};
 	};
 	class Sensors
