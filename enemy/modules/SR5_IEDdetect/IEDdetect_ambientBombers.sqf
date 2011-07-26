@@ -63,7 +63,7 @@ if (count _civilians > 0) then {
       if (reezo_IEDdetect_debug) then { _soldier globalChat "DEBUG IEDDETECT_AMBIENTBOMBERS: TRIGGERMAN FOUND"; sleep 1; };
       _rnd = random 100;
       _vehicles = [];
-      _nearCars = (getPos _triggerman) nearObjects [_IEDtype,_scanArea];
+      _nearCars = nearestObjects [(getPos _triggerman), _IEDtype,_scanArea];
       //DECIDE: SUICIDE BOMBER OR TRIGGERMAN?
       if (_rnd < _suicideRate && count _nearCars > 0) then {
         for [{_k = 0},{_k < (count _nearCars)},{_k = _k + 1}] do {
