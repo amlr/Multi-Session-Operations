@@ -30,8 +30,8 @@ _car = createvehicle [_class, _pos, [], _radius, "none"];
 _car setdir (_dir - 10 + random 20);
 _car setvelocity [0,0,-0.2];
 _car setPosASL getPosASL _car;	// converge to the terrain
-_car setvariable ["SILVIE_id",_id];
-_car setvariable ["SILVIE_obj",if (typeof _obj == "") then {objnull} else {_obj}];
+_car setvariable ["SILVIE_id",_id,true];
+_car setvariable ["SILVIE_obj",if (typeof _obj == "") then {objnull} else {_obj},true];
 _car addeventhandler ["killed",{
 	_this spawn {
 		_car = _this select 0;
@@ -41,8 +41,8 @@ _car addeventhandler ["killed",{
 		_id = -_id;
 		_twn = (_car getvariable "SILVIE_twn");
 		if (typename _twn == "TEXT") then {_twn = str _twn; textLogFormat ["Log: [SILVIE]: Error in currentTown - %1",_twn]};
-		_logic setvariable ["id",_id];
-		_logic setvariable ["currentTown",_twn];
+		_logic setvariable ["id",_id,true];
+		_logic setvariable ["currentTown",_twn,true];
 		[_logic,"carlist",[_car]] call bis_fnc_variablespaceremove;
 	};
 	[_this] call BIS_GC_trashItFunc;
@@ -54,7 +54,7 @@ _car setFuel 0.5 + ((random 1)^3 - (random 1)^3)/2;
 _car setDamage (random 0.5)^2;	// Up to 25% worn out
 {_car setHit [_x,(random 0.75)^3]} forEach _zgb_hitparts_car;	// Up to 42,1875% worn out
 
-_car setvariable ["SILVIE_twn",_twn];
+_car setvariable ["SILVIE_twn",_twn,true];
 _car spawn (_logic getvariable "vehicleInit");
 
 //--- Alarm ;)
