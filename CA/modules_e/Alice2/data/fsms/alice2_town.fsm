@@ -320,7 +320,7 @@ class FSM
        "" \n
        "" \n
        "//--- Pre-set neighbors" \n
-       "_nearbyTownsAll = _twn getvariable ""neighbors"";" \n
+       "_nearbyTownsAll = _twn getvariable [""neighbors"",[]];" \n
        "" \n
        "//--- Find neighbors if no pre-sets are available" \n
        "if (count _nearbyTownsAll == 0) then {" \n
