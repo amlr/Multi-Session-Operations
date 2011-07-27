@@ -24,17 +24,17 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		{getDir player;},
 		{[vehicle player, driver (vehicle player) == player, gunner (vehicle player) == player, commander (vehicle player) == player];},
 		{lifestate player;},
-		{[group player, (leader player == player)];},
+		{rank player;},
 		#include <mods\aaw_g.hpp>
-		{rank player;}
+		{[group player, (leader player == player)];}
 	] + [
-		if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
+		{if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 			#include <mods\ace_sys_ruck_g.hpp>
 			#include <mods\ace_sys_wounds_g.hpp>
 			#include <mods\ace_earplugs_g.hpp>
 			#include <mods\ace_glasses_g.hpp>
 			#include <mods\ace_rangefinder_g.hpp>
-		}
+		};}
 	],
 	[
 		{
@@ -106,28 +106,21 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 				player setUnconscious true;
 			};
 		},
-		{
-			if (_this select 1) then {
-				[player] joinSilent (createGroup playerSide);
-				(group player) selectLeader player;
-				{
-					if !(isplayer _x) then {
-						[_x] joinsilent (group player);
-					};
-				} foreach units (_this select 0);
-			} else {
-				[player] joinSilent (_this select 0);
-			};
-		},
+		{player setunitrank _this;},
 		#include <mods\aaw_s.hpp>
-		{player setunitrank _this;}
+		{
+			[player] joinSilent (_this select 0);
+			if (_this select 1) then {
+				(_this select 0) selectLeader player;
+			};
+		}
 	] + [
-		if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
+		{if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 			#include <mods\ace_sys_ruck_s.hpp>
 			#include <mods\ace_sys_wounds_s.hpp>
 			#include <mods\ace_earplugs_s.hpp>
 			#include <mods\ace_glasses_s.hpp>
 			#include <mods\ace_rangefinder_s.hpp>
-		}
+		};}
 	]
 ] execfsm "core\modules\nomad\nomad.fsm";
