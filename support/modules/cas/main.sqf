@@ -20,6 +20,11 @@ RMM_cas_lines = [
 RMM_cas_missiontime = 540;
 RMM_cas_flyinheight = 500;
 
+if (isnil "RMM_cas_frequency") then {
+	RMM_cas_frequency = 3600;
+	publicvariable "RMM_cas_frequency";
+};
+
 if (isnil "RMM_cas_lastTime") then {
 	RMM_cas_lastTime = -RMM_cas_frequency;
 	publicvariable "RMM_cas_lastTime";
