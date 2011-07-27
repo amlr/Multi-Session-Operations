@@ -97,7 +97,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=41;
+		items=42;
 		class Item0
 		{
 			side="LOGIC";
@@ -1622,6 +1622,27 @@ class Mission
 				};
 			};
 		};
+		class Item41
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={3242.979,656.99017,8805.6611};
+					azimut=7.35953;
+					special="NONE";
+					id=353;
+					side="WEST";
+					vehicle="BAF_Soldier_EN_MTP";
+					leader=1;
+					skill=0.46666664;
+					init="nul0 = [this,50,10,20,01] execVM ""enemy\modules\SR5_IEDdetect\IEDdetect_detector.sqf"";";
+					description="EOD Engineer";
+				};
+			};
+		};
 	};
 	class Vehicles
 	{
@@ -1683,7 +1704,8 @@ class Mission
 			side="EMPTY";
 			vehicle="BAF_Offroad_D";
 			skill=0.2;
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf""; nul0 = [this,50,10,20,01] execVM ""enemy\modules\SR5_IEDdetect\IEDdetect_detector_vehicle.sqf"";";
+			description="EOD Land Rover";
 		};
 		class Item6
 		{
@@ -4253,7 +4275,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=28;
+		items=29;
 		class Item0
 		{
 			position[]={3275.4336,658.91974,8840.1123};
@@ -4316,7 +4338,7 @@ class Mission
 		};
 		class Item7
 		{
-			position[]={3249.3977,657.18884,8798.8955};
+			position[]={3247.4368,657.38934,8797.0205};
 			name="trucks";
 			text="Trucks";
 			type="hd_dot";
@@ -4324,7 +4346,7 @@ class Mission
 		};
 		class Item8
 		{
-			position[]={3226.5422,657.49805,8808.6846};
+			position[]={3231.1555,657.19342,8810.8066};
 			name="cars";
 			text="Cars";
 			type="hd_dot";
@@ -4479,6 +4501,14 @@ class Mission
 			position[]={2822.9312,674.32941,9132.0918};
 			name="Air";
 			text="Aircraft";
+			type="hd_dot";
+			angle=-207.64;
+		};
+		class Item28
+		{
+			position[]={3240.9414,657.03247,8805.623};
+			name="IED";
+			text="EOD Team";
 			type="hd_dot";
 			angle=-207.64;
 		};

@@ -12,4 +12,4 @@ Questions
 
 Wolffy - 
 
-Added General Carver's AC130 script (Tupolov)
+Added LDL's AC130 script (Tupolov)
