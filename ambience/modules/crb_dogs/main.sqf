@@ -20,7 +20,7 @@ if(count _this > 0) then {
 
 {
         if(type _x in _types) then {
-                if (random 1 > 0.9) then {
+                if (random 1 > 0.8) then {
                         private["_name","_dx","_dy","_pos","_trg","_m"];
                         _name = format["wilddogs_%1", floor(random 10000)];
                         if(_debug) then {
