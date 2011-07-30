@@ -13,8 +13,8 @@ class crb_tc_markers {
 
 class crb_tc_intensity {
         title = "    Recruitment per Hour"; 
-        values[]= {0.25,0.5,1,2,3}; 
-        texts[]= {"4 Recruits","2 Recruits","1 Recruit","0.5 Recruit","0.33 Recruit"}; 
-        default = 1;
+        values[]= {0,1,2,3,4,5}; 
+        texts[]= {"None","4 Recruits","2 Recruits","1 Recruit","0.5 Recruit","0.33 Recruit"}; 
+        default = 2;
 };
 

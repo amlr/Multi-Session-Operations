@@ -14,6 +14,28 @@ if(!isServer) exitWith{};
 
 _debug = false;
 if(isNil "crb_tc_intensity")then{crb_tc_intensity = 1;};
+crb_tc_intensity = switch(crb_tc_intensity) do {
+	case 0: {
+		0;
+	};
+	case 1: {
+		0.25;
+	};
+	case 2: {
+		0.5;
+	};
+	case 3: {
+		1;
+	};
+	case 4: {
+		2;
+	};
+	case 5: {
+		3;
+	};
+};
+if(crb_tc_intensity == 0) exitWith{};
+
 if(isNil "crb_tc_markers")then{crb_tc_markers = 1;};
 
 CRB_fnc_debugPositions = {
@@ -65,8 +87,7 @@ PGM_fnc_CreateIntel = {
                 (getPosATL _cache select 0) + _sign *(random _radius),
                 (getPosATL _cache select 1) + _sign2*(random _radius)
         ]; 
-        _range  = round sqrt(_radius^2*2);
-        _range  = _range - (_range % 50);
+        _range  = ceil((position _cache distance _pos) / 50) * 50;
         [format["%1intel%2", _cache, _i], _pos, "Icon", [0.5,0.5], "TEXT:", format["%1m", _range], "TYPE:", intelMarkerType, "COLOR:", "ColorRed", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
         [2,[],{player sideChat "Intelligence received - map updated";}] call mso_core_fnc_ExMP;
 
