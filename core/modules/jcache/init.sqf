@@ -41,7 +41,7 @@ if(isServer) then {
                 _params = _this select 0;
                 _debug = _params select 0;
                 {
-			if(!((leader _x) getVariable [QUOTE(GVAR(isLeader)), false])) then {
+			if(!((leader _x) getVariable [QUOTE(GVAR(isLeader)), false]) && !(leader _x in ([] call BIS_fnc_listPlayers)) && !(_x getVariable ["CEP_disableCache", false])) then {
 				[leader _x, [JCACHE_RANGE_INFANTRY, JCACHE_RANGE_VEHICLE, JCACHE_RANGE_AIRCRAFT] ] call jayai_sys_cache_fnc_addGroup;
 			};
                 } forEach allGroups;
