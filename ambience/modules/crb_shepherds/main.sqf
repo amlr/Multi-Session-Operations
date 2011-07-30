@@ -232,6 +232,7 @@ _shepherds = [];
                         _pos = [_pos, 0, 50, 1, 0, 50, 0] call BIS_fnc_findSafePos;
                         missionNamespace setVariable [_name, _pos];
                         _grp = createGroup civilian;
+			_grp setVariable ["CEP_disableCache", true, true];
                         _shepherds set [count _shepherds, _name];
                         
                         if (_debug) then {
@@ -258,8 +259,7 @@ _shepherds = [];
                                 };
                                 
                                 
-                                if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) > 0 && count(units _grp) > 0) then {
-                                        if(count(units _grp) == 0) then {
+                                if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) > 0 && count(units _grp) == 0) then {
                                                 if(_debug) then {player globalChat format["Creating %1", _name];};
 						diag_log format["MSO-%1 Shepherds creating %2", time, _name];
                                                 _herd = [_pos] call CRB_fnc_createHerd;
@@ -280,7 +280,8 @@ _shepherds = [];
                                                 _grp enableAttack true;
                                                 _grp selectLeader _shepherd;
                                         };
-                                        
+
+                                if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) > 0 && count(units _grp) > 0) then {
                                         _leader = leader _grp;
                                         
                                         if(!(_leader getVariable "attacking")) then {
@@ -369,17 +370,17 @@ _shepherds = [];
                                                 if(_debug) then {player globalChat format["%1 Attacking!", _name] ;};
                                         };
                                 }  else {
-/*
+
                                         if(count(units _grp) > 0) then {
                                                 if(_debug) then {player globalChat format["Destroying %1", _name];};
                                                 {deleteVehicle _x} foreach units _grp;
 						diag_log format["MSO-%1 Shepherds destroying %2", time, _name];
                                         };
-*/
+
                                         if (_grp getVariable "wait" < time) then {
                                                 private["_oldpos"];
                                                 _oldpos = _pos;
-                                                _pos = [_pos, _maxdist] call CBA_fnc_randPos;
+                                                _pos = [_pos, _maxdist * 5] call CBA_fnc_randPos;
                                                 _grp setVariable ["wait", time + (_oldpos distance _pos) * 1.5, true];
                                                 if(_debug) then {
                                                         hint format["Moving %1", _name];
