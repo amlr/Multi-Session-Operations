@@ -6,7 +6,7 @@ if(!isServer) exitWith{};
 if (isNil "amount") then {amount = 1;};
 if (amount == 2) exitWith{};
 
-if(isNil "SeaROE")then{SeaROE = 1;};
+if(isNil "SeaROE")then{SeaROE = 2;};
 
 _debug = false;
 if(isNil "AmbientLHD")then{AmbientLHD = 0;};

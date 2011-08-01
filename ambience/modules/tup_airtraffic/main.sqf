@@ -9,7 +9,7 @@ if (factionsMask == 2) exitWith{};
 if(isNil "AirIntensity")then{AirIntensity = 1;};
 AirIntensity = (AirIntensity + 1) / 4;
 
-if(isNil "AirROE")then{AirROE = 1;};
+if(isNil "AirROE")then{AirROE = 2;};
 
 _debug = false;
 
