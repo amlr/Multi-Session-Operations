@@ -8,7 +8,6 @@ if (amount == 2) exitWith{};
 
 if(isNil "SeaROE")then{SeaROE = 2;};
 
-_debug = false;
 if(isNil "AmbientLHD")then{AmbientLHD = 0;};
 
 
@@ -49,12 +48,13 @@ if (((random 1 < 0.5) && (AmbientLHD == 2)) || (AmbientLHD == 1)) then {
 	_LHD call bis_ew_fnc_createLHD;
 
 	// Add Heli pad and crewman for each LHD 
-	_LHDLand = [["Land_LHD_1"], [], _mapsize, _debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType;
+	_LHDLand = [["Land_LHD_6"], [], _mapsize, _debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType;
 	{
-		_dummy = createVehicle ["HeliHRescue", [getposasl _x select 0, getposasl _x select 1, 16], [],0,'NONE'];
-		_unit = group _dummy createUnit ["USMC_LHD_Crew_Yellow", [getposasl _x select 0, getposasl _x select 1, 17], [], 10, ""];
+		_dummy = createVehicle ["HeliHRescue", [getposasl _x select 0, getposasl _x select 1, 18.5], [],0,'NONE'];
+		_dummy attachTo [_x, [getposasl _x select 0, getposasl _x select 1, 16]];
+		_unit = "USMC_LHD_Crew_Yellow" createUnit [[getposasl _x select 0, getposasl _x select 1, 19], group _LHD];
 	} foreach _LHDLand;
-	
+
 	if (_debug) then {
 		diag_log format ["MSO-%1 Sea Traffic: LHD at: %2", time, mapgridposition _LHD];
     };

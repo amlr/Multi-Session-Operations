@@ -11,7 +11,6 @@ AirIntensity = (AirIntensity + 1) / 4;
 
 if(isNil "AirROE")then{AirROE = 2;};
 
-_debug = false;
 
 {
         private["_new"];
@@ -108,7 +107,7 @@ for "_j" from 0 to (_destinations-1) do
         
         [_j, _helidest, _planedest, _debug, _mapsize] spawn 
         {
-                private ["_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_wp","_j","_debug","_mapsize","_currentairfield","_airfieldSide","_factions","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight","_controltowers","_controlTowerTypes","_controltw","_housepos","_mv22pos","_aircraftClass","_combatMode","_landed"];
+                private ["_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_wp","_j","_debug","_mapsize","_currentairfield","_airfieldSide","_factions","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight","_controltowers","_controlTowerTypes","_controltw","_housepos","_mv22pos","_aircraftClass","_combatMode","_landed","_LHDobject"];
                 _j = _this select 0;
                 _helidest = _this select 1;
                 _planedest = _this select 2;
@@ -188,9 +187,14 @@ for "_j" from 0 to (_destinations-1) do
                         if (factionsMask == 0 || _airfieldSide == civilian) then {
                                 if (random 1 < AirIntensity) then
                                 {
-                                        // Get the factions for the controlling side and count their units
-                                        _factions = [_airfieldside, _currentairfield, 1000,"factions",_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
-                                        //_factionsCount = [_airfieldside, _currentairfield, 1000,"count",_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
+                                        // Get the factions for the controlling side and count their units (check to see if landing at LHD)
+										_LHDobject = _destpos nearObjects ["Land_LHD_1",100];
+										if (count _LHDobject > 0) then {
+											_factions = ["USMC"];
+										} else {
+											_factions = [_airfieldside, _currentairfield, 1000,"factions",_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
+											//_factionsCount = [_airfieldside, _currentairfield, 1000,"count",_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
+										};
                                         
                                         // Mark Destination on Map
                                         if (_debug) then{
@@ -256,6 +260,16 @@ for "_j" from 0 to (_destinations-1) do
                                         
                                         waitUntil{sleep 1;(_aircraftVehicle distance _destpos < 300) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
  										
+										// Check to see if landing area is LHD, use Mand Heliroute to land
+										
+										if (count _LHDobject > 0) then {
+											if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 is attempting to land on the LHD", time, _j, typeOf _aircraftVehicle, _destination];};
+											_scr = [_aircraftVehicle,[(_LHDobject select 0) modelToWorld [0,0,16]],25, true] execVM "ambience\modules\tup_airtraffic\mando_heliroute_arma.sqf";
+											Sleep 2;
+											waitUntil {sleep 1;_aircraftVehicle getVariable "mando_heliroute" != "busy"};
+											if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 landed on LHD", time, _j, typeOf _aircraftVehicle, _destination];};
+										};
+										
 										// Get rid of the original waypoint now that the aircraft is nearby
 										deleteWaypoint [_grp, currentwaypoint _grp];
 										
