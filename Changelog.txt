@@ -1,4 +1,152 @@
 Change Log:
+v3.45
+- Split MSO into Core, Ambient, Support, Enemy and Missions components
+
+Core
+====
+- Removed unused files
+- Added checks for CEP_disableCache flag
+- Added disable cache to groups with player leader
+- Made compatible with JCache
+- Shuffled group/leader and rank to fix Nomad group AI leader bug
+- Changed setVariables to broadcast
+- Added Jaynus Cache module
+- Added Robalo's ACE fix (#21569 - Robalo)
+- Changed method used to check for ACE (thanks Robalo)
+- Added pause if no players are online
+- Added parameter subheadings
+- Updated for compatibility with user made maps where some towns may not have neighbours. Removes error on Tup's Qom Province.
+- Default 50% intensity
+- Added sleeps to waitUntil
+- Remove AI disable commands as they were affecting units 'In Cargo'
+- Fixed missing time field
+- Fixed overwriting of BIS Comms menu
+- Reduced default unit skill level
+- Added waitUntil sleeps to improve Server FPS
+- Added profiling
+- Fixed nomad vehicle positions
+- Default debug to 30 sec
+- Reduced skill to improve CPU performance
+- Added profiling and performance improvements
+- Tidied up Mission Parameters list
+- Added MSO Loop handler and profiler
+- Profiled and performance tuned CORE
+- Profiled and performance tuned ambience
+- Broadcast garbage collector queue
+- Removed Tora Bora until keypoints are placed
+- Added Nou's Caching
+- Added trigger flag to prevent intensity issues
+- Converted say3D to be broadcast
+- converted to MSO Function loop
+- Added MSO Function Loops (thanks Nou for the code)
+- Added custom seasons
+- Added Debug Server FPS to report option
+- Disabled debug by default
+
+Ambient
+====
+- Added ability for AI to land accurately on LHD (using Mando Heliroute)
+- Changed default ROE to Hold fire - defend only
+- Fixed Ambient Air/Sea intensity parameter
+- Slightly increased the chance of dogs
+- Sanity check for SP mode
+- Sanity check if no neighbours are found
+- Corrected CAS Readme.txt to include LDL's AC130 script
+- Fixed Ambient Bomber script errors - Bug #20449
+- Added playable AC130 Spectre Gunship to Qom mission (based on 3.45 CAS updates)
+- Added playable UAV and AC130 for Close Air Support (using LDL's AC130 script)
+- Updated description-mso.ext to support updates to Close Air Support
+- Added parameters to control frequency and number of CAS requests
+- Removed EmptyHeliH from landing destinations to stop helicopters from landing at phantom places
+- Fixed check for hangars and helipads
+- Improved aircraft taxiing and waypoints
+- Added better debugging to Ambient Air
+- Fixed - AirIntensity changes were broken
+- Fixed - Keep getting Duplicate Weapon Throw errors - commented Throw weapon
+- Added pauses for no players and full hangars
+- Changed default intensity to 0.5
+- Added check for Throw weapon
+- Decreased the number of ambient civilians
+- Re-added Remove all weapons to ambient civilians, to prevent surrendering of maps
+- Commented out reference to nil variables in alice2_town.fsm causing errors
+- Fixed typos
+- Fixed issue of duplicate throw weapon being reported
+- Improved ambient aircraft
+- Improved ambient air waypoints
+- Removed invisible Heli Pad at hangars to stop AI from trying to land on top
+- Improved landing and taxiing code by using EventHandler
+- Disabled crows by default
+- Changed order so that sea ambience is started before air to ensure LHD is registered as location for ambient air
+- Added Parameter for spawning an LHD on the map
+- Added LHD to SeaTraffic
+- Added mission parameters to Sandstorms and flies
+- Added stones to random civilians
+- Added Rules of Engagement for Ambient Sea Traffic
+- Added Rule of Engagement parameter for Ambient Air
+- Added check to see if aircraft is damaged by more than 0.4, then delete
+- Updated findVehicleType to include single seat jets
+- Added Rasman Heliport
+- Added Ambient Air Intensity Parameter (25%, 50%, 75%, 100%) - Default = 100%
+- Removed debugging log from Control Tower code
+- Remove private declarations from FSMs
+- Move server check to SQF
+- Pass _this to FSM
+
+Support
+====
+- Implemented Sickboys code for checking for ACRE radio without ACE
+- Added curly braces to fix ACE component not working
+- Added A10 to Towable vehicles for Towing Tractor
+- Added more BAF vehicles (thanks Friznit)
+- Added USMC support (thanks Friznit)
+- Added additional BAF objects (Friznit)
+- Improved BLUFOR and Civilian intel by providing town name or grid locations
+- Added check for towns without buildings
+- Increased search radius for neighbouring towns (1000m)
+- Doesn't quit script without a town - sets the town to the first one found.
+- Added Desert MTVR
+- Added Stryker support for Takistan
+- Fixed TownManager hanging is ALICE not enabled
+- Added WobblyHeadedBobs Respawn Manager
+- Reverts back to old vehicle and resupply scripts
+- Added Engineer to recruitment for BAF and US
+- Added Medic to recruitment for BAF and US
+- Added CASEVAC module (was previously just a menu only)
+- Updated Support Modules.hpp to include CASEVAC
+- Added WobblyHeadedBobs FOB Spawn module
+- Removed broken delay code from vehicle FSM
+
+Enemy
+====
+- Added SR5 profiling
+- Fixed distance text of intel markers
+- Disabled SR5 until dedi support
+- Changed Intensity method for Enemy Populator
+- Increased default random enemy population intensity
+- Added default spawn locations when not signed in or markers not specified
+- Fixed terrorist main.sqf error - expecting object rather than position
+- 90% chance civilians will have 8 stones to throw at BLUFOR if conditions are right
+- Updated rocks to inflict damage
+- Renamed parameters
+- Fixed SR5 IED errors - thanks to Zorrobyte
+- Random civilians have handguns
+- Added Reezo's SR5 IED Detect module
+- Added ZoneKillers Build module
+- Fixed convoy task update
+- Created mission parameter for Enemy Population Intensity
+- Created mission parameters for markers and intensity
+- Fixed bug to stop Terrorist Recruiting on dedicated server
+- Increased default recruitment per cell to 30min to 1hr
+
+Missions
+====
+- Updated Qom Province mission with IED detector based Land Rover and IED Detector AI Engineer
+- Added base Takistan, Chernarus and Qom Province mission.sqm files to mission folder
+- Added Qom Province MSO 3.43 mission
+- Updated Sample Missions to v3.43
+
+--------------------------------------------------------------------------------
+
 v3.4
 - Split MSO into Core, Ambient, Support and Enemy components
 
@@ -162,3 +310,4 @@ Sample missions included:
 - GUE/PMC vs RU/INS on Utes
 - BAF/USA vs TK_GUE on Takistan
 - AAW/ACE vs GUE on Chernarus
+
