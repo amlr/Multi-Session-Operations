@@ -11,6 +11,7 @@ AirIntensity = (AirIntensity + 1) / 4;
 
 if(isNil "AirROE")then{AirROE = 2;};
 
+_debug = false;
 
 {
         private["_new"];
