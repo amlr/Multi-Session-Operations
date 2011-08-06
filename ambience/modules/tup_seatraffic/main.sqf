@@ -8,8 +8,9 @@ if (amount == 2) exitWith{};
 
 if(isNil "SeaROE")then{SeaROE = 2;};
 
-if(isNil "AmbientLHD")then{AmbientLHD = 0;};
+_debug = false;
 
+if(isNil "AmbientLHD")then{AmbientLHD = 0;};
 
 waitUntil{!isNil "BIS_fnc_init"};
 // Get center of map
