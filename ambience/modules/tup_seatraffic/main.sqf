@@ -125,8 +125,7 @@ for "_j" from 0 to (_destinations-1) do {
                         if (_debug) then {
                                 private["_t","_m"];
                                 _t = format["SeaTraffic_s%1", floor(random 10000)];
-                                _m = [_t, _spawnpos, "Icon", [1,1], "TYPE:", "mil_dot", "GLOBAL"] call CBA_fnc_createMarker;
-                                [_m, true] call CBA_fnc_setMarkerPersistent;
+                                _m = [_t, _spawnpos, "Icon", [1,1], "TYPE:", "mil_dot", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
                         };
                         
                         // Set a safe destination for the 2nd waypoint (make it another sea port)
@@ -139,8 +138,7 @@ for "_j" from 0 to (_destinations-1) do {
                         if (_debug) then {
                                 private["_t","_m"];
                                 _t = format["SeaTraffic_s%1", floor(random 10000)];
-                                _m = [_t, _destpos, "Icon", [1,1], "TYPE:", "hd_pickup", "GLOBAL"] call CBA_fnc_createMarker;								
-                                [_m, true] call CBA_fnc_setMarkerPersistent;
+                                _m = [_t, _destpos, "Icon", [1,1], "TYPE:", "hd_pickup", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
                         };
                         // Define a random place at the edge of the map to fly to
                         _endpos = [_startpos, _mapsize-10, _mapsize, 10, 2, 0, 0] call BIS_fnc_findSafePos;
