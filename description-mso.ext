@@ -111,6 +111,24 @@ class Params {
 		texts[]= {"false","true"}; 
 		default = 0;
 	};
+	class faction_CWR2_USA {
+		title = "Enable CWR2 USA"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_CWR2_RUS {
+		title = "Enable CWR2 Russians"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
+	class faction_CWR2_FIA {
+		title = "Enable CWR2 Insurgents"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = 0;
+	};
 }; 
 
 #ifdef R3F_LOGISTICS

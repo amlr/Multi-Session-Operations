@@ -43,7 +43,22 @@ if(!isNil "faction_BIS_TK_GUE") then {
                 MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK_GUE"];
         };
 };
-if(count MSO_FACTIONS == 0) then {MSO_FACTIONS = ["BIS_TK_GUE"];};
+if(!isNil "faction_CWR2_USA") then {
+        if(faction_CWR2_USA == 1) then {
+                MSO_FACTIONS = MSO_FACTIONS + ["CWR2_USA"];
+        };
+};
+if(!isNil "faction_CWR2_RUS") then {
+        if(faction_CWR2_RUS == 1) then {
+                MSO_FACTIONS = MSO_FACTIONS + ["CWR2_RUS"];
+        };
+};
+if(!isNil "faction_CWR2_FIA") then {
+        if(faction_CWR2_FIA == 1) then {
+                MSO_FACTIONS = MSO_FACTIONS + ["CWR2_FIA"];
+        };
+};
+if(count MSO_FACTIONS == 0) then {MSO_FACTIONS = ["CWR2_RUS"];};
 
 #ifdef CRB_CONVOYS
 "Convoys" call mso_core_fnc_initStat;
