@@ -342,64 +342,73 @@ class FSM
        "// --------------------------------" \n
        "// Select Favourite places" \n
        "// --------------------------------" \n
+       "    _root = configFile >> ""CfgVehicles"" >> ""hen"";" \n
+       "    _favouritezones = getText ( _root >> ""favouritezones"");" \n
+       "    " \n
+       "    // --------------------------------" \n
+       "    // Lauch Spawn function" \n
+       "    // --------------------------------" \n
+       "    " \n
+       "    // Find all available spawn positions for all players" \n
+       "    _PosList = [];" \n
+       "    {" \n
+       "        _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
+       "        _PosList = _PosList + selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
+       "    } forEach ([] call BIS_fnc_listPlayers);" \n
+       "    " \n
+       "    _newPosList = [];" \n
+       "    // For each spawn position ..." \n
+       "    {" \n
+       "        _PosSelect = _x;" \n
+       "        // Check if duplicated" \n
+       "        if (typeName ([_newPosList, _PosSelect] call BIS_fnc_arrayFindDeep) == ""SCALAR"") then {" \n
        "            " \n
-       "		_root = configFile >> ""CfgVehicles"" >> ""hen"";" \n
-       "            _favouritezones = getText ( _root >> ""favouritezones"");" \n
        "" \n
        "" \n
        "           " \n
+       "            // Check if BIS_arz_* triggers are present..." \n
+       "            if (count _triglist > 0) then {" \n
+       "                " \n
+       "                // Check if spawn position is NOT within a BIS_arz_* trigger" \n
+       "                if ({[_x, _PosSelect select 0] call BIS_fnc_inTrigger} count _triglist == 0) then {" \n
+       "                    // then add to list" \n
+       "                    _newPosList = _newPosList + [_PosSelect];" \n
+       "                };" \n
+       "                " \n
+       "            } else {" \n
+       "                // If no BIS_arz_* triggers present, add to list" \n
+       "                _newPosList = _newPosList + [_PosSelect];" \n
+       "            };" \n
+       "        };" \n
+       "    } forEach _PosList;" \n
+       "    _PosList = _newPosList;" \n
        "    " \n
        "" \n
-       "// --------------------------------" \n
-       "// Lauch Spawn function" \n
-       "// --------------------------------" \n
-       "" \n
-       "{" \n
-       "" \n
-       "" \n
-       " if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
-       "" \n
-       "" \n
-       "} foreach _triglist;" \n
-       "" \n
-       "       {" \n
-       "              _PosList = [];" \n
-       "              {" \n
-       "                   _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
-       "                   _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
-       "              } forEach ([] call BIS_fnc_listPlayers);" \n
        "" \n
        "" \n
        "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
+       "    if (count _PosList > 0) then {" \n
+       "        {" \n
        "            _PosSelect = _PosList select (floor random (count _PosList));" \n
        "            _Pos =  _PosSelect select 0;        " \n
        "" \n
-       "	if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
-       "" \n
-       "" \n
-       "          		//DEBUG" \n
-       "              _GroupMarker = (str (random 9999));" \n
-       "              createMarker [_GroupMarker, _Pos ];" \n
-       "              if (_debug) then {_GroupMarker setMarkerType ""Dot"";} else {_GroupMarker setMarkerType ""Empty"";};" \n
-       "              _GroupMarker setMarkerColor ""ColorRed"";" \n
-       "             _GroupMarker setMarkerText (str (_agentnumber + 1));             " \n
        "" \n
        "" \n
        "" \n
-       "			for ""_i"" from 0 to _agentnumber do" \n
-       "			{" \n
+       "" \n
+       "" \n
        "" \n
        "		" \n
        "" \n
-       "            		 _fsm = [_type, _Pos, _SpawnRadius, _GroupMarker] execfsm ""CA\Modules\Animals\data\fsms\Animals_spawn.fsm"";" \n
        "		" \n
        "" \n
        "" \n
-       "              [ _GroupMarker, _SpawnRadius, _type] execFSM ""CA\Modules\Animals\data\fsms\Delete_group.fsm"";" \n
-       "" \n
-       "      };" \n
-       "" \n
-       " };" \n
        "" \n
        "" \n
        "" \n
@@ -417,7 +426,27 @@ class FSM
        "" \n
        "" \n
        "" \n
-       "       } forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "" \n
+       "            " \n
+       "            if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
+       "                //DEBUG" \n
+       "                _GroupMarker = (str (random 9999));" \n
+       "                createMarker [_GroupMarker, _Pos ];" \n
+       "                if (_debug) then {_GroupMarker setMarkerType ""Dot"";} else {_GroupMarker setMarkerType ""Empty"";};" \n
+       "                _GroupMarker setMarkerColor ""ColorRed"";" \n
+       "                _GroupMarker setMarkerText (str (_agentnumber + 1));             " \n
+       "                " \n
+       "                for ""_i"" from 0 to _agentnumber do" \n
+       "                {" \n
+       "                    _fsm = [_type, _Pos, _SpawnRadius, _GroupMarker] execfsm ""CA\Modules\Animals\data\fsms\Animals_spawn.fsm"";" \n
+       "                    " \n
+       "                    [ _GroupMarker, _SpawnRadius, _type] execFSM ""CA\Modules\Animals\data\fsms\Delete_group.fsm"";" \n
+       "                };" \n
+       "            };" \n
+       "        } forEach ([] call BIS_fnc_listPlayers);" \n
+       "    };" \n
+       "    " \n
        "};" \n
        "" \n
        "" \n
@@ -481,25 +510,47 @@ class FSM
        "// --------------------------------" \n
        "" \n
        "" \n
-       "{" \n
-       "" \n
-       "" \n
-       " if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
-       "" \n
-       "" \n
-       "} foreach _triglist;" \n
        "" \n
        "" \n
        "" \n
        "" \n
        "" \n
-       "       {" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        "              _PosList = [];" \n
-       "              {" \n
-       "                   _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
-       "                   _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
-       "              } forEach ([] call BIS_fnc_listPlayers);" \n
+       "       {" \n
+       "               _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
+       "               _PosList = _PosList + selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
+       "       } forEach ([] call BIS_fnc_listPlayers);" \n
        "" \n
+       "_newPosList = [];" \n
+       "    // For each spawn position ..." \n
+       "    {" \n
+       "        _PosSelect = _x;" \n
+       "        // Check if duplicated" \n
+       "        if (typeName ([_newPosList, _PosSelect] call BIS_fnc_arrayFindDeep) == ""SCALAR"") then {" \n
+       "            " \n
+       "            // Check if BIS_arz_* triggers are present..." \n
+       "            if (count _triglist > 0) then {" \n
+       "                " \n
+       "                // Check if spawn position is NOT within a BIS_arz_* trigger" \n
+       "                if ({[_x, _PosSelect select 0] call BIS_fnc_inTrigger} count _triglist == 0) then {" \n
+       "                    // then add to list" \n
+       "                    _newPosList = _newPosList + [_PosSelect];" \n
+       "                };" \n
+       "                " \n
+       "            } else {" \n
+       "                // If no BIS_arz_* triggers present, add to list" \n
+       "                _newPosList = _newPosList + [_PosSelect];" \n
+       "            };" \n
+       "        };" \n
+       "    } forEach _PosList;" \n
+       "    _PosList = _newPosList;" \n
+       "    " \n
+       "    if (count _PosList > 0) then {" \n
+       "       {" \n
        "            _PosSelect = _PosList select (floor random (count _PosList));" \n
        "            _Pos =  _PosSelect select 0;        " \n
        "" \n
@@ -547,6 +598,7 @@ class FSM
        "" \n
        "" \n
        "" \n
+       "	};" \n
        "};" \n
        "" \n
        "" \n
@@ -650,23 +702,45 @@ class FSM
        "// Lauch Spawn function" \n
        "// --------------------------------" \n
        "" \n
-       "{" \n
-       "" \n
-       "" \n
-       " if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
-       "" \n
-       "" \n
-       "} foreach _triglist;" \n
        "" \n
        "" \n
        "" \n
-       "       {" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        "              _PosList = [];" \n
-       "              {" \n
-       "                     _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
-       "                     _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
-       "              } forEach ([] call BIS_fnc_listPlayers);" \n
+       "       {" \n
+       "               _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
+       "               _PosList = _PosList + selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
+       "       } forEach ([] call BIS_fnc_listPlayers);" \n
        "" \n
+       "_newPosList = [];" \n
+       "    // For each spawn position ..." \n
+       "    {" \n
+       "        _PosSelect = _x;" \n
+       "        // Check if duplicated" \n
+       "        if (typeName ([_newPosList, _PosSelect] call BIS_fnc_arrayFindDeep) == ""SCALAR"") then {" \n
+       "            " \n
+       "            // Check if BIS_arz_* triggers are present..." \n
+       "            if (count _triglist > 0) then {" \n
+       "                " \n
+       "                // Check if spawn position is NOT within a BIS_arz_* trigger" \n
+       "                if ({[_x, _PosSelect select 0] call BIS_fnc_inTrigger} count _triglist == 0) then {" \n
+       "                    // then add to list" \n
+       "                    _newPosList = _newPosList + [_PosSelect];" \n
+       "                };" \n
+       "                " \n
+       "            } else {" \n
+       "                // If no BIS_arz_* triggers present, add to list" \n
+       "                _newPosList = _newPosList + [_PosSelect];" \n
+       "            };" \n
+       "        };" \n
+       "    } forEach _PosList;" \n
+       "    _PosList = _newPosList;" \n
+       "    " \n
+       "    if (count _PosList > 0) then {" \n
+       "       {" \n
        "            _PosSelect = _PosList select (floor random (count _PosList));" \n
        "            _Pos =  _PosSelect select 0;        " \n
        "" \n
@@ -711,6 +785,7 @@ class FSM
        "" \n
        "" \n
        "" \n
+       "	};" \n
        "};" \n
        "" \n
        "" \n
@@ -790,22 +865,47 @@ class FSM
        "// Lauch Spawn function" \n
        "// --------------------------------" \n
        "" \n
-       "{" \n
-       "" \n
-       "" \n
-       " if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
-       "" \n
-       "" \n
-       "} foreach _triglist;" \n
        "" \n
        "" \n
        "" \n
-       "       {" \n
+       "" \n
+       "" \n
+       "" \n
+       "" \n
        "              _PosList = [];" \n
-       "              _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
-       "              _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
-       "              _PosSelect = _PosList select (floor random (count _PosList));" \n
-       "              _Pos =  _PosSelect select 0;        " \n
+       "       {" \n
+       "               _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
+       "               _PosList = _PosList + selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
+       "       } forEach ([] call BIS_fnc_listPlayers);" \n
+       "" \n
+       "_newPosList = [];" \n
+       "    // For each spawn position ..." \n
+       "    {" \n
+       "        _PosSelect = _x;" \n
+       "        // Check if duplicated" \n
+       "        if (typeName ([_newPosList, _PosSelect] call BIS_fnc_arrayFindDeep) == ""SCALAR"") then {" \n
+       "            " \n
+       "            // Check if BIS_arz_* triggers are present..." \n
+       "            if (count _triglist > 0) then {" \n
+       "                " \n
+       "                // Check if spawn position is NOT within a BIS_arz_* trigger" \n
+       "                if ({[_x, _PosSelect select 0] call BIS_fnc_inTrigger} count _triglist == 0) then {" \n
+       "                    // then add to list" \n
+       "                    _newPosList = _newPosList + [_PosSelect];" \n
+       "                };" \n
+       "                " \n
+       "            } else {" \n
+       "                // If no BIS_arz_* triggers present, add to list" \n
+       "                _newPosList = _newPosList + [_PosSelect];" \n
+       "            };" \n
+       "        };" \n
+       "    } forEach _PosList;" \n
+       "    _PosList = _newPosList;" \n
+       "    " \n
+       "    if (count _PosList > 0) then {" \n
+       "       {" \n
+       "            _PosSelect = _PosList select (floor random (count _PosList));" \n
+       "            _Pos =  _PosSelect select 0;        " \n
        "" \n
        "              if (_x distance _Pos < _SpawnRadius && NOT surfaceIsWater _Pos) then {" \n
        "" \n
@@ -845,6 +945,7 @@ class FSM
        "" \n
        "" \n
        "" \n
+       "	};" \n
        "};" \n
        "" \n
        "" \n
@@ -928,22 +1029,43 @@ class FSM
        "// --------------------------------" \n
        "" \n
        "" \n
-       "{" \n
        "" \n
        "" \n
-       " if (_x distance _Pos < (triggerarea _x select 0)  ) then {_Pos = [0,0];}; " \n
        "" \n
        "" \n
-       "} foreach _triglist;" \n
        "" \n
-       "" \n
-       "       {" \n
        "              _PosList = [];" \n
-       "              {" \n
-       "                   _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
-       "                   _PosList = selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
-       "              } forEach ([] call BIS_fnc_listPlayers);" \n
+       "       {" \n
+       "               _randrefpoint = [getpos _x, 10, _SpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n
+       "               _PosList = _PosList + selectbestplaces [_randrefpoint,_FindPlaceRadius,_favouritezones,10,5];" \n
+       "       } forEach ([] call BIS_fnc_listPlayers);" \n
        "" \n
+       "_newPosList = [];" \n
+       "    // For each spawn position ..." \n
+       "    {" \n
+       "        _PosSelect = _x;" \n
+       "        // Check if duplicated" \n
+       "        if (typeName ([_newPosList, _PosSelect] call BIS_fnc_arrayFindDeep) == ""SCALAR"") then {" \n
+       "            " \n
+       "            // Check if BIS_arz_* triggers are present..." \n
+       "            if (count _triglist > 0) then {" \n
+       "                " \n
+       "                // Check if spawn position is NOT within a BIS_arz_* trigger" \n
+       "                if ({[_x, _PosSelect select 0] call BIS_fnc_inTrigger} count _triglist == 0) then {" \n
+       "                    // then add to list" \n
+       "                    _newPosList = _newPosList + [_PosSelect];" \n
+       "                };" \n
+       "                " \n
+       "            } else {" \n
+       "                // If no BIS_arz_* triggers present, add to list" \n
+       "                _newPosList = _newPosList + [_PosSelect];" \n
+       "            };" \n
+       "        };" \n
+       "    } forEach _PosList;" \n
+       "    _PosList = _newPosList;" \n
+       "    " \n
+       "    if (count _PosList > 0) then {" \n
+       "       {" \n
        "            _PosSelect = _PosList select (floor random (count _PosList));" \n
        "            _Pos =  _PosSelect select 0;        " \n
        "" \n
@@ -984,6 +1106,7 @@ class FSM
        "" \n
        "" \n
        "" \n
+       "	};" \n
        "};" \n
        "" \n
        "" \n

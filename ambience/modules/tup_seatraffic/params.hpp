@@ -14,7 +14,7 @@ class SeaROE {
         title = "    Rules of Engagement"; 
        values[]= {1,2,3,4,5}; 
        texts[]= {"Never fire","Hold fire - defend only","Hold fire, engage at will","Fire at will","Fire at will, engage at will"}; 
-       default = 1;
+       default = 2;
 };
 class AmbientLHD {
         title = "    Landing Helicopter Dock"; 

@@ -6,11 +6,11 @@ if(!isServer) exitWith{};
 if (isNil "amount") then {amount = 1;};
 if (amount == 2) exitWith{};
 
-if(isNil "SeaROE")then{SeaROE = 1;};
+if(isNil "SeaROE")then{SeaROE = 2;};
 
 _debug = false;
-if(isNil "AmbientLHD")then{AmbientLHD = 0;};
 
+if(isNil "AmbientLHD")then{AmbientLHD = 0;};
 
 waitUntil{!isNil "BIS_fnc_init"};
 // Get center of map
@@ -49,12 +49,13 @@ if (((random 1 < 0.5) && (AmbientLHD == 2)) || (AmbientLHD == 1)) then {
 	_LHD call bis_ew_fnc_createLHD;
 
 	// Add Heli pad and crewman for each LHD 
-	_LHDLand = [["Land_LHD_1"], [], _mapsize, _debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType;
+	_LHDLand = [["Land_LHD_6"], [], _mapsize, _debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType;
 	{
-		_dummy = createVehicle ["HeliHRescue", [getposasl _x select 0, getposasl _x select 1, 16], [],0,'NONE'];
-		_unit = group _dummy createUnit ["USMC_LHD_Crew_Yellow", [getposasl _x select 0, getposasl _x select 1, 17], [], 10, ""];
+		_dummy = createVehicle ["HeliHRescue", [getposasl _x select 0, getposasl _x select 1, 18.5], [],0,'NONE'];
+		_dummy attachTo [_x, [getposasl _x select 0, getposasl _x select 1, 16]];
+		_unit = "USMC_LHD_Crew_Yellow" createUnit [[getposasl _x select 0, getposasl _x select 1, 19], group _LHD];
 	} foreach _LHDLand;
-	
+
 	if (_debug) then {
 		diag_log format ["MSO-%1 Sea Traffic: LHD at: %2", time, mapgridposition _LHD];
     };
@@ -124,8 +125,7 @@ for "_j" from 0 to (_destinations-1) do {
                         if (_debug) then {
                                 private["_t","_m"];
                                 _t = format["SeaTraffic_s%1", floor(random 10000)];
-                                _m = [_t, _spawnpos, "Icon", [1,1], "TYPE:", "mil_dot", "GLOBAL"] call CBA_fnc_createMarker;
-                                [_m, true] call CBA_fnc_setMarkerPersistent;
+                                _m = [_t, _spawnpos, "Icon", [1,1], "TYPE:", "mil_dot", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
                         };
                         
                         // Set a safe destination for the 2nd waypoint (make it another sea port)
@@ -138,8 +138,7 @@ for "_j" from 0 to (_destinations-1) do {
                         if (_debug) then {
                                 private["_t","_m"];
                                 _t = format["SeaTraffic_s%1", floor(random 10000)];
-                                _m = [_t, _destpos, "Icon", [1,1], "TYPE:", "hd_pickup", "GLOBAL"] call CBA_fnc_createMarker;								
-                                [_m, true] call CBA_fnc_setMarkerPersistent;
+                                _m = [_t, _destpos, "Icon", [1,1], "TYPE:", "hd_pickup", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
                         };
                         // Define a random place at the edge of the map to fly to
                         _endpos = [_startpos, _mapsize-10, _mapsize, 10, 2, 0, 0] call BIS_fnc_findSafePos;

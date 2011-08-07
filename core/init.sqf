@@ -63,7 +63,14 @@ mso_interaction_key = if (!isNil "ace_sys_interaction_key_self") then {
 mso_fnc_hasRadio = if (!isNil "ACE_fnc_hasRadio") then {
         {if(player call ACE_fnc_hasRadio) then {true} else {hint "You require a radio.";false;};}
 } else {
-        {if(player hasWeapon "itemRadio") then {true} else {hint "You require a radio.";false;};}
+        {
+		// Thanks Sickboy
+		_hasRadio = false; 
+		{
+			if (getText(configFile >> "CfgWeapons" >> _x >> "simulation") == "ItemRadio") exitWith { _hasRadio = true };
+		} forEach (weapons player);
+		if(_hasRadio) then {true} else {hint "You require a radio.";false;};
+	}
 };
 
 if(isNil "BIS_MENU_GroupCommunication") then {

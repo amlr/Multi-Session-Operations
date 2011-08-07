@@ -1,6 +1,5 @@
 //#define CEP_CACHE
-//#define NOU_CACHE
-#define JCACHE
+#define NOU_CACHE
 #define RMM_DEBUG
 #define RMM_HELP
 #define RMM_MP_RIGHTS
@@ -12,3 +11,4 @@
 //#define RMM_GTK
 //#define RMM_OSL
 //#define RMM_OSOM
+//#define JCACHE
