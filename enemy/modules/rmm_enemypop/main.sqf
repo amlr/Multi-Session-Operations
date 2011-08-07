@@ -98,9 +98,11 @@ fPlayersInside = {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8"];
                                                 f_builder = mso_core_fnc_createCompositionE;
                                         };
-                                        _camp = _camp call BIS_fnc_selectRandom;
-                                        _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-                                        [_camp, random 360, _pos] call f_builder;
+					if (count _camp > 0) then {
+	                                        _camp = _camp call BIS_fnc_selectRandom;
+        	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                	                        [_camp, random 360, _pos] call f_builder;
+					};
                                 };
                                 
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[4,3,2,1]] call mso_core_fnc_selectRandomBias;
@@ -258,9 +260,11 @@ fPlayersInside = {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8","citybase01","cityBase02","cityBase03","cityBase04"];
                                                 f_builder = mso_core_fnc_createCompositionE;
                                         };
-                                        _camp = _camp call BIS_fnc_selectRandom;
-                                        _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-                                        [_camp, random 360, _pos] call f_builder;
+					if (count _camp > 0) then {
+	                                        _camp = _camp call BIS_fnc_selectRandom;
+        	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                	                        [_camp, random 360, _pos] call f_builder;
+					};
                                 };
                                 
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[4,3,2,1]] call mso_core_fnc_selectRandomBias;
@@ -339,9 +343,11 @@ fPlayersInside = {
                                         if("BIS_TK" in MSO_FACTIONS || "BIS_TK_INS" in MSO_FACTIONS || "BIS_TK_GUE" in MSO_FACTIONS) then {
                                                 f_builder = mso_core_fnc_createCompositionE;
                                         };
-                                        _camp = _camp call BIS_fnc_selectRandom;
-                                        _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-                                        [_camp, random 360, _pos] call f_builder;
+					if (count _camp > 0) then {
+	                                        _camp = _camp call BIS_fnc_selectRandom;
+        	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                	                        [_camp, random 360, _pos] call f_builder;
+					};
                                 };
                                 
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[8,6,3,1]] call mso_core_fnc_selectRandomBias;
@@ -398,8 +404,7 @@ fPlayersInside = {
                         private["_t","_m"];
                         _t = format["op%1",floor(random 10000)];
                         if(isNil "_type") then {_type = "";};
-                        _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL"] call CBA_fnc_createMarker;
-                        [_m, true] call CBA_fnc_setMarkerPersistent;
+                        _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
                 };
         };
 } foreach CRB_LOCS;
