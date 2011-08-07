@@ -1,0 +1,5 @@
+intel based
+	persistent "Find Intel Task"
+		adds cache/mission tasks
+	random intel receival (small chance, every 1 hour or so)
+	
