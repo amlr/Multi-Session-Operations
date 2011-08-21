@@ -13,6 +13,7 @@ private ["_spawnpoints","_debug","_numcells"];
 if(!isServer) exitWith{};
 
 _debug = false;
+
 if(isNil "crb_tc_intensity")then{crb_tc_intensity = 1;};
 crb_tc_intensity = switch(crb_tc_intensity) do {
 	case 0: {
@@ -46,7 +47,7 @@ CRB_fnc_debugPositions = {
         _text = _this select 1;
         _debug = _this select 2;
         if(_debug) then {
-                hint format["Marking %1...", _text];
+                diag_log format["Marking %1...", _text];
                 private["_i","_m","_p"];
                 _i = 0;
                 {
@@ -66,9 +67,11 @@ CRB_fnc_debugPositions = {
 	CRBPROFILERSTOP
 };
 
+
 // Thanks to Pogoman's Insurgency for this code
 #define intelMarkerType "hd_unknown"
 #define intelRadius 1000
+
 PGM_fnc_CreateIntel = { 
 	CRBPROFILERSTART("CRB Terrorists createIntel")
 
@@ -93,6 +96,26 @@ PGM_fnc_CreateIntel = {
 
 	CRBPROFILERSTOP
 }; 
+
+
+
+
+TUP_fnc_AddVehicleTrigger = {
+	private ["_vehicle", "_debug"];
+	
+	_vehicle = _this select 0;
+	_debug = _this select 1;
+	
+	// Create trigger and attach to vehicle to check for enemy - in order to control reaction
+	_trg = createTrigger["EmptyDetector",getPos _vehicle]; 
+	_trg setTriggerArea[800,800,0,false];
+	_trg setTriggerActivation["WEST","EAST D",false];
+	_trg setTriggerStatements["this && ({vehicle _x in thisList} count ([] call BIS_fnc_listPlayers) > 0)", "null = [thisTrigger, thisList] execvm 'enemy\modules\crb_terrorists\inspectvehicle.sqf'", ""]; 
+	_trg attachTo [_vehicle,[0,0,0]];
+	 if (_debug) then {
+		diag_log format ["MSO-%1 Terrorists Cells: %2 created at %3", time, typeof _vehicle, mapgridposition _vehicle];
+	};
+};
 
 CRB_fnc_FindVehicle = {
 	CRBPROFILERSTART("CRB Terrorists findVehicle")
@@ -119,6 +142,9 @@ CRB_fnc_FindVehicle = {
         } else {
                 //DEBUG:player sideChat "No vehicle found";
         };
+		
+		// Create trigger and attach to vehicleto check for enemy - in order to control reaction
+		[_newveh,_debug] call TUP_fnc_AddVehicleTrigger;
         
 	CRBPROFILERSTOP
         _newveh;
@@ -141,6 +167,8 @@ CRB_fnc_SpawnVehicle = {
                 _tmp = (BIS_alice_mainscope getvariable "ALICE_classesVehicles") call BIS_fnc_selectRandom;
                 if(_tmp isKindOf "Car") then {
                         _vehicle = _tmp createVehicle _pos;
+						// Create trigger and attach to vehicleto check for enemy - in order to control reaction
+						[_vehicle,_debug] call TUP_fnc_AddVehicleTrigger;
                         _vcargo = _vehicle emptyPositions "cargo";
                 };
 //                sleep 0.1;
@@ -468,8 +496,7 @@ CRB_fnc_SplitCell = {
         _newtwn = _newtwn call BIS_fnc_selectRandom;
         */        
         _newtwn = [_pos, _debug] call CRB_fnc_GetNearestTown;
-        _newcell setVariable ["nearestTown", _newtwn, true];
-        
+        _newcell setVariable ["nearestTown", _newtwn, true];        
         if (_debug) then {
                 deleteMarker _tcrm;
         };
@@ -583,10 +610,12 @@ CRB_fnc_SpawnNewCell = {
         if(crb_tc_markers==1)then{_ammo call PGM_fnc_CreateIntel;};
         
         if (_debug) then {
-                hint format["Cell#%1 - no longer recruiting", _tcid];
+                diag_log format["Cell#%1 - no longer recruiting", _tcid];
                 deleteMarker _tcdm;
         };
 };
+
+
 
 // Identify all random spawn points
 waitUntil{!isNil "BIS_fnc_init"};
@@ -602,6 +631,7 @@ _spawnpoints = [];
 } forEach CRB_LOCS;
 
 waitUntil{!isNil "bis_alice_mainscope"};
+
 // Pick a civilian class and civilian vehicle class
 if(isNil "CRB_classlistMen") then {
         [] call CRB_fnc_InitClassLists;
@@ -640,7 +670,8 @@ for "_i" from 1 to _numcells do {
                 _grp addVehicle _vehicle;
                 
                 _vcargo = _vehicle emptyPositions "cargo";
-                //DEBUG:_twn = nearestLocation [_spawn, "CityCenter"];
+                
+				//DEBUG:_twn = nearestLocation [_spawn, "CityCenter"];
                 _twn = [_spawn, _debug] call CRB_fnc_GetNearestTown;
                 _grp setVariable ["nearestTown", _twn, true];
                 
