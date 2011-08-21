@@ -2,6 +2,7 @@
 //#squint filter Unknown variable mso_core_fnc_initStat
 
 #include <modules\modules.hpp>
+#include <msofactions_defaults.hpp>
 
 #ifndef execNow
 #define execNow call compile preprocessfilelinenumbers
@@ -58,7 +59,10 @@ if(!isNil "faction_CWR2_FIA") then {
                 MSO_FACTIONS = MSO_FACTIONS + ["CWR2_FIA"];
         };
 };
-if(count MSO_FACTIONS == 0) then {MSO_FACTIONS = ["CWR2_RUS"];};
+
+if(count MSO_FACTIONS == 0) then {
+	MSO_FACTIONS = MSO_FACTIONS + ["RU"];
+};
 
 #ifdef CRB_CONVOYS
 "Convoys" call mso_core_fnc_initStat;

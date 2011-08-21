@@ -1,0 +1,10 @@
+#define DEFAULT_RU 1
+#define DEFAULT_ACE_RU 0
+#define DEFAULT_INS 1
+#define DEFAULT_GUE 0
+#define DEFAULT_BIS_TK 0
+#define DEFAULT_BIS_TK_INS 0
+#define DEFAULT_BIS_TK_GUE 0
+#define DEFAULT_CWR2_USA 0
+#define DEFAULT_CWR2_RUS 0
+#define DEFAULT_CWR2_FIA 0
