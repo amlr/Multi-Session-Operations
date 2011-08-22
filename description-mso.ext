@@ -132,6 +132,9 @@ class cfgFunctions {
 #ifdef RMM_JIPMARKERS
 	#include <support\modules\jipmarkers\functions.hpp>
 #endif
+#ifdef TN_LHDELEVATOR
+	#include <support\modules\tn_lhdelevator\functions.hpp>
+#endif
 #ifdef RMM_LOGBOOK
 	#include <support\modules\logbook\functions.hpp>
 #endif
