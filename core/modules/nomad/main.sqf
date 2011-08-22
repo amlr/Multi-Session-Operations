@@ -9,7 +9,8 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 [
 	[
 		/*{deaths player} //auto-integrated*/
-		{typeof player;},
+		{if(nomadClassRestricted == 1) then {typeof player;};},
+		{playerSide;},
 		{magazines player;},
 		{weapons player;},
 		{typeof (unitbackpack player);},
@@ -43,11 +44,15 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 			if (_this > _maxLives) then {_disconnect = true;};
 		},
 		{
-			if (typeof player != _this) then {_disconnect = true;};
+			if (nomadClassRestricted == 1 && typeof player != _this) then {_disconnect = true;};
+		},
+		{
+			if (playerSide != _this) then {_disconnect = true;};
 		},
 		{
 			{player removemagazine _x;} foreach (magazines player);
-			{player addmagazine _x;} foreach _this;
+			{[player, _x, 1] call CBA_fnc_AddMagazineVerified;} foreach _this;
+//			{player addmagazine _x;} foreach _this;
 		},
 		{
 			{player removeweapon _x;} foreach ((weapons player) + (items player));
