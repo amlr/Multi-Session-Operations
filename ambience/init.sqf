@@ -12,6 +12,10 @@ civilian setFriend [resistance, 1];
 "Crows" call mso_core_fnc_initStat;
 execNow "ambience\modules\crb_crows\main.sqf";
 #endif
+#ifdef CRB_DESTROYCITY
+"Destroy City" call mso_core_fnc_initStat;
+[] execNow "ambience\modules\crb_destroyCity\main.sqf";
+#endif
 #ifdef CRB_DOGS
 "Dogs" call mso_core_fnc_initStat;
 [east] execNow "ambience\modules\crb_dogs\main.sqf";

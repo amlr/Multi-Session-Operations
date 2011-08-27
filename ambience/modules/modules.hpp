@@ -1,3 +1,4 @@
+
 // --Tested--
 #define CRB_CIVILIANS
 #define CRB_CROWS
@@ -11,3 +12,5 @@
 #define TUP_SEATRAFFIC
 
 // -- Pending --
+
+#define CRB_DESTROYCITY
