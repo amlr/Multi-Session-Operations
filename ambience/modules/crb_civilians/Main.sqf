@@ -2,7 +2,9 @@ if(isServer) then {
         private["_debug","_logicCiv","_logicVeh","_logicAni"];
         
         _debug = false;
+
         waitUntil{!isNil "BIS_fnc_init"};
+
         if(isNil "CRB_LOCS") then {
                 CRB_LOCS = [] call mso_core_fnc_initLocations;
         };
