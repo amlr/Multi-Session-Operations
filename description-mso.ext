@@ -219,6 +219,7 @@ class CfgGroups {
 
 class CfgAmmo
 {
+#ifdef CRB_CIVILIANS
  class Default;
  class BulletBase;
  class GrenadeHand;
@@ -229,4 +230,6 @@ class CfgAmmo
   indirectHitRange = 1;
   soundHit[] = {"Ca\sounds\Weapons\hits\rico_hit_wood_08",15.848933,1};
  };
+#endif
 };
+
