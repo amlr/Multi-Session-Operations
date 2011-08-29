@@ -1,3 +1,6 @@
+titleText ["", "BLACK"];
+
+
 #ifndef execNow
 #define execNow call compile preprocessfilelinenumbers
 #endif
@@ -12,4 +15,5 @@ execNow "enemy\init.sqf";
 execNow "init-custom.sqf";
 
 "Completed" call mso_core_fnc_initStat;
+titleText ["", "BLACK IN"];
 execNow "core\scripts\intro.sqf";
