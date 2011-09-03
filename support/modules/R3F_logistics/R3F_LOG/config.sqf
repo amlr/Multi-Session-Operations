@@ -90,6 +90,7 @@ R3F_LOG_CFG_objets_heliportables =
 	"Car",
 	"Ship",
 	"ReammoBox",
+	"MLRS",
 	
 	"Land_Misc_Cargo1Ao",
 	"Land_Misc_Cargo1B",
