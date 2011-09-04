@@ -549,6 +549,7 @@ class FSM
        "//--- Get group" \n
        "_grp = _allgroups select _n;" \n
        "_icon = _grp getvariable ""BIS_MARTA_ICON_TYPE"";" \n
+       "_grpIconVisible = false;" \n
        "" \n
        "//--- Null group - abort" \n
        "if (isnull _grp || isnil ""_grp"") exitwith {};" \n
