@@ -14,3 +14,26 @@ if (isnil "RMM_tasks") then {
 
 CRB_MAPCLICK = CRB_MAPCLICK + "if (_shift && _alt && ((getPlayerUID player) in MSO_R_Leader)) then {RMM_tasks_position = _pos; RMM_tasks_position set [2,0]; createDialog ""RMM_ui_tasks"";};";
 onMapSingleClick CRB_MAPCLICK;
+
+"RMM_tasks" addPublicVariableEventHandler {
+	{
+		if(str (_x select 2) == "[0,0,0]" && playerSide == (_x select 3)) then {
+			private ["_taskname","_description","_destination","_playerSide"];
+			_taskname = _this select 0;
+			_description = _this select 1;
+			_destination = _this select 2;
+			_playerSide = _this select 3;
+
+			if (_playerSide == playerSide) then {
+				private "_task";
+				_task = player createsimpletask [_taskname];
+				_task setsimpletaskdescription _description;
+				_task setsimpletaskdestination _destination;
+				_task settaskstate "created";
+				missionnamespace setvariable [_taskname,_task];
+
+				RMM_mytasks set [count RMM_mytasks, _task];
+			};
+		};
+	} forEach (_this select 1);
+};

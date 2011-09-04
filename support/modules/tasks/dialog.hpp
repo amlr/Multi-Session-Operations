@@ -40,13 +40,13 @@ class RMM_ui_tasks { // by Rommel
 			text = "Transmit";
 			w = CUI_Box_W;
 			y = CUI_Row_Y(3);
-			action = "[str (time + random 1),[(ctrlText 2),(ctrlText 1),(ctrlText 1)],RMM_tasks_position] call tasks_fnc_add; closeDialog 0;";
+			action = "[str (time + random 1),[(ctrlText 2),(ctrlText 1),(ctrlText 1)],RMM_tasks_position, playerSide] call tasks_fnc_add; closeDialog 0;";
 		};
 		class Delete : CUI_Button {
 			text = "Delete Nearest";
 			w = CUI_Box_W;
 			y = CUI_Row_Y(4);
-			action = "if (count RMM_tasks > 0) then {RMM_tasks_position call tasks_fnc_deletenearest; closeDialog 0;};";
+			action = "if (count RMM_tasks > 0) then {[RMM_tasks_position, playerSide] call tasks_fnc_deletenearest; closeDialog 0;};";
 		};
 	};
 };
