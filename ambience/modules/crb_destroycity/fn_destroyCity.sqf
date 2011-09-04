@@ -16,12 +16,13 @@ scriptName "fn_destroyCity.sqf";
 */
 //if (!isserver) exitwith {debuglog "Log: [Functions] ERROR: 'BIS_fnc_destroyCity' cannot run on client.";};
 
-private ["_center","_areaSize","_seed","_blacklist","_debug","_buildings","_pos","_posX","_posY","_posTotal","_seedLocal"];
+private ["_center","_areaSize","_seed","_blacklist","_fire","_debug","_buildings","_pos","_posX","_posY","_posTotal","_seedLocal","_marker","_centre","_size"];
 _debug = false;
 _center = _this select 0;
 _areaSize = if (count _this > 1) then {_this select 1} else {1000};
 _seed = if (count _this > 2) then {_this select 2} else {1138};
 _blacklist = if (count _this > 3) then {_this select 3} else {[]};
+_fire = if (count _this > 4) then {_this select 4} else {true;};
 _debug = if (isnil "_debug") then {false} else {_debug};
 
 if (typename _center == typename "") then {_center = markerpos _center};
@@ -41,8 +42,9 @@ _buildings = _buildings - _blacklist;
 	_posY = _pos select 1;
 	_posTotal = _posX + _posY;
 	_seedLocal = (_posTotal % _seed) / _seed;
+        //_bc = boundingCenter _x;
+
 //	_pos = [(_pos select 0) + (_bc select 0), (_pos select 1) + (_bc select 2), (_pos select 2) + (_bc select 1)];
-	_bc = boundingCenter _x;
 	_size = (boundingBox _x) select 1;
 
 	if (_seedLocal < 0.5) then {
@@ -57,9 +59,11 @@ _buildings = _buildings - _blacklist;
 			//_x hideobject true;
 			_x setdamage 1;
 			if (_debug) then {_marker = createMarker ["X" + str _posTotal, position _x]; _marker setmarkertype "Dot"; _marker setmarkercolor "colorblue";};
-			_centre = "SkeetDisk" createVehicle _pos;
+                        if(_fire && !isDedicated) then {
+                                _centre = "SkeetDisk" createVehicleLocal _pos;
 			_centre setPos _pos;
 			0 = [_centre, exp((_size select 0) * (_size select 1) * (_size select 2) / 500) min 10, time, false, false] spawn BIS_Effects_Burn;
+                        };
 		} else {
 			_x setdamage 0.5;
 			if (_debug) then {_marker = createMarker ["X" + str _posTotal, position _x]; _marker setmarkertype "Dot"; _marker setmarkercolor "colorgreen";};
