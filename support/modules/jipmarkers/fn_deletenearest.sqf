@@ -4,7 +4,8 @@ _cidx = 0;
 _cpos = [0,0,0];
 _i=0;
 {
-	if ((_x select 1) distance RMM_jipmarkers_position < _cpos distance RMM_jipmarkers_position)then{
+	if ((_x select 1) distance RMM_jipmarkers_position < _cpos distance RMM_jipmarkers_position &&
+		playerSide == (_x select 4)) then{
 		_cname = _x select 0;
 		_cpos = _x select 1;
 		_cidx = _i;

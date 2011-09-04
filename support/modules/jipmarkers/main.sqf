@@ -19,10 +19,12 @@ if (isnil "RMM_jipmarkers") then {
 	publicvariable "RMM_jipmarkers";
 } else {
 	{
-		private "_mkr";
-		_mkr = createMarkerLocal [(_x select 0),(_x select 1)];
-		_mkr setmarkertypelocal (_x select 2);
-		_mkr setmarkertextlocal (_x select 3);
+		if(playerSide == (_x select 4)) then {
+			private "_mkr";
+			_mkr = createMarkerLocal [(_x select 0),(_x select 1)];
+			_mkr setmarkertypelocal (_x select 2);
+			_mkr setmarkertextlocal (_x select 3);
+		};
 	} foreach RMM_jipmarkers;
 };
 
@@ -30,3 +32,14 @@ if (isnil "RMM_jipmarkers") then {
 
 CRB_MAPCLICK = CRB_MAPCLICK + "if (!_shift && _alt) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
 onMapSingleClick CRB_MAPCLICK;
+
+"RMM_jipmarkers" addPublicVariableEventHandler {
+	{
+		if(str (markerPos (_x select 0)) == "[0,0,0]" && playerSide == (_x select 4)) then {
+			private "_mkr";
+			_mkr = createMarkerLocal [(_x select 0),(_x select 1)];
+			_mkr setmarkertypelocal (_x select 2);
+			_mkr setmarkertextlocal (_x select 3);
+		};
+	} forEach (_this select 1);
+};
