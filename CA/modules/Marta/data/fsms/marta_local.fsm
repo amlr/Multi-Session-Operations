@@ -199,6 +199,7 @@ class FSM
     {
       name = "LOOP_II";
       init = /*%FSM<STATEINIT""">*/"_rule = -1;" \n
+       "_grpCount = 0;" \n
        "" \n
        "//--- Load custom show rules - in format [sideA,valueA,sideB,valueB,...]" \n
        "if (!isnil ""_showrules"" && _grpSideId >= 0) then {" \n
