@@ -13,12 +13,12 @@ if(destroyCityIntensity > 0) then {
 
         {
                 _fire = if(destroyCityFire == 1) then {true;} else {false;};
-                ["destroyCentre", 250, 529, _blacklist, _fire] call compile preprocessFileLineNumbers "ambience\modules\crb_destroycity\fn_destroyCity.sqf";
+                [position _x, 250, 529, _blacklist, _fire] call compile preprocessFileLineNumbers "ambience\modules\crb_destroycity\fn_destroyCity.sqf";
                 if(destroyCityIntensity > 1) then {
-                        ["destroyCentre", 350, 889, _blacklist, _fire] call compile preprocessFileLineNumbers "ambience\modules\crb_destroycity\fn_destroyCity.sqf";
+                        [position _x, 350, 889, _blacklist, _fire] call compile preprocessFileLineNumbers "ambience\modules\crb_destroycity\fn_destroyCity.sqf";
                 };
                 if(destroyCityIntensity > 2) then {
-                        ["destroyCentre", 500, 1138, _blacklist, _fire] call compile preprocessFileLineNumbers "ambience\modules\crb_destroycity\fn_destroyCity.sqf";
+                        [position _x, 500, 1138, _blacklist, _fire] call compile preprocessFileLineNumbers "ambience\modules\crb_destroycity\fn_destroyCity.sqf";
                 };
         } forEach (bis_functions_mainscope getVariable "locations");
 };
