@@ -12,3 +12,6 @@
 //#define RMM_OSL
 //#define RMM_OSOM
 //#define JCACHE
+
+#define SPYDER_ONU
+

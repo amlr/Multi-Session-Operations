@@ -165,6 +165,11 @@ execNow "core\modules\weather\main.sqf";
 execNow "core\modules\settings\main.sqf";	
 #endif
 
+#ifdef SPYDER_ONU
+"Spyder Object Network Updater" call mso_core_fnc_initStat;
+execNow "core\modules\spyder_onu\main.sqf";
+#endif
+
 "Remove Destroyed Objects" call mso_core_fnc_initStat;
 //--- Is Garbage collector running?
 if (isnil "BIS_GC") then {BIS_GC = (group BIS_functions_mainscope) createUnit ["GarbageCollector", position BIS_functions_mainscope, [], 0, "NONE"]};
