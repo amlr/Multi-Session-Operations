@@ -135,6 +135,11 @@ if(isNil "mprightsDisable") then {
 execNow "core\modules\debug\main.sqf";
 #endif
 
+#ifdef RMM_NOMAD
+"NOMAD" call mso_core_fnc_initStat;
+execNow "core\modules\nomad\main.sqf";
+#endif
+
 #ifdef CEP_CACHE
 "CEP AI Unit Caching" call mso_core_fnc_initStat;
 execNow "core\modules\CEP_caching\main.sqf";
@@ -155,11 +160,6 @@ execNow "core\modules\jcache\init.sqf";
 execNow "core\modules\weather\main.sqf";
 #endif
 
-#ifdef RMM_NOMAD
-"NOMAD" call mso_core_fnc_initStat;
-execNow "core\modules\nomad\main.sqf";
-#endif
-
 #ifdef RMM_SETTINGS
 "View Distance Settings" call mso_core_fnc_initStat;
 execNow "core\modules\settings\main.sqf";	
@@ -169,3 +169,4 @@ execNow "core\modules\settings\main.sqf";
 //--- Is Garbage collector running?
 if (isnil "BIS_GC") then {BIS_GC = (group BIS_functions_mainscope) createUnit ["GarbageCollector", position BIS_functions_mainscope, [], 0, "NONE"]};
 BIS_GC setVariable ["auto", true, true];
+
