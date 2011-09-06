@@ -10,8 +10,9 @@ if(!isServer) exitWith{};
 
 [] spawn {
         while {true} do {
-		private ["_i"];
+		private ["_i","_t"];
 		_i = 0;
+		_t = time + 60;
                 {                                                
                         if (simulationEnabled _x) then {
                                 _x enableSimulation false;
@@ -24,6 +25,8 @@ if(!isServer) exitWith{};
                                 // DEBUG
                                 //player sideChat format ["OBJ: %1", _object];
                         };
+
+			if(time > _t) exitWith {};
                         
                 } forEach (((allMissionObjects "Static") + (allMissionObjects "Thing")) - (allMissionObjects "ThingEffect"));
 
