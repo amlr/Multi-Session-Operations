@@ -58,6 +58,9 @@ class Params {
 #ifdef RMM_CAS
 	#include <support\modules\cas\params.hpp>
 #endif
+#ifdef CRB_TOWNMGR
+	#include <support\modules\CRB_TownMgr\params.hpp>
+#endif
 #ifdef WHB_MULTISPAWN
 	#include <support\modules\WHB_FOBspawn\params.hpp>
 #endif
