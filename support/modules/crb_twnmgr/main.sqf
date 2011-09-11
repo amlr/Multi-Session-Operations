@@ -1,4 +1,3 @@
-private ["_debug"];
 //if(isDedicated) exitWith{};
 
 if(isNil "TownManager")then{TownManager = 1;};
@@ -7,7 +6,7 @@ if (TownManager == 0) exitWith{};
 if (isNil "bis_functions_mainscope") exitWith{};
 waitUntil{typeName (bis_functions_mainscope getVariable "locations") == "ARRAY"};
 
-_debug = false;
+CRB_TownMgr_debug = false;
 
 if(isNil "twnmgr_status")then{twnmgr_status = 1;};
 if(isNil "twnmgr_civ")then{twnmgr_civ = 1;};
@@ -29,28 +28,37 @@ CRB_whichSideText = {
 
 CRB_whichSideTrigger = {
         switch(_this) do {
-                case west: {"WEST";};
-                case east: {"EAST";};
                 case resistance: {"GUER";};
                 case civilian: {"CIV";};
+                default {str _this};
         };
         
 };
 
-CRB_updateMarker = {
-        private ["_name","_pos","_detector","_detected","_color"];
+CRB_updateDetectedMarker = {
+        private ["_name","_pos","_detector","_detected","_color","_detectorTxt"];
         _name = _this select 0;
         _pos = _this select 1;
         _detector = _this select 2;
+        _detectorTxt = if(_detector == resistance) then {"resistance"} else {str _detector};
         _detected = _this select 3;
         _color = _this select 4;
         
-        format["""%1_mgr"" setMarkerColorLocal ""%2""; [2,[%3], {[(_this select 0), ""HQ""] sideChat ""%4 intel reports %5 movement at %6 - map updated"";}] call mso_core_fnc_ExMP;", _name, _color,_detector, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
+        format["""%1_mgr"" setMarkerColorLocal ""%2""; [2,[%3], {[(_this select 0), ""HQ""] sideChat ""%4 intel reports %5 movement at %6 - map updated"";}] call mso_core_fnc_ExMP;", _name, _color,_detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
 };
 
+CRB_updateSeizedMarker = {
+        private ["_name","_detector","_color","_detectorTxt"];
+        _name = _this select 0;
+        _detector = _this select 1;
+        _detectorTxt = if(_detector == resistance) then {"resistance"} else {str _detector};
+        _color = _this select 2;
+        
+        format["""%1_mgr"" setMarkerColorLocal ""%2""; [2,[%3], {[(_this select 0), ""HQ""] sideChat ""%4 intel reports %1 has been secured - map updated"";}] call mso_core_fnc_ExMP;", _name, _color, _detectorTxt, _detector call CRB_whichSideText];
+};
 
 CRB_createDetectTrigger = {
-        private ["_detected","_detector","_size","_color","_pos","_name"];
+        private ["_detected","_detector","_size","_color","_pos","_name","_trg","_cond"];
         _name = _this select 0;
         _pos = _this select 1;
         _size = _this select 2;
@@ -58,11 +66,49 @@ CRB_createDetectTrigger = {
         _detector = _this select 4;
         _color = _this select 5;
         
+        _cond = switch{_detector} do {
+                case civilian: {
+                        "this";
+                };
+                default {
+                        format["this && (str playerSide == ""%1"")", _detector];
+                };
+        };
+        
         // Create the detect trigger 
-        _t = [_pos, "NAME:", format["%1_%2_D%3", _detected call CRB_whichSideTrigger, _detector call CRB_whichSideTrigger, ceil random 10000], "AREA:", [_size, _size, 0, false], "ACT:", [(_detected call CRB_whichSideTrigger), format["%1 D", _detector call CRB_whichSideTrigger], true], "STATE:",  [format["this && (playerSide == %1)", _detector], [_name,_pos,_detector, _detected, _color] call CRB_updateMarker,""]] call CBA_fnc_createTrigger;
-
-	if(_debug) then {diag_log format["MSO-%1 Town Manager - %2", time, _t];};
+        _trg = [_pos, "AREA:", [_size, _size, 0, false], "ACT:", [(_detected call CRB_whichSideTrigger), format["%1 D", _detector call CRB_whichSideTrigger], true], "STATE:",  [_cond, [_name,_pos,_detector, _detected, _color] call CRB_updateDetectedMarker, format["""%1_mgr"" setMarkerColorLocal ""ColorWhite"";", _name]]] call CBA_fnc_createTrigger;
+        if(!CRB_TownMgr_debug) then {
+                _trg = _trg select 0;
+                _trg setTriggerTimeout [180, 360, 600, true];
+        } else {
+                diag_log format["MSO-%1 Town Manager - %2", time, _trg];
+        };
 };
+
+CRB_createSeizedTrigger = {
+        private ["_detector","_size","_color","_pos","_name","_trg","_cond"];
+        _name = _this select 0; 
+        _pos = _this select 1;
+        _size = _this select 2;
+        _detector = _this select 3;
+        _color = _this select 4;
+
+        _cond = switch{_detector} do {
+                default {
+                        format["this && (getMarkerColor ""%1_mgr"" == ""ColorWhite"") && (str playerSide == ""%2"")", _name, _detector]
+                };
+        };
+        
+        // Create the detect trigger 
+        _trg = [_pos, "AREA:", [_size, _size, 0, false], "ACT:", [format["%1 SEIZED", _detector call CRB_whichSideTrigger], "PRESENT", true], "STATE:",  [_cond, [_name,_detector, _color] call CRB_updateSeizedMarker,""]] call CBA_fnc_createTrigger;
+        
+        if(!CRB_TownMgr_debug) then {
+                _trg = _trg select 0;
+                _trg setTriggerTimeout [15, 30, 90, true];
+        } else {
+                diag_log format["MSO-%1 Town Manager - %2", time, _trg];
+        };
+};        
 
 {
         private ["_size","_name", "_pos","_trg"];
@@ -83,16 +129,16 @@ CRB_createDetectTrigger = {
         //////////////////////////////////////////
         // BLUFOR DETECT Triggers
         //////////////////////////////////////////        
-        
+
         // Create the BLUFOR detect EAST trigger 
         [_name, _pos, _size, east, west, "ColorRed"] call CRB_createDetectTrigger;
         // Create the BLUFOR detect GUER trigger 
         [_name, _pos, _size, resistance, west, "ColorGreen"] call CRB_createDetectTrigger;
-        
+
         //////////////////////////////////////////
         // GUER DETECT Triggers
         //////////////////////////////////////////        
-
+        
         // Create the GUER detect BLUFOR trigger 
         [_name, _pos, _size, west, resistance, "ColorBlue"] call CRB_createDetectTrigger;
         // Create the GUER detect EAST trigger 
@@ -106,54 +152,25 @@ CRB_createDetectTrigger = {
         [_name, _pos, _size, west, east, "ColorBlue"] call CRB_createDetectTrigger;
         // Create the EAST detect GUER trigger 
         [_name, _pos, _size, resistance, east, "ColorGreen"] call CRB_createDetectTrigger;
-                
+        
         //////////////////////////////////////////
         // BLUFOR SEIZED Triggers
         //////////////////////////////////////////        
         
-        /*        // Create the BLUFOR trigger 
-        _trg = [_pos, "AREA:", [_size, _size, 0, false], "ACT:", ["WEST SEIZED","PRESENT", true], 
-        "STATE:", [
-                "this", 
-                format["""%1_mgr""", _name] + " setMarkerColor ""ColorBlue""; [2,[], {player sideChat " + format["""%1 has been secured - map updated""", _name] + ";}] call mso_core_fnc_ExMP;",
-                format["""%1_mgr""", _name] + " setMarkerColor ""ColorWhite"";"
-        ]] call CBA_fnc_createTrigger;
-        _trg = _trg select 0;
-        _trg setTriggerTimeout [15, 30, 90, true];
-        */
+        [_name, _pos, _size, west, "ColorBlue"] call CRB_createSeizedTrigger;
 
         //////////////////////////////////////////
         // GUER SEIZED Triggers
         //////////////////////////////////////////        
-
-	/*
-        // Create the GUER trigger 
-        _trg = [_pos, "AREA:", [_size, _size, 0, false], "ACT:", ["GUER SEIZED","PRESENT", true], 
-        "STATE:", [
-                "this", 
-                format["""%1_mgr""", _name] + " setMarkerColor ""ColorGreen""; [2,[], {player sideChat " + format["""%1 has been secured - map updated""", _name] + ";}] call mso_core_fnc_ExMP;",
-                format["""%1_mgr""", _name] + " setMarkerColor ""ColorWhite"";"
-        ]] call CBA_fnc_createTrigger;
-        _trg = _trg select 0;
-        _trg setTriggerTimeout [15, 30, 90, true];
-        */
-
+        
+        [_name, _pos, _size, resistance, "ColorGreen"] call CRB_createSeizedTrigger;
+        
         //////////////////////////////////////////
         // OPFOR SEIZED Triggers
         //////////////////////////////////////////        
 
-	/*
-        // Create the OPFOR trigger 
-        _trg = [_pos, "AREA:", [_size, _size, 0, false], "ACT:", ["EAST SEIZED","PRESENT", true], 
-        "STATE:", [
-                "this", 
-                format["""%1_mgr""", _name] + " setMarkerColor ""ColorRed""; [2,[], {player sideChat " + format["""%1 has been secured - map updated""", _name] + ";}] call mso_core_fnc_ExMP;",
-                format["""%1_mgr""", _name] + " setMarkerColor ""ColorWhite"";"
-        ]] call CBA_fnc_createTrigger;
-        _trg = _trg select 0;
-        _trg setTriggerTimeout [15, 30, 90, true];
-        */
-        
+        [_name, _pos, _size, east, "ColorRed"] call CRB_createSeizedTrigger;
+
         /*
         //////////////////////////////////////////
         // CIVILIAN DETECT Triggers
@@ -192,5 +209,5 @@ CRB_createDetectTrigger = {
         _trg = _trg select 0;
         _trg setTriggerTimeout [180, 360, 900, true];
         */
-
+        
 } forEach (bis_functions_mainscope getVariable "locations");
