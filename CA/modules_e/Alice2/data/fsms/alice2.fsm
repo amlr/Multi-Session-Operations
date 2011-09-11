@@ -167,7 +167,7 @@ class FSM
        "_trafficDisMax = _trafficDisMin * 1.2;" \n
        "" \n
        "//--- Start " \n
-       "_maxtraffic = 3;" \n
+       "_maxtraffic = ceil count (_town getvariable [""ALICE_population"", []]) / 25;" \n
        "if (_activeTraffic < _maxtraffic && {_town distance _x < _trafficDisMin} count ([] call BIS_fnc_listPlayers) > 0) then {" \n
        "	_activeTraffic = _activeTraffic + 1;" \n
        "	_town setvariable [""ALICE_active_traffic"",_activeTraffic,true];" \n

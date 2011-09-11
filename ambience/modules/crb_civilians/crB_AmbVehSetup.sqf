@@ -35,7 +35,7 @@ switch toLower(worldName) do {
                 BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 1.0)"];
         };
         case "utes": {
-                BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 0.75)"];
+                BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 0.5)"];
         };
         case "zargabad": {
                 BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 0.5)"];
@@ -59,14 +59,34 @@ BIS_silvie_mainscope setVariable ["vehicleInit",{
         if (random 1>0.6) then {
                 _this lock true;
         } else {
-                _this setFuel (random 1);
-                _this setDamage (random 0.5);
+
+		// zGuba: enabled random damage and fuel
+		_this setFuel 0.5 + ((random 1)^3 - (random 1)^3)/2;
+//                _this setFuel (random 1);
+		_this setDamage (random 0.5)^2;	// Up to 25% worn out
+//                _this setDamage (random 0.5);
         };
         _this addEventHandler ["Engine", {
                 if(_this select 1) then {
                         driver (_this select 0) addRating -400;
                 };
         }];
+
+	// zGuba: HitParts members for class Car, usually common
+	_zgb_hitparts_car = ["HitEngine","HitRGlass","HitLGlass","HitBody","HitFuel","HitLFWheel","HitRFWheel","HitLF2Wheel","HitRF2Wheel","HitLMWheel","HitRMWheel","HitLBWheel","HitRBWheel","HitGlass1","HitGlass2","HitGlass3","HitGlass4"];
+	{_this setHit [_x,(random 0.75)^3]} forEach _zgb_hitparts_car;	// Up to 42,1875% worn out
+
+	//--- Alarm ;)
+	if (random 1 > 0.75) then {
+		_eh = _this addeventhandler ["engine",{
+			_car = _this select 0;
+			if (!isnil {_car getvariable "SILVIE_radio"}) exitwith {};
+			if (_this select 1) then {[-2,{
+				_this say3D "SILVIE_carradio";
+				_this setvariable ["SILVIE_radio",true]},_car] call CBA_fnc_GlobalExecute;
+			};
+		}];
+	};
 }, true];
 
 

@@ -127,6 +127,15 @@ class FSM
        "" \n
        "" \n
        "_marker = """";" \n
+       "//--- Debug mode, halellujah" \n
+       "if (_debug) then {" \n
+       "	_markerx = createmarker [_twnclass+""_size"",position _twn];" \n
+       "	_markerx setmarkersize [_twnSize,_twnSize];" \n
+       "	_markerx setmarkershape ""ellipse"";" \n
+       "	_markerx setmarkerbrush ""border"";" \n
+       "	_markerx setmarkercolor ""colorblack"";" \n
+       "	_markerx setmarkeralpha 0.5;" \n
+       "" \n
        "	_marker = createmarker [_twnclass+""_twn"",position _twn];" \n
        "	_marker setmarkertypelocal ""flag1"";" \n
        "	_marker setmarkersizelocal [1,1];" \n
@@ -139,30 +148,6 @@ class FSM
        "			_color = ""colorwhite"";" \n
        "			if (_threat >= 0) then {_color = ""color"" + (_twn getvariable ""ALICE_status"")};" \n
        "			_marker setmarkercolor _color;" \n
-       "			sleep 1;" \n
-       "		};" \n
-       "	};" \n
-       "//--- Debug mode, halellujah" \n
-       "if (_debug) then {" \n
-       "	_markerx = createmarker [_twnclass+""_size"",position _twn];" \n
-       "	_markerx setmarkersize [_twnSize,_twnSize];" \n
-       "	_markerx setmarkershape ""ellipse"";" \n
-       "	_markerx setmarkerbrush ""border"";" \n
-       "	_markerx setmarkercolor ""colorblack"";" \n
-       "	_markerx setmarkeralpha 0.5;" \n
-       "" \n
-       "//	_marker = createmarker [_twnclass+""_twn"",position _twn];" \n
-       "//	_marker setmarkertypelocal ""flag1"";" \n
-       "//	_marker setmarkersizelocal [1,1];" \n
-       "//	_marker setmarkercolor ""colorwhite"";" \n
-       "	[_marker,_twn] spawn {" \n
-       "		_marker = _this select 0;" \n
-       "		_twn = _this select 1;" \n
-       "		while {true} do {" \n
-       "			_threat = _twn getvariable ""ALICE_threat"";" \n
-       "			_color = ""colorwhite"";" \n
-       "			if (_threat >= 0) then {_color = ""color"" + (_twn getvariable ""ALICE_status"")};" \n
-       "//			_marker setmarkercolor _color;" \n
        "			_marker setmarkertext format [""%1 (%2)"",_threat,count (_twn getvariable ""ALICE_population"")];" \n
        "			sleep 1;" \n
        "		};" \n

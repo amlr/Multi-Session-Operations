@@ -154,7 +154,11 @@ waitUntil {!isNil "BIS_ALICE_fnc_houseEffects"};
                 if(!isNil "BIS_ALICE_fnc_houseEffects" && (_twn getVariable "ALICE_active") && !(_twn in _twnEffects)) then {
                         _twnEffects set [count _twnEffects, _twn];
                         
-                        _doorsAll = _twn nearentities ["bis_alice_emptydoor",500]; 
+                        _doorsAll = _twn getVariable "bis_alice_emptydoor";
+			if(isNil "_doorsAll") then {
+				_doorsAll = _twn nearentities ["bis_alice_emptydoor",500]; 
+				_twn setVariable ["bis_alice_emptydoor", _doorsAll, true];
+			};
                         _doors = []; 
                         { 
                                 _obj = _x getvariable "ALICE_obj"; 

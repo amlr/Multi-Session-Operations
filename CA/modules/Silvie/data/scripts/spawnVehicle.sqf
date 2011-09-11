@@ -19,9 +19,6 @@ _init = _this select 7;
 _debug = _this select 8;
 _logic = bis_silvie_mainscope;
 
-// zGuba: HitParts members for class Car, usually common
-_zgb_hitparts_car = ["HitEngine","HitRGlass","HitLGlass","HitBody","HitFuel","HitLFWheel","HitRFWheel","HitLF2Wheel","HitRF2Wheel","HitLMWheel","HitRMWheel","HitLBWheel","HitRBWheel","HitGlass1","HitGlass2","HitGlass3","HitGlass4"];
-
 if (_debug) then {textLogFormat ["Log: [SILVIE] #%1 at %2",_id, time];};
 
 //--- Clear
@@ -48,23 +45,19 @@ _car addeventhandler ["killed",{
 	[_this] call BIS_GC_trashItFunc;
 }];
 [_logic,"carlist",[_car]] call bis_fnc_variablespaceadd;
-
-// zGuba: enabled random damage and fuel
-_car setFuel 0.5 + ((random 1)^3 - (random 1)^3)/2;
-_car setDamage (random 0.5)^2;	// Up to 25% worn out
-{_car setHit [_x,(random 0.75)^3]} forEach _zgb_hitparts_car;	// Up to 42,1875% worn out
-
+//_car setfuel (random 1);
+//_car setdamage (random 0.5);
 _car setvariable ["SILVIE_twn",_twn,true];
 _car spawn (_logic getvariable "vehicleInit");
 
-//--- Alarm ;)
-if (random 1 > 0.925) then {
+//--- Radio ;)
+if (random 1 > 0.75) then {
 	_eh = _car addeventhandler ["engine",{
 		_car = _this select 0;
 		if (!isnil {_car getvariable "SILVIE_radio"}) exitwith {};
-		if (_this select 1) then {[-2,{
-			_this say3D "SILVIE_carradio";
-			_this setvariable ["SILVIE_radio",true]},_car] call CBA_fnc_GlobalExecute;
+		if (_this select 1) then {
+			_car say3D "SILVIE_carradio";
+			_car setvariable ["SILVIE_radio",true,true];
 		};
 	}];
 };
