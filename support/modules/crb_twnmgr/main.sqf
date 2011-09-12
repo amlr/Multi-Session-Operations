@@ -49,9 +49,9 @@ CRB_updateDetectedMarker = {
         _color = _this select 4;
 
 	if(_detector == civilian) then {        
-	        format["""%1_mgr"" setMarkerColorLocal ""%2""; [2,[], {[playerSide, ""HQ""] sideChat ""%4 intel reports %5 movement at %6 - map updated"";}] call mso_core_fnc_ExMP;", _name, _color,_detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
+	        format["""%1_mgr"" setMarkerColorLocal ""%2""; [playerSide, ""HQ""] sideChat ""%4 intel reports %5 movement at %6 - map updated"";", _name, _color,_detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
 	} else {
-	        format["""%1_mgr"" setMarkerColorLocal ""%2""; [2,[%3], {[(_this select 0), ""HQ""] sideChat ""%4 intel reports %5 movement at %6 - map updated"";}] call mso_core_fnc_ExMP;", _name, _color,_detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
+	        format["""%1_mgr"" setMarkerColorLocal ""%2""; [%3, ""HQ""] sideChat ""%4 intel reports %5 movement at %6 - map updated"";", _name, _color,_detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
 	};
 };
 
@@ -66,7 +66,7 @@ CRB_updateSeizedMarker = {
 	};
         _color = _this select 2;
         
-        format["""%1_mgr"" setMarkerColorLocal ""%2""; [2,[%3], {[(_this select 0), ""HQ""] sideChat ""%4 intel reports %1 has been secured - map updated"";}] call mso_core_fnc_ExMP;", _name, _color, _detectorTxt, _detector call CRB_whichSideText];
+        format["""%1_mgr"" setMarkerColorLocal ""%2""; [%3, ""HQ""] sideChat ""%4 intel reports %1 has been secured - map updated"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText];
 };
 
 CRB_createDetectTrigger = {
