@@ -1,13 +1,13 @@
-if(isNil "ambientEnvironment") then {ambientEnvironment = 1;};
+if(isNil "crbAmbientEnvironment") then {crbAmbientEnvironment = 1;};
 
-if(isServer && ambientEnvironment == 1) then {
+if(isServer && crbAmbientEnvironment == 1) then {
         private["_debug","_logicCiv","_logicVeh","_logicAni"];
         
         _debug = false;
 
-	if(isNil "ambientCivs") then {ambientCivs = 1;};
-	if(isNil "ambientVehs") then {ambientVehs = 1;};
-	if(isNil "ambientAnimals") then {ambientAnimals = 1;};
+	if(isNil "crbAmbientCivs") then {crbAmbientCivs = 1;};
+	if(isNil "crbAmbientVehs") then {crbAmbientVehs = 1;};
+	if(isNil "crbAmbientAnimals") then {crbAmbientAnimals = 1;};
  
         waitUntil{!isNil "BIS_fnc_init"};
 
@@ -15,7 +15,7 @@ if(isServer && ambientEnvironment == 1) then {
                 CRB_LOCS = [] call mso_core_fnc_initLocations;
         };
         
-        if (isnil 'BIS_alice_mainscope' && ambientCivs == 1) then {
+        if (isnil 'BIS_alice_mainscope' && crbAmbientCivs == 1) then {
 	        _logicCiv = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
                 BIS_alice_mainscope = _logicCiv;
                 publicvariable 'BIS_alice_mainscope';
@@ -30,7 +30,7 @@ if(isServer && ambientEnvironment == 1) then {
 	        [] call compile preprocessfilelinenumbers "ambience\modules\crb_civilians\crB_AmbCivSetup.sqf";
         };
         
-        if (isnil 'BIS_silvie_mainscope' && ambientVehs == 1) then {
+        if (isnil 'BIS_silvie_mainscope' && crbAmbientVehs == 1) then {
 	        _logicVeh = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
                 BIS_silvie_mainscope = _logicVeh;
                 publicvariable 'BIS_silvie_mainscope';
@@ -43,7 +43,7 @@ if(isServer && ambientEnvironment == 1) then {
 	        [] call compile preprocessfilelinenumbers "ambience\modules\crb_civilians\crB_AmbVehSetup.sqf";
         };
         
-        if (isnil 'BIS_Animals_debug' && ambientAnimals == 1) then {
+        if (isnil 'BIS_Animals_debug' && crbAmbientAnimals == 1) then {
 	        _logicAni = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
                 BIS_Animals_debug = _debug;
                 private ["_ok"];

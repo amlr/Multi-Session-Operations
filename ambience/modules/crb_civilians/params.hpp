@@ -1,22 +1,22 @@
-class ambientEnvironment {
+class crbAmbientEnvironment {
         title = "Ambient - Environment"; 
         values[]= {0}; 
         texts[]= {" "}; 
         default = 0;
 };
-class ambientCivs {
+class crbAmbientCivs {
         title = "    Enable Civilians"; 
         values[]= {0,1}; 
         texts[]= {"Off", "On"}; 
         default = 0;
 };
-class ambientVehs {
+class crbAmbientVehs {
         title = "    Enabled Civilian Vehicles"; 
         values[]= {0,1}; 
         texts[]= {"Off", "On"}; 
         default = 0;
 };
-class ambientAnimals {
+class crbAmbientAnimals {
         title = "    Enable Animals"; 
         values[]= {0,1}; 
         texts[]= {"Off", "On"}; 
