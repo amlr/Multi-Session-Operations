@@ -37,6 +37,9 @@ class Params {
 #ifdef RMM_WEATHER
 	#include <core\modules\weather\params.hpp>
 #endif
+#ifdef CRB_CIVILIANS
+	#include <ambience\modules\crb_civilians\params.hpp>
+#endif
 #ifdef CRB_DESTROYCITY
 	#include <ambience\modules\crb_destroyCity\params.hpp>
 #endif
