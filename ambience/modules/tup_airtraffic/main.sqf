@@ -108,7 +108,7 @@ for "_j" from 0 to (_destinations-1) do
         
         [_j, _helidest, _planedest, _debug, _mapsize] spawn 
         {
-                private ["_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_wp","_j","_debug","_mapsize","_currentairfield","_airfieldSide","_factions","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight","_controltowers","_controlTowerTypes","_controltw","_housepos","_mv22pos","_aircraftClass","_combatMode","_landed","_LHDobject"];
+                private ["_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_wp","_j","_debug","_mapsize","_currentairfield","_airfieldSide","_factions","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight","_controltowers","_controlTowerTypes","_controltw","_housepos","_mv22pos","_aircraftClass","_combatMode","_landed","_LHDobject","_test"];
                 _j = _this select 0;
                 _helidest = _this select 1;
                 _planedest = _this select 2;
@@ -148,7 +148,7 @@ for "_j" from 0 to (_destinations-1) do
                 };
                 
                 // Set timeout for waypoints
-                _timeout = if(_debug) then {[0, 0, 0];} else {[30, 60, 90];};
+                _timeout = if(_debug) then {[30, 60, 90];} else {[30, 60, 90];};
                 
                 //Loop continuously and create aircraft for the destination		
                 while {true} do 
@@ -251,7 +251,7 @@ for "_j" from 0 to (_destinations-1) do
                                         
                                         // Starting waypoint
                                         // Destination Waypoint
-                                        _wp = _grp addwaypoint [_destpos, 300];
+                                        _wp = _grp addwaypoint [_destpos, 50];
                                         _wp setWaypointBehaviour "SAFE";
                                         _wp setWaypointCombatMode _combatMode;
                                         
@@ -259,7 +259,7 @@ for "_j" from 0 to (_destinations-1) do
                                         
                                         CRBPROFILERSTOP
                                         
-                                        waitUntil{sleep 1;(_aircraftVehicle distance _destpos < 300) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
+                                        waitUntil{sleep 1;(_aircraftVehicle distance _destpos < 200) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
  										
 										// Check to see if landing area is LHD, use Mand Heliroute to land
 										
@@ -270,9 +270,7 @@ for "_j" from 0 to (_destinations-1) do
 											waitUntil {sleep 1;_aircraftVehicle getVariable "mando_heliroute" != "busy"};
 											if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 landed on LHD", time, _j, typeOf _aircraftVehicle, _destination];};
 										};
-										
-										// Get rid of the original waypoint now that the aircraft is nearby
-										deleteWaypoint [_grp, currentwaypoint _grp];
+									
 										
 										// Once near destination, action a landing.
 										
@@ -305,10 +303,14 @@ for "_j" from 0 to (_destinations-1) do
                                         deleteVehicle _landEnd;
 
                                         // Turnoff the aircraft engines and stop aircraft
+										leader _grp stop true;
 										_aircraftVehicle engineOn false;
 										
 										// Pause before moving to end position
-                                        sleep (random 90);
+										_test = (_timeout select (random 2));
+                                        sleep _test;
+										
+										 if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %5 %2 %3 Sleeping for: %4", time, _j, typeOf _aircraftVehicle, str _test, _destination];};
                                      
                                         // Check to see if aircraft is near Control Tower, if so, crew may get out and go for a chat
                                         _controlTowerTypes = ["Land_Mil_ControlTower","Land_Mil_ControlTower_EP1"];
@@ -346,7 +348,11 @@ for "_j" from 0 to (_destinations-1) do
                                         
 										// Pause before moving to end position
                                         sleep (_timeout select (random 2));
-                                                                               
+                                        
+										// Get rid of the original waypoint now that the aircraft is nearby
+										deleteWaypoint [_grp, currentwaypoint _grp];
+										if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 Deleted waypoint now moving", time, _j, typeOf _aircraftVehicle, _destination];};
+										
                                         // Create end position waypoint
                                         _wp = _grp addwaypoint [_endpos, 0];
                                         _wp setWaypointType "MOVE";                               

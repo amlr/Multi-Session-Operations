@@ -6,6 +6,9 @@ class Mission
 		"ca_modules_functions",
 		"ca_missions_garbagecollector",
 		"ca_modules_clouds",
+		"cba_main",
+		"ca_modules_e_weather",
+		"ca_modules_marta",
 		"cacharacters2",
 		"CAAir2_UH1Y",
 		"CAAir",
@@ -33,13 +36,10 @@ class Mission
 		"cabuildings2_misc_cargo",
 		"CATracked2_us_m270mlrs",
 		"cawheeled2_m1114_armored",
-		"utes",
 		"CAWater",
 		"cawater2_destroyer",
 		"cawater2_fregata",
-		"cba_main",
-		"ca_modules_e_weather",
-		"ca_modules_marta"
+		"utes"
 	};
 	addOnsAuto[]=
 	{
@@ -87,12 +87,12 @@ class Mission
 		briefingName="TvT USMC vs GUE MSO v3.5e";
 		briefingDescription="An MSO Team Development (A2CO)";
 		resistanceWest=0;
-		startWeather=0.39999998;
+		startWeather=0.40000001;
 		forecastWeather=0.25;
-		year=2011;
-		month=8;
-		day=14;
-		hour=18;
+		year=2008;
+		month=10;
+		day=11;
+		hour=14;
 		minute=20;
 	};
 	class Groups
