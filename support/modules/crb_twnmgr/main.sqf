@@ -1,12 +1,9 @@
-//if(isDedicated) exitWith{};
+
 
 if(isNil "TownManager")then{TownManager = 1;};
 if (TownManager == 0) exitWith{};
 
 if (isNil "bis_functions_mainscope") exitWith{};
-
-//[] call BIS_fnc_locations;
-//waituntil {sleep 1;isnil {bis_functions_mainscope getvariable "BIS_fnc_locations_pending"}};
 
 CRB_TownMgr_debug = true;
 
@@ -93,7 +90,7 @@ CRB_updateSeizedMarker = {
         if (twnmgr_status == 1) then { 
 			_ret = format["""%1_mgr"" setMarkerColorLocal ""%2""; ", _name, _color];
 		};
-		ret = _ret + format["[playerSide, ""HQ""] sideChat ""SIGINT suggests %1 has been secured by %3 forces"";", _name, _detectorTxt, _detector call CRB_whichSideText];
+		_ret = _ret + format["[playerSide, ""HQ""] sideChat ""SIGINT suggests %1 has been secured by %3 forces"";", _name, _detectorTxt, _detector call CRB_whichSideText];
 		
 		_ret
 };
@@ -138,28 +135,21 @@ CRB_createDetectTrigger = {
 };
 
 CRB_createSeizedTrigger = {
-        private ["_detector","_size","_color","_pos","_name","_trg","_cond","_undetect"];
+        private ["_detector","_size","_color","_pos","_name","_trg","_cond"];
         _name = _this select 0; 
         _pos = _this select 1;
         _size = _this select 2;
         _detector = _this select 3;
         _color = _this select 4;
-		_undetect = "";
 
         _cond = switch(_detector) do {
                 default {
                         format["this"];
                 };
         };
-        
-		if (twnmgr_status == 0) then { 
-			_undetect = format["[playerSide, ""HQ""] sideChat ""SIGINT suggests %1 is no longer under the control of %2 forces"";", _name, _detector call CRB_whichSideText];
-		} else {
-			_undetect = _undetect + format["""%1_mgr"" setMarkerColorLocal ""ColorWhite"";", _name];
-		};
-		
+			
         // Create the seized trigger 
-        _trg = [_pos, "AREA:", [_size, _size, 0, false], "ACT:", [format["%1 SEIZED", _detector call CRB_whichSideTrigger], "PRESENT", true], "STATE:",  [_cond, [_name,_detector, _color] call CRB_updateSeizedMarker, _undetect]] call CBA_fnc_createTrigger;
+        _trg = [_pos, "AREA:", [_size, _size, 0, false], "ACT:", [format["%1 SEIZED", _detector call CRB_whichSideTrigger], "PRESENT", true], "STATE:",  [_cond, [_name,_detector, _color] call CRB_updateSeizedMarker, format["[playerSide, ""HQ""] sideChat ""SIGINT suggests %1 is no longer under the control of %2 forces"";", _name, _detector call CRB_whichSideText]]] call CBA_fnc_createTrigger;
         
         if(!CRB_TownMgr_debug) then {
                 _trg = _trg select 0;
@@ -169,6 +159,14 @@ CRB_createSeizedTrigger = {
         };
 };        
 
+
+// Setup Trigger for map
+// Satellite Intel Trigger for OPFOR and BLUFOR
+
+// End Game Trigger?
+// Check to see if 1 side has seized all locations?
+
+// Setup triggers per location
 {
         private ["_size","_name", "_pos","_trg"];
         // Get the town size
