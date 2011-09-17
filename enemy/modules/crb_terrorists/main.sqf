@@ -35,7 +35,7 @@ crb_tc_intensity = switch(crb_tc_intensity) do {
 		3;
 	};
 };
-if(crb_tc_intensity == 0) exitWith{};
+if(crb_tc_intensity == 0 || AmbientCivs == 0) exitWith{};
 
 if(isNil "crb_tc_markers")then{crb_tc_markers = 1;};
 

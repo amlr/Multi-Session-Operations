@@ -3,6 +3,9 @@
 
 if (isdedicated) exitwith {};
 
+if(isNil "nomadHeader")then{nomadHeader = 1;};
+if (nomadHeader == 0) exitWith{};
+
 waituntil {not isnull player};
 waituntil {!isMultiplayer || getplayeruid player != ""};
 

@@ -1,6 +1,9 @@
 private ["_hospitals","_police","_repairs","_id","_debug"];
 if(!isServer) exitWith{};
 
+if(isNil "Emergency")then{Emergency = 1;};
+if (Emergency == 0) exitWith{};
+
 waitUntil{!isNil "bis_functions_mainscope"};
 waitUntil{typeName (bis_functions_mainscope getVariable "locations") == "ARRAY"};
 

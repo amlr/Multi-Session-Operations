@@ -1,8 +1,8 @@
 class nomadHeader {
         title = "Nomad"; 
-        values[]= {0}; 
-        texts[]= {" "}; 
-        default = 0;
+        values[]= {1,0}; 
+        texts[]= {"On","Off"}; 
+        default = 1;
 };
 class nomadRespawns {
 	title = "    Respawns"; 

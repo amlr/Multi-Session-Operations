@@ -11,7 +11,7 @@ class AmbientCivs {
         default = 0;
 };
 class AmbientVehs {
-        title = "    Enabled Civilian Vehicles"; 
+        title = "    Enable Civilian Vehicles"; 
         values[]= {0,1}; 
         texts[]= {"Off", "On"}; 
         default = 0;

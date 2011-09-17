@@ -40,8 +40,14 @@ class Params {
 #ifdef CRB_CIVILIANS
 	#include <ambience\modules\crb_civilians\params.hpp>
 #endif
-#ifdef CRB_DESTROYCITY
-	#include <ambience\modules\crb_destroyCity\params.hpp>
+#ifdef CRB_EMERGENCY
+	#include <ambience\modules\crb_emergency\params.hpp>
+#endif
+#ifdef CRB_DOGS
+	#include <ambience\modules\crb_dogs\params.hpp>
+#endif
+#ifdef CRB_SHEPHERDS
+	#include <ambience\modules\crb_shepherds\params.hpp>
 #endif
 #ifdef CRB_CROWS
 	#include <ambience\modules\crb_crows\params.hpp>
@@ -52,6 +58,9 @@ class Params {
 #ifdef CRB_SANDSTORM
 	#include <ambience\modules\crb_sandstorms\params.hpp>
 #endif
+#ifdef CRB_DESTROYCITY
+	#include <ambience\modules\crb_destroyCity\params.hpp>
+#endif
 #ifdef TUP_AIRTRAFFIC
 	#include <ambience\modules\tup_airtraffic\params.hpp>
 #endif
@@ -61,20 +70,20 @@ class Params {
 #ifdef RMM_CAS
 	#include <support\modules\cas\params.hpp>
 #endif
-#ifdef CRB_TOWNMGR
-	#include <support\modules\CRB_TownMgr\params.hpp>
+#ifdef CRB_TWNMGR
+	#include <support\modules\CRB_twnmgr\params.hpp>
 #endif
 #ifdef WHB_MULTISPAWN
 	#include <support\modules\WHB_FOBspawn\params.hpp>
+#endif
+#ifdef RMM_ENEMYPOP
+	#include <enemy\modules\rmm_enemypop\params.hpp>
 #endif
 #ifdef CRB_CONVOYS
 	#include <enemy\modules\crb_convoys\params.hpp>
 #endif
 #ifdef CRB_TERRORISTS
 	#include <enemy\modules\crb_terrorists\params.hpp>
-#endif
-#ifdef RMM_ENEMYPOP
-	#include <enemy\modules\rmm_enemypop\params.hpp>
 #endif
 #ifdef MSOFACTIONS
 	#include <enemy\msofactions.hpp>
@@ -94,9 +103,6 @@ class RscTitles
 {
 #ifdef R3F_LOGISTICS
 	#include <support\modules\R3F_logistics\desc_rsct_include.h>
-#endif
-#ifdef SR5_IEDS
-	#include <enemy\modules\SR5_IEDdetect\IEDdetect_screens.cpp>
 #endif
 #ifdef RMM_CAS
 	#include <support\modules\cas\LDL_ac130\Includes\RscTitles.hpp>

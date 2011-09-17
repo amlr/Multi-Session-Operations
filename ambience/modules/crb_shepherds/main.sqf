@@ -2,6 +2,10 @@
 
 private ["_debug","_types","_name","_pos","_grp","_shepherds"];
 if (!isServer) exitWith{};
+
+if(isNil "ambientShepherds")then{ambientShepherds = 1;};
+if (ambientShepherds == 0) exitWith{};
+
 _debug = false;
 
 waitUntil{!isNil "BIS_fnc_init"};

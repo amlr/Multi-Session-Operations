@@ -3,6 +3,9 @@
 private ["_debug","_types","_dogs","_side","_grp","_maxdist"];
 if (!isServer) exitWith{};
 
+if(isNil "ambientDogs")then{ambientDogs = 1;};
+if (ambientDogs == 0) exitWith{};
+
 _debug = false;
 
 waitUntil{!isNil "BIS_fnc_init"};
