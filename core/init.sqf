@@ -98,9 +98,9 @@ if (!isNil "paramsArray") then {
 execNow "core\scripts\init_player.sqf";
 
 if(isDedicated) then {
-	setViewDistance 5000;
+	setViewDistance 3000;
 } else {
-	setViewDistance 2500;
+	setViewDistance 1500;
 };
 setTerrainGrid 25;
 
