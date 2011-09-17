@@ -5,7 +5,7 @@ if (TownManager == 0) exitWith{};
 
 if (isNil "bis_functions_mainscope") exitWith{};
 
-CRB_TownMgr_debug = true;
+CRB_TownMgr_debug = false;
 
 if(isNil "twnmgr_status")then{twnmgr_status = 1;};
 if(isNil "twnmgr_civ")then{twnmgr_civ = 1;};
