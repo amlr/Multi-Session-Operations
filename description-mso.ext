@@ -15,8 +15,8 @@ class CfgSounds {
 #ifdef RMM_CTP
 	#include <ambience\modules\rmm_ctp\cfgsounds.hpp>
 #endif
-#ifdef SR5_IEDS
-	#include <enemy\modules\SR5_IEDdetect\IEDdetect_sounds.cpp>
+#ifdef AEG
+	#include <ambience\modules\AEG\Sounds\AEG_Sounds.hpp>
 #endif
 #ifdef RMM_CAS
 	#include <support\modules\cas\LDL_ac130\Includes\CfgSounds.hpp>
@@ -66,6 +66,9 @@ class Params {
 #endif
 #ifdef TUP_SEATRAFFIC
 	#include <ambience\modules\tup_seatraffic\params.hpp>
+#endif
+#ifdef AEG
+	#include <ambience\modules\AEG\params.hpp>
 #endif
 #ifdef RMM_CAS
 	#include <support\modules\cas\params.hpp>
@@ -182,8 +185,8 @@ class cfgFunctions {
 #ifdef RMM_SETTINGS
 	#include <core\modules\settings\dialog.hpp>
 #endif
-#ifdef SR5_IEDS
-	#include <enemy\modules\SR5_IEDdetect\IEDdetect_dialog.h>
+#ifdef AEG
+	#include "ambience\modules\AEG\Dialogs\AEG_Dialogs.hpp"
 #endif
 #ifdef RMM_AAR
 	#include <support\modules\aar\dialog.hpp>

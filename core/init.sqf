@@ -4,6 +4,8 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
+// Add briefing for MSO
+_nul = [] execVM "core\scripts\briefing.sqf";
 
 //http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];
