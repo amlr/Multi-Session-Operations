@@ -213,8 +213,10 @@ class cfgFunctions {
 #ifdef RMM_RECRUITMENT
 	#include <support\modules\recruitment\dialog_baf.hpp>
 	#include <support\modules\recruitment\dialog_us.hpp>
+	#include <support\modules\recruitment\dialog_ru.hpp>
 	#include <support\modules\recruitment\dialog_usmc.hpp>
 	#include <support\modules\recruitment\dialog_cz.hpp>
+	#include <support\modules\recruitment\dialog_gue.hpp>
 	#include <support\modules\recruitment\dialog_aaw.hpp>
 	#include <support\modules\recruitment\TeamStatusDialog\TeamStatusDialog.hpp>
 #endif
