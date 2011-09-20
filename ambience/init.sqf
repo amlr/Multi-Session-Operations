@@ -44,6 +44,10 @@ execNow "ambience\modules\crb_civilians\main.sqf";
 "Shepherds" call mso_core_fnc_initStat;
 execNow "ambience\modules\crb_shepherds\main.sqf";
 #endif
+#ifdef AEG
+"Ambient Power Grids" call mso_core_fnc_initStat;
+execNow "ambience\modules\AEG\main.sqf";
+#endif
 #ifdef TUP_SEATRAFFIC
 "Ambient Sea" call mso_core_fnc_initStat;
 execNow "ambience\modules\tup_seatraffic\main.sqf";
