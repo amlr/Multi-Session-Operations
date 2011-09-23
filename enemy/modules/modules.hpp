@@ -1,5 +1,5 @@
 // - Tested
-#define MSO_FACTIONS
+#define MSOFACTIONS
 #define CRB_CONVOYS
 #define RMM_ENEMYPOP
 #define CRB_TERRORISTS
