@@ -42,7 +42,7 @@ class FSM
        "" \n
        "//Initialize the queue." \n
        "private [""_queue""];" \n
-       "_collector setVariable [""queue"", []];" \n
+       "_collector setVariable [""queue"", [], true];" \n
        "" \n
        "//Compile the function that allows trashing of content." \n
        "BIS_GC_trashItFunc = compile (preprocessFileLineNumbers (_path + ""scripts\trashIt.sqf""));"/*%FSM</STATEINIT""">*/;
@@ -69,7 +69,7 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"_queue = _collector getVariable ""queue"";" \n
        "" \n
        "_auto = _collector getVariable ""auto"";" \n
-       "if(isNil ""_auto"") then {_collector setVariable [""auto"", false];};" \n
+       "if(isNil ""_auto"") then {_collector setVariable [""auto"", false, true];};" \n
        "if (_collector getVariable ""auto"" && time > _autotime) then {" \n
        "	{" \n
        "		if (!alive _x) then {" \n
@@ -78,7 +78,7 @@ class FSM
        "	} forEach nearestObjects [getArray (configFile >> ""CfgWorlds"" >> worldName >> ""centerPosition""), [""Man"",""Car"",""Tank"",""Air""], 100000];" \n
        "" \n
        "	{" \n
-       "		if (_x == grpNull) then {" \n
+       "		if (count units _x == 0) then {" \n
        "			[_x] call BIS_GC_trashItFunc;" \n
        "		};" \n
        "	} foreach allGroups;" \n

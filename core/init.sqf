@@ -174,6 +174,11 @@ execNow "core\modules\spyder_onu\main.sqf";
 
 "Remove Destroyed Objects" call mso_core_fnc_initStat;
 //--- Is Garbage collector running?
-if (isnil "BIS_GC") then {BIS_GC = (group BIS_functions_mainscope) createUnit ["GarbageCollector", position BIS_functions_mainscope, [], 0, "NONE"]};
+if (isnil "BIS_GC") then {
+	private ["_ok","_logic"];
+	createCenter sideLogic;
+	_logic = (createGroup sideLogic) createUnit ["GarbageCollector", [0,0,0], [], 0, "NONE"];
+};
+waitUntil{!isNil "BIS_GC"};
 BIS_GC setVariable ["auto", true, true];
 
