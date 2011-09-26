@@ -8,6 +8,7 @@ scriptName "Silvie\data\scripts\spawnVehicle.sqf";
 
 */
 
+private ["_eh","_marker","_objpos","_bbox","_b1","_b2","_bbx","_bby","_id","_twn","_class","_obj","_pos","_radius","_dir","_init","_debug","_logic","_car"];
 _id = _this select 0;
 _twn = _this select 1;
 _class = _this select 2;
@@ -31,6 +32,7 @@ _car setvariable ["SILVIE_id",_id,true];
 _car setvariable ["SILVIE_obj",if (typeof _obj == "") then {objnull} else {_obj},true];
 _car addeventhandler ["killed",{
 	_this spawn {
+		private ["_twn","_car","_logic","_id"];
 		_car = _this select 0;
 		_logic = BIS_silvie_mainscope;
 		waituntil {sleep 1;_logic getvariable "id" > 0};

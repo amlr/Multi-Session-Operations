@@ -23,7 +23,6 @@ if(isServer) then {
                 if(_debug) then {
                         _logicCiv setvariable ["debug", true];
                 };
-                BIS_ALICE2_fnc_civilianSet = compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\fn_civilianSet.sqf";
                 BIS_alice_mainscope setVariable ["townlist",(BIS_functions_mainscope getVariable "locations")];
                 //		_ok = [_logicCiv] execVM "ca\modules\alice\data\scripts\main.sqf";
                 _ok = [_logicCiv] execVM "ca\modules_e\alice2\data\scripts\main.sqf";

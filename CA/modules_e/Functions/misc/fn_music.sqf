@@ -14,6 +14,7 @@ scriptName "modules_e\Functions\objects\fn_music.sqf";
 	Nothing
 */
 
+private ["_trackList","_delay","_class","_duration","_current","_path","_pathCount","_durationList"];
 _trackList = [];
 _durationList = [];
 _delay = 3;
@@ -45,6 +46,7 @@ if (count _tracklist == 0) then {
 //--- Play
 if (!isnil "bis_fnc_music_spawn") then {terminate bis_fnc_music_spawn};
 bis_fnc_music_spawn = [_trackList,_durationList,_delay] spawn {
+	private ["_ran","_fade","_track","_durationFull","_oldRan","_duration","_n","_trackList","_trackCount","_durationList","_delay","_fadeTime"];
 	_trackList = _this select 0;
 	_trackCount = count _trackList;
 	_durationList = _this select 1;
