@@ -221,18 +221,18 @@ for "_j" from 1 to _numconvoys do {
                         //_taskid setTaskState "SUCCEEDED";
                         
                         //remove the task to avoid clutter in the taskslist (wait 10 seconds before deleting)
-                        [_taskid, _cid] spawn {	
+                        //[_taskid, _cid] spawn {	
                                 //private ["_task","_id"];
                                 //_task = _this select 0;
                                 //_id = _this select 1;
                                 //sleep 10;
                                 //player removeSimpleTask _task;
                                 //diag_log Format["MSO-%1 Convoy %2 Task Deleted", time, _id];
-                        };
+                        //};
                         
                         //alert the players
                         [-1, {
-				[west, "Base"] sideChat (_this select 0);
+				[playerSide, "Base"] sideChat (_this select 0);
 				[(_this select 1), "SUCCEEDED"] call tasks_fnc_taskUpdate;
 			},
 			[format["All teams, this is Command, UAV scans indicates convoy #%1 has been destroyed! Out.", _cid], _taskid]
