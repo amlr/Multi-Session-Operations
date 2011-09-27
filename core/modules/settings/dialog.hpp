@@ -2,7 +2,7 @@ class RMM_ui_settings {
 	idd = 80508;
 	movingEnable = 1;
 	enableSimulation = 1;
-	onLoad = "[] spawn {if (isnil ""terraindetail"") then {terraindetail = 1}; ctrlSetText [1,format['%1/%2 m', viewdistance, 10000]]; ctrlSetText [3,format['%1/%2', terraindetail, 5]]; sliderSetRange [2, 500, 10000];sliderSetRange [4, 0, 5];sliderSetSpeed [2, 50, 100];sliderSetSpeed [4, 1, 1];sliderSetPosition [2, viewdistance];sliderSetPosition [4, terraindetail];};";
+	onLoad = "[] spawn {if (isnil ""terraindetail"") then {terraindetail = 1}; ctrlSetText [1,format['%1/%2 m', viewdistance, settings_maxvd]]; ctrlSetText [3,format['%1/%2', terraindetail, 5]]; sliderSetRange [2, 500, settings_maxvd];sliderSetRange [4, 0, 5];sliderSetSpeed [2, 50, 100];sliderSetSpeed [4, 1, 1];sliderSetPosition [2, viewdistance];sliderSetPosition [4, terraindetail];};";
 	
 	class controls {
 		class Background : CUI_Frame {
@@ -22,7 +22,7 @@ class RMM_ui_settings {
 		class VDSlider : CUI_Slider {
 			idc = 2;
 			y = CUI_Box_Row(0,2.5);
-			onSliderPosChanged = "setviewdistance round(_this select 1); ctrlSetText [1,format['%1/%2 m', viewdistance, 10000]];";
+			onSliderPosChanged = "setviewdistance round(_this select 1); ctrlSetText [1,format['%1/%2 m', viewdistance, settings_maxvd]];";
 		};
 		class TDText : CUI_Text {
 			y = CUI_Box_Row(0,4);

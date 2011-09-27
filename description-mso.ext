@@ -34,6 +34,9 @@ class Params {
 #ifdef RMM_NOMAD
 	#include <core\modules\nomad\params.hpp>
 #endif
+#ifdef RMM_SETTINGS
+	#include <core\modules\settings\params.hpp>
+#endif
 #ifdef RMM_WEATHER
 	#include <core\modules\weather\params.hpp>
 #endif

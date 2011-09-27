@@ -99,13 +99,6 @@ if (!isNil "paramsArray") then {
 "Player" call mso_core_fnc_initStat;
 execNow "core\scripts\init_player.sqf";
 
-if(isDedicated) then {
-	setViewDistance 3000;
-} else {
-	setViewDistance 1500;
-};
-setTerrainGrid 25;
-
 #ifdef RMM_MP_RIGHTS
 private ["_uid"];
 if(isNil "mprightsDisable") then {mprightsDisable = 1;};
@@ -165,7 +158,14 @@ execNow "core\modules\weather\main.sqf";
 #ifdef RMM_SETTINGS
 "View Distance Settings" call mso_core_fnc_initStat;
 execNow "core\modules\settings\main.sqf";	
+#else
+if(isDedicated) then {
+	setViewDistance 3000;
+} else {
+	setViewDistance 1500;
+};
 #endif
+setTerrainGrid 25;
 
 #ifdef SPYDER_ONU
 "Spyder Object Network Updater" call mso_core_fnc_initStat;
