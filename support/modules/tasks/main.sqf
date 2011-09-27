@@ -19,10 +19,10 @@ onMapSingleClick CRB_MAPCLICK;
 	{
 		if(str (_x select 2) == "[0,0,0]" && playerSide == (_x select 3)) then {
 			private ["_taskname","_description","_destination","_playerSide"];
-			_taskname = _this select 0;
-			_description = _this select 1;
-			_destination = _this select 2;
-			_playerSide = _this select 3;
+			_taskname = _x select 0;
+			_description = _x select 1;
+			_destination = _x select 2;
+			_playerSide = _x select 3;
 
 			if (_playerSide == playerSide) then {
 				private "_task";
@@ -37,3 +37,4 @@ onMapSingleClick CRB_MAPCLICK;
 		};
 	} forEach (_this select 1);
 };
+

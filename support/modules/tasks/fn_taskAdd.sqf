@@ -2,7 +2,8 @@ private ["_taskname","_description","_destination","_playerSide"];
 _taskname = _this select 0;
 _description = _this select 1;
 _destination = _this select 2;
-_playerSide = _this select 3;
+_playerSide = if(count _this > 3) then {_this select 3;} else {playerSide;};
+player globalChat str _this;
 
 
 if (_playerSide == playerSide) then {
