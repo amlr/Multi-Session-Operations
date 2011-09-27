@@ -1,7 +1,24 @@
 #include <crbprofiler.hpp>
 
-private ["_allTopics","_endSentences","_tempArray","_element","_type","_topic","_path","_category","_screams","_scream","_categoryId","_oldScreams","_allScreams","_Remarks","_oldRemarks","_allRemarks","_civilianConversations","_civilianScreams","_civilianRemarks","_source","_twnEffects","_logic","_AIdoor","_allConversations","_kbCategories"];
-waituntil {!isnil "BIS_fnc_init"};_logic = bis_alice_mainscope;
+///////////////////////////////////////////////////////////////////
+
+// Function file for Armed Assault
+
+// Created by: BIS
+// Customised for OA by (AEF)Wolffy.au [CTB]
+
+// Created: 20110315
+
+// Contact: http://dev-heaven.net/projects/mip
+
+// Purpose: Enable house effects for ALICE2 module
+
+// Modified: 20110925
+///////////////////////////////////////////////////////////////////
+
+private ["_allTopics","_endSentences","_tempArray","_element","_type","_topic","_path","_category","_screams","_scream","_categoryId","_oldScreams","_allScreams","_Remarks","_oldRemarks","_allRemarks","_civilianConversations","_civilianScreams","_civilianRemarks","_source","_twnEffects","_logic","_AIdoor","_allConversations","_kbCategories","_doorsAll","_obj","_doors","_twn"];
+waituntil {!isnil "BIS_fnc_init"};
+_logic = bis_alice_mainscope;
 
 //--- Dummy door
 _AIdoor = "BIS_alice_emptydoor" createvehicle [1000,10,10];
@@ -160,6 +177,7 @@ waitUntil {!isNil "BIS_ALICE_fnc_houseEffects"};
 				_twn setVariable ["bis_alice_emptydoor", _doorsAll, true];
 			};
                         _doors = []; 
+                        private["_x"];
                         { 
                                 _obj = _x getvariable "ALICE_obj"; 
                                 if (!isnil "_obj") then { 
