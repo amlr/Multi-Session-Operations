@@ -22,7 +22,7 @@ _locs = [];
 {
 	_loc = _x;
 	{
-			_locs = _locs + nearestLocations [position _loc, [_x] , 10];
+			_locs = _locs + nearestLocations [position _loc, [_x] , 100];
 	} forEach ["NameCityCapital","NameCity","NameVillage","Strategic","Airport","VegetationVineyard"];
 } foreach (bis_functions_mainscope getvariable "locations");
 
