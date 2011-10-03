@@ -58,7 +58,7 @@ diag_log format["MSO-%1 Convoy: destinations(%2) spawns(%3) convoys(%4)", time, 
 
 for "_j" from 1 to _numconvoys do {
         [_j, _spawnpoints, _convoydest, _debug] spawn {
-                private ["_timeout","_startpos","_destpos","_endpos","_grp","_front","_facs","_wp","_cid","_t","_j","_spawnpoints","_convoydest","_debug","_sleep","_strnone","_strlittle","_strgood"];
+                private ["_timeout","_startpos","_destpos","_endpos","_grp","_front","_facs","_wp","_cid","_t","_j","_spawnpoints","_convoydest","_debug","_sleep","_strnone","_strlittle","_strgood","_type"];
                 _j = _this select 0;
                 _spawnpoints = _this select 1;
                 _convoydest = _this select 2;
@@ -66,14 +66,14 @@ for "_j" from 1 to _numconvoys do {
                 
                 _timeout = if(_debug) then {[30, 30, 30];} else {[30, 120, 300];};
                 while{true} do {
-			CRBPROFILERSTART("CRB Convoys")
-
-                        _startpos = (_spawnpoints call BIS_fnc_selectRandom);
-                        _startpos = [_startpos, 0, 0, 0, 0, 10, 0] call BIS_fnc_findSafePos;
+                        CRBPROFILERSTART("CRB Convoys")
+                        
+                        _startpos = ((_spawnpoints call BIS_fnc_selectRandom) nearRoads 100) call BIS_fnc_selectRandom;
+                        _startpos = [position _startpos, 0, 0, 0, 0, 10, 0] call BIS_fnc_findSafePos;
                         _destpos = (_convoydest call BIS_fnc_selectRandom);
-                        _destpos = [_destpos , 0, 50, 10, 0, 10, 0] call BIS_fnc_findSafePos;
-                        _endpos = (_spawnpoints call BIS_fnc_selectRandom);
-                        _endpos = [_endpos, 0, 0, 0, 0, 10, 0] call BIS_fnc_findSafePos;
+                        _destpos = [_destpos, 0, 50, 10, 0, 10, 0] call BIS_fnc_findSafePos;
+                        _endpos = ((_spawnpoints call BIS_fnc_selectRandom) nearRoads 100) call BIS_fnc_selectRandom;
+                        _endpos = [position _endpos, 0, 0, 0, 0, 10, 0] call BIS_fnc_findSafePos;
                         _grp = nil;
                         _front = "";
                         while{isNil "_grp"} do {
@@ -86,25 +86,33 @@ for "_j" from 1 to _numconvoys do {
                         switch(_front) do {
                                 case "Motorized": {
                                         for "_i" from 0 to floor(random 2) do {
-                                                [[_startpos, 50] call CBA_fnc_randPos, 0, ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom, _grp] call BIS_fnc_spawnVehicle;
+                                                _type = ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
+                                                if(_type isKindOf "Air") then {_startpos set [2, 500];};
+                                                [[_startpos, 50] call CBA_fnc_randPos, 0, _type, _grp] call BIS_fnc_spawnVehicle;
                                         };
                                 };
                                 case "Mechanized": {
                                         for "_i" from 0 to (1 + floor(random 2)) do {
-                                                [[_startpos, 50] call CBA_fnc_randPos, 0, ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom, _grp] call BIS_fnc_spawnVehicle;
+                                                _type = ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
+                                                if(_type isKindOf "Air") then {_startpos set [2, 500];};
+                                                [[_startpos, 50] call CBA_fnc_randPos, 0, _type, _grp] call BIS_fnc_spawnVehicle;
                                         };
                                         if(random 1 > 0.5) then {[[_startpos, 50] call CBA_fnc_randPos, 0, ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom, _grp] call BIS_fnc_spawnVehicle;};
                                 };
                                 case "Armored": {
                                         for "_i" from 0 to (2 + floor(random 1)) do {
-                                                [[_startpos, 50] call CBA_fnc_randPos, 0, ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom, _grp] call BIS_fnc_spawnVehicle;
+                                                _type = ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
+                                                if(_type isKindOf "Air") then {_startpos set [2, 500];};
+                                                [[_startpos, 50] call CBA_fnc_randPos, 0, _type, _grp] call BIS_fnc_spawnVehicle;
                                         };
+                                        _type = ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
+                                        if(_type isKindOf "Air") then {_startpos set [2, 500];};
                                         [[_startpos, 50] call CBA_fnc_randPos, 0, ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom, _grp] call BIS_fnc_spawnVehicle;
                                 };
                         };
                         
                         {_x setSkill 0.2;} forEach units _grp;
-
+                        
                         _wp = _grp addwaypoint [_startpos, 0];
                         _wp setWaypointFormation "FILE";
                         _wp setWaypointSpeed "LIMITED";
