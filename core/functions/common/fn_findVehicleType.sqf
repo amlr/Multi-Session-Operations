@@ -8,7 +8,7 @@ _cargoslots = _this select 0;
 _fac = nil;
 _type = nil;
 _nonConfigs = ["StaticWeapon","CruiseMissile1","CruiseMissile2","Chukar_EP1","Chukar","Chukar_AllwaysEnemy_EP1"];
-_nonSims = ["parachute"];
+_nonSims = ["parachute","house"];
 
 if(count _this > 1) then {
         _fac = _this select 1;
