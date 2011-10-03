@@ -100,6 +100,7 @@ CRB_createDetectTrigger = {
         _name = _this select 0;
         _pos = _this select 1;
         _size = _this select 2;
+	if(_size < 250) then {_size = 250;};
         _detected = _this select 3;
         _detector = _this select 4;
         _color = _this select 5;
@@ -139,6 +140,7 @@ CRB_createSeizedTrigger = {
         _name = _this select 0; 
         _pos = _this select 1;
         _size = _this select 2;
+	if(_size < 250) then {_size = 250;};
         _detector = _this select 3;
         _color = _this select 4;
 
@@ -171,6 +173,7 @@ CRB_createSeizedTrigger = {
         private ["_size","_name", "_pos","_trg"];
         // Get the town size
         _size = size _x select 0;
+	if(_size < 250) then {_size = 250;};
         _name = text _x;
         _pos = position _x;
 
