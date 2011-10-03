@@ -113,6 +113,8 @@ BIS_alice_mainscope setvariable ["threatDecay", 0.00005, true];
         {removeAllItems _this},
         {
 		if (random 1 > 0.1) then {
+			_this setSkill 0.2;
+		        _this allowFleeing 0.5;
 			{_this enableAI _x} count ["AUTOTARGET","TARGET"];
 			_this addMagazine "HandGrenade_Stone";
 			_this addMagazine "HandGrenade_Stone";
@@ -125,6 +127,8 @@ BIS_alice_mainscope setvariable ["threatDecay", 0.00005, true];
 //			if(!("Throw" in weapons _this)) then {_this addWeapon "Throw";};
 		};
                 if (random 1 > 0.95 && (_this isKindOf "Woman_EP1" || _this isKindOf "Woman")) then {
+			_this setSkill 0.2;
+		        _this allowFleeing 0;
                         if (random 1 > 0.5) then {
                                 _this addMagazine "8Rnd_9x18_Makarov";
                                 _this addMagazine "8Rnd_9x18_Makarov";

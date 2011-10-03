@@ -69,7 +69,7 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"_queue = _collector getVariable ""queue"";" \n
        "" \n
        "_auto = _collector getVariable ""auto"";" \n
-       "if(isNil ""_auto"") then {_collector setVariable [""auto"", false, true];};" \n
+       "if(isNil ""_auto"") then {_collector setVariable [""auto"", true, true];};" \n
        "if (_collector getVariable ""auto"" && time > _autotime) then {" \n
        "	{" \n
        "		if (!alive _x) then {" \n
