@@ -92,7 +92,6 @@ switch toLower(worldName) do {
         };
         case "eden": {
                 CRB_LOC_DIST = 9000;
-                {_twn = (group bis_functions_mainscope) createUnit ["LOGIC", position _x, [], 0, "NONE"]; _twn setVariable ["name", name _x]; _twn setVariable ["demography", ["CIV",0,"CIV_RU",0]]; [[_twn], [], true] call BIS_fnc_locations;} foreach nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), ["NameCityCapital","NameCity","NameVillage"] , CRB_LOC_DIST];
                 [] call _initNeighbors;
         };
         case "utes": {
