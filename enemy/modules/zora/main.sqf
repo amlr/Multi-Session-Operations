@@ -25,17 +25,22 @@ BIS_Zora_Mainscope setvariable ["maxgroups",1];
 BIS_Zora_Mainscope setvariable ["mindist",1500];
 BIS_Zora_Mainscope setvariable ["maxdist", 2500];
 
-[{
-	CRBPROFILERSTART("RMM ZORA")
-
+[] spawn {
         private ["_mx","_fnc_status","_waittime"];
+	_waittime = 0;
+	BIS_Zora_pause = true;
+
         _fnc_status = {
                 if (BIS_Zora_Mainscope getvariable "debug") then {
                         hint format["ZORA Pause: %1\nMaxGroups: %2", BIS_Zora_pause, BIS_Zora_mainscope getvariable "maxgroups"];
                 };
         };
         
-        if(_waittime < time) then {
+
+	while {true} do {
+		CRBPROFILERSTART("RMM ZORA")
+
+                _waittime = 60;
                 if (count playableUnits > 0) then {
                         _mx = floor( (sqrt (count playableUnits)) + random 1);
                         if(_mx > 5) then {_mx = 5;};
@@ -44,18 +49,20 @@ BIS_Zora_Mainscope setvariable ["maxdist", 2500];
                 if ((random 1 > NIGHT_POSSIBILITY) && (daytime < 5 || daytime > 18)) then {
                         BIS_Zora_pause = true;
                         call _fnc_status;
-                        _waittine = time + (60 * 60) + ((random 60) * 60);
+                        _waittime = (60 * 60) + ((random 60) * 60);
                 } else {
                         if(BIS_Zora_pause) then {
                                 call _fnc_status;
-                                _waittine = time + ((random 60) * 60);
+                                _waittime = ((random 60) * 60);
                                 BIS_Zora_pause = false;
                         } else {
                                 call _fnc_status;
-                                _waittine = time + ((random 60) * 60);
+                                _waittime = ((random 60) * 60);
                                 BIS_Zora_pause = true;
                         };
                 };
+
+		CRBPROFILERSTOP
+		sleep _waittime;
         };
-	CRBPROFILERSTOP
-}, 60, []] call mso_core_fnc_addLoopHandler;
+};
