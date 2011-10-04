@@ -1,5 +1,3 @@
-
-
 if(isNil "TownManager")then{TownManager = 1;};
 if (TownManager == 0) exitWith{};
 
@@ -15,15 +13,12 @@ if(isNil "twnmgr_tasks")then{twnmgr_tasks = 1;};
 
 diag_log format["MSO-%1 Town Manager - Starting", time];
 
-private ["_locs","_loc"];
+private ["_locs"];
 
 // Get location objects nearest each CityCenter
 _locs = [];
 {
-	_loc = _x;
-	{
-			_locs = _locs + nearestLocations [position _loc, [_x] , 100];
-	} forEach ["NameCityCapital","NameCity","NameVillage","Strategic","Airport","VegetationVineyard"];
+	_locs = _locs + [(nearestLocations [position _x, ["CityCenter","NameCityCapital","NameCity","NameVillage","Airport","Strategic","VegetationVineyard"], 100]) select 0];
 } foreach (bis_functions_mainscope getvariable "locations");
 
 diag_log format["MSO-%1 Town Manager - Locations: %1", count _locs];
@@ -48,7 +43,7 @@ CRB_whichSideTrigger = {
 };
 
 CRB_updateDetectedMarker = {
-        private ["_name","_pos","_detector","_detected","_color","_detectorTxt","_ret"];
+        private ["_name","_pos","_detector","_detected","_color","_detectorTxt"];
         _name = _this select 0;
         _pos = _this select 1;
         _detector = _this select 2;
@@ -58,25 +53,17 @@ CRB_updateDetectedMarker = {
 			default {str _detector};
 		};
         _detected = _this select 3;
-		_ret = "";
         _color = _this select 4;
 
 	if(_detector == civilian) then {
-		if (twnmgr_status == 1) then { 
-	        _ret = format["""%1_mgr"" setMarkerColorLocal ""%2"";", _name, _color];
-		};
-	    _ret = _ret + format["[playerSide, ""HQ""] sideChat ""%1 HUMINT reports %2 movement at %3 (%4)"";", _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos, _name];
+		format["""%1_mgr"" setMarkerColorLocal ""%2""; [playerSide, ""HQ""] sideChat ""%1 HUMINT reports %2 movement at %3 (%4)"";", _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos, _name];
 	} else {
-		if (twnmgr_status == 1) then { 
-	        _ret = format["""%1_mgr"" setMarkerColorLocal ""%2"";", _name, _color];
-		};
-		_ret = _ret + format["[%1, ""HQ""] sideChat ""HUMINT reports %3 movement at %4 (%5)"";", _detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos, _name];
+                format["""%1_mgr"" setMarkerColorLocal ""%2""; [%3, ""HQ""] sideChat ""HUMINT reports %5 movement at %1 (%6)"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
 	};
-	_ret
 };
 
 CRB_updateSeizedMarker = {
-        private ["_name","_detector","_color","_detectorTxt","_ret"];
+        private ["_name","_detector","_color","_detectorTxt"];
         _name = _this select 0;
         _detector = _this select 1;
         _detectorTxt = switch(_detector) do {
@@ -84,19 +71,13 @@ CRB_updateSeizedMarker = {
 			case resistance: {"resistance"};
 			default {str _detector};
 		};
-		_ret = "";
         _color = _this select 2;
 		
-        if (twnmgr_status == 1) then { 
-			_ret = format["""%1_mgr"" setMarkerColorLocal ""%2""; ", _name, _color];
-		};
-		_ret = _ret + format["[playerSide, ""HQ""] sideChat ""SIGINT suggests %1 has been secured by %3 forces"";", _name, _detectorTxt, _detector call CRB_whichSideText];
-		
-		_ret
+	format["""%1_mgr"" setMarkerColorLocal ""%2""; [%3, ""HQ""] sideChat ""SIGINT suggests %1 has been secured by %4 forces"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText];
 };
 
 CRB_createDetectTrigger = {
-        private ["_detected","_detector","_size","_color","_pos","_name","_trg","_cond","_undetect"];
+        private ["_detected","_detector","_size","_color","_pos","_name","_trg","_cond"];
         _name = _this select 0;
         _pos = _this select 1;
         _size = _this select 2;
@@ -104,7 +85,6 @@ CRB_createDetectTrigger = {
         _detected = _this select 3;
         _detector = _this select 4;
         _color = _this select 5;
-        _undetect = "";
 		
         _cond = switch(_detector) do {
                 case civilian: {
@@ -115,20 +95,14 @@ CRB_createDetectTrigger = {
                 };
         };
         
-		 if (twnmgr_status == 1) then { 
-			_undetect = format["""%1_mgr"" setMarkerColorLocal ""ColorWhite"";", _name];
-		} else {
-			_undetect = "";
-		};
-		
         // Create the detect trigger 
-        _trg = [_pos, "AREA:", [_size, _size, 0, false], "ACT:", [(_detected call CRB_whichSideTrigger), format["%1 D", _detector call CRB_whichSideTrigger], true], "STATE:",  [_cond, [_name,_pos,_detector, _detected, _color] call CRB_updateDetectedMarker, _undetect]] call CBA_fnc_createTrigger;
+        _trg = [_pos, "AREA:", [_size, _size, 0, false], "ACT:", [(_detected call CRB_whichSideTrigger), format["%1 D", _detector call CRB_whichSideTrigger], true], "STATE:",  [_cond, [_name,_pos,_detector, _detected, _color] call CRB_updateDetectedMarker, ""]] call CBA_fnc_createTrigger;
         if(!CRB_TownMgr_debug) then {
                 _trg = _trg select 0;
                 if(_detector == civilian) then {
-                        _trg setTriggerTimeout [180, 540, 900, true];
+                        _trg setTriggerTimeout [180, 540, 900, false];
                 } else {
-                        _trg setTriggerTimeout [180, 360, 600, true];
+                        _trg setTriggerTimeout [30, 90, 150, false];
                 };
         } else {
                 diag_log format["MSO-%1 Town Manager - %2", time, _trg];
@@ -146,16 +120,18 @@ CRB_createSeizedTrigger = {
 
         _cond = switch(_detector) do {
                 default {
-                        format["this"];
+                        format["this && (getMarkerColor ""%1_mgr"" != ""%2"") && (str playerSide == ""%3"")", _name, _color, _detector]
+                        //format["this"];
                 };
         };
 			
         // Create the seized trigger 
-        _trg = [_pos, "AREA:", [_size, _size, 0, false], "ACT:", [format["%1 SEIZED", _detector call CRB_whichSideTrigger], "PRESENT", true], "STATE:",  [_cond, [_name,_detector, _color] call CRB_updateSeizedMarker, format["[playerSide, ""HQ""] sideChat ""SIGINT suggests %1 is no longer under the control of %2 forces"";", _name, _detector call CRB_whichSideText]]] call CBA_fnc_createTrigger;
+        _trg = [_pos, "AREA:", [_size, _size, 0, false], "ACT:", [format["%1 SEIZED", _detector call CRB_whichSideTrigger], "PRESENT", true], "STATE:",  [_cond, [_name,_detector, _color] call CRB_updateSeizedMarker,""]] call CBA_fnc_createTrigger;
+        //_trg = [_pos, "AREA:", [_size, _size, 0, false], "ACT:", [format["%1 SEIZED", _detector call CRB_whichSideTrigger], "PRESENT", true], "STATE:",  [_cond, [_name,_detector, _color] call CRB_updateSeizedMarker, format["[playerSide, ""HQ""] sideChat ""SIGINT suggests %1 is no longer under the control of %2 forces"";", _name, _detector call CRB_whichSideText]]] call CBA_fnc_createTrigger;
         
         if(!CRB_TownMgr_debug) then {
                 _trg = _trg select 0;
-                _trg setTriggerTimeout [15, 30, 90, true];
+		_trg setTriggerTimeout [15, 30, 90, false];
         } else {
                 diag_log format["MSO-%1 Town Manager - %2", time, _trg];
         };
@@ -170,7 +146,7 @@ CRB_createSeizedTrigger = {
 
 // Setup triggers per location
 {
-        private ["_size","_name", "_pos","_trg"];
+        private ["_size","_name", "_pos","_trg","_type"];
         // Get the town size
         _size = size _x select 0;
 	if(_size < 250) then {_size = 250;};
@@ -178,8 +154,11 @@ CRB_createSeizedTrigger = {
         _pos = position _x;
 
 		if(twnmgr_status == 1) then {
-			[format["%1_mgr", _name], _pos, "ELLIPSE", [_size, _size], "COLOR:", "ColorWhite", "BRUSH:", "Cross"] call CBA_fnc_createMarker;
+                _type = "ELLIPSE";
+        } else {
+                _type = "ICON";
         };
+        [format["%1_mgr", _name], _pos, _type, [_size, _size], "COLOR:", "ColorWhite", "BRUSH:", "Cross"] call CBA_fnc_createMarker;
 		
 		if (twnmgr_detected == 1) then {
 			//////////////////////////////////////////
