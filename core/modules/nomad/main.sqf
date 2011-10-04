@@ -54,8 +54,8 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 		},
 		{
 			{player removemagazine _x;} foreach (magazines player);
-//			{[player, _x, 1] call CBA_fnc_AddMagazineVerified;} foreach _this;
-			{player addmagazine _x;} foreach _this;
+			{[player, _x, 1] call CBA_fnc_AddMagazineVerified;} foreach _this;
+//			{player addmagazine _x;} foreach _this;
 		},
 		{
 			{player removeweapon _x;} foreach ((weapons player) + (items player));
