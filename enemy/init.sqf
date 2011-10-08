@@ -44,14 +44,14 @@ if(!isNil "faction_BIS_TK_GUE") then {
                 MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK_GUE"];
         };
 };
-if(!isNil "faction_CWR2_USA") then {
-        if(faction_CWR2_USA == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["CWR2_USA"];
+if(!isNil "faction_CWR2_US") then {
+        if(faction_CWR2_US == 1) then {
+                MSO_FACTIONS = MSO_FACTIONS + ["CWR2_US"];
         };
 };
-if(!isNil "faction_CWR2_RUS") then {
-        if(faction_CWR2_RUS == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["CWR2_RUS"];
+if(!isNil "faction_CWR2_RU") then {
+        if(faction_CWR2_RU == 1) then {
+                MSO_FACTIONS = MSO_FACTIONS + ["CWR2_RU"];
         };
 };
 if(!isNil "faction_CWR2_FIA") then {
@@ -61,6 +61,7 @@ if(!isNil "faction_CWR2_FIA") then {
 };
 
 if(count MSO_FACTIONS == 0) then {
+
 	MSO_FACTIONS = MSO_FACTIONS + ["RU"];
 };
 

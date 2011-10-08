@@ -42,17 +42,17 @@
 		texts[]= {"false","true"}; 
 		default = DEFAULT_BIS_TK_GUE;
 	};
-	class faction_CWR2_USA {
-		title = "Enable CWR2 USA"; 
+	class faction_CWR2_US {
+		title = "Enable CWR2 US"; 
 		values[]= {0,1}; 
 		texts[]= {"false","true"}; 
-		default = DEFAULT_CWR2_USA;
+		default = DEFAULT_CWR2_US;
 	};
-	class faction_CWR2_RUS {
+	class faction_CWR2_RU {
 		title = "Enable CWR2 Russians"; 
 		values[]= {0,1}; 
 		texts[]= {"false","true"}; 
-		default = DEFAULT_CWR2_RUS;
+		default = DEFAULT_CWR2_RU;
 	};
 	class faction_CWR2_FIA {
 		title = "Enable CWR2 Insurgents"; 
