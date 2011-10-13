@@ -216,7 +216,7 @@ for "_j" from 0 to (_destinations-1) do
                                         
                                         // Select the faction based on unit count bias and get a list of possible vehicles
                                         //_facs = [_factions,_factionsCount] call mso_core_fnc_selectRandomBias;
-                                        _vehiclelist =  [0, _factions + TUP_CIVFACS,_front] call mso_core_fnc_findVehicleType; 
+                                        _vehiclelist =  [0, _factions,_front] call mso_core_fnc_findVehicleType; 
                                         _aircraftClass = "";
                                         
                                         // Select a vehicle from the list - if no valid vehicle selet a civilian aircraft
@@ -246,13 +246,19 @@ for "_j" from 0 to (_destinations-1) do
                                         _grp = _aircraft select 2;
                                         _stoptime = time + 900;
                                         diag_log format["MSO-%1 Air Traffic: %10 #%2, Vehicle: %6 Group: %9 Faction: %7 Start: %3 Landing: %4 End: %5 Stop: %8", time, _j, _startpos, _destpos, _endpos, typeOf _aircraftVehicle, _factions, _stopTime, _grp, _destination];
-                                        
+                                        if (_combatMode == "BLUE") then {
+											{_x disableAI "AUTOTARGET"} foreach _aircraftCrew;
+											{_x disableAI "TARGET"} foreach _aircraftCrew;
+										};
+										
+										_grp setCombatMode _combatMode;
+										_grp setBehaviour "CARELESS";
+										
                                         // Set aircraft waypoints
                                         
                                         // Starting waypoint
                                         // Destination Waypoint
                                         _wp = _grp addwaypoint [_destpos, 50];
-                                        _wp setWaypointBehaviour "SAFE";
                                         _wp setWaypointCombatMode _combatMode;
                                         
                                         // Wait until the aircraft is close to the airfield
@@ -337,7 +343,7 @@ for "_j" from 0 to (_destinations-1) do
                                                         
 														
                                                         // Get crew to chat once at controltower
-                                                        _wp setWayPointStatements ["true","{_x playMove 'AidlPercSnonWnonDnon_talk1'} foreach _aircraftCrew;"];
+                                                        _wp setWayPointStatements ["true","{_x playMove 'AidlPercSnonWnonDnon_talk1'} foreach crew (vehicle this);"];
                                                         
                                                         // Pause then send the crew back to the vehicle
                                                         sleep (_timeout select (random 2));
