@@ -46,12 +46,12 @@ if(!isNil "faction_BIS_TK_GUE") then {
 };
 if(!isNil "faction_CWR2_US") then {
         if(faction_CWR2_US == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["CWR2_US"];
+                MSO_FACTIONS = MSO_FACTIONS + ["cwr2_us"];
         };
 };
 if(!isNil "faction_CWR2_RU") then {
         if(faction_CWR2_RU == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["CWR2_RU"];
+                MSO_FACTIONS = MSO_FACTIONS + ["cwr2_ru"];
         };
 };
 if(!isNil "faction_CWR2_FIA") then {
