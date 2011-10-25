@@ -47,13 +47,13 @@ switch toLower(worldName) do {
         case "eden": {                
                 BIS_alice_mainscope setvariable ["trafficDistance",700];                
                 BIS_alice_mainscope setvariable ["spawnDistance",350];                
-                BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];                
+                BIS_alice_mainscope setVariable ["townsFaction",["cwr2_civ","CIV_RU"]];                
                 [] spawn compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";        
         };
         case "fallujah": {                
                 BIS_alice_mainscope setvariable ["trafficDistance",600, true];      
                 BIS_alice_mainscope setvariable ["spawnDistance",250, true];      
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"], true];
+                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"]];
 	};  
         case "isladuala": {      
                 BIS_alice_mainscope setvariable ["trafficDistance",1000];             
@@ -70,7 +70,7 @@ switch toLower(worldName) do {
         case "torabora": {       
                 BIS_alice_mainscope setvariable ["trafficDistance",1500, true];       
                 BIS_alice_mainscope setvariable ["spawnDistance",600, true];        
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"],true];  
+                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"]];  
         };
         case "utes": {        
                 BIS_alice_mainscope setvariable ["trafficDistance",650];      
@@ -82,7 +82,7 @@ switch toLower(worldName) do {
                 BIS_alice_mainscope setvariable ["trafficDistance",750];      
                 BIS_alice_mainscope setvariable ["spawnDistance",600];      
                 // Add some rare english speaking civilians to the mix            
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"],true];  
+                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"]];  
                 //[BIS_alice_mainscope, "civilianRarity",["CIV_EuroWoman01_EP1", 5, "CIV_EuroWoman02_EP1", 5, "Dr_Annie_Baker_EP1", 10, "Rita_Ensler_EP1", 10, "CIV_EuroMan01_EP1", 5, "CIV_EuroMan02_EP1", 5, "Haris_Press_EP1", 10, "Dr_Hladik_EP1", 10, "Citizen2_EP1", 5, "Citizen3_EP1", 5, "Profiteer2_EP1", 5, "Functionary1_EP1", 5, "Functionary2_EP1", 3]] call BIS_fnc_variableSpaceAdd;
         };
 };
@@ -108,13 +108,11 @@ BIS_alice_mainscope setvariable ["threatDecay", 0.00005, true];
         { 
                 {_this disableAI _x} count ["AUTOTARGET","TARGET"]
         },
-        {_this allowFleeing 1}, 
         {removeAllWeapons _this}, 
         {removeAllItems _this},
         {
 		if (random 1 > 0.1) then {
 			_this setSkill 0.2;
-		        _this allowFleeing 0.5;
 			{_this enableAI _x} count ["AUTOTARGET","TARGET"];
 			_this addMagazine "HandGrenade_Stone";
 			_this addMagazine "HandGrenade_Stone";
@@ -127,8 +125,8 @@ BIS_alice_mainscope setvariable ["threatDecay", 0.00005, true];
 //			if(!("Throw" in weapons _this)) then {_this addWeapon "Throw";};
 		};
                 if (random 1 > 0.95 && (_this isKindOf "Woman_EP1" || _this isKindOf "Woman")) then {
-			_this setSkill 0.2;
-		        _this allowFleeing 0;
+			_this setSkill 0.1;
+			{_this enableAI _x} count ["AUTOTARGET","TARGET"];
                         if (random 1 > 0.5) then {
                                 _this addMagazine "8Rnd_9x18_Makarov";
                                 _this addMagazine "8Rnd_9x18_Makarov";

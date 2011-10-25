@@ -140,6 +140,8 @@ _twnlist = [];
 	{
 		//--- Array
 		if (typename _x == "ARRAY") then {
+			//_center = _x select 0;
+			//_maxdis = _x select 1;
 			_locationParams = if (_debug) then {[["CityCenter"],_x,true]} else {[["CityCenter"],_x]};
 			_create = _locationParams call bis_fnc_locations;
 			{if !(_x in _twnlist) then {_twnlist = _twnlist + [_x]}} foreach _create;

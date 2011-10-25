@@ -35,7 +35,7 @@ _setNeigbors = {
 	_neighbors = _this select 1;
 	_debug = _this select 2;
 	_neighborsLogic = [];
-	waituntil {sleep 1;isnil {bis_functions_mainscope getvariable "BIS_fnc_locations_pending"}};
+	waituntil {sleep 1; isnil {bis_functions_mainscope getvariable "BIS_fnc_locations_pending"}};
 	{
 		call compile format ["if !(isnil 'BIS_loc_%1') then {_neighborsLogic = _neighborsLogic + [BIS_loc_%1]}",_x];	
 	} foreach _neighbors;
@@ -230,7 +230,6 @@ switch (typename _types) do {
 								_marker setmarkercolor "colorblack";
 								_marker setmarkertext _name;
 							};
-
 						} else {textLogFormat ["Log: [Functions/location] Object %1 is already registred, only neighbors were set.",_logic]};
 
 						//--- Save neighbors
@@ -288,5 +287,7 @@ switch (typename _types) do {
 		};
 	};
 };
+
+
 
 _result;

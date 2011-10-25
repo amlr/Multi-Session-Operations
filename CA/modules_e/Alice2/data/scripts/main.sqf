@@ -1,4 +1,3 @@
-
 private ["_logicFnc","_twnlist","_locationParams","_create","_twnlistTemp","_i","_rarity","_faction","_classlist","_classlistVehicles","_scope","_side","_woman","_class","_vehicleclass","_actual","_condition","_fsm","_locked","_canrepeat","_initVariables","_init","_allActions","_action","_tempArrayx","_civilianActions","_source","_allActionsx","_allTopics","_endSentences","_tempArray","_element","_type","_topic","_path","_category","_screams","_scream","_categoryId","_oldScreams","_allScreams","_Remarks","_oldRemarks","_allRemarks","_civilianConversations","_civilianScreams","_civilianRemarks","_factionCiv","_logic","_debug","_initArray","_distlimit","_trafficDistance","_twnSize","_civilianCount","_actionCategories","_kbCategories","_townsFaction","_blacklist","_respectModifyCoef","_threatDecay","_unitrarity","_totobj","_allConversations","_twnrespect"];
 scriptName "Alice2\data\scripts\main.sqf";
 /*
@@ -41,51 +40,51 @@ if (!isnil "bis_gita_0") then {waituntil {!isnil "bis_gita_init"}};	//--- If pre
 ///////////////////////////////////////////////////////////////////////////////////
 //--- Debug
 _debug = if (isnil {_logic getvariable "debug"}) then {false} else {true};
-_logic setvariable ["debug",_debug,true];
+_logic setvariable ["debug",_debug];
 
 //--- Civilian init
 _initArray = if (isnil {_logic getvariable "initArray"}) then {[]} else {_logic getvariable "initArray";};
-_logic setvariable ["initArray",_initArray,true];
+_logic setvariable ["initArray",_initArray];
 
 //--- Spawn distance
 _distlimit = if (isnil {_logic getvariable "spawnDistance"}) then {400} else {_logic getvariable "spawnDistance"};
-_logic setvariable ["spawnDistance",_distLimit,true];
+_logic setvariable ["spawnDistance",_distLimit];
 
 //--- Traffic distance
 _trafficDistance = if (isnil {_logic getvariable "trafficDistance"}) then {500} else {_logic getvariable "trafficDistance"};
-_logic setvariable ["trafficDistance",_trafficDistance,true];
+_logic setvariable ["trafficDistance",_trafficDistance];
 
 //--- Town size
 _twnSize = if (isnil {_logic getvariable "ALICE_townsize"}) then {_distLimit * 2/3} else {_logic getvariable "ALICE_townsize";};
-_logic setvariable ["ALICE_townsize",_twnSize,true];
+_logic setvariable ["ALICE_townsize",_twnSize];
 
 //--- Civilian count
 _civilianCount = if (isnil {_logic getvariable "civilianCount"}) then {"round (4 * (sqrt %1))"} else {_logic getvariable "civilianCount";};
-_logic setvariable ["civilianCount",_civilianCount,true];
+_logic setvariable ["civilianCount",_civilianCount];
 
 //--- Civilian actions
 _actionCategories = if (isnil {_logic getvariable "civilianActions"}) then {["BIS"]} else {_logic getvariable "civilianActions";};
-_logic setvariable ["civilianActions",_actionCategories,true];
+_logic setvariable ["civilianActions",_actionCategories];
 
 //--- Civilian conversations
 _kbCategories = if (isnil {_logic getvariable "civilianConversations"}) then {["BIS"]} else {_logic getvariable "civilianConversations";};
-_logic setvariable ["civilianConversations",_kbCategories,true];
+_logic setvariable ["civilianConversations",_kbCategories];
 
 //--- Towns faction
 _townsFaction = if (isnil {_logic getvariable "townsFaction"}) then {["BIS_TK_CIV"]} else {_logic getvariable "townsFaction";};
-_logic setvariable ["townsFaction",_townsFaction,true];
+_logic setvariable ["townsFaction",_townsFaction];
 
 //--- Object blacklist
 _blacklist = if (isnil {_logic getvariable "blacklist"}) then {[]} else {_logic getvariable "blacklist";};
-_logic setvariable ["blacklist",_blacklist,true];
+_logic setvariable ["blacklist",_blacklist];
 
 //--- Respect modify
 _respectModifyCoef = if (isnil {_logic getvariable "respectModifyCoef"}) then {0.15} else {_logic getvariable "respectModifyCoef"};
-_logic setvariable ["respectModifyCoef",_respectModifyCoef,true];
+_logic setvariable ["respectModifyCoef",_respectModifyCoef];
 
 //--- ThreatDecay
 _threatDecay = if (isnil {_logic getvariable "threatDecay"}) then {0.07} else {_logic getvariable "threatDecay"};
-_logic setvariable ["threatDecay",_threatDecay,true];
+_logic setvariable ["threatDecay",_threatDecay];
 
 
 //--- Town list
@@ -93,17 +92,21 @@ _twnlist = [];
  if (isnil {_logic getvariable "townlist"}) then {
 	_locationParams = if (_debug) then {[["CityCenter"],[],true]} else {[["CityCenter"]]};
 	_create = _locationParams call bis_fnc_locations;
+
 	//waituntil {count _create > 0};
-	waituntil {sleep 1;count (bis_functions_mainscope getvariable "locations") > 0};
+	waituntil {sleep 1; count (bis_functions_mainscope getvariable "locations") > 0};
 	{
 		if ((_x getvariable "type") == "CityCenter") then {_twnlist = _twnlist + [_x]};
 	} foreach (bis_functions_mainscope getvariable "locations");
-	_logic setvariable ["townlist",_twnlist,true];
+
+	_logic setvariable ["townlist",_twnlist];
 } else {
 	_twnlistTemp = _logic getvariable "townlist";
 	{
 		//--- Array
 		if (typename _x == "ARRAY") then {
+			//_center = _x select 0;
+			//_maxdis = _x select 1;
 			_locationParams = if (_debug) then {[["CityCenter"],_x,true]} else {[["CityCenter"],_x]};
 			_create = _locationParams call bis_fnc_locations;
 			{if !(_x in _twnlist) then {_twnlist = _twnlist + [_x]}} foreach _create;
@@ -123,13 +126,13 @@ _twnlist = [];
 		};
 	} foreach _twnlistTemp;
 };
-_logic setvariable ["ALICE_alltowns",_twnlist,true];
+_logic setvariable ["ALICE_alltowns",_twnlist];
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Civilian & Vehicles Classes
 ///////////////////////////////////////////////////////////////////////////////////
 _unitrarity = if (format ["%1",_logic getvariable "civilianRarity"] == "<null>") then {[]} else {_logic getvariable "civilianRarity";};
-_logic setvariable ["civilianRarity",_unitrarity,true];
+_logic setvariable ["civilianRarity",_unitrarity];
 
 _classlist = [];
 _classlistVehicles = [];
@@ -162,8 +165,8 @@ for [{_i = 0}, {_i < _totobj}, {_i = _i + 1}] do {
 		};
 	};
 };
-_logic setvariable ["ALICE_classes",_classlist,true];
-_logic setvariable ["ALICE_classesVehicles",_classlistVehicles,true];
+_logic setvariable ["ALICE_classes",_classlist];
+_logic setvariable ["ALICE_classesVehicles",_classlistVehicles];
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Civilian Actions
@@ -207,8 +210,8 @@ for "_i" from 0 to 2 do {
 	} foreach _actionCategories;
 	_allActionsx = _allActionsx + [_tempArrayx];
 };
-_logic setvariable ["ALICE_actionsx",_allActionsx,true];
-_logic setvariable ["ALICE_actions",_allActions,true];
+_logic setvariable ["ALICE_actionsx",_allActionsx];
+_logic setvariable ["ALICE_actions",_allActions];
 
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -245,8 +248,8 @@ for "_i" from 0 to 2 do {
 				_allConversations set [_type,_tempArray];
 			};
 
-		};
 
+		};
 
 		//--- Screams
 		_civilianScreams = _source >> "CfgCivilianScreams_EP1" >> _x;
@@ -283,17 +286,16 @@ for "_i" from 0 to 2 do {
 		};
 	} foreach _kbCategories;
 };
-_logic setvariable ["ALICE_conversations",_allConversations,true];
-_logic setvariable ["ALICE_screams",_allScreams,true];
-_logic setvariable ["ALICE_remarks",_allRemarks,true];
-_logic setvariable ["ALICE_topics",_allTopics,true];
+_logic setvariable ["ALICE_conversations",_allConversations];
+_logic setvariable ["ALICE_screams",_allScreams];
+_logic setvariable ["ALICE_remarks",_allRemarks];
+_logic setvariable ["ALICE_topics",_allTopics];
 
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Execute
 ///////////////////////////////////////////////////////////////////////////////////
 _fsm = _logic execfsm (BIS_Alice2_path + "fsms\alice2.fsm");
-
 
 
 
@@ -312,19 +314,19 @@ _twnrespect = ["SET"] call BIS_fnc_respect;
 	_name = _x getvariable "name";
 	_pos = position _x;
 	if (isnil {_x getvariable "respect"}) then {_x setVariable ["respect",_twnrespect,true]};
-	_x setVariable ["ALICE_active",false,true];
-	_x setVariable ["ALICE_active_traffic",0,true];
-	_x setvariable ["ALICE_threat",-1,true];
-	_x setvariable ["ALICE_status","black",true];
-	_x setVariable ["ALICE_population",[],true];
-	_x setVariable ["ALICE_populationCount",-1,true];
+	_x setVariable ["ALICE_active",false];
+	_x setVariable ["ALICE_active_traffic",0];
+	_x setvariable ["ALICE_threat",-1];
+	_x setvariable ["ALICE_status","black"];
+	_x setVariable ["ALICE_population",[]];
+	_x setVariable ["ALICE_populationCount",-1];
 	_fsm = [_x,_classlist] execfsm (BIS_Alice2_path + "fsms\alice2.fsm");
-	_x setvariable ["ALICE_fsm",_fsm,true];
+	_x setvariable ["ALICE_fsm",_fsm];
 	//if (_x == bis_loc_acityc_khelm) then {diag_debugfsm _fsm};
 
 	//sleep .1;
 } foreach _twnlist;
-_logic setvariable ["pause",false,true];
+_logic setvariable ["pause",false];
 */
 debuglog format ["Log: ALICE 2: Initialized (%1 towns).",count _twnlist];
 bis_alice2_init = true;

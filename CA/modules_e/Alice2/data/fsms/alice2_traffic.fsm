@@ -62,11 +62,11 @@ class FSM
        "_grp = grpnull;" \n
        "if (isnil {_twn getvariable ""ALICE_group""}) then {" \n
        "	_grp = creategroup civilian;" \n
-       "	_twn setvariable [""ALICE_group"",_grp,true];" \n
+       "	_twn setvariable [""ALICE_group"",_grp];" \n
        "};" \n
        "" \n
        "_neighbors = _twn getvariable ""neighbors"";" \n
-      "if(isNil ""_neighbors"") then {_neighbors = [];};"/*%FSM</STATEINIT""">*/;
+       "if(isNil ""_neighbors"") then {_neighbors = [];};"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -120,7 +120,15 @@ class FSM
        "if (isnil ""_destinationSize"") then {_destinationSize = _logic getvariable ""ALICE_townsize""};" \n
        "" \n
        "//--- Find roads" \n
-       "_twnRoads = _twn nearroads _twnSize;" \n
+       "_twnRoadsPre = _twn nearroads _twnSize;" \n
+       "_twnRoads = [];" \n
+       "_players = [] call BIS_fnc_listPlayers;" \n
+       "{" \n
+       "	_roadPos = _x;" \n
+       "	if({(position _roadPos) distance _x < _spawnDistance * 0.33} count _players == 0) then {" \n
+       "		_twnRoads = _twnRoads + [_roadPos];" \n
+       "	};" \n
+       "}forEach _twnRoadsPre;" \n
        "_twnPos = if (count _twnRoads > 0) then {_twnRoads call bis_fnc_selectrandom} else {_twn};" \n
        "_destinationRoads = _destination nearroads _destinationSize;" \n
        "_destinationPos = if (count _destinationRoads > 0) then {_destinationRoads call bis_fnc_selectrandom} else {_destination};" \n
@@ -132,7 +140,7 @@ class FSM
        "	_rarity = _x select 1;" \n
        "	_faction = _x select 2;" \n
        "	_woman = _x select 3;" \n
-       "	if (_woman == 0 && 	_faction in (_twn getVariable [""demography"", _logic getvariable ""townsFaction""])) then {" \n
+       "	if (_woman == 0 && _faction in (_twn getVariable [""demography"", _logic getvariable ""townsFaction""])) then {" \n
        "		_classlistMen = _classlistMen + [_class];" \n
        "	};" \n
        "} foreach _classlist;" \n
@@ -178,7 +186,7 @@ class FSM
        "	_marker setmarkersize [0.5,0.5];" \n
        "	_marker setmarkertext _markertext;" \n
        "	_marker setmarkercolor ""coloryellow"";" \n
-       "	_driver setvariable [""ALICE_marker"",_marker,true];" \n
+       "	_driver setvariable [""ALICE_marker"",_marker];" \n
        "	[_marker,_driver] spawn {" \n
        "		_marker = _this select 0;" \n
        "		_driver = _this select 1;" \n
@@ -219,7 +227,8 @@ class FSM
           priority = 1.000000;
           to="Delete";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"{(position _car) distance _x < _spawnDistance} count ([] call BIS_fnc_listPlayers) == 0"/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_players = [] call BIS_fnc_listPlayers;" \n
+           "{(position _car) distance _x < _spawnDistance} count _players == 0"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
@@ -260,7 +269,7 @@ class FSM
     {
       name = "Continue_";
       init = /*%FSM<STATEINIT""">*/"_timeNow = time;" \n
-       "_delay = random 15;"/*%FSM</STATEINIT""">*/;
+       "_delay = random 60;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -280,13 +289,14 @@ class FSM
           priority = 0.000000;
           to="Spawn_Car";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"(_twn getvariable ""ALICE_active"")" \n
+          condition=/*%FSM<CONDITION""">*/"_players = [] call BIS_fnc_listPlayers;" \n
+           "(_twn getvariable ""ALICE_active"")" \n
            " && " \n
            "//(_twn getvariable ""ALICE_threat"") <= 0" \n
            "// && " \n
            "(time - _timeNow > _delay)" \n
            "&&" \n
-           "{(position _twn) distance _x < _spawnDistance} count ([] call BIS_fnc_listPlayers) > 0"/*%FSM</CONDITION""">*/;
+           "{(position _twn) distance _x < _spawnDistance} count _players > 0"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
@@ -307,7 +317,8 @@ class FSM
           priority = 1.000000;
           to="Delete";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"{(position _car) distance _x < _spawnDistance} count ([] call BIS_fnc_listPlayers) == 0"/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_players = [] call BIS_fnc_listPlayers;" \n
+           "{(position _car) distance _x < _spawnDistance} count _players == 0"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
@@ -348,7 +359,8 @@ class FSM
           priority = 0.000000;
           to="Arrived";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"unitready _driver || {(position _car) distance _x < _spawnDistance * 1.2} count ([] call BIS_fnc_listPlayers) == 0"/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_players = [] call BIS_fnc_listPlayers;" \n
+           "unitready _driver || {(position _car) distance _x < _spawnDistance * 1.2} count _players == 0"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/

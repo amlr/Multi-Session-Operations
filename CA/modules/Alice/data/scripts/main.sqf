@@ -85,7 +85,7 @@ _twnlist = [];
  if (isnil {_logic getvariable "townlist"}) then {
 	_locationParams = if (_debug) then {[["CityCenter"],[],true]} else {[["CityCenter"]]};
 	_create = _locationParams call bis_fnc_locations;
-	waituntil {sleep 1;count _create > 0};
+	waituntil {sleep 1; count _create > 0};
 	{
 		if ((_x getvariable "type") == "CityCenter") then {_twnlist = _twnlist + [_x]};
 	} foreach (bis_functions_mainscope getvariable "locations");
@@ -96,6 +96,8 @@ _twnlist = [];
 	{
 		//--- Array
 		if (typename _x == "ARRAY") then {
+			//_center = _x select 0;
+			//_maxdis = _x select 1;
 			_locationParams = if (_debug) then {[["CityCenter"],_x,true]} else {[["CityCenter"],_x]};
 			_create = _locationParams call bis_fnc_locations;
 			{if !(_x in _twnlist) then {_twnlist = _twnlist + [_x]}} foreach _create;
@@ -275,6 +277,7 @@ _logic setvariable ["ALICE_topics",_allTopics];
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Towns
 ///////////////////////////////////////////////////////////////////////////////////
+//_factionCiv = ["CIV"] call BIS_fnc_getFactions;
 _twnrespect = ["SET"] call BIS_fnc_respect;
 {
 	_factionCiv = [_x] call BIS_fnc_getFactions;

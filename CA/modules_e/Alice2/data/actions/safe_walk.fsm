@@ -154,7 +154,7 @@ class FSM
        "" \n
        "//--- Reset" \n
        "if !(isnil ""_neighbour"") then {" \n
-       "	_neighbour setvariable [""ALICE_action_fsm"",-1,true];" \n
+       "	_neighbour setvariable [""ALICE_action_fsm"",-1];" \n
        "	_neighbour = nil;" \n
        "	_unit setspeedmode ""limited"";" \n
        "	_unit domove position _destination;" \n
@@ -305,12 +305,12 @@ class FSM
        "_neighboursUsed = _neighboursUsed + [_neighbour];" \n
        "" \n
        "//--- Copy params" \n
-       "_neighbour setvariable [""ALICE_action"",""<WALK>"",true];" \n
-       "_neighbour setvariable [""ALICE_action_fsm"",_unit getvariable ""ALICE_action_fsm"",true];" \n
-       "_neighbour setvariable [""ALICE_action_locked"",1,true];" \n
-       "//_neighbour setvariable [""ALICE_action_locked"",_unit getvariable ""ALICE_action_locked"",true];" \n
+       "_neighbour setvariable [""ALICE_action"",""<WALK>""];" \n
+       "_neighbour setvariable [""ALICE_action_fsm"",_unit getvariable ""ALICE_action_fsm""];" \n
+       "_neighbour setvariable [""ALICE_action_locked"",1];" \n
+       "//_neighbour setvariable [""ALICE_action_locked"",_unit getvariable ""ALICE_action_locked""];" \n
        "" \n
-       "_unit setvariable [""ALICE_action_locked"",1,true];" \n
+       "_unit setvariable [""ALICE_action_locked"",1];" \n
        "" \n
        "_unit setspeedmode ""limited"";" \n
        "_unit domove position _unit;" \n
@@ -370,7 +370,7 @@ class FSM
        "_timeNow = time;" \n
        "_timeConversation = time;" \n
        "" \n
-       "_neighbour setvariable [""ALICE_action"","""",true];" \n
+       "_neighbour setvariable [""ALICE_action"",""""];" \n
        "" \n
        "if (_debug) then {" \n
        "	debuglog str [""Log:::::::END"",_unit getvariable ""ALICE_id"",[_neighbour,_topic,_sentenceId]];" \n

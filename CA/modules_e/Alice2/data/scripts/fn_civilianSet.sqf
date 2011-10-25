@@ -18,7 +18,12 @@ _movein = false;
 
 _unit = _this select 0;
 if (typename _unit == typename "") then {
-	_grp = if (count _this > 1) then {(_this select 1) getvariable "ALICE_group"} else {createcenter civilian; creategroup civilian;};
+	_grp = if (count _this > 1) then {(_this select 1) getvariable "ALICE_group"};
+	if (isNull _grp) then {
+		createcenter civilian;
+		_grp = creategroup civilian;
+		(_this select 1) setvariable ["ALICE_group",_grp];
+	};
 	_class = _unit;
 	_pos = 	if (count _this > 2) then {position (_this select 2)} else {
 		if (count _this > 1) then {position (_this select 1)} else {[1,1,1]};
@@ -45,10 +50,9 @@ _house = if (count _this > 2) then {_this select 2} else {
 		} else {debuglog format ["Log: [ALICE] Cannot add %1 - no houses available in %2!",_unit,_twn];false};
 	};
 };
-
 if (typename _house == "BOOL") exitwith {};
 _id = _logic getvariable "id";
-[_logic,"id",1,true] call bis_fnc_variablespaceadd;
+[_logic,"id",1] call bis_fnc_variablespaceadd;
 
 sleep 0.01;
 
@@ -85,25 +89,25 @@ if (_movein && _house isKindOf "house") then {
 
 	_spawnpos = _house modeltoworld (_posList call bis_fnc_selectrandom);
 	_unit setposatl _spawnpos;
-	_unit setskill (random 0.5);
+	_unit setskill (random 1);
 	_unit setvelocity [0,0,0];
 };
 
 [_unit] join (_twn getvariable "ALICE_group");
 _unit forcewalk true;
 _unit setbehaviour "safe";
-_unit setvariable ["ALICE_id",_id,true];
-_unit setvariable ["ALICE_twn",_twn,true];
-_unit setvariable ["ALICE_home",_house,true];
-_unit setvariable ["ALICE_randomValue",random 1,true];
-_unit setvariable ["ALICE_action","",true];
-_unit setvariable ["ALICE_action_fsm",-1,true];
-_unit setvariable ["ALICE_type",getnumber(configfile >> "cfgvehicles" >> typeof _unit >> "characterID"),true];
+_unit setvariable ["ALICE_id",_id];
+_unit setvariable ["ALICE_twn",_twn];
+_unit setvariable ["ALICE_home",_house];
+_unit setvariable ["ALICE_randomValue",random 1];
+_unit setvariable ["ALICE_action",""];
+_unit setvariable ["ALICE_action_fsm",-1];
+_unit setvariable ["ALICE_type",getnumber(configfile >> "cfgvehicles" >> typeof _unit >> "characterID")];
 _moves = gettext(configfile >> "cfgvehicles" >> typeof _unit >> "moves");
-_unit setvariable ["ALICE_moves",_moves,true];
+_unit setvariable ["ALICE_moves",_moves];
 ["ADD",_unit,0.1] call BIS_fnc_respect;
 _fsm = _unit execfsm "ca\modules_e\alice2\data\fsms\alice2Formation.fsm";
-_unit setvariable ["ALICE_fsm",_fsm,true];
+_unit setvariable ["ALICE_fsm",_fsm];
 //if (_id == 33) then {diag_debugFSM _fsm};
 
 //--- Add conversation topics
@@ -121,9 +125,9 @@ for "_i" from 0 to (count _allTopics - 1) step 2 do {
 sleep 0.01;
 
 //--- Storing variables
-//[_twn,"ALICE_populationCountDef",1,true] call bis_fnc_variablespaceadd;
+//[_twn,"ALICE_populationCountDef",1] call bis_fnc_variablespaceadd;
 _add = [_twn,"ALICE_population",[_unit]] call bis_fnc_variablespaceadd;
-debuglog str ["Log::::::::::::",_unit,typeof _unit,count _add];
+//debuglog str ["Log::::::::::::",_unit,typeof _unit,count _add];
 
 //--- Event Handlers
 _unit addeventhandler ["hit",{_this call BIS_ALICE2_fnc_civilianHit}];
@@ -165,7 +169,7 @@ debuglog str ["Log:::::::::::::::::::DEAD",["DCEnemyDetected","DCFire","DCHit","
 
 	//--- Clear & Present Danger
 	if (_danger >= 0) then {
-		_newstatus = [_twn,"ALICE_threat",(1 + _danger)*_dangerCoef,true] call bis_fnc_variablespaceadd;
+		_newstatus = [_twn,"ALICE_threat",(1 + _danger)*_dangerCoef] call bis_fnc_variablespaceadd;
 	};
 
 	if (random 1 > 0.666) then {
@@ -191,7 +195,7 @@ if (_debug) then {
 	_marker setmarkercolor "colorwhite";
 	_marker setmarkersizelocal [.6,.6];
 	_marker setmarkertextlocal str(_id);
-	_unit setvariable ["ALICE_marker",_marker,true];
+	_unit setvariable ["ALICE_marker",_marker];
 
 	_markerx = createmarker [format ["BIS_alice_civ_%1_w",_id],position _unit];
 	_markerx setmarkertypelocal "mil_destroy";

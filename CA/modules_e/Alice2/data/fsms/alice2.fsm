@@ -43,7 +43,7 @@ class FSM
        "_debuglist = [];" \n
        "" \n
        "createcenter civilian;" \n
-       "_logic setvariable [""id"",0,true];"/*%FSM</STATEINIT""">*/;
+       "_logic setvariable [""id"",0];"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -103,7 +103,7 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"_n = 0;" \n
        "_delay = 1;" \n
        "" \n
-       ""/*%FSM</STATEINIT""">*/;
+       "_players = [] call BIS_fnc_listPlayers;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -131,13 +131,13 @@ class FSM
        "" \n
        "//--- Virgin - define variables for first time" \n
        "if (isnil {_town getvariable ""ALICE_active""}) then {" \n
-       "	_town setvariable [""ALICE_active"",false,true];" \n
-       "	_town setvariable [""ALICE_active_traffic"",0,true];" \n
-       "	_town setvariable [""ALICE_threat"",-1,true];" \n
-       "	_town setvariable [""ALICE_status"",""black"",true];" \n
+       "	_town setvariable [""ALICE_active"",false];" \n
+       "	_town setvariable [""ALICE_active_traffic"",0];" \n
+       "	_town setvariable [""ALICE_threat"",-1];" \n
+       "	_town setvariable [""ALICE_status"",""black""];" \n
        "};" \n
        "if (isnil {_town getvariable ""demography""} || count (_town getvariable ""demography"") == 0) then {" \n
-       "	_town setvariable [""demography"",_logic getvariable ""townsFaction"",true];" \n
+       "	_town setvariable [""demography"",_logic getvariable ""townsFaction""];" \n
        "};" \n
        "" \n
        "_active = _town getvariable ""ALICE_active"";" \n
@@ -149,15 +149,15 @@ class FSM
        "_spawnDisMax = _spawnDisMin * 1.2;" \n
        "" \n
        "//--- Start " \n
-       "if (!_active && {_town distance _x < _spawnDisMin} count ([] call BIS_fnc_listPlayers) > 0) then {" \n
-       "	_town setvariable [""ALICE_active"",true,true];" \n
+       "if (!_active && {_town distance _x < _spawnDisMin} count _players > 0) then {" \n
+       "	_town setvariable [""ALICE_active"",true];" \n
        "	textLogFormat [""Log: [ALICE 2]: %1 populated."",_name];" \n
        "	_fsm = [_logic,_town] execfsm (BIS_Alice2_path + ""fsms\alice2_town.fsm"");" \n
        "};" \n
        "" \n
        "//--- End" \n
-       "if (_active && {_town distance _x < _spawnDisMax} count ([] call BIS_fnc_listPlayers) == 0) then {" \n
-       "	_town setvariable [""ALICE_active"",false,true];" \n
+       "if (_active && {_town distance _x < _spawnDisMax} count _players == 0) then {" \n
+       "	_town setvariable [""ALICE_active"",false];" \n
        "	textLogFormat [""Log: [ALICE 2]: %1 depopulated."",_name];" \n
        "};" \n
        "" \n
@@ -168,19 +168,17 @@ class FSM
        "" \n
        "//--- Start " \n
        "_maxtraffic = ceil count (_town getvariable [""ALICE_population"", []]) / 25;" \n
-       "if (_activeTraffic < _maxtraffic && {_town distance _x < _trafficDisMin} count ([] call BIS_fnc_listPlayers) > 0) then {" \n
+       "if (_activeTraffic < _maxtraffic && {_town distance _x < _trafficDisMin} count _players > 0) then {" \n
        "	_activeTraffic = _activeTraffic + 1;" \n
-       "	_town setvariable [""ALICE_active_traffic"",_activeTraffic,true];" \n
-       "	diag_log Format [""Log: [ALICE 2]: %1-%2 traffic start."",_name,_activeTraffic];" \n
+       "	_town setvariable [""ALICE_active_traffic"",_activeTraffic];" \n
        "	textLogFormat [""Log: [ALICE 2]: %1-%2 traffic start."",_name,_activeTraffic];" \n
        "	_fsmTraffic = [_logic,_town] execfsm (BIS_Alice2_path + ""fsms\alice2_traffic.fsm"");" \n
        "};" \n
        "" \n
        "//--- End" \n
-       "if (_activeTraffic > 0 && {_town distance _x < _trafficDisMax} count ([] call BIS_fnc_listPlayers) == 0) then {" \n
+       "if (_activeTraffic > 0 && {_town distance _x < _trafficDisMax} count _players == 0) then {" \n
        "	_activeTraffic = _activeTraffic - 1;" \n
-       "	_town setvariable [""ALICE_active_traffic"",_activeTraffic,true];" \n
-       "	diag_log Format [""Log: [ALICE 2]: %1-%2 traffic end."",_name,_activeTraffic];" \n
+       "	_town setvariable [""ALICE_active_traffic"",_activeTraffic];" \n
        "	textLogFormat [""Log: [ALICE 2]: %1-%2 traffic end."",_name,_activeTraffic];" \n
        "};" \n
        "////////////////////////////////////////////////////////////////////////////////////////////////" \n

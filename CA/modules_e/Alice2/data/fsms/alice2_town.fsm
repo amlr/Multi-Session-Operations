@@ -75,14 +75,14 @@ class FSM
        "};" \n
        "//--- Wrong value" \n
        "if (count _twndemography == 0) then {" \n
-       "	_twndemography = [""BIS_TK_CIV""]; //--- Default value" \n
-       "	_twn setvariable [""demography"",_twndemography,true];" \n
+       "	_twndemography = _logic getvariable ""townsFaction""; //--- Default value" \n
+       "	_twn setvariable [""demography"",_twndemography];" \n
        "};" \n
-       "if (!isnil {_twn getvariable ""demography""}) then {_twndemography = _twn getvariable ""demography""};" \n
+       "if (!isnil {_twn getvariable ""demography""}) then {_twndemography = _twn getVariable [""demography"", _logic getvariable ""townsFaction""]};" \n
        "" \n
        "//--- Default values" \n
-       "//_twn setvariable [""ALICE_threat"",-1,true];" \n
-       "//_twn setvariable [""ALICE_status"",""black"",true];" \n
+       "//_twn setvariable [""ALICE_threat"",-1];" \n
+       "//_twn setvariable [""ALICE_status"",""black""];" \n
        "" \n
        "_distLimit = _logic getvariable ""spawnDistance"";" \n
        "_civilianCount = _logic getvariable ""civilianCount"";" \n
@@ -91,11 +91,11 @@ class FSM
        "" \n
        "//--- Spawn distance" \n
        "_distlimit = if (isnil {_twn getvariable ""ALICE_spawnDistance""}) then {_distLimit} else {_twn getvariable ""ALICE_spawnDistance""};" \n
-       "_twn setvariable [""ALICE_spawnDistance"",_distLimit,true];" \n
+       "_twn setvariable [""ALICE_spawnDistance"",_distLimit];" \n
        "" \n
        "//--- Town size" \n
        "_twnSize = if (isnil {_twn getvariable ""ALICE_townsize""}) then {_distLimit * 2/3} else {_twn getvariable ""ALICE_townsize"";};" \n
-       "_twn setvariable [""ALICE_townsize"",_twnSize,true];" \n
+       "_twn setvariable [""ALICE_townsize"",_twnSize];" \n
        "" \n
        "//--- Restecpa!" \n
        "_twnrespect = [""SET""] call BIS_fnc_respect;" \n
@@ -108,7 +108,7 @@ class FSM
        "_grp = grpnull;" \n
        "if (isnil {_twn getvariable ""ALICE_group""}) then {" \n
        "	_grp = creategroup civilian;" \n
-       "	_twn setvariable [""ALICE_group"",_grp,true];" \n
+       "	_twn setvariable [""ALICE_group"",_grp];" \n
        "};" \n
        "" \n
        "_classlist = [];" \n
@@ -285,23 +285,26 @@ class FSM
     {
       name = "Init";
       itemno = 9;
-      init = /*%FSM<STATEINIT""">*/"_houselistRaw = _twnpos nearobjects [""House"",_twnSize];" \n
-       "_houselist = [];" \n
-       "{" \n
-       "	_bbox = abs((boundingbox _x select 1) select 0) min abs((boundingbox _x select 1) select 1);" \n
-       "	_point = _x selectionposition ""AIspawnpos_0"";" \n
-       "	if (_bbox > 3 && _point distance [0,0,0] > 0.1) then {" \n
-       "		_houselist = _houselist + [_x]" \n
-       "	} else {" \n
-       "		_doors = _x call BIS_ALICE_fnc_doorCreate;" \n
-       "		_houselist = _houselist + _doors" \n
-       "	};" \n
-       "} foreach _houselistRaw;" \n
+      init = /*%FSM<STATEINIT""">*/"_houselist = _twn getvariable [""ALICE_houselist"", []];" \n
+       "if(count _houselist == 0) then {" \n
+       "	_houselistRaw = _twnpos nearobjects [""House"",_twnSize];" \n
+       "	{" \n
+       "		_bbox = abs((boundingbox _x select 1) select 0) min abs((boundingbox _x select 1) select 1);" \n
+       "		_point = _x selectionposition ""AIspawnpos_0"";" \n
+       "		if (_bbox > 3 && _point distance [0,0,0] > 0.1) then {" \n
+       "			_houselist = _houselist + [_x]" \n
+       "		} else {" \n
+       "			_doors = _x call BIS_ALICE_fnc_doorCreate;" \n
+       "			_houselist = _houselist + _doors;" \n
+       "		};" \n
+       "	} foreach _houselistRaw;" \n
+       "	_twn setvariable [""ALICE_houselist"",_houselist];" \n
+       "};" \n
        "_housecount = count _houselist;" \n
        "" \n
        "_populationCount = call compile format [_civilianCount,_housecount]; //--- Total" \n
-       "_twn setvariable [""ALICE_populationCountDef"",_populationCount,true];" \n
-       "_twn setvariable [""ALICE_population"",[],true];" \n
+       "_twn setvariable [""ALICE_populationCountDef"",_populationCount];" \n
+       "_twn setvariable [""ALICE_population"",[]];" \n
        "" \n
        "" \n
        "//--- Pre-set neighbors" \n
@@ -319,7 +322,7 @@ class FSM
        "	if !(isnil {_x getvariable ""ALICE_threat""}) then {_nearbyTowns = _nearbyTowns + [_x]};" \n
        "} foreach _nearbyTownsAll;" \n
        "" \n
-       "_twn setvariable [""ALICE_nearbyTowns"",_nearbyTowns,true];" \n
+       "_twn setvariable [""ALICE_nearbyTowns"",_nearbyTowns];" \n
        "" \n
        "" \n
        "_n = 0;"/*%FSM</STATEINIT""">*/;
@@ -383,7 +386,7 @@ class FSM
        "if (alive _unit) then {_populationAfter = _populationAfter + [_unit]} else {" \n
        "	_action = """";" \n
        "	_fsm = -1;" \n
-       "	_unit setvariable [""ALICE_action"","""",true];" \n
+       "	_unit setvariable [""ALICE_action"",""""];" \n
        "};" \n
        "" \n
        "if (_twnstatuschanged) then {_action = """"};" \n
@@ -402,9 +405,9 @@ class FSM
        "		_houselist = _houselistNew;" \n
        "		if (count _houselist > 0) then {" \n
        "			_newhome = _houselist call bis_fnc_selectrandom;" \n
-       "			_unit setvariable [""ALICE_home"",_newhome,true];" \n
+       "			_unit setvariable [""ALICE_home"",_newhome];" \n
        "		} else {" \n
-       "		_unit setvariable [""ALICE_home"",objnull,true];" \n
+       "		_unit setvariable [""ALICE_home"",objnull];" \n
        "		};" \n
        "	};" \n
        "" \n
@@ -430,9 +433,9 @@ class FSM
        "	//--- Execute associated FSM" \n
        "	_fsmPath = _selectedAction select 3;" \n
        "	_fsm = _arguments execfsm _fsmPath;" \n
-       "	_unit setvariable [""ALICE_action_fsm"",_fsm,true];" \n
-       "	_unit setvariable [""ALICE_action"",_selectedaction select 1,true];" \n
-       "	_unit setvariable [""ALICE_action_locked"",_selectedAction select 5,true];" \n
+       "	_unit setvariable [""ALICE_action_fsm"",_fsm];" \n
+       "	_unit setvariable [""ALICE_action"",_selectedaction select 1];" \n
+       "	_unit setvariable [""ALICE_action_locked"",_selectedAction select 5];" \n
        "	/////////////////////////////////////////////////////////////////////////////////////////////" \n
        "" \n
        "	if (_debug) then {" \n
@@ -472,7 +475,7 @@ class FSM
        "	_decay = _logic getvariable ""threatDecay"";" \n
        "	_twnthreat = _twnthreat - _decay;" \n
        "	if (_twnthreat < 0) then {_twnthreat = 0};" \n
-       "	_twn setvariable [""ALICE_threat"",_twnthreat,true];" \n
+       "	_twn setvariable [""ALICE_threat"",_twnthreat];" \n
        "};" \n
        "" \n
        "" \n
@@ -483,7 +486,7 @@ class FSM
        "	_status = if (_twnthreat == 0) then {""green""} else {" \n
        "			if (_twnthreat > 0) then {""red""} else {""black""};" \n
        "	};" \n
-       "	_twn setvariable [""ALICE_status"",_status,true];" \n
+       "	_twn setvariable [""ALICE_status"",_status];" \n
        "	_status" \n
        "} else {_twn getvariable ""ALICE_status""};" \n
        "" \n
@@ -546,7 +549,7 @@ class FSM
     {
       name = "Reset";
       itemno = 16;
-      init = /*%FSM<STATEINIT""">*/"_twn setvariable [""ALICE_population"",_populationAfter,true];" \n
+      init = /*%FSM<STATEINIT""">*/"_twn setvariable [""ALICE_population"",_populationAfter];" \n
        "" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -571,8 +574,8 @@ class FSM
     {
       name = "Start";
       itemno = 18;
-      init = /*%FSM<STATEINIT""">*/"_twn setvariable [""ALICE_threat"",0,true];" \n
-       "_twn setvariable [""ALICE_status"",""green"",true];" \n
+      init = /*%FSM<STATEINIT""">*/"_twn setvariable [""ALICE_threat"",0];" \n
+       "_twn setvariable [""ALICE_status"",""green""];" \n
        "" \n
        "_twnthreat = 0;" \n
        "_twnstatus = ""green"";"/*%FSM</STATEINIT""">*/;
