@@ -15,7 +15,7 @@ _repairs = [];
 // Find & mark hospitals, Police Stations and Repair centres
 {
         private["_h","_hf","_pf"];
-        _h = nearestObjects [position _x, ["Land_A_Hospital","Land_A_Office01","Land_A_Office01_EP1","Land_A_Stationhouse","Land_A_Stationhouse_ep1","Land_Mil_House_EP1","Land_repair_center","Land_Mil_Repair_center_EP1"], 500];
+        _h = nearestObjects [position _x, ["Land_A_Hospital","Land_cwr2_hospital","Land_A_Office01","Land_A_Office01_EP1","Land_A_Stationhouse","Land_A_Stationhouse_ep1","Land_Mil_House_EP1","Land_repair_center","Land_Mil_Repair_center_EP1"], 500];
         
         _hf = 0;
         _pf = 0;
@@ -23,7 +23,7 @@ _repairs = [];
         _pp = [];
         {
                 if (!(_x in _hospitals || _x in _police || _x in _repairs)) then {
-                        if(typeOf _x == "Land_A_Hospital") then {
+                        if(typeOf _x == "Land_A_Hospital" || typeOf _x == "Land_cwr2_Hospital") then {
                                 if(_hf < 2) then {_hp = [];};
                                 _hp = _hp + [_x];
                                 _hf = 2;
