@@ -10,26 +10,12 @@
 //#squint filter Unknown variable mso_core_fnc_addLoopHandler
 //#squint filter Unknown variable mso_core_fnc_removeLoopHandler
 
-if(!isServer) exitWith{};
 
 private ["_debug","_d","_camp","_flag"];
-_debug = false;
-if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 1;};
-rmm_ep_intensity = switch(rmm_ep_intensity) do {
-	case 0: {
-		1;
-	};
-	case 1: {
-		1.5;
-	};
-	case 2: {
-		3;
-	};
-	case 3: {
-		1000;
-	};
-};
+if(!isServer) exitWith{};
 
+_debug = true;
+if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 1;};
 ep_dist = 2000;
 ep_groups = [];
 ep_total = 0;
@@ -52,18 +38,14 @@ fPlayersInside = {
         ({_pos distance _x < _dist} count ([] call BIS_fnc_listPlayers) > 0);
 };
 
-{
-        private ["_group","_pos","_type"];
+for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
+        private ["_x","_group","_pos","_type"];
+	_x = CRB_LOCS select _i;
         _group = grpNull;
         _type = "";
         _pos = [];
-	_skip = false;
 
-	if (_forEachIndex % rmm_ep_intensity < 1) then {
-		_skip = true;
-	};
-        
-        if(!([position _x, ep_dist] call fPlayersInside) && !_skip) then {
+        if(!([position _x, ep_dist] call fPlayersInside)) then {
                 if (type _x == "Hill") then {
                         if (random 1 > 0.33) then {
                                 ep_total = ep_total + 1;
@@ -90,7 +72,7 @@ fPlayersInside = {
                                         if("BIS_TK_GUE" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["MediumTentCamp_local","SmallTentCamp2_local","SmallTentCamp_local"];
                                         };
-                                        if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
+                                        if("RU" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8"];
                                                 f_builder = mso_core_fnc_createComposition;
                                         };
@@ -150,7 +132,7 @@ fPlayersInside = {
                         };
                 };
                 if (type _x in ["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"]) then {
-                        if (random 1 > 0.6) then {
+                        if (random 1 > 0.5) then {
                                 ep_total = ep_total + 1;
                                 _d = 800;
                                 _pos = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
@@ -163,7 +145,7 @@ fPlayersInside = {
                                         if("BIS_TK" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["anti-air_tk1","camp_tk1","camp_tk2","firebase_tk1","heli_park_tk1","mediumtentcamp2_tk","mediumtentcamp3_tk","mediumtentcamp_tk","radar_site_tk1","fuel_dump_tk1","vehicle_park_tk1","weapon_store_tk1"];
                                         };
-                                        if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
+                                        if("RU" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8","citybase01","cityBase02","cityBase03","cityBase04"];
                                                 f_builder = mso_core_fnc_createComposition;
                                         };
@@ -227,7 +209,7 @@ fPlayersInside = {
                         };
                 };
                 if (type _x in ["FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown"]) then {
-                        if (random 1 > 0.8) then {
+                        if (random 1 > 0.66) then {
                                 ep_total = ep_total + 1;
                                 _d = 400;
                                 _pos = [position _x, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
@@ -252,7 +234,7 @@ fPlayersInside = {
                                         if("BIS_TK_GUE" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["MediumTentCamp_local","SmallTentCamp2_local","SmallTentCamp_local"];
                                         };
-                                        if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
+                                        if("RU" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8","citybase01","cityBase02","cityBase03","cityBase04"];
                                                 f_builder = mso_core_fnc_createComposition;
                                         };
@@ -312,7 +294,7 @@ fPlayersInside = {
                         };
                 };
                 if (type _x in ["ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"]) then {
-                        if (random 1 > 0.9) then {
+                        if (random 1 > 0.75) then {
                                 ep_total = ep_total + 1;
                                 _d = 300;
                                 _pos = [position _x, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
@@ -337,7 +319,7 @@ fPlayersInside = {
                                         if("BIS_TK_GUE" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["MediumTentCamp_local","SmallTentCamp2_local","SmallTentCamp_local"];
                                         };
-                                        if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
+                                        if("RU" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
                                                 f_builder = mso_core_fnc_createComposition;
                                         };
                                         if("BIS_TK" in MSO_FACTIONS || "BIS_TK_INS" in MSO_FACTIONS || "BIS_TK_GUE" in MSO_FACTIONS) then {
@@ -407,7 +389,7 @@ fPlayersInside = {
                         _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
                 };
         };
-} foreach CRB_LOCS;
+};
 
 diag_log format["MSO-%1 Enemy Population # %2", time, ep_total];
 if(_debug)then{hint format["MSO-%1 Enemy Population # %2", time, ep_total];};

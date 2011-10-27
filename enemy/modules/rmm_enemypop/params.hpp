@@ -6,7 +6,7 @@ class enemyHeader {
 };
 class rmm_ep_intensity {
         title = "    Enemy Intensity"; 
-        values[]= {0,1,2,3}; 
-        texts[]= {"Disabled","33%","66%","100%"}; 
+        values[]= {0,3,2,1}; 
+        texts[]= {"Disabled","33%","50%","100%"}; 
         default = 1;
 };
