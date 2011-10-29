@@ -14,7 +14,7 @@ displayStats = {
 	diag_log format["CRBSERVERFPS,%1,%2,%3,%4,%5,%6,%7,%8", time, _maxF, _avgF, _minF, _maxU, _avgU, _curU, count allGroups];
 };	
 
-if(isNil "debug_serverfps") then {debug_serverfps = 30;};
+if(isNil "debug_serverfps") then {debug_serverfps = 0;};
 
 if(isServer && debug_serverfps != 0) then{
 	waitUntil{!isNil "bis_fnc_init"};
