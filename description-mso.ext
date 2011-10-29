@@ -94,6 +94,9 @@ class Params {
 #ifdef MSOFACTIONS
 	#include <enemy\msofactions.hpp>
 #endif
+#ifdef WICT_ENEMYPOP
+	#include <enemy\modules\WICT_enemypop\params.hpp>
+#endif
 }; 
 
 #ifdef R3F_LOGISTICS

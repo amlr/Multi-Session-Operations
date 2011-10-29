@@ -6,3 +6,4 @@
 #define RMM_ZORA
 
 // - To Test
+#define WICT_ENEMYPOP

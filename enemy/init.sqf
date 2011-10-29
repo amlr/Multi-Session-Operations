@@ -110,3 +110,8 @@ execNow "enemy\modules\SR5_IEDdetect\IEDdetect_init.sqf";
 execNow "enemy\modules\rmm_enemypop\main.sqf";
 #endif
 
+#ifdef WICT_ENEMYPOP
+"WICT Populate" call mso_core_fnc_initStat;
+execNow "enemy\modules\wict_enemypop\main.sqf";
+#endif
+
