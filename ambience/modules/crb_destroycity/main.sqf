@@ -1,5 +1,5 @@
 private ["_blacklist","_fire"];
-if(isNil "destroyCityIntensity") then {destroyCityIntensity = 3;};
+if(isNil "destroyCityIntensity") then {destroyCityIntensity = 1;};
 if(isNil "destroyCityFire") then {destroyCityFire = 1;};
 if(destroyCityIntensity > 0) then {
         _blacklist = ((markerPos "respawn_guerrila") nearObjectS ["House", 50]) +
