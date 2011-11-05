@@ -27,9 +27,14 @@ Nou_cacheGroup = {
                 {
                         private["_pos"];
                         if(vehicle _x == _x) then {
+				_x disableAI "TARGET";
+				_x disableAI "AUTOTARGET";
+				_x disableAI "MOVE";
+				_x disableAI "ANIM";
+				_x disableAI "FSM";
+		
                                 _x enableSimulation false;
                                 _x allowDamage false;
-                                _x setVariable ["pos", leader _x worldToModel position _x, true];
                                 _pos = getPosATL _x;
                                 _pos set [2, -2];
                                 _x setPosATL _pos;
@@ -49,11 +54,16 @@ Nou_uncacheGroup = {
                 {
                         private["_pos"];
                         if(vehicle _x == _x) then {
-                                _pos = leader _x modelToWorld (_x getVariable "pos");
-                                _x setVariable ["pos", nil];
-                                _x setPosATL _pos;
+                                _x setPosATL (formationPosition _x);
                                 _x allowDamage true;
                                 _x enableSimulation true;
+
+				_x enableAI "TARGET";
+				_x enableAI "AUTOTARGET";
+				_x enableAI "MOVE";
+				_x enableAI "ANIM";
+				_x enableAI "FSM";
+
                                 if(nou_cached > 0) then {nou_cached = nou_cached - 1;};
                         };
                 } forEach units _this - [leader _this];
