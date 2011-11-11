@@ -18,6 +18,7 @@ if(isNil "debug_serverfps") then {debug_serverfps = 0;};
 
 if(isServer && debug_serverfps != 0) then{
 	waitUntil{!isNil "bis_fnc_init"};
+	diag_log "CRBSERVERFPS,Time,FPSMax,FPSAvg,FPSMin,UnitsMax,UnitsAvg,UnitsCur,allGroups";
 	[] spawn {
 		_i = 0;
 		_fpsmax = 0;
@@ -75,7 +76,6 @@ if(isServer && debug_serverfps != 0) then{
 	};
 };
 
-diag_log "CRBSERVERFPS,Time,FPSMax,FPSAvg,FPSMin,UnitsMax,UnitsAvg,UnitsCur,allGroups";
 "CRBSERVERFPS" addPublicVariableEventHandler {
 	call displayStats;
 };
