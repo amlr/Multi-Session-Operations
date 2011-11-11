@@ -49,3 +49,5 @@ _nul = [] execVM "ambience\modules\AEG\briefing.sqf";
 //LGD_fnc_debugMessage = compile (preprocessFileLineNumbers "LGD_fnc_debugMessage.sqf"); //DEBUG
 
 if (!isNil "AEG_DEBUG") then {_debug = ["init.sqf: execVM AEG_init.sqf."] call LGD_fnc_debugMessage;}; //DEBUG
+
+_nul = [] execVM "ambience\modules\AEG\scripts\AEG_init.sqf";
