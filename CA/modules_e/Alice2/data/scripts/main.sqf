@@ -326,7 +326,7 @@ _twnrespect = ["SET"] call BIS_fnc_respect;
 
 	//sleep .1;
 } foreach _twnlist;
-_logic setvariable ["pause",false];
 */
+_logic setvariable ["pause",false];
 debuglog format ["Log: ALICE 2: Initialized (%1 towns).",count _twnlist];
 bis_alice2_init = true;
