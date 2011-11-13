@@ -8,17 +8,17 @@ class AmbientCivs {
         title = "    Enable Civilians"; 
         values[]= {0,1}; 
         texts[]= {"Off", "On"}; 
-        default = 0;
+        default = 1;
 };
 class AmbientVehs {
         title = "    Enable Civilian Vehicles"; 
         values[]= {0,1}; 
         texts[]= {"Off", "On"}; 
-        default = 0;
+        default = 1;
 };
 class AmbientAnimals {
         title = "    Enable Animals"; 
         values[]= {0,1}; 
         texts[]= {"Off", "On"}; 
-        default = 0;
+        default = 1;
 };

@@ -1,18 +1,12 @@
 #include <crbprofiler.hpp>
 
 ///////////////////////////////////////////////////////////////////
-
 // Function file for Armed Assault
-
 // Created by: BIS
 // Customised for OA by (AEF)Wolffy.au [CTB]
-
 // Created: 20110315
-
 // Contact: http://dev-heaven.net/projects/mip
-
 // Purpose: Enable house effects for ALICE2 module
-
 // Modified: 20110925
 ///////////////////////////////////////////////////////////////////
 
