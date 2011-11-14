@@ -1,149 +1,158 @@
 #include <crbprofiler.hpp>
 
-private ["_debug","_sealandings","_center","_seadest","_destinations","_mapsize","_LHD","_LHDdir","_LHDspawnpoint","_parts","_dummy","_LHDLand","_unit","_group","_logic"];
+private ["_seadest","_mapsize","_LHD","_dummy","_LHDLand","_group","_logic","_unit","_lhdpos","_center"];
 if(!isServer) exitWith{};
 
-if (isNil "amount") then {amount = 1;};
-if (amount == 2) exitWith{};
+tup_seatraffic_debug = false;
 
-if(isNil "SeaROE")then{SeaROE = 2;};
-
-_debug = false;
-
-if(isNil "AmbientLHD")then{AmbientLHD = 0;};
-
-waitUntil{!isNil "BIS_fnc_init"};
-// Get center of map
 _center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
 
-// Calculate size of map
-_mapsize = ((_center select 0) * 2);
-if (_debug) then 
-{
-        diag_log format ["MSO-%1 Sea Traffic: Mapsize is %2", time, _mapsize];
+if (isNil "tup_seatraffic_amount") then {tup_seatraffic_amount = 0;};
+if (tup_seatraffic_amount == 2) exitWith{};
+if (isNil "tup_seatraffic_ROE") then {tup_seatraffic_ROE = 2;};
+if (isNil "tup_seatraffic_LHD") then {tup_seatraffic_LHD = 1;};
+
+switch(tup_seatraffic_ROE) do {
+        case "1": {
+                tup_seatraffic_combatMode = "BLUE";
+        };
+        case "2": {
+                tup_seatraffic_combatMode = "GREEN";
+        };
+        case "3": {
+                tup_seatraffic_combatMode = "WHITE";
+        };
+        case "4": {
+                tup_seatraffic_combatMode = "YELLOW";
+        };
+        case "5": {
+                tup_seatraffic_combatMode = "RED";
+        };
 };
-
-_sealandings = [];
-_seadest = [];
-
-//Find boathouses, piers , fuelling stations on map. Amount = 1 reduced, amount = 0 full
-if (amount == 1) then {
-        _sealandings = ["land_nav_boathouse","land_nav_pier_m_fuel","land_nav_pier_m_end","land_nav_pier_c2_end"];
-} else {
-        _sealandings = ["land_nav_boathouse","land_nav_pier_m_fuel","land_nav_pier_m_end","land_nav_pier_c2_end","land_nav_pier_c","land_nav_pier_c2","land_nav_pier_m_1","land_nav_pier_m_2"];
-};
-_seadest = [_sealandings, [], _mapsize, _debug,"ColorBlack","heliport"] call mso_core_fnc_findObjectsByType;
-
-// Check there are some piers and boathouses, if not exit
-if (count _seadest < 1) exitWith {
-        diag_log format ["MSO-%1 Sea Traffic: Cannot find any sea landing objects. Exiting.", time];
-};
-
-// Randomly place LHD
-if (((random 1 < 0.5) && (AmbientLHD == 2)) || (AmbientLHD == 1)) then {
-	_logic = createCenter sideLogic;
-	_group = createGroup _logic;
-	_LHD = _group createUnit ["LOGIC",([_center, 2000, _mapsize, 500, 2, 0, 0] call BIS_fnc_findSafePos), [], 0, ""]; ;
-	_LHD setdir (random 359);
-	
-	_LHD call bis_ew_fnc_createLHD;
-
-	// Add Heli pad and crewman for each LHD 
-	_LHDLand = [["Land_LHD_6"], [], _mapsize, _debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType;
-	{
-		_dummy = createVehicle ["HeliHRescue", [getposasl _x select 0, getposasl _x select 1, 18.5], [],0,'NONE'];
-		_dummy attachTo [_x, [getposasl _x select 0, getposasl _x select 1, 16]];
-		_unit = "USMC_LHD_Crew_Yellow" createUnit [[getposasl _x select 0, getposasl _x select 1, 19], group _LHD];
-	} foreach _LHDLand;
-
-	if (_debug) then {
-		diag_log format ["MSO-%1 Sea Traffic: LHD at: %2", time, mapgridposition _LHD];
-    };
-};
-
-_destinations = count _seadest;
 
 if(isNil "TUP_CIVFACS") then {
         TUP_CIVFACS = [civilian] call mso_core_fnc_getFactions;
 };
 
-// Spawn a process for each destination
-for "_j" from 0 to (_destinations-1) do {
+waitUntil{!isNil "BIS_fnc_init"};
+
+// Calculate size of map
+tup_seatraffic_getMapSize = {
+        private ["_center","_mapsize"];
+        // Get center of map
+        _center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
+        // Calculate size of map
+        _mapsize = ((_center select 0) max (_center select 1)) * 1.2;
+        if (tup_seatraffic_debug) then {
+                diag_log format ["MSO-%1 Sea Traffic: Mapsize is %2", time, _mapsize];
+                ["tup_seatraffic_mapsize", _center, "Rectangle", [_mapsize,_mapsize], "BRUSH:", "Border", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+        };
+        _mapsize;
+};
+
+// Find all sea destinations
+tup_seatraffic_getSeaDestinations = {
+        private ["_sealandings","_mapsize"];
+        _mapsize = _this select 0;
+        _sealandings = [];
+        //Find boathouses, piers , fuelling stations on map. tup_seatraffic_amount = 1 reduced, tup_seatraffic_amount = 0 full
+        if (tup_seatraffic_amount == 1) then {
+                _sealandings = ["land_nav_boathouse","land_nav_pier_m_end"];
+        } else {
+                _sealandings = ["land_nav_boathouse","land_nav_pier_m_fuel","land_nav_pier_m_end","land_nav_pier_c2_end"];
+                //_sealandings = ["land_nav_boathouse","land_nav_pier_m_fuel","land_nav_pier_m_end","land_nav_pier_c2_end","land_nav_pier_c","land_nav_pier_c2","land_nav_pier_m_1","land_nav_pier_m_2"];
+        };
+        [_sealandings, [], _mapsize, tup_seatraffic_debug,"ColorBlack","boat"] call mso_core_fnc_findObjectsByType;
+};
+
+_mapsize = call tup_seatraffic_getMapSize;
+_seadest = [_mapsize] call tup_seatraffic_getSeaDestinations;
+// Check there are some piers and boathouses, if not exit
+if (count _seadest < 1) exitWith {
+        diag_log format ["MSO-%1 Sea Traffic: Cannot find any sea landing objects. Exiting.", time];
+};
+
+////////////////////////
+// Randomly place LHD
+////////////////////////
+if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)) then {
+        _logic = createCenter sideLogic;
+        _group = createGroup _logic;
+        _lhdpos = [_center, 2000, _mapsize, 500, 2, 0, 0] call BIS_fnc_findSafePos;
+        while {_lhdpos distance _center > _mapsize} do {
+                _lhdpos = [_center, 2000, _mapsize, 500, 2, 0, 0] call BIS_fnc_findSafePos;
+        };
+        _LHD = _group createUnit ["LOGIC",_lhdpos, [], 0, ""];
+        _LHD setdir (random 359);
         
-        [_j, _seadest, _mapsize, _debug] spawn {
-                private ["_timeout","_sleep","_startpos","_destpos","_grp","_front","_wp","_j","_spawnpos","_debug","_factions","_stopTime","_seadest","_vehiclelist","_seaportside","_ship","_shipVehicle","_shipCrew","_currentseadest","_endpos","_mapsize","_shipClass","_combatMode"];
+        _LHD call bis_ew_fnc_createLHD;
+        
+        // Add Heli pad and crewman for each LHD 
+        _LHDLand = [["Land_LHD_6"], [], _mapsize, tup_seatraffic_debug,"ColorGreen","Heliport"] call mso_core_fnc_findObjectsByType;
+        {
+                _dummy = createVehicle ["HeliHRescue", [getposasl _x select 0, getposasl _x select 1, 18.5], [],0,'NONE'];
+                _dummy attachTo [_x, [getposasl _x select 0, getposasl _x select 1, 16]];
+                _unit = (group _LHD) createUnit ["USMC_LHD_Crew_Yellow", [getposasl _x select 0, getposasl _x select 1, 20], [], 0, "NONE"];
+                _unit setPosASL [getposasl _x select 0, getposasl _x select 1, 19];
+                doStop _unit;
+        } foreach _LHDLand;
+        
+        if (tup_seatraffic_debug) then {
+                diag_log format ["MSO-%1 Sea Traffic: LHD at: %2", time, mapgridposition _LHD];
+        };
+};
+
+
+// Spawn a process for each destination
+{
+        
+        [_forEachIndex, _x, _seadest, _mapsize] spawn {
+                private ["_timeout","_destpos","_j","_spawnpos","_seadest","_currentseadest","_mapsize","_maxdist","_shipClass","_seaportside","_factions","_ship","_front","_vehiclelist","_shipVehicle","_shipCrew","_grp","_wp"];
                 _j = _this select 0;
-                _seadest = _this select 1;
-                _mapsize = _this select 2;
-                _debug = _this select 3;
+                _currentseadest = _this select 1;
+                _seadest = _this select 2;
+                _mapsize = _this select 3;
+                _maxdist = 3000;
                 
-                _currentseadest = _seadest select _j;           
-                _timeout = if(_debug) then {[0, 0, 0];} else {[30, 60, 90];};
+                _timeout = if(tup_seatraffic_debug) then {[0, 0, 0];} else {[30, 60, 90];};
                 _spawnpos = [];
-				
-				switch(SeaROE) do {
-						case "1": {
-								_combatMode = "BLUE";
-						};
-						case "2": {
-								_combatMode = "GREEN";
-						};
-						case "3": {
-								_combatMode = "WHITE";
-						};
-						case "4": {
-								_combatMode = "YELLOW";
-						};
-						case "5": {
-								_combatMode = "RED";
-						};
-				};
+                _destpos = [];
                 
                 //Loop continuously and create ships for the destination		
-                while{true} do {
+                while {true} do {
                         // Wait a random amount of time before starting
-                        sleep (random 90);
+                        waitUntil{sleep 30 + random 30; {(_x distance _currentseadest < _maxdist)} count ([] call BIS_fnc_listPlayers) > 0};
+                        
                         CRBPROFILERSTART("TUP Sea Traffic")
                         
-                        // Work out side that controls destination (based on unit numbers)
-                        _seaportside =  [_currentseadest, 1000, format["%1 %2",_currentseadest,_j],_debug] call mso_core_fnc_getDominantSide;
-                        
-                        // Get the factions for the controlling side and count their units
-                        _factions = [_seaportside, _currentseadest, 1000,"factions",_debug,format["Seaport %2",_j]] call mso_core_fnc_getFactions;
-                        //_factionsCount = [_seaportside, _currentseadest, 1000,"count",_debug,format["Seaport %2",_j]] call mso_core_fnc_getFactions;
-                        
-                        // Use the destination's position as the first waypoint
-                        x = (position _currentseadest select 0) ;
-                        y = (position _currentseadest select 1) ;
-                        z = (position _currentseadest select 2) ;
-                        _startpos = [x,y,z];
-                        
                         // Spawn the ship near dest on water
-                        _spawnpos = [_startpos, 200, 1000, 10, 2, 0, 0] call BIS_fnc_findSafePos;
+                        _spawnpos = [position _currentseadest, 200, _maxdist, 10, 2, 0, 0] call BIS_fnc_findSafePos;
+                        
+                        // Define a random sea port
+                        _destpos = [position (_seadest call BIS_fnc_selectRandom), 200, 1000, 10, 2, 0, 0] call BIS_fnc_findSafePos;
+                        if (str _destpos == "[0,0,0]" || random 1 > 0.9) then {
+                                // Define a random place at the edge of the map to fly to
+                                _destpos = [_center, _mapsize-10, _mapsize, 10, 2, 0, 0] call BIS_fnc_findSafePos;
+                        };
                         
                         // Mark the spawn point
-                        if (_debug) then {
+                        if (tup_seatraffic_debug) then {
                                 private["_t","_m"];
-                                _t = format["SeaTraffic_s%1", floor(random 10000)];
-                                _m = [_t, _spawnpos, "Icon", [1,1], "TYPE:", "mil_dot", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                                _t = format["SeaTraffic_s%1", _j];
+                                _m = [_t, _spawnpos, "Icon", [0.5,0.5], "TYPE:", "hd_start", "GLOBAL"] call CBA_fnc_createMarker;
+                                
+                                _t = format["SeaTraffic_d%1", _j];
+                                _m = [_t, _destpos, "Icon", [0.5,0.5], "TYPE:", "hd_end", "GLOBAL"] call CBA_fnc_createMarker;
+                                //diag_log format ["MSO-%1 Sea Traffic: #%2 Moving from %3 to %4", time, _j, _spawnpos, _destpos];
                         };
-                        
-                        // Set a safe destination for the 2nd waypoint (make it another sea port)
-                        _destpos = [position (_seadest call BIS_fnc_selectRandom), 15, 50, 10, 2, 0, 0] call BIS_fnc_findSafePos;
-                        
-                        if (_debug) then {
-                                diag_log format ["MSO-%1 Sea Traffic: #%2 Landing point at: %3", time, _j, _destpos];
-                        };
-                        
-                        if (_debug) then {
-                                private["_t","_m"];
-                                _t = format["SeaTraffic_s%1", floor(random 10000)];
-                                _m = [_t, _destpos, "Icon", [1,1], "TYPE:", "hd_pickup", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-                        };
-                        // Define a random place at the edge of the map to fly to
-                        _endpos = [_startpos, _mapsize-10, _mapsize, 10, 2, 0, 0] call BIS_fnc_findSafePos;
                         
                         // Create ship
+                        // Work out side that controls destination (based on unit numbers)
+                        _seaportside =  [_currentseadest, 1000, format["%1 %2",_currentseadest,_j],tup_seatraffic_debug] call mso_core_fnc_getDominantSide;                        
+                        // Get the factions for the controlling side and count their units
+                        _factions = [_seaportside, _currentseadest, 1000,"factions",tup_seatraffic_debug,format["Seaport %2",_j]] call mso_core_fnc_getFactions;
+                        //_factionsCount = [_seaportside, _currentseadest, 1000,"count",tup_seatraffic_debug,format["Seaport %2",_j]] call mso_core_fnc_getFactions;
+                        
                         _ship = [];
                         _front = "Ship";
                         
@@ -153,69 +162,72 @@ for "_j" from 0 to (_destinations-1) do {
                         
                         // Make sure a suitable vehicle has been found, if not spawn a civilian ship
                         if (count _vehiclelist > 0) then {
-                                if (_debug) then {
+                                if (tup_seatraffic_debug) then {
                                         diag_log format ["MSO-%1 Sea Traffic: %2 Faction: %4 Vehicle list: %3", time, _j, _vehiclelist, _factions];
                                 };
                                 _shipClass = (_vehiclelist) call BIS_fnc_selectRandom;
                         } else {
                                 _shipClass =  ([0, TUP_CIVFACS,_front] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;                   
                                 _seaportside = civilian;
-                                if (_debug) then {
+                                if (tup_seatraffic_debug) then {
                                         diag_log format ["MSO-%1 Sea Traffic: %2  Could not find suitable faction/ship, civilian ship found: %3", time, _j, _shipClass];
                                 };
                         };
                         
-                        if (_debug) then {
-                                diag_log format ["MSO-%1 Sea Traffic: %2  Found Ship %3", time, _j, _shipClass];
+                        if (tup_seatraffic_debug) then {
+                                //diag_log format ["MSO-%1 Sea Traffic: %2  Found Ship %3", time, _j, _shipClass];
                         };
                         
                         _ship = [_spawnpos, 0,_shipClass, _seaportside] call BIS_fnc_spawnVehicle;         
-                        
                         _shipVehicle = _ship select 0;
                         _shipCrew = _ship select 1;
                         {_x setSkill 0.1} forEach _shipCrew;
                         _grp = _ship select 2;
-                        _stoptime = time + 600 + random 300;
                         
-                        if (_debug) then {
-                                diag_log format["MSO-%1 Sea Traffic: #%2, Vehicle: %5 Group: %8 Faction: %6 Start: %3 Landing: %4 Stop: %7", time, _j, _startpos, _destpos, typeOf _shipVehicle, _factions, _stopTime, _grp];
+                        if (tup_seatraffic_debug) then {
+                                diag_log format["MSO-%1 Sea Traffic: #%2, Vehicle: %5 Group: %7 Faction: %6 Start: %3 Landing: %4", time, _j, _spawnpos, _destpos, typeOf _shipVehicle, _factions, _grp];
                         };
                         
                         // Set ship waypoints
                         _wp = _grp addwaypoint [_destpos, 0];
                         _wp setWayPointType "MOVE";
+                        _wp setWaypointSpeed (["LIMITED", "NORMAL", "FULL"] call BIS_fnc_selectRandom);
                         _wp setWaypointFormation "FILE";
                         _wp setWaypointBehaviour "SAFE";
-						_wp setWaypointBehaviour _combatMode;
+                        _wp setWaypointCombatMode tup_seatraffic_combatMode;
                         _wp setWaypointTimeout _timeout;   
                         
-                        _wp = _grp addwaypoint [_endpos, 0];
-                        _wp setWayPointType "MOVE";
-                        _wp setWaypointTimeout _timeout;   
-                        
-                        _wp = _grp addwaypoint [_startpos, 0];
+                        _wp = _grp addwaypoint [_spawnpos, 0];
                         _wp setWayPointType "MOVE";
                         _wp setWaypointTimeout _timeout;                                 
                         
-                        _wp = _grp addwaypoint [_startpos, 0];
+                        _wp = _grp addwaypoint [_spawnpos, 0];
                         _wp setWaypointType "CYCLE";
                         
                         CRBPROFILERSTOP
                         
-                        waitUntil{sleep 15;(time > _stopTime)};
-                        
-                        // Remove ship and crew
-                        
-                        if (_debug) then {
-                                diag_log format["MSO-%1 Sea Traffic: %3 deleting %2", time, TypeOf _shipVehicle, _j];
+                        // if all players are 1.2 * maxdist away from seadest or vehicle, delete and restart
+                        waitUntil{
+                                sleep 60; 
+                                ({(_x distance _currentseadest < _maxdist * 1.2)} count ([] call BIS_fnc_listPlayers) == 0) && 
+                                ({(_x distance _shipVehicle < _maxdist * 1.2)} count ([] call BIS_fnc_listPlayers) == 0)
                         };
                         
+                        // Remove ship and crew
+                        if (tup_seatraffic_debug) then {
+                                private["_t","_m"];
+                                diag_log format["MSO-%1 Sea Traffic: %3 deleting %2", time, TypeOf _shipVehicle, _j];
+                                _t = format["SeaTraffic_s%1", _j];
+                                deleteMarker _t;
+                                _t = format["SeaTraffic_d%1", _j];
+                                deleteMarker _t;
+                        };                        
                         { deleteVehicle _x } forEach _shipCrew;
                         deleteVehicle _shipVehicle;
                         deletegroup _grp;
-	                waitUntil{sleep 60;count ([] call BIS_fnc_listPlayers) > 1 || !isMultiplayer};
-                        _sleep = if(_debug) then {10;} else {random 300;};
-                        sleep _sleep;
+			// Pause before creating another aircraft for destination
+			//_sleep = if(tup_seatraffic_debug) then {10;} else {random 300;};
+			//sleep _sleep;                                
                 };
         };
-};
+} forEach _seadest;
