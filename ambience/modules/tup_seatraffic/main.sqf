@@ -107,7 +107,7 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
 {
         
         [_forEachIndex, _x, _seadest, _mapsize] spawn {
-                private ["_timeout","_destpos","_j","_spawnpos","_seadest","_currentseadest","_mapsize","_maxdist","_shipClass","_seaportside","_factions","_ship","_front","_vehiclelist","_shipVehicle","_shipCrew","_grp","_wp"];
+                private ["_timeout","_destpos","_j","_spawnpos","_seadest","_currentseadest","_mapsize","_maxdist","_shipClass","_seaportside","_factions","_ship","_front","_vehiclelist","_shipVehicle","_shipCrew","_grp","_wp","_center","_p1","_p2"];
                 _j = _this select 0;
                 _currentseadest = _this select 1;
                 _seadest = _this select 2;
@@ -130,7 +130,7 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
                         
                         // Define a random sea port
                         _destpos = [position (_seadest call BIS_fnc_selectRandom), 200, 1000, 10, 2, 0, 0] call BIS_fnc_findSafePos;
-                        if (str _destpos == "[0,0,0]" || random 1 > 0.9) then {
+                        if (str _destpos == "[0,0,0]" || random 1 > 0.75) then {
                                 // Define a random place at the edge of the map to fly to
                                 _destpos = [_center, _mapsize-10, _mapsize, 10, 2, 0, 0] call BIS_fnc_findSafePos;
                         };
@@ -189,13 +189,25 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
                         };
                         
                         // Set ship waypoints
-                        _wp = _grp addwaypoint [_destpos, 0];
+                        if(random 1 > 0.5) then {
+                                _p1 = _currentseadest;
+                                _p2 = _destpos;
+                        } else {
+                                _p1 = _destpos;
+                                _p2 = _currentseadest;
+                        };
+                        
+                        _wp = _grp addwaypoint [_p1, 0];
                         _wp setWayPointType "MOVE";
                         _wp setWaypointSpeed (["LIMITED", "NORMAL", "FULL"] call BIS_fnc_selectRandom);
                         _wp setWaypointFormation "FILE";
                         _wp setWaypointBehaviour "SAFE";
                         _wp setWaypointCombatMode tup_seatraffic_combatMode;
                         _wp setWaypointTimeout _timeout;   
+                        
+                        _wp = _grp addwaypoint [_p2, 0];
+                        _wp setWayPointType "MOVE";
+                        _wp setWaypointTimeout _timeout;                                                    
                         
                         _wp = _grp addwaypoint [_spawnpos, 0];
                         _wp setWayPointType "MOVE";
@@ -209,8 +221,7 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
                         // if all players are 1.2 * maxdist away from seadest or vehicle, delete and restart
                         waitUntil{
                                 sleep 60; 
-                                ({(_x distance _currentseadest < _maxdist * 1.2)} count ([] call BIS_fnc_listPlayers) == 0) && 
-                                ({(_x distance _shipVehicle < _maxdist * 1.2)} count ([] call BIS_fnc_listPlayers) == 0)
+                                {(_x distance _shipVehicle < _maxdist * 1.2)} count ([] call BIS_fnc_listPlayers) == 0
                         };
                         
                         // Remove ship and crew
@@ -225,9 +236,9 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
                         { deleteVehicle _x } forEach _shipCrew;
                         deleteVehicle _shipVehicle;
                         deletegroup _grp;
-			// Pause before creating another aircraft for destination
-			//_sleep = if(tup_seatraffic_debug) then {10;} else {random 300;};
-			//sleep _sleep;                                
+                        // Pause before creating another aircraft for destination
+                        //_sleep = if(tup_seatraffic_debug) then {10;} else {random 300;};
+                        //sleep _sleep;                                
                 };
         };
 } forEach _seadest;
