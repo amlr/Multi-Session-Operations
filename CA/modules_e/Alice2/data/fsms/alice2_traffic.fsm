@@ -180,7 +180,7 @@ class FSM
        "_marker = """";" \n
        "//--- Debug mode, halellujah" \n
        "if (_debug) then {" \n
-       "	_markertext = format [""%1-%2"",_twn, floor(random 9999)];" \n
+       "	_markertext = str _driver;" \n
        "	_marker = createmarker [_markertext,position _driver];" \n
        "	_marker setmarkertype ""Dot"";" \n
        "	_marker setmarkersize [0.5,0.5];" \n
@@ -194,6 +194,7 @@ class FSM
        "			_marker setmarkerpos position vehicle _driver;" \n
        "			sleep 0.1;" \n
        "		};" \n
+       "		deleteMarker _marker;" \n
        "	};" \n
        "};" \n
        "_fsmFormation = _driver execfsm ""ca\modules_e\alice2\data\fsms\alice2Formation.fsm"";"/*%FSM</STATEINIT""">*/;
@@ -243,9 +244,6 @@ class FSM
        "{" \n
        "	deletevehicle _x;" \n
        "} forEach _cargo;" \n
-       "if (_debug) then {" \n
-       "	deleteMarker (_driver getvariable ""ALICE_marker"");" \n
-       "};" \n
        "deletevehicle _driver;" \n
        "deletevehicle _car;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
