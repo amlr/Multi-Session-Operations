@@ -1,23 +1,54 @@
 #include <crbprofiler.hpp>
 
-private ["_debug","_mapsize","_helidest","_planedest","_destinations","_destairfield","_helilandings","_center","_airports","_planelandings"];
+private ["_mapsize","_helidest","_planedest","_destinations"];
 if(!isServer) exitWith{};
 
-if (isNil "factionsMask") then {factionsMask = 0;};
-if (factionsMask == 2) exitWith{};
+tup_airtraffic_debug = false;
 
-if(isNil "AirIntensity")then{AirIntensity = 1;};
-AirIntensity = (AirIntensity + 1) / 4;
+//_center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
 
-if(isNil "AirROE")then{AirROE = 2;};
+if (isNil "tup_airtraffic_factions") then {tup_airtraffic_factions = 0;};
+if (tup_airtraffic_factions == 2) exitWith{};
+if (isNil "tup_airtraffic_intensity") then {tup_airtraffic_intensity = 1;};
+if (isNil "tup_airtraffic_ROE") then {tup_airtraffic_ROE = 2;};
 
-_debug = false;
+switch(tup_airtraffic_ROE) do {
+        case 1: {
+                tup_airtraffic_combateMode = "BLUE";
+        };
+        case 2: {
+                tup_airtraffic_combateMode = "GREEN";
+        };
+        case 3: {
+                tup_airtraffic_combatMode = "WHITE";
+        };
+        case 4: {
+                tup_airtraffic_combatMode = "YELLOW";
+        };
+        case 5: {
+                tup_airtraffic_combatMode = "RED";
+        };
+};
+
+if(isNil "TUP_CIVFACS") then {
+        TUP_CIVFACS = [civilian] call mso_core_fnc_getFactions;
+};
 
 {
         private["_new"];
         _new = createVehicle ["HeliHEmpty", (_x select 0), [],0,'NONE'];     
         _new setDir (_x select 1);
 } forEach (switch toLower(worldName) do {		
+        case "chernarus": {
+                [
+                        [[4704.1758,10249.779], 240],
+                        [[4688.6235,10276.778], 240],
+                        [[4672.2915,10305.309], 240],
+                        [[12171.944,12639.515], 200],
+                        [[12207.261,12625.699], 200],
+                        [[4836.9639,2521.9746], 120]
+                ];
+        };
         case "takistan": {
                 [
                         [[8263,1800.54], 150.567],
@@ -67,79 +98,147 @@ _debug = false;
 };*/
 
 waitUntil{!isNil "BIS_fnc_init"};
-// Get center of map
-_center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
 
 // Calculate size of map
-_mapsize = ((_center select 0) * 2);
-if (_debug) then 
-{
-        diag_log format ["MSO-%1 Air Traffic: Mapsize is %2", time, _mapsize];
+tup_airtraffic_getMapSize = {
+        private ["_center","_mapsize"];
+        // Get center of map
+        _center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
+        // Calculate size of map
+        _mapsize = ((_center select 0) max (_center select 1)) * 1.2;
+        if (tup_airtraffic_debug) then {
+                diag_log format ["MSO-%1 Air Traffic: Mapsize is %2", time, _mapsize];
+                ["tup_airtraffic_mapSize", _center, "Rectangle", [_mapsize,_mapsize], "BRUSH:", "Border", "GLOBAL"] call CBA_fnc_createMarker;
+        };
+        _mapsize;
 };
-
-_destairfield = [];
-_helilandings = [];
-_helidest = [];
-_planedest = [];
 
 // Define airports-hangars-Helipads from the Map
 // Find airport locations
-_airports = ["Airport"];  
-_destairfield = [_airports,_debug,"ColorGreen","airport"] call mso_core_fnc_findLocationsByType;
+tup_airtraffic_getAirports = {
+        private ["_airports"];
+        _airports = ["Airport"];
+        ([_airports,tup_airtraffic_debug,"ColorGreen","airport"] call mso_core_fnc_findLocationsByType);
+};
 
 //Find hangars at airport locations
-_planelandings = ["Land_Hangar_2","Land_SS_hangar","Land_SS_hangarD","Land_Mil_hangar_EP1"];
-_planedest = [_planelandings, _destairfield, 1500,_debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType;
+tup_airtraffic_getHangars = {
+        private ["_destairfield","_planelandings"];
+        _destairfield = _this select 0;
+        //_planelandings = ["Land_Hangar_2","Land_SS_hangar","Land_SS_hangarD","Land_Mil_hangar_EP1"];
+        _planelandings = ["Land_SS_hangar","Land_SS_hangarD","Land_Mil_hangar_EP1"];
+        ([_planelandings, _destairfield, 1000,tup_airtraffic_debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType);
+};
 
 // Find helipads on the map
-_helilandings = ["HeliH","HeliHRescue","HeliHCivil"];
-_helidest = [_helilandings, [], _mapsize, _debug,"ColorBlack","heliport"] call mso_core_fnc_findObjectsByType;
+tup_airtraffic_getHeliports = {
+        private ["_mapsize","_helilandings"];
+        _mapsize = _this select 0;
+        _helilandings = ["HeliH","HeliHRescue","HeliHCivil"];
+        ([_helilandings, [], _mapsize, tup_airtraffic_debug,"ColorBlack","heliport"] call mso_core_fnc_findObjectsByType);
+};
 
+// Get the factions for the controlling side and count their units (check to see if landing at LHD)
+tup_airtraffic_getFactions = {
+        private ["_factions","_currentairfield","_airfieldside","_LHDobject"];
+        _currentairfield = _this select 0;
+        _factions = [];
+        
+        _airfieldside =  [_currentairfield, 1000, "", false] call mso_core_fnc_getDominantSide;
+        
+        // Get the factions for the controlling side and count their units (check to see if landing at LHD)
+        _LHDobject = (position _currentairfield) nearObjects ["Land_LHD_1",100];
+        if (count _LHDobject > 0) then {
+                _factions = ["USMC"];
+        } else {
+                // Work out side that controls destination (based on unit numbers)
+                _factions = [_airfieldside, _currentairfield, 1000,"factions",false,""] call mso_core_fnc_getFactions;
+                //_factionsCount = [_airfieldside, _currentairfield, 1000,"count",tup_airtraffic_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
+        };
+        
+        [_factions,_airfieldside];
+};
+
+// Create aircraft 
+tup_airtraffic_createAircraft = {
+        private ["_factions","_aircraftClass","_airfieldside","_currentairfield","_j","_isPlane","_vehiclelist","_aircraft","_startpos","_aircraftVehicle","_aircraftCrew","_vehicletype","_tmp"];
+        _j = _this select 1;
+        _currentairfield = _this select 1;
+        _startpos = _this select 2;
+        _isPlane = _this select 3;
+        
+        _tmp = [_currentairfield] call tup_airtraffic_getFactions;
+        _airfieldside = _tmp select 1;
+        _factions = _tmp select 0;
+        
+        // Check to see if we need a plane or helicopter
+        if (_isPlane) then {
+                _vehicletype = "Plane";
+        } else {
+                _vehicletype = "Helicopter";
+        };
+        
+        // Select the faction based on unit count bias and get a list of possible vehicles
+        //_facs = [_factions,_factionsCount] call mso_core_fnc_selectRandomBias;
+        _vehiclelist =  [0, _factions,_vehicletype] call mso_core_fnc_findVehicleType; 
+        _aircraftClass = "";
+        
+        // Select a vehicle from the list - if no valid vehicle selet a civilian aircraft
+        if (count _vehiclelist > 0) then {
+                if (tup_airtraffic_debug) then {
+                        diag_log format ["MSO-%1 Air Traffic: %4 %2 Faction: %5 Vehicle list: %3", time, _j, _vehiclelist, _currentairfield, _factions];
+                };
+                _aircraftClass = (_vehiclelist) call BIS_fnc_selectRandom;
+        } else {
+                _aircraftClass =  ([0, TUP_CIVFACS,_vehicletype] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
+                _airfieldside = civilian;
+                if (tup_airtraffic_debug) then {
+                        diag_log format ["MSO-%1 Air Traffic: %4 %2  Could not find suitable military aircraft, civilian aircraft found: %3", time, _j, _aircraftClass, _currentairfield];
+                };
+        };
+        
+        if (tup_airtraffic_debug) then {
+                diag_log format ["MSO-%1 Air Traffic: %4 %2  Found Aircraft %3", time, _j, _aircraftClass, _currentairfield];
+        };
+        
+        // Create aircraft
+        _aircraft = [[_startpos, 10] call CBA_fnc_randPos, 0,_aircraftClass, _airfieldside] call BIS_fnc_spawnVehicle;         
+        _aircraftVehicle = _aircraft select 0;
+        _aircraftCrew = _aircraft select 1;
+        {_x setSkill 0.1;} forEach _aircraftCrew;
+        if (tup_airtraffic_combatMode == "BLUE") then {
+                {_x disableAI "AUTOTARGET"} foreach _aircraftCrew;
+                {_x disableAI "TARGET"} foreach _aircraftCrew;
+        };
+        
+        _aircraftVehicle;
+};
+
+_mapsize = call tup_airtraffic_getMapSize;
+_planedest = [call tup_airtraffic_getAirports] call tup_airtraffic_getHangars;
+_helidest = [_mapsize] call tup_airtraffic_getHeliports;
 // Total number of landing points - hangars and helipads
 _destinations = count _planedest + count _helidest;
-
-if(isNil "TUP_CIVFACS") then {
-        TUP_CIVFACS = [civilian] call mso_core_fnc_getFactions;
+// Check there are some piers and boathouses, if not exit
+if (_destinations < 1) exitWith {
+        diag_log format ["MSO-%1 Air Traffic: Cannot find any air landing objects. Exiting.", time];
 };
 
 // Spawn a process for each destination (each hangar and each helipad)
-for "_j" from 0 to (_destinations-1) do 
-{
-        
-        [_j, _helidest, _planedest, _debug, _mapsize] spawn 
-        {
-                private ["_destination","_aircraftVehicle","_aircraftCrew","_timeout","_sleep","_startpos","_destpos","_endpos","_grp","_front","_wp","_j","_debug","_mapsize","_currentairfield","_airfieldSide","_factions","_stopTime","_landEnd","_planedest","_helidest","_isPlane","_aircraft","_vehiclelist","_startHeight","_controltowers","_controlTowerTypes","_controltw","_housepos","_mv22pos","_aircraftClass","_combatMode","_landed","_LHDobject","_test"];
+for "_j" from 0 to (_destinations-1) do {
+        [_j, _helidest, _planedest, _mapsize] spawn {
+                private ["_destination","_aircraftVehicle","_startpos","_destpos","_endpos","_grp","_wp","_j","_mapsize","_currentairfield","_landEnd","_planedest","_helidest","_isPlane","_startHeight","_controltowers","_controltw","_mv22pos","_maxdist","_t","_scrambleTime","_controlTowerTypes"];
                 _j = _this select 0;
                 _helidest = _this select 1;
                 _planedest = _this select 2;
-                _debug = _this select 3;
-                _mapsize = _this select 4;
-				_landed = false;
+                _mapsize = _this select 3;
+                _maxdist = 3000;
                 
                 _isPlane = false;
                 _startHeight = 500 + (random 200);
                 
-                switch(AirROE) do {
-                        case 1: {
-                                _combatMode = "BLUE";
-                        };
-                        case 2: {
-                                _combatMode = "GREEN";
-                        };
-                        case 3: {
-                                _combatMode = "WHITE";
-                        };
-                        case 4: {
-                                _combatMode = "YELLOW";
-                        };
-                        case 5: {
-                                _combatMode = "RED";
-                        };
-                };
-                
                 // Work out if current destination is for a plane or helicopter
-                if (_j < count _planedest) then 
-                {
+                if (_j < count _planedest) then {
                         _currentairfield = _planedest select _j;
                         _isPlane = true;
                 } else {
@@ -148,250 +247,219 @@ for "_j" from 0 to (_destinations-1) do
                 };
                 
                 // Set timeout for waypoints
-                _timeout = if(_debug) then {[30, 60, 90];} else {[30, 60, 90];};
+                //_timeout = if(tup_airtraffic_debug) then {[0, 0, 0];} else {[30, 60, 90];};
                 
                 //Loop continuously and create aircraft for the destination		
-                while {true} do 
-                {
-                        _destpos = position _currentairfield;
-
-						waitUntil{sleep 60;{(_x distance _destpos < 2000)} count ([] call BIS_fnc_listPlayers) > 0 || !isMultiplayer};
-
+                while {true} do {
                         // Wait a random amount of time before starting
-                        sleep (random 90);
+                        waitUntil{sleep (90 + random 90);{(_x distance _currentairfield < _maxdist)} count ([] call BIS_fnc_listPlayers) > 0 && (random 4 > (3 - tup_airtraffic_intensity))};
                         
                         CRBPROFILERSTART("TUP Air Traffic")
                         
-                        //Create a random spawn point along the edge of the map				
-                        _startpos = [_mapsize,_startHeight,_debug,str _j,"ColorBlack","Dot"] call mso_core_fnc_randomEdgePos;    
+                        ////////////////////////
+                        // Define Positions
+                        ////////////////////////
                         
+                        //Create a random spawn point along the edge of the map				
+                        _startpos = [_mapsize * 2,_startHeight,false,"","",""] call mso_core_fnc_randomEdgePos;
+                        
+                        _destpos = position _currentairfield;                        
                         // Set a safe destination point at airfield and destination type for debugging.
-                        If (!_isPlane) then 
-                        {
-                                //  _destpos = [position _currentairfield, 0, 20, 10, 0, 0, 0] call BIS_fnc_findSafePos;
-                                _destination = "HeliPad";
-								if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %2 has %3 objects", time, _j, {(_x iskindof "Helicopter")} count (_destpos nearObjects 7)];};	
-                                waitUntil{sleep 15;{(_x iskindof "Helicopter")} count (_destpos nearObjects 7) == 0};
-                        } else {
+                        If (_isPlane) then {
                                 _destination = "Hangar";
-								if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %2 has %3 objects", time, _j, {(_x iskindof "Plane")} count (_destpos nearObjects 30)];};												
-                                waitUntil{sleep 15;{(_x iskindof "Plane")} count (_destpos nearObjects 30) == 0};
+                                if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %2 has %3 objects", time, _j, {(_x iskindof "Plane")} count (_destpos nearObjects 30)];};												
+                                waitUntil{sleep (30 + random 30);{(_x iskindof "Plane")} count (_destpos nearObjects 30) == 0};
+                        } else {
+                                _destination = "HeliPad";
+                                if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %2 has %3 objects", time, _j, {(_x iskindof "Helicopter")} count (_destpos nearObjects 7)];};	
+                                waitUntil{sleep (30 + random 30);{(_x iskindof "Helicopter")} count (_destpos nearObjects 7) == 0};
                         };
                         
                         // Define a random place at the edge of the map to fly to
-                        _endpos = [_mapsize,_startheight,_debug, str _j,"ColorRed","Dot"] call mso_core_fnc_randomEdgePos;
+                        _endpos = [_mapsize * 2,_startheight,false,"","",""] call mso_core_fnc_randomEdgePos;
                         
-                        // Work out side that controls destination (based on unit numbers)
-                        _airfieldside =  [_currentairfield, 1000, format["%1 %2",_destination,_j],_debug] call mso_core_fnc_getDominantSide;
+                        if (tup_airtraffic_debug) then {
+                                private ["_t","_m"];
+                                _t = format["AirTraffic_s%1", _j];
+                                _m = [_t, _startpos, "Icon", [0.5,0.5], "TEXT:", str _j, "TYPE:", "hd_start", "GLOBAL"] call CBA_fnc_createMarker;
+                                _t = format["AirTraffic_d%1", _j];
+                                _m = [_t, _destpos, "Icon", [0.5,0.5], "TYPE:", "hd_pickup", "GLOBAL"] call CBA_fnc_createMarker;
+                                _t = format["AirTraffic_e%1", _j];
+                                _m = [_t, _endpos, "Icon", [0.5,0.5], "TEXT:", str _j, "TYPE:", "hd_end", "GLOBAL"] call CBA_fnc_createMarker;
+                        };
                         
                         // If we are counting all factions then work out controlling side, otherwise default to civilian
-                        if (factionsMask == 0 || _airfieldSide == civilian) then {
-                                if (random 1 < AirIntensity) then
-                                {
-                                        // Get the factions for the controlling side and count their units (check to see if landing at LHD)
-										_LHDobject = _destpos nearObjects ["Land_LHD_1",100];
-										if (count _LHDobject > 0) then {
-											_factions = ["USMC"];
-										} else {
-											_factions = [_airfieldside, _currentairfield, 1000,"factions",_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
-											//_factionsCount = [_airfieldside, _currentairfield, 1000,"count",_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
-										};
-                                        
-                                        // Mark Destination on Map
-                                        if (_debug) then{
-                                                private["_t","_m"];
-                                                _t = format["AirTraffic_s%1", floor(random 10000)];
-                                                _m = [_t, _destpos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", str _j, "COLOR:", "ColorBlack", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-                                        };                                
-                                        // Create aircraft 
-                                        _aircraft = [];
-                                        _front = "";
-                                        
-                                        // Check to see if we need a plane or helicopter
-                                        if (_isPlane) then {
-                                                _front = "Plane";
-                                        } else {
-                                                _front = "Helicopter";
-                                        };
-                                        
-                                        // Select the faction based on unit count bias and get a list of possible vehicles
-                                        //_facs = [_factions,_factionsCount] call mso_core_fnc_selectRandomBias;
-                                        _vehiclelist =  [0, _factions,_front] call mso_core_fnc_findVehicleType; 
-                                        _aircraftClass = "";
-                                        
-                                        // Select a vehicle from the list - if no valid vehicle selet a civilian aircraft
-                                        if (count _vehiclelist > 0) then {
-                                                if (_debug) then {
-                                                        diag_log format ["MSO-%1 Air Traffic: %4 %2 Faction: %5 Vehicle list: %3", time, _j, _vehiclelist, _destination, _factions];
-                                                };
-                                                _aircraftClass = (_vehiclelist) call BIS_fnc_selectRandom;
-                                        } else {
-                                                _aircraftClass =  ([0, TUP_CIVFACS,_front] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
-                                                
-                                                _airfieldside = civilian;
-                                                if (_debug) then {
-                                                        diag_log format ["MSO-%1 Air Traffic: %4 %2  Could not find suitable military aircraft, civilian aircraft found: %3", time, _j, _aircraftClass, _destination];
-                                                };
-                                        };
-                                        
-                                        if (_debug) then {
-                                                diag_log format ["MSO-%1 Air Traffic: %4 %2  Found Aircraft %3", time, _j, _aircraftClass, _destination];
-                                        };
-                                        
-                                        // Create aircraft
-                                        _aircraft = [[_startpos, 10] call CBA_fnc_randPos, 0,_aircraftClass, _airfieldside] call BIS_fnc_spawnVehicle;         
-                                        _aircraftVehicle = _aircraft select 0;
-                                        _aircraftCrew = _aircraft select 1;
-                                        {_x setSkill 0.1;} forEach _aircraftCrew;
-                                        _grp = _aircraft select 2;
-                                        _stoptime = time + 900;
-                                        diag_log format["MSO-%1 Air Traffic: %10 #%2, Vehicle: %6 Group: %9 Faction: %7 Start: %3 Landing: %4 End: %5 Stop: %8", time, _j, _startpos, _destpos, _endpos, typeOf _aircraftVehicle, _factions, _stopTime, _grp, _destination];
-                                        if (_combatMode == "BLUE") then {
-											{_x disableAI "AUTOTARGET"} foreach _aircraftCrew;
-											{_x disableAI "TARGET"} foreach _aircraftCrew;
-										};
-										
-										_grp setCombatMode _combatMode;
-										_grp setBehaviour "CARELESS";
-										
-                                        // Set aircraft waypoints
-                                        
-                                        // Starting waypoint
-                                        // Destination Waypoint
-                                        _wp = _grp addwaypoint [_destpos, 50];
-                                        _wp setWaypointCombatMode _combatMode;
-                                        
-                                        // Wait until the aircraft is close to the airfield
-                                        
-                                        CRBPROFILERSTOP
-                                        
-                                        waitUntil{sleep 1;(_aircraftVehicle distance _destpos < 200) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
- 										
-										// Check to see if landing area is LHD, use Mand Heliroute to land
-										
-										if (count _LHDobject > 0) then {
-											if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 is attempting to land on the LHD", time, _j, typeOf _aircraftVehicle, _destination];};
-											_scr = [_aircraftVehicle,[(_LHDobject select 0) modelToWorld [0,0,16]],25, true] execVM "ambience\modules\tup_airtraffic\mando_heliroute_arma.sqf";
-											Sleep 2;
-											waitUntil {sleep 1;_aircraftVehicle getVariable "mando_heliroute" != "busy"};
-											if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 landed on LHD", time, _j, typeOf _aircraftVehicle, _destination];};
-										};
-									
-										
-										// Once near destination, action a landing.
-										
-                                        // Make sure MV22 lands near hangar and not on runway as it doesn't taxi
-										if (typeof _aircraftVehicle == "MV22") then {
-                                                _mv22pos = [_destpos, 0, 45, 15, 0, 0, 0] call BIS_fnc_findSafePos;
-                                                _landEnd = "HeliHEmpty" createVehicle _mv22pos;
-										} else {
-												_landEnd = objNull;
-                                        };
-										
-                                        if (_aircraftVehicle iskindof "Helicopter" or typeof _aircraftVehicle == "MV22") then {
-                                                _aircraftVehicle land "LAND";
-                                                waitUntil{sleep 1;((position _aircraftVehicle) select 2 <= 5) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
-                                        } else {
-												_aircraftVehicle addEventHandler ["LandedStopped", {
-													(_this select 0) setvariable ["landed", 1]
-												}]; 
-												_aircraftVehicle setvariable ["landed", 0];
-                                                _aircraftVehicle action ["Land", _aircraftVehicle];
-												
-												if (_debug && (_grp call CBA_fnc_isAlive)) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 is now landing.", time, _j, typeOf _aircraftVehicle, _destination];};
-												
-												waitUntil{sleep 1; (_aircraftVehicle getvariable "landed" == 1) || (time > _stopTime)  || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
-												
-												if ((_aircraftVehicle getvariable "landed" == 1) && _debug) then {
-													diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 Landed!", time, _j, typeOf _aircraftVehicle, _destination];
-												};                                   
-                                        };			
-                                        deleteVehicle _landEnd;
-
-                                        // Turnoff the aircraft engines and stop aircraft
-										leader _grp stop true;
-										_aircraftVehicle engineOn false;
-										
-										// Pause before moving to end position
-										_test = (_timeout select (random 2));
-                                        sleep _test;
-										
-										 if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %5 %2 %3 Sleeping for: %4", time, _j, typeOf _aircraftVehicle, str _test, _destination];};
-                                     
-                                        // Check to see if aircraft is near Control Tower, if so, crew may get out and go for a chat
-                                        _controlTowerTypes = ["Land_Mil_ControlTower","Land_Mil_ControlTower_EP1"];
-                                        _controltowers = nearestObjects [position _aircraftVehicle, _controlTowerTypes, 200]; 
-                                        if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %5 %2 %3 Found ControlTowers: %4", time, _j, typeOf _aircraftVehicle, count _controltowers, _destination];};
-                                        If (count _controltowers > 0) then 
-                                        {
-                                                if (random 1 > 0.5) then 
-                                                {
-                                                        // Set time for pilots to leave
-                                                        //_scrambleTime = time + random 180;
-                                                        if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 is stopping for breakfast!", time, _j, typeOf _aircraftVehicle, _destination];};
-                                       
-                                                        // Get Crew out of vehicle
-                                                        _wp = _grp addwaypoint [position _aircraftVehicle, 0];
-                                                        _wp setWayPointType "GETOUT";
-                                                        
-                                                        sleep 1;
-                                                        // Move crew to Control Tower room
-                                                        _controltw = _controltowers call BIS_fnc_selectRandom;
-                                                        _housepos = round (random 15); //Control tower positions are 0-15
-                                                        _wp = _grp addwaypoint [(_controltw buildingPos _housepos), 0];
-                                                        _wp setWayPointType "MOVE";
-                                                        
-														
-                                                        // Get crew to chat once at controltower
-                                                        _wp setWayPointStatements ["true","{_x playMove 'AidlPercSnonWnonDnon_talk1'} foreach crew (vehicle this);"];
-                                                        
-                                                        // Pause then send the crew back to the vehicle
-                                                        sleep (_timeout select (random 2));
-                                                        _wp = _grp addwaypoint [position _aircraftVehicle, 0];
-                                                        _wp setWayPointType "GETIN";
-                                                };
-                                        };
-                                        
-										// Pause before moving to end position
-                                        sleep (_timeout select (random 2));
-                                        
-										// Get rid of the original waypoint now that the aircraft is nearby
-										deleteWaypoint [_grp, currentwaypoint _grp];
-										if (_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 Deleted waypoint now moving", time, _j, typeOf _aircraftVehicle, _destination];};
-										
-                                        // Create end position waypoint
-                                        _wp = _grp addwaypoint [_endpos, 0];
-                                        _wp setWaypointType "MOVE";                               
-                                        
-                                        waitUntil{sleep 1;(_aircraftVehicle distance _endpos < 150) || (time > _stopTime) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
-                                        
-                                        // Check to see if vehicle was killed/died/crashed
-                                        if (!(_grp call CBA_fnc_isAlive) && (_debug)) then {
-                                                diag_log format["MSO-%1 Air Traffic: %3 %4, %2 Died!", time, TypeOf _aircraftVehicle, _destination, _j];
-                                        };
-                                        
-                                        // Check to see if vehicle was damaged
-                                        
-                                        if ((damage _aircraftVehicle > 0.4) && (_grp call CBA_fnc_isAlive) && (_debug)) then {
-                                                diag_log format["MSO-%1 Air Traffic: %3 %4, %2 Damaged!", time, TypeOf _aircraftVehicle, _destination, _j];
-                                        };
-                                        
-                                        // Remove aircraft and crew
-                                        if (_debug) then {
-                                                diag_log format["MSO-%1 Air Traffic: %3 %4 deleting %2", time, TypeOf _aircraftVehicle, _destination, _j];
-                                        };
-                                        
-                                        { deleteVehicle _x } forEach _aircraftCrew;
-										sleep 0.1;
-                                        deleteVehicle _aircraftVehicle;
-										sleep 0.1;
-                                        deletegroup _grp;
-                                };
-                                // Pause before creating another aircraft for destination
-                                _sleep = if(_debug) then {10;} else {random 300;};
-                                sleep _sleep;	
+                        //if (tup_airtraffic_factions == 0 || _airfieldSide == civilian) then {
                                 
+                                // Create aircraft 
+                                _aircraftVehicle = [_j, _currentairfield, _startpos, _isPlane] call tup_airtraffic_createAircraft;
+                                diag_log format["MSO-%1 Air Traffic: #%2, Vehicle: %6 Start: %3 Landing: %4 End: %5", time, _j, _startpos, _currentairfield, _endpos, typeOf _aircraftVehicle];
+                                
+                                
+                                // Make sure MV22 lands near hangar and not on runway as it doesn't taxi
+                                _landEnd = objNull;
+                                if (typeof _aircraftVehicle == "MV22") then {
+                                        _mv22pos = [_destpos, 0, 45, 15, 0, 0, 0] call BIS_fnc_findSafePos;
+                                        _landEnd = "HeliHEmpty" createVehicle _mv22pos;
+                                };
+                                
+                                
+                                ////////////////////////
+                                // Set aircraft waypoints
+                                ////////////////////////
+                                
+                                // Destination Waypoint
+                                _grp = group _aircraftVehicle;
+                                _wp = _grp addwaypoint [_destpos, 50];
+                                _wp setWaypointCombatMode tup_airtraffic_combatMode;
+                                _wp setWaypointBehaviour "CARELESS";
+                                _wp setWaypointStatements ["true", "if(typeOf vehicle this != ""MV22"")then{vehicle this action [""Land"", vehicle this]};"];
+                                _wp setWaypointCompletionRadius 3000;
+                                /*
+                                // Wait until the aircraft is close to the airfield
+                                
+                                waitUntil{
+                                        sleep 3;
+                                        (_aircraftVehicle distance _destpos < 200) ||
+                                        !(_grp call CBA_fnc_isAlive) || 
+                                        (damage _aircraftVehicle > 0.4)
+                                };
+                                
+                                ////////////////////////
+                                // Once near destination, action a landing.
+                                ////////////////////////
+                                
+                                // Check to see if landing area is LHD, use Mand Heliroute to land
+                                _LHDobject = (position _currentairfield) nearObjects ["Land_LHD_1",100];
+                                if (count _LHDobject > 0) then {
+                                        if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 is attempting to land on the LHD", time, _j, typeOf _aircraftVehicle, _destination];};
+                                        [_aircraftVehicle,[(_LHDobject select 0) modelToWorld [0,0,16]],50, true] call compile preprocessFileLineNumbers "ambience\modules\tup_airtraffic\mando_heliroute_arma.sqf";
+                                        waitUntil {sleep 3;_aircraftVehicle getVariable "mando_heliroute" != "busy"};
+                                        if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 landed on LHD", time, _j, typeOf _aircraftVehicle, _destination];};
+                                };
+                                
+                                if (_aircraftVehicle iskindof "Helicopter" or typeof _aircraftVehicle == "MV22") then {
+                                        _aircraftVehicle land "LAND";
+                                } else {
+                                        _aircraftVehicle addEventHandler ["LandedStopped", {
+                                                (_this select 0) setvariable ["landed", 1]
+                                        }]; 
+                                        _aircraftVehicle setvariable ["landed", 0];
+                                        _aircraftVehicle action ["Land", _aircraftVehicle];                                        
+                                };			
+                                if (tup_airtraffic_debug && (_grp call CBA_fnc_isAlive)) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 is now landing.", time, _j, typeOf _aircraftVehicle, _destination];};
+                                waitUntil{sleep 3;((position _aircraftVehicle) select 2 <= 5) || !(_grp call CBA_fnc_isAlive) || (damage _aircraftVehicle > 0.4)};
+                                if ((_aircraftVehicle getvariable "landed" == 1) && tup_airtraffic_debug) then {
+                                        diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 Landed!", time, _j, typeOf _aircraftVehicle, _destination];
+                                };                                   
+                                
+                                
+                                // Turnoff the aircraft engines and stop aircraft
+                                leader _grp stop true;
+                                _aircraftVehicle engineOn false;
+                                
+                                // Pause before moving to end position
+                                //_test = (_timeout select (random 2));
+                                //sleep _test;
+                                //if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %5 %2 %3 Sleeping for: %4", time, _j, typeOf _aircraftVehicle, str _test, _destination];};
+                                */                                
+                                // Check to see if aircraft is near Control Tower, if so, crew may get out and go for a chat
+                                _controlTowerTypes = ["Land_Mil_ControlTower","Land_Mil_ControlTower_EP1"];
+                                _controltowers = nearestObjects [position _currentairfield, _controlTowerTypes, 200]; 
+                                if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %5 %2 %3 Found ControlTowers: %4", time, _j, typeOf _aircraftVehicle, count _controltowers, _currentairfield];};
+                                
+                                if (!_isPlane || typeOf _aircraftVehicle == "MV22") then {
+                                        // Get Crew out of vehicle
+                                        _wp = _grp addwaypoint [_destpos, 50];
+                                        _wp setWaypointType "GETOUT";
+                                        _wp setWaypointTimeout [60, 120, 180];
+                                };
+                                
+                                If (count _controltowers > 0 && !_isPlane) then {
+                                        if (random 1 > 0.5) then {
+                                                // Set time for pilots to leave
+                                                _scrambleTime = 150 + random 150;
+                                                if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 is stopping for breakfast!", time, _j, typeOf _aircraftVehicle, _destination];};
+                                                
+                                                // Move crew to Control Tower room
+                                                _controltw = _controltowers call BIS_fnc_selectRandom;
+                                                //_housepos = round (random 15); //Control tower positions are 0-15
+                                                _wp = _grp addwaypoint [position _controltw, 0];
+                                                _wp setWayPointType "MOVE";
+                                                _wp setWaypointHousePosition 1;
+                                                // Get crew to chat once at controltower
+                                                _wp setWayPointStatements ["true","{_x playMove 'AidlPercSnonWnonDnon_talk1'} foreach crew (vehicle this);"];
+                                                _wp setWaypointTimeout [_scrambleTime,_scrambleTime,_scrambleTime];
+                                        };
+                                };                                
+                                
+                                if (!_isPlane || typeOf _aircraftVehicle == "MV22") then {
+                                        // Get Crew out of vehicle
+                                        // Pause then send the crew back to the vehicle
+                                        _wp = _grp addwaypoint [_destpos, 0];
+                                        _wp setWayPointType "GETIN";
+                                };
+                                /*
+                                // Get rid of the original waypoint now that the aircraft is nearby
+                                deleteWaypoint [_grp, currentwaypoint _grp];
+                                if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 waypoint now moving", time, _j, typeOf _aircraftVehicle, _destination];};
+                                */                                
+                                // Create end position waypoint
+                                _wp = _grp addwaypoint [_endpos, 0];
+                                _wp setWaypointType "MOVE";
+                                
+                                _wp = _grp addwaypoint [_startpos, 0];
+                                _wp setWaypointType "MOVE";
+                                
+                                _wp = _grp addwaypoint [_startpos, 0];
+                                _wp setWaypointType "CYCLE";
+                                
+                                CRBPROFILERSTOP
+                                
+                                // Check to see if vehicle was killed/died/crashed
+                                //if (!(_grp call CBA_fnc_isAlive) && (tup_airtraffic_debug)) then {
+                                        //        diag_log format["MSO-%1 Air Traffic: %3 %4, %2 Died!", time, TypeOf _aircraftVehicle, _destination, _j];
+                                        //};
+                                        
+                                        // if all players are 1.2 * maxdist away from airfield or vehicle, delete and restart
+                                        waitUntil{
+                                                sleep 60; 
+                                                (({(_x distance _currentairfield < _maxdist * 1.2)} count ([] call BIS_fnc_listPlayers) == 0) && 
+                                                ({_x distance _aircraftVehicle < _maxdist * 1.2} count ([] call BIS_fnc_listPlayers) == 0)) ||
+                                                (damage _aircraftVehicle > 0.4) ||
+                                                (_aircraftVehicle distance _endpos < 200)
+                                        };
+                                        
+                                        deleteVehicle _landEnd;
+                                        
+                                        // Check to see if vehicle was damaged                                
+                                        //if ((damage _aircraftVehicle > 0.4) && (tup_airtraffic_debug)) then {
+                                                //        diag_log format["MSO-%1 Air Traffic: %3 %4, %2 Damaged!", time, TypeOf _aircraftVehicle, _destination, _j];
+                                                //};
+                                                
+                                                // Remove aircraft and crew
+                                                if (tup_airtraffic_debug) then {
+                                                        diag_log format["MSO-%1 Air Traffic: %3 %4 deleting %2", time, TypeOf _aircraftVehicle, _destination, _j];
+                                                };
+                                                { deleteVehicle _x } forEach units _grp;
+                                                deleteVehicle _aircraftVehicle;
+                                                deletegroup _grp;
+                                                
+                                                // Pause before creating another aircraft for destination
+                                                //_sleep = if(tup_airtraffic_debug) then {10;} else {random 300;};
+                                                //sleep _sleep;                                
+                                                //};
+                                                // Remove aircraft and crew
+                                                if (tup_airtraffic_debug) then {
+                                                        _t = format["AirTraffic_s%1", _j];
+                                                        deleteMarker _t;
+                                                        _t = format["AirTraffic_d%1", _j];
+                                                        deleteMarker _t;
+                                                        _t = format["AirTraffic_e%1", _j];
+                                                        deleteMarker _t;
+                                                };
+                                        };
+                                };
                         };
-                };
-        };
-};
+                        //};
+                        
