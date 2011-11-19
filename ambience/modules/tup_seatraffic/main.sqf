@@ -121,7 +121,7 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
                 //Loop continuously and create ships for the destination		
                 while {true} do {
                         // Wait a random amount of time before starting
-                        waitUntil{sleep 30 + random 30; {(_x distance _currentseadest < _maxdist)} count ([] call BIS_fnc_listPlayers) > 0};
+                        waitUntil{sleep (30 + random 30); {(_x distance _currentseadest < _maxdist)} count ([] call BIS_fnc_listPlayers) > 0};
                         
                         CRBPROFILERSTART("TUP Sea Traffic")
                         
