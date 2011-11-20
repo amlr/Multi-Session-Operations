@@ -105,8 +105,8 @@ class FSM
        "_twnRarityUrban = _logic getvariable ""rarityurban"";" \n
        "if (isnil ""_twnRarityUrban"") then {_twnRarityUrban = [_twn,[""RARITY""]] call bis_fnc_locations};" \n
        "" \n
-       "_grp = grpnull;" \n
-       "if (isnil {_twn getvariable ""ALICE_group""}) then {" \n
+       "_grp = _twn getvariable ""ALICE_group"";" \n
+       "if (isNil ""_grp"") then {" \n
        "	_grp = creategroup civilian;" \n
        "	_twn setvariable [""ALICE_group"",_grp];" \n
        "};" \n
@@ -359,11 +359,11 @@ class FSM
     {
       name = "END";
       itemno = 10;
-      init = /*%FSM<STATEINIT""">*/"_population = _twn getvariable ""alice_population"";" \n
+      init = /*%FSM<STATEINIT""">*/"_grp = _twn getvariable ""ALICE_group"";" \n
        "" \n
        "{" \n
        "	deletevehicle _x;" \n
-       "} foreach _population;" \n
+       "} foreach units _grp;" \n
        "" \n
        "if (count _houselist == 0) then {" \n
        "	debuglog [""Log: ALICE 2: [ERROR] No houses in %1!"",_twnclass];" \n
