@@ -43,8 +43,8 @@ _i = 0;
 				if (({(_x distance _object) <= 500} count ([] call BIS_fnc_listPlayers)) == 0) then
 				{
 					deleteVehicle _object;
-					_queue set [_i, -1];
 				};
+				_queue set [_i, -1];
 			};
 
 			case (typeName grpNull):
@@ -53,8 +53,8 @@ _i = 0;
 				if (({alive _x} count (units _object)) == 0) then
 				{
 					deleteGroup _object;
-					_queue set [_i, -1];
 				};
+				_queue set [_i, -1];
 			};
 
 			default {};
