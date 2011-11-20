@@ -1,4 +1,4 @@
-private ["_hospitals","_police","_repairs","_id","_debug"];
+private ["_hospitals","_police","_repairs","_hp","_pp","_maxdist"];
 if(!isServer) exitWith{};
 
 if(isNil "Emergency")then{Emergency = 1;};
@@ -7,10 +7,11 @@ if (Emergency == 0) exitWith{};
 waitUntil{!isNil "bis_functions_mainscope"};
 waitUntil{typeName (bis_functions_mainscope getVariable "locations") == "ARRAY"};
 
-_debug = false;
+crb_emergency_debug = true;
 _hospitals = [];
 _police = [];
 _repairs = [];
+_maxdist = 3000;
 
 // Find & mark hospitals, Police Stations and Repair centres
 {
@@ -25,152 +26,234 @@ _repairs = [];
                 if (!(_x in _hospitals || _x in _police || _x in _repairs)) then {
                         if(typeOf _x == "Land_A_Hospital" || typeOf _x == "Land_cwr2_Hospital") then {
                                 if(_hf < 2) then {_hp = [];};
-                                _hp = _hp + [_x];
+                                _hp set [count _hp, _x];
                                 _hf = 2;
                         } else {
                                 if(_hf < 2 && (typeOf _x == "Land_A_Stationhouse" || typeOf _x == "Land_A_Stationhouse_ep1")) then {
                                         if(_hf < 1) then {_hp = [];};
-                                        _hp = _hp + [_x];
+                                        _hp set [count _hp, _x];
                                         _hf = 1;
                                 } else {
                                         if(_hf < 1 && typeOf _x == "Land_Mil_House_EP1") then {
-                                                _hp = _hp + [_x];
+                                                _hp set [count _hp, _x];
                                         };
                                 };
                         };
                         
                         if(typeOf _x == "Land_A_Office01" || typeOf _x == "Land_A_Office01_EP1") then {
                                 if(_pf < 2) then {_pp = [];};
-                                _pp = _pp + [_x];
+                                _pp set [count _pp, _x];
                                 _pf = 2;
                         } else {
                                 if(_pf < 2 && (typeOf _x == "Land_A_Stationhouse" || typeOf _x == "Land_A_Stationhouse_ep1")) then {
                                         if(_pf < 1) then {_pp = [];};
-                                        _pp = _pp + [_x];
+                                        _pp set [count _pp, _x];
                                         _pf = 1;
                                 } else {
                                         if(_pf < 1 && typeOf _x == "Land_Mil_House_EP1") then {
-                                                _pp = _pp + [_x];
+                                                _pp set [count _pp, _x];
                                         };
                                 };
                         };
                         
                         if(typeOf _x == "Land_repair_center" || typeOf _x == "Land_Mil_Repair_center_EP1") then {
-                                _repairs =  _repairs + [_x];
+                                _repairs set [count _repairs, _x];
                         };
                 };
         } forEach _h;
         _hospitals = _hospitals + _hp;
-        _police = _police + _pp;
-        
+        _police = _police + _pp;        
 } forEach (bis_functions_mainscope getVariable "locations");
 
-// Place ambulance/doctos and police cars/police outside, and
-// add SUPPORT and GUARD waypoints
-_id = 0;
-{
-        private["_pos","_veh","_grp","_unit","_wp"];
-        _pos = _x buildingExit 0;
-        if(str _pos == "[0,0,0]") then {_pos = _x buildingPos 0;};
-        if(str _pos == "[0,0,0]") then {_pos = position _x;};
-        _veh = createvehicle ["S1203_ambulance_EP1", _pos, [], 0, "NONE"];
-        _veh allowDamage false;
-        _veh setVectorUp [0,0,1];
-        _veh setDir (getDir _x) + 90;
-        _grp = createGroup civilian;
-        _unit = _grp createUnit ["Doctor", _pos, [], 0, "NONE"];
-        _unit setSkill 0.2;
-        _unit allowDamage false;
-        _unit assignAsDriver _veh;
-        _unit moveInDriver _veh;
-        //_unit = _grp createUnit ["Doctor", _pos, [], 0, "NONE"];
-        //_unit setSkill 0.2;
-        //_unit allowDamage false;
-        //_unit assignAsCargo _veh;
-        //_unit moveInCargo _veh;
-        
-        _wp = _grp addwaypoint [_pos, 0];
-        _wp setWaypointSpeed "FULL";
-        _wp setWaypointBehaviour "SAFE";
-        _wp setWaypointType "SUPPORT";        
-        
-        if (_debug) then {
+if (crb_emergency_debug) then {
+        {
                 private["_n"];
-                _n = format["hospital_%1", _id];
-                [_n, _pos, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorRed", "TEXT:", _n,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-                _id = _id + 1;
-        };
+                _n = format["hospital_%1", _forEachIndex];
+                [_n, position _x, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorRed", "TEXT:", _n,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+        } forEach _hospitals;
         
-} forEach _hospitals;
+        {
+                private["_n"];
+                _n = format["police_%1", _forEachIndex];
+                [_n, position _x, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorBlue", "TEXT:", _n,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+        } forEach _police;
+        
+        {
+                private["_n"];
+                _n = format["repair_%1", _forEachIndex];
+                [_n, position _x, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorGreen", "TEXT:", _n,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+        } forEach _repairs;
+};
 
-_id = 0;
-{
-        private["_pos","_veh","_grp","_unit","_wp"];
-        _pos = _x buildingExit 0;
-        if(str _pos == "[0,0,0]") then {_pos = _x buildingPos 0;};
-        if(str _pos == "[0,0,0]") then {_pos = position _x;};
-        _veh = createvehicle ["LadaLM", _pos, [], 0, "NONE"];
-        _veh allowDamage false;
-        _veh setVectorUp [0,0,1];
-        _veh addMagazineCargo ["8Rnd_9x18_Makarov", 20];
-        _veh setDir (getDir _x) + 90;
-        _grp = createGroup civilian;
-        _unit = _grp createUnit ["Policeman", _pos, [], 0, "NONE"];
-        _unit setSkill 0.2;
-        _unit allowDamage false;
-        {_unit addMagazine "8Rnd_9x18_Makarov"} forEach [1,2,3,4,5,6,7,8];
-        _unit addWeapon "Makarov"; 
-        _unit assignAsDriver _veh;
-        _unit moveInDriver _veh;
-        _unit = _grp createUnit ["Policeman", _pos, [], 0, "NONE"];
-        _unit setSkill 0.2;
-        _unit allowDamage false;
-        {_unit addMagazine "8Rnd_9x18_Makarov"} forEach [1,2,3,4,5,6,7,8];
-        _unit addWeapon "Makarov"; 
-        _unit assignAsCargo _veh;
-        _unit moveInCargo _veh;
+[_hospitals, _police, _repairs, _maxdist] spawn {
+        private ["_hospitals","_police","_repairs","_maxdist","_grp","_h"];
+        _hospitals = _this select 0;
+        _police = _this select 1;
+        _repairs = _this select 2;
+        _maxdist = _this select 3;
         
-        _wp = _grp addwaypoint [_pos, 0];
-        _wp setWaypointSpeed "FULL";
-        _wp setWaypointBehaviour "SAFE";
-        _wp setWaypointType "GUARD";        
-        
-        if (_debug) then {
-                private["_n"];
-                _n = format["police_%1", _id];
-                [_n, _pos, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorBlue", "TEXT:", _n,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-                _id = _id + 1;
+        while{true} do {
+                // Place ambulance/doctos and police cars/police outside, and
+                // add SUPPORT and GUARD waypoints
+                {
+                        _h = _x;
+                        _grp = _h getVariable "EmergencyGroup";
+                        //diag_log format["repair_%1 %2 %3 %4", _forEachIndex, (isNil "_grp"), (isNull _grp), _grp];
+                        if(isNil "_grp" && ({_h distance _x < _maxdist} count ([] call BIS_fnc_listPlayers) > 0)) then {
+                                private["_pos","_veh","_unit","_wp"];
+                                _pos = _h buildingExit 0;
+                                if(str _pos == "[0,0,0]") then {_pos = _h buildingPos 0;};
+                                if(str _pos == "[0,0,0]") then {_pos = position _h;};
+                                _veh = createvehicle ["S1203_ambulance_EP1", _pos, [], 0, "NONE"];
+                                _veh allowDamage false;
+                                _veh setVectorUp [0,0,1];
+                                _veh setDir (getDir _h) + 90;
+                                _grp = createGroup civilian;
+                                _unit = _grp createUnit ["Doctor", _pos, [], 0, "NONE"];
+                                _unit setSkill 0.2;
+                                _unit allowDamage false;
+                                _unit assignAsDriver _veh;
+                                _unit moveInDriver _veh;
+                                //_unit = _grp createUnit ["Doctor", _pos, [], 0, "NONE"];
+                                //_unit setSkill 0.2;
+                                //_unit allowDamage false;
+                                //_unit assignAsCargo _veh;
+                                //_unit moveInCargo _veh;
+                                
+                                _wp = _grp addwaypoint [_pos, 0];
+                                _wp setWaypointSpeed "FULL";
+                                _wp setWaypointBehaviour "SAFE";
+                                _wp setWaypointType "SUPPORT";        
+                                
+                                if (crb_emergency_debug) then {
+                                        private["_n"];
+                                        _n = format["hospital_%1", _forEachIndex];
+                                        diag_log format ["MSO-%1 Emergency: Spawning %2", time, _n];
+                                };
+                                _h setVariable ["EmergencyGroup", _grp];
+                        } else {
+                                if(!isNil "_grp" && ({_h distance _x < _maxdist} count ([] call BIS_fnc_listPlayers) == 0)) then {
+                                        if (crb_emergency_debug) then {
+                                                private["_n"];
+                                                _n = format["hospital_%1", _forEachIndex];
+                                                diag_log format ["MSO-%1 Emergency: Removing %2", time, _n];
+                                        };
+                                        {
+                                                deleteVehicle (assignedVehicle _x);
+                                                deleteVehicle _x;
+                                        } forEach units _grp;
+                                        deleteGroup _grp;
+                                        _h setVariable ["EmergencyGroup", nil];
+                                };
+                        };
+                } forEach _hospitals;
+                
+                {
+                        _h = _x;
+                        _grp = _h getVariable "EmergencyGroup";
+                        //diag_log format["repair_%1 %2 %3 %4", _forEachIndex, (isNil "_grp"), (isNull _grp), _grp];
+                        if(isNil "_grp" && ({_h distance _x < _maxdist} count ([] call BIS_fnc_listPlayers) > 0)) then {
+                                private["_pos","_veh","_unit","_wp"];
+                                _pos = _h buildingExit 0;
+                                if(str _pos == "[0,0,0]") then {_pos = _h buildingPos 0;};
+                                if(str _pos == "[0,0,0]") then {_pos = position _h;};
+                                _veh = createvehicle ["LadaLM", _pos, [], 0, "NONE"];
+                                _veh allowDamage false;
+                                _veh setVectorUp [0,0,1];
+                                _veh addMagazineCargo ["8Rnd_9x18_Makarov", 20];
+                                _veh setDir (getDir _h) + 90;
+                                _grp = createGroup civilian;
+                                _unit = _grp createUnit ["Policeman", _pos, [], 0, "NONE"];
+                                _unit setSkill 0.2;
+                                _unit allowDamage false;
+                                {_unit addMagazine "8Rnd_9x18_Makarov"} forEach [1,2,3,4,5,6,7,8];
+                                _unit addWeapon "Makarov"; 
+                                _unit assignAsDriver _veh;
+                                _unit moveInDriver _veh;
+                                _unit = _grp createUnit ["Policeman", _pos, [], 0, "NONE"];
+                                _unit setSkill 0.2;
+                                _unit allowDamage false;
+                                {_unit addMagazine "8Rnd_9x18_Makarov"} forEach [1,2,3,4,5,6,7,8];
+                                _unit addWeapon "Makarov"; 
+                                _unit assignAsCargo _veh;
+                                _unit moveInCargo _veh;
+                                
+                                _wp = _grp addwaypoint [_pos, 0];
+                                _wp setWaypointSpeed "FULL";
+                                _wp setWaypointBehaviour "SAFE";
+                                _wp setWaypointType "GUARD";        
+                                
+                                if (crb_emergency_debug) then {
+                                        private["_n"];
+                                        _n = format["police_%1", _forEachIndex];
+                                        diag_log format ["MSO-%1 Emergency: Spawning %2", time, _n];
+                                };
+                                _h setVariable ["EmergencyGroup", _grp];
+                        } else {
+                                if(!isNil "_grp" && ({_h distance _x < _maxdist} count ([] call BIS_fnc_listPlayers) == 0)) then {
+                                        if (crb_emergency_debug) then {
+                                                private["_n"];
+                                                _n = format["repair_%1", _forEachIndex];
+                                                diag_log format ["MSO-%1 Emergency: Removing %2", time, _n];
+                                        };
+                                        {
+                                                deleteVehicle (assignedVehicle _x);
+                                                deleteVehicle _x;
+                                        } forEach units _grp;
+                                        deleteGroup _grp;
+                                        _h setVariable ["EmergencyGroup", nil];
+                                };
+                        };
+                } forEach _police;
+                
+                {
+                        _h = _x;
+                        _grp = _h getVariable "EmergencyGroup";
+                        //diag_log format["repair_%1 %2 %3 %4", _forEachIndex, (isNil "_grp"), (isNull _grp), _grp];
+                        if(isNil "_grp" && ({_h distance _x < _maxdist} count ([] call BIS_fnc_listPlayers) > 0)) then {
+                                private["_pos","_veh","_unit","_wp"];
+                                _pos = _h buildingExit 3;
+                                if(str _pos == "[0,0,0]") then {_pos = _h buildingPos 0;};
+                                if(str _pos == "[0,0,0]") then {_pos = position _h;};
+                                _veh = createvehicle ["V3S_Repair_TK_GUE_EP1", _pos, [], 0, "NONE"];
+                                _veh allowDamage false;
+                                _veh setVectorUp [0,0,1];
+                                _veh setDir (getDir _h) + 180;
+                                _grp = createGroup civilian;
+                                _unit = _grp createUnit [["TK_CIV_Worker01_EP1","TK_CIV_Worker02_EP1"] call BIS_fnc_selectRandom, _pos, [], 0, "NONE"];
+                                _unit setSkill 0.2;
+                                _unit allowDamage false;
+                                _unit assignAsDriver _veh;
+                                _unit moveInDriver _veh;
+                                
+                                _wp = _grp addwaypoint [_pos, 0];
+                                _wp setWaypointSpeed "FULL";
+                                _wp setWaypointBehaviour "SAFE";
+                                _wp setWaypointType "SUPPORT";        
+                                
+                                if (crb_emergency_debug) then {
+                                        private["_n"];
+                                        _n = format["repair_%1", _forEachIndex];
+                                        diag_log format ["MSO-%1 Emergency: Spawning %2", time, _n];
+                                };
+                                _h setVariable ["EmergencyGroup", _grp];
+                        } else {
+                                if(!isNil "_grp" && ({_h distance _x < _maxdist} count ([] call BIS_fnc_listPlayers) == 0)) then {
+                                        if (crb_emergency_debug) then {
+                                                private["_n"];
+                                                _n = format["repair_%1", _forEachIndex];
+                                                diag_log format ["MSO-%1 Emergency: Removing %2", time, _n];
+                                        };
+                                        {
+                                                deleteVehicle (assignedVehicle _x);
+                                                deleteVehicle _x;
+                                        } forEach units _grp;
+                                        deleteGroup _grp;
+                                        _h setVariable ["EmergencyGroup", nil];
+                                };
+                        };
+                } forEach _repairs;
+                
+                sleep 3;
         };
-        
-} forEach _police;
-
-_id = 0;
-{
-        private["_pos","_veh","_grp","_unit","_wp"];
-        _pos = _x buildingExit 3;
-        if(str _pos == "[0,0,0]") then {_pos = _x buildingPos 0;};
-        if(str _pos == "[0,0,0]") then {_pos = position _x;};
-        _veh = createvehicle ["V3S_Repair_TK_GUE_EP1", _pos, [], 0, "NONE"];
-        _veh allowDamage false;
-        _veh setVectorUp [0,0,1];
-        _veh setDir (getDir _x) + 180;
-        _grp = createGroup civilian;
-        _unit = _grp createUnit [["TK_CIV_Worker01_EP1","TK_CIV_Worker02_EP1"] call BIS_fnc_selectRandom, _pos, [], 0, "NONE"];
-        _unit setSkill 0.2;
-        _unit allowDamage false;
-        _unit assignAsDriver _veh;
-        _unit moveInDriver _veh;
-        
-        _wp = _grp addwaypoint [_pos, 0];
-        _wp setWaypointSpeed "FULL";
-        _wp setWaypointBehaviour "SAFE";
-        _wp setWaypointType "SUPPORT";        
-        
-        if (_debug) then {
-                private["_n"];
-                _n = format["repair_%1", _id];
-                [_n, _pos, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorGreen", "TEXT:", _n,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-                _id = _id + 1;
-        };
-        
-} forEach _repairs;
+};
