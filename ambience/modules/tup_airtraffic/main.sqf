@@ -1,6 +1,20 @@
 #include <crbprofiler.hpp>
 
 private ["_mapsize","_helidest","_planedest","_destinations"];
+switch toLower(worldName) do {		
+        case "chernarus": {
+		// Clear taxi way in NW airfield
+		{hideobject _x;} forEach nearestObjects [[4659.2949,10425.214], ["Building"], 30];
+		{hideobject _x;} forEach nearestObjects [[4715.2759,10321.276], ["Building"], 30];
+		hideobject ([4740.1904,10224.742] nearestObject "Land_Lampa_sidl");
+        };
+        case "takistan": {
+        };
+        case "zargabad": {
+        };
+        default {};
+};
+
 if(!isServer) exitWith{};
 
 tup_airtraffic_debug = false;
