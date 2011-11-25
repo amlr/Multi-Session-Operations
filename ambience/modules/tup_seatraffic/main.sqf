@@ -88,12 +88,14 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
         _LHD call bis_ew_fnc_createLHD;
         
         // Add Heli pad and crewman for each LHD 
-        _LHDLand = [["Land_LHD_6"], [], _mapsize, tup_seatraffic_debug,"ColorGreen","Heliport"] call mso_core_fnc_findObjectsByType;
+        _LHDLand = [["Land_LHD_6"], [], _mapsize * 1.4, tup_seatraffic_debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType;
         {
-                _dummy = createVehicle ["HeliHRescue", [getposasl _x select 0, getposasl _x select 1, 18.5], [],0,'NONE'];
-                _dummy attachTo [_x, [getposasl _x select 0, getposasl _x select 1, 16]];
-                _unit = (group _LHD) createUnit ["USMC_LHD_Crew_Yellow", [getposasl _x select 0, getposasl _x select 1, 20], [], 0, "NONE"];
-                _unit setPosASL [getposasl _x select 0, getposasl _x select 1, 19];
+                _dummy = createVehicle ["HeliH", getposASL _x, [], 0, 'NONE'];
+		_dummy setDir (direction _x);
+                _dummy setPosASL (_x modelToWorld [0,0,18]);
+                _unit = (group _LHD) createUnit ["USMC_LHD_Crew_Yellow", getPosASL _x, [], 0, "NONE"];
+		_unit setDir (direction _dummy - 180);
+                _unit setPosASL (_dummy modelToWorld [0,7,1]);
                 doStop _unit;
         } foreach _LHDLand;
         

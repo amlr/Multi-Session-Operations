@@ -3,10 +3,10 @@
 private ["_mapsize","_helidest","_planedest","_destinations"];
 switch toLower(worldName) do {		
         case "chernarus": {
-		// Clear taxi way in NW airfield
-		{hideobject _x;} forEach nearestObjects [[4659.2949,10425.214], ["Building"], 30];
-		{hideobject _x;} forEach nearestObjects [[4715.2759,10321.276], ["Building"], 30];
-		hideobject ([4740.1904,10224.742] nearestObject "Land_Lampa_sidl");
+                // Clear taxi way in NW airfield
+                {hideobject _x;} forEach nearestObjects [[4659.2949,10425.214], ["Building"], 30];
+                {hideobject _x;} forEach nearestObjects [[4715.2759,10321.276], ["Building"], 30];
+                hideobject ([4740.1904,10224.742] nearestObject "Land_Lampa_sidl");
         };
         case "takistan": {
         };
@@ -50,14 +50,14 @@ if(isNil "TUP_CIVFACS") then {
 
 {
         private["_new"];
-        _new = createVehicle ["HeliHEmpty", (_x select 0), [],0,'NONE'];     
+        _new = createVehicle ["HeliHCivil", (_x select 0), [],0,'NONE'];     
         _new setDir (_x select 1);
 } forEach (switch toLower(worldName) do {		
         case "chernarus": {
                 [
-                        [[4704.1758,10249.779], 240],
-                        [[4688.6235,10276.778], 240],
-                        [[4672.2915,10305.309], 240],
+                        [[4700.1758,10249.779], 240],
+                        [[4685.6235,10276.778], 240],
+                        [[4669.2915,10305.309], 240],
                         [[12171.944,12639.515], 200],
                         [[12207.261,12625.699], 200],
                         [[4836.9639,2521.9746], 120]
@@ -149,7 +149,7 @@ tup_airtraffic_getHeliports = {
         private ["_mapsize","_helilandings"];
         _mapsize = _this select 0;
         _helilandings = ["HeliH","HeliHRescue","HeliHCivil"];
-        ([_helilandings, [], _mapsize, tup_airtraffic_debug,"ColorBlack","heliport"] call mso_core_fnc_findObjectsByType);
+        ([_helilandings, [], _mapsize * 1.4, tup_airtraffic_debug,"ColorBlack","heliport"] call mso_core_fnc_findObjectsByType);
 };
 
 // Get the factions for the controlling side and count their units (check to see if landing at LHD)
@@ -241,7 +241,7 @@ if (_destinations < 1) exitWith {
 // Spawn a process for each destination (each hangar and each helipad)
 for "_j" from 0 to (_destinations-1) do {
         [_j, _helidest, _planedest, _mapsize] spawn {
-                private ["_destination","_aircraftVehicle","_startpos","_destpos","_endpos","_grp","_wp","_j","_mapsize","_currentairfield","_landEnd","_planedest","_helidest","_isPlane","_startHeight","_controltowers","_controltw","_mv22pos","_maxdist","_t","_scrambleTime","_controlTowerTypes"];
+                private ["_destination","_aircraftVehicle","_startpos","_destpos","_endpos","_grp","_wp","_j","_mapsize","_currentairfield","_landEnd","_planedest","_helidest","_isPlane","_startHeight","_controltowers","_controltw","_mv22pos","_maxdist","_t","_scrambleTime","_controlTowerTypes","_LHDobject"];
                 _j = _this select 0;
                 _helidest = _this select 1;
                 _planedest = _this select 2;
@@ -329,7 +329,7 @@ for "_j" from 0 to (_destinations-1) do {
                                 _wp setWaypointBehaviour "CARELESS";
                                 _wp setWaypointStatements ["true", "if(typeOf vehicle this != ""MV22"")then{vehicle this action [""Land"", vehicle this]};"];
                                 _wp setWaypointCompletionRadius 3000;
-                                /*
+/*
                                 // Wait until the aircraft is close to the airfield
                                 
                                 waitUntil{
@@ -343,14 +343,6 @@ for "_j" from 0 to (_destinations-1) do {
                                 // Once near destination, action a landing.
                                 ////////////////////////
                                 
-                                // Check to see if landing area is LHD, use Mand Heliroute to land
-                                _LHDobject = (position _currentairfield) nearObjects ["Land_LHD_1",100];
-                                if (count _LHDobject > 0) then {
-                                        if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 is attempting to land on the LHD", time, _j, typeOf _aircraftVehicle, _destination];};
-                                        [_aircraftVehicle,[(_LHDobject select 0) modelToWorld [0,0,16]],50, true] call compile preprocessFileLineNumbers "ambience\modules\tup_airtraffic\mando_heliroute_arma.sqf";
-                                        waitUntil {sleep 3;_aircraftVehicle getVariable "mando_heliroute" != "busy"};
-                                        if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 landed on LHD", time, _j, typeOf _aircraftVehicle, _destination];};
-                                };
                                 
                                 if (_aircraftVehicle iskindof "Helicopter" or typeof _aircraftVehicle == "MV22") then {
                                         _aircraftVehicle land "LAND";
@@ -376,17 +368,35 @@ for "_j" from 0 to (_destinations-1) do {
                                 //_test = (_timeout select (random 2));
                                 //sleep _test;
                                 //if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %5 %2 %3 Sleeping for: %4", time, _j, typeOf _aircraftVehicle, str _test, _destination];};
-                                */                                
+*/                                
                                 // Check to see if aircraft is near Control Tower, if so, crew may get out and go for a chat
                                 _controlTowerTypes = ["Land_Mil_ControlTower","Land_Mil_ControlTower_EP1"];
                                 _controltowers = nearestObjects [position _currentairfield, _controlTowerTypes, 200]; 
                                 if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %5 %2 %3 Found ControlTowers: %4", time, _j, typeOf _aircraftVehicle, count _controltowers, _currentairfield];};
                                 
                                 if (!_isPlane || typeOf _aircraftVehicle == "MV22") then {
-                                        // Get Crew out of vehicle
-                                        _wp = _grp addwaypoint [_destpos, 50];
-                                        _wp setWaypointType "GETOUT";
-                                        _wp setWaypointTimeout [60, 120, 180];
+                                        
+                                        // Check to see if landing area is LHD, use Mand Heliroute to land
+                                        _LHDobject = _destpos nearObjects ["Land_LHD_6",100];
+                                        if (count _LHDobject > 0) then {
+                                                if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 is attempting to land on the LHD", time, _j, typeOf _aircraftVehicle, _destpos];};
+                                                _wp = _grp addwaypoint [(_LHDobject select 0), 0];
+                		                _wp setWaypointType "MOVE";
+                                                _wp setWaypointTimeout [10,10,10];
+                                                
+                                                _wp = _grp addwaypoint [(_LHDobject select 0), 0];
+		                                _wp setWaypointType "MOVE";
+                                                _wp setWaypointSpeed "LIMITED";
+                                                _wp setWaypointStatements ["true", format["[vehicle this, [%1], 9, false, %2] execVM ""ambience\modules\tup_airtraffic\mando_heliroute_arma.sqf"";", (_LHDobject select 0) modelToWorld [0,0,16], 60 + random 120]];
+                                                
+                                                _wp = _grp addwaypoint [(_LHDobject select 0), 0];
+                                                _wp setWaypointType "HOLD";
+                                        } else {
+                                                // Get Crew out of vehicle
+                                                _wp = _grp addwaypoint [_destpos, 0];
+                                                _wp setWaypointType "GETOUT";
+                                                _wp setWaypointTimeout [60, 120, 180];
+                                        };
                                 };
                                 
                                 If (count _controltowers > 0 && !_isPlane) then {
@@ -413,14 +423,15 @@ for "_j" from 0 to (_destinations-1) do {
                                         _wp = _grp addwaypoint [_destpos, 0];
                                         _wp setWayPointType "GETIN";
                                 };
-                                /*
+/*
                                 // Get rid of the original waypoint now that the aircraft is nearby
                                 deleteWaypoint [_grp, currentwaypoint _grp];
                                 if (tup_airtraffic_debug) then {diag_log format ["MSO-%1 Air Traffic: %4 %2 %3 waypoint now moving", time, _j, typeOf _aircraftVehicle, _destination];};
-                                */                                
+*/
                                 // Create end position waypoint
                                 _wp = _grp addwaypoint [_endpos, 0];
                                 _wp setWaypointType "MOVE";
+                                _wp setWaypointSpeed "NORMAL";
                                 
                                 _wp = _grp addwaypoint [_startpos, 0];
                                 _wp setWaypointType "MOVE";

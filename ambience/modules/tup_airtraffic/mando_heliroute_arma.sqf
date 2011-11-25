@@ -36,13 +36,13 @@ else
 
 
 
-private["_heli", "_route", "_endpos", "_height", "_landing ", "_pilot", "_i", "_j", "_pos", "_dist", "_distold", "_angh", "_dir", "_accel", "_speed", "_steps", "_inipos", "_offset"];
+private ["_heli","_route","_endpos","_height","_pilot","_i","_j","_pos","_dist","_distold","_angh","_dir","_speed","_steps","_inipos","_ang","_landing","_offset","_oldheight","_sleep"];
 
 _heli          = _this select 0;
 _route         = _this select 1;
 _height        = _this select 2;
 _landing       = _this select 3;
-
+_sleep       = _this select 4;
 
 if (!local _heli) exitWith {hint "mando_heliroute: vehicle must be local";};
 
@@ -51,7 +51,7 @@ _pilot = driver _heli;
 
 _heli setVariable ["mando_heliroute", "busy"];
 
-
+_oldheight = (getPosASL _heli) select 2;
 _heli flyinHeight _height;
 _pilot doMove [getPos _heli select 0, getPos _heli select 1, _height];
 Sleep 2;
@@ -211,3 +211,7 @@ if (!(alive _pilot) || (damage _heli >= 0.5)) exitWith
 {
    _heli setVariable ["mando_heliroute", "damaged"];
 };
+
+sleep _sleep;
+_heli flyinHeight _oldheight;
+group _heli setCurrentWaypoint [group _heli, (currentWaypoint group _heli) + 1];
