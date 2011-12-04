@@ -6,7 +6,7 @@ if (!isServer) exitWith{};
 if(isNil "ambientShepherds")then{ambientShepherds = 1;};
 if (ambientShepherds == 0) exitWith{};
 
-crb_shepherds_debug = true;
+crb_shepherds_debug = false;
 
 waitUntil{!isNil "BIS_fnc_init"};
 
@@ -81,12 +81,16 @@ CRB_fnc_createShepherd = {
         _shepherd setSpeedMode "LIMITED";
         _shepherd setBehaviour "SAFE";
         _shepherd setRank "CORPORAL";
-        _shepherd setVariable ["attacking", false, true];
+        _shepherd setVariable ["attacking", false];
         
         if(isDedicated) then {
                 _shepherd addMPEventHandler ["MPKilled",{[([position (_this select 0), group (_this select 0)] call CRB_fnc_createShepherd)] call CRB_fnc_armShepherd;}];
         } else {
                 _shepherd addEventHandler ["Killed",{[([position (_this select 0), group (_this select 0)] call CRB_fnc_createShepherd)] call CRB_fnc_armShepherd;}];
+        };
+        
+        if(count _this > 1) then {
+                {_x setVariable ["Shepherd", _shepherd];} forEach units _grp;
         };
         
         CRBPROFILERSTOP
@@ -118,26 +122,39 @@ CRB_fnc_shepherdAttack = {
         private ["_shepherd","_target","_delaytime","_unit"];
         _unit = _this select 0;
         _shepherd = _unit getVariable "Shepherd";
-        if(_shepherd getVariable "attacking") exitWith{};
-        _shepherd setVariable ["attacking", true, true];
         _target = _this select 1;
-        if(crb_shepherds_debug) then {player globalChat format["%1 Attacking %2!", _shepherd, _target];};
-        
         _target addRating -400;
+        if(_shepherd getVariable "attacking") exitWith{};
+        _shepherd setVariable ["attacking", true];
+        if(crb_shepherds_debug) then {diag_log format["MSO-%1 shepherds: %2 Attacking!", time, _name];};
+        
         _delaytime = time + 30;
         _shepherd setUnitPos "UP";
         _shepherd setSpeedMode "FULL";
         _shepherd reveal _target;
+	_dogs = [];
+
+	{
+		if(typeOf _x == "Pastor" || typeOf _x == "Fin") then {  
+			_x setspeedmode "FULL";
+			_x domove position _target;
+			_dogs = _dogs + [_x];
+		}
+	} forEach units _shepherd;
+
         while{alive _shepherd && alive _target && time < _delaytime} do {
                 _shepherd doWatch position _target;
                 _shepherd doTarget _target;
                 _shepherd doFire _target;
-                sleep random 1;
+		{
+			if(_x distance _target <= 2) then {[_target, _x] spawn dogs_fnc_dogattack;};
+		} forEach _dogs;
+                sleep random 2;
         };
         _shepherd setUnitPos "AUTO";
         _shepherd setSpeedMode "LIMITED";
         _shepherd setBehaviour "SAFE";
-        _shepherd setVariable ["attacking", false, true];
+        _shepherd setVariable ["attacking", false];
         _shepherd action ["WeaponOnBack", _shepherd];
         
         CRBPROFILERSTOP
@@ -244,7 +261,7 @@ _shepherds = [];
                         
                         if (crb_shepherds_debug) then {
                                 ["m_" + _name, _pos,  "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _name,  "GLOBAL"] call CBA_fnc_createMarker;
-                                //player setPos _pos;
+                                player setPos _pos;
                         };                      
                         
                         [_name, _pos] spawn {
@@ -254,124 +271,124 @@ _shepherds = [];
                                 _name = _this select 0;
                                 _pos = _this select 1;
                                 _grp = nil;
-                                _maxdist = 30;
+                                _maxdist = 10;
                                 _wait = time + 60 + random 60;                                
                                 
                                 while{true} do {
-                                        if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) > 0 && isNil "_grp") then {
-                                                if(crb_shepherds_debug) then {player globalChat format["Creating %1", _name];};
-                                                diag_log format["MSO-%1 Shepherds creating %2", time, _name];
-                                                _grp = createGroup civilian;
-                                                _herd = [_pos] call CRB_fnc_createHerd;
-                                                _dogs = [_pos] call CRB_fnc_createDogs;
-                                                _shepherd = [_pos] call CRB_fnc_createShepherd;
-                                                player sidechat str _shepherd;
-                                                [_shepherd] call CRB_fnc_armShepherd;
-                                                
-                                                [_shepherd] joinSilent _grp;
-                                                (_herd + _dogs ) joinSilent _grp;
-                                                
-                                                {_x setVariable ["Shepherd", _shepherd, true];} forEach units _grp;
-                                                _shepherd setPos _pos;
-                                                
-                                                _shepherd setSpeedMode "LIMITED";
-                                                _shepherd setBehaviour "SAFE";
-                                                _shepherd setFormation "DELTA";
-                                                
-                                                _grp enableAttack true;
-                                                _grp selectLeader _shepherd;
-                                        };
-                                        
-                                        /*                                if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) > 0 && !isNil "_grp") then {
-                                                _leader = leader _grp;
-                                                
-                                                if(!(_leader getVariable "attacking")) then {
-                                                        if(crb_shepherds_debug) then {
-                                                                //player globalChat format["Checking %1", _name];
-                                                                if(alive _leader) then {format["m_%1",_name] setMarkerPos position _leader;};
-                                                        }; 
+                                        if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) > 0) then {
+                                                if(isNil "_grp") then {
+                                                        if(crb_shepherds_debug) then {diag_log format["MSO-%1 shepherds: %2 Spawning", time, _name];};
+                                                        diag_log format["MSO-%1 Shepherds creating %2", time, _name];
+                                                        _grp = createGroup civilian;
+                                                        _herd = [_pos] call CRB_fnc_createHerd;
+                                                        _dogs = [_pos] call CRB_fnc_createDogs;
+                                                        _shepherd = [_pos] call CRB_fnc_createShepherd;
+                                                        [_shepherd] call CRB_fnc_armShepherd;
                                                         
-                                                        {
-                                                                _h = _x;
+                                                        [_shepherd] joinSilent _grp;
+                                                        (_herd + _dogs ) joinSilent _grp;
+                                                        
+                                                        {_x setVariable ["Shepherd", _shepherd];} forEach units _grp;
+                                                        _shepherd setPos _pos;
+                                                        
+                                                        _shepherd setSpeedMode "LIMITED";
+                                                        _shepherd setBehaviour "SAFE";
+                                                        _shepherd setFormation "DELTA";
+                                                        
+                                                        _grp enableAttack true;
+                                                        _grp selectLeader _shepherd;
+                                                };
+                                                if(!isNil "_grp") then {
+                                                        _leader = leader _grp;
+                                                        
+                                                        if(_leader getVariable "attacking") then {
+                                                                if(crb_shepherds_debug) then {player globalChat format["%1 Attacking!", _name] ;};
+                                                        } else {
+                                                                if(crb_shepherds_debug) then {
+                                                                        //player globalChat format["Checking %1", _name];
+                                                                        if(alive _leader) then {format["m_%1",_name] setMarkerPos position _leader;};
+                                                                }; 
                                                                 
-                                                                _wait = _h getVariable "wait";
-                                                                if(isNil "_wait") then {
-                                                                        _h setVariable ["wait", time, true];
-                                                                };
-                                                                
-                                                                if(_leader distance _h < _maxdist && typeOf _h != "Pastor" && typeOf _h != "Fin") then {  
-                                                                        // limited speed
-                                                                        //if(crb_shepherds_debug) then {player globalChat format["Limited %1", _h];};
-                                                                        _h setSpeedMode "LIMITED";
-                                                                } else {
-                                                                        // full speed
-                                                                        //if(crb_shepherds_debug) then {player globalChat format["Full %1", _h];};
-                                                                        _h setSpeedMode "FULL";
-                                                                };
-                                                                
-                                                                // Not Man  && unit near leader && unit ready (stopped units are never ready)
-                                                                if (_leader != _h && _h distance _leader < _maxdist * 0.1 && unitReady _h) then {
-                                                                        if(crb_shepherds_debug) then {player globalChat format["Stop cow %1", _h];};
-                                                                        doStop _h;
-                                                                        _h setVariable ["wait", time + 30 + random 180, true];
-                                                                };
-                                                                
-                                                                // Dog and no longer waiting
-                                                                // Move to furthest animal
-                                                                if((typeOf _h == "Pastor" || typeOf _h == "Fin") && _h getVariable "wait" < time) then {  
-                                                                        _dist = 0;
-                                                                        _last = _h;
-                                                                        { 
-                                                                                if (typeOf _x != "Pastor" && typeOf _x != "Fin" && _x distance _leader > _dist) then {                                                                 
-                                                                                        _last = _x;                                                                
-                                                                                        _dist = _x distance _leader;
-                                                                                };
-                                                                        } forEach units _grp;
+                                                                {
+                                                                        _h = _x;
                                                                         
-                                                                        if(crb_shepherds_debug) then {player globalChat format["Move dog %1", _h];};
-                                                                        _h doMove ([position _last, 3] call CBA_fnc_randPos);
-                                                                        _h setVariable ["wait", time + (_h distance _last) * random 0.5, true];
-                                                                };
-                                                                
-                                                                // Man && unit ready (stopped units are never ready)
-                                                                if(_leader == _h && unitReady _h) then {
-                                                                        if(crb_shepherds_debug) then {player globalChat format["Stop man %1", _h];};
-                                                                        doStop _h;
-                                                                        _actions = [
-                                                                                "SitDown",
-                                                                                "StrokeFist",
-                                                                                "StrokeGun"
-                                                                        ];
-                                                                        if(random 1 > 0.5) then {_h action [_actions call BIS_fnc_selectRandom, _h];};
-                                                                        _h setVariable ["wait", time + 5 + random 60, true];
-                                                                };
-                                                                
-                                                                // Time is up OR animals are too far away OR animals are right next to leader
-                                                                if (
-                                                                        (_h getVariable "wait" < time ||
-                                                                        (_leader != _h && _leader distance _h > _maxdist) ||
-                                                                        (_leader != _h && _h distance _leader < _maxdist * 0.1)) &&
-                                                                        (typeOf _x != "Pastor" && typeOf _x != "Fin")
-                                                                ) then {
-                                                                        _pos = [position _leader, if(_leader == _h) then{_maxdist * 10} else { _maxdist}] call CBA_fnc_randPos;
-                                                                        _h doMove _pos;
-                                                                        if(_leader == _h) then {
-                                                                                if(crb_shepherds_debug) then {
-                                                                                        player globalChat format["Move leader %1", _h];
-                                                                                };
-                                                                                _h action ["WeaponOnBack", _h];
-                                                                        } else {
-                                                                                //player globalChat format["Move herd %1", _h];
+                                                                        _wait = _h getVariable "wait";
+                                                                        if(isNil "_wait") then {
+                                                                                _h setVariable ["wait", time];
                                                                         };
                                                                         
-                                                                        _h setVariable ["wait", time + (_h distance _pos) * random 1.5, true];
-                                                                };
-                                                        } forEach units _grp;
-                                                } else {
-                                                        if(crb_shepherds_debug) then {player globalChat format["%1 Attacking!", _name] ;};
+                                                                        if(_leader distance _h < _maxdist && typeOf _h != "Pastor" && typeOf _h != "Fin") then {  
+                                                                                // limited speed
+                                                                                //if(crb_shepherds_debug) then {player globalChat format["Limited %1", _h];};
+                                                                                _h setSpeedMode "LIMITED";
+                                                                        } else {
+                                                                                // full speed
+                                                                                //if(crb_shepherds_debug) then {player globalChat format["Full %1", _h];};
+                                                                                _h setSpeedMode "FULL";
+                                                                        };
+                                                                        
+                                                                        // Not Man  && unit near leader && unit ready (stopped units are never ready)
+                                                                        if (_leader != _h && _h distance _leader < _maxdist * 0.1 && unitReady _h) then {
+                                                                                if(crb_shepherds_debug) then {player globalChat format["Stop cow %1", _h];};
+                                                                                doStop _h;
+                                                                                _h setVariable ["wait", time + 30 + random 180];
+                                                                        };
+                                                                        
+                                                                        // Dog and no longer waiting
+                                                                        // Move to furthest animal
+                                                                        if((typeOf _h == "Pastor" || typeOf _h == "Fin") && _h getVariable "wait" < time) then {  
+                                                                                _dist = 0;
+                                                                                _last = _h;
+                                                                                { 
+                                                                                        if (typeOf _x != "Pastor" && typeOf _x != "Fin" && _x distance _leader > _dist) then {                                                                 
+                                                                                                _last = _x;                                                                
+                                                                                                _dist = _x distance _leader;
+                                                                                        };
+                                                                                } forEach units _grp;
+                                                                                
+                                                                                //if(crb_shepherds_debug) then {player globalChat format["Move dog %1", _h];};
+                                                                                _h doMove ([position _last, 3] call CBA_fnc_randPos);
+                                                                                _h setVariable ["wait", time + (_h distance _last) * random 0.5];
+                                                                        };
+                                                                        
+                                                                        // Man && unit ready (stopped units are never ready)
+                                                                        if(_leader == _h && unitReady _h) then {
+                                                                                if(crb_shepherds_debug) then {player globalChat format["Stop man %1", _h];};
+                                                                                doStop _h;
+                                                                                _actions = [
+                                                                                        "SitDown",
+                                                                                        "StrokeFist",
+                                                                                        "StrokeGun"
+                                                                                ];
+                                                                                if(random 1 > 0.5) then {_h action [_actions call BIS_fnc_selectRandom, _h];};
+                                                                                _h setVariable ["wait", time + 5 + random 60];
+                                                                        };
+                                                                        
+                                                                        // Time is up OR animals are too far away OR animals are right next to leader
+                                                                        if (
+                                                                                (_h getVariable "wait" < time ||
+                                                                                (_leader != _h && _leader distance _h > _maxdist) ||
+                                                                                (_leader != _h && _h distance _leader < _maxdist * 0.1)) &&
+                                                                                (typeOf _x != "Pastor" && typeOf _x != "Fin")
+                                                                        ) then {
+                                                                                _pos = [position _leader, if(_leader == _h || unitReady _h) then{_maxdist * 10} else { _maxdist}] call CBA_fnc_randPos;
+                                                                                _h doMove _pos;
+                                                                                if(_leader == _h) then {
+                                                                                        if(crb_shepherds_debug) then {
+                                                                                                player globalChat format["Move leader %1", _h];
+                                                                                        };
+                                                                                        _h action ["WeaponOnBack", _h];
+                                                                                } else {
+                                                                                        //player globalChat format["Move herd %1", _h];
+                                                                                };
+                                                                                
+                                                                                _h setVariable ["wait", time + (_h distance _pos) * random 1.5];
+                                                                        };
+                                                                } forEach units _grp;
+                                                        };
                                                 };
                                         };
-                                        */                                
+                                        
                                         if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) == 0 && !isNil "_grp") then {
                                                 if(crb_shepherds_debug) then {player globalChat format["Destroying %1", _name];};
                                                 {deleteVehicle _x} foreach units _grp;
