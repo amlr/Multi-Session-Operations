@@ -261,7 +261,7 @@ _shepherds = [];
                         
                         if (crb_shepherds_debug) then {
                                 ["m_" + _name, _pos,  "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _name,  "GLOBAL"] call CBA_fnc_createMarker;
-                                player setPos _pos;
+                                //player setPos _pos;
                         };                      
                         
                         [_name, _pos] spawn {
@@ -277,8 +277,7 @@ _shepherds = [];
                                 while{true} do {
                                         if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) > 0) then {
                                                 if(isNil "_grp") then {
-                                                        if(crb_shepherds_debug) then {diag_log format["MSO-%1 shepherds: %2 Spawning", time, _name];};
-                                                        diag_log format["MSO-%1 Shepherds creating %2", time, _name];
+                                                        if(crb_shepherds_debug) then {diag_log format["MSO-%1 Shepherds creating %2", time, _name];};
                                                         _grp = createGroup civilian;
                                                         _herd = [_pos] call CRB_fnc_createHerd;
                                                         _dogs = [_pos] call CRB_fnc_createDogs;
@@ -302,7 +301,7 @@ _shepherds = [];
                                                         _leader = leader _grp;
                                                         
                                                         if(_leader getVariable "attacking") then {
-                                                                if(crb_shepherds_debug) then {player globalChat format["%1 Attacking!", _name] ;};
+                                                                if(crb_shepherds_debug) then {diag_log format["MSO-%1 shepherds: %2 Attacking!", time, _name] ;};
                                                         } else {
                                                                 if(crb_shepherds_debug) then {
                                                                         //player globalChat format["Checking %1", _name];
@@ -329,7 +328,7 @@ _shepherds = [];
                                                                         
                                                                         // Not Man  && unit near leader && unit ready (stopped units are never ready)
                                                                         if (_leader != _h && _h distance _leader < _maxdist * 0.1 && unitReady _h) then {
-                                                                                if(crb_shepherds_debug) then {player globalChat format["Stop cow %1", _h];};
+                                                                                //if(crb_shepherds_debug) then {player globalChat format["Stop cow %1", _h];};
                                                                                 doStop _h;
                                                                                 _h setVariable ["wait", time + 30 + random 180];
                                                                         };
@@ -390,9 +389,8 @@ _shepherds = [];
                                         };
                                         
                                         if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) == 0 && !isNil "_grp") then {
-                                                if(crb_shepherds_debug) then {player globalChat format["Destroying %1", _name];};
+                                                if(crb_shepherds_debug) then {diag_log format["MSO-%1 Shepherds destroying %2", time, _name];};
                                                 {deleteVehicle _x} foreach units _grp;
-                                                diag_log format["MSO-%1 Shepherds destroying %2", time, _name];
                                                 deleteGroup _grp;
                                                 _grp = nil;
                                         };
@@ -403,7 +401,7 @@ _shepherds = [];
                                                 _pos = [_pos, _maxdist * 5] call CBA_fnc_randPos;
                                                 _wait = time + (_oldpos distance _pos) * 1.5;
                                                 if(crb_shepherds_debug) then {
-                                                        hint format["Moving %1", _name];
+                                                        diag_log format["MSO-%1 Shepherds moving %2", time, _name];
                                                         format["m_%1",_name] setMarkerPos _pos;
                                                 };
                                         };
