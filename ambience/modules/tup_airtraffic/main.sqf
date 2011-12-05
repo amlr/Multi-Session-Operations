@@ -48,38 +48,6 @@ if(isNil "TUP_CIVFACS") then {
         TUP_CIVFACS = [civilian] call mso_core_fnc_getFactions;
 };
 
-{
-        private["_new"];
-        _new = createVehicle ["HeliHCivil", (_x select 0), [],0,'NONE'];     
-        _new setDir (_x select 1);
-} forEach (switch toLower(worldName) do {		
-        case "chernarus": {
-                [
-                        [[4700.1758,10249.779], 240],
-                        [[4685.6235,10276.778], 240],
-                        [[4669.2915,10305.309], 240],
-                        [[12171.944,12639.515], 200],
-                        [[12207.261,12625.699], 200],
-                        [[4836.9639,2521.9746], 120]
-                ];
-        };
-        case "takistan": {
-                [
-                        [[8263,1800.54], 150.567],
-                        [[8222.98,1776.7,0.0101013],150.358],
-                        [[8180.42,1752.3,0.0100098],151.828],
-                        [[6046.42,10470.4,0.0102081],112.581]
-                ];
-        };
-        case "zargabad": {
-                [
-                        [[3534.1, 3939.4], 270],
-                        [[4568,4124], 110]
-                ];
-        };
-        default {[]};
-});
-
 // CRB_convertHelipads
 /*[] spawn 
 {
