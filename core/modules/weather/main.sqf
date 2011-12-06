@@ -22,8 +22,12 @@ CRB_randomOvercast = {
 
 CRB_randomFog = {
         private ["_value","_delay"];
-        _value = random 0.5; //new fog% (0-0.5)
-        _delay = 300 + random 3300; // finish
+	if (daytime > 2 && daytime < 7) then {
+	        _value = random 1; //new fog% (0-0.5)
+	} else {
+	        _value = 0;
+	};
+       	_delay = 300 + random 3300; // finish
         
         [fog, _value, time, time + _delay];
 };
@@ -38,7 +42,7 @@ CRB_randomRain = {
 
 if (isserver) then {        
         if(isNil "disableFog") then {
-                disableFog = 1;
+                disableFog = 0;
         };
 
         if(isNil "timeOptions") then {
