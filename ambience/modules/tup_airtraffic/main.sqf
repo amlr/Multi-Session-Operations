@@ -109,7 +109,7 @@ tup_airtraffic_getHangars = {
         _destairfield = _this select 0;
         //_planelandings = ["Land_Hangar_2","Land_SS_hangar","Land_SS_hangarD","Land_Mil_hangar_EP1"];
         _planelandings = ["Land_SS_hangar","Land_SS_hangarD","Land_Mil_hangar_EP1"];
-        ([_planelandings, _destairfield, 1000,tup_airtraffic_debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType);
+        ([_planelandings, [], _mapsize * 1.4,tup_airtraffic_debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType);
 };
 
 // Find helipads on the map
