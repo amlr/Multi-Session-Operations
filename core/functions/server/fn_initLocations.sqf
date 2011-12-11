@@ -114,6 +114,12 @@ switch toLower(worldName) do {
                 {(createVehicle ["HeliHCivil", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[4700.1758,10249.779], 240],[[4685.6235,10276.778], 240],[[4669.2915,10305.309], 240],[[12171.944,12639.515], 200],[[12207.261,12625.699], 200],[[4836.9639,2521.9746], 120]];
                 [] call _initNeighbors;
         };
+        case "lingor": {
+                {(createVehicle ["HeliH", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[919,9214], 0],[[6478,6093], 0],[[2650,6819], 0],[[3709,4189], 0],[[2988.33,6640.74],264.161],[[2650,6819], 264]];
+                {(createVehicle ["HeliHCivil", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[3063.16,7974.41], 93], [[5135,6799], 0], [[5928,6798], 0], [[4237,6791], 20], [[3348,3589], 45],[[4191.1,1429.85],270],[[4191.27,1524],270],[[6493.83,6909.81],180],[[6581.21,6909.99],180],[[6626.48,6909.99],180]];
+                {(createVehicle ["HeliHRescue", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[6846,6461], 90],[[6863.47,4452],92.293]];
+                CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
+        };
         /*
         // Removed until keypoints are placed.
         case "torabora": {
