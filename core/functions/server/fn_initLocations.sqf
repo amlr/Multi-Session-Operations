@@ -120,6 +120,24 @@ switch toLower(worldName) do {
                 {(createVehicle ["HeliHRescue", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[6846,6461], 90],[[6863.47,4452],92.293]];
                 CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
         };
+        case "tup_qom": {
+                {(createVehicle ["HeliH", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
+			[[1636.63,7338.07], 0],
+			[[4311.03,8714.72], 4],
+			[[1827.21,7392.98], 0],
+			[[7067.62,4376.49], 4],
+			[[844.725,6417.14],-60],
+			[[2029.56,7729.28],-60],
+			[[3488.31,4151.53],-27],
+			[[5567.3,7011.71],160.581],
+			[[2879.46,9187.48],10],
+			[[2831.94,9206.63],10],
+			[[2780.88,9227.2],10],
+			[[2726.26,9248.48],10],
+			[[2663.85,9272.59],10]
+		];
+                CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
+        };
         /*
         // Removed until keypoints are placed.
         case "torabora": {
