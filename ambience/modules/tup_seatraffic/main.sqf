@@ -82,6 +82,7 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
         while {_lhdpos distance _center > _mapsize} do {
                 _lhdpos = [_center, 2000, _mapsize, 500, 2, 0, 0] call BIS_fnc_findSafePos;
         };
+	if(str _lhdpos == str _center) exitWith{};
         _LHD = _group createUnit ["LOGIC",_lhdpos, [], 0, ""];
         _LHD setdir (random 359);
         
@@ -195,7 +196,8 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
                                 _p1 = _currentseadest;
                                 _p2 = _destpos;
                         } else {
-                                _p1 = _destpos;
+                                _p1 = _destpos;
+
                                 _p2 = _currentseadest;
                         };
                         
