@@ -7,3 +7,4 @@
 
 // - To Test
 #define WICT_ENEMYPOP
+#define BIS_WARFARE
