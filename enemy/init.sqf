@@ -115,3 +115,8 @@ execNow "enemy\modules\rmm_enemypop\main.sqf";
 execNow "enemy\modules\wict_enemypop\main.sqf";
 #endif
 
+#ifdef BIS_WARFARE
+"BIS Warfare" call mso_core_fnc_initStat;
+execNow "enemy\modules\bis_warfare\main.sqf";
+#endif
+
