@@ -1,19 +1,41 @@
-if(isNil "ambientEnvironment") then {ambientEnvironment = 1;};
-	//Victory Conditions.
-if(isNil "VictoryTime") then {VictoryTime = -1;};
-if(isNil "VictoryScore") then {VictoryScore = -1;};
-if(isNil "VictoryTowns") then {VictoryTowns = -1;};
-if(isNil "CapturableTowns") then {CapturableTown = -1;};
-if(isNil "FasterTime") then {FasterTime = 0;};
-if(isNil "MinStartingDistance") then {MinStartingDistance = 2500;};
-if(isNil "MiscSettings") then {MiscSettings = 0;};
-if(isNil "NeutralOpposition") then {NeutralOpposition = 2;};
-if(isNil "SideColorScheme") then {SideColorScheme = 0;};
-if(isNil "StartTime") then {StartTime = -1;};
-if(isNil "Support") then {Support = 4;};
-if(isNil "TownSpawnRange") then {TownSpawnRange = 0;};
-if(isNil "TownSpawnTime") then {TownSpawnTime = 0;};
-if(isNil "GameMode") then {GameMode = 1;};
-if(isNil "LimitedWarfare") then {LimitedWarfare = 1;};
+private ["_VictoryTime","_VictoryScore","_VictoryTowns","_CapturableTowns","_FasterTime","_MinStartingDistance","_MiscSettings","_NeutralOpposition","_SideColorScheme","_StartTime","_Support","_TownSpawnRange","_TownSpawnTime","_GameMode","_LimitedWarfare"];
 
-BIS_Warfare_completed = true;
+if(isNil "CRB_LOCS") then {
+	CRB_LOCS = [] call mso_core_fnc_initLocations;
+};
+
+if(isNil "paramsArray") then {
+	_VictoryTime = -1;
+	_VictoryScore = -1;
+	_VictoryTowns = -1;
+	_CapturableTowns = -1;
+	_FasterTime = 0;
+	_MinStartingDistance = 2500;
+	_MiscSettings = 2;
+	_NeutralOpposition = 2;
+	_SideColorScheme = 0;
+	_StartTime = -1;
+	_Support = 4;
+	_TownSpawnRange = 8;
+	_TownSpawnTime = 450;
+	_GameMode = 1;
+	_LimitedWarfare = 1;
+	paramsArray = [
+		_VictoryTime,
+		_VictoryScore,
+		_VictoryTowns,
+		_CapturableTowns,
+		_FasterTime,
+		_MinStartingDistance,
+		_MiscSettings,
+		_NeutralOpposition,
+		_SideColorScheme,
+		_StartTime,
+		_Support,
+		_TownSpawnRange,
+		_TownSpawnTime,
+		_GameMode,
+		_LimitedWarfare
+	];
+};
+

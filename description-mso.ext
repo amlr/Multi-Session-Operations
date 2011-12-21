@@ -5,7 +5,7 @@
 
 //http://community.bistudio.com/wiki/Description.ext#Respawn...
 respawn = 3;
-respawnDelay = 10;
+respawnDelay = 15;
 disabledAI = 1;
 respawnDialog = false;
 
@@ -26,6 +26,10 @@ class CfgSounds {
 
 //http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
 class Params {
+#ifdef BIS_WARFARE
+// BIS Warfare Params must go first
+	#include <enemy\modules\BIS_Warfare\params.hpp>
+#endif
 #ifdef RMM_DEBUG
 	#include <core\modules\debug\params.hpp>
 #endif
@@ -97,9 +101,6 @@ class Params {
 #endif
 #ifdef WICT_ENEMYPOP
 	#include <enemy\modules\WICT_enemypop\params.hpp>
-#endif
-#ifdef BIS_WARFARE
-	#include <enemy\modules\BIS_Warfare\params.hpp>
 #endif
 }; 
 

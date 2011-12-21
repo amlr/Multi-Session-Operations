@@ -1,10 +1,3 @@
-	class BISWarfare {
-	        title = "BIS Warfare"; 
-        	values[]= {0}; 
-	        texts[]= {" "}; 
-        	default = 0;
-	};
-
 	//Victory Conditions.
 	class VictoryTime
 	{
@@ -60,7 +53,7 @@
 		title = $STRWFMISCSETTINGS;
 		values[] = {0,1,2,3};
 		texts[] = {$STRWFALLON,$STRWFALLOFF,$STRWFNOCIVS,$STRWFNOGRASS};
-		default = 0;
+		default = 2;
 	};
 
 	class NeutralOpposition
@@ -82,8 +75,10 @@
 	class StartTime
 	{
 		title = $STRWFSTARTTIME;
-		values[] = {-1,100,5,7,11,12,14,18,22,2};
-		texts[] = {$STRWFMISSIONDEFAULT,$STRWFRANDOM,$STRWFEARLYMORNING,$STRWFMORNING,$STRWFEARLYAFTERNOON,$STRWFAFTERNOON,$STRWFLATEAFTERNOON,$STRWFEVENING,$STRWFNIGHT,$STRWFLATENIGHT};
+		//values[] = {-1,100,5,7,11,12,14,18,22,2};
+		//texts[] = {$STRWFMISSIONDEFAULT,$STRWFRANDOM,$STRWFEARLYMORNING,$STRWFMORNING,$STRWFEARLYAFTERNOON,$STRWFAFTERNOON,$STRWFLATEAFTERNOON,$STRWFEVENING,$STRWFNIGHT,$STRWFLATENIGHT};
+		values[] = {-1};
+		texts[] = {$STRWFMISSIONDEFAULT};
 		default = -1;
 	};
 
