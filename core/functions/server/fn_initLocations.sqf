@@ -121,6 +121,7 @@ switch toLower(worldName) do {
                 CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
         };
         case "tup_qom": {
+                [] call mso_core_fnc_createLocations;
                 {(createVehicle ["HeliH", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
 			[[1636.63,7338.07], 0],
 			[[4311.03,8714.72], 4],
