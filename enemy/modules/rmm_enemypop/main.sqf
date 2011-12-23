@@ -15,7 +15,7 @@ private ["_debug","_d","_camp","_flag"];
 if(!isServer) exitWith{};
 
 _debug = true;
-if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 1;};
+if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 3;};
 ep_dist = 2000;
 ep_groups = [];
 ep_total = 0;
@@ -39,18 +39,18 @@ fPlayersInside = {
 };
 
 for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
-        private ["_x","_group","_pos","_type"];
-	_x = CRB_LOCS select _i;
+        private ["_loc","_group","_pos","_type"];
+	_loc = CRB_LOCS select _i;
         _group = grpNull;
         _type = "";
         _pos = [];
 
-        if(!([position _x, ep_dist] call fPlayersInside)) then {
-                if (type _x == "Hill") then {
+        if(!([position _loc, ep_dist] call fPlayersInside)) then {
+                if (type _loc == "Hill") then {
                         if (random 1 > 0.33) then {
                                 ep_total = ep_total + 1;
                                 _d = 500;
-                                _pos = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
+                                _pos = [position _loc, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];
@@ -131,11 +131,11 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                 }, 3, [_pos, _flag, _type]] call mso_core_fnc_addLoopHandler;
                         };
                 };
-                if (type _x in ["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"]) then {
+                if (type _loc in ["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"]) then {
                         if (random 1 > 0.5) then {
                                 ep_total = ep_total + 1;
                                 _d = 800;
-                                _pos = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
+                                _pos = [position _loc, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];
@@ -153,10 +153,10 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8","citybase01","cityBase02","cityBase03","cityBase04"];
                                                 f_builder = mso_core_fnc_createCompositionE;
                                         };
-                                        if("RU" in MSO_FACTIONS && type _x == "Airport") then {
+                                        if("RU" in MSO_FACTIONS && type _loc == "Airport") then {
                                                 _camp = ["airplane_park_ru1"];
                                         };
-                                        if("BIS_TK" in MSO_FACTIONS && type _x == "Airport") then {
+                                        if("BIS_TK" in MSO_FACTIONS && type _loc == "Airport") then {
                                                 _camp = ["airplane_park_tk1"];
                                         };
                                         _camp = _camp call BIS_fnc_selectRandom;
@@ -208,11 +208,11 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                 }, 3, [_pos, _flag, _type]] call mso_core_fnc_addLoopHandler;
                         };
                 };
-                if (type _x in ["FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown"]) then {
+                if (type _loc in ["FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown"]) then {
                         if (random 1 > 0.66) then {
                                 ep_total = ep_total + 1;
                                 _d = 400;
-                                _pos = [position _x, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
+                                _pos = [position _loc, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];
@@ -293,11 +293,11 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                 }, 3, [_pos, _flag, _type]] call mso_core_fnc_addLoopHandler;
                         };
                 };
-                if (type _x in ["ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"]) then {
+                if (type _loc in ["ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"]) then {
                         if (random 1 > 0.75) then {
                                 ep_total = ep_total + 1;
                                 _d = 300;
-                                _pos = [position _x, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
+                                _pos = [position _loc, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];
