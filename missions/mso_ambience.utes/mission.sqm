@@ -63,7 +63,7 @@ class Mission
 					id=0;
 					side="WEST";
 					vehicle="BAF_Soldier_TL_W";
-					player="PLAY CDG";
+					player="PLAYER COMMANDER";
 					leader=1;
 					rank="CORPORAL";
 					skill=0.33333331;
@@ -71,7 +71,6 @@ class Mission
 				class Item1
 				{
 					position[]={3469.7537,18.89266,3650.7329};
-					special="FLY";
 					id=1;
 					side="WEST";
 					vehicle="AW159_Lynx_BAF";
@@ -86,7 +85,7 @@ class Mission
 					id=2;
 					side="WEST";
 					vehicle="BAF_Soldier_W";
-					player="PLAYER COMMANDER";
+					player="PLAY CDG";
 					skill=0.2;
 				};
 				class Item3
