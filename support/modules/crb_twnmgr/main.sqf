@@ -1,3 +1,4 @@
+private ["_locs"];
 if(isNil "TownManager")then{TownManager = 1;};
 if (TownManager == 0) exitWith{};
 
@@ -13,14 +14,8 @@ if(isNil "twnmgr_tasks")then{twnmgr_tasks = 1;};
 
 diag_log format["MSO-%1 Town Manager - Starting", time];
 
-private ["_locs"];
-
 // Get location objects nearest each CityCenter
-_locs = [];
-{
-	_locs = _locs + [(nearestLocations [position _x, ["CityCenter","NameCityCapital","NameCity","NameVillage","Airport","Strategic","VegetationVineyard"], 100]) select 0];
-} foreach (bis_functions_mainscope getvariable "locations");
-
+_locs = bis_functions_mainscope getvariable "locations";
 diag_log format["MSO-%1 Town Manager - Locations: %1", count _locs];
 
 CRB_whichSideText = {
@@ -146,14 +141,20 @@ CRB_createSeizedTrigger = {
 
 // Setup triggers per location
 {
-        private ["_size","_name", "_pos","_trg","_type"];
-        // Get the town size
-        _size = size _x select 0;
-	if(_size < 250) then {_size = 250;};
-        _name = text _x;
+        private ["_size","_name", "_pos","_trg","_type","_loc"];
         _pos = position _x;
+        _loc = (nearestLocations [_pos, ["CityCenter","NameCityCapital","NameCity","NameVillage","Airport","Strategic","VegetationVineyard"], 100]) select 0;
 
-		if(twnmgr_status == 1) then {
+        _name = _x getVariable "name";
+        _size = 250;
+        if(!isNil "_loc") then {
+                // Get the town size
+                _size = (size _loc) select 0;
+                if(_size < 250) then {_size = 250;};
+                _name = name _loc;
+        };
+        
+        if(twnmgr_status == 1) then {
                 _type = "ELLIPSE";
         } else {
                 _type = "ICON";
