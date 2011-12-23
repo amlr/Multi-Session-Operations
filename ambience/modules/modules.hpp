@@ -10,8 +10,5 @@
 #define RMM_CTP
 #define TUP_AIRTRAFFIC
 #define TUP_SEATRAFFIC
-
-// -- Pending --
-
 #define CRB_DESTROYCITY
 #define AEG
