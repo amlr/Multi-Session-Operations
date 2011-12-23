@@ -86,10 +86,12 @@ if(count _this > 0) then {
                                                         format["m_%1",_name] setMarkerPos _pos;
                                                 };
                                         };
+
+					sleep 3;
                                 };
 
 				CRBPROFILERSTOP
-                        }, 3, [_name, _grp, _maxdist, _debug]] call mso_core_fnc_addLoopHandler;
+                        }, 1, [_name, _grp, _maxdist, _debug]] call mso_core_fnc_addLoopHandler;
                 };
         };
 } forEach CRB_LOCS;
