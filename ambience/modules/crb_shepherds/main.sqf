@@ -220,7 +220,7 @@ CRB_fnc_createHerd = {
         };
         
         // Create animals
-        for "_i" from 0 to 6 + floor(random 12) do {
+        for "_i" from 0 to 6 + floor(random 6) do {
                 _h = (createGroup civilian) createUnit [(_herdClass call BIS_fnc_selectRandom), _pos, [], 30, "NONE"];
                 _h setSkill 0;
                 _h allowFleeing 1;
