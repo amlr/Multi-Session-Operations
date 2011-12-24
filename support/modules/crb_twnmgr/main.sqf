@@ -126,7 +126,7 @@ CRB_createSeizedTrigger = {
         
         if(!CRB_TownMgr_debug) then {
                 _trg = _trg select 0;
-		_trg setTriggerTimeout [15, 30, 90, false];
+				_trg setTriggerTimeout [120, 210, 300, true];
         } else {
                 diag_log format["MSO-%1 Town Manager - %2", time, _trg];
         };
