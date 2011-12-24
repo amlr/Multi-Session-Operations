@@ -145,11 +145,11 @@ CRB_createSeizedTrigger = {
         private ["_size","_name", "_pos","_trg","_type","_loc"];
         _pos = position _x;
 		_name = _x getVariable "name";
-		if (isNil "bis_alice_mainscope") then {
-			_size = 250;
-		} else {
-			_size = _x getVariable ["ALICE_townsize", bis_alice_mainscope getVariable "ALICE_townsize"];	// needs alice to be running
-		};
+		//if (isNil "bis_alice_mainscope") then {
+		_size = 250;
+		//} else {
+		//	_size = _x getVariable ["ALICE_townsize", bis_alice_mainscope getVariable "ALICE_townsize"];	// needs alice to be running
+		//};
 		
 		// Get location object nearest each CityCenter (City Centers typically don't have text friendly names)
         _loc = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Airport","Strategic","VegetationVineyard","NameLocal"], _size]) select 0;
