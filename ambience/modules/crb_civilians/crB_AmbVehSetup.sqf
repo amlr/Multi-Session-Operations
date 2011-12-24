@@ -12,7 +12,7 @@ waitUntil{!isNil "BIS_fnc_init"};
 waitUntil{!isNil "BIS_silvie_mainscope"};
 
 // http://community.bistudio.com/wiki/Ambient_Civilian_Vehicles
-//BIS_silvie_mainscope setVariable ["debug", true, true];
+//BIS_silvie_mainscope setVariable ["debug", true];
 
 // list of places where vehicles will be spawned. Can be location logic (created by BIS_fnc_locations), array in format [center,distance] or trigger. 
 // BIS_silvie_mainscope setVariable ["townlist", [bis_loc_acityc_mogilevka,[position this,3000],trigger1]]; 
@@ -37,6 +37,9 @@ BIS_silvie_mainscope setVariable ["vehicleRarity",[
 switch toLower(worldName) do {		
         case "chernarus": {
                 BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 1.0)"];
+        };
+        case "cmr_cicada": {
+                BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 0.5)"];
         };
         case "eden": {
                 BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 0.75)"];

@@ -20,7 +20,7 @@ waitUntil{!isNil "BIS_alice_mainscope"};
 BIS_ALICE2_fnc_civilianSet = compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\fn_civilianSet.sqf";
 
 // See http://community.bistudio.com/wiki/Ambient_Civilians
-//BIS_alice_mainscope setVariable ["debug", true, true];
+//BIS_alice_mainscope setVariable ["debug", true];
 
 // list of places where civilians will be spawned. Can be location logic (created by BIS_fnc_locations), array in format [center,distance] or trigger. 
 // BIS_alice_mainscope setVariable ["townlist",[bis_loc_acityc_mogilevka,[position this,3000],trigger1]]; 
@@ -45,6 +45,13 @@ switch toLower(worldName) do {
 		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"]; 
                 [] spawn compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";        
         };        
+        case "cmr_cicada": {      
+                BIS_alice_mainscope setvariable ["trafficDistance",1000];             
+                BIS_alice_mainscope setvariable ["spawnDistance",700];            
+                BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];                
+		BIS_alice_mainscope setVariable ["civilianCount","round (3 * (sqrt %1))"]; 
+                [] spawn compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
+        };       
         case "eden": {                
                 BIS_alice_mainscope setvariable ["trafficDistance",700];                
                 BIS_alice_mainscope setvariable ["spawnDistance",350];                
