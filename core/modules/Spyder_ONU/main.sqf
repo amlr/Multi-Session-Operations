@@ -6,7 +6,7 @@ SPYDER001@COMCAST.NET
 _null = [] execVM "SPY\SPY_objectNetUpdate.sqf";
 ****************************************************************************/
 
-if(!isServer) exitWith{};
+if(!isDedicated) exitWith{};
 
 [] spawn {
         while {true} do {
