@@ -134,8 +134,13 @@ tup_airtraffic_getFactions = {
                 _factions = ["USMC"];
         } else {
                 // Work out side that controls destination (based on unit numbers)
-                _factions = [_airfieldside, _currentairfield, 1000,"factions",false,""] call mso_core_fnc_getFactions;
-                //_factionsCount = [_airfieldside, _currentairfield, 1000,"count",tup_airtraffic_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
+				if (tup_airtraffic_factions == 1) then {
+					_factions = TUP_CIVFACS;
+					_airfieldside = civilian;
+				} else {
+					_factions = [_airfieldside, _currentairfield, 1000,"factions",false,""] call mso_core_fnc_getFactions;
+					//_factionsCount = [_airfieldside, _currentairfield, 1000,"count",tup_airtraffic_debug,format["%1 %2",_destination,_j]] call mso_core_fnc_getFactions;
+				};
         };
         
         [_factions,_airfieldside];
