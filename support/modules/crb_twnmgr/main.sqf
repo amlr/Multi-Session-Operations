@@ -10,11 +10,11 @@ if(isNil "twnmgr_status")then{twnmgr_status = 1;};
 if(isNil "twnmgr_civ")then{twnmgr_civ = 1;};
 if(isNil "twnmgr_detected")then{twnmgr_detected = 1;};
 if(isNil "twnmgr_seized")then{twnmgr_seized = 1;};
-if(isNil "twnmgr_tasks")then{twnmgr_tasks = 1;};
+//if(isNil "twnmgr_tasks")then{twnmgr_tasks = 1;};
 
 diag_log format["MSO-%1 Town Manager - Starting", time];
 
-// Get location objects nearest each CityCenter
+// Manage/provide intel on each town/area with a city center
 _locs = bis_functions_mainscope getvariable "locations";
 diag_log format["MSO-%1 Town Manager - Locations: %1", count _locs];
 
@@ -133,27 +133,34 @@ CRB_createSeizedTrigger = {
 };        
 
 
+
 // Setup Trigger for map
+
 // Satellite Intel Trigger for OPFOR and BLUFOR
 
-// End Game Trigger?
-// Check to see if 1 side has seized all locations?
+// End Game Trigger? Check to see if 1 side has seized all locations?
 
 // Setup triggers per location
 {
         private ["_size","_name", "_pos","_trg","_type","_loc"];
         _pos = position _x;
-        _loc = (nearestLocations [_pos, ["CityCenter","NameCityCapital","NameCity","NameVillage","Airport","Strategic","VegetationVineyard"], 100]) select 0;
+		_name = _x getVariable "name";
+		if (isNil "bis_alice_mainscope") then {
+			_size = 250;
+		} else {
+			_size = _x getVariable ["ALICE_townsize", bis_alice_mainscope getVariable "ALICE_townsize"];	// needs alice to be running
+		};
+		
+		// Get location object nearest each CityCenter (City Centers typically don't have text friendly names)
+        _loc = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Airport","Strategic","VegetationVineyard","NameLocal"], _size]) select 0;
 
-        _name = _x getVariable "name";
-        _size = 250;
         if(!isNil "_loc") then {
-                // Get the town size
+                // Get the town size and town name
                 _size = (size _loc) select 0;
-                if(_size < 250) then {_size = 250;};
-                _name = name _loc;
+                if (_size < 250) then {_size = 250;};
+                _name = text _loc;
         };
-        
+		
         if(twnmgr_status == 1) then {
                 _type = "ELLIPSE";
         } else {

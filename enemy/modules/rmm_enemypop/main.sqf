@@ -14,7 +14,7 @@
 private ["_debug","_d","_camp","_flag"];
 if(!isServer) exitWith{};
 
-_debug = true;
+_debug = false;
 if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 3;};
 ep_dist = 2000;
 ep_groups = [];

@@ -15,7 +15,7 @@ if(!isServer) exitWith{};
 WICT_PATH = "enemy\modules\WICT_enemypop\";
 
 private ["_debug","_d","_camp","_flag","_WICTM","_WICTMN","_group","_pos2"];
-_debug = true;
+_debug = false;
 
 if(isNil "wict_ep_intensity")then{wict_ep_intensity = 1;};
 wict_ep_intensity = switch(wict_ep_intensity) do {
