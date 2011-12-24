@@ -68,12 +68,13 @@ for "_j" from 1 to _numconvoys do {
                 while{true} do {
                         CRBPROFILERSTART("CRB Convoys")
                         
-                        _startpos = ((_spawnpoints call BIS_fnc_selectRandom) nearRoads 100) call BIS_fnc_selectRandom;
-                        _startpos = [position _startpos, 0, 0, 0, 0, 10, 0] call BIS_fnc_findSafePos;
+                        // _startpos = ((_spawnpoints call BIS_fnc_selectRandom) nearRoads 200) call BIS_fnc_selectRandom; 
+						_startpos = _spawnpoints call BIS_fnc_selectRandom;
+                        _startpos = [_startpos, 0, 50, 0, 0, 10, 0] call BIS_fnc_findSafePos;
                         _destpos = (_convoydest call BIS_fnc_selectRandom);
-                        _destpos = [_destpos, 0, 50, 10, 0, 10, 0] call BIS_fnc_findSafePos;
-                        _endpos = ((_spawnpoints call BIS_fnc_selectRandom) nearRoads 100) call BIS_fnc_selectRandom;
-                        _endpos = [position _endpos, 0, 0, 0, 0, 10, 0] call BIS_fnc_findSafePos;
+                        _destpos = [_destpos, 0, 100, 10, 0, 10, 0] call BIS_fnc_findSafePos;
+                        _endpos = _spawnpoints call BIS_fnc_selectRandom;
+                        _endpos = [_endpos, 0, 50, 0, 0, 10, 0] call BIS_fnc_findSafePos;
                         _grp = nil;
                         _front = "";
                         while{isNil "_grp"} do {
