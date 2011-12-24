@@ -6,7 +6,7 @@ SPYDER001@COMCAST.NET
 _null = [] execVM "SPY\SPY_objectNetUpdate.sqf";
 ****************************************************************************/
 
-if(!isServer) exitWith{};
+if(!isDedicated) exitWith{};
 
 [] spawn {
         while {true} do {
@@ -16,7 +16,7 @@ if(!isServer) exitWith{};
                 {                                                
                         if (simulationEnabled _x) then {
                                 _x enableSimulation false;
-				_i = _i + 1;
+								_i = _i + 1;
                                 
                                 if (((typeOf _x) in ["HeliHEmpty"])) exitWith {};
                                 
@@ -26,7 +26,7 @@ if(!isServer) exitWith{};
                                 //player sideChat format ["OBJ: %1", _object];
                         };
 
-			if(time > _t) exitWith {};
+						if(time > _t) exitWith {};
                         
                 } forEach (((allMissionObjects "Static") + (allMissionObjects "Thing")) - (allMissionObjects "ThingEffect"));
 
