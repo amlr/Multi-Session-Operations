@@ -39,6 +39,7 @@ fPlayersInside = {
 };
 
 for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
+	if(_i >= count CRB_LOCS) exitWith{};
         private ["_loc","_group","_pos","_type"];
 	_loc = CRB_LOCS select _i;
         _group = grpNull;
