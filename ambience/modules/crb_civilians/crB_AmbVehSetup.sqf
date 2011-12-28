@@ -54,7 +54,7 @@ switch toLower(worldName) do {
                 BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 1.0)"];
         };
         case "utes": {
-                BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 0.75)"];
+                BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 0.5)"];
         };
         case "zargabad": {
                 BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 0.5)"];
