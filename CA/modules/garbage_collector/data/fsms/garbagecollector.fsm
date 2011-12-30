@@ -42,7 +42,7 @@ class FSM
        "" \n
        "//Initialize the queue." \n
        "private [""_queue""];" \n
-       "_collector setVariable [""queue"", [], true];" \n
+       "_collector setVariable [""queue"", []];" \n
        "" \n
        "//Compile the function that allows trashing of content." \n
        "BIS_GC_trashItFunc = compile (preprocessFileLineNumbers (_path + ""scripts\trashIt.sqf""));"/*%FSM</STATEINIT""">*/;
@@ -69,7 +69,7 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"_queue = _collector getVariable ""queue"";" \n
        "" \n
        "_auto = _collector getVariable ""auto"";" \n
-       "if(isNil ""_auto"") then {_collector setVariable [""auto"", true, true];};" \n
+       "if(isNil ""_auto"") then {_collector setVariable [""auto"", false];};" \n
        "if (_collector getVariable ""auto"" && time > _autotime) then {" \n
        "	{" \n
        "		if (!alive _x) then {" \n

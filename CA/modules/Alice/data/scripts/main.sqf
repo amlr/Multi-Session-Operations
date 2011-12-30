@@ -49,35 +49,35 @@ _logic setvariable ["debug",_debug];
 
 //--- Civilian init
 _initArray = if (isnil {_logic getvariable "initArray"}) then {[]} else {_logic getvariable "initArray";};
-_logic setvariable ["initArray",_initArray,true];
+_logic setvariable ["initArray",_initArray];
 
 //--- Spawn distance
 _distlimit = if (isnil {_logic getvariable "spawnDistance"}) then {1000} else {_logic getvariable "spawnDistance"};
-_logic setvariable ["spawnDistance",_distLimit,true];
+_logic setvariable ["spawnDistance",_distLimit];
 
 //--- Civilian count
 _civilianCount = if (isnil {_logic getvariable "civilianCount"}) then {"round (2 * (sqrt %1))"} else {_logic getvariable "civilianCount";};
-_logic setvariable ["civilianCount",_civilianCount,true];
+_logic setvariable ["civilianCount",_civilianCount];
 
 //--- Civilian actions
 _actionCategories = if (isnil {_logic getvariable "civilianActions"}) then {["BIS"]} else {_logic getvariable "civilianActions";};
-_logic setvariable ["civilianActions",_actionCategories,true];
+_logic setvariable ["civilianActions",_actionCategories];
 
 //--- Civilian conversations
 _kbCategories = if (isnil {_logic getvariable "civilianConversations"}) then {["BIS"]} else {_logic getvariable "civilianConversations";};
-_logic setvariable ["civilianConversations",_kbCategories,true];
+_logic setvariable ["civilianConversations",_kbCategories];
 
 //--- Object blacklist
 _blacklist = if (isnil {_logic getvariable "blacklist"}) then {[]} else {_logic getvariable "blacklist";};
-_logic setvariable ["blacklist",_blacklist,true];
+_logic setvariable ["blacklist",_blacklist];
 
 //--- Spawn distance
 _respectModifyCoef = if (isnil {_logic getvariable "respectModifyCoef"}) then {0.15} else {_logic getvariable "respectModifyCoef"};
-_logic setvariable ["respectModifyCoef",_respectModifyCoef,true];
+_logic setvariable ["respectModifyCoef",_respectModifyCoef];
 
 //--- ThreatDecay
 _threatDecay = if (isnil {_logic getvariable "threatDecay"}) then {0.07} else {_logic getvariable "threatDecay"};
-_logic setvariable ["threatDecay",_threatDecay,true];
+_logic setvariable ["threatDecay",_threatDecay];
 
 
 //--- Town list
@@ -90,7 +90,7 @@ _twnlist = [];
 		if ((_x getvariable "type") == "CityCenter") then {_twnlist = _twnlist + [_x]};
 	} foreach (bis_functions_mainscope getvariable "locations");
 
-	_logic setvariable ["townlist",_twnlist,true];
+	_logic setvariable ["townlist",_twnlist];
 } else {
 	_twnlistTemp = _logic getvariable "townlist";
 	{
@@ -288,18 +288,18 @@ _twnrespect = ["SET"] call BIS_fnc_respect;
 	_name = _x getvariable "name";
 	textLogFormat ["Log: ALICE: Initializing ...",_name];
 //	_pos = position _x;
-	if (isnil {_x getvariable "respect"}) then {_x setVariable ["respect",_twnrespect,true]};
-	_x setvariable ["ALICE_threat",-1,true];
-	_x setvariable ["ALICE_status","black",true];
-	_x setVariable ["ALICE_population",[],true];
-	_x setVariable ["ALICE_populationActive",[],true];
-	_x setVariable ["ALICE_populationCountDef",-1,true];
-	_x setVariable ["ALICE_populationCoef",0,true];
-	_x setVariable ["ALICE_playersNear",false,true];
-	_x setVariable ["ALICE_forcePopulation",false,true];
+	if (isnil {_x getvariable "respect"}) then {_x setVariable ["respect",_twnrespect]};
+	_x setvariable ["ALICE_threat",-1];
+	_x setvariable ["ALICE_status","black"];
+	_x setVariable ["ALICE_population",[]];
+	_x setVariable ["ALICE_populationActive",[]];
+	_x setVariable ["ALICE_populationCountDef",-1];
+	_x setVariable ["ALICE_populationCoef",0];
+	_x setVariable ["ALICE_playersNear",false];
+	_x setVariable ["ALICE_forcePopulation",false];
 	_x setvariable ["doorcountdef",0];
 	_fsm = [_x,_classlist] execfsm (_BIS_Alice_path + "fsms\alice.fsm");
-	_x setvariable ["ALICE_fsm",_fsm,true];
+	_x setvariable ["ALICE_fsm",_fsm];
 	//if (_x == bis_loc_acityc_khelm) then {diag_debugfsm _fsm};
 
 	//sleep .1;

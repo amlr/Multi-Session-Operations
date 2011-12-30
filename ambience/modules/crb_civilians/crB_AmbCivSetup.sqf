@@ -20,7 +20,7 @@ waitUntil{!isNil "BIS_alice_mainscope"};
 BIS_ALICE2_fnc_civilianSet = compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\fn_civilianSet.sqf";
 
 // See http://community.bistudio.com/wiki/Ambient_Civilians
-//BIS_alice_mainscope setVariable ["debug", true, true];
+//BIS_alice_mainscope setVariable ["debug", true];
 
 // list of places where civilians will be spawned. Can be location logic (created by BIS_fnc_locations), array in format [center,distance] or trigger. 
 // BIS_alice_mainscope setVariable ["townlist",[bis_loc_acityc_mogilevka,[position this,3000],trigger1]]; 
@@ -43,24 +43,24 @@ switch toLower(worldName) do {
                 BIS_alice_mainscope setvariable ["spawnDistance",700];                
                 BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];                
 		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"]; 
-                [] spawn compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";        
+                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";        
         };        
         case "eden": {                
                 BIS_alice_mainscope setvariable ["trafficDistance",700];                
                 BIS_alice_mainscope setvariable ["spawnDistance",350];                
                 BIS_alice_mainscope setVariable ["townsFaction",["cwr2_civ","CIV_RU"]];                
-                [] spawn compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";        
+                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
         };
         case "fallujah": {                
-                BIS_alice_mainscope setvariable ["trafficDistance",600, true];      
-                BIS_alice_mainscope setvariable ["spawnDistance",250, true];      
+                BIS_alice_mainscope setvariable ["trafficDistance",600];      
+                BIS_alice_mainscope setvariable ["spawnDistance",250];      
                 BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"]];
 	};  
         case "isladuala": {      
                 BIS_alice_mainscope setvariable ["trafficDistance",1000];             
                 BIS_alice_mainscope setvariable ["spawnDistance",700];            
                 BIS_alice_mainscope setVariable ["civilianCount","round (5 * (sqrt %1))"];   
-                [] spawn compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
+                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
         };       
         case "takistan": {   
                 BIS_alice_mainscope setvariable ["trafficDistance",1000];      
@@ -70,15 +70,15 @@ switch toLower(worldName) do {
                 BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"]];
         };   
         case "torabora": {       
-                BIS_alice_mainscope setvariable ["trafficDistance",1500, true];       
-                BIS_alice_mainscope setvariable ["spawnDistance",600, true];        
+                BIS_alice_mainscope setvariable ["trafficDistance",1500];       
+                BIS_alice_mainscope setvariable ["spawnDistance",600];        
                 BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"]];  
         };
         case "utes": {        
                 BIS_alice_mainscope setvariable ["trafficDistance",650];      
                 BIS_alice_mainscope setvariable ["spawnDistance",500];       
                 BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];  
-                [] spawn compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";
+                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
         };
         case "zargabad": { 
                 BIS_alice_mainscope setvariable ["trafficDistance",750];      
@@ -96,11 +96,11 @@ switch toLower(worldName) do {
 // Artificial coeficient to set how much will be town's respect decreased once some civilian is hit or killed.
 // The higher the number is, the more is respect towards killer's faction decreased. 
 // BIS_alice_mainscope setVariable ["respectModifyCoef",0.15]; 
-BIS_alice_mainscope setvariable ["respectModifyCoef", 0.7, true]; 
+BIS_alice_mainscope setvariable ["respectModifyCoef", 0.7]; 
 
 // Value which is removed from town threat every 5 seconds (until threat reaches 0) 
 // BIS_alice_mainscope setVariable ["threatDecay",0.07 ];
-BIS_alice_mainscope setvariable ["threatDecay", 0.00005, true];
+BIS_alice_mainscope setvariable ["threatDecay", 0.00005];
 
 // array of codes which is executed upon every civilian unit created. 
 // [BIS_alice_mainscope,"ALICE_civilianinit",[{_this addweapon "Mk_48"}]] call bis_fnc_variablespaceadd; 
