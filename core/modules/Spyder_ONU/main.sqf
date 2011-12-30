@@ -16,7 +16,7 @@ if(!isDedicated) exitWith{};
                 {                                                
                         if (simulationEnabled _x) then {
                                 _x enableSimulation false;
-								_i = _i + 1;
+				_i = _i + 1;
                                 
                                 if (((typeOf _x) in ["HeliHEmpty"])) exitWith {};
                                 
@@ -26,7 +26,7 @@ if(!isDedicated) exitWith{};
                                 //player sideChat format ["OBJ: %1", _object];
                         };
 
-						if(time > _t) exitWith {};
+			if(time > _t) exitWith {};
                         
                 } forEach (((allMissionObjects "Static") + (allMissionObjects "Thing")) - (allMissionObjects "ThingEffect"));
 

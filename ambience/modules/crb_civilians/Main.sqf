@@ -1,6 +1,6 @@
 if(isNil "ambientEnvironment") then {ambientEnvironment = 1;};
 
-if(isServer) then {
+if(isServer && ambientEnvironment == 1) then {
         private["_debug","_logicCiv","_logicVeh","_logicAni"];
         
         _debug = false;
@@ -24,7 +24,7 @@ if(isServer) then {
                         _logicCiv setvariable ["debug", true];
                 };
                 BIS_alice_mainscope setVariable ["townlist",(BIS_functions_mainscope getVariable "locations")];
-                //		_ok = [_logicCiv] execVM "ca\modules\alice\data\scripts\main.sqf";
+                //_ok = [_logicCiv] execVM "ca\modules\alice\data\scripts\main.sqf";
                 _ok = [_logicCiv] execVM "ca\modules_e\alice2\data\scripts\main.sqf";
 	        [] call compile preprocessfilelinenumbers "ambience\modules\crb_civilians\crB_AmbCivSetup.sqf";
         };
