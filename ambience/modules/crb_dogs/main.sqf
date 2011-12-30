@@ -45,8 +45,9 @@ if(count _this > 0) then {
                         [{
 				CRBPROFILERSTART("Wild dogs")
 
-                                private ["_pos","_name","_debug","_params","_grp","_maxdist","_leader"];
+                                private ["_pos","_name","_debug","_params","_grp","_maxdist","_leader","_handle"];
                                 _params = _this select 0;
+                                _handle = _this select 1;
                                 _name = _params select 0;
                                 _grp = _params select 1;
                                 _maxdist = _params select 2;
@@ -73,7 +74,7 @@ if(count _this > 0) then {
                                                 if(_debug) then {player globalChat format["Destroying %1", _name];};
 						diag_log format["MSO-%1 Dog Packs destroying %2", time, _name];
                                                 {deleteVehicle _x} foreach units _grp;
-                                                [_grp getVariable "handle"] call mso_core_fnc_removeLoopHandler;
+                                                [_handle] call mso_core_fnc_removeLoopHandler;
                                         };
                                         
                                         if (_grp getVariable "wait" < time) then {
