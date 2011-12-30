@@ -44,8 +44,9 @@ player addeventhandler ["respawn", {
                         };
                 };
                 
-                removeallweapons _corpse;
-                removeallitems _corpse;
-                removebackpack _corpse;
         };
+
+        removeallweapons _corpse;
+        removeallitems _corpse;
+        removebackpack _corpse;
 }];

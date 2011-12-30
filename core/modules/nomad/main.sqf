@@ -47,7 +47,7 @@ _s_nomad = [
         },
         {
                 {player removemagazine _x;} foreach (magazines player);
-                if(!isNil "CBA_fnc_AddMagazineVerified") then {
+                if(!isNil "CBA_fnc_AddMagazineVerified" && !isClass(configFile>>"CfgPatches">>"ace_main")) then {
                         {[player, _x, 1] call CBA_fnc_AddMagazineVerified;} foreach _this;
                 } else {
                         {player addmagazine _x;} foreach _this;
