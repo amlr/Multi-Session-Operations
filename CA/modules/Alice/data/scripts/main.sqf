@@ -37,7 +37,7 @@ if (isnil "bis_fnc_init") then {
 waituntil {!isnil "BIS_fnc_init"};
 
 //--- Dummy door
-_AIdoor = "BIS_alice_emptydoor" createvehicle [1000,10,10];
+_AIdoor = "BIS_alice_emptydoor" createvehicleLocal [1000,10,10];
 _logic setvariable ["dummydoor",_AIdoor];
 
 ///////////////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,4 @@
-if(isNil "ambientEnvironment") then {ambientEnvironment = 1;};
-
-if(isServer && ambientEnvironment == 1) then {
+if(isServer) then {
         private["_debug","_logicCiv","_logicVeh","_logicAni"];
         
         _debug = false;
