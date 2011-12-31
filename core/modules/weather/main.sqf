@@ -27,7 +27,7 @@ CRB_randomFog = {
 	} else {
 	        _value = 0;
 	};
-       	_delay = 300 + random 3300; // finish
+       	_delay = 300 + random 300; // finish
         
         [fog, _value, time, time + _delay];
 };
