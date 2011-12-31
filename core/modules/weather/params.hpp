@@ -20,9 +20,9 @@ class timeSync {
 
 class timeDiff {
         title = "    Acceptable Time Desync";
-        values[] = {60,120,300,600,1200};
-        texts[] = {"1 min","2 mins","5 mins","10 mins","20 mins"};
-        default = 300;
+        values[] = {2,5,10,20};
+        texts[] = {"2 mins","5 mins","10 mins","20 mins"};
+        default = 5;
 };
 
 class timeOptions {
