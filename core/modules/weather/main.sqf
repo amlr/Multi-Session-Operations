@@ -6,7 +6,7 @@ CRB_timeSync = {
         private["_stime","_sdiff"];
         _stime = _this select 0;
         _sdiff = (((datetonumber date) - (datetonumber _stime)) * 365 * 24 * 60);
-        if(abs(_sdiff) > 2) then {
+        if(abs(_sdiff) > timeDiff) then {
                 player sideChat format["Time syncing (%1=>%2)...", date, _stime];
                 setDate _stime;
         };
@@ -69,8 +69,8 @@ if (isserver) then {
                 // Random
                 case 1: {
                         _currentDate = date;
-			_currentDate set [1, [12,3,6,9] call BIS_fnc_selectRandom];
-			_currentDate set [2, 22];
+						_currentDate set [1, [12,3,6,9] call BIS_fnc_selectRandom];
+						_currentDate set [2, 22];
                         _currentDate set [3, floor(random 24)];
                         _currentDate set [4, floor(random 60)];
                         setDate _currentDate;
@@ -78,8 +78,8 @@ if (isserver) then {
                 // Custom
                 case 2: {
                         _currentDate = date;
-			_currentDate set [1, timeSeasons];
-			_currentDate set [2, 22];
+						_currentDate set [1, timeSeasons];
+						_currentDate set [2, 22];
                         _currentDate set [3, timeHour];
                         _currentDate set [4, timeMinute];
                         setDate _currentDate;
@@ -112,22 +112,22 @@ if (isserver) then {
         
         [{               
                 private ["_oend","_fend","_rend","_publish"];
-		_publish = false;
+				_publish = false;
                 _oend = RMM_w select 3;               
                 _fend = RMM_w select 7;
                 _rend = RMM_w select 11;
 
                 if (time > _oend) then {
                         RMM_o = call CRB_randomOvercast;                                
-			_publish = true;
+						_publish = true;
                 };
                 if (time > _fend) then {
                         RMM_f = call CRB_randomFog;
-			_publish = true;
+						_publish = true;
                 };
                 if (time > _rend) then {
                         RMM_r = call CRB_randomRain;
-			_publish = true;
+						_publish = true;
                 };
 		if (_publish) then {
 	                RMM_w = RMM_o + RMM_f + RMM_r;
@@ -136,13 +136,7 @@ if (isserver) then {
 		};
         }, 30, []] call mso_core_fnc_addLoopHandler;
         
-	[{CRB_t = [date]; publicvariable "CRB_t";}, 60, []] call mso_core_fnc_addLoopHandler;
-        
-        // On every JIP connect, publish latest time
-        onPlayerConnected {
-                CRB_t = [date];
-                publicvariable "CRB_t";
-        };
+	[{CRB_t = [date]; publicvariable "CRB_t";}, timeSync, []] call mso_core_fnc_addLoopHandler;
         
 } else {
         "CRB_t" addPublicVariableEventHandler {CRB_t call CRB_timeSync;};

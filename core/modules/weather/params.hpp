@@ -11,6 +11,20 @@ class disableFog {
         default = 0;
 };
 
+class timeSync {
+        title = "    Time Sync Check";
+        values[] = {60,300,600,3600,7200};
+        texts[] = {"1 min","5 mins","10 mins","1 hour","2 hours"};
+        default = 300;
+};
+
+class timeDiff {
+        title = "    Acceptable Time Desync";
+        values[] = {60,120,300,600,1200};
+        texts[] = {"1 min","2 mins","5 mins","10 mins","20 mins"};
+        default = 300;
+};
+
 class timeOptions {
         title = "    Time Options";
         values[] = {0,1,2};
