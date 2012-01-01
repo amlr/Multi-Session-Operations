@@ -19,7 +19,7 @@ if(isNil "paramsArray") then {
 	_TownSpawnRange = 0;
 	_TownSpawnTime = 0;
 	_GameMode = 1;
-	_LimitedWarfare = 1;
+	_LimitedWarfare = 0;
 	paramsArray = [
 		_VictoryTime,
 		_VictoryScore,
