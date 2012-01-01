@@ -25,7 +25,7 @@ class Mission
 	class Intel
 	{
 		briefingName="MSO16 A2Free CTI CDF vs INS v4.0";
-		briefingDescription="CDF and Insurgents fight over Chernarus (A2Free)";
+		briefingDescription="An MSO Team Development (A2Free)";
 		resistanceWest=0;
 		startWeather=0;
 		forecastWeather=0.15976299;

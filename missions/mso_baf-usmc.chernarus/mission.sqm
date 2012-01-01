@@ -91,7 +91,7 @@ class Mission
 	class Intel
 	{
 		briefingName="MSO BAF/USMC vs RU/INS v4.0";
-		briefingDescription="An AAF/AEF CTB Development";
+		briefingDescription="An MSO Tead Development (A2CO)";
 		startWeather=0;
 		forecastWeather=0.30342692;
 		year=2011;

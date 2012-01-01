@@ -41,7 +41,7 @@ class Mission
 	class Intel
 	{
 		briefingName="MSO GUE vs RU v4.0";
-		briefingDescription="An MSO Team Development";
+		briefingDescription="An MSO Team Development (A2CO)";
 		startWeather=0.10000002;
 		forecastWeather=0.7465229;
 		year=2011;

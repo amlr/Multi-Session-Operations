@@ -74,7 +74,7 @@ class Mission
 	class Intel
 	{
 		briefingName="MSO BAF/USA vs TK_GUE v4.0";
-		briefingDescription="An AAF/AEF CTB Collaboration";
+		briefingDescription="An MSO Team Development (A2CO)";
 		resistanceWest=0;
 		resistanceEast=1;
 		startWeather=0.28730148;
