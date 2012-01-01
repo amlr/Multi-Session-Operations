@@ -630,8 +630,6 @@ _spawnpoints = [];
         };
 } forEach CRB_LOCS;
 
-if(count _spawnpoints == 0) then {_spawnpoints = bis_functions_mainscope getvariable "locations";};
-
 waitUntil{!isNil "bis_alice_mainscope"};
 
 // Pick a civilian class and civilian vehicle class
