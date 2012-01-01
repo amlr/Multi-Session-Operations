@@ -66,7 +66,7 @@ switch toLower(worldName) do {
 // randomly lock and vary fuel
 
 BIS_silvie_mainscope setVariable ["vehicleInit",{
-        if (random 1>0.6) then {
+	if(random 1 > 0.6) then {
 		clearMagazineCargo _this;
 		clearWeaponCargo _this;
 	};
