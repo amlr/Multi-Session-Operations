@@ -73,7 +73,7 @@ class Mission
 	randomSeed=10170483;
 	class Intel
 	{
-		briefingName="BAF/USA vs TK_GUE MSO v3.42";
+		briefingName="MSO BAF/USA vs TK_GUE v4.0";
 		briefingDescription="An AAF/AEF CTB Collaboration";
 		resistanceWest=0;
 		resistanceEast=1;

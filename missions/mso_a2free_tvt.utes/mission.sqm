@@ -82,7 +82,7 @@ class Mission
 	randomSeed=13948913;
 	class Intel
 	{
-		briefingName="MSO TvT USMC vs GUE v4.0";
+		briefingName="MSO A2Free TvT USMC vs GUE v4.0";
 		briefingDescription="An MSO Team Development (A2Free)";
 		resistanceWest=0;
 		resistanceEast=1;

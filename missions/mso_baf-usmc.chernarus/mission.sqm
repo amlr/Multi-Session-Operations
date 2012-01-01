@@ -90,7 +90,7 @@ class Mission
 	randomSeed=6553103;
 	class Intel
 	{
-		briefingName="BAF/USMC vs RU/INS MSO v3.43c";
+		briefingName="MSO BAF/USMC vs RU/INS v4.0";
 		briefingDescription="An AAF/AEF CTB Development";
 		startWeather=0;
 		forecastWeather=0.30342692;

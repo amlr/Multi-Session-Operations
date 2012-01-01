@@ -137,7 +137,7 @@ class Mission
 	randomSeed=7826758;
 	class Intel
 	{
-		briefingName="BAF USA vs TAK GUER MSO CLAFGHAN 4.0";
+		briefingName="MSO70 ACE BAF USA vs TAK GUER v4.0";
 		resistanceWest=0;
 		resistanceEast=1;
 		startWeather=0.44999999;

@@ -119,7 +119,7 @@ class Mission
 	randomSeed=6553103;
 	class Intel
 	{
-		briefingName="BAF/USMC vs RU/INS ACE MSO";
+		briefingName="MSO ACE BAF/USMC vs RU/INS v4.0";
 		startWeather=0;
 		forecastWeather=0.30342692;
 		year=2011;

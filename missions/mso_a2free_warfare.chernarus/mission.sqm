@@ -24,7 +24,7 @@ class Mission
 	randomSeed=928259;
 	class Intel
 	{
-		briefingName="MSO CTI 16 Civil War v4.0";
+		briefingName="MSO16 A2Free CTI CDF vs INS v4.0";
 		briefingDescription="CDF and Insurgents fight over Chernarus (A2Free)";
 		resistanceWest=0;
 		startWeather=0;

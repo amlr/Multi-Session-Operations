@@ -102,7 +102,7 @@ class Mission
 	randomSeed=10170483;
 	class Intel
 	{
-		briefingName="BAF/USA vs TK_GUE ACE MSO";
+		briefingName="MSO ACE BAF/USA vs TK_GUE v4.0";
 		resistanceWest=0;
 		resistanceEast=1;
 		startWeather=0.28730148;

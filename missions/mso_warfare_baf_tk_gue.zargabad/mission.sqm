@@ -45,7 +45,7 @@ class Mission
 	randomSeed=928259;
 	class Intel
 	{
-		briefingName="CTI 12 Urban Warfare";
+		briefingName="MSO12 CTI USA vs TAK vs TK_GUE v4.0";
 		briefingDescription="@STR_EP1_mission.sqmMission_Intel1_15";
 		resistanceWest=0;
 		startWeather=0.0065680146;

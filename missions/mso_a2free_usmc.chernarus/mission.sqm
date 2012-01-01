@@ -72,7 +72,7 @@ class Mission
 	randomSeed=6553103;
 	class Intel
 	{
-		briefingName="MSO USMC vs RU v4.0";
+		briefingName="MSO A2Free USMC vs RU v4.0";
 		briefingDescription="An MSO Team Development (A2Free)";
 		startWeather=0;
 		forecastWeather=0.30342692;

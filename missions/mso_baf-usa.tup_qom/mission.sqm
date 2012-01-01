@@ -88,7 +88,7 @@ class Mission
 	randomSeed=10170483;
 	class Intel
 	{
-		briefingName="BAF/USA vs TK_GUE MSO v4.0";
+		briefingName="MSO BAF/USA vs TK_GUE v4.0";
 		resistanceWest=0;
 		startWeather=0;
 		forecastWeather=0.22455329;

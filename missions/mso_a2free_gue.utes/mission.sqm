@@ -40,7 +40,7 @@ class Mission
 	randomSeed=6973914;
 	class Intel
 	{
-		briefingName="MSO GUE vs RU v4.0";
+		briefingName="MSO A2Free GUE vs RU v4.0";
 		briefingDescription="An MSO Team Development (A2Free)";
 		startWeather=0.10000002;
 		forecastWeather=0.7465229;
