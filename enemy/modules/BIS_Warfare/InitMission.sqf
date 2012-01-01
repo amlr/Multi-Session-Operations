@@ -1,7 +1,5 @@
 scriptName "InitMission.sqf";
 
-waitUntil{!isNil "BIS_Warfare_completed"};
-
 //Last modified 4/30/10
 //*****************************************************************************************
 //Description: This is called before the WF core initialization starts.
