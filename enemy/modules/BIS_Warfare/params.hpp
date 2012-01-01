@@ -61,7 +61,7 @@
 		title = $STRWFNEUTRALOPPOSITION;
 		values[] = {-2,-1,0,1,2};
 		texts[] = {$STRWFVERYLOW,$STRWFLOW,$STRWFNORMAL,$STRWFMEDIUM,$STRWFHIGH};
-		default = 2;
+		default = 0;
 	};
 
 	class SideColorScheme
@@ -116,7 +116,7 @@
 
 	class LimitedWarfare
 	{
-		title = $STR_EP1_WFLIMITEDWARFARE;
+		title = $STR_WFLIMITEDWARFARE;
 		values[] = {0,1};
 		texts[] = {$STRWFNO,$STRWFYES};
 		default = 1;

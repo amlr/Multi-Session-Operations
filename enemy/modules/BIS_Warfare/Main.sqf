@@ -12,12 +12,12 @@ if(isNil "paramsArray") then {
 	_FasterTime = 0;
 	_MinStartingDistance = 2500;
 	_MiscSettings = 2;
-	_NeutralOpposition = 2;
+	_NeutralOpposition = 0;
 	_SideColorScheme = 0;
 	_StartTime = -1;
 	_Support = 4;
-	_TownSpawnRange = 8;
-	_TownSpawnTime = 450;
+	_TownSpawnRange = 0;
+	_TownSpawnTime = 0;
 	_GameMode = 1;
 	_LimitedWarfare = 1;
 	paramsArray = [
