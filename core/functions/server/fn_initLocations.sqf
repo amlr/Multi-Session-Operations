@@ -110,9 +110,11 @@ switch toLower(worldName) do {
                 CRB_LOC_DIST = 2500;
         };
         case "clafghan": {
+				CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
+				[] call mso_core_fnc_createLocations;
                 {createLocation ["Airport",_x,1,1]} foreach [[15493.888,858.08838,0]];
                 {(createVehicle ["HeliHCivil", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[4700.1758,10249.779], 240],[[4685.6235,10276.778], 240],[[4669.2915,10305.309], 240],[[12171.944,12639.515], 200],[[12207.261,12625.699], 200],[[4836.9639,2521.9746], 120]];
-                [] call _initNeighbors;
+                [] call _initNeighbors;		
         };
         case "lingor": {
                 {(createVehicle ["HeliH", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[919,9214], 0],[[6478,6093], 0],[[2650,6819], 0],[[3709,4189], 0],[[2988.33,6640.74],264.161],[[2650,6819], 264]];
@@ -121,23 +123,23 @@ switch toLower(worldName) do {
                 CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
         };
         case "tup_qom": {
+				CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
                 [] call mso_core_fnc_createLocations;
                 {(createVehicle ["HeliH", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
-			[[1636.63,7338.07], 0],
-			[[4311.03,8714.72], 4],
-			[[1827.21,7392.98], 0],
-			[[7067.62,4376.49], 4],
-			[[844.725,6417.14],-60],
-			[[2029.56,7729.28],-60],
-			[[3488.31,4151.53],-27],
-			[[5567.3,7011.71],160.581],
-			[[2879.46,9187.48],10],
-			[[2831.94,9206.63],10],
-			[[2780.88,9227.2],10],
-			[[2726.26,9248.48],10],
-			[[2663.85,9272.59],10]
-		];
-                CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
+					[[1636.63,7338.07], 0],
+					[[4311.03,8714.72], 4],
+					[[1827.21,7392.98], 0],
+					[[7067.62,4376.49], 4],
+					[[844.725,6417.14],-60],
+					[[2029.56,7729.28],-60],
+					[[3488.31,4151.53],-27],
+					[[5567.3,7011.71],160.581],
+					[[2879.46,9187.48],10],
+					[[2831.94,9206.63],10],
+					[[2780.88,9227.2],10],
+					[[2726.26,9248.48],10],
+					[[2663.85,9272.59],10]
+				];               
         };
         /*
         // Removed until keypoints are placed.
