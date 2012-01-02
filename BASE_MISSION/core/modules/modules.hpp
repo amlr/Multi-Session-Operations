@@ -5,6 +5,7 @@
 #define RMM_SETTINGS
 #define RMM_WEATHER
 #define SPYDER_ONU
+#define NOU_CACHE
 
 // To fix
 //#define RMM_GTK
@@ -12,6 +13,6 @@
 //#define RMM_OSOM
 //#define JCACHE
 //#define CEP_CACHE
-//#define NOU_CACHE
+
 
 
