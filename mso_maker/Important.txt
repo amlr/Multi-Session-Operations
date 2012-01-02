@@ -1,0 +1,4 @@
+You do need the FSMcompiler.exe from the BIS tools.
+
+You can download the BIS Tools here:
+http://community.bistudio.com/wiki/BI_Tools_2.5
