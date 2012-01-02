@@ -24,9 +24,13 @@ cd TMPMissions
 rem For each mission folder, update the SQM, rapify it, compile FSMs, PBO Mission, delete mission folder
 FOR /F %%G IN ('dir /b') DO (CALL :processMission %%G)
 
+rem zip PBO files
+"c:\program files\7-zip\7z.exe" a -p{tupolov} MSO_Missions_%D_VER%.7z *.pbo
+
 rem cleanup
 cd ..
 move TMPMissions %MP_DIR%_%D_VER%
+
 echo Complete!
 
 goto:eof
