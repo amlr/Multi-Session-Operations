@@ -46,6 +46,7 @@ move %MISSION_FOLDER_NAME% %MISSION_FILENAME%
 set NDIR=..\TMPMissions\%MISSION_FILENAME%
 cd ..
 cd mso_maker
+set MISSION_NAME=%MISSION_NAME:_= %
 sqm %NDIR%\mission.sqm -s briefingName * "MSO%D_NUM_PLAYERS% %MISSION_NAME% %D_BNVER%" -o %NDIR%\newmission.sqm
 del %NDIR%\mission.sqm
 move %NDIR%\newmission.sqm %NDIR%\mission.sqm
