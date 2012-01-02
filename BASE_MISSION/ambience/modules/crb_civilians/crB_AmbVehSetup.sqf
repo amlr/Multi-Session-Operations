@@ -47,6 +47,9 @@ switch toLower(worldName) do {
         case "isladuala": {
                 BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 2.0)"];
         };
+        case "lingor": {
+                BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 0.5)"];
+        };
         case "takistan": {
                 BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 0.5)"];
         };
