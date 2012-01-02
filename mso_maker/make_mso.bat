@@ -17,8 +17,8 @@ set D_NUM_PLAYERS_CTI=16
 rem Create temporary mission folders and place base mission code into each mission
 cd ..
 md TMPMissions
-echo Copying Missions to temp folder
-xcopy %M_DIR% TMPMissions /S /Y /Q /EXCLUDE:mso_maker\exclude.txt
+echo Copying Mission folders to temp folder
+xcopy %M_DIR% TMPMissions /T /Y /Q /EXCLUDE:mso_maker\exclude.txt
 
 cd TMPMissions
 rem For each mission folder, update the SQM, rapify it, compile FSMs, PBO Mission, delete mission folder
@@ -36,7 +36,10 @@ goto:eof
 setlocal  EnableDelayedExpansion
 set MISSION_FOLDER_NAME=%1
 echo Processing %1
+rem copy base mission across
 xcopy ..\%BASE_DIR% %MISSION_FOLDER_NAME% /E /Y /Q
+rem copy any mission customizations back
+xcopy ..\%M_DIR%\%MISSION_FOLDER_NAME% %MISSION_FOLDER_NAME% /S /Y /Q /EXCLUDE:..\mso_maker\exclude.txt
 FOR /F "tokens=1,2 delims=." %%U IN ('echo %MISSION_FOLDER_NAME%') DO (CALL :setMissionNames %%U %%V)
 set MISSION_FILENAME=MSO%D_NUM_PLAYERS%_%MISSION_NAME%_%D_VER%.%MISSION_ISLAND%
 move %MISSION_FOLDER_NAME% %MISSION_FILENAME%
@@ -50,7 +53,7 @@ rapify %NDIR%\mission.sqm
 del %NDIR%\mission.sqm
 move %NDIR%\mission.sqm.bin %NDIR%\mission.sqm
 echo Creating %MISSION_FILENAME% PBO
-makePbo -N -K -P MPMissions %NDIR% 1> %NDIR%.txt
+makePbo -N -K %NDIR% 1> %NDIR%.txt
 rmdir /S /Q %NDIR%
 goto:eof
 
