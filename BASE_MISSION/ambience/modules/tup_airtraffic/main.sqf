@@ -21,10 +21,10 @@ tup_airtraffic_debug = false;
 
 //_center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
 
-if (isNil "tup_airtraffic_factions") then {tup_airtraffic_factions = 0;};
+if (isNil "tup_airtraffic_factions") then {tup_airtraffic_factions = 1;};
 if (tup_airtraffic_factions == 2) exitWith{};
-if (isNil "tup_airtraffic_intensity") then {tup_airtraffic_intensity = 1;};
-if (isNil "tup_airtraffic_ROE") then {tup_airtraffic_ROE = 2;};
+if (isNil "tup_airtraffic_intensity") then {tup_airtraffic_intensity = 0;};
+if (isNil "tup_airtraffic_ROE") then {tup_airtraffic_ROE = 1;};
 
 switch(tup_airtraffic_ROE) do {
         case 1: {

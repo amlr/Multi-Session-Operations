@@ -7,10 +7,10 @@ tup_seatraffic_debug = false;
 
 _center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
 
-if (isNil "tup_seatraffic_amount") then {tup_seatraffic_amount = 0;};
+if (isNil "tup_seatraffic_amount") then {tup_seatraffic_amount = 1;};
 if (tup_seatraffic_amount == 2) exitWith{};
 if (isNil "tup_seatraffic_ROE") then {tup_seatraffic_ROE = 2;};
-if (isNil "tup_seatraffic_LHD") then {tup_seatraffic_LHD = 1;};
+if (isNil "tup_seatraffic_LHD") then {tup_seatraffic_LHD = 2;};
 
 switch(tup_seatraffic_ROE) do {
         case "1": {
