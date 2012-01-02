@@ -25,7 +25,7 @@ rem For each mission folder, update the SQM, rapify it, compile FSMs, PBO Missio
 FOR /F %%G IN ('dir /b') DO (CALL :processMission %%G)
 
 rem zip PBO files
-"c:\program files\7-zip\7z.exe" a -p{tupolov} MSO_Missions_%D_VER%.7z *.pbo
+"c:\program files\7-zip\7z.exe" a MSO_Missions_%D_VER%.7z *.pbo
 
 rem cleanup
 cd ..
@@ -41,6 +41,8 @@ setlocal  EnableDelayedExpansion
 set MISSION_FOLDER_NAME=%1
 echo Processing %1
 rem copy base mission across
+xcopy ..\mso_maker\makepbo.exe . /Q /Y
+xcopy ..\mso_maker\depbo.dll . /Q /Y
 xcopy ..\%BASE_DIR% %MISSION_FOLDER_NAME% /E /Y /Q
 rem copy any mission customizations back
 xcopy ..\%M_DIR%\%MISSION_FOLDER_NAME% %MISSION_FOLDER_NAME% /S /Y /Q /EXCLUDE:..\mso_maker\exclude.txt
@@ -58,8 +60,11 @@ rapify %NDIR%\mission.sqm
 del %NDIR%\mission.sqm
 move %NDIR%\mission.sqm.bin %NDIR%\mission.sqm
 echo Creating %MISSION_FILENAME% PBO
-makePbo -N -K %NDIR% 1> %NDIR%.txt
-rmdir /S /Q %NDIR%
+cd ..\TMPMissions
+makePbo -N -K %MISSION_FILENAME% 1> %MISSION_FILENAME%.txt
+rmdir /S /Q %MISSION_FILENAME%
+del makepbo.exe
+del depbo.dll
 goto:eof
 
 :setMissionNames
