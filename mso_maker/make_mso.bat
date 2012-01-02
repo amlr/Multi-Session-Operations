@@ -25,7 +25,7 @@ rem For each mission folder, update the SQM, rapify it, compile FSMs, PBO Missio
 FOR /F %%G IN ('dir /b') DO (CALL :processMission %%G)
 
 rem zip PBO files
-"c:\program files\7-zip\7z.exe" a MSO_Missions_%D_VER%.7z *.pbo
+"c:\program files\7-zip\7z.exe" a MSO_Missions_4-0.7z *.pbo
 
 rem cleanup
 cd ..
@@ -56,9 +56,6 @@ set MISSION_NAME=%MISSION_NAME:_= %
 sqm %NDIR%\mission.sqm -s briefingName * "MSO%D_NUM_PLAYERS% %MISSION_NAME% %D_BNVER%" -o %NDIR%\newmission.sqm
 del %NDIR%\mission.sqm
 move %NDIR%\newmission.sqm %NDIR%\mission.sqm
-rapify %NDIR%\mission.sqm
-del %NDIR%\mission.sqm
-move %NDIR%\mission.sqm.bin %NDIR%\mission.sqm
 echo Creating %MISSION_FILENAME% PBO
 cd ..\TMPMissions
 makePbo -N -K %MISSION_FILENAME% 1> %MISSION_FILENAME%.txt
