@@ -7436,6 +7436,7 @@ class Mission
 	};
 	class Markers
 	{
+		items=23;
 		items=22;
 		class Item0
 		{
@@ -7612,6 +7613,12 @@ class Mission
 			colorName="ColorOrange";
 			a=0.60000002;
 			b=0.60000002;
+		};
+		class Item22
+		{
+			position[]={2754.575,690.96704,8841.96};
+			name="hospital";
+			type="Empty";
 		};
 	};
 	class Sensors
