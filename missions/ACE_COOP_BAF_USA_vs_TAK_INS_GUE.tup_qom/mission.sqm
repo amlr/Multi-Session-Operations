@@ -1590,7 +1590,7 @@ class Mission
 			vehicle="M1130_HQ_unfolded_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""support\modules\recruitment\addAction.sqf"";";
+			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf"";";
 		};
 		class Item2
 		{
@@ -1600,7 +1600,7 @@ class Mission
 			side="EMPTY";
 			vehicle="SignM_FARP_Winchester_EP1";
 			skill=0.2;
-			init="0 = this execVM ""support\modules\logbook\addAction.sqf""; this setVariable [""R3F_LOG_disabled"", true]; ";
+			init="0 = this execVM ""support\modules\rmm_logbook\addAction.sqf""; this setVariable [""R3F_LOG_disabled"", true]; ";
 		};
 		class Item3
 		{
@@ -1902,7 +1902,7 @@ class Mission
 			vehicle="US_WarfareBUAVterminal_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""core\modules\weather\addAction.sqf"";";
+			init="0 = this execVM ""core\modules\rmm_weather\addAction.sqf"";";
 		};
 		class Item34
 		{
@@ -2618,7 +2618,7 @@ class Mission
 			vehicle="M1130_HQ_unfolded_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""support\modules\recruitment\addAction.sqf"";";
+			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf"";";
 		};
 		class Item106
 		{
@@ -2628,7 +2628,7 @@ class Mission
 			side="EMPTY";
 			vehicle="SignM_FOB_Revolve_EP1";
 			skill=0.2;
-			init="0 = this execVM ""support\modules\logbook\addAction.sqf""; this setVariable [""R3F_LOG_disabled"", true]; ";
+			init="0 = this execVM ""support\modules\rmm_logbook\addAction.sqf""; this setVariable [""R3F_LOG_disabled"", true]; ";
 		};
 		class Item107
 		{
@@ -2939,7 +2939,7 @@ class Mission
 			vehicle="US_WarfareBUAVterminal_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""core\modules\weather\addAction.sqf"";";
+			init="0 = this execVM ""core\modules\rmm_weather\addAction.sqf"";";
 		};
 		class Item139
 		{
@@ -3905,7 +3905,7 @@ class Mission
 			side="EMPTY";
 			vehicle="C130J_US_EP1";
 			skill=0.2;
-			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf""; nul = [this] execVM ""support\modules\cas\LDL_ac130\Addon\ac130_init_AC130.sqf"";";
+			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf""; nul = [this] execVM ""support\modules\rmm_cas\LDL_ac130\Addon\ac130_init_AC130.sqf"";";
 		};
 		class Item237
 		{

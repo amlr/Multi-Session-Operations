@@ -1253,7 +1253,7 @@ class Mission
 					rank="CORPORAL";
 					skill=0.466667;
 					text="user1_1";
-					init="0 = this execVM ""support\modules\recruitment\addAction.sqf"";";
+					init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf"";";
 					description="Game Master - optional";
 					synchronizations[]={330};
 				};
@@ -1303,7 +1303,7 @@ class Mission
 			leader=1;
 			skill=0.2;
 			text="HQ";
-			init="0 = this execVM ""support\modules\recruitment\addAction.sqf"";";
+			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf"";";
 		};
 		class Item2
 		{
@@ -1313,7 +1313,7 @@ class Mission
 			side="EMPTY";
 			vehicle="SignM_FARP_Winchester_EP1";
 			skill=0.2;
-			init="0 = this execVM ""support\modules\logbook\addAction.sqf""; this setVariable [""R3F_LOG_disabled"", true]; ";
+			init="0 = this execVM ""support\modules\rmm_logbook\addAction.sqf""; this setVariable [""R3F_LOG_disabled"", true]; ";
 		};
 		class Item3
 		{
@@ -2387,7 +2387,7 @@ class Mission
 			side="EMPTY";
 			vehicle="SignM_FOB_Revolve_EP1";
 			skill=0.2;
-			init="0 = this execVM ""support\modules\logbook\addAction.sqf""; this addAction [""MSO Help"",""scripts\MSO_Help.sqf""]; this setVariable [""R3F_LOG_disabled"", true]; 0 = this execVM ""support\modules\recruitment\addAction.sqf"";";
+			init="0 = this execVM ""support\modules\rmm_logbook\addAction.sqf""; this addAction [""MSO Help"",""scripts\MSO_Help.sqf""]; this setVariable [""R3F_LOG_disabled"", true]; 0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf"";";
 		};
 		class Item112
 		{
@@ -2729,7 +2729,7 @@ class Mission
 			vehicle="US_WarfareBUAVterminal_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""core\modules\weather\addAction.sqf"";";
+			init="0 = this execVM ""core\modules\rmm_weather\addAction.sqf"";";
 		};
 		class Item147
 		{

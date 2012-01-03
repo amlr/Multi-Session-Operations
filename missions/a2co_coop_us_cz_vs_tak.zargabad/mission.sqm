@@ -858,7 +858,7 @@ class Mission
 			side="EMPTY";
 			vehicle="US_WarfareBUAVterminal_Base_EP1";
 			skill=0.60000002;
-			init="0 = this execVM ""core\modules\weather\addAction.sqf"";";
+			init="0 = this execVM ""core\modules\rmm_weather\addAction.sqf"";";
 		};
 		class Item1
 		{
@@ -869,7 +869,7 @@ class Mission
 			vehicle="US_WarfareBBarracks_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""support\modules\recruitment\addAction.sqf""; this allowDamage false;";
+			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf""; this allowDamage false;";
 		};
 		class Item2
 		{
@@ -972,7 +972,7 @@ class Mission
 			side="EMPTY";
 			vehicle="SignM_FOB_Prostejov_EP1";
 			skill=0.2;
-			init="0 = this execVM ""support\modules\logbook\addAction.sqf""; this setVariable [""R3F_LOG_disabled"", true]; ";
+			init="0 = this execVM ""support\modules\rmm_logbook\addAction.sqf""; this setVariable [""R3F_LOG_disabled"", true]; ";
 		};
 		class Item12
 		{

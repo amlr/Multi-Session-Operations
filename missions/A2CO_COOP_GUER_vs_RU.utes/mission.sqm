@@ -1414,7 +1414,7 @@ class Mission
 			vehicle="Notebook";
 			leader=1;
 			skill=0.60000002;
-			init="0 = this execVM ""support\modules\logbook\addAction.sqf""; this setVariable [""R3F_LOG_disabled"", true]; 0 = this execVM ""support\modules\recruitment\addAction.sqf""; 0 = this execVM ""core\modules\weather\addAction.sqf""; this setPosATL [getPosATL this select 0, getPosATL this select 1, (getPosATL this select 2) + 0.9]; ";
+			init="0 = this execVM ""support\modules\rmm_logbook\addAction.sqf""; this setVariable [""R3F_LOG_disabled"", true]; 0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf""; 0 = this execVM ""core\modules\rmm_weather\addAction.sqf""; this setPosATL [getPosATL this select 0, getPosATL this select 1, (getPosATL this select 2) + 0.9]; ";
 		};
 		class Item18
 		{

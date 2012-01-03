@@ -551,7 +551,7 @@ class Mission
 			side="EMPTY";
 			vehicle="SignM_FOB_Blanik_EP1";
 			skill=0.60000002;
-			init="this setVariable [""R3F_LOG_disabled"", true]; 0 = this execVM ""support\modules\logbook\addAction.sqf"";";
+			init="this setVariable [""R3F_LOG_disabled"", true]; 0 = this execVM ""support\modules\rmm_logbook\addAction.sqf"";";
 		};
 		class Item7
 		{
@@ -562,7 +562,7 @@ class Mission
 			vehicle="US_WarfareBBarracks_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""support\modules\recruitment\addAction.sqf"";";
+			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf"";";
 		};
 		class Item8
 		{
