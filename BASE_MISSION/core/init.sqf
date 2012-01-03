@@ -112,7 +112,7 @@ if(mprightsDisable == 1) then {
         MSO_R_Crew = [_uid];
 } else {
         "MP Rights" call mso_core_fnc_initStat;
-        execNow "core\modules\mp_rights\main.sqf";
+        execNow "core\modules\rmm_mp_rights\main.sqf";
 };
 #endif
 if(isNil "mprightsDisable") then {
@@ -127,22 +127,22 @@ if(isNil "mprightsDisable") then {
 
 #ifdef RMM_DEBUG
 "Debug" call mso_core_fnc_initStat;
-execNow "core\modules\debug\main.sqf";
+execNow "core\modules\rmm_debug\main.sqf";
 #endif
 
 #ifdef RMM_NOMAD
 "NOMAD" call mso_core_fnc_initStat;
-execNow "core\modules\nomad\main.sqf";
+execNow "core\modules\rmm_nomad\main.sqf";
 #endif
 
 #ifdef CEP_CACHE
 "CEP AI Unit Caching" call mso_core_fnc_initStat;
-execNow "core\modules\CEP_caching\main.sqf";
+execNow "core\modules\CEP_cache\main.sqf";
 #endif
 
 #ifdef NOU_CACHE
 "Nou AI Unit Caching" call mso_core_fnc_initStat;
-execNow "core\modules\Nou_caching\main.sqf";
+execNow "core\modules\Nou_cache\main.sqf";
 #endif
 
 #ifdef JCACHE
@@ -152,12 +152,12 @@ execNow "core\modules\jcache\init.sqf";
 
 #ifdef RMM_WEATHER
 "Weather" call mso_core_fnc_initStat;
-execNow "core\modules\weather\main.sqf";
+execNow "core\modules\rmm_weather\main.sqf";
 #endif
 
 #ifdef RMM_SETTINGS
 "View Distance Settings" call mso_core_fnc_initStat;
-execNow "core\modules\settings\main.sqf";	
+execNow "core\modules\rmm_settings\main.sqf";	
 #else
 if(isDedicated) then {
 	setViewDistance 3000;

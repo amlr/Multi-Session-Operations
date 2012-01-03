@@ -30,19 +30,19 @@ class Params {
 	#include <enemy\modules\BIS_Warfare\params.hpp>
 #endif
 #ifdef RMM_DEBUG
-	#include <core\modules\debug\params.hpp>
+	#include <core\modules\rmm_debug\params.hpp>
 #endif
 #ifdef RMM_MP_RIGHTS
-	#include <core\modules\mp_rights\params.hpp>
+	#include <core\modules\rmm_mp_rights\params.hpp>
 #endif
 #ifdef RMM_NOMAD
-	#include <core\modules\nomad\params.hpp>
+	#include <core\modules\rmm_nomad\params.hpp>
 #endif
 #ifdef RMM_SETTINGS
-	#include <core\modules\settings\params.hpp>
+	#include <core\modules\rmm_settings\params.hpp>
 #endif
 #ifdef RMM_WEATHER
-	#include <core\modules\weather\params.hpp>
+	#include <core\modules\rmm_weather\params.hpp>
 #endif
 #ifdef CRB_CIVILIANS
 	#include <ambience\modules\crb_civilians\params.hpp>
@@ -130,16 +130,16 @@ class cfgFunctions {
 	#include <ambience\modules\crb_dogs\functions.hpp>
 #endif
 #ifdef RMM_GTK
-	#include <core\modules\gtk\functions.hpp>
+	#include <core\modules\rmm_gtk\functions.hpp>
 #endif
 #ifdef RMM_HELP
-	#include <core\modules\help\functions.hpp>
+	#include <core\modules\rmm_help\functions.hpp>
 #endif
 #ifdef RMM_OSOM
-	#include <core\modules\osom\functions.hpp>
+	#include <core\modules\rmm_osom\functions.hpp>
 #endif
 #ifdef RMM_WEATHER
-	#include <core\modules\weather\functions.hpp>
+	#include <core\modules\rmm_weather\functions.hpp>
 #endif
 
 #ifdef RMM_AAR
@@ -187,13 +187,13 @@ class cfgFunctions {
 #include <core\dialogs\c_ui.hpp>
 
 #ifdef RMM_DEBUG
-	#include <core\modules\debug\dialog.hpp>
+	#include <core\modules\rmm_debug\dialog.hpp>
 #endif
 #ifdef RMM_HELP
-	#include <core\modules\help\dialog.hpp>
+	#include <core\modules\rmm_help\dialog.hpp>
 #endif
 #ifdef RMM_SETTINGS
-	#include <core\modules\settings\dialog.hpp>
+	#include <core\modules\rmm_settings\dialog.hpp>
 #endif
 #ifdef AEG
 	#include "ambience\modules\AEG\Dialogs\AEG_Dialogs.hpp"
