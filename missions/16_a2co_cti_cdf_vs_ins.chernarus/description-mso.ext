@@ -20,7 +20,7 @@ class CfgSounds {
 	#include <ambience\modules\AEG\Sounds\AEG_Sounds.hpp>
 #endif
 #ifdef RMM_CAS
-	#include <support\modules\cas\LDL_ac130\Includes\CfgSounds.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\CfgSounds.hpp>
 #endif
 };
 
@@ -31,19 +31,19 @@ class Params {
 	#include <enemy\modules\BIS_Warfare\params.hpp>
 #endif
 #ifdef RMM_DEBUG
-	#include <core\modules\debug\params.hpp>
+	#include <core\modules\rmm_debug\params.hpp>
 #endif
 #ifdef RMM_MP_RIGHTS
-	#include <core\modules\mp_rights\params.hpp>
+	#include <core\modules\rmm_mp_rights\params.hpp>
 #endif
 #ifdef RMM_NOMAD
-	#include <core\modules\nomad\params.hpp>
+	#include <core\modules\rmm_nomad\params.hpp>
 #endif
 #ifdef RMM_SETTINGS
-	#include <core\modules\settings\params.hpp>
+	#include <core\modules\rmm_settings\params.hpp>
 #endif
 #ifdef RMM_WEATHER
-	#include <core\modules\weather\params.hpp>
+	#include <core\modules\rmm_weather\params.hpp>
 #endif
 #ifdef CRB_CIVILIANS
 	#include <ambience\modules\crb_civilians\params.hpp>
@@ -79,13 +79,13 @@ class Params {
 	#include <ambience\modules\AEG\params.hpp>
 #endif
 #ifdef RMM_CAS
-	#include <support\modules\cas\params.hpp>
+	#include <support\modules\rmm_cas\params.hpp>
 #endif
 #ifdef CRB_TWNMGR
 	#include <support\modules\CRB_twnmgr\params.hpp>
 #endif
 #ifdef WHB_MULTISPAWN
-	#include <support\modules\WHB_FOBspawn\params.hpp>
+	#include <support\modules\WHB_MULTISPAWN\params.hpp>
 #endif
 #ifdef RMM_ENEMYPOP
 	#include <enemy\modules\rmm_enemypop\params.hpp>
@@ -109,8 +109,8 @@ class Params {
 #endif
 
 #ifdef RMM_CAS
-	#include <support\modules\cas\LDL_ac130\Includes\uiDefines.hpp>
-	#include <support\modules\cas\LDL_ac130\Includes\define.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\uiDefines.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\define.hpp>
 #endif
 
 class RscTitles
@@ -119,7 +119,7 @@ class RscTitles
 	#include <support\modules\R3F_logistics\desc_rsct_include.h>
 #endif
 #ifdef RMM_CAS
-	#include <support\modules\cas\LDL_ac130\Includes\RscTitles.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\RscTitles.hpp>
 #endif
 };
 
@@ -131,56 +131,56 @@ class cfgFunctions {
 	#include <ambience\modules\crb_dogs\functions.hpp>
 #endif
 #ifdef RMM_GTK
-	#include <core\modules\gtk\functions.hpp>
+	#include <core\modules\rmm_gtk\functions.hpp>
 #endif
 #ifdef RMM_HELP
-	#include <core\modules\help\functions.hpp>
+	#include <core\modules\rmm_help\functions.hpp>
 #endif
 #ifdef RMM_OSOM
-	#include <core\modules\osom\functions.hpp>
+	#include <core\modules\rmm_osom\functions.hpp>
 #endif
 #ifdef RMM_WEATHER
-	#include <core\modules\weather\functions.hpp>
+	#include <core\modules\rmm_weather\functions.hpp>
 #endif
 
 #ifdef RMM_AAR
-	#include <support\modules\aar\functions.hpp>
+	#include <support\modules\rmm_aar\functions.hpp>
 #endif
 #ifdef RMM_CAS
-	#include <support\modules\cas\functions.hpp>
+	#include <support\modules\rmm_cas\functions.hpp>
 #endif
 #ifdef RMM_CASEVAC
-	#include <support\modules\casevac\functions.hpp>
+	#include <support\modules\rmm_casevac\functions.hpp>
 #endif
 #ifdef RMM_CNSTRCT
 	#include <support\modules\rmm_cnstrct\functions.hpp>
 #endif
 #ifdef CRB_FLIPPABLE
-	#include <support\modules\flippable\functions.hpp>
+	#include <support\modules\crb_flippable\functions.hpp>
 #endif
 #ifdef RMM_JIPMARKERS
-	#include <support\modules\jipmarkers\functions.hpp>
+	#include <support\modules\rmm_jipmarkers\functions.hpp>
 #endif
 #ifdef TN_LHDELEVATOR
 	#include <support\modules\tn_lhdelevator\functions.hpp>
 #endif
 #ifdef RMM_LOGBOOK
-	#include <support\modules\logbook\functions.hpp>
+	#include <support\modules\rmm_logbook\functions.hpp>
 #endif
 #ifdef RMM_LOGISTICS
-	#include <support\modules\logistics\functions.hpp>
+	#include <support\modules\rmm_logistics\functions.hpp>
 #endif
 #ifdef RMM_NOTEBOOK
-	#include <support\modules\notebook\functions.hpp>
+	#include <support\modules\rmm_notebook\functions.hpp>
 #endif
 #ifdef RMM_REVIVE
-	#include <support\modules\revive\functions.hpp>
+	#include <support\modules\rmm_revive\functions.hpp>
 #endif
 #ifdef RMM_TASKS
-	#include <support\modules\tasks\functions.hpp>
+	#include <support\modules\rmm_tasks\functions.hpp>
 #endif
 #ifdef RMM_TYRES
-	#include <support\modules\tyres\functions.hpp>
+	#include <support\modules\rmm_tyres\functions.hpp>
 #endif
 };
 
@@ -188,54 +188,54 @@ class cfgFunctions {
 #include <core\dialogs\c_ui.hpp>
 
 #ifdef RMM_DEBUG
-	#include <core\modules\debug\dialog.hpp>
+	#include <core\modules\rmm_debug\dialog.hpp>
 #endif
 #ifdef RMM_HELP
-	#include <core\modules\help\dialog.hpp>
+	#include <core\modules\rmm_help\dialog.hpp>
 #endif
 #ifdef RMM_SETTINGS
-	#include <core\modules\settings\dialog.hpp>
+	#include <core\modules\rmm_settings\dialog.hpp>
 #endif
 #ifdef AEG
 	#include "ambience\modules\AEG\Dialogs\AEG_Dialogs.hpp"
 #endif
 #ifdef RMM_AAR
-	#include <support\modules\aar\dialog.hpp>
+	#include <support\modules\rmm_aar\dialog.hpp>
 #endif
 #ifdef RMM_CAS
-	#include <support\modules\cas\dialog.hpp>
-	#include <support\modules\cas\LDL_ac130\Includes\dialogParent.hpp>
-	#include <support\modules\cas\LDL_ac130\Includes\dialogAC130.hpp>
-	#include <support\modules\cas\LDL_ac130\Includes\dialogUAV.hpp>
-	#include <support\modules\cas\LDL_ac130\Includes\dialogMap.hpp>
+	#include <support\modules\rmm_cas\dialog.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogParent.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogAC130.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogUAV.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogMap.hpp>
 #endif
 #ifdef RMM_CASEVAC
-	#include <support\modules\casevac\dialog.hpp>
+	#include <support\modules\rmm_casevac\dialog.hpp>
 #endif
 #ifdef RMM_JIPMARKERS
-	#include <support\modules\jipmarkers\dialog.hpp>
+	#include <support\modules\rmm_jipmarkers\dialog.hpp>
 #endif
 #ifdef RMM_LOGBOOK
-	#include <support\modules\logbook\dialog.hpp>
+	#include <support\modules\rmm_logbook\dialog.hpp>
 #endif
 #ifdef RMM_LOGISTICS
-	#include <support\modules\logistics\dialog.hpp>
+	#include <support\modules\rmm_logistics\dialog.hpp>
 #endif
 #ifdef RMM_NOTEBOOK
-	#include <support\modules\notebook\dialog.hpp>
+	#include <support\modules\rmm_notebook\dialog.hpp>
 #endif
 #ifdef RMM_RECRUITMENT
-	#include <support\modules\recruitment\dialog_baf.hpp>
-	#include <support\modules\recruitment\dialog_us.hpp>
-	#include <support\modules\recruitment\dialog_ru.hpp>
-	#include <support\modules\recruitment\dialog_usmc.hpp>
-	#include <support\modules\recruitment\dialog_cz.hpp>
-	#include <support\modules\recruitment\dialog_gue.hpp>
-	#include <support\modules\recruitment\dialog_aaw.hpp>
-	#include <support\modules\recruitment\TeamStatusDialog\TeamStatusDialog.hpp>
+	#include <support\modules\rmm_recruitment\dialog_baf.hpp>
+	#include <support\modules\rmm_recruitment\dialog_us.hpp>
+	#include <support\modules\rmm_recruitment\dialog_ru.hpp>
+	#include <support\modules\rmm_recruitment\dialog_usmc.hpp>
+	#include <support\modules\rmm_recruitment\dialog_cz.hpp>
+	#include <support\modules\rmm_recruitment\dialog_gue.hpp>
+	#include <support\modules\rmm_recruitment\dialog_aaw.hpp>
+	#include <support\modules\rmm_recruitment\TeamStatusDialog\TeamStatusDialog.hpp>
 #endif
 #ifdef RMM_TASKS
-	#include <support\modules\tasks\dialog.hpp>
+	#include <support\modules\rmm_tasks\dialog.hpp>
 #endif
 
 // Add BAF and TK Flight groups
