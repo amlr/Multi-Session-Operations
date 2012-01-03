@@ -12,7 +12,7 @@ scriptName "rmm_zora\data\scripts\main.sqf";
 */
 
 private ["_BIS_Zora_path","_logic","_fsm"];
-_BIS_Zora_path = "ca\modules\zora\data\";
+_BIS_Zora_path = "ca\modules\rmm_zora\data\";
 
 _logic = _this select 0;
 _logic setvariable ["unitslist",[]];

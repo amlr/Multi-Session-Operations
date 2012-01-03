@@ -28,7 +28,7 @@ if(disableFog == 0) then {
 /*
 	if (_fforecast > 0.5) then {
 		_end = daytime + (_fend * 60 * 60);
-		0 = [player,100,20,10,4,7,-0.3,0.1,0.8,1,1,1,13,12,15,true,2,2.1,0.1,4,6,0,daytime,_end] execFSM "core\modules\weather\Fog.fsm";
+		0 = [player,100,20,10,4,7,-0.3,0.1,0.8,1,1,1,13,12,15,true,2,2.1,0.1,4,6,0,daytime,_end] execFSM "core\modules\rmm_weather\Fog.fsm";
 	};
 */
 };

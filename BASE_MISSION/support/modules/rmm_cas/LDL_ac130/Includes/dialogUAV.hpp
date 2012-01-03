@@ -13,7 +13,7 @@ class LDL_UAVDialog: LDL_DialogParent
         class Cross: LDL_RscPicture
   	{
    		idc = 1007;
-  		text = "support\modules\cas\LDL_ac130\Pictures\VisTV.paa";
+  		text = "support\modules\rmm_cas\LDL_ac130\Pictures\VisTV.paa";
 		w = SafeZoneW/4;
 		h = SafeZoneH/4;
 		x = SafeZoneX + SafeZoneW/2 - SafeZoneW/8;

@@ -613,9 +613,9 @@ LDL_setVariables =
 		//LDL_weaponSlots = [["Name", max, current, shooting, ammo, picture, max Zoom], [Weapon 2]];
 		LDL_weaponSlots = 
 		[
-			//["Hellfire (Mounted)", LDL_UAV_Adjustments select 2, LDL_ac130_plane ammo "HellfireLauncher", false, "", "support\modules\cas\LDL_ac130\Pictures\VisTV.paa", LDL_UAV_Adjustments select 4], 
-			["Hellfire (Mounted)", LDL_UAV_Adjustments select 2, (LDL_ac130_plane ammo "HellfireLauncher") min (LDL_UAV_Adjustments select 2), false, "", "support\modules\cas\LDL_ac130\Pictures\VisTV.paa", LDL_UAV_Adjustments select 4], 
-			["Hellfire Strike", LDL_UAV_Adjustments select 3, _currentStrikes, false, "", "support\modules\cas\LDL_ac130\Pictures\VisTV.paa", LDL_UAV_Adjustments select 5]
+			//["Hellfire (Mounted)", LDL_UAV_Adjustments select 2, LDL_ac130_plane ammo "HellfireLauncher", false, "", "support\modules\rmm_cas\LDL_ac130\Pictures\VisTV.paa", LDL_UAV_Adjustments select 4], 
+			["Hellfire (Mounted)", LDL_UAV_Adjustments select 2, (LDL_ac130_plane ammo "HellfireLauncher") min (LDL_UAV_Adjustments select 2), false, "", "support\modules\rmm_cas\LDL_ac130\Pictures\VisTV.paa", LDL_UAV_Adjustments select 4], 
+			["Hellfire Strike", LDL_UAV_Adjustments select 3, _currentStrikes, false, "", "support\modules\rmm_cas\LDL_ac130\Pictures\VisTV.paa", LDL_UAV_Adjustments select 5]
 		];
 	}
 	else
@@ -653,9 +653,9 @@ LDL_setVariables =
 		//LDL_weaponSlots = [["Name", max, current, shooting, ammo, picture, max Zoom], [Weapon 2]];
 		LDL_weaponSlots = 
 		[
-			["25mm", (LDL_AC130_Adjustments select 2), _current25mm, false, LDL_ammo select 0, "support\modules\cas\LDL_ac130\Pictures\Vis25mm.paa", LDL_AC130_Adjustments select 6], 
-			["40mm", (LDL_AC130_Adjustments select 3), _current40mm, false, LDL_ammo select 1, "support\modules\cas\LDL_ac130\Pictures\Vis40mm.paa", LDL_AC130_Adjustments select 7], 
-			["105mm", (LDL_AC130_Adjustments select 4), _current105mm, false, LDL_ammo select 2, "support\modules\cas\LDL_ac130\Pictures\Vis105mm.paa", LDL_AC130_Adjustments select 8]
+			["25mm", (LDL_AC130_Adjustments select 2), _current25mm, false, LDL_ammo select 0, "support\modules\rmm_cas\LDL_ac130\Pictures\Vis25mm.paa", LDL_AC130_Adjustments select 6], 
+			["40mm", (LDL_AC130_Adjustments select 3), _current40mm, false, LDL_ammo select 1, "support\modules\rmm_cas\LDL_ac130\Pictures\Vis40mm.paa", LDL_AC130_Adjustments select 7], 
+			["105mm", (LDL_AC130_Adjustments select 4), _current105mm, false, LDL_ammo select 2, "support\modules\rmm_cas\LDL_ac130\Pictures\Vis105mm.paa", LDL_AC130_Adjustments select 8]
 		];
 	};
 	

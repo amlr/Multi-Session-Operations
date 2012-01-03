@@ -8,10 +8,10 @@ if (RMM_cas_lastTime + RMM_cas_frequency < time) then {
 	If ( _selection == "C130J" || _selection == "MQ9PredatorB") then {
 		If (_selection == "C130J") then {
 			// Call AI AC130
-			_nul = execVM "support\modules\cas\LDL_ac130\Actions\ac130_action_map_AI.sqf";
+			_nul = execVM "support\modules\rmm_cas\LDL_ac130\Actions\ac130_action_map_AI.sqf";
 		} else {
 			// Call AI UAV
-			_nul = execVM "support\modules\cas\LDL_ac130\Actions\uav_action_map.sqf";
+			_nul = execVM "support\modules\rmm_cas\LDL_ac130\Actions\uav_action_map.sqf";
 		};
 	} else {
 	

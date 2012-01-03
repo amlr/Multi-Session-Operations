@@ -12,7 +12,7 @@ class LDL_DialogMap
   	{
    		idc = 2000;
    		font = "Bitstream";
-  		text = "support\modules\cas\LDL_ac130\Pictures\TVMonitor.paa";
+  		text = "support\modules\rmm_cas\LDL_ac130\Pictures\TVMonitor.paa";
   		x = SafeZoneX;
   		y = SafeZoneY;
   		w = SafeZoneW;

@@ -14,7 +14,7 @@ class LDL_DialogParent
   	{
    		idc = 1000;
    		font = "Bitstream";
-  		text = "support\modules\cas\LDL_ac130\Pictures\TVMonitor.paa";
+  		text = "support\modules\rmm_cas\LDL_ac130\Pictures\TVMonitor.paa";
   		x = SafeZoneX;
   		y = SafeZoneY;
   		w = SafeZoneW;
@@ -183,7 +183,7 @@ class LDL_DialogParent
         class Cross: LDL_RscPicture
   	{
    		idc = 1007;
-  		text = "support\modules\cas\LDL_ac130\Pictures\Vis25mm.paa";
+  		text = "support\modules\rmm_cas\LDL_ac130\Pictures\Vis25mm.paa";
 		w = SafeZoneW/4;
 		h = SafeZoneH/4;
 		x = SafeZoneX + SafeZoneW/2 - SafeZoneW/8;

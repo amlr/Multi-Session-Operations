@@ -53,7 +53,7 @@ if ((!((LDL_weaponSlots select _weapon)select 3)) && (((LDL_weaponSlots select _
 				sleep 0.1;
 				playSound "LDL_beep_short";
 				
-				[_hellfire, LDL_logic_object, LDL_ac130_plane] execVM "support\modules\cas\LDL_ac130\Misc\mando_hellfire.sqf";
+				[_hellfire, LDL_logic_object, LDL_ac130_plane] execVM "support\modules\rmm_cas\LDL_ac130\Misc\mando_hellfire.sqf";
 			};
 			
 			(LDL_weaponSlots select 0) set [2, ((LDL_weaponSlots select 0)select 2)-1]; 
@@ -133,7 +133,7 @@ if ((!((LDL_weaponSlots select _weapon)select 3)) && (((LDL_weaponSlots select _
 					for [{_i = 0;},{_i < 3;},{_i = _i + 1;}] do 
 					{
 						_hellfire = "M_Hellfire_AT" createVehicle [_spawn select 0, _spawn select 1, 700];
-						[_hellfire, _target, LDL_ac130_plane] execVM "support\modules\cas\LDL_ac130\Misc\mando_hellfire.sqf";
+						[_hellfire, _target, LDL_ac130_plane] execVM "support\modules\rmm_cas\LDL_ac130\Misc\mando_hellfire.sqf";
 						sleep 1;	
 					};
 				};

@@ -124,7 +124,7 @@ class LDL_HUD_pilot
 	/*
 	class LDL_Picture01 : RscLDL_Picture
 	{
-		text = "support\modules\cas\LDL_ac130\Pictures\back.paa";
+		text = "support\modules\rmm_cas\LDL_ac130\Pictures\back.paa";
 	    	x = SafeZoneX+SafeZoneW/4 - SafeZoneW/16;
 	     	y = SafeZoneY+SafeZoneH/4 - SafeZoneH/16;
 	     	w = SafeZoneW/6;

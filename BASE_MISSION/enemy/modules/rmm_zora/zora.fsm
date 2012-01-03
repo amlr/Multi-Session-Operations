@@ -262,7 +262,7 @@ class FSM
        "		_safepos = [position _x, _zora_mindist,  _zora_maxdist, 2, 0, _slopeCoef, 0,_triglist] call BIS_fnc_findSafePos;" \n
        "		_grpP = [_safepos, _side, _types, _positions, _ranks] call BIS_fnc_spawnGroup;" \n
        "		{_grpP call _x} foreach _custom_init;" \n
-       "		_fsm = [_grpP,_x,_group,_debugType] execfsm (""enemy\modules\zora\zora_patrol.fsm"");" \n
+       "		_fsm = [_grpP,_x,_group,_debugType] execfsm (""enemy\modules\rmm_zora\zora_patrol.fsm"");" \n
        "//		diag_debugfsm _fsm;" \n
        "" \n
        "		//--- Add group to unit's group list" \n

@@ -13,7 +13,7 @@ _objects = synchronizedObjects (_this select 0);
 for [{_i = 0},{_i < count _objects},{_i = _i + 1}] do 
 {
 	_object = (_objects select _i);
-	_object addAction ["Call UAV", "support\modules\cas\LDL_ac130\Actions\uav_action_map.sqf"];
+	_object addAction ["Call UAV", "support\modules\rmm_cas\LDL_ac130\Actions\uav_action_map.sqf"];
 };
 
 sleep 3;
