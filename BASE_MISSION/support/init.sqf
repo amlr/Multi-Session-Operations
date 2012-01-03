@@ -22,22 +22,22 @@ if (!isNil "revive_test") then {
 
 #ifdef RMM_AAR
 "After Action Reports" call mso_core_fnc_initStat;
-execNow "support\modules\aar\main.sqf";
+execNow "support\modules\rmm_aar\main.sqf";
 #endif
 
 #ifdef RMM_CAS
 "Close Air Support" call mso_core_fnc_initStat;
-execNow "support\modules\cas\main.sqf";
+execNow "support\modules\rmm_cas\main.sqf";
 #endif
 
 #ifdef RMM_CASEVAC
 "CASEVAC" call mso_core_fnc_initStat;
-execNow "support\modules\casevac\main.sqf";
+execNow "support\modules\rmm_casevac\main.sqf";
 #endif
 
 #ifdef CRB_FLIPPABLE
 "Flippable Vehicles" call mso_core_fnc_initStat;
-execNow "support\modules\flippable\main.sqf";
+execNow "support\modules\crb_flippable\main.sqf";
 #endif
 
 #ifdef GC_PACK_COW
@@ -47,12 +47,12 @@ execNow "support\modules\gc_pack_cow\main.sqf";
 
 #ifdef RMM_JIPMARKERS
 "JIP Markers" call mso_core_fnc_initStat;
-execNow "support\modules\jipmarkers\main.sqf";
+execNow "support\modules\rmm_jipmarkers\main.sqf";
 #endif
 
 #ifdef RMM_LOGISTICS
 "Logistics" call mso_core_fnc_initStat;
-execNow "support\modules\logistics\main.sqf";
+execNow "support\modules\rmm_logistics\main.sqf";
 #endif
 
 #ifdef R3F_LOGISTICS
@@ -63,17 +63,17 @@ execNow "support\modules\R3F_logistics\init.sqf";
 // FOB HQ MultiSpawn
 #ifdef WHB_MULTISPAWN
 "FOB HQ Multispawn" call mso_core_fnc_initStat;
-execNow "support\modules\WHB_FOBspawn\common\initMain.sqf";
+execNow "support\modules\WHB_Multispawn\common\initMain.sqf";
 #endif
 
 #ifdef RMM_NOTEBOOK
 "Notebook" call mso_core_fnc_initStat;
-execNow "support\modules\notebook\main.sqf";
+execNow "support\modules\rmm_notebook\main.sqf";
 #endif
 
 #ifdef RMM_TASKS
 "JIP Tasks" call mso_core_fnc_initStat;
-execNow "support\modules\tasks\main.sqf";	
+execNow "support\modules\rmm_tasks\main.sqf";	
 #endif
 
 #ifdef CRB_TWNMGR
@@ -83,7 +83,7 @@ execNow "support\modules\crb_twnmgr\main.sqf";
 
 #ifdef RMM_TYRES
 "Tyre Changing" call mso_core_fnc_initStat;
-execNow "support\modules\tyres\main.sqf";
+execNow "support\modules\rmm_tyres\main.sqf";
 #endif
 
 // AAW INKO Fix
