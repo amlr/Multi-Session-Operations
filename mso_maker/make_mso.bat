@@ -5,11 +5,13 @@ echo Thanks to Xeno for the dom_maker scripts/tools
 
 setlocal  EnableDelayedExpansion
 
+set ZIPNAME=MSO_Missions
 set MP_DIR=MPMissions
 set M_DIR=missions
 set BASE_DIR=BASE_MISSION
 set D_VER=4-0
 set D_BNVER=4.0
+set CODE_DIR=MSO_%BASE_DIR%_CODE_%D_VER%
 set D_NUM_PLAYERS=32
 set D_NUM_PLAYERS_TVT=16
 set D_NUM_PLAYERS_CTI=16
@@ -21,15 +23,20 @@ echo Copying Mission folders to temp folder
 xcopy %M_DIR% TMPMissions /T /Y /Q /EXCLUDE:mso_maker\exclude.txt
 
 cd TMPMissions
-rem For each mission folder, update the SQM, rapify it, compile FSMs, PBO Mission, delete mission folder
+rem For each mission folder, update the SQM, PBO Mission, delete mission folder
 FOR /F %%G IN ('dir /b') DO (CALL :processMission %%G)
 
+rem Copy base mission code to TMPMissions
+md %CODE_DIR%
+cd ..
+move TMPMissions %MP_DIR%
+xcopy %BASE_DIR% %MP_DIR%\%CODE_DIR% /S /Y /Q
+
 rem zip PBO files
-"c:\program files\7-zip\7z.exe" a MSO_Missions_%D_VER%.7z *.pbo
+"c:\program files\7-zip\7z.exe" a %ZIPNAME%_%D_VER%.7z %MP_DIR%
 
 rem cleanup
-cd ..
-move TMPMissions %MP_DIR%_%D_VER%
+rmdir /S /Q %MP_DIR%
 
 echo Complete!
 
@@ -67,7 +74,7 @@ move %NDIR%\newmission.sqm %NDIR%\mission.sqm
 CALL :LoCase MISSION_FILENAME
 echo Creating %MISSION_FILENAME%.pbo
 cd ..\TMPMissions
-makePbo -N -K %MISSION_FILENAME% 1> %MISSION_FILENAME%.txt
+makePbo -N -K %MISSION_FILENAME% 1> nul
 rmdir /S /Q %MISSION_FILENAME%
 del makepbo.exe
 del depbo.dll
