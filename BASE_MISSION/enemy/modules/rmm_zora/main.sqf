@@ -8,7 +8,7 @@ if (isnil 'BIS_Zora_mainscope') then {
         BIS_Zora_MainScope = _logicZora;
         if (isServer) then {
                 private ["_ok"];
-                //		_ok = [_logicZora] execVM "ca\modules\rmm_zora\data\scripts\main.sqf"
+                //		_ok = [_logicZora] execVM "ca\modules\zora\data\scripts\main.sqf"
                 _ok = [_logicZora] execVM "enemy\modules\rmm_zora\zora.sqf"
         };
 };
