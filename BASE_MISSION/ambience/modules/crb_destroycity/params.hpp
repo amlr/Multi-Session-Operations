@@ -14,5 +14,5 @@ class destroyCityFire {
         title = "        Enable Destroyed City Building Fires"; 
         values[]= {0,1}; 
         texts[]= {"Off", "On"}; 
-        default = 0;
+        default = 1;
 };
