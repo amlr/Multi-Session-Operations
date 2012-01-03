@@ -1,14 +1,14 @@
-rem MSO Build Batch
-rem Thanks to Xeno for the dom_maker scripts/tools
-
 @echo off
+
+echo MSO Build Batch
+echo Thanks to Xeno for the dom_maker scripts/tools
 
 setlocal  EnableDelayedExpansion
 
 set MP_DIR=MPMissions
 set M_DIR=missions
 set BASE_DIR=BASE_MISSION
-set D_VER=4_0
+set D_VER=4-0
 set D_BNVER=4.0
 set D_NUM_PLAYERS=32
 set D_NUM_PLAYERS_TVT=16
@@ -25,7 +25,7 @@ rem For each mission folder, update the SQM, rapify it, compile FSMs, PBO Missio
 FOR /F %%G IN ('dir /b') DO (CALL :processMission %%G)
 
 rem zip PBO files
-"c:\program files\7-zip\7z.exe" a MSO_Missions_4-0.7z *.pbo
+"c:\program files\7-zip\7z.exe" a MSO_Missions_%D_VER%.7z *.pbo
 
 rem cleanup
 cd ..
@@ -47,6 +47,12 @@ xcopy ..\mso_maker\depbo.dll . /Q /Y
 xcopy ..\%BASE_DIR% %MISSION_FOLDER_NAME% /E /Y /Q
 rem copy any mission customizations back
 xcopy ..\%M_DIR%\%MISSION_FOLDER_NAME% %MISSION_FOLDER_NAME% /S /Y /Q /EXCLUDE:..\mso_maker\exclude.txt
+cd %MISSION_FOLDER_NAME%
+call ..\..\mso_maker\clean_modules.bat ambience\modules
+call ..\..\mso_maker\clean_modules.bat core\modules
+call ..\..\mso_maker\clean_modules.bat enemy\modules
+call ..\..\mso_maker\clean_modules.bat support\modules
+cd ..
 FOR /F "tokens=1,2 delims=." %%U IN ('echo %MISSION_FOLDER_NAME%') DO (CALL :setMissionNames %%U %%V)
 set MISSION_FILENAME=mso%D_NUM_PLAYERS%_%MISSION_NAME%_%D_VER%.%MISSION_ISLAND%
 move %MISSION_FOLDER_NAME% %MISSION_FILENAME%
