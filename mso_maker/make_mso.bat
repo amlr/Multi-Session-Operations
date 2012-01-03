@@ -12,9 +12,6 @@ set BASE_DIR=BASE_MISSION
 set D_VER=4-0
 set D_BNVER=4.0
 set CODE_DIR=MSO_%BASE_DIR%_CODE_%D_VER%
-set D_NUM_PLAYERS=32
-set D_NUM_PLAYERS_TVT=16
-set D_NUM_PLAYERS_CTI=16
 
 rem Create temporary mission folders and place base mission code into each mission
 cd ..
@@ -61,14 +58,14 @@ call ..\..\mso_maker\clean_modules.bat enemy\modules
 call ..\..\mso_maker\clean_modules.bat support\modules
 cd ..
 FOR /F "tokens=1,2 delims=." %%U IN ('echo %MISSION_FOLDER_NAME%') DO (CALL :setMissionNames %%U %%V)
-set MISSION_FILENAME=mso%D_NUM_PLAYERS%_%MISSION_NAME%_%D_VER%.%MISSION_ISLAND%
+set MISSION_FILENAME=mso_%MISSION_NAME%_%D_VER%.%MISSION_ISLAND%
 move %MISSION_FOLDER_NAME% %MISSION_FILENAME%
 set NDIR=..\TMPMissions\%MISSION_FILENAME%
 cd ..
 cd mso_maker
 set MISSION_NAME=%MISSION_NAME:_= %
 CALL :UpCase MISSION_NAME
-sqm %NDIR%\mission.sqm -s briefingName * "MSO%D_NUM_PLAYERS% %MISSION_NAME% %D_BNVER%" -o %NDIR%\newmission.sqm
+sqm %NDIR%\mission.sqm -s briefingName * "MSO %MISSION_NAME% %D_BNVER%" -o %NDIR%\newmission.sqm
 del %NDIR%\mission.sqm
 move %NDIR%\newmission.sqm %NDIR%\mission.sqm
 CALL :LoCase MISSION_FILENAME
