@@ -26,7 +26,7 @@ execNow "ambience\modules\crb_flies\main.sqf";
 #endif
 #ifdef CRB_SANDSTORM
 "Sandstorms" call mso_core_fnc_initStat;
-execNow "ambience\modules\crb_sandstorms\main.sqf";
+execNow "ambience\modules\crb_sandstorm\main.sqf";
 #endif
 #ifdef RMM_CTP
 "Call To Prayer" call mso_core_fnc_initStat;

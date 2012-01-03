@@ -1,5 +1,3 @@
-
-// --Tested--
 #define CRB_CIVILIANS
 //#define CRB_CROWS
 #define CRB_DOGS
