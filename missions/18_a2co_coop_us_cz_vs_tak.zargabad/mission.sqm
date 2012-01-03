@@ -61,8 +61,8 @@ class Mission
 	randomSeed=9773591;
 	class Intel
 	{
-		briefingName="Terrorist Cells v1.1 MSO v3.4";
-		briefingDescription="An AEF CTB MSO Mission";
+		briefingName="MSO USA/CZ vs TK_GUE v4.0";
+		briefingDescription="An MSO Team Development (A2CO)";
 		resistanceEast=1;
 		startWeather=0.25;
 		forecastWeather=0;
@@ -234,7 +234,7 @@ class Mission
 					vehicle="US_Soldier_Marksman_EP1";
 					leader=1;
 					skill=0.46666664;
-					init="0 = [this] call compile preprocessFileLineNumbers ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
+					init="0 = [this] execVM ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
 				};
 			};
 		};
@@ -438,7 +438,7 @@ class Mission
 					vehicle="US_Soldier_Marksman_EP1";
 					leader=1;
 					skill=0.46666664;
-					init="0 = [this] call compile preprocessFileLineNumbers ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
+					init="0 = [this] execVM ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
 				};
 			};
 		};
@@ -457,7 +457,7 @@ class Mission
 					vehicle="US_Soldier_Marksman_EP1";
 					leader=1;
 					skill=0.46666664;
-					init="0 = [this] call compile preprocessFileLineNumbers ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
+					init="0 = [this] execVM ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
 				};
 			};
 		};
@@ -476,7 +476,7 @@ class Mission
 					vehicle="US_Soldier_Marksman_EP1";
 					leader=1;
 					skill=0.46666664;
-					init="0 = [this] call compile preprocessFileLineNumbers ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
+					init="0 = [this] execVM ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
 				};
 			};
 		};
@@ -495,7 +495,7 @@ class Mission
 					vehicle="US_Soldier_Marksman_EP1";
 					leader=1;
 					skill=0.46666664;
-					init="0 = [this] call compile preprocessFileLineNumbers ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
+					init="0 = [this] execVM ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
 				};
 			};
 		};
@@ -514,7 +514,7 @@ class Mission
 					vehicle="US_Soldier_Marksman_EP1";
 					leader=1;
 					skill=0.46666664;
-					init="0 = [this] call compile preprocessFileLineNumbers ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
+					init="0 = [this] execVM ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
 				};
 			};
 		};
@@ -533,7 +533,7 @@ class Mission
 					vehicle="US_Soldier_Marksman_EP1";
 					leader=1;
 					skill=0.46666664;
-					init="0 = [this] call compile preprocessFileLineNumbers ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
+					init="0 = [this] execVM ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
 				};
 			};
 		};
@@ -552,7 +552,7 @@ class Mission
 					vehicle="US_Soldier_Marksman_EP1";
 					leader=1;
 					skill=0.46666664;
-					init="0 = [this] call compile preprocessFileLineNumbers ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
+					init="0 = [this] execVM ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
 				};
 			};
 		};
@@ -571,7 +571,7 @@ class Mission
 					vehicle="US_Soldier_Marksman_EP1";
 					leader=1;
 					skill=0.46666664;
-					init="0 = [this] call compile preprocessFileLineNumbers ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
+					init="0 = [this] execVM ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
 				};
 			};
 		};
@@ -590,7 +590,7 @@ class Mission
 					vehicle="US_Soldier_Marksman_EP1";
 					leader=1;
 					skill=0.46666664;
-					init="0 = [this] call compile preprocessFileLineNumbers ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
+					init="0 = [this] execVM ""support\scripts\crB_scripts\crB_HousePos.sqf"";";
 				};
 			};
 		};
@@ -1000,7 +1000,7 @@ class Mission
 			side="EMPTY";
 			vehicle="TK_ALICE_Pack_EP1";
 			skill=0.2;
-			init="0 = [this, 60] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item15
 		{
@@ -1010,7 +1010,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M2StaticMG_US_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item16
 		{
@@ -1020,7 +1020,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M2StaticMG_US_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item17
 		{
@@ -1030,7 +1030,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M252_US_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item18
 		{
@@ -1040,7 +1040,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M252_US_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item19
 		{
@@ -1050,7 +1050,7 @@ class Mission
 			side="EMPTY";
 			vehicle="TK_ALICE_Pack_EP1";
 			skill=0.2;
-			init="0 = [this, 60] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item20
 		{
@@ -1060,7 +1060,7 @@ class Mission
 			side="EMPTY";
 			vehicle="TK_ALICE_Pack_EP1";
 			skill=0.2;
-			init="0 = [this, 60] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item21
 		{
@@ -1070,7 +1070,7 @@ class Mission
 			side="EMPTY";
 			vehicle="TK_ALICE_Pack_EP1";
 			skill=0.2;
-			init="0 = [this, 60] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item22
 		{
@@ -1080,7 +1080,7 @@ class Mission
 			side="EMPTY";
 			vehicle="TK_ALICE_Pack_EP1";
 			skill=0.2;
-			init="0 = [this, 60] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item23
 		{
@@ -1090,7 +1090,7 @@ class Mission
 			side="EMPTY";
 			vehicle="TK_ALICE_Pack_EP1";
 			skill=0.2;
-			init="0 = [this, 60] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item24
 		{
@@ -1174,7 +1174,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item33
 		{
@@ -1184,7 +1184,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item34
 		{
@@ -1194,7 +1194,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item35
 		{
@@ -1204,7 +1204,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item36
 		{
@@ -1214,7 +1214,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item37
 		{
@@ -1224,7 +1224,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item38
 		{
@@ -1234,7 +1234,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item39
 		{
@@ -1244,7 +1244,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item40
 		{
@@ -1254,7 +1254,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_long";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item41
 		{
@@ -1264,7 +1264,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_long";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item42
 		{
@@ -1274,7 +1274,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_long";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item43
 		{
@@ -1284,7 +1284,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_long";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item44
 		{
@@ -1294,7 +1294,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_corner";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item45
 		{
@@ -1304,7 +1304,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_corner";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item46
 		{
@@ -1314,7 +1314,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_corner";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item47
 		{
@@ -1324,7 +1324,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_corner";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item48
 		{
@@ -1334,7 +1334,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_round";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item49
 		{
@@ -1344,7 +1344,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_round";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item50
 		{
@@ -1354,7 +1354,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_round";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item51
 		{
@@ -1364,7 +1364,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_round";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item52
 		{
@@ -1374,7 +1374,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_HBarrier5";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item53
 		{
@@ -1384,7 +1384,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_HBarrier5";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item54
 		{
@@ -1394,7 +1394,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_HBarrier_large";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item55
 		{
@@ -1404,7 +1404,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_HBarrier_large";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item56
 		{
@@ -1414,7 +1414,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Fort_RazorWire";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item57
 		{
@@ -1424,7 +1424,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Fort_RazorWire";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item58
 		{
@@ -1434,7 +1434,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Fort_RazorWire";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item59
 		{
@@ -1480,7 +1480,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Fort_RazorWire";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item64
 		{
@@ -1490,7 +1490,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item65
 		{
@@ -1500,7 +1500,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item66
 		{
@@ -1510,7 +1510,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item67
 		{
@@ -1520,7 +1520,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item68
 		{
@@ -1530,7 +1530,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item69
 		{
@@ -1540,7 +1540,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item70
 		{
@@ -1550,7 +1550,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item71
 		{
@@ -1560,7 +1560,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item72
 		{
@@ -1570,7 +1570,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fortified_nest_small_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item73
 		{
@@ -1580,7 +1580,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fortified_nest_small_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item74
 		{
@@ -1590,7 +1590,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_artillery_nest_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item75
 		{
@@ -1600,7 +1600,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fortified_nest_big_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item76
 		{
@@ -1610,7 +1610,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MASH_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item77
 		{
@@ -1620,7 +1620,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USBasicAmmunitionBox_EP1";
 			skill=0.2;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item78
 		{
@@ -1630,7 +1630,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USBasicWeapons_EP1";
 			skill=0.2;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item79
 		{
@@ -1640,7 +1640,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USLaunchers_EP1";
 			skill=0.2;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item80
 		{
@@ -1650,7 +1650,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_CamoNet_NATO_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item81
 		{
@@ -1660,7 +1660,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_CamoNetB_NATO_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item82
 		{
@@ -1670,7 +1670,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_CamoNetVar_NATO_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item83
 		{
@@ -1680,7 +1680,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USOrdnanceBox_EP1";
 			skill=0.2;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item84
 		{
@@ -1690,7 +1690,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USVehicleBox_EP1";
 			skill=0.2;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item85
 		{
@@ -1700,7 +1700,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USVehicleBox_EP1";
 			skill=0.2;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item86
 		{
@@ -1710,7 +1710,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M2StaticMG_US_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item87
 		{
@@ -1720,7 +1720,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M119_US_EP1";
 			skill=0.2;
-			init="0 = [this, 86400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 86400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item88
 		{
@@ -1789,7 +1789,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Misc_Cargo1E_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item95
 		{
@@ -1888,7 +1888,7 @@ class Mission
 			side="EMPTY";
 			vehicle="CZBasicWeapons_EP1";
 			skill=0.2;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item105
 		{
@@ -1898,7 +1898,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USSpecialWeapons_EP1";
 			skill=0.2;
-			init="0 = [this, 14400] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item106
 		{
@@ -1917,7 +1917,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Misc_Cargo1E_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item108
 		{
@@ -1927,7 +1927,7 @@ class Mission
 			side="EMPTY";
 			vehicle="SearchLight_US_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item109
 		{
@@ -1937,7 +1937,7 @@ class Mission
 			side="EMPTY";
 			vehicle="SearchLight_US_EP1";
 			skill=0.2;
-			init="0 = [this, 28800] call compile preprocessFileLineNumbers ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item110
 		{
