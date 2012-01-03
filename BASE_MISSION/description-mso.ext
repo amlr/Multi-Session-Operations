@@ -63,7 +63,7 @@ class Params {
 	#include <ambience\modules\crb_flies\params.hpp>
 #endif
 #ifdef CRB_SANDSTORM
-	#include <ambience\modules\crb_sandstorms\params.hpp>
+	#include <ambience\modules\crb_sandstorm\params.hpp>
 #endif
 #ifdef CRB_DESTROYCITY
 	#include <ambience\modules\crb_destroyCity\params.hpp>
