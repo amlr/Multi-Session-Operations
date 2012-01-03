@@ -39,6 +39,7 @@ goto:eof
 @echo off
 setlocal  EnableDelayedExpansion
 set MISSION_FOLDER_NAME=%1
+echo ---------------------
 echo Processing %1
 rem copy base mission across
 xcopy ..\mso_maker\makepbo.exe . /Q /Y
@@ -47,16 +48,18 @@ xcopy ..\%BASE_DIR% %MISSION_FOLDER_NAME% /E /Y /Q
 rem copy any mission customizations back
 xcopy ..\%M_DIR%\%MISSION_FOLDER_NAME% %MISSION_FOLDER_NAME% /S /Y /Q /EXCLUDE:..\mso_maker\exclude.txt
 FOR /F "tokens=1,2 delims=." %%U IN ('echo %MISSION_FOLDER_NAME%') DO (CALL :setMissionNames %%U %%V)
-set MISSION_FILENAME=MSO%D_NUM_PLAYERS%_%MISSION_NAME%_%D_VER%.%MISSION_ISLAND%
+set MISSION_FILENAME=mso%D_NUM_PLAYERS%_%MISSION_NAME%_%D_VER%.%MISSION_ISLAND%
 move %MISSION_FOLDER_NAME% %MISSION_FILENAME%
 set NDIR=..\TMPMissions\%MISSION_FILENAME%
 cd ..
 cd mso_maker
 set MISSION_NAME=%MISSION_NAME:_= %
+CALL :UpCase MISSION_NAME
 sqm %NDIR%\mission.sqm -s briefingName * "MSO%D_NUM_PLAYERS% %MISSION_NAME% %D_BNVER%" -o %NDIR%\newmission.sqm
 del %NDIR%\mission.sqm
 move %NDIR%\newmission.sqm %NDIR%\mission.sqm
-echo Creating %MISSION_FILENAME% PBO
+CALL :LoCase MISSION_FILENAME
+echo Creating %MISSION_FILENAME%.pbo
 cd ..\TMPMissions
 makePbo -N -K %MISSION_FILENAME% 1> %MISSION_FILENAME%.txt
 rmdir /S /Q %MISSION_FILENAME%
@@ -69,4 +72,16 @@ set MISSION_NAME=%1
 set MISSION_NAME=%MISSION_NAME: =%
 set MISSION_ISLAND=%2
 set MISSION_ISLAND=%MISSION_ISLAND: =%
+goto:eof
 
+:LoCase
+:: Subroutine to convert a variable VALUE to all lower case.
+:: The argument for this subroutine is the variable NAME.
+FOR %%i IN ("A=a" "B=b" "C=c" "D=d" "E=e" "F=f" "G=g" "H=h" "I=i" "J=j" "K=k" "L=l" "M=m" "N=n" "O=o" "P=p" "Q=q" "R=r" "S=s" "T=t" "U=u" "V=v" "W=w" "X=x" "Y=y" "Z=z") DO CALL SET "%1=%%%1:%%~i%%"
+GOTO:EOF
+
+:UpCase
+:: Subroutine to convert a variable VALUE to all UPPER CASE.
+:: The argument for this subroutine is the variable NAME.
+FOR %%i IN ("a=A" "b=B" "c=C" "d=D" "e=E" "f=F" "g=G" "h=H" "i=I" "j=J" "k=K" "l=L" "m=M" "n=N" "o=O" "p=P" "q=Q" "r=R" "s=S" "t=T" "u=U" "v=V" "w=W" "x=X" "y=Y" "z=Z") DO CALL SET "%1=%%%1:%%~i%%"
+GOTO:EOF
