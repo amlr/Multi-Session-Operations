@@ -1,0 +1,9 @@
+To create the patch, use the following from GIT Bash:
+
+$ diff -rupN  BASE_MISSION/ BASE_A2FREE/ > a2free_patch.txt
+
+This will NOT capture binaries like images, so you need to zip them separately in cba-x.7z for example.
+
+To apply the patch to a BASE_MISSION directory, from a DOS command prompt:
+
+> patch --binary -p0 < a2free_patch.txt

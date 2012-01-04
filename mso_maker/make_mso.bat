@@ -49,8 +49,17 @@ rem copy base mission across
 xcopy ..\mso_maker\makepbo.exe . /Q /Y
 xcopy ..\mso_maker\depbo.dll . /Q /Y
 xcopy ..\%BASE_DIR% %MISSION_FOLDER_NAME% /E /Y /Q
+pause
+for /f "tokens=1,2 delims=_" %%U in ('echo %MISSION_FOLDER_NAME%') do (
+if "%%U"=="A2Free" call (
+rem Apply A2Free patch
+..\mso_maker\patch.exe --binary -t -p1 -d %MISSION_FOLDER_NAME% < ..\mso_maker\a2free_patch.txt
+"c:\program files\7-zip\7z.exe" x -o%MISSION_FOLDER_NAME% ..\mso_maker\cba-x.7z
+)
+pause
 rem copy any mission customizations back
 xcopy ..\%M_DIR%\%MISSION_FOLDER_NAME% %MISSION_FOLDER_NAME% /S /Y /Q /EXCLUDE:..\mso_maker\exclude.txt
+
 cd %MISSION_FOLDER_NAME%
 call ..\..\mso_maker\clean_modules.bat ambience\modules
 call ..\..\mso_maker\clean_modules.bat core\modules
