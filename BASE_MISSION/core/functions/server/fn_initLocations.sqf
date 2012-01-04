@@ -145,7 +145,6 @@ switch toLower(worldName) do {
         case "torabora": {
 				CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
                 [] call mso_core_fnc_createLocations;
-                {createLocation ["BorderCrossing",_x,1,1]} foreach [[48.716465,1614.6689,0],[1823.8114,5080.3926,0],[1648.1056,7808.8857,0],[1964.0529,9121.2988,0],[2257.4221,15234.31,0],[9683.6787,13556.688,0],[11955.002,13150.367,0],[13388.054,12853.484,0],[4980.04,12584.29,0]];
                 [] call _initNeighbors;
         };
        
