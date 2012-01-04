@@ -1,8 +1,8 @@
 class WICT_wict_header {
         title = "    Enemy - World In Conflict Tool"; 
-        values[]= {0}; 
-        texts[]= {" "}; 
-        default = 0;
+        values[]= {0, 1}; 
+        texts[]= {"Off","On"}; 
+        default = 1;
 };
 class wict_ai_groups {
         title = "        WICT - Maximum AI Groups"; 

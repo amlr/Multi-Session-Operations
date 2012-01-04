@@ -16,7 +16,7 @@ diag_log format["MSO-%1 Town Manager - Starting", time];
 
 // Manage/provide intel on each town/area with a city center
 _locs = bis_functions_mainscope getvariable "locations";
-diag_log format["MSO-%1 Town Manager - Locations: %1", count _locs];
+diag_log format["MSO-%1 Town Manager - Locations: %2", time, count _locs];
 
 CRB_whichSideText = {
         switch(_this) do {

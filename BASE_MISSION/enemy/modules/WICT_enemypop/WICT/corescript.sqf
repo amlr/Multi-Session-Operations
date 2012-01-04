@@ -61,7 +61,6 @@ if (isServer) then
 		{
 			_playable = playableUnits;
 			_n = count _playable;
-			
 			if (_n > 0) then
 			{
 				{
@@ -75,15 +74,16 @@ if (isServer) then
 						_posB = _posB + _other_y;
 					};
 				} foreach _playable;
+				
+				_posA = _posA/(_n);
+				_posB = _posB/(_n);
+				
+				WICT_playerPos set [0, _posA];
+				WICT_playerPos set [1, _posB];
+			} else {
+				WICT_state = "stop";
 			};
-			
-			_posA = _posA/(_n);
-			_posB = _posB/(_n);
-			
-			WICT_playerPos set [0, _posA];
-			WICT_playerPos set [1, _posB];
 		};
-
 				
 		WICT_time = WICT_time + (round (random WICT_timeRand));
 
@@ -156,7 +156,7 @@ if (isServer) then
 
 		waitUntil {WICT_clutch == 1};
 
-		if (WICT_debug == "yes") then {hint format ["Number of AI groups: %4, west base: %1, east base: %2, neutral base: %3",WICT_wb,WICT_eb,WICT_nb,(count allGroups)];};
+		if (WICT_debug == "yes") then {diag_log format ["Number of AI groups: %4, west base: %1, east base: %2, neutral base: %3",WICT_wb,WICT_eb,WICT_nb,(count allGroups)];};
 
 		sleep WICT_time;
 	};

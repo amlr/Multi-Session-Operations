@@ -19,8 +19,22 @@ if (isServer) then
 {
 	while {true} do
 	{
+		private ["_n","_playable"];
+		
 		/* Checks the state of the WICT_state variable - whether it is START or STOP */
 		_currentState = WICT_state;
+		
+		// Check to see if there are playable units
+		_playable = playableUnits;
+		_n = count _playable;
+		
+		if (_n == 0) then 
+		{
+			WICT_state = "stop";
+		} else {
+			WICT_state = "start";
+		};
+		
 		/* It waits for a change in the state */
 		waitUntil {!(WICT_state == _currentState)};
 		
@@ -32,6 +46,7 @@ if (isServer) then
 		
 		if (WICT_state == "stop") then
 		{
+			diag_log "Stopping WICT Controller";
 			_null = terminate controllerH;
 			sleep 1;
 		};

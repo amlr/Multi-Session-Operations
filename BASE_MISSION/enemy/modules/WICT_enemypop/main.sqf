@@ -12,6 +12,9 @@
 
 if(!isServer) exitWith{};
 
+if(isNil "WICT_wict_header")then{WICT_wict_header = 1;};
+if (WICT_wict_header == 0) exitWith{};
+
 WICT_PATH = "enemy\modules\WICT_enemypop\";
 
 private ["_debug","_d","_camp","_flag","_WICTM","_WICTMN","_group","_pos2"];

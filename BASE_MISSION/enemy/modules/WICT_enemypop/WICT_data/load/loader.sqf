@@ -21,5 +21,5 @@ if (!isDedicated) then
 	
 	sleep 3;
 
-	[nil,nil,rEXECVM,(WICT_PATH + "WICT\sandbox\sandbox_exe.sqf"),(WICT_PATH + "WICT\sandbox\"),"taskCreator","Airport base","mixedBase_1","yes","Primary: Capture the enemy bases!","Seek and destroy all enemy bases and clear the island from opressing russian forces!","yes","all"] call RE;
+	[nil,nil,rEXECVM,(WICT_PATH + "WICT\sandbox\sandbox_exe.sqf"),(WICT_PATH + "WICT\sandbox\"),"taskCreator","BLUFOR Base","mixedBase_1","yes","Primary: Capture the enemy bases!","Seek and destroy all enemy bases and clear the area of enemy forces!","yes","all"] call RE;
 };

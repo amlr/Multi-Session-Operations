@@ -18,7 +18,7 @@ waituntil {!isnil "bis_fnc_init"};
 waituntil {BIS_MPF_InitDone};
 
 /* Show this text on all machines */
-titleText ["Powered by WICT v7.0d", "PLAIN"]; titleFadeOut 7;
+//titleText ["Powered by WICT v7.0d", "PLAIN"]; titleFadeOut 7;
 
 /* Run this only on server */
 if (isServer) then
