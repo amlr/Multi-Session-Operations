@@ -4,6 +4,8 @@
 
 waitUntil{!isNil "BIS_fnc_init"};
 
+diag_log format["MSO version: %1", "4.0e"];
+
 execNow "core\init.sqf";
 execNow "ambience\init.sqf";
 execNow "support\init.sqf";
