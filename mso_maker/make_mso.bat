@@ -59,11 +59,11 @@ xcopy ..\mso_maker\depbo.dll . /Q /Y
 echo Copying code base structure to %MISSION_FOLDER_NAME%
 xcopy ..\%BASE_DIR% %MISSION_FOLDER_NAME% /E /Y /Q
 
-echo Checking for A2Free version
-for /f "tokens=1,2 delims=_" %%U in ('echo %MISSION_FOLDER_NAME%') do (CALL :processA2Free %%V)
-
 echo Copying Mission customisations to %MISSION_FOLDER_NAME%
 xcopy ..\%M_DIR%\%MISSION_FOLDER_NAME% %MISSION_FOLDER_NAME% /S /Y /Q /EXCLUDE:..\mso_maker\exclude.txt
+
+echo Checking for A2Free version
+for /f "tokens=1,2 delims=_" %%U in ('echo %MISSION_FOLDER_NAME%') do (CALL :processA2Free %%V)
 
 cd %MISSION_FOLDER_NAME%
 call ..\..\mso_maker\clean_modules.bat ambience\modules
