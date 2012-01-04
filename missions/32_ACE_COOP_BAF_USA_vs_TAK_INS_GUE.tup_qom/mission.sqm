@@ -7437,7 +7437,6 @@ class Mission
 	class Markers
 	{
 		items=23;
-		items=22;
 		class Item0
 		{
 			position[]={2759.1951,691.98602,8819.3076};
