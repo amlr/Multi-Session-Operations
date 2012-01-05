@@ -24,10 +24,11 @@ CRB_randomFog = {
         private ["_value","_delay"];
         if (daytime > 1 && daytime < 8) then {
                 _value = random 1; //new fog% (0-0.5)
+	        _delay = 300 + random 300; // finish
         } else {
                 _value = 0;
+	        _delay = 300 + random 3300; // finish
         };
-        _delay = 300 + random 300; // finish
         
         [fog, _value, time, time + _delay];
 };
@@ -99,15 +100,15 @@ if (isserver) then {
         
         // Set random weather on server
         _overcast = random 1;
-        diag_log format["MSO-%1 Weather Sync: Overcast=%2", time, _overcast];
+        diag_log format["MSO-%1 Weather Server Start: Overcast=%2", time, _overcast];
         0 setOvercast _overcast;
         
         _fog = if(disableFog == 0) then {random 0.5;} else {0};
-        diag_log format["MSO-%1 Weather Sync: Fog=%2", time, _fog];
+        diag_log format["MSO-%1 Weather Server Start: Fog=%2", time, _fog];
         0 setFog _fog;
         
         _rain = random 1;
-        diag_log format["MSO-%1 Weather Sync: Rain=%2", time, _rain];
+        diag_log format["MSO-%1 Weather Server Start: Rain=%2", time, _rain];
         0 setRain _rain;
         
         // Setup random weather forecast on server
@@ -146,7 +147,9 @@ if (isserver) then {
         
         [{CRB_t = [date]; publicvariable "CRB_t";}, timeSync, []] call mso_core_fnc_addLoopHandler;
         
-} else {
+};
+
+if(!isDedicated) then {
         "CRB_t" addPublicVariableEventHandler {CRB_t call CRB_timeSync;};
         "RMM_w" addPublicVariableEventHandler {RMM_w call weather_fnc_sync;};
         
@@ -171,17 +174,17 @@ if (isserver) then {
         
         //Linear interpolation
         _overcast = ((time - _ostart) * (_oforecast - _ocurrent)/(_oend - _ostart)) + _ocurrent;
-        diag_log format["MSO-%1 Weather Sync: Overcast=%2", time, _overcast];
+        diag_log format["MSO-%1 Weather Client Start: Overcast=%2", time, _overcast];
         0 setOvercast _overcast;
         
         _fog = if(disableFog == 0) then {
                 ((time - _fstart) * (_fforecast - _fcurrent)/(_fend - _fstart)) + _fcurrent;
         } else {0};
-        diag_log format["MSO-%1 Weather Sync: Fog=%2", time, _fog];
+        diag_log format["MSO-%1 Weather Client Start: Fog=%2", time, _fog];
         0 setFog _fog;
         
         _rain = ((time - _rstart) * (_rforecast - _rcurrent)/(_rend - _rstart)) + _rcurrent;
-        diag_log format["MSO-%1 Weather Sync: Rain=%2", time, _rain];
+        diag_log format["MSO-%1 Weather Client Start: Rain=%2", time, _rain];
         0 setRain _rain;
         
         RMM_w call weather_fnc_sync;
