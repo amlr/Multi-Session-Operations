@@ -1007,7 +1007,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=15;
+		items=17;
 		class Item0
 		{
 			position[]={3515.6721,22.35,3992.2153};
@@ -1119,6 +1119,20 @@ class Mission
 			text="MP Rights Testing";
 			type="mil_dot";
 			angle=89.497597;
+		};
+		class Item15
+		{
+			position[]={3556.9207,22.356726,4080.9922};
+			name="ammo";
+			text="ACRE Radio Box Test";
+			type="mil_dot";
+		};
+		class Item16
+		{
+			position[]={3561.0027,22.411779,4085.9219};
+			name="ammo_1";
+			text="Ammo Box Testing";
+			type="mil_dot";
 		};
 	};
 	class Sensors
