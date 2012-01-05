@@ -1,4 +1,4 @@
-diff -rupN BASE_MISSION/XEH_preinit.sqf BASE_A2Free/XEH_preinit.sqf
+﻿diff -rupN BASE_MISSION/XEH_preinit.sqf BASE_A2Free/XEH_preinit.sqf
 --- BASE_MISSION/XEH_preinit.sqf	Mon Jan  2 21:53:46 2012
 +++ BASE_A2Free/XEH_preinit.sqf	Thu Jan  1 10:00:00 1970
 @@ -1,4 +0,0 @@
@@ -537,15 +537,7 @@ diff -rupN BASE_MISSION/enemy/modules/crb_terrorists/main.sqf BASE_A2Free/enemy/
  };
 +#endif
 \ No newline at end of file
-diff -rupN BASE_MISSION/enemy/modules/rmm_zora/main.sqf BASE_A2Free/enemy/modules/rmm_zora/main.sqf
---- BASE_MISSION/enemy/modules/rmm_zora/main.sqf	Tue Jan  3 23:48:20 2012
-+++ BASE_A2Free/enemy/modules/rmm_zora/main.sqf	Thu Jan  5 12:24:12 2012
-@@ -65,4 +65,4 @@ BIS_Zora_Mainscope setvariable ["maxdist
- 		CRBPROFILERSTOP
- 		sleep _waittime;
-         };
--};
-+};
+
 diff -rupN BASE_MISSION/init-custom.sqf BASE_A2Free/init-custom.sqf
 --- BASE_MISSION/init-custom.sqf	Mon Jan  2 21:53:46 2012
 +++ BASE_A2Free/init-custom.sqf	Thu Jan  5 12:24:56 2012
