@@ -9,8 +9,8 @@ Thanks to:
 - Kremator, SCAJolly, Katipo66, vengeance1, 16AA and AEF clans for testing
 - Alef and Sickboy for CBA conversion for A2Free
 - Xeno and Mikero for their Mission Builder Script
-- Spyder for Object Network Update (ONU), LoyalGuard for ARMA Electrical Grids (AEG), ArmaIIholic and Highhead for World In Conflict (WICT)
-- USMCWall, Muzzleflash, Wobbleyheadedbob, Hatedread, Zonekiller, VoW Widow, Swedge, Lonestar, SBSMac, Prymsuspec, zGuba, Fireball, Nou, Jaynus, Norrin for bits and pieces we got from you
+- Spyder for Object Network Update (ONU), LoyalGuard for ARMA Electrical Grids (AEG), ArmaIIholic and Highhead for World In Conflict (WICT), LurchiDerLurch for AC130 CAS
+- Robalo, USMCWall, Muzzleflash, Wobbleyheadedbob, Hatedread, Zonekiller, VoW Widow, Swedge, Lonestar, SBSMac, Prymsuspec, zGuba, Fireball, Nou, Jaynus, Norrin for bits and pieces we got from you
 - CWR² team, IceBreakr, Shezan, Commander, Old Bear for making your mods and islands MSO friendly
 
 Core
