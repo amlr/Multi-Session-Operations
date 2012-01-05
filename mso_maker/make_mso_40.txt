@@ -1,0 +1,1810 @@
+MSO Build Batch
+Thanks to Xeno for the dom_maker scripts/tools
+Creating temporary mission folders and placing base mission code into each mission
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 11_a2co_coop_us_baf_vs_ins_gue.torabora
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 11_a2co_coop_us_baf_vs_ins_gue.torabora
+755 File(s) copied
+Copying Mission customisations to 11_a2co_coop_us_baf_vs_ins_gue.torabora
+4 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "enemy\modules\crb_terrorists"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 11 A2CO COOP US BAF VS INS GUE 4.0
+        1 file(s) moved.
+Creating mso_11_a2co_coop_us_baf_vs_ins_gue_4-0.torabora.pbo
+Deleting mso_11_a2co_coop_us_baf_vs_ins_gue_4-0.torabora Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 12_a2co_cti_us_vs_tak_vs_gue.zargabad
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 12_a2co_cti_us_vs_tak_vs_gue.zargabad
+755 File(s) copied
+Copying Mission customisations to 12_a2co_cti_us_vs_tak_vs_gue.zargabad
+12 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\NOU_cache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_nomad"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\crb_convoys"
+Deleting "enemy\modules\crb_terrorists"
+Deleting "enemy\modules\rmm_enemypop"
+Deleting "enemy\modules\rmm_zora"
+Deleting "enemy\modules\WICT_enemypop"
+Deleting "support\modules\ca"
+Deleting "support\modules\crb_twnmgr"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\R3F_logistics"
+Deleting "support\modules\rmm_cas"
+Deleting "support\modules\rmm_casevac"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logbook"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\rmm_recruitment"
+Deleting "support\modules\rmm_revive"
+Deleting "support\modules\rmm_tasks"
+Deleting "support\modules\rmm_tyres"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\WHB_Multispawn"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 12 A2CO CTI US VS TAK VS GUE 4.0
+        1 file(s) moved.
+Creating mso_12_a2co_cti_us_vs_tak_vs_gue_4-0.zargabad.pbo
+Deleting mso_12_a2co_cti_us_vs_tak_vs_gue_4-0.zargabad Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 13_a2co_coop_usmc_vs_ru.fdf_isle1_a
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 13_a2co_coop_usmc_vs_ru.fdf_isle1_a
+755 File(s) copied
+Copying Mission customisations to 13_a2co_coop_usmc_vs_ru.fdf_isle1_a
+4 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "enemy\modules\crb_terrorists"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 13 A2CO COOP USMC VS RU 4.0
+        1 file(s) moved.
+Creating mso_13_a2co_coop_usmc_vs_ru_4-0.fdf_isle1_a.pbo
+Deleting mso_13_a2co_coop_usmc_vs_ru_4-0.fdf_isle1_a Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 13_a2co_coop_usmc_vs_ru_gue.lingor
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 13_a2co_coop_usmc_vs_ru_gue.lingor
+755 File(s) copied
+Copying Mission customisations to 13_a2co_coop_usmc_vs_ru_gue.lingor
+4 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "enemy\modules\crb_terrorists"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 13 A2CO COOP USMC VS RU GUE 4.0
+        1 file(s) moved.
+Creating mso_13_a2co_coop_usmc_vs_ru_gue_4-0.lingor.pbo
+Deleting mso_13_a2co_coop_usmc_vs_ru_gue_4-0.lingor Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 16_a2co_cti_cdf_vs_ins.chernarus
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 16_a2co_cti_cdf_vs_ins.chernarus
+755 File(s) copied
+Copying Mission customisations to 16_a2co_cti_cdf_vs_ins.chernarus
+12 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\NOU_cache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_nomad"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\crb_convoys"
+Deleting "enemy\modules\crb_terrorists"
+Deleting "enemy\modules\WICT_enemypop"
+Deleting "support\modules\ca"
+Deleting "support\modules\crb_twnmgr"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\R3F_logistics"
+Deleting "support\modules\rmm_cas"
+Deleting "support\modules\rmm_casevac"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logbook"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\rmm_recruitment"
+Deleting "support\modules\rmm_revive"
+Deleting "support\modules\rmm_tasks"
+Deleting "support\modules\rmm_tyres"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\WHB_Multispawn"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 16 A2CO CTI CDF VS INS 4.0
+        1 file(s) moved.
+Creating mso_16_a2co_cti_cdf_vs_ins_4-0.chernarus.pbo
+Deleting mso_16_a2co_cti_cdf_vs_ins_4-0.chernarus Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 16_a2co_cti_cdf_vs_ins.cmr_cicada
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 16_a2co_cti_cdf_vs_ins.cmr_cicada
+755 File(s) copied
+Copying Mission customisations to 16_a2co_cti_cdf_vs_ins.cmr_cicada
+12 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\NOU_cache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_nomad"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\crb_convoys"
+Deleting "enemy\modules\crb_terrorists"
+Deleting "enemy\modules\WICT_enemypop"
+Deleting "support\modules\ca"
+Deleting "support\modules\crb_twnmgr"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\R3F_logistics"
+Deleting "support\modules\rmm_cas"
+Deleting "support\modules\rmm_casevac"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logbook"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\rmm_recruitment"
+Deleting "support\modules\rmm_revive"
+Deleting "support\modules\rmm_tasks"
+Deleting "support\modules\rmm_tyres"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\WHB_Multispawn"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 16 A2CO CTI CDF VS INS 4.0
+        1 file(s) moved.
+Creating mso_16_a2co_cti_cdf_vs_ins_4-0.cmr_cicada.pbo
+Deleting mso_16_a2co_cti_cdf_vs_ins_4-0.cmr_cicada Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 16_a2co_cti_us_vs_tak.takistan
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 16_a2co_cti_us_vs_tak.takistan
+755 File(s) copied
+Copying Mission customisations to 16_a2co_cti_us_vs_tak.takistan
+7 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\NOU_cache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_nomad"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\crb_convoys"
+Deleting "enemy\modules\crb_terrorists"
+Deleting "enemy\modules\WICT_enemypop"
+Deleting "support\modules\ca"
+Deleting "support\modules\crb_twnmgr"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\R3F_logistics"
+Deleting "support\modules\rmm_cas"
+Deleting "support\modules\rmm_casevac"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logbook"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\rmm_recruitment"
+Deleting "support\modules\rmm_revive"
+Deleting "support\modules\rmm_tasks"
+Deleting "support\modules\rmm_tyres"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\WHB_Multispawn"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 16 A2CO CTI US VS TAK 4.0
+        1 file(s) moved.
+Creating mso_16_a2co_cti_us_vs_tak_4-0.takistan.pbo
+Deleting mso_16_a2co_cti_us_vs_tak_4-0.takistan Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 16_A2Free_CTI_CDF_vs_INS.chernarus
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 16_A2Free_CTI_CDF_vs_INS.chernarus
+755 File(s) copied
+Copying Mission customisations to 16_A2Free_CTI_CDF_vs_INS.chernarus
+1 File(s) copied
+Checking for A2Free version
+Patching mission for A2FREE
+patching file XEH_preinit.sqf
+patching file ambience/modules/crb_civilians/Main.sqf
+patching file ambience/modules/crb_civilians/crB_AmbCivSetup.sqf
+patching file ambience/modules/crb_shepherds/main.sqf
+patching file ambience/modules/tup_seatraffic/main.sqf
+patching file core/functions/common/fn_addLoopHandler.sqf
+patching file core/functions/server/fn_initLocations.sqf
+patching file core/init.sqf
+patching file core/modules/Spyder_ONU/main.sqf
+patching file core/modules/rmm_nomad/main.sqf
+patching file core/scripts/init_player.sqf
+patching file core/scripts/intro.sqf
+patching file enemy/modules/WICT_enemypop/WICT/controller.sqf
+patching file enemy/modules/WICT_enemypop/WICT/corescript.sqf
+patching file enemy/modules/WICT_enemypop/WICT/start.sqf
+patching file enemy/modules/WICT_enemypop/WICT_data/load/loader.sqf
+patching file enemy/modules/WICT_enemypop/main.sqf
+patching file enemy/modules/WICT_enemypop/params.hpp
+patching file init-custom.sqf
+patching file init.sqf
+patching file support/modules/crb_twnmgr/main.sqf
+patching file support/scripts/resupply.sqf
+patching file support/scripts/vehicle.sqf
+Extracting A2Free files into 16_A2Free_CTI_CDF_vs_INS.chernarus
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 16 A2FREE CTI CDF VS INS 4.0
+        1 file(s) moved.
+Creating mso_16_a2free_cti_cdf_vs_ins_4-0.chernarus.pbo
+Deleting mso_16_a2free_cti_cdf_vs_ins_4-0.chernarus Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 17_A2CO_COOP_GUER_vs_RU.utes
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 17_A2CO_COOP_GUER_vs_RU.utes
+755 File(s) copied
+Copying Mission customisations to 17_A2CO_COOP_GUER_vs_RU.utes
+3 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\ca"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cas"
+Deleting "support\modules\rmm_casevac"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 17 A2CO COOP GUER VS RU 4.0
+        1 file(s) moved.
+Creating mso_17_a2co_coop_guer_vs_ru_4-0.utes.pbo
+Deleting mso_17_a2co_coop_guer_vs_ru_4-0.utes Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 17_A2Free_COOP_GUER_vs_RU.utes
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 17_A2Free_COOP_GUER_vs_RU.utes
+755 File(s) copied
+Copying Mission customisations to 17_A2Free_COOP_GUER_vs_RU.utes
+1 File(s) copied
+Checking for A2Free version
+Patching mission for A2FREE
+patching file XEH_preinit.sqf
+patching file ambience/modules/crb_civilians/Main.sqf
+patching file ambience/modules/crb_civilians/crB_AmbCivSetup.sqf
+patching file ambience/modules/crb_shepherds/main.sqf
+patching file ambience/modules/tup_seatraffic/main.sqf
+patching file core/functions/common/fn_addLoopHandler.sqf
+patching file core/functions/server/fn_initLocations.sqf
+patching file core/init.sqf
+patching file core/modules/Spyder_ONU/main.sqf
+patching file core/modules/rmm_nomad/main.sqf
+patching file core/scripts/init_player.sqf
+patching file core/scripts/intro.sqf
+patching file enemy/modules/WICT_enemypop/WICT/controller.sqf
+patching file enemy/modules/WICT_enemypop/WICT/corescript.sqf
+patching file enemy/modules/WICT_enemypop/WICT/start.sqf
+patching file enemy/modules/WICT_enemypop/WICT_data/load/loader.sqf
+patching file enemy/modules/WICT_enemypop/main.sqf
+patching file enemy/modules/WICT_enemypop/params.hpp
+patching file init-custom.sqf
+patching file init.sqf
+patching file support/modules/crb_twnmgr/main.sqf
+patching file support/scripts/resupply.sqf
+patching file support/scripts/vehicle.sqf
+Extracting A2Free files into 17_A2Free_COOP_GUER_vs_RU.utes
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 17 A2FREE COOP GUER VS RU 4.0
+        1 file(s) moved.
+Creating mso_17_a2free_coop_guer_vs_ru_4-0.utes.pbo
+Deleting mso_17_a2free_coop_guer_vs_ru_4-0.utes Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 18_a2co_coop_us_cz_vs_tak.zargabad
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 18_a2co_coop_us_cz_vs_tak.zargabad
+755 File(s) copied
+Copying Mission customisations to 18_a2co_coop_us_cz_vs_tak.zargabad
+5 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "enemy\modules\rmm_enemypop"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\WHB_Multispawn"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 18 A2CO COOP US CZ VS TAK 4.0
+        1 file(s) moved.
+Creating mso_18_a2co_coop_us_cz_vs_tak_4-0.zargabad.pbo
+Deleting mso_18_a2co_coop_us_cz_vs_tak_4-0.zargabad Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 24_a2co_cti_us_vs_tak_vs_gue.takistan
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 24_a2co_cti_us_vs_tak_vs_gue.takistan
+755 File(s) copied
+Copying Mission customisations to 24_a2co_cti_us_vs_tak_vs_gue.takistan
+8 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\NOU_cache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_nomad"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\crb_convoys"
+Deleting "enemy\modules\crb_terrorists"
+Deleting "enemy\modules\rmm_enemypop"
+Deleting "enemy\modules\rmm_zora"
+Deleting "enemy\modules\WICT_enemypop"
+Deleting "support\modules\ca"
+Deleting "support\modules\crb_twnmgr"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\R3F_logistics"
+Deleting "support\modules\rmm_cas"
+Deleting "support\modules\rmm_casevac"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logbook"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\rmm_recruitment"
+Deleting "support\modules\rmm_revive"
+Deleting "support\modules\rmm_tasks"
+Deleting "support\modules\rmm_tyres"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\WHB_Multispawn"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 24 A2CO CTI US VS TAK VS GUE 4.0
+        1 file(s) moved.
+Creating mso_24_a2co_cti_us_vs_tak_vs_gue_4-0.takistan.pbo
+Deleting mso_24_a2co_cti_us_vs_tak_vs_gue_4-0.takistan Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 27_A2Free_COOP_USMC_vs_RU_INS.chernarus
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 27_A2Free_COOP_USMC_vs_RU_INS.chernarus
+755 File(s) copied
+Copying Mission customisations to 27_A2Free_COOP_USMC_vs_RU_INS.chernarus
+1 File(s) copied
+Checking for A2Free version
+Patching mission for A2FREE
+patching file XEH_preinit.sqf
+patching file ambience/modules/crb_civilians/Main.sqf
+patching file ambience/modules/crb_civilians/crB_AmbCivSetup.sqf
+patching file ambience/modules/crb_shepherds/main.sqf
+patching file ambience/modules/tup_seatraffic/main.sqf
+patching file core/functions/common/fn_addLoopHandler.sqf
+patching file core/functions/server/fn_initLocations.sqf
+patching file core/init.sqf
+patching file core/modules/Spyder_ONU/main.sqf
+patching file core/modules/rmm_nomad/main.sqf
+patching file core/scripts/init_player.sqf
+patching file core/scripts/intro.sqf
+patching file enemy/modules/WICT_enemypop/WICT/controller.sqf
+patching file enemy/modules/WICT_enemypop/WICT/corescript.sqf
+patching file enemy/modules/WICT_enemypop/WICT/start.sqf
+patching file enemy/modules/WICT_enemypop/WICT_data/load/loader.sqf
+patching file enemy/modules/WICT_enemypop/main.sqf
+patching file enemy/modules/WICT_enemypop/params.hpp
+patching file init-custom.sqf
+patching file init.sqf
+patching file support/modules/crb_twnmgr/main.sqf
+patching file support/scripts/resupply.sqf
+patching file support/scripts/vehicle.sqf
+Extracting A2Free files into 27_A2Free_COOP_USMC_vs_RU_INS.chernarus
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 27 A2FREE COOP USMC VS RU INS 4.0
+        1 file(s) moved.
+Creating mso_27_a2free_coop_usmc_vs_ru_ins_4-0.chernarus.pbo
+Deleting mso_27_a2free_coop_usmc_vs_ru_ins_4-0.chernarus Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 32_A2CO_COOP_BAF_USA_vs_TAK_INS_GUE.takistan
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 32_A2CO_COOP_BAF_USA_vs_TAK_INS_GUE.takistan
+755 File(s) copied
+Copying Mission customisations to 32_A2CO_COOP_BAF_USA_vs_TAK_INS_GUE.takistan
+3 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 32 A2CO COOP BAF USA VS TAK INS GUE 4.0
+        1 file(s) moved.
+Creating mso_32_a2co_coop_baf_usa_vs_tak_ins_gue_4-0.takistan.pbo
+Deleting mso_32_a2co_coop_baf_usa_vs_tak_ins_gue_4-0.takistan Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 32_A2CO_COOP_BAF_USA_vs_TAK_INS_GUE.tup_qom
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 32_A2CO_COOP_BAF_USA_vs_TAK_INS_GUE.tup_qom
+755 File(s) copied
+Copying Mission customisations to 32_A2CO_COOP_BAF_USA_vs_TAK_INS_GUE.tup_qom
+2 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 32 A2CO COOP BAF USA VS TAK INS GUE 4.0
+        1 file(s) moved.
+Creating mso_32_a2co_coop_baf_usa_vs_tak_ins_gue_4-0.tup_qom.pbo
+Deleting mso_32_a2co_coop_baf_usa_vs_tak_ins_gue_4-0.tup_qom Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 32_A2CO_COOP_BAF_USMC_vs_RU_INS.chernarus
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 32_A2CO_COOP_BAF_USMC_vs_RU_INS.chernarus
+755 File(s) copied
+Copying Mission customisations to 32_A2CO_COOP_BAF_USMC_vs_RU_INS.chernarus
+1 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 32 A2CO COOP BAF USMC VS RU INS 4.0
+        1 file(s) moved.
+Creating mso_32_a2co_coop_baf_usmc_vs_ru_ins_4-0.chernarus.pbo
+Deleting mso_32_a2co_coop_baf_usmc_vs_ru_ins_4-0.chernarus Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 32_ACE_COOP_BAF_USA_vs_TAK_INS_GUE.takistan
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 32_ACE_COOP_BAF_USA_vs_TAK_INS_GUE.takistan
+755 File(s) copied
+Copying Mission customisations to 32_ACE_COOP_BAF_USA_vs_TAK_INS_GUE.takistan
+3 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\rmm_revive"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 32 ACE COOP BAF USA VS TAK INS GUE 4.0
+        1 file(s) moved.
+Creating mso_32_ace_coop_baf_usa_vs_tak_ins_gue_4-0.takistan.pbo
+Deleting mso_32_ace_coop_baf_usa_vs_tak_ins_gue_4-0.takistan Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 32_ACE_COOP_BAF_USA_vs_TAK_INS_GUE.tup_qom
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 32_ACE_COOP_BAF_USA_vs_TAK_INS_GUE.tup_qom
+755 File(s) copied
+Copying Mission customisations to 32_ACE_COOP_BAF_USA_vs_TAK_INS_GUE.tup_qom
+3 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\rmm_revive"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 32 ACE COOP BAF USA VS TAK INS GUE 4.0
+        1 file(s) moved.
+Creating mso_32_ace_coop_baf_usa_vs_tak_ins_gue_4-0.tup_qom.pbo
+Deleting mso_32_ace_coop_baf_usa_vs_tak_ins_gue_4-0.tup_qom Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 32_ACE_COOP_BAF_USMC_vs_RU_INS.chernarus
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 32_ACE_COOP_BAF_USMC_vs_RU_INS.chernarus
+755 File(s) copied
+Copying Mission customisations to 32_ACE_COOP_BAF_USMC_vs_RU_INS.chernarus
+2 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\rmm_revive"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 32 ACE COOP BAF USMC VS RU INS 4.0
+        1 file(s) moved.
+Creating mso_32_ace_coop_baf_usmc_vs_ru_ins_4-0.chernarus.pbo
+Deleting mso_32_ace_coop_baf_usmc_vs_ru_ins_4-0.chernarus Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 70_A2CO_TVT_USMC_vs_GUE.utes
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 70_A2CO_TVT_USMC_vs_GUE.utes
+755 File(s) copied
+Copying Mission customisations to 70_A2CO_TVT_USMC_vs_GUE.utes
+2 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 70 A2CO TVT USMC VS GUE 4.0
+        1 file(s) moved.
+Creating mso_70_a2co_tvt_usmc_vs_gue_4-0.utes.pbo
+Deleting mso_70_a2co_tvt_usmc_vs_gue_4-0.utes Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 70_A2Free_TVT_USMC_vs_GUE.utes
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 70_A2Free_TVT_USMC_vs_GUE.utes
+755 File(s) copied
+Copying Mission customisations to 70_A2Free_TVT_USMC_vs_GUE.utes
+1 File(s) copied
+Checking for A2Free version
+Patching mission for A2FREE
+patching file XEH_preinit.sqf
+patching file ambience/modules/crb_civilians/Main.sqf
+patching file ambience/modules/crb_civilians/crB_AmbCivSetup.sqf
+patching file ambience/modules/crb_shepherds/main.sqf
+patching file ambience/modules/tup_seatraffic/main.sqf
+patching file core/functions/common/fn_addLoopHandler.sqf
+patching file core/functions/server/fn_initLocations.sqf
+patching file core/init.sqf
+patching file core/modules/Spyder_ONU/main.sqf
+patching file core/modules/rmm_nomad/main.sqf
+patching file core/scripts/init_player.sqf
+patching file core/scripts/intro.sqf
+patching file enemy/modules/WICT_enemypop/WICT/controller.sqf
+patching file enemy/modules/WICT_enemypop/WICT/corescript.sqf
+patching file enemy/modules/WICT_enemypop/WICT/start.sqf
+patching file enemy/modules/WICT_enemypop/WICT_data/load/loader.sqf
+patching file enemy/modules/WICT_enemypop/main.sqf
+patching file enemy/modules/WICT_enemypop/params.hpp
+patching file init-custom.sqf
+patching file init.sqf
+patching file support/modules/crb_twnmgr/main.sqf
+patching file support/scripts/resupply.sqf
+patching file support/scripts/vehicle.sqf
+Extracting A2Free files into 70_A2Free_TVT_USMC_vs_GUE.utes
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 70 A2FREE TVT USMC VS GUE 4.0
+        1 file(s) moved.
+Creating mso_70_a2free_tvt_usmc_vs_gue_4-0.utes.pbo
+Deleting mso_70_a2free_tvt_usmc_vs_gue_4-0.utes Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 70_ACE_COOP_BAF_USA_vs_TAK_INS_GUE.clafghan
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 70_ACE_COOP_BAF_USA_vs_TAK_INS_GUE.clafghan
+755 File(s) copied
+Copying Mission customisations to 70_ACE_COOP_BAF_USA_vs_TAK_INS_GUE.clafghan
+6 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\rmm_revive"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 70 ACE COOP BAF USA VS TAK INS GUE 4.0
+        1 file(s) moved.
+Creating mso_70_ace_coop_baf_usa_vs_tak_ins_gue_4-0.clafghan.pbo
+Deleting mso_70_ace_coop_baf_usa_vs_tak_ins_gue_4-0.clafghan Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 8_a2co_cti_us_vs_tak.zargabad
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 8_a2co_cti_us_vs_tak.zargabad
+755 File(s) copied
+Copying Mission customisations to 8_a2co_cti_us_vs_tak.zargabad
+13 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\NOU_cache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_nomad"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\crb_convoys"
+Deleting "enemy\modules\crb_terrorists"
+Deleting "enemy\modules\WICT_enemypop"
+Deleting "support\modules\ca"
+Deleting "support\modules\crb_twnmgr"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\R3F_logistics"
+Deleting "support\modules\rmm_cas"
+Deleting "support\modules\rmm_casevac"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logbook"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\rmm_recruitment"
+Deleting "support\modules\rmm_revive"
+Deleting "support\modules\rmm_tasks"
+Deleting "support\modules\rmm_tyres"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\WHB_Multispawn"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 8 A2CO CTI US VS TAK 4.0
+        1 file(s) moved.
+Creating mso_8_a2co_cti_us_vs_tak_4-0.zargabad.pbo
+Deleting mso_8_a2co_cti_us_vs_tak_4-0.zargabad Folder
+                                                                     
+--------------------------------------------------------------------
+Processing Mission 8_ACE_COOP_BAF_USA_vs_TAK_INS_GUE.zargabad
+--------------------------------------------------------------------
+Copying PBO utilities across
+1 File(s) copied
+1 File(s) copied
+Copying code base structure to 8_ACE_COOP_BAF_USA_vs_TAK_INS_GUE.zargabad
+755 File(s) copied
+Copying Mission customisations to 8_ACE_COOP_BAF_USA_vs_TAK_INS_GUE.zargabad
+4 File(s) copied
+Checking for A2Free version
+Deleting "core\modules\CEP_cache"
+Deleting "core\modules\jcache"
+Deleting "core\modules\rmm_gtk"
+Deleting "core\modules\rmm_osl"
+Deleting "core\modules\rmm_osom"
+Deleting "enemy\modules\BIS_Warfare"
+Deleting "support\modules\eodd"
+Deleting "support\modules\gc_pack_cow"
+Deleting "support\modules\qrb"
+Deleting "support\modules\rmm_cnstrct"
+Deleting "support\modules\rmm_logistics"
+Deleting "support\modules\rmm_notebook"
+Deleting "support\modules\rmm_revive"
+Deleting "support\modules\som"
+Deleting "support\modules\supplies"
+Deleting "support\modules\teams"
+Deleting "support\modules\tn_lhdelevator"
+Deleting "support\modules\ZKS_Build"
+        1 dir(s) moved.
+Creating Mission Briefing Name - MSO 8 ACE COOP BAF USA VS TAK INS GUE 4.0
+        1 file(s) moved.
+Creating mso_8_ace_coop_baf_usa_vs_tak_ins_gue_4-0.zargabad.pbo
+Deleting mso_8_ace_coop_baf_usa_vs_tak_ins_gue_4-0.zargabad Folder
+Moving TMPMissions to MPMissions
+        1 dir(s) moved.
+Copying code base BASE_MISSION to MPMissions\MSO_BASE_MISSION_CODE_4-0
+755 File(s) copied
+Zipping up MPMissions to MSO_Missions_4-0.7z
+
+7-Zip [64] 4.65  Copyright (c) 1999-2009 Igor Pavlov  2009-02-03
+Scanning
+
+Creating archive MSO_Missions_4-0.7z
+
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_osl\WIP
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\Amb01.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\Amb02.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\Amb03.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\Amb04.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\Amb05.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\Amb06.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\Amb07.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\Amb08.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\Amb09.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\Amb10.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\beep_long.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\beep_short.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_dogs\sounds\dog_maul01.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_dogs\sounds\dog_yelp.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\empty.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\gun01.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\gun02.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\gun03.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\Interior.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\interiorLoop01.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\interiorLoop02.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\interiorLoop03.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\rmm_ctp\sounds\muezzin.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Sounds\reload.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_dogs\sounds\scream.ogg
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\desc_include.h
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\desc_rsct_include.h
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\transporteur\dlg_constantes.h
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\transporteur\dlg_contenu_vehicule.h
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\mods\aaw_g.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\mods\aaw_s.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\mods\ace_earplugs_g.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\mods\ace_earplugs_s.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\mods\ace_glasses_g.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\mods\ace_glasses_s.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\mods\ace_rangefinder_g.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\mods\ace_rangefinder_s.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\mods\ace_sys_ruck_g.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\mods\ace_sys_ruck_s.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\mods\ace_sys_wounds_g.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\mods\ace_sys_wounds_s.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Dialogs\AEG_Constants.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Dialogs\AEG_ControlClasses.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Dialogs\AEG_Dialogs.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Dialogs\AEG_Logon.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Sounds\AEG_Sounds.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Dialogs\AEG_System.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Dialogs\AEG_Video.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\TeamStatusDialog\BaseClassesExtract.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\BIS_TK.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\BIS_TK_GUE.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\tup_airtraffic\cfggroups.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_dogs\cfgsounds.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\rmm_ctp\cfgsounds.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Includes\CfgSounds.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_gtk\config.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\functions\server\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_civilians\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_crows\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_dogs\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_flies\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_shepherds\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\rmm_ctp\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\tup_airtraffic\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\tup_seatraffic\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\server\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\crb_convoys\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\crb_terrorists\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\rmm_enemypop\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\scripts\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_sandstorm\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\CEP_cache\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\NOU_cache\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_MP_rights\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\rmm_zora\crbprofiler.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\dialogs\c_ui.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\eodd\dialogs\c_ui.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Includes\define.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_debug\dialog.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_help\dialog.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_settings\dialog.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_aar\dialog.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\dialog.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_casevac\dialog.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_jipmarkers\dialog.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logbook\dialog.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logistics\dialog.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_notebook\dialog.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tasks\dialog.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Includes\dialogAC130.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\TeamStatusDialog\DialogColorScheme.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Includes\dialogMap.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Includes\dialogParent.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Includes\dialogUAV.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\dialog_aaw.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\dialog_baf.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\dialog_cz.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\dialog_gue.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\dialog_ru.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\dialog_us.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\dialog_usmc.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_debug\dpanel.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\eodd\dialogs\EODD.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\functions\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_dogs\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cnstrct\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\tn_lhdelevator\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_MP_rights\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_gtk\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_help\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_osl\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_osom\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_weather\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\crb_flippable\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_aar\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_casevac\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_jipmarkers\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logbook\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logistics\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_notebook\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_revive\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tasks\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tyres\functions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\GUE.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\modules.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\modules.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\modules.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\modules.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\msofactions.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\msofactions_defaults.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_civilians\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_crows\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_dogs\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_emergency\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_flies\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_shepherds\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\tup_airtraffic\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\tup_seatraffic\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\crb_convoys\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\crb_terrorists\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\rmm_enemypop\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\crb_twnmgr\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_sandstorm\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_MP_rights\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_debug\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_settings\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_weather\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_destroycity\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\params.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Includes\RscTitles.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\RU_INS.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\script_component.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\script_macros.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\supplies\supplies.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\TeamStatusDialog\TeamStatusDialog.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Includes\uiDefines.hpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\config.cpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\TeamStatusDialog\pos2grid.cpp
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_casevac\help.html
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_notebook\help.html
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ca\readme.html
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_gtk\readme.html
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_osom\readme.html
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_civilians\BazaarReadMe.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\Changelog.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\CHANGELOG.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\CEP_cache\Fireball.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\som\ideas.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\mso\mso_uids.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\README.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\teams\readme.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\readme.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_settings\readme.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_aar\readme.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\readme.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_casevac\readme.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_jipmarkers\readme.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logbook\readme.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logistics\readme.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tasks\readme.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tyres\readme.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\version.txt
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\StringTable.csv
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\stringtable.csv
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\StringTable.csv
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\TeamStatusDialog\stringtable.csv
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\description-mso.ext
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\eodd\description.ext
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\description.ext
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\airE.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\airW.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\AI_Driver_2_Gunner.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\AI_Driver_Assign.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\AI_Driver_doors.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\AI_Driver_Empty.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\AI_Driver_Fold.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\AI_Driver_Full.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\AI_Driver_Pickup.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\AI_Driver_Respawn.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\AI_Driver_Search.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\AI_Driver_Start.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\AI_Driver_Type.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules_e\Alice2\data\fsms\alice2.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules_e\Alice2\data\fsms\alice2_town.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules_e\Alice2\data\fsms\alice2_traffic.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules\Animals\Data\fsms\Animals_main.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules\Animals\Data\fsms\Animals_spawn.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules_e\Alice2\data\actions\combat_hideOut.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\CEP_cache\crB_AICaching.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules\Animals\Data\fsms\Delete_Group.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\exeSpawnE.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\exeSpawnW.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_weather\Fog.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules\garbage_collector\data\fsms\garbagecollector.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\infantry2E.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\infantry2W.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\infantryE.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\infantryW.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules\Marta\data\fsms\marta_local.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\nomad.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules_e\Alice2\data\actions\safe_walk.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\SpawnStd.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\surrender.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\crb_terrorists\TerroristCell.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\transportE.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\transportW.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_MP_rights\vehicledrivercheck.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\vehiclesE.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\vehiclesW.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\rmm_zora\zora.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\rmm_zora\zora_patrol.fsm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\functions\server\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_civilians\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_crows\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_dogs\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_flies\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_shepherds\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\rmm_ctp\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\tup_airtraffic\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\tup_seatraffic\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\server\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\crb_convoys\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\crb_terrorists\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\rmm_enemypop\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\scripts\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_sandstorm\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\CEP_cache\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\NOU_cache\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_MP_rights\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\rmm_zora\crbprofiler.hppx
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Textures\AEGIcon.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\back.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Textures\CloseButton.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\icon_AC130.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\icon_init.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\icon_logic_call.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\icon_logic_callAI.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\icon_logic_callUAV.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\icon_logic_rearm.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\msoimg.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Textures\Poles.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\Target.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\TVMonitor.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\Vis105mm.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\Vis25mm.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\Vis40mm.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Pictures\VisTV.paa
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Textures\WindowIcon.paa
+Compressing  MPMissions\mso_11_a2co_coop_us_baf_vs_ins_gue_4-0.torabora.pbo
+Compressing  MPMissions\mso_12_a2co_cti_us_vs_tak_vs_gue_4-0.zargabad.pbo
+Compressing  MPMissions\mso_13_a2co_coop_usmc_vs_ru_4-0.fdf_isle1_a.pbo
+Compressing  MPMissions\mso_13_a2co_coop_usmc_vs_ru_gue_4-0.lingor.pbo
+Compressing  MPMissions\mso_16_a2co_cti_cdf_vs_ins_4-0.chernarus.pbo
+Compressing  MPMissions\mso_16_a2co_cti_cdf_vs_ins_4-0.cmr_cicada.pbo
+Compressing  MPMissions\mso_16_a2co_cti_us_vs_tak_4-0.takistan.pbo
+Compressing  MPMissions\mso_16_a2free_cti_cdf_vs_ins_4-0.chernarus.pbo
+Compressing  MPMissions\mso_17_a2co_coop_guer_vs_ru_4-0.utes.pbo
+Compressing  MPMissions\mso_17_a2free_coop_guer_vs_ru_4-0.utes.pbo
+Compressing  MPMissions\mso_18_a2co_coop_us_cz_vs_tak_4-0.zargabad.pbo
+Compressing  MPMissions\mso_24_a2co_cti_us_vs_tak_vs_gue_4-0.takistan.pbo
+Compressing  MPMissions\mso_27_a2free_coop_usmc_vs_ru_ins_4-0.chernarus.pbo
+Compressing  MPMissions\mso_32_a2co_coop_baf_usa_vs_tak_ins_gue_4-0.takistan.pbo
+Compressing  MPMissions\mso_32_a2co_coop_baf_usa_vs_tak_ins_gue_4-0.tup_qom.pbo
+Compressing  MPMissions\mso_32_a2co_coop_baf_usmc_vs_ru_ins_4-0.chernarus.pbo
+Compressing  MPMissions\mso_32_ace_coop_baf_usa_vs_tak_ins_gue_4-0.takistan.pbo
+Compressing  MPMissions\mso_32_ace_coop_baf_usa_vs_tak_ins_gue_4-0.tup_qom.pbo
+Compressing  MPMissions\mso_32_ace_coop_baf_usmc_vs_ru_ins_4-0.chernarus.pbo
+Compressing  MPMissions\mso_70_a2co_tvt_usmc_vs_gue_4-0.utes.pbo
+Compressing  MPMissions\mso_70_a2free_tvt_usmc_vs_gue_4-0.utes.pbo
+Compressing  MPMissions\mso_70_ace_coop_baf_usa_vs_tak_ins_gue_4-0.clafghan.pbo
+Compressing  MPMissions\mso_8_a2co_cti_us_vs_tak_4-0.zargabad.pbo
+Compressing  MPMissions\mso_8_ace_coop_baf_usa_vs_tak_ins_gue_4-0.zargabad.pbo
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Actions\ac130_action_coop_copilot.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Actions\ac130_action_copilot.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Actions\ac130_action_map.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Actions\ac130_action_map_AI.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Actions\ac130_action_pilot.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Actions\ac130_action_systems_pilot.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_AI_assignTarget.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_AI_ceaseFire.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\ac130_AI_main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_AI_returnHome.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Setups\ac130_AI_setup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_AI_shooting.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\ac130_att_camera.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\ac130_att_main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Setups\ac130_att_setup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_blink.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_bulletCam.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_calculateBullet.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_client - Kopie.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_client.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\ac130_coop_pilot_main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Setups\ac130_coop_pilot_setup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_correctAxis.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_createDialog.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_createMap.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_createParticleSource.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_createPlane.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_delay.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_functions.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_guns.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_HUD.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Addon\ac130_init_AC130.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_interior.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\ac130_lite_camera.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\ac130_lite_main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Setups\ac130_lite_setup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Addon\ac130_logic_call.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Addon\ac130_logic_callAI.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Addon\ac130_logic_callUAV.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Addon\ac130_logic_rearm.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_ppEffects.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_rearm.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\ac130_rot_camera.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\ac130_rot_camera_opt.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_rot_float.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\ac130_rot_main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Setups\ac130_rot_setup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_rot_waypoints.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_setCamUseTi.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_sound.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\AC130\ac130_troops.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\ac130_warning.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\scripts\ace_aaw_fix.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\addons_config\ACE_OA_objects.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\action.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\gc_pack_cow\action_manager.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cnstrct\addAction.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\tn_lhdelevator\addAction.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_weather\addAction.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logbook\addAction.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\addAction.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_actions.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_client.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_common.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_controls.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_damage.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_events.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_flash.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_actions.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_chernarus.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_commands.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_node.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_overview.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_password.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_qom.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_status.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_supply.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_takistan.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_user.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_utes.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_video.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Functions\AEG_fnc_zargabad.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_init_chernarus.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_init_qom.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_init_takistan.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_init_utes.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_init_zargabad.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_JIP.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_logon.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_monitor.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_respawn.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_server.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_smoke.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_sounds.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_system.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_team.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Scripts\AEG_video.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_civilians\ALICE2_houseEffects.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\support\ambientArti.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\addons_config\arma2_CO_objects.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\autoFlag.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\autoStart.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\addons_config\BAF_objects.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\BIN_taskDefend.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\scripts\BIN_taskDefend.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\BIN_taskPatrol.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\BIN_taskSweep.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\briefing.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\scripts\briefing.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\burn.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\scripts\callAcreSync.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Camera\camera.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Camera\camera_approach.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\capture.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\captureMessage.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\cargomenu.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ca\center.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\transporteur\charger_deplace.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\transporteur\charger_selection.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\scripts\civilian_city.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_civilians\CIV_City.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\clearMemory.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\gc_pack_cow\client_move_script.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\gc_pack_cow\client_object_manager.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\coin.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Camera\commitChanges.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\config.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\config.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.urban\ConfigSquads.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.urban3sided\ConfigSquads.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.urban\ConfigTeams.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.urban3sided\ConfigTeams.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.urban\Server\Config\Config_DefaultTown.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.urban3sided\Server\Config\Config_DefaultTown.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.civilwar\Config_Loadouts.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.civilwar\Config_Structures.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\controller.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\corescript.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\gc_pack_cow\cow_ai_manager.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\gc_pack_cow\cow_move_manager.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\support\crateFiller.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_civilians\crB_AmbCivSetup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_civilians\crB_AmbVehSetup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\scripts\crB_scripts\crB_HousePos.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\scripts\crb_packCamoNet.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\scripts\crB_scripts\crB_staticRearm.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\common\debug_displayHQArray.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\transporteur\decharger.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\objet_deplacable\deplacer.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\deploy.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\gc_pack_cow\deploy_crate.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\remorqueur\detacher.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\ejectaction.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\end.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\en_strings_lang.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\en_strings_lang.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\eodd\dialogs\EODD.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\eodd\dialogs\EODDopen.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_at.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_hchop.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_htank.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_ifv.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_lightveh.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_mchop.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_mtank.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_reginf.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_sniper.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_specop.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_support.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_trans.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\E_classes\E_wing.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\fire.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\scripts\firstaidfix.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\flag.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\flagDo.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\float.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\fnc_activateGroup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\fnc_addGroup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\fnc_deactivateGroup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\fnc_despawnGroup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\fnc_getUnitVehiclePosition.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\fnc_showDebugMarkers.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\fnc_spawnGroup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\fnc_srv_mainLoop.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\fnc_srv_processGroup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_osl\fn_active.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_osom\fn_active.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tasks\fn_add.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\common\fn_addAction_Deploy.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\common\fn_addAction_SignInFOB.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\common\fn_addAction_unDeploy.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ca\fn_addGroup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_addLoopHandler.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_dogs\fn_blitzy.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_aar\fn_broadcast.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_casevac\fn_call.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\fn_call.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tyres\fn_change.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules_e\Alice2\data\scripts\fn_civilianSet.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_jipmarkers\fn_click.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tasks\fn_click.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\common\fn_Client_SyncHQState.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_revive\fn_conscious.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_convertGroupStringToConfig.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cnstrct\fn_create.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_createComposition.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_createCompositionE.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_createCompositionLocal.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\server\fn_createLocations.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_revive\fn_damage.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_jipmarkers\fn_deletenearest.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tasks\fn_deletenearest.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\server\fn_DeployHQ.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_destroycity\fn_destroyCity.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_help\fn_display.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_dogs\fn_dogattack.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_revive\fn_drag.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_revive\fn_drop.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\functions\server\fn_dynoCreate.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_ExMP.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\functions\common\fn_failSafeLS.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_findLocationsByType.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_findObjectsByType.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_findVehicleType.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_gtk\fn_forceActive.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_gtk\fn_forceInactive.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_weather\fn_forecast.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_getDominantSide.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_getFactions.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ca\fn_getRating.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_MP_rights\fn_getRights.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_getUnitsInArea.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cnstrct\fn_handler.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_revive\fn_heal.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\fn_help.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_casevac\fn_help.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_osl\fn_inactive.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_osom\fn_inactive.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_revive\fn_init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\server\fn_initLocations.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_initStat.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\common\fn_JIP_HQSync.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\functions\common\fn_landForTime.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logistics\fn_load.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules\Functions\systems\fn_locations.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\qrb\fn_menuDef.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_debug\fn_menuDef.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_settings\fn_menuDef.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_aar\fn_menuDef.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\fn_menuDef.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_casevac\fn_menuDef.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_jipmarkers\fn_menuDef.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_notebook\fn_menuDef.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tasks\fn_menuDef.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logistics\fn_move.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\tn_lhdelevator\fn_moveElevatorDown.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\tn_lhdelevator\fn_moveElevatorUp.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules_e\Functions\misc\fn_music.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_help\fn_onload.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_aar\fn_onload.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\fn_onload.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_casevac\fn_onload.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_jipmarkers\fn_onload.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cnstrct\fn_open.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logbook\fn_open.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logistics\fn_open.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_notebook\fn_open.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\common\fn_playerRespawn.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\TeamStatusDialog\fn_PosToGrid.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_profiler.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ca\fn_radioCheck.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_randomEdgePos.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_randomGroup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cnstrct\fn_refresh.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_removeLoopHandler.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ca\fn_runElection.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_selectRandomBias.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cnstrct\fn_sell.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\server\fn_Server_SyncHQState.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_osl\fn_spawn.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_osom\fn_spawn.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\functions\server\fn_spawnVehiclePath.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\tn_lhdelevator\fn_stopElevator.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_aar\fn_submit.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_osl\fn_sync.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_osom\fn_sync.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_weather\fn_sync.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_revive\fn_takeout.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tasks\fn_taskAdd.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tasks\fn_taskHint.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tasks\fn_taskUpdate.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_jipmarkers\fn_transmit.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_revive\fn_unconscious.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\server\fn_unDeployHQ.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logistics\fn_unload.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cnstrct\fn_update.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\functions\common\fn_updateMenu.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\crb_flippable\fn_vehicleFlip.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_dogs\fn_wilddogs.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\fr_strings_lang.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\fr_strings_lang.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\sandbox\fTaskHint.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\getPitchBank.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\ghostBase.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\scripts\GuardPost.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\heliporteur\heliporter.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\heliporteur\heliporteur_init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\init-custom.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.civilwar\InitCommon.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.mountain3sided\InitCommon.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.urban\InitCommon.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.urban3sided\InitCommon.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.urban\InitCommonConstants.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.urban3sided\InitCommonConstants.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\InitJIPcompatible.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\common\initMain.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\InitMission.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.civilwar\InitMission.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.mountain\InitMission.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.mountain3sided\InitMission.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.urban\InitMission.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\template.urban3sided\InitMission.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\common\init_Client_DefaultSpawnLocations.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\scripts\init_player.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\WHB_Multispawn\server\init_Server_MHQs.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\crb_terrorists\InspectVehicle.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\scripts\intro.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\keyDown.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\keyUp.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\KRON_Strings.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\heliporteur\larguer.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\LDL_init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\load\loader.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\gc_pack_cow\load_crate.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules\Alice\data\scripts\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules\Silvie\data\scripts\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules_e\Alice2\data\scripts\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_civilians\Main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_crows\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_dogs\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_emergency\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_flies\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_shepherds\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\rmm_ctp\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\Spyder_ONU\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\crb_convoys\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\crb_terrorists\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\rmm_enemypop\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\gc_pack_cow\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\tn_lhdelevator\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\BIS_Warfare\Main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\tup_airtraffic\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\tup_seatraffic\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_sandstorm\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\CEP_cache\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\NOU_cache\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_MP_rights\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_debug\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_settings\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_weather\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\qrb\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\crb_flippable\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_aar\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_casevac\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_jipmarkers\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_logistics\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_notebook\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tasks\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_tyres\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\crb_destroycity\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\rmm_zora\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\crb_twnmgr\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_nomad\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\mando_angles.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\tup_airtraffic\mando_heliroute_arma.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\mando_hellfire.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\masterClassSpawn.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\missionCapture.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\gc_pack_cow\move_cow.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\sandbox\murk_spawn.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\scripts\murk_spawn.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\sandbox\murk_spawn_loaded.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\objet_init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\packup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\playeraction.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\ZKS_Build\FSM\Vehicle\playeractionC.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\powerTask.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules\garbage_collector\data\scripts\process_queue.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_ARTY_disable_enable.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG_disable_enable.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\support\reinforce.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\objet_deplacable\relacher.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\remorqueur\remorquer_deplace.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\remorqueur\remorquer_selection.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\remorqueur\remorqueur_init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\removeBody.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\scripts\resupply.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\sandbox\sandbox_exe.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\remorqueur\selectionner_objet.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\transporteur\selectionner_objet.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Misc\setPitchBank.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\setupE.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\setupW.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\show_them.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\CA\modules\Silvie\data\scripts\spawnVehicle.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\start.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\startSettings.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\AI\static.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\gc_pack_cow\stop_cow.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\support\supplyDrop.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\surveiller_conditions_actions_menu.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\surveiller_nouveaux_objets.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\surveiller_nouveaux_objets_dedie.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\sandbox\taskCreator.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\sandbox\taskMonitor.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_recruitment\TeamStatusDialog\TeamStatusDialog.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\tup_airtraffic\test.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT\timeShift.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\rmm_gtk\tracker.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\transporteur\transporteur_init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Actions\uav_action_map.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\UAV\uav_createDialog.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\UAV\uav_guns.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\UAV\uav_HUD.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\uav_rot_main.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\rmm_cas\LDL_ac130\Setups\uav_rot_setup.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\scripts\vehicle.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\R3F_logistics\R3F_LOG\transporteur\voir_contenu_vehicule.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_at.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_hchop.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_htank.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_ifv.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_lightveh.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_mchop.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_mtank.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_reginf.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_sniper.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_specop.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_support.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_trans.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\W_classes\W_wing.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\XEH_post_init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\XEH_preinit.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\core\modules\jcache\XEH_pre_init.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\rmm_zora\zora.sqf
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\support\modules\eodd\mission.sqm
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Sounds\close.wss
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Sounds\hum.wss
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Sounds\open.wss
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\ambience\modules\AEG\Sounds\plant.wss
+Compressing  MPMissions\MSO_BASE_MISSION_CODE_4-0\enemy\modules\WICT_enemypop\WICT_data\classes.xlsx
+
+Everything is Ok
+Press any key to continue . . . 
+Deleting MPMissions working folder
+Complete
