@@ -63,6 +63,7 @@ class Mission
 	{
 		briefingName="MSO USA/CZ vs TK_GUE v4.0";
 		briefingDescription="An MSO Team Development (A2CO)";
+		resistanceWest=0;
 		resistanceEast=1;
 		startWeather=0.25;
 		forecastWeather=0;
@@ -620,8 +621,8 @@ class Mission
 					vehicle="US_Soldier_TL_EP1";
 					player="PLAY CDG";
 					rank="CORPORAL";
-					description="US Team Lead";
 					skill=0.46666664;
+					description="US Team Lead";
 				};
 				class Item2
 				{
@@ -630,68 +631,68 @@ class Mission
 					side="WEST";
 					vehicle="US_Soldier_EP1";
 					player="PLAY CDG";
-					description="US Soldier";
 					skill=0.46666664;
+					description="US Soldier";
 				};
 				class Item3
 				{
 					position[]={4936.8945,29.451054,6097.7764};
 					id=34;
-					description="US Soldier";
 					side="WEST";
 					vehicle="US_Soldier_EP1";
 					player="PLAY CDG";
 					skill=0.33333331;
+					description="US Soldier";
 				};
 				class Item4
 				{
 					position[]={4938.8945,29.432732,6097.7764};
-					description="US Soldier";
 					id=35;
 					side="WEST";
 					vehicle="US_Soldier_EP1";
 					player="PLAY CDG";
 					skill=0.33333331;
+					description="US Soldier";
 				};
 				class Item5
 				{
 					position[]={4940.8945,29.417732,6097.7764};
 					id=36;
-					description="US Soldier";
 					side="WEST";
 					vehicle="US_Soldier_TL_EP1";
 					player="PLAY CDG";
 					skill=0.33333331;
+					description="US Soldier";
 				};
 				class Item6
 				{
 					position[]={4942.8945,29.406086,6097.7764};
 					id=37;
-					description="US Soldier";
 					side="WEST";
 					vehicle="US_Soldier_EP1";
 					player="PLAY CDG";
 					skill=0.2;
+					description="US Soldier";
 				};
 				class Item7
 				{
 					position[]={4944.8945,29.410032,6097.7764};
 					id=38;
-					description="US Soldier";
 					side="WEST";
 					vehicle="US_Soldier_EP1";
 					player="PLAY CDG";
 					skill=0.2;
+					description="US Soldier";
 				};
 				class Item8
 				{
 					position[]={4946.8945,29.423355,6097.7764};
 					id=39;
 					side="WEST";
-					description="US Soldier";
 					vehicle="US_Soldier_EP1";
 					player="PLAY CDG";
 					skill=0.2;
+					description="US Soldier";
 				};
 			};
 		};
@@ -710,19 +711,19 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					rank="SERGEANT";
-					description="CZ Team Lead";
 					skill=0.59999996;
+					description="CZ Team Lead";
 				};
 				class Item1
 				{
 					position[]={4962.5742,29.415764,6097.7759};
 					id=43;
 					side="WEST";
-					description="CZ Team Lead";
 					vehicle="CZ_Soldier_SL_DES_EP1";
 					player="PLAY CDG";
 					rank="CORPORAL";
 					skill=0.46666664;
+					description="CZ Team Lead";
 				};
 				class Item2
 				{
@@ -730,69 +731,69 @@ class Mission
 					id=44;
 					side="WEST";
 					vehicle="CZ_Soldier_DES_EP1";
-					description="CZ Soldier";
 					player="PLAY CDG";
 					skill=0.46666664;
+					description="CZ Soldier";
 				};
 				class Item3
 				{
 					position[]={4966.5742,29.386456,6097.7759};
 					id=45;
 					side="WEST";
-					description="CZ Soldier";
 					vehicle="CZ_Soldier_DES_EP1";
 					player="PLAY CDG";
 					skill=0.33333331;
+					description="CZ Soldier";
 				};
 				class Item4
 				{
 					position[]={4968.5742,29.379375,6097.7759};
-					description="CZ Soldier";
 					id=46;
 					side="WEST";
 					vehicle="CZ_Soldier_DES_EP1";
 					player="PLAY CDG";
 					skill=0.33333331;
+					description="CZ Soldier";
 				};
 				class Item5
 				{
 					position[]={4970.5742,29.401749,6097.7759};
-					description="CZ Soldier";
 					id=47;
 					side="WEST";
 					vehicle="CZ_Soldier_SL_DES_EP1";
 					player="PLAY CDG";
 					skill=0.33333331;
+					description="CZ Soldier";
 				};
 				class Item6
 				{
 					position[]={4972.5742,29.408878,6097.7759};
 					id=48;
 					side="WEST";
-					description="CZ Soldier";
 					vehicle="CZ_Soldier_DES_EP1";
 					player="PLAY CDG";
 					skill=0.2;
+					description="CZ Soldier";
 				};
 				class Item7
 				{
 					position[]={4974.5742,29.406254,6097.7759};
 					id=49;
-					description="CZ Soldier";
 					side="WEST";
 					vehicle="CZ_Soldier_DES_EP1";
 					player="PLAY CDG";
 					skill=0.2;
+					description="CZ Soldier";
 				};
 				class Item8
 				{
 					position[]={4976.5742,29.392689,6097.7759};
-					description="CZ Soldier";
 					id=50;
 					side="WEST";
 					vehicle="CZ_Soldier_DES_EP1";
 					player="PLAY CDG";
 					skill=0.2;
+					description="CZ Soldier";
 				};
 			};
 		};
