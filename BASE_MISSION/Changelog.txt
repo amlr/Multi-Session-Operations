@@ -1,5 +1,17 @@
 Change Log:
 v4.0
+Thanks to:
+- MSO development team: Wolffy.au, Tupolov, Ryan, friznit, highhead, zorrobyte, HateDread, kieran, Kolmain, and Rommel
+- Ryan, Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
+- Friznit, Tupolov, DaveP and Volunteer Combat Battalion (VCB)
+- Krause, Beta, Sandiford, JollyResq - United Operations (UO)
+- Capt.Alderman and MilitaryGaming.org (MilGO)
+- Kremator, SCAJolly, Katipo66, vengeance1, 16AA and AEF clans for testing
+- Alef and Sickboy for CBA conversion for A2Free
+- Xeno and Mikero for their Mission Builder Script
+- Spyder for Object Network Update (ONU), LoyalGuard for ARMA Electrical Grids (AEG), ArmaIIholic and Highhead for World In Conflict (WICT)
+- USMCWall, Muzzleflash, Wobbleyheadedbob, Hatedread, Zonekiller, VoW Widow, Swedge, Lonestar, SBSMac, Prymsuspec, zGuba, Fireball, Nou, Jaynus, Norrin for bits and pieces we got from you
+- CWR² team, IceBreakr, Shezan, Commander, Old Bear for making your mods and islands MSO friendly
 
 Core
 ====
