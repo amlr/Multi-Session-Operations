@@ -1,0 +1,262 @@
+#include <core\modules\modules.hpp>
+#include <ambience\modules\modules.hpp>
+#include <support\modules\modules.hpp>
+#include <enemy\modules\modules.hpp>
+
+//http://community.bistudio.com/wiki/Description.ext#Respawn...
+respawn = 3;
+respawnDelay = 15;
+respawnDialog = false;
+
+class CfgSounds {
+#ifdef CRB_DOGS
+	#include <ambience\modules\crb_dogs\cfgsounds.hpp>
+#endif
+#ifdef RMM_CTP
+	#include <ambience\modules\rmm_ctp\cfgsounds.hpp>
+#endif
+#ifdef AEG
+	#include <ambience\modules\AEG\Sounds\AEG_Sounds.hpp>
+#endif
+#ifdef RMM_CAS
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\CfgSounds.hpp>
+#endif
+};
+
+//http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
+class Params {
+#ifdef BIS_WARFARE
+// BIS Warfare Params must go first
+	#include <enemy\modules\BIS_Warfare\params.hpp>
+#endif
+#ifdef RMM_DEBUG
+	#include <core\modules\rmm_debug\params.hpp>
+#endif
+#ifdef RMM_MP_RIGHTS
+	#include <core\modules\rmm_mp_rights\params.hpp>
+#endif
+#ifdef RMM_NOMAD
+	#include <core\modules\rmm_nomad\params.hpp>
+#endif
+#ifdef RMM_SETTINGS
+	#include <core\modules\rmm_settings\params.hpp>
+#endif
+#ifdef RMM_WEATHER
+	#include <core\modules\rmm_weather\params.hpp>
+#endif
+#ifdef CRB_CIVILIANS
+	#include <ambience\modules\crb_civilians\params.hpp>
+#endif
+#ifdef CRB_EMERGENCY
+	#include <ambience\modules\crb_emergency\params.hpp>
+#endif
+#ifdef CRB_DOGS
+	#include <ambience\modules\crb_dogs\params.hpp>
+#endif
+#ifdef CRB_SHEPHERDS
+	#include <ambience\modules\crb_shepherds\params.hpp>
+#endif
+#ifdef CRB_CROWS
+	#include <ambience\modules\crb_crows\params.hpp>
+#endif
+#ifdef CRB_FLIES
+	#include <ambience\modules\crb_flies\params.hpp>
+#endif
+#ifdef CRB_SANDSTORM
+	#include <ambience\modules\crb_sandstorm\params.hpp>
+#endif
+#ifdef CRB_DESTROYCITY
+	#include <ambience\modules\crb_destroyCity\params.hpp>
+#endif
+#ifdef TUP_AIRTRAFFIC
+	#include <ambience\modules\tup_airtraffic\params.hpp>
+#endif
+#ifdef TUP_SEATRAFFIC
+	#include <ambience\modules\tup_seatraffic\params.hpp>
+#endif
+#ifdef AEG
+	#include <ambience\modules\AEG\params.hpp>
+#endif
+#ifdef RMM_CAS
+	#include <support\modules\rmm_cas\params.hpp>
+#endif
+#ifdef CRB_TWNMGR
+	#include <support\modules\CRB_twnmgr\params.hpp>
+#endif
+#ifdef WHB_MULTISPAWN
+	#include <support\modules\WHB_Multispawn\params.hpp>
+#endif
+#ifdef RMM_ENEMYPOP
+	#include <enemy\modules\rmm_enemypop\params.hpp>
+#endif
+#ifdef CRB_CONVOYS
+	#include <enemy\modules\crb_convoys\params.hpp>
+#endif
+#ifdef CRB_TERRORISTS
+	#include <enemy\modules\crb_terrorists\params.hpp>
+#endif
+#ifdef MSOFACTIONS
+	#include <enemy\msofactions.hpp>
+#endif
+#ifdef WICT_ENEMYPOP
+	#include <enemy\modules\WICT_enemypop\params.hpp>
+#endif
+}; 
+
+#ifdef R3F_LOGISTICS
+	#include <support\modules\R3F_logistics\desc_include.h>
+#endif
+
+#ifdef RMM_CAS
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\uiDefines.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\define.hpp>
+#endif
+
+class RscTitles
+{
+#ifdef R3F_LOGISTICS
+	#include <support\modules\R3F_logistics\desc_rsct_include.h>
+#endif
+#ifdef RMM_CAS
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\RscTitles.hpp>
+#endif
+};
+
+//http://community.bistudio.com/wiki/Functions_Library
+class cfgFunctions {
+	#include <core\functions\functions.hpp>
+	#include <ambience\functions\functions.hpp>
+#ifdef CRB_DOGS
+	#include <ambience\modules\crb_dogs\functions.hpp>
+#endif
+#ifdef RMM_GTK
+	#include <core\modules\rmm_gtk\functions.hpp>
+#endif
+#ifdef RMM_HELP
+	#include <core\modules\rmm_help\functions.hpp>
+#endif
+#ifdef RMM_OSOM
+	#include <core\modules\rmm_osom\functions.hpp>
+#endif
+#ifdef RMM_WEATHER
+	#include <core\modules\rmm_weather\functions.hpp>
+#endif
+
+#ifdef RMM_AAR
+	#include <support\modules\rmm_aar\functions.hpp>
+#endif
+#ifdef RMM_CAS
+	#include <support\modules\rmm_cas\functions.hpp>
+#endif
+#ifdef RMM_CASEVAC
+	#include <support\modules\rmm_casevac\functions.hpp>
+#endif
+#ifdef RMM_CNSTRCT
+	#include <support\modules\rmm_cnstrct\functions.hpp>
+#endif
+#ifdef CRB_FLIPPABLE
+	#include <support\modules\crb_flippable\functions.hpp>
+#endif
+#ifdef RMM_JIPMARKERS
+	#include <support\modules\rmm_jipmarkers\functions.hpp>
+#endif
+#ifdef TN_LHDELEVATOR
+	#include <support\modules\tn_lhdelevator\functions.hpp>
+#endif
+#ifdef RMM_LOGBOOK
+	#include <support\modules\rmm_logbook\functions.hpp>
+#endif
+#ifdef RMM_LOGISTICS
+	#include <support\modules\rmm_logistics\functions.hpp>
+#endif
+#ifdef RMM_NOTEBOOK
+	#include <support\modules\rmm_notebook\functions.hpp>
+#endif
+#ifdef RMM_REVIVE
+	#include <support\modules\rmm_revive\functions.hpp>
+#endif
+#ifdef RMM_TASKS
+	#include <support\modules\rmm_tasks\functions.hpp>
+#endif
+#ifdef RMM_TYRES
+	#include <support\modules\rmm_tyres\functions.hpp>
+#endif
+};
+
+//http://community.bistudio.com/wiki/PreProcessor_Commands
+#include <core\dialogs\c_ui.hpp>
+
+#ifdef RMM_DEBUG
+	#include <core\modules\rmm_debug\dialog.hpp>
+#endif
+#ifdef RMM_HELP
+	#include <core\modules\rmm_help\dialog.hpp>
+#endif
+#ifdef RMM_SETTINGS
+	#include <core\modules\rmm_settings\dialog.hpp>
+#endif
+#ifdef AEG
+	#include "ambience\modules\AEG\Dialogs\AEG_Dialogs.hpp"
+#endif
+#ifdef RMM_AAR
+	#include <support\modules\rmm_aar\dialog.hpp>
+#endif
+#ifdef RMM_CAS
+	#include <support\modules\rmm_cas\dialog.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogParent.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogAC130.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogUAV.hpp>
+	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogMap.hpp>
+#endif
+#ifdef RMM_CASEVAC
+	#include <support\modules\rmm_casevac\dialog.hpp>
+#endif
+#ifdef RMM_JIPMARKERS
+	#include <support\modules\rmm_jipmarkers\dialog.hpp>
+#endif
+#ifdef RMM_LOGBOOK
+	#include <support\modules\rmm_logbook\dialog.hpp>
+#endif
+#ifdef RMM_LOGISTICS
+	#include <support\modules\rmm_logistics\dialog.hpp>
+#endif
+#ifdef RMM_NOTEBOOK
+	#include <support\modules\rmm_notebook\dialog.hpp>
+#endif
+#ifdef RMM_RECRUITMENT
+	#include <support\modules\rmm_recruitment\dialog_baf.hpp>
+	#include <support\modules\rmm_recruitment\dialog_us.hpp>
+	#include <support\modules\rmm_recruitment\dialog_ru.hpp>
+	#include <support\modules\rmm_recruitment\dialog_usmc.hpp>
+	#include <support\modules\rmm_recruitment\dialog_cz.hpp>
+	#include <support\modules\rmm_recruitment\dialog_gue.hpp>
+	#include <support\modules\rmm_recruitment\dialog_aaw.hpp>
+	#include <support\modules\rmm_recruitment\TeamStatusDialog\TeamStatusDialog.hpp>
+#endif
+#ifdef RMM_TASKS
+	#include <support\modules\rmm_tasks\dialog.hpp>
+#endif
+
+// Add BAF and TK Flight groups
+class CfgGroups {
+#ifdef TUP_AIRTRAFFIC
+	#include <ambience\modules\tup_airtraffic\cfggroups.hpp>
+#endif
+};
+
+class CfgAmmo
+{
+#ifdef CRB_CIVILIANS
+ class Default;
+ class BulletBase;
+ class GrenadeHand;
+ class GrenadeHand_stone: GrenadeHand
+ {
+  hit = 7;
+  indirectHit = 0.2;
+  indirectHitRange = 1;
+  soundHit[] = {"Ca\sounds\Weapons\hits\rico_hit_wood_08",15.848933,1};
+ };
+#endif
+};
+

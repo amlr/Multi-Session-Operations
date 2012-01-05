@@ -1,0 +1,65 @@
+//http://community.bistudio.com/wiki/description.ext#Header_Class
+class header {
+	gametype = COOP;
+	minplayers = 1;
+	maxplayers = 0;
+};
+
+//http://community.bistudio.com/wiki/description.ext#OnLoad...
+onLoadIntro = "";
+onLoadMission = "";
+onLoadIntroTime = false;
+onLoadMissionTime = false;
+estimatedTimeLeft=7200;
+
+//http://community.bistudio.com/wiki/Description.ext#Respawn...
+respawn = 3;
+respawnDelay = 10;
+respawnVehicleDelay = 0;
+respawnDialog = 1;
+
+//http://community.bistudio.com/wiki/description.ext#Show...
+showCompass = 1;
+showGPS = 1;
+showHUD = 1;
+showMap = 1;
+showNotePad = 0;
+showRadio = 0;
+showWatch = 1;
+
+//http://community.bistudio.com/wiki/description.ext#Miscellaneous
+disabledAI = 1;
+aiKills = 0;
+briefing = 1;
+debriefing = 1;
+
+//http://community.bistudio.com/wiki/description.ext#Score
+MinScore = 0;
+AvgScore = 50;
+MaxScore = 100;
+
+//http://community.bistudio.com/wiki/description.ext#Sounds
+class CfgMusic {
+};
+class CfgSounds {
+};
+class CfgRadio {
+};
+
+//http://community.bistudio.com/wiki/description.ext#CfgIdentities
+class CfgIdentities {
+};
+
+//http://community.bistudio.com/wiki/description.ext#Weapons_and_Magazines
+class Weapons {
+};
+class Magazines {
+};
+
+//http://community.bistudio.com/wiki/Functions_Library
+class cfgFunctions {
+};
+
+//http://community.bistudio.com/wiki/PreProcessor_Commands
+#include <dialogs\c_ui.hpp>
+#include <dialogs\EODD.hpp>

@@ -1,0 +1,676 @@
+diff -rupN BASE_MISSION/XEH_preinit.sqf BASE_A2Free/XEH_preinit.sqf
+--- BASE_MISSION/XEH_preinit.sqf	Mon Jan  2 21:53:46 2012
++++ BASE_A2Free/XEH_preinit.sqf	Thu Jan  1 10:00:00 1970
+@@ -1,4 +0,0 @@
+-// Check for ACRE, enable sync
+-if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
+-	acre_sys_core_sync_enabled = true;
+-};
+\ No newline at end of file
+diff -rupN BASE_MISSION/ambience/modules/crb_civilians/Main.sqf BASE_A2Free/ambience/modules/crb_civilians/Main.sqf
+--- BASE_MISSION/ambience/modules/crb_civilians/Main.sqf	Mon Jan  2 21:53:46 2012
++++ BASE_A2Free/ambience/modules/crb_civilians/Main.sqf	Thu Jan  5 12:24:56 2012
+@@ -1,3 +1,6 @@
++#define A2FREE
++
++
+ if(isServer) then {
+         private["_debug","_logicCiv","_logicVeh","_logicAni"];
+         
+@@ -22,8 +25,11 @@ if(isServer) then {
+                         _logicCiv setvariable ["debug", true];
+                 };
+                 BIS_alice_mainscope setVariable ["townlist",(BIS_functions_mainscope getVariable "locations")];
+-                //_ok = [_logicCiv] execVM "ca\modules\alice\data\scripts\main.sqf";
++#ifdef A2FREE
++		_ok = [_logicCiv] execVM "ca\modules\alice\data\scripts\main.sqf";
++#else
+                 _ok = [_logicCiv] execVM "ca\modules_e\alice2\data\scripts\main.sqf";
++#endif
+ 	        [] call compile preprocessfilelinenumbers "ambience\modules\crb_civilians\crB_AmbCivSetup.sqf";
+         };
+         
+diff -rupN BASE_MISSION/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf BASE_A2Free/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf
+--- BASE_MISSION/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf	Mon Jan  2 21:53:46 2012
++++ BASE_A2Free/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf	Thu Jan  5 12:24:56 2012
+@@ -1,3 +1,5 @@
++#define A2FREE
++
+ //////////////////////////////////////////////////////////////////
+ // Function file for Armed Assault
+ // Created by: (AEF)Wolffy.au [CTB]
+@@ -11,6 +13,7 @@ if(!isServer) exitWith{};
+ waitUntil{!isNil "BIS_fnc_init"};
+ waitUntil{!isNil "BIS_alice_mainscope"};
+ 
++#ifndef A2FREE
+ // Override default BIS_ALICE2_fnc_civilianSet function with MIP patch
+ // - Fixed issues with units spawning on roofs in Chernarus
+ // - Fixed some typos
+@@ -18,6 +21,7 @@ waitUntil{!isNil "BIS_alice_mainscope"};
+ // - Reduced default AI skill for less CPU
+ // - Changed unit speed to LIMITED
+ BIS_ALICE2_fnc_civilianSet = compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\fn_civilianSet.sqf";
++#endif
+ 
+ // See http://community.bistudio.com/wiki/Ambient_Civilians
+ //BIS_alice_mainscope setVariable ["debug", true];
+@@ -43,13 +47,17 @@ switch toLower(worldName) do {		
+                 BIS_alice_mainscope setvariable ["spawnDistance",700];                
+                 BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];                
+ 		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"]; 
++#ifndef A2FREE
+                 [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";        
++#endif
+         };        
+         case "eden": {                
+                 BIS_alice_mainscope setvariable ["trafficDistance",700];                
+                 BIS_alice_mainscope setvariable ["spawnDistance",350];                
+                 BIS_alice_mainscope setVariable ["townsFaction",["cwr2_civ","CIV_RU"]];                
++#ifndef A2FREE
+                 [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
++#endif
+         };
+         case "fallujah": {                
+                 BIS_alice_mainscope setvariable ["trafficDistance",600];      
+@@ -60,7 +68,9 @@ switch toLower(worldName) do {		
+                 BIS_alice_mainscope setvariable ["trafficDistance",1000];             
+                 BIS_alice_mainscope setvariable ["spawnDistance",700];            
+                 BIS_alice_mainscope setVariable ["civilianCount","round (5 * (sqrt %1))"];   
++#ifndef A2FREE
+                 [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
++#endif
+         };       
+         case "takistan": {   
+                 BIS_alice_mainscope setvariable ["trafficDistance",1000];      
+@@ -78,7 +88,9 @@ switch toLower(worldName) do {		
+                 BIS_alice_mainscope setvariable ["trafficDistance",650];      
+                 BIS_alice_mainscope setvariable ["spawnDistance",500];       
+                 BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];  
++#ifndef A2FREE
+                 [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
++#endif
+         };
+         case "zargabad": { 
+                 BIS_alice_mainscope setvariable ["trafficDistance",750];      
+@@ -133,10 +145,12 @@ BIS_alice_mainscope setvariable ["threat
+                                 _this addMagazine "8Rnd_9x18_Makarov";
+                                 _this addMagazine "8Rnd_9x18_Makarov";
+                                 _this addWeapon "Makarov";
++#ifndef A2FREE
+                         } else {
+                                 _this addMagazine "6Rnd_45ACP";
+                                 _this addMagazine "6Rnd_45ACP";
+                                 _this addWeapon "revolver_EP1";
++#endif
+                         };
+                 };
+         }
+diff -rupN BASE_MISSION/ambience/modules/crb_shepherds/main.sqf BASE_A2Free/ambience/modules/crb_shepherds/main.sqf
+--- BASE_MISSION/ambience/modules/crb_shepherds/main.sqf	Mon Jan  2 21:53:46 2012
++++ BASE_A2Free/ambience/modules/crb_shepherds/main.sqf	Thu Jan  5 12:24:56 2012
+@@ -1,4 +1,5 @@
+ #include <crbprofiler.hpp>
++#define A2FREE
+ 
+ private ["_types","_name","_pos","_shepherds"];
+ if (!isServer) exitWith{};
+@@ -84,8 +85,10 @@ CRB_fnc_createShepherd = {
+         _shepherd setVariable ["attacking", false];
+         
+         if(isDedicated) then {
++#ifndef A2FREE
+                 _shepherd addMPEventHandler ["MPKilled",{[([position (_this select 0), group (_this select 0)] call CRB_fnc_createShepherd)] call CRB_fnc_armShepherd;}];
+         } else {
++#endif
+                 _shepherd addEventHandler ["Killed",{[([position (_this select 0), group (_this select 0)] call CRB_fnc_createShepherd)] call CRB_fnc_armShepherd;}];
+         };
+         
+@@ -176,8 +179,10 @@ CRB_fnc_createDogs = {
+                 _dog setSkill (random 0.5);
+                 _dog allowFleeing 0;
+                 if(isDedicated) then {
++#ifndef A2FREE
+                         _dog addMPEventHandler ["MPKilled",{_this spawn CRB_fnc_shepherdAttack;}];
+                 } else {
++#endif
+                         _dog addEventHandler ["Killed",{_this spawn CRB_fnc_shepherdAttack;}];
+                 };
+                 _dogs set [count _dogs, _dog];
+@@ -226,8 +231,10 @@ CRB_fnc_createHerd = {
+                 _h allowFleeing 1;
+                 _h setBehaviour "SAFE";
+                 if(isDedicated) then {
++#ifndef A2FREE
+                         _h addMPEventHandler ["MPKilled",{_this spawn CRB_fnc_shepherdAttack;}];
+                 } else {
++#endif
+                         _h addEventHandler ["Killed",{_this spawn CRB_fnc_shepherdAttack;}];
+                 };
+                 _herd set [count _herd, _h];
+diff -rupN BASE_MISSION/ambience/modules/tup_seatraffic/main.sqf BASE_A2Free/ambience/modules/tup_seatraffic/main.sqf
+--- BASE_MISSION/ambience/modules/tup_seatraffic/main.sqf	Mon Jan  2 21:54:15 2012
++++ BASE_A2Free/ambience/modules/tup_seatraffic/main.sqf	Thu Jan  5 12:24:56 2012
+@@ -107,9 +107,10 @@ if (((random 1 < 0.5) && (tup_seatraffic
+ 
+ 
+ // Spawn a process for each destination
++_i = 0;
+ {
+         
+-        [_forEachIndex, _x, _seadest, _mapsize] spawn {
++        [_i, _x, _seadest, _mapsize] spawn {
+                 private ["_timeout","_destpos","_j","_spawnpos","_seadest","_currentseadest","_mapsize","_maxdist","_shipClass","_seaportside","_factions","_ship","_front","_vehiclelist","_shipVehicle","_shipCrew","_grp","_wp","_center","_p1","_p2"];
+                 _j = _this select 0;
+                 _currentseadest = _this select 1;
+@@ -245,4 +246,5 @@ if (((random 1 < 0.5) && (tup_seatraffic
+                         //sleep _sleep;                                
+                 };
+         };
++	_i = _i + 1;
+ } forEach _seadest;
+diff -rupN BASE_MISSION/core/functions/common/fn_addLoopHandler.sqf BASE_A2Free/core/functions/common/fn_addLoopHandler.sqf
+--- BASE_MISSION/core/functions/common/fn_addLoopHandler.sqf	Mon Jan  2 21:53:46 2012
++++ BASE_A2Free/core/functions/common/fn_addLoopHandler.sqf	Thu Jan  5 12:24:56 2012
+@@ -1,15 +1,17 @@
+ // Thanks to Nou for this code
+-private ["_id","_forEachIndex","_return"];
++private ["_id","_return","_i"];
+ _return = -1;
+ if(MSO_useCBA) then {
+         player sideChat format["cba"];
+         _this call cba_fnc_addPerFrameHandler;
+ } else {
+         _id = -1;
++	_i = 0;
+         {
+                 if((count _x) == 0) exitWith {
+-                        _id = _forEachIndex;
++                        _id = _i;
+                 };
++		_i = _i + 1;
+         } forEach MSO_Loop_Funcs;
+         if(_id == -1) then {
+                 _id = (count MSO_Loop_Funcs);
+diff -rupN BASE_MISSION/core/init.sqf BASE_A2Free/core/init.sqf
+--- BASE_MISSION/core/init.sqf	Tue Jan  3 22:34:53 2012
++++ BASE_A2Free/core/init.sqf	Thu Jan  5 12:24:56 2012
+@@ -20,16 +20,18 @@ MSO_useCBA = false;
+                         waitUntil { player == player && alive player };
+                 };
+                 waitUntil {
+-		        private ["_f","_delta"];
++		        private ["_f","_delta","_i"];
++			_i = 0;
+                         {
+                                 if((count _x) > 0) then {
+                                         _f = _x select 0;
+                                         _delta = _x select 1;
+                                         if(diag_tickTime >= _delta) then {
+-                                                [(_f select 2), _forEachIndex] call (_f select 0);
++                                                [(_f select 2), _i] call (_f select 0);
+                                                 _x set[1, diag_tickTime + (_f select 1)];
+                                         };
+                                 };
++				_i = _i + 1;
+                         } forEach MSO_Loop_Funcs;
+                         false;
+                 };
+diff -rupN BASE_MISSION/core/modules/NOU_cache/main.sqf BASE_A2Free/core/modules/NOU_cache/main.sqf
+--- BASE_MISSION/core/modules/NOU_cache/main.sqf	Mon Jan  2 21:53:46 2012
++++ BASE_A2Free/core/modules/NOU_cache/main.sqf	Thu Jan  5 12:56:48 2012
+@@ -22,7 +22,10 @@ nou_stats = "";
+ Nou_cacheGroup = {
+         CRBPROFILERSTART("Nou Caching cacheGroup")
+         
+-        if(!(_this getVariable ["Cached", false])) then {
++        private ["_cached"];
++        _cached = _this getVariable "Cached";
++        if(isNil "_cached") then {_cached = false;};
++        if(!_cached) then {
+                 _this setVariable ["Cached", true];
+                 {
+                         private["_pos"];
+@@ -49,7 +52,10 @@ Nou_cacheGroup = {
+ Nou_uncacheGroup = {
+         CRBPROFILERSTART("Nou Caching uncacheGroup")
+         
+-        if(_this getVariable ["Cached",true]) then {
++        private ["_cached"];
++        _cached = _this getVariable "Cached";
++        if(isNil "_cached") then {_cached =true;};
++        if(_cached) then {
+                 _this setVariable ["Cached", false];
+                 {
+                         private["_pos"];
+@@ -75,7 +81,10 @@ Nou_uncacheGroup = {
+ Nou_suspendGroup = {
+         CRBPROFILERSTART("Nou Caching suspendGroup")
+         
+-        if(!(_this getVariable ["Suspended", false])) then {
++        private ["_suspended"];
++        _suspended = _this getVariable "Suspended";
++        if(isNil "_suspended") then {_suspended = false;};
++        if(!_suspended) then {
+                 _this setVariable ["Suspended", true];
+                 {
+                         _x enableSimulation false;
+@@ -88,7 +97,10 @@ Nou_suspendGroup = {
+ Nou_unsuspendGroup = {
+         CRBPROFILERSTART("Nou Caching unsuspendGroup")
+         
+-        if(_this getVariable ["Suspended", true]) then {
++        private ["_suspended"];
++        _suspended = _this getVariable "Suspended";
++        if(isNil "_suspended") then {_suspended =true;};
++        if(_suspended) then {
+                 _this setVariable ["Suspended", false];
+                 {
+                         _x enableSimulation true;
+diff -rupN BASE_MISSION/core/modules/Spyder_ONU/main.sqf BASE_A2Free/core/modules/Spyder_ONU/main.sqf
+--- BASE_MISSION/core/modules/Spyder_ONU/main.sqf	Mon Jan  2 21:53:46 2012
++++ BASE_A2Free/core/modules/Spyder_ONU/main.sqf	Thu Jan  5 12:24:56 2012
+@@ -1,3 +1,6 @@
++
++#define A2FREE
++
+ /***************************************************************************
+ OBJECT NETWORK UPDATE
+ CREATED BY SPYDER
+@@ -6,6 +9,7 @@ SPYDER001@COMCAST.NET
+ _null = [] execVM "SPY\SPY_objectNetUpdate.sqf";
+ ****************************************************************************/
+ 
++#ifndef A2FREE
+ if(!isDedicated) exitWith{};
+ 
+ [] spawn {
+@@ -34,4 +38,4 @@ if(!isDedicated) exitWith{};
+ 		sleep 120;
+         };
+ };
+-
++#endif
+\ No newline at end of file
+diff -rupN BASE_MISSION/core/modules/rmm_nomad/main.sqf BASE_A2Free/core/modules/rmm_nomad/main.sqf
+--- BASE_MISSION/core/modules/rmm_nomad/main.sqf	Thu Jan  5 11:19:08 2012
++++ BASE_A2Free/core/modules/rmm_nomad/main.sqf	Thu Jan  5 12:25:00 2012
+@@ -1,5 +1,6 @@
+ //#squint filter Code-block is never called
+ //#squint filter Expected ; or operator but got ,
++#define A2FREE
+ 
+ private ["_g_nomad","_s_nomad"];
+ if (isdedicated) exitwith {};
+@@ -16,9 +17,11 @@ _g_nomad = [
+         {playerSide;},
+         {magazines player;},
+         {weapons player;},
++#ifndef A2FREE
+         {typeof (unitbackpack player);},
+         {getmagazinecargo (unitbackpack player);},
+         {getweaponcargo (unitbackpack player);},
++#endif
+         {getposATL player;},
+         {damage player;},
+         {rating player;},
+@@ -58,6 +61,7 @@ _s_nomad = [
+                 {player addweapon _x;} foreach _this;
+                 player selectweapon (primaryweapon player);
+         },
++#ifndef A2FREE
+         {
+                 if (_this != "") then {
+                         player addbackpack _this;
+@@ -75,6 +79,7 @@ _s_nomad = [
+                         (unitbackpack player) addweaponcargo [(_this select 0) select _i,(_this select 1) select _i];
+                 };
+         },
++#endif
+         {player setposATL _this;},
+         {player setdamage _this;},
+         {player addrating (-(rating player) + _this);},
+@@ -120,7 +125,7 @@ _s_nomad = [
+         }
+ ];
+ 
+-
++#ifndef A2FREE
+ if (isClass(configFile>>"CfgPatches">>"ace_main")) then { 
+         _g_nomad = _g_nomad + [
+                 #include <mods\ace_sys_ruck_g.hpp>
+@@ -140,5 +145,6 @@ if (isClass(configFile>>"CfgPatches">>"a
+                 {} 
+         ];                
+ };
++#endif
+ 
+ [_g_nomad, _s_nomad] execfsm "core\modules\rmm_nomad\nomad.fsm";
+diff -rupN BASE_MISSION/core/scripts/init_player.sqf BASE_A2Free/core/scripts/init_player.sqf
+--- BASE_MISSION/core/scripts/init_player.sqf	Mon Jan  2 21:53:46 2012
++++ BASE_A2Free/core/scripts/init_player.sqf	Thu Jan  5 12:24:56 2012
+@@ -1,3 +1,5 @@
++#define A2FREE
++
+ if (isDedicated) exitWith{};
+ waituntil {not isnull player};
+ 
+@@ -21,12 +23,15 @@ player addeventhandler ["respawn", {
+         if !(isClass(configFile>>"CfgPatches">>"ace_main")) then {
+                 {_unit removeweapon _x;} foreach ((weapons _unit) + (items _unit));
+                 {_unit removemagazine _x;} foreach (magazines _unit);
++#ifndef A2FREE
+                 removebackpack _unit;
++#endif
+                 
+                 {_unit addmagazine _x;} foreach (magazines _corpse);
+                 {_unit addweapon _x;} foreach ((weapons _corpse) + (items _corpse));
+                 _unit selectweapon (primaryweapon _unit);
+                 
++#ifndef A2FREE
+                 _bp = typeof (unitbackpack _corpse);
+                 if (_bp != "") then {
+                         _bpm = getmagazinecargo (unitbackpack _corpse);
+@@ -43,10 +48,13 @@ player addeventhandler ["respawn", {
+                                 (unitbackpack _unit) addweaponcargo [(_bpw select 0) select _i,(_bpw select 1) select _i];
+                         };
+                 };
++#endif
+                 
+         };
+ 
+         removeallweapons _corpse;
+         removeallitems _corpse;
++#ifndef A2FREE
+         removebackpack _corpse;
++#endif
+ }];
+diff -rupN BASE_MISSION/core/scripts/intro.sqf BASE_A2Free/core/scripts/intro.sqf
+--- BASE_MISSION/core/scripts/intro.sqf	Mon Jan  2 21:53:46 2012
++++ BASE_A2Free/core/scripts/intro.sqf	Thu Jan  5 12:24:56 2012
+@@ -1,3 +1,4 @@
++#define A2FREE
+ if(isDedicated) exitWith{};
+ sleep 1;
+ hint parsetext "<t size=2 align=left>MSO (FAQ)</t><t align=left><br/>
+@@ -6,6 +7,9 @@ You have limited number of lives; after 
+ <t size=2 align=left>What Now?</t><br/>Check your tasks and the notes section for after action reports, upcoming missions and recon information.<br/><br/>
+ <t size=2 align=left>Who with?</t><br/>Join our teamspeak 3 channel (ts.ausarma.org) to meet up with others on the map, or use the ingame VOIP. If you have skype, send your account name to an AAF/AEF CTB member and you will be added to the MSO conversation.</t>";
+ sleep 10;
+-["Multi-Session","Operation"] call BIS_fnc_infoText;
+-["by the MSO", "Development Team"] call BIS_fnc_infoText;
+-
++#ifndef A2FREE
++	["Multi-Session","Operation"] call BIS_fnc_infoText;
++	["by the MSO", "Development Team"] call BIS_fnc_infoText;
++#else
++	titleText ["Multi-Session Operation\n\nby the MSO Development Team", "PLAIN DOWN"];
++#endif
+diff -rupN BASE_MISSION/description-mso.ext BASE_A2Free/description-mso.ext
+--- BASE_MISSION/description-mso.ext	Wed Jan  4 08:54:04 2012
++++ BASE_A2Free/description-mso.ext	Thu Jan  5 12:44:02 2012
+@@ -1,3 +1,5 @@
++#include <x\CBA\addons\script_mod.hpp>
++#include <x\CBA\addons\script_macros_common.hpp>
+ #include <core\modules\modules.hpp>
+ #include <ambience\modules\modules.hpp>
+ #include <support\modules\modules.hpp>
+@@ -112,8 +114,10 @@ class Params {
+ 	#include <support\modules\rmm_cas\LDL_ac130\Includes\define.hpp>
+ #endif
+ 
++#include <x\CBA\addons\CfgPerFrame.hpp>
+ class RscTitles
+ {
++	#include <x\CBA\addons\CfgRscTitles.hpp>
+ #ifdef R3F_LOGISTICS
+ 	#include <support\modules\R3F_logistics\desc_rsct_include.h>
+ #endif
+@@ -124,6 +128,7 @@ class RscTitles
+ 
+ //http://community.bistudio.com/wiki/Functions_Library
+ class cfgFunctions {
++	#include <x\CBA\addons\CfgFunctions.hpp>
+ 	#include <core\functions\functions.hpp>
+ 	#include <ambience\functions\functions.hpp>
+ #ifdef CRB_DOGS
+@@ -260,3 +265,4 @@ class CfgAmmo
+ #endif
+ };
+ 
++#include <x\CBA\addons\ui_config.cpp>
+diff -rupN BASE_MISSION/enemy/modules/WICT_enemypop/main.sqf BASE_A2Free/enemy/modules/WICT_enemypop/main.sqf
+--- BASE_MISSION/enemy/modules/WICT_enemypop/main.sqf	Thu Jan  5 09:57:15 2012
++++ BASE_A2Free/enemy/modules/WICT_enemypop/main.sqf	Thu Jan  5 12:24:56 2012
+@@ -17,7 +17,7 @@ if (WICT_wict_header == 0) exitWith{};
+ 
+ WICT_PATH = "enemy\modules\WICT_enemypop\";
+ 
+-private ["_debug","_d","_camp","_flag","_WICTM","_WICTMN","_group","_pos2"];
++private ["_debug","_d","_camp","_flag","_WICTM","_WICTMN","_group","_pos2","_i"];
+ _debug = false;
+ 
+ if(isNil "wict_ep_intensity")then{wict_ep_intensity = 1;};
+@@ -90,6 +90,7 @@ fPlayersInside = {
+ 
+ if(isNil "wict_baselocations")then{wict_baselocations = 0};
+ 
++_i = 0;
+ {
+         private ["_group","_pos","_type"];
+         _group = grpNull;
+@@ -97,7 +98,7 @@ if(isNil "wict_baselocations")then{wict_
+         _pos = [];
+ 	_skip = false;
+ 
+-	if (_forEachIndex % wict_ep_intensity < 1) then {
++	if (_i % wict_ep_intensity < 1) then {
+ 		_skip = true;
+ 	};
+ 	
+@@ -495,6 +496,7 @@ if(isNil "wict_baselocations")then{wict_
+                         _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                 };
+         };
++	_i = _i + 1;
+ } foreach CRB_LOCS;
+ 
+ [0,[],{[] call compile preprocessFileLineNumbers "enemy\modules\WICT_enemypop\init.sqf";}] call mso_core_fnc_ExMP;
+diff -rupN BASE_MISSION/enemy/modules/crb_terrorists/main.sqf BASE_A2Free/enemy/modules/crb_terrorists/main.sqf
+--- BASE_MISSION/enemy/modules/crb_terrorists/main.sqf	Mon Jan  2 21:53:46 2012
++++ BASE_A2Free/enemy/modules/crb_terrorists/main.sqf	Thu Jan  5 13:10:54 2012
+@@ -1,3 +1,6 @@
++#define A2FREE
++
++#ifndef A2FREE
+ #include <crbprofiler.hpp>
+ 
+ //execVM "modules\crb_terrorists\main.sqf";
+@@ -101,7 +104,7 @@ PGM_fnc_CreateIntel = { 
+ 
+ 
+ TUP_fnc_AddVehicleTrigger = {
+-	private ["_vehicle", "_debug"];
++	private ["_vehicle","_debug","_trg"];
+ 	
+ 	_vehicle = _this select 0;
+ 	_debug = _this select 1;
+@@ -153,7 +156,7 @@ CRB_fnc_FindVehicle = {
+ CRB_fnc_SpawnVehicle = {
+ 	CRBPROFILERSTART("CRB Terrorists spawnVehicle")
+ 
+-        private ["_vehicle","_vcargo","_tmp","_pos","_crew"];
++        private ["_vehicle","_vcargo","_tmp","_pos","_crew","_debug"];
+         _pos = _this select 0;
+         _crew = 1;
+         if(count _this > 1) then {
+@@ -386,7 +389,7 @@ CRB_fnc_RecruitMember = {
+ 		if(isNil "_twn") then {
+ 			_twn = [position leader _grp, _debug] call CRB_fnc_GetNearestTown;
+ 			_grp setVariable ["nearestTown", _twn, true];
+-		};
++		};
+         _bldgpos = [_twn,_debug] call CRB_fnc_GetBuildingPosForTown;
+         _recpos = _bldgpos call BIS_fnc_selectRandom;
+         if(isNil "_recpos") exitWith {
+@@ -496,7 +499,7 @@ CRB_fnc_SplitCell = {
+         _newtwn = _newtwn call BIS_fnc_selectRandom;
+         */        
+         _newtwn = [_pos, _debug] call CRB_fnc_GetNearestTown;
+-        _newcell setVariable ["nearestTown", _newtwn, true];        
++        _newcell setVariable ["nearestTown", _newtwn, true];        
+         if (_debug) then {
+                 deleteMarker _tcrm;
+         };
+@@ -682,7 +685,7 @@ for "_i" from 1 to _numcells do {
+                 
+ 				//DEBUG:_twn = nearestLocation [_spawn, "CityCenter"];
+                 _twn = [_spawn, _debug] call CRB_fnc_GetNearestTown;
+-                _grp setVariable ["nearestTown", _twn, true];
++                _grp setVariable ["nearestTown", _twn, true];
+                 
+                 _terrorcrgo = [];
+                 for "_i" from 0 to floor(random _vcargo) do {
+@@ -732,3 +735,4 @@ for "_i" from 1 to _numcells do {
+                 */
+         };
+ };
++#endif
+\ No newline at end of file
+diff -rupN BASE_MISSION/enemy/modules/rmm_zora/main.sqf BASE_A2Free/enemy/modules/rmm_zora/main.sqf
+--- BASE_MISSION/enemy/modules/rmm_zora/main.sqf	Tue Jan  3 23:48:20 2012
++++ BASE_A2Free/enemy/modules/rmm_zora/main.sqf	Thu Jan  5 12:24:12 2012
+@@ -65,4 +65,4 @@ BIS_Zora_Mainscope setvariable ["maxdist
+ 		CRBPROFILERSTOP
+ 		sleep _waittime;
+         };
+-};
++};
+diff -rupN BASE_MISSION/init-custom.sqf BASE_A2Free/init-custom.sqf
+--- BASE_MISSION/init-custom.sqf	Mon Jan  2 21:53:46 2012
++++ BASE_A2Free/init-custom.sqf	Thu Jan  5 12:24:56 2012
+@@ -1,37 +1,2 @@
+-// Custom improvements that you may wish to implement
+-
+-// ACE configuration
+-if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
+-	enableEngineArtillery false;  //disable BI arty comp
+-	Ace_sys_wounds_no_medical_gear = true;  //disable ACE adding medical items
+-	ace_sys_wounds_noai = true;  //disable wounds for AI for performance
+-	ace_sys_eject_fnc_weaponcheck = {};  //disable aircraft weapon removal
+-};
+-
+-// ACRE Config and sync
+-if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
+-
+-//	[0] call acre_api_fnc_setLossModelScale;  // Description: Specify any value between 1.0 and 0. Setting it to 0 means the loss model is disabled, 1 is default.
+-
+-	runOnPlayers = {
+-		[] spawn
+-		{
+-			waitUntil {!isNil "mso_interaction_key"};
+-			["player", [mso_interaction_key], 4, ["scripts\callAcreSync.sqf", "main"]] call CBA_ui_fnc_add;
+-		};
+-	};
+-
+-	if (!isDedicated) then {
+-		if (!isNull player) then  // non JIP
+-		{
+-			call runOnPlayers;
+-		}
+-		else 
+-		{
+-			[] spawn {
+-				waitUntil {!isNull player};
+-				call runOnPlayers;
+-			};
+-		};
+-	};
+-};
+\ No newline at end of file
++BIS_Effects_Rifle=compile preprocessFileLineNumbers "ca\Data\ParticleEffects\SCRIPTS\muzzle\rifle.sqf";
++BIS_Effects_Rocket=compile preprocessFileLineNumbers "ca\Data\ParticleEffects\SCRIPTS\muzzle\rocket.sqf";
+\ No newline at end of file
+diff -rupN BASE_MISSION/init.sqf BASE_A2Free/init.sqf
+--- BASE_MISSION/init.sqf	Thu Jan  5 10:24:24 2012
++++ BASE_A2Free/init.sqf	Thu Jan  5 12:24:56 2012
+@@ -1,3 +1,7 @@
++
++// A2Free CBA Integration
++#include "CBA_init.sqf"
++
+ #ifndef execNow
+ #define execNow call compile preprocessfilelinenumbers
+ #endif
+diff -rupN BASE_MISSION/support/scripts/resupply.sqf BASE_A2Free/support/scripts/resupply.sqf
+--- BASE_MISSION/support/scripts/resupply.sqf	Mon Jan  2 21:53:47 2012
++++ BASE_A2Free/support/scripts/resupply.sqf	Thu Jan  5 12:24:56 2012
+@@ -1,3 +1,5 @@
++﻿#define A2FREE
++
+ /*  
+ =========================================================
+ Based on Simple Vehicle Respawn Script v1.6
+@@ -31,8 +33,11 @@ if (_delay < 0) then {_delay = 0};
+ _dir = getDir _unit;
+ _position = getPosASL _unit;
+ _type = typeOf _unit;
++
++#ifndef A2FREE
+ _weapons = getWeaponCargo _unit;
+ _mags = getMagazineCargo _unit;
++#endif
+ 
+ // Start monitoring the vehicle
+ while {_run} do {	
+@@ -45,6 +50,8 @@ while {_run} do {	
+ 					_unit setVehicleVarName _unitname;
+ 			};
+ 		};
++
++#ifndef A2FREE
+         clearWeaponCargo _unit;
+         clearMagazineCargo _unit;
+         
+@@ -57,4 +64,5 @@ while {_run} do {	
+         for "_i" from 0 to _max do {
+                 _unit addMagazineCargo [(_mags select 0) select _i, (_mags select 1) select _i];
+         };        
++#endif
+ };
+diff -rupN BASE_MISSION/support/scripts/vehicle.sqf BASE_A2Free/support/scripts/vehicle.sqf
+--- BASE_MISSION/support/scripts/vehicle.sqf	Mon Jan  2 21:53:47 2012
++++ BASE_A2Free/support/scripts/vehicle.sqf	Thu Jan  5 12:24:56 2012
+@@ -1,3 +1,5 @@
++﻿#define A2FREE
++
+ /*  
+ =========================================================
+ Simple Vehicle Respawn Script v1.6
+@@ -88,8 +90,10 @@ _type = typeOf _unit;
+ _dead = false;
+ _nodelay = false;
+ 
++#ifndef A2FREE
+ _weapons = getWeaponCargo _unit;
+ _mags = getMagazineCargo _unit;
++#endif
+ 
+ // Start monitoring the vehicle
+ while {_run} do 
+@@ -121,6 +125,7 @@ while {_run} do 
+                 _unit setPosASL _position;
+                 _unit setDir _dir;
+                 
++#ifndef A2FREE
+                 clearWeaponCargo _unit;
+                 clearMagazineCargo _unit;
+                 
+@@ -133,6 +138,7 @@ while {_run} do 
+                 for "_i" from 0 to _max do {
+                         _unit addMagazineCargo [(_mags select 0) select _i, (_mags select 1) select _i];
+                 };
++#endif
+                 
+                 if (_haveinit) then 
+                 {_unit setVehicleInit format ["%1;", _unitinit];
