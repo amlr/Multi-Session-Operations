@@ -6,12 +6,30 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 	Ace_sys_wounds_no_medical_gear = true;  //disable ACE adding medical items
 	ace_sys_wounds_noai = true;  //disable wounds for AI for performance
 	ace_sys_eject_fnc_weaponcheck = {};  //disable aircraft weapon removal
+		
 };
 
 // ACRE Config and sync
 if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
 
-//	[0] call acre_api_fnc_setLossModelScale;  // Description: Specify any value between 1.0 and 0. Setting it to 0 means the loss model is disabled, 1 is default.
+	// Add ACRE box near current ammo boxes - ACRE_RadioBox
+	if (isServer) then {
+		private ["_radiomarkers"];
+		_radiomarkers = ["ammo","ammo_1"];
+		{
+			private ["_pos","_newpos"];
+			if !(str (markerPos _x) == "[0,0,0]") then {
+				_pos = markerPos _x;
+				if (count nearestObjects [_pos, ["ACRE_RadioBox"], 10] == 0) then {
+					_newpos = [_pos, 0, 10, 2, 0, 0, 0] call BIS_fnc_findSafePos;
+					"ACRE_RadioBox" createVehicle _newpos;
+					diag_log format ["Creating ACRE Radio Box at %1", _newpos];
+				};
+			};
+		} foreach _radiomarkers;
+	};
+
+	//	[0] call acre_api_fnc_setLossModelScale;  // Description: Specify any value between 1.0 and 0. Setting it to 0 means the loss model is disabled, 1 is default.
 
 	runOnPlayers = {
 		[] spawn
