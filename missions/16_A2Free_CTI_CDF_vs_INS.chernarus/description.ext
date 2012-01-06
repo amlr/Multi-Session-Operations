@@ -2,10 +2,10 @@
 
 //http://community.bistudio.com/wiki/description.ext#Header_Class
 class header {
-	gametype = COOP;
+	gametype = CTI;
 	minplayers = 1;
-	maxplayers = 8;
-	playerCountMultipleOf = 1;  //Coop type missions use 1, Team type missions use 2
+	maxplayers = 16;
+	playerCountMultipleOf = 2;  //Coop type missions use 1, Team type missions use 2
 };
 
 //http://community.bistudio.com/wiki/description.ext#OnLoad...
@@ -18,5 +18,4 @@ onLoadMissionTime = true;
 aiKills = 0;
 briefing = 1;
 debriefing = 1;
-disabledAI = 1;
-
+disabledAI = 0;

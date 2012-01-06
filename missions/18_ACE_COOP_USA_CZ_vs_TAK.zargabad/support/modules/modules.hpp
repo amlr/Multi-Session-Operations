@@ -12,6 +12,7 @@
 #define RMM_TASKS
 #define RMM_TYRES
 #define WHB_MULTISPAWN
+#define ZKS_BUILD
 
 // WIP
 //#define GC_PACK_COW
