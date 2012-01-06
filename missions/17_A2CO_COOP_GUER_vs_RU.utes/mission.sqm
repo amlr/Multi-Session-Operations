@@ -1461,7 +1461,7 @@ class Mission
 		class Item0
 		{
 			position[]={2243.2188,21.42321,4055.8623};
-			name="respawn_guerilla";
+			name="respawn_GUE";
 			text="Base Camp";
 			type="Faction_GUE";
 		};
