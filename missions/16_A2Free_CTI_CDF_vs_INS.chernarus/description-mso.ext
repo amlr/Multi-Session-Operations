@@ -6,7 +6,6 @@
 //http://community.bistudio.com/wiki/Description.ext#Respawn...
 respawn = 3;
 respawnDelay = 15;
-disabledAI = 0;
 respawnDialog = false;
 
 class CfgSounds {
