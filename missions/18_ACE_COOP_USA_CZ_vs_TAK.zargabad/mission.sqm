@@ -2510,7 +2510,7 @@ class Mission
 		class Item4
 		{
 			position[]={4936.4976,29.426275,6124.1079};
-			name="respawn_BIZ_CZ";
+			name="respawn_BIS_CZ";
 			type="Empty";
 			a=1.5;
 			b=1.5;

@@ -81,7 +81,7 @@ if (isServer) then
 				WICT_playerPos set [0, _posA];
 				WICT_playerPos set [1, _posB];
 			} else {
-				WICT_state = "stop";
+				// Should stop WICT here
 			};
 		};
 				
