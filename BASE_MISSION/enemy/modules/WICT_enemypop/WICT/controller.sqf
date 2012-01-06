@@ -40,6 +40,7 @@ if (isServer) then
 		
 		if (WICT_state == "start") then
 		{
+			diag_log "Starting WICT Controller";
 			_null = [] spawn {controllerH = [] execVM (WICT_PATH + "WICT\corescript.sqf")};
 			sleep 1;
 		};
