@@ -87,6 +87,7 @@ del %NDIR%\mission.sqm
 move %NDIR%\newmission.sqm %NDIR%\mission.sqm
 
 CALL :LoCase MISSION_FILENAME
+pause
 echo Creating %MISSION_FILENAME%.pbo
 cd ..\TMPMissions
 makePbo -N -K %MISSION_FILENAME% 1> nul
@@ -109,9 +110,9 @@ CALL :UpCase A2FREE_NAME
 set A2FREE_NAME=%A2FREE_NAME: =%
 if %A2FREE_NAME%==A2FREE (
 echo Patching mission for %A2FREE_NAME%
-..\mso_maker\patch.exe --binary -l -u -p1 -d %MISSION_FOLDER_NAME% < ..\mso_maker\a2free_patch.txt
+..\mso_maker\patch.exe --ignore-whitespace -F3 -N -p1 -d %MISSION_FOLDER_NAME% < ..\mso_maker\a2free_patch.txt
 echo Extracting A2Free files into %MISSION_FOLDER_NAME%
-"c:\program files\7-zip\7z.exe" x -o%MISSION_FOLDER_NAME% ..\mso_maker\a2free_convert.7z 1> nul )
+"c:\program files\7-zip\7z.exe" x -y -o%MISSION_FOLDER_NAME% ..\mso_maker\a2free_convert.7z 1> nul)
 goto:eof
 
 :LoCase

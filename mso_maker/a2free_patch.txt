@@ -1,38 +1,6 @@
-﻿diff -rupN BASE_MISSION/XEH_preinit.sqf BASE_A2Free/XEH_preinit.sqf
---- BASE_MISSION/XEH_preinit.sqf	Mon Jan  2 21:53:46 2012
-+++ BASE_A2Free/XEH_preinit.sqf	Thu Jan  1 10:00:00 1970
-@@ -1,4 +0,0 @@
--// Check for ACRE, enable sync
--if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
--	acre_sys_core_sync_enabled = true;
--};
-\ No newline at end of file
-diff -rupN BASE_MISSION/ambience/modules/crb_civilians/Main.sqf BASE_A2Free/ambience/modules/crb_civilians/Main.sqf
---- BASE_MISSION/ambience/modules/crb_civilians/Main.sqf	Mon Jan  2 21:53:46 2012
-+++ BASE_A2Free/ambience/modules/crb_civilians/Main.sqf	Thu Jan  5 12:24:56 2012
-@@ -1,3 +1,6 @@
-+#define A2FREE
-+
-+
- if(isServer) then {
-         private["_debug","_logicCiv","_logicVeh","_logicAni"];
-         
-@@ -22,8 +25,11 @@ if(isServer) then {
-                         _logicCiv setvariable ["debug", true];
-                 };
-                 BIS_alice_mainscope setVariable ["townlist",(BIS_functions_mainscope getVariable "locations")];
--                //_ok = [_logicCiv] execVM "ca\modules\alice\data\scripts\main.sqf";
-+#ifdef A2FREE
-+		_ok = [_logicCiv] execVM "ca\modules\alice\data\scripts\main.sqf";
-+#else
-                 _ok = [_logicCiv] execVM "ca\modules_e\alice2\data\scripts\main.sqf";
-+#endif
- 	        [] call compile preprocessfilelinenumbers "ambience\modules\crb_civilians\crB_AmbCivSetup.sqf";
-         };
-         
-diff -rupN BASE_MISSION/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf BASE_A2Free/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf
---- BASE_MISSION/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf	Mon Jan  2 21:53:46 2012
-+++ BASE_A2Free/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf	Thu Jan  5 12:24:56 2012
+diff -rupN BASE_MISSION/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf BASE_A2FREE/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf
+--- BASE_MISSION/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf	2012-01-02 21:53:46.346027100 +1100
++++ BASE_A2FREE/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf	2012-01-06 10:31:40.377289600 +1100
 @@ -1,3 +1,5 @@
 +#define A2FREE
 +
@@ -106,9 +74,32 @@ diff -rupN BASE_MISSION/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf BASE_
                          };
                  };
          }
-diff -rupN BASE_MISSION/ambience/modules/crb_shepherds/main.sqf BASE_A2Free/ambience/modules/crb_shepherds/main.sqf
---- BASE_MISSION/ambience/modules/crb_shepherds/main.sqf	Mon Jan  2 21:53:46 2012
-+++ BASE_A2Free/ambience/modules/crb_shepherds/main.sqf	Thu Jan  5 12:24:56 2012
+diff -rupN BASE_MISSION/ambience/modules/crb_civilians/Main.sqf BASE_A2FREE/ambience/modules/crb_civilians/Main.sqf
+--- BASE_MISSION/ambience/modules/crb_civilians/Main.sqf	2012-01-02 21:53:46.346027100 +1100
++++ BASE_A2FREE/ambience/modules/crb_civilians/Main.sqf	2012-01-06 10:31:40.377289600 +1100
+@@ -1,3 +1,6 @@
++#define A2FREE
++
++
+ if(isServer) then {
+         private["_debug","_logicCiv","_logicVeh","_logicAni"];
+         
+@@ -22,8 +25,11 @@ if(isServer) then {
+                         _logicCiv setvariable ["debug", true];
+                 };
+                 BIS_alice_mainscope setVariable ["townlist",(BIS_functions_mainscope getVariable "locations")];
+-                //_ok = [_logicCiv] execVM "ca\modules\alice\data\scripts\main.sqf";
++#ifdef A2FREE
++		_ok = [_logicCiv] execVM "ca\modules\alice\data\scripts\main.sqf";
++#else
+                 _ok = [_logicCiv] execVM "ca\modules_e\alice2\data\scripts\main.sqf";
++#endif
+ 	        [] call compile preprocessfilelinenumbers "ambience\modules\crb_civilians\crB_AmbCivSetup.sqf";
+         };
+         
+diff -rupN BASE_MISSION/ambience/modules/crb_shepherds/main.sqf BASE_A2FREE/ambience/modules/crb_shepherds/main.sqf
+--- BASE_MISSION/ambience/modules/crb_shepherds/main.sqf	2012-01-02 21:53:46.361627100 +1100
++++ BASE_A2FREE/ambience/modules/crb_shepherds/main.sqf	2012-01-06 10:31:40.377289600 +1100
 @@ -1,4 +1,5 @@
  #include <crbprofiler.hpp>
 +#define A2FREE
@@ -148,9 +139,9 @@ diff -rupN BASE_MISSION/ambience/modules/crb_shepherds/main.sqf BASE_A2Free/ambi
                          _h addEventHandler ["Killed",{_this spawn CRB_fnc_shepherdAttack;}];
                  };
                  _herd set [count _herd, _h];
-diff -rupN BASE_MISSION/ambience/modules/tup_seatraffic/main.sqf BASE_A2Free/ambience/modules/tup_seatraffic/main.sqf
---- BASE_MISSION/ambience/modules/tup_seatraffic/main.sqf	Mon Jan  2 21:54:15 2012
-+++ BASE_A2Free/ambience/modules/tup_seatraffic/main.sqf	Thu Jan  5 12:24:56 2012
+diff -rupN BASE_MISSION/ambience/modules/tup_seatraffic/main.sqf BASE_A2FREE/ambience/modules/tup_seatraffic/main.sqf
+--- BASE_MISSION/ambience/modules/tup_seatraffic/main.sqf	2012-01-02 21:54:14.816077100 +1100
++++ BASE_A2FREE/ambience/modules/tup_seatraffic/main.sqf	2012-01-06 10:31:40.377289600 +1100
 @@ -107,9 +107,10 @@ if (((random 1 < 0.5) && (tup_seatraffic
  
  
@@ -169,9 +160,15 @@ diff -rupN BASE_MISSION/ambience/modules/tup_seatraffic/main.sqf BASE_A2Free/amb
          };
 +	_i = _i + 1;
  } forEach _seadest;
-diff -rupN BASE_MISSION/core/functions/common/fn_addLoopHandler.sqf BASE_A2Free/core/functions/common/fn_addLoopHandler.sqf
---- BASE_MISSION/core/functions/common/fn_addLoopHandler.sqf	Mon Jan  2 21:53:46 2012
-+++ BASE_A2Free/core/functions/common/fn_addLoopHandler.sqf	Thu Jan  5 12:24:56 2012
+diff -rupN BASE_MISSION/CA/modules/Functions/variables/fn_undefCheck.sqf BASE_A2FREE/CA/modules/Functions/variables/fn_undefCheck.sqf
+--- BASE_MISSION/CA/modules/Functions/variables/fn_undefCheck.sqf	1970-01-01 11:00:00.000000000 +1100
++++ BASE_A2FREE/CA/modules/Functions/variables/fn_undefCheck.sqf	2012-01-06 10:31:40.377289600 +1100
+@@ -0,0 +1,2 @@
++diag_log "Dummy file called, please fix!";
++false;
+diff -rupN BASE_MISSION/core/functions/common/fn_addLoopHandler.sqf BASE_A2FREE/core/functions/common/fn_addLoopHandler.sqf
+--- BASE_MISSION/core/functions/common/fn_addLoopHandler.sqf	2012-01-02 21:53:46.377227100 +1100
++++ BASE_A2FREE/core/functions/common/fn_addLoopHandler.sqf	2012-01-06 10:31:40.377289600 +1100
 @@ -1,15 +1,17 @@
  // Thanks to Nou for this code
 -private ["_id","_forEachIndex","_return"];
@@ -192,9 +189,9 @@ diff -rupN BASE_MISSION/core/functions/common/fn_addLoopHandler.sqf BASE_A2Free/
          } forEach MSO_Loop_Funcs;
          if(_id == -1) then {
                  _id = (count MSO_Loop_Funcs);
-diff -rupN BASE_MISSION/core/init.sqf BASE_A2Free/core/init.sqf
---- BASE_MISSION/core/init.sqf	Tue Jan  3 22:34:53 2012
-+++ BASE_A2Free/core/init.sqf	Thu Jan  5 12:24:56 2012
+diff -rupN BASE_MISSION/core/init.sqf BASE_A2FREE/core/init.sqf
+--- BASE_MISSION/core/init.sqf	2012-01-03 22:34:53.385886100 +1100
++++ BASE_A2FREE/core/init.sqf	2012-01-06 10:31:40.377289600 +1100
 @@ -20,16 +20,18 @@ MSO_useCBA = false;
                          waitUntil { player == player && alive player };
                  };
@@ -216,9 +213,9 @@ diff -rupN BASE_MISSION/core/init.sqf BASE_A2Free/core/init.sqf
                          } forEach MSO_Loop_Funcs;
                          false;
                  };
-diff -rupN BASE_MISSION/core/modules/NOU_cache/main.sqf BASE_A2Free/core/modules/NOU_cache/main.sqf
---- BASE_MISSION/core/modules/NOU_cache/main.sqf	Mon Jan  2 21:53:46 2012
-+++ BASE_A2Free/core/modules/NOU_cache/main.sqf	Thu Jan  5 12:56:48 2012
+diff -rupN BASE_MISSION/core/modules/NOU_cache/main.sqf BASE_A2FREE/core/modules/NOU_cache/main.sqf
+--- BASE_MISSION/core/modules/NOU_cache/main.sqf	2012-01-02 21:53:46.392827200 +1100
++++ BASE_A2FREE/core/modules/NOU_cache/main.sqf	2012-01-06 10:31:40.377289600 +1100
 @@ -22,7 +22,10 @@ nou_stats = "";
  Nou_cacheGroup = {
          CRBPROFILERSTART("Nou Caching cacheGroup")
@@ -267,9 +264,63 @@ diff -rupN BASE_MISSION/core/modules/NOU_cache/main.sqf BASE_A2Free/core/modules
                  _this setVariable ["Suspended", false];
                  {
                          _x enableSimulation true;
-diff -rupN BASE_MISSION/core/modules/Spyder_ONU/main.sqf BASE_A2Free/core/modules/Spyder_ONU/main.sqf
---- BASE_MISSION/core/modules/Spyder_ONU/main.sqf	Mon Jan  2 21:53:46 2012
-+++ BASE_A2Free/core/modules/Spyder_ONU/main.sqf	Thu Jan  5 12:24:56 2012
+diff -rupN BASE_MISSION/core/modules/rmm_nomad/main.sqf BASE_A2FREE/core/modules/rmm_nomad/main.sqf
+--- BASE_MISSION/core/modules/rmm_nomad/main.sqf	2012-01-05 19:38:19.208046400 +1100
++++ BASE_A2FREE/core/modules/rmm_nomad/main.sqf	2012-01-06 10:31:40.658090100 +1100
+@@ -1,5 +1,6 @@
+ //#squint filter Code-block is never called
+ //#squint filter Expected ; or operator but got ,
++#define A2FREE
+ 
+ private ["_g_nomad","_s_nomad"];
+ if (isdedicated) exitwith {};
+@@ -16,9 +17,11 @@ _g_nomad = [
+         {playerSide;},
+         {magazines player;},
+         {weapons player;},
++#ifndef A2FREE
+         {typeof (unitbackpack player);},
+         {getmagazinecargo (unitbackpack player);},
+         {getweaponcargo (unitbackpack player);},
++#endif
+         {getposATL player;},
+         {damage player;},
+         {rating player;},
+@@ -59,6 +62,7 @@ _s_nomad = [
+                 {player addweapon _x;} foreach _this;
+                 player selectweapon (primaryweapon player);
+         },
++#ifndef A2FREE
+         {
+                 if (_this != "") then {
+                         player addbackpack _this;
+@@ -76,6 +80,7 @@ _s_nomad = [
+                         (unitbackpack player) addweaponcargo [(_this select 0) select _i,(_this select 1) select _i];
+                 };
+         },
++#endif
+         {player setposATL _this;},
+         {player setdamage _this;},
+         {player addrating (-(rating player) + _this);},
+@@ -121,7 +126,7 @@ _s_nomad = [
+         }
+ ];
+ 
+-
++#ifndef A2FREE
+ if (isClass(configFile>>"CfgPatches">>"ace_main")) then { 
+         _g_nomad = _g_nomad + [
+                 #include <mods\ace_sys_ruck_g.hpp>
+@@ -141,5 +146,6 @@ if (isClass(configFile>>"CfgPatches">>"a
+                 {} 
+         ];                
+ };
++#endif
+ 
+ [_g_nomad, _s_nomad] execfsm "core\modules\rmm_nomad\nomad.fsm";
+diff -rupN BASE_MISSION/core/modules/Spyder_ONU/main.sqf BASE_A2FREE/core/modules/Spyder_ONU/main.sqf
+--- BASE_MISSION/core/modules/Spyder_ONU/main.sqf	2012-01-02 21:53:46.392827200 +1100
++++ BASE_A2FREE/core/modules/Spyder_ONU/main.sqf	2012-01-06 10:31:40.392889600 +1100
 @@ -1,3 +1,6 @@
 +
 +#define A2FREE
@@ -292,63 +343,9 @@ diff -rupN BASE_MISSION/core/modules/Spyder_ONU/main.sqf BASE_A2Free/core/module
 -
 +#endif
 \ No newline at end of file
-diff -rupN BASE_MISSION/core/modules/rmm_nomad/main.sqf BASE_A2Free/core/modules/rmm_nomad/main.sqf
---- BASE_MISSION/core/modules/rmm_nomad/main.sqf	Thu Jan  5 11:19:08 2012
-+++ BASE_A2Free/core/modules/rmm_nomad/main.sqf	Thu Jan  5 12:25:00 2012
-@@ -1,5 +1,6 @@
- //#squint filter Code-block is never called
- //#squint filter Expected ; or operator but got ,
-+#define A2FREE
- 
- private ["_g_nomad","_s_nomad"];
- if (isdedicated) exitwith {};
-@@ -16,9 +17,11 @@ _g_nomad = [
-         {playerSide;},
-         {magazines player;},
-         {weapons player;},
-+#ifndef A2FREE
-         {typeof (unitbackpack player);},
-         {getmagazinecargo (unitbackpack player);},
-         {getweaponcargo (unitbackpack player);},
-+#endif
-         {getposATL player;},
-         {damage player;},
-         {rating player;},
-@@ -58,6 +61,7 @@ _s_nomad = [
-                 {player addweapon _x;} foreach _this;
-                 player selectweapon (primaryweapon player);
-         },
-+#ifndef A2FREE
-         {
-                 if (_this != "") then {
-                         player addbackpack _this;
-@@ -75,6 +79,7 @@ _s_nomad = [
-                         (unitbackpack player) addweaponcargo [(_this select 0) select _i,(_this select 1) select _i];
-                 };
-         },
-+#endif
-         {player setposATL _this;},
-         {player setdamage _this;},
-         {player addrating (-(rating player) + _this);},
-@@ -120,7 +125,7 @@ _s_nomad = [
-         }
- ];
- 
--
-+#ifndef A2FREE
- if (isClass(configFile>>"CfgPatches">>"ace_main")) then { 
-         _g_nomad = _g_nomad + [
-                 #include <mods\ace_sys_ruck_g.hpp>
-@@ -140,5 +145,6 @@ if (isClass(configFile>>"CfgPatches">>"a
-                 {} 
-         ];                
- };
-+#endif
- 
- [_g_nomad, _s_nomad] execfsm "core\modules\rmm_nomad\nomad.fsm";
-diff -rupN BASE_MISSION/core/scripts/init_player.sqf BASE_A2Free/core/scripts/init_player.sqf
---- BASE_MISSION/core/scripts/init_player.sqf	Mon Jan  2 21:53:46 2012
-+++ BASE_A2Free/core/scripts/init_player.sqf	Thu Jan  5 12:24:56 2012
+diff -rupN BASE_MISSION/core/scripts/init_player.sqf BASE_A2FREE/core/scripts/init_player.sqf
+--- BASE_MISSION/core/scripts/init_player.sqf	2012-01-02 21:53:46.424027200 +1100
++++ BASE_A2FREE/core/scripts/init_player.sqf	2012-01-06 10:31:40.392889600 +1100
 @@ -1,3 +1,5 @@
 +#define A2FREE
 +
@@ -385,9 +382,9 @@ diff -rupN BASE_MISSION/core/scripts/init_player.sqf BASE_A2Free/core/scripts/in
          removebackpack _corpse;
 +#endif
  }];
-diff -rupN BASE_MISSION/core/scripts/intro.sqf BASE_A2Free/core/scripts/intro.sqf
---- BASE_MISSION/core/scripts/intro.sqf	Mon Jan  2 21:53:46 2012
-+++ BASE_A2Free/core/scripts/intro.sqf	Thu Jan  5 12:24:56 2012
+diff -rupN BASE_MISSION/core/scripts/intro.sqf BASE_A2FREE/core/scripts/intro.sqf
+--- BASE_MISSION/core/scripts/intro.sqf	2012-01-02 21:53:46.424027200 +1100
++++ BASE_A2FREE/core/scripts/intro.sqf	2012-01-06 10:31:40.392889600 +1100
 @@ -1,3 +1,4 @@
 +#define A2FREE
  if(isDedicated) exitWith{};
@@ -406,9 +403,9 @@ diff -rupN BASE_MISSION/core/scripts/intro.sqf BASE_A2Free/core/scripts/intro.sq
 +#else
 +	titleText ["Multi-Session Operation\n\nby the MSO Development Team", "PLAIN DOWN"];
 +#endif
-diff -rupN BASE_MISSION/description-mso.ext BASE_A2Free/description-mso.ext
---- BASE_MISSION/description-mso.ext	Wed Jan  4 08:54:04 2012
-+++ BASE_A2Free/description-mso.ext	Thu Jan  5 12:44:02 2012
+diff -rupN BASE_MISSION/description-mso.ext BASE_A2FREE/description-mso.ext
+--- BASE_MISSION/description-mso.ext	2012-01-04 08:54:04.214706900 +1100
++++ BASE_A2FREE/description-mso.ext	2012-01-06 10:31:40.392889600 +1100
 @@ -1,3 +1,5 @@
 +#include <x\CBA\addons\script_mod.hpp>
 +#include <x\CBA\addons\script_macros_common.hpp>
@@ -439,46 +436,9 @@ diff -rupN BASE_MISSION/description-mso.ext BASE_A2Free/description-mso.ext
  };
  
 +#include <x\CBA\addons\ui_config.cpp>
-diff -rupN BASE_MISSION/enemy/modules/WICT_enemypop/main.sqf BASE_A2Free/enemy/modules/WICT_enemypop/main.sqf
---- BASE_MISSION/enemy/modules/WICT_enemypop/main.sqf	Thu Jan  5 09:57:15 2012
-+++ BASE_A2Free/enemy/modules/WICT_enemypop/main.sqf	Thu Jan  5 12:24:56 2012
-@@ -17,7 +17,7 @@ if (WICT_wict_header == 0) exitWith{};
- 
- WICT_PATH = "enemy\modules\WICT_enemypop\";
- 
--private ["_debug","_d","_camp","_flag","_WICTM","_WICTMN","_group","_pos2"];
-+private ["_debug","_d","_camp","_flag","_WICTM","_WICTMN","_group","_pos2","_i"];
- _debug = false;
- 
- if(isNil "wict_ep_intensity")then{wict_ep_intensity = 1;};
-@@ -90,6 +90,7 @@ fPlayersInside = {
- 
- if(isNil "wict_baselocations")then{wict_baselocations = 0};
- 
-+_i = 0;
- {
-         private ["_group","_pos","_type"];
-         _group = grpNull;
-@@ -97,7 +98,7 @@ if(isNil "wict_baselocations")then{wict_
-         _pos = [];
- 	_skip = false;
- 
--	if (_forEachIndex % wict_ep_intensity < 1) then {
-+	if (_i % wict_ep_intensity < 1) then {
- 		_skip = true;
- 	};
- 	
-@@ -495,6 +496,7 @@ if(isNil "wict_baselocations")then{wict_
-                         _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-                 };
-         };
-+	_i = _i + 1;
- } foreach CRB_LOCS;
- 
- [0,[],{[] call compile preprocessFileLineNumbers "enemy\modules\WICT_enemypop\init.sqf";}] call mso_core_fnc_ExMP;
-diff -rupN BASE_MISSION/enemy/modules/crb_terrorists/main.sqf BASE_A2Free/enemy/modules/crb_terrorists/main.sqf
---- BASE_MISSION/enemy/modules/crb_terrorists/main.sqf	Mon Jan  2 21:53:46 2012
-+++ BASE_A2Free/enemy/modules/crb_terrorists/main.sqf	Thu Jan  5 13:10:54 2012
+diff -rupN BASE_MISSION/enemy/modules/crb_terrorists/main.sqf BASE_A2FREE/enemy/modules/crb_terrorists/main.sqf
+--- BASE_MISSION/enemy/modules/crb_terrorists/main.sqf	2012-01-02 21:53:46.486427300 +1100
++++ BASE_A2FREE/enemy/modules/crb_terrorists/main.sqf	2012-01-06 10:31:40.392889600 +1100
 @@ -1,3 +1,6 @@
 +#define A2FREE
 +
@@ -537,11 +497,47 @@ diff -rupN BASE_MISSION/enemy/modules/crb_terrorists/main.sqf BASE_A2Free/enemy/
  };
 +#endif
 \ No newline at end of file
-
-diff -rupN BASE_MISSION/init-custom.sqf BASE_A2Free/init-custom.sqf
---- BASE_MISSION/init-custom.sqf	Mon Jan  2 21:53:46 2012
-+++ BASE_A2Free/init-custom.sqf	Thu Jan  5 12:24:56 2012
-@@ -1,37 +1,2 @@
+diff -rupN BASE_MISSION/enemy/modules/WICT_enemypop/main.sqf BASE_A2FREE/enemy/modules/WICT_enemypop/main.sqf
+--- BASE_MISSION/enemy/modules/WICT_enemypop/main.sqf	2012-01-05 09:57:15.184596900 +1100
++++ BASE_A2FREE/enemy/modules/WICT_enemypop/main.sqf	2012-01-06 10:31:40.392889600 +1100
+@@ -17,7 +17,7 @@ if (WICT_wict_header == 0) exitWith{};
+ 
+ WICT_PATH = "enemy\modules\WICT_enemypop\";
+ 
+-private ["_debug","_d","_camp","_flag","_WICTM","_WICTMN","_group","_pos2"];
++private ["_debug","_d","_camp","_flag","_WICTM","_WICTMN","_group","_pos2","_i"];
+ _debug = false;
+ 
+ if(isNil "wict_ep_intensity")then{wict_ep_intensity = 1;};
+@@ -90,6 +90,7 @@ fPlayersInside = {
+ 
+ if(isNil "wict_baselocations")then{wict_baselocations = 0};
+ 
++_i = 0;
+ {
+         private ["_group","_pos","_type"];
+         _group = grpNull;
+@@ -97,7 +98,7 @@ if(isNil "wict_baselocations")then{wict_
+         _pos = [];
+ 	_skip = false;
+ 
+-	if (_forEachIndex % wict_ep_intensity < 1) then {
++	if (_i % wict_ep_intensity < 1) then {
+ 		_skip = true;
+ 	};
+ 	
+@@ -495,6 +496,7 @@ if(isNil "wict_baselocations")then{wict_
+                         _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                 };
+         };
++	_i = _i + 1;
+ } foreach CRB_LOCS;
+ 
+ [0,[],{[] call compile preprocessFileLineNumbers "enemy\modules\WICT_enemypop\init.sqf";}] call mso_core_fnc_ExMP;
+diff -rupN BASE_MISSION/init-custom.sqf BASE_A2FREE/init-custom.sqf
+--- BASE_MISSION/init-custom.sqf	2012-01-05 23:06:28.908854200 +1100
++++ BASE_A2FREE/init-custom.sqf	2012-01-06 10:31:55.244115700 +1100
+@@ -1,55 +1,2 @@
 -// Custom improvements that you may wish to implement
 -
 -// ACE configuration
@@ -550,12 +546,30 @@ diff -rupN BASE_MISSION/init-custom.sqf BASE_A2Free/init-custom.sqf
 -	Ace_sys_wounds_no_medical_gear = true;  //disable ACE adding medical items
 -	ace_sys_wounds_noai = true;  //disable wounds for AI for performance
 -	ace_sys_eject_fnc_weaponcheck = {};  //disable aircraft weapon removal
+-		
 -};
 -
 -// ACRE Config and sync
 -if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
 -
--//	[0] call acre_api_fnc_setLossModelScale;  // Description: Specify any value between 1.0 and 0. Setting it to 0 means the loss model is disabled, 1 is default.
+-	// Add ACRE box near current ammo boxes - ACRE_RadioBox
+-	if (isServer) then {
+-		private ["_radiomarkers"];
+-		_radiomarkers = ["ammo","ammo_1"];
+-		{
+-			private ["_pos","_newpos"];
+-			if !(str (markerPos _x) == "[0,0,0]") then {
+-				_pos = markerPos _x;
+-				if (count nearestObjects [_pos, ["ACRE_RadioBox"], 10] == 0) then {
+-					_newpos = [_pos, 0, 10, 2, 0, 0, 0] call BIS_fnc_findSafePos;
+-					"ACRE_RadioBox" createVehicle _newpos;
+-					diag_log format ["Creating ACRE Radio Box at %1", _newpos];
+-				};
+-			};
+-		} foreach _radiomarkers;
+-	};
+-
+-	//	[0] call acre_api_fnc_setLossModelScale;  // Description: Specify any value between 1.0 and 0. Setting it to 0 means the loss model is disabled, 1 is default.
 -
 -	runOnPlayers = {
 -		[] spawn
@@ -583,9 +597,9 @@ diff -rupN BASE_MISSION/init-custom.sqf BASE_A2Free/init-custom.sqf
 +BIS_Effects_Rifle=compile preprocessFileLineNumbers "ca\Data\ParticleEffects\SCRIPTS\muzzle\rifle.sqf";
 +BIS_Effects_Rocket=compile preprocessFileLineNumbers "ca\Data\ParticleEffects\SCRIPTS\muzzle\rocket.sqf";
 \ No newline at end of file
-diff -rupN BASE_MISSION/init.sqf BASE_A2Free/init.sqf
---- BASE_MISSION/init.sqf	Thu Jan  5 10:24:24 2012
-+++ BASE_A2Free/init.sqf	Thu Jan  5 12:24:56 2012
+diff -rupN BASE_MISSION/init.sqf BASE_A2FREE/init.sqf
+--- BASE_MISSION/init.sqf	2012-01-05 21:33:16.118699700 +1100
++++ BASE_A2FREE/init.sqf	2012-01-06 10:31:40.658090100 +1100
 @@ -1,3 +1,7 @@
 +
 +// A2Free CBA Integration
@@ -594,9 +608,9 @@ diff -rupN BASE_MISSION/init.sqf BASE_A2Free/init.sqf
  #ifndef execNow
  #define execNow call compile preprocessfilelinenumbers
  #endif
-diff -rupN BASE_MISSION/support/scripts/resupply.sqf BASE_A2Free/support/scripts/resupply.sqf
---- BASE_MISSION/support/scripts/resupply.sqf	Mon Jan  2 21:53:47 2012
-+++ BASE_A2Free/support/scripts/resupply.sqf	Thu Jan  5 12:24:56 2012
+diff -rupN BASE_MISSION/support/scripts/resupply.sqf BASE_A2FREE/support/scripts/resupply.sqf
+--- BASE_MISSION/support/scripts/resupply.sqf	2012-01-02 21:53:46.658027600 +1100
++++ BASE_A2FREE/support/scripts/resupply.sqf	2012-01-06 10:31:40.392889600 +1100
 @@ -1,3 +1,5 @@
 +﻿#define A2FREE
 +
@@ -630,9 +644,9 @@ diff -rupN BASE_MISSION/support/scripts/resupply.sqf BASE_A2Free/support/scripts
          };        
 +#endif
  };
-diff -rupN BASE_MISSION/support/scripts/vehicle.sqf BASE_A2Free/support/scripts/vehicle.sqf
---- BASE_MISSION/support/scripts/vehicle.sqf	Mon Jan  2 21:53:47 2012
-+++ BASE_A2Free/support/scripts/vehicle.sqf	Thu Jan  5 12:24:56 2012
+diff -rupN BASE_MISSION/support/scripts/vehicle.sqf BASE_A2FREE/support/scripts/vehicle.sqf
+--- BASE_MISSION/support/scripts/vehicle.sqf	2012-01-02 21:53:46.658027600 +1100
++++ BASE_A2FREE/support/scripts/vehicle.sqf	2012-01-06 10:31:40.392889600 +1100
 @@ -1,3 +1,5 @@
 +﻿#define A2FREE
 +
@@ -666,3 +680,12 @@ diff -rupN BASE_MISSION/support/scripts/vehicle.sqf BASE_A2Free/support/scripts/
                  
                  if (_haveinit) then 
                  {_unit setVehicleInit format ["%1;", _unitinit];
+diff -rupN BASE_MISSION/XEH_preinit.sqf BASE_A2FREE/XEH_preinit.sqf
+--- BASE_MISSION/XEH_preinit.sqf	2012-01-02 21:53:46.314827000 +1100
++++ BASE_A2FREE/XEH_preinit.sqf	1970-01-01 11:00:00.000000000 +1100
+@@ -1,4 +0,0 @@
+-// Check for ACRE, enable sync
+-if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
+-	acre_sys_core_sync_enabled = true;
+-};
+\ No newline at end of file
