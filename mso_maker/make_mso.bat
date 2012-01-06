@@ -86,7 +86,6 @@ del %NDIR%\mission.sqm
 move %NDIR%\newmission.sqm %NDIR%\mission.sqm
 
 CALL :LoCase MISSION_FILENAME
-pause
 echo Creating %MISSION_FILENAME%.pbo
 cd ..\TMPMissions
 makePbo -N -K %MISSION_FILENAME% 1> nul
