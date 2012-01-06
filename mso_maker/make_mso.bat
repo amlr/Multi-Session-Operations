@@ -31,10 +31,8 @@ echo Copying code base %BASE_DIR% to %MP_DIR%\%CODE_DIR%
 xcopy %BASE_DIR% %MP_DIR%\%CODE_DIR% /S /Y /Q
 
 echo Zipping up %MP_DIR% to %ZIPNAME%_%D_VER%.7z
-del %ZIPNAME%_%D_VER%.7z
+del %ZIPNAME%_%D_VER%.7z 1> nul
 "c:\program files\7-zip\7z.exe" a %ZIPNAME%_%D_VER%.7z %MP_DIR%
-
-pause
 
 rem cleanup
 echo Deleting %MP_DIR% working folder
