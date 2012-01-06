@@ -3117,7 +3117,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=16;
+		items=17;
 		class Item0
 		{
 			position[]={4841.2969,5.7493715,2328.9624};
@@ -3208,7 +3208,7 @@ class Mission
 		class Item12
 		{
 			position[]={4690.6938,9,2594.739};
-			name="respawn_west";
+			name="respawn_UK";
 			type="Empty";
 		};
 		class Item13
@@ -3232,6 +3232,12 @@ class Mission
 			text="AC130 Spectre";
 			type="b_plane";
 			angle=1.2677879;
+		};
+		class Item16
+		{
+			position[]={4690.6938,9,2594.739};
+			name="respawn_US";
+			type="Empty";
 		};
 	};
 	class Sensors
