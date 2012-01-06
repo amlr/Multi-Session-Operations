@@ -2849,7 +2849,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=15;
+		items=16;
 		class Item0
 		{
 			position[]={4722.0137,5.9586272,2286.0889};
@@ -2943,7 +2943,7 @@ class Mission
 		class Item12
 		{
 			position[]={4690.1519,8.9825191,2596.3108};
-			name="respawn_west";
+			name="respawn_UK";
 			type="Empty";
 		};
 		class Item13
@@ -2959,6 +2959,12 @@ class Mission
 			name="fastair";
 			text="Fast Air";
 			type="b_plane";
+		};
+		class Item15
+		{
+			position[]={4690.1519,8.9825191,2596.3108};
+			name="respawn_US";
+			type="Empty";
 		};
 	};
 	class Sensors
