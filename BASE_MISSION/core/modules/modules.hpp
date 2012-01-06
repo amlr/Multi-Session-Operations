@@ -1,4 +1,4 @@
-#define RMM_DEBUG
+//#define RMM_DEBUG
 #define RMM_HELP
 #define RMM_MP_RIGHTS
 #define RMM_NOMAD

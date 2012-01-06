@@ -1,5 +1,4 @@
 Change Log:
-v4.0
 Thanks to:
 - MSO development team: Wolffy.au, Tupolov, Ryan, friznit, highhead, zorrobyte, HateDread, kieran, Kolmain, and Rommel
 - Ryan, Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
@@ -13,6 +12,24 @@ Thanks to:
 - Robalo, USMCWall, Muzzleflash, Wobbleyheadedbob, Hatedread, Zonekiller, VoW Widow, Swedge, Lonestar, SBSMac, Prymsuspec, zGuba, Fireball, Nou, Jaynus, Norrin for bits and pieces we got from you
 - CWR² team, IceBreakr, Shezan, Commander, Old Bear for making your mods and islands MSO friendly
 
+v4.01
+Core
+====
+- A2Free patch using DOS diff.exe
+- Disabled Debug Console by default
+- Cleaned up unused modules
+
+Ambience
+========
+- Fixed emergency vehicles not despawning
+
+Missions
+========
+- Commit fixed Chernarus and Utes missions so that respawn markers are compatible with WHB_Multispawn
+- Added 18 slot ACE COOP Zargabad mission
+- Updated init-custom.sqf to place ACRE Radio box near ammo and ammo_1 markers. (Relies on these markers being set in SQM)
+
+v4.0
 Core
 ====
 - Provide MSO A2Free support

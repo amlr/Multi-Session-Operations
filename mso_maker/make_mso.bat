@@ -9,8 +9,8 @@ set ZIPNAME=MSO_Missions
 set MP_DIR=MPMissions
 set M_DIR=missions
 set BASE_DIR=BASE_MISSION
-set D_VER=4-0
-set D_BNVER=4.0
+set D_VER=4-01
+set D_BNVER=4.01
 set CODE_DIR=MSO_%BASE_DIR%_CODE_%D_VER%
 
 echo Creating temporary mission folders and placing base mission code into each mission
@@ -31,9 +31,8 @@ echo Copying code base %BASE_DIR% to %MP_DIR%\%CODE_DIR%
 xcopy %BASE_DIR% %MP_DIR%\%CODE_DIR% /S /Y /Q
 
 echo Zipping up %MP_DIR% to %ZIPNAME%_%D_VER%.7z
+del %ZIPNAME%_%D_VER%.7z 1> nul
 "c:\program files\7-zip\7z.exe" a %ZIPNAME%_%D_VER%.7z %MP_DIR%
-
-pause
 
 rem cleanup
 echo Deleting %MP_DIR% working folder
@@ -87,7 +86,6 @@ del %NDIR%\mission.sqm
 move %NDIR%\newmission.sqm %NDIR%\mission.sqm
 
 CALL :LoCase MISSION_FILENAME
-pause
 echo Creating %MISSION_FILENAME%.pbo
 cd ..\TMPMissions
 makePbo -N -K %MISSION_FILENAME% 1> nul

@@ -65,28 +65,35 @@ _maxdist = 3000;
         _police = _police + _pp;        
 } forEach (bis_functions_mainscope getVariable "locations");
 
-if (crb_emergency_debug) then {
-        {
-                private["_n"];
-                _n = format["hospital_%1", _forEachIndex];
+{
+        private["_n"];
+        _n = format["hospital_%1", random 10000];
+        _x setVariable ["name", _n];
+        if (crb_emergency_debug) then {
                 [_n, position _x, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorRed", "TEXT:", _n,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-        } forEach _hospitals;
-        
-        {
-                private["_n"];
-                _n = format["police_%1", _forEachIndex];
+        };
+} forEach _hospitals;
+
+{
+        private["_n"];
+        _n = format["police_%1", random 10000];
+        _x setVariable ["name", _n];
+        if (crb_emergency_debug) then {
                 [_n, position _x, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorBlue", "TEXT:", _n,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-        } forEach _police;
-        
-        {
-                private["_n"];
-                _n = format["repair_%1", _forEachIndex];
+        };
+} forEach _police;
+
+{
+        private["_n"];
+        _n = format["repair_%1", random 10000];
+        _x setVariable ["name", _n];
+        if (crb_emergency_debug) then {
                 [_n, position _x, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorGreen", "TEXT:", _n,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-        } forEach _repairs;
-};
+        };
+} forEach _repairs;
 
 [_hospitals, _police, _repairs, _maxdist] spawn {
-        private ["_hospitals","_police","_repairs","_maxdist","_grp","_h"];
+        private ["_hospitals","_police","_repairs","_maxdist","_grp","_h","_name"];
         _hospitals = _this select 0;
         _police = _this select 1;
         _repairs = _this select 2;
@@ -98,7 +105,8 @@ if (crb_emergency_debug) then {
                 {
                         _h = _x;
                         _grp = _h getVariable "EmergencyGroup";
-                        //diag_log format["repair_%1 %2 %3 %4", _forEachIndex, (isNil "_grp"), (isNull _grp), _grp];
+                        _name = _h getVariable "name";
+                        //diag_log format["%1 %2 %3 %4", _name, (isNil "_grp"), (isNull _grp), _grp];
                         if(isNil "_grp" && ({_h distance _x < _maxdist} count ([] call BIS_fnc_listPlayers) > 0)) then {
                                 private["_pos","_veh","_unit","_wp"];
                                 _pos = _h buildingExit 0;
@@ -126,17 +134,13 @@ if (crb_emergency_debug) then {
                                 _wp setWaypointType "SUPPORT";        
                                 
                                 if (crb_emergency_debug) then {
-                                        private["_n"];
-                                        _n = format["hospital_%1", _forEachIndex];
-                                        diag_log format ["MSO-%1 Emergency: Spawning %2", time, _n];
+                                        diag_log format ["MSO-%1 Emergency: Spawning %2", time, _name];
                                 };
                                 _h setVariable ["EmergencyGroup", _grp];
                         } else {
                                 if(!isNil "_grp" && ({_h distance _x < _maxdist} count ([] call BIS_fnc_listPlayers) == 0)) then {
                                         if (crb_emergency_debug) then {
-                                                private["_n"];
-                                                _n = format["hospital_%1", _forEachIndex];
-                                                diag_log format ["MSO-%1 Emergency: Removing %2", time, _n];
+                                                diag_log format ["MSO-%1 Emergency: Removing %2", time, _name];
                                         };
                                         {
                                                 deleteVehicle (assignedVehicle _x);
@@ -151,7 +155,8 @@ if (crb_emergency_debug) then {
                 {
                         _h = _x;
                         _grp = _h getVariable "EmergencyGroup";
-                        //diag_log format["repair_%1 %2 %3 %4", _forEachIndex, (isNil "_grp"), (isNull _grp), _grp];
+                        _name = _h getVariable "name";
+                        //diag_log format["%1 %2 %3 %4", _name, (isNil "_grp"), (isNull _grp), _grp];
                         if(isNil "_grp" && ({_h distance _x < _maxdist} count ([] call BIS_fnc_listPlayers) > 0)) then {
                                 private["_pos","_veh","_unit","_wp"];
                                 _pos = _h buildingExit 0;
@@ -184,17 +189,13 @@ if (crb_emergency_debug) then {
                                 _wp setWaypointType "GUARD";        
                                 
                                 if (crb_emergency_debug) then {
-                                        private["_n"];
-                                        _n = format["police_%1", _forEachIndex];
-                                        diag_log format ["MSO-%1 Emergency: Spawning %2", time, _n];
+                                        diag_log format ["MSO-%1 Emergency: Spawning %2", time, _name];
                                 };
                                 _h setVariable ["EmergencyGroup", _grp];
                         } else {
                                 if(!isNil "_grp" && ({_h distance _x < _maxdist} count ([] call BIS_fnc_listPlayers) == 0)) then {
                                         if (crb_emergency_debug) then {
-                                                private["_n"];
-                                                _n = format["repair_%1", _forEachIndex];
-                                                diag_log format ["MSO-%1 Emergency: Removing %2", time, _n];
+                                                diag_log format ["MSO-%1 Emergency: Removing %2", time, _name];
                                         };
                                         {
                                                 deleteVehicle (assignedVehicle _x);
@@ -209,7 +210,8 @@ if (crb_emergency_debug) then {
                 {
                         _h = _x;
                         _grp = _h getVariable "EmergencyGroup";
-                        //diag_log format["repair_%1 %2 %3 %4", _forEachIndex, (isNil "_grp"), (isNull _grp), _grp];
+                        _name = _h getVariable "name";
+                        //diag_log format["%1 %2 %3 %4", _name, (isNil "_grp"), (isNull _grp), _grp];
                         if(isNil "_grp" && ({_h distance _x < _maxdist} count ([] call BIS_fnc_listPlayers) > 0)) then {
                                 private["_pos","_veh","_unit","_wp"];
                                 _pos = _h buildingExit 3;
@@ -232,17 +234,13 @@ if (crb_emergency_debug) then {
                                 _wp setWaypointType "SUPPORT";        
                                 
                                 if (crb_emergency_debug) then {
-                                        private["_n"];
-                                        _n = format["repair_%1", _forEachIndex];
-                                        diag_log format ["MSO-%1 Emergency: Spawning %2", time, _n];
+                                        diag_log format ["MSO-%1 Emergency: Spawning %2", time, _name];
                                 };
                                 _h setVariable ["EmergencyGroup", _grp];
                         } else {
                                 if(!isNil "_grp" && ({_h distance _x < _maxdist} count ([] call BIS_fnc_listPlayers) == 0)) then {
                                         if (crb_emergency_debug) then {
-                                                private["_n"];
-                                                _n = format["repair_%1", _forEachIndex];
-                                                diag_log format ["MSO-%1 Emergency: Removing %2", time, _n];
+                                                diag_log format ["MSO-%1 Emergency: Removing %2", time, _name];
                                         };
                                         {
                                                 deleteVehicle (assignedVehicle _x);
