@@ -9560,7 +9560,7 @@ class Mission
 		class Item5
 		{
 			position[]={15649.296,6.432826,17179.867};
-			name="respawn_US";
+			name="respawn_BIS_US";
 			text="FOB Lincoln";
 			type="Faction_US";
 			a=1.5;

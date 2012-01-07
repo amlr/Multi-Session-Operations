@@ -3793,7 +3793,7 @@ class Mission
 		class Item3
 		{
 			position[]={8401.4824,84.571915,456.04623};
-			name="respawn_US";
+			name="respawn_BIS_US";
 			text="FOB Lincoln";
 			type="Faction_USA_EP1";
 			angle=59.73;
