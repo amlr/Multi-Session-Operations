@@ -4025,7 +4025,7 @@ class Mission
 		class Item1
 		{
 			position[]={6166.8472,12.221355,6781.2515};
-			name="respawn_west";
+			name="respawn_US";
 			type="Faction_US";
 			angle=0.87239802;
 		};

@@ -2481,9 +2481,9 @@ class Mission
 		class Item0
 		{
 			position[]={4936.4976,29.426275,6124.1079};
-			name="respawn_US";
+			name="respawn_BIS_US";
 			text="FOB Centauri";
-			type="Faction_BIS_US";
+			type="Faction_US";
 			a=1.5;
 			b=1.5;
 		};
@@ -2510,7 +2510,7 @@ class Mission
 		class Item4
 		{
 			position[]={4936.4976,29.426275,6124.1079};
-			name="respawn_BIZ_CZ";
+			name="respawn_BIS_CZ";
 			type="Empty";
 			a=1.5;
 			b=1.5;
