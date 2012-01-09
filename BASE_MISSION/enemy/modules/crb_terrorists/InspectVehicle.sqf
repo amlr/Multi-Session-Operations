@@ -119,14 +119,48 @@ If !(isNull driver _vehicle) then {
 	 if (_debug) then {
 		diag_log format ["MSO-%1 Terrorists Cells: No driver in Terrorist car %2", time, typeof _vehicle];
 	};
-	_fate = 4; //round(random 6); // roll the dice!
-	if (_fate > 3) then {
-		// create trigger to detonate bomb - convertto SR5IED when its MP Compatible
-		_trg = createTrigger["EmptyDetector",getPos _vehicle]; 
-		_trg setTriggerArea[3,3,0,false];
-		_trg setTriggerActivation["WEST","PRESENT",false];
-		_trg setTriggerStatements["this && ({vehicle _x in thisList} count ([] call BIS_fnc_listPlayers) > 0)", "_bomb = nearestObject [getPos (thisTrigger), 'Car']; boom = 'Sh_100_HE' createVehicle position _bomb;", ""]; 
-		_trg attachTo [_vehicle,[0,0,0]];
+	
+	if (_debug) then {
+		_fate = 6; 
+	} else {
+		_fate = random 6; //roll the dice!
+	};
+	
+	if (_fate > 2) then {
+		private ["_IEDskins","_IED"];
+		// create IED object and attach to vehicle
+		_IEDskins = ["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC"];
+		_IED = createVehicle [_IEDskins select (floor (random (count _IEDskins))),getpos _vehicle, [], 0, "CAN_COLLIDE"];
+		_IED attachTo [_vehicle,[0,0,0]];
+		
+		// If EOD addon is detected and fate > 4, then add reezo eventhandler for radio controlled IED else set detonation trigger for normal IED
+		if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (_fate > 4)) then {
+			// add dicker to ensure IED is not interfered with
+			private ["_dicker","_skins","_group"];
+			_group = createGroup civilian;
+			_skins = ["TK_CIV_Takistani01_EP1","TK_CIV_Takistani02_EP1","TK_CIV_Takistani03_EP1","TK_CIV_Takistani04_EP1","TK_CIV_Takistani05_EP1","TK_CIV_Takistani06_EP1","TK_CIV_Worker01_EP1","TK_CIV_Worker02_EP1"];
+			_dicker = _group createUnit [_skins select (floor (random (count _skins))), getPos _ied, [], 400, "NONE"];
+			removeAllItems _dicker;
+			removeAllWeapons _dicker;
+			_dicker addWeapon "Binocular";
+			_dicker addWeapon "ItemRadio";
+			_dicker doWatch (getPos _ied);			
+			_dicker setVariable ["reezo_eod_avail",false];
+			
+			// Setup IED as Reezo IED radio controlled 
+			_IED setVariable ["reezo_eod_trigger","radio"];
+			nul0 = [_dicker, _IED, 400] execVM "x\eod\addons\eod\IED_postServerInit.sqf";
+			if (_debug) then {
+				diag_log format ["MSO-%1 Terrorists Cells: Creating Reezo EOD mod IED for %2 at %3", time, typeof _vehicle, mapgridposition _vehicle];
+			};
+		} else {
+			// Set up trigger to detonate IED
+			_trg = createTrigger["EmptyDetector",getPos _IED]; 
+			_trg setTriggerArea[3,3,0,false];
+			_trg setTriggerActivation["WEST","PRESENT",false];
+			_trg setTriggerStatements["this && ({vehicle _x in thisList} count ([] call BIS_fnc_listPlayers) > 0)", "_bomb = nearestObject [getPos (thisTrigger), 'Car']; boom = 'Sh_100_HE' createVehicle position _bomb;", ""]; 
+			_trg attachTo [_IED,[0,0,0]];
+		};
 		 if (_debug) then {
 			diag_log format ["MSO-%1 Terrorists Cells: Terrorist car %2 at %3 is boobytrapped", time, typeof _vehicle, mapgridposition _vehicle];
 		};
