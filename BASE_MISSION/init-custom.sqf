@@ -53,3 +53,26 @@ if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
 		};
 	};
 };
+
+// EOD Mod Configuration
+if (isClass(configFile>>"CfgPatches">>"reezo_eod")) then {
+	
+	// Add THOR 3 backpacks to ammo crates or ACRE_RadioBox
+	private ["_thors","_boxes","_crates","_boxmarkers","_crate","_number"];
+	_boxmarkers = ["ammo","ammo_1"];
+	_thors = ["SR5_THOR3", "SR5_THOR3_MAR", "SR5_THOR3_ACU"];
+	_boxes = ["ACRE_RadioBox","ACE_RuckBox","BAF_BasicWeapons","USBasicWeaponsBox","USBasicWeapons_EP1"];
+	_number = (count playableunits) * 3;
+	_crates = [];
+	{
+		_crates = _crates + nearestObjects [markerPos _x, _boxes, 20];
+	} foreach _boxmarkers;
+	{
+		_crate = _x;
+		{
+			_crate addweaponcargo [_x, _number];
+			diag_log format ["Adding %1 to %2 at %3", _x, _crate, position _crate];
+		} foreach _thors;
+	} foreach _crates;
+
+};
