@@ -7,7 +7,7 @@ class RMM_ui_jipmarkers { // by Rommel
 	class controls {
 		class Background : CUI_Frame {
 			y = CUI_Row_Y(0);
-			h = CUI_Row_DY(0,5);
+			h = CUI_Row_DY(0,6);
 			w = CUI_Box_W;
 		};
 		class Caption : CUI_Caption {
@@ -36,16 +36,26 @@ class RMM_ui_jipmarkers { // by Rommel
 			y = CUI_Row_Y(2);
 			w = CUI_Box_W * 3/4;
 		};
+		class LblColor : CUI_Text {
+			y = CUI_Row_Y(3);
+			text = "Color:";
+		};
+		class MarkerColor : CUI_Combo {
+			idc = 3;
+			x = CUI_Box_X(1/4);
+			y = CUI_Row_Y(3);
+			w = CUI_Box_W * 3/4;
+		};
 		class Transmit : CUI_Button {
 			text = "Transmit";
 			w = CUI_Box_W;
-			y = CUI_Row_Y(3);
+			y = CUI_Row_Y(4);
 			action = "if ((lbCurSel 1) > -1) then {0 call jipmarkers_fnc_transmit; closeDialog 0;};";
 		};
 		class Delete : CUI_Button {
 			text = "Delete Nearest";
 			w = CUI_Box_W;
-			y = CUI_Row_Y(4);
+			y = CUI_Row_Y(5);
 			action = "if (count RMM_jipmarkers > 0) then {0 call jipmarkers_fnc_deletenearest; closeDialog 0;};";
 		};
 	};

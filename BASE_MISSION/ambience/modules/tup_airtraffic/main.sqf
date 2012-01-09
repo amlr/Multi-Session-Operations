@@ -17,6 +17,7 @@ switch toLower(worldName) do {
 
 if(!isServer) exitWith{};
 
+tup_airtraffic_debug = false;
 
 //_center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
 
