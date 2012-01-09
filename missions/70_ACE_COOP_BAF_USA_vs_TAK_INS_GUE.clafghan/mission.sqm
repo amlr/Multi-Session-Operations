@@ -9510,7 +9510,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=24;
+		items=25;
 		class Item0
 		{
 			position[]={15468.856,2.8314047,935.71094};
@@ -9714,6 +9714,12 @@ class Mission
 			type="hd_dot";
 			colorName="ColorBlue";
 			angle=48.619812;
+		};
+		class Item24
+		{
+			position[]={15426.366,2.8314047,497.85403};
+			name="hospital";
+			type="empty";
 		};
 	};
 	class Sensors
