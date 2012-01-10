@@ -91,8 +91,10 @@ if(isNil "CRB_LOCS") then {
 
 "Mission Parameters" call mso_core_fnc_initStat;
 if (!isNil "paramsArray") then {
+	diag_log format["MSO-%1 Mission Parameters", time];
         for "_i" from 0 to ((count paramsArray)-1) do {
                 missionNamespace setVariable [configName ((missionConfigFile/"Params") select _i),paramsArray select _i];
+		diag_log format["MSO-%1    %2 = %3", time, configName ((missionConfigFile/"Params") select _i), paramsArray select _i];
         };
 };
 
