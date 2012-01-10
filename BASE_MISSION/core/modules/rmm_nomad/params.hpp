@@ -4,6 +4,12 @@ class nomadHeader {
         texts[]= {"On","Off"}; 
         default = 1;
 };
+class nomadTime {
+	title = "    NOMAD Save State"; 
+	values[]= {5,30,60,300,600}; 
+	texts[]= {"Every 5 secs","Every 30 secs","Every 1 min","Every 5 mins","Every 10 mins"}; 
+	default = 30; 
+};
 class nomadRespawns {
 	title = "    Respawns"; 
 	values[]= {1,2,3,4,5,6,7,999}; 
