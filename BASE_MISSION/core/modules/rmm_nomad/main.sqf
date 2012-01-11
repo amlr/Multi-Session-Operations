@@ -56,7 +56,20 @@ _s_nomad = [
         },
         {
                 {player removeweapon _x;} foreach ((weapons player) + (items player));
-                {player addweapon _x;} foreach _this;
+				{
+					if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
+					// Catch any acre radios and store as base radio (do not store radio with ID) http://tracker.idi-systems.com/issues/2
+						private ["_ret"];
+						_ret = [_x] call acre_api_fnc_getBaseRadio;
+						if (typeName _ret == "STRING") then {
+							player addweapon _ret;
+						} else {
+							player addweapon _x;
+						};
+					} else {
+						player addweapon _x;
+					};
+				} foreach _this;
                 player selectweapon (primaryweapon player);
         },
         {
