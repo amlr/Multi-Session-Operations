@@ -10,6 +10,12 @@ if (nomadHeader == 0) exitWith{};
 waituntil {not isnull player};
 waituntil {!isMultiplayer || getplayeruid player != ""};
 
+if (nomadTime == 43200) then {
+	// Setup UI option to Save Player State
+	["player", [mso_interaction_key], 4, ["core\modules\rmm_nomad\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+	["SPS","updatePlayerStateNow = true"] call mso_core_fnc_updateMenu;
+};
+
 _g_nomad = [
         /*{deaths player} //auto-integrated*/
         {if(nomadClassRestricted == 1) then {typeof player;};},

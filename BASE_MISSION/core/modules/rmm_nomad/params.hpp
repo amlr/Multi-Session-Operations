@@ -5,10 +5,10 @@ class nomadHeader {
         default = 1;
 };
 class nomadTime {
-	title = "    NOMAD Save State"; 
-	values[]= {5,30,60,300,600}; 
-	texts[]= {"Every 5 secs","Every 30 secs","Every 1 min","Every 5 mins","Every 10 mins"}; 
-	default = 30; 
+	title = "    NOMAD Player State Save Option"; 
+	values[]= {5,30,60,300,600,3600,7200,43200}; 
+	texts[]= {"Every 5 secs","Every 30 secs","Every 1 min","Every 5 mins","Every 10 mins","Every 30 mins","Every hour","Manually"}; 
+	default = 60; 
 };
 class nomadRespawns {
 	title = "    Respawns"; 
