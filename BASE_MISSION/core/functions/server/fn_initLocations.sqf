@@ -223,7 +223,8 @@ if (_debug) then {
 
 if (_debug) then {player globalChat format["initLocs: Shuffle Locs(%1)", count _locs];};
 _locs = [_locs] call CBA_fnc_shuffle;
-if (_debug) then {player globalChat format["initLocs: Final Locs(%1)", count _locs];};
+
+diag_log format["MSO-%1 Initialise Locations (%2)", time, count _locs];
 
 CRBPROFILERSTOP
 
