@@ -95,7 +95,8 @@ switch toLower(worldName) do {
                 CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
         };
         case "eden": {
-                CRB_LOC_DIST = 9000;
+		CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
+                [] call mso_core_fnc_createLocations;
                 [] call _initNeighbors;
         };
         case "utes": {
@@ -143,7 +144,7 @@ switch toLower(worldName) do {
         };
        
         case "torabora": {
-				CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
+		CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
                 [] call mso_core_fnc_createLocations;
                 [] call _initNeighbors;
         };
@@ -151,6 +152,7 @@ switch toLower(worldName) do {
         default {
                 CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
                 [] call mso_core_fnc_createLocations;
+                [] call _initNeighbors;
         };
 };
 
