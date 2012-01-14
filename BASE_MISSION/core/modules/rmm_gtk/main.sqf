@@ -11,6 +11,10 @@ if (tolower(typename _this) == "object") then {
         _sleep = _this getvariable ["sleep", _sleep];
 } else {
         _groups = _this select 0;
+        if (typeName _groups != "ARRAY") then {
+                _groups = [group (_this select 0)];
+        };
+
         if (count _this > 0) then {
                 _range = _this select 1;
         };
@@ -40,8 +44,11 @@ if(!isNil "_fnc_init") then {
         _array = _groups;
 };
 
+diag_log format["MSO-%1 GTK Initialised %2 Groups", time, count _array];
+
+
 [_array, _range, _type, _sleep] spawn {
-        private ["_array","_range","_type","_sleep","_functions","_fnc_sync","_fnc_active","_fnc_inactive"];
+        private ["_array","_range","_type","_sleep","_functions","_fnc_sync","_exclude","_cached","_fnc_cache","_fnc_uncache"];
         _array = _this select 0;
         _range = _this select 1;
         _type = _this select 2;
@@ -54,32 +61,33 @@ if(!isNil "_fnc_init") then {
         _fnc_sync = _functions select 1;
         _fnc_cache = _functions select 2;
         _fnc_uncache = _functions select 3;
+        _fnc_refresh = _functions select 4;
         
         while {count _array > 0} do {
                 {
                         _x call _fnc_sync;
-
-			// Is group deleted?
+                        
+                        // Is group deleted?
                         if (isnull _x) then {
                                 _array = _array - [_x];
                         } else {
                                 _exclude = _x getvariable "rmm_gtk_exclude";
                                 if (isNil "_exclude") then {_exclude = false;};
-
+                                
                                 _cached = _x getvariable "rmm_gtk_cached";
                                 if (isNil "_cached") then {_cached = false;};
-
-				// Is group excluded from processing?
+                                
+                                // Is group excluded from processing?
                                 if (!_exclude) then {
-					// Is group cached?
+                                        // Is group cached?
                                         if (_cached) then {
-						// Any player within range?
+                                                // Any player within range?
                                                 if ([_x, _range] call CBA_fnc_nearPlayer) then {
                                                         _x setvariable ["rmm_gtk_cached", nil];
                                                         _x call _fnc_uncache;
                                                 };
                                         } else {
-						// All players outside 1.1 * range?
+                                                // All players outside 1.1 * range?
                                                 if !([_x, _range * 1.1] call CBA_fnc_nearPlayer) then {
                                                         _x setvariable ["rmm_gtk_cached", true];
                                                         _x call _fnc_cache;
@@ -88,8 +96,9 @@ if(!isNil "_fnc_init") then {
                                 };
                         };
                 } foreach _array;
-
+                
                 sleep _sleep;
+		_array = _array call _fnc_refresh;
         };
 };
 

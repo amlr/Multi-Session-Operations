@@ -4,15 +4,17 @@ switch (toUpper(_this)) do {
 			nil,
 			nil,
 			nil,
+			nil,
 			nil
 		]
 	};
-	case "NOUJAY" : { // NouberNou's Caching
+	case "NOUJAY" : { // NouberNou's and Jaynus' Caching
 		[
+			{_this call noujay_fnc_init},
 			nil,
-			nil,
-			nil,
-			nil
+			{_this call noujay_fnc_cache},
+			{_this call noujay_fnc_uncache},
+			{_this call noujay_fnc_refresh}
 		]
 	};
 	case "OSOM" : { // Outta Sight Outta Mind
@@ -20,7 +22,8 @@ switch (toUpper(_this)) do {
 			{_this call OSOM_fnc_init},
 			{_this call OSOM_fnc_sync},
 			{_this call OSOM_fnc_inactive},
-			{_this call OSOM_fnc_active}
+			{_this call OSOM_fnc_active},
+			nil
 		]
 	};
 	case "OSL" : { // Outta Sight Light
@@ -28,7 +31,8 @@ switch (toUpper(_this)) do {
 			{_this call OSL_fnc_init},
 			nil,
 			{_this call OSL_fnc_inactive},
-			{_this call OSL_fnc_active}
+			{_this call OSL_fnc_active},
+			nil
 		]
 	};
 	case "DEBUG" : {
@@ -36,11 +40,13 @@ switch (toUpper(_this)) do {
 			{hint "GTK Initialising";_this;},
 			{hintSilent format["GTK Syncing - %1", _this getvariable "rmm_gtk_cached"];},
 			{hint "GTK Caching";},
-			{hint "GTK Uncaching";}
+			{hint "GTK Uncaching";},
+			{hint "GTK Refreshing";}
 		]
 	};
 	Default {
 		[
+			nil,
 			nil,
 			nil,
 			nil,

@@ -137,19 +137,9 @@ execNow "core\modules\rmm_debug\main.sqf";
 execNow "core\modules\rmm_nomad\main.sqf";
 #endif
 
-#ifdef CEP_CACHE
-"CEP AI Unit Caching" call mso_core_fnc_initStat;
-execNow "core\modules\CEP_cache\main.sqf";
-#endif
-
-#ifdef NOU_CACHE
-"Nou AI Unit Caching" call mso_core_fnc_initStat;
-execNow "core\modules\Nou_cache\main.sqf";
-#endif
-
-#ifdef JCACHE
-"Jaynus AI Unit Caching" call mso_core_fnc_initStat;
-execNow "core\modules\jcache\init.sqf";
+#ifdef RMM_GTK
+"Group Tracking" call mso_core_fnc_initStat;
+[allGroups, 1500, "NOUJAY", 3] execNow "core\modules\rmm_gtk\main.sqf";
 #endif
 
 #ifdef RMM_WEATHER

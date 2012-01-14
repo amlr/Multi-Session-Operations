@@ -129,11 +129,11 @@ class cfgFunctions {
 #ifdef CRB_DOGS
 	#include <ambience\modules\crb_dogs\functions.hpp>
 #endif
-#ifdef RMM_GTK
-	#include <core\modules\rmm_gtk\functions.hpp>
-#endif
 #ifdef RMM_HELP
 	#include <core\modules\rmm_help\functions.hpp>
+#endif
+#ifdef NOU_CACHE
+	#include <core\modules\nou_cache\functions.hpp>
 #endif
 #ifdef RMM_OSOM
 	#include <core\modules\rmm_osom\functions.hpp>
