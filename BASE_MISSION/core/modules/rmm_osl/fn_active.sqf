@@ -35,7 +35,7 @@ _current = _waypoints select 1;
 _group setcurrentwaypoint [_group,_current];
 
 {
-	[_x,_group] call OSOM_fnc_spawn;
+	[_x,_group] call OSL_fnc_spawn;
 } foreach _list;
 
 _this setvariable ["group",_group];
