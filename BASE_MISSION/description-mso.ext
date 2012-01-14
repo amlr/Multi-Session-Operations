@@ -38,6 +38,9 @@ class Params {
 #ifdef RMM_NOMAD
 	#include <core\modules\rmm_nomad\params.hpp>
 #endif
+#ifdef NOU_CACHE
+	#include <core\modules\nou_cache\params.hpp>
+#endif
 #ifdef RMM_SETTINGS
 	#include <core\modules\rmm_settings\params.hpp>
 #endif
@@ -88,6 +91,9 @@ class Params {
 #endif
 #ifdef RMM_ENEMYPOP
 	#include <enemy\modules\rmm_enemypop\params.hpp>
+#endif
+#ifdef RYD_HAC
+	#include <enemy\modules\ryd_hac\params.hpp>
 #endif
 #ifdef CRB_CONVOYS
 	#include <enemy\modules\crb_convoys\params.hpp>

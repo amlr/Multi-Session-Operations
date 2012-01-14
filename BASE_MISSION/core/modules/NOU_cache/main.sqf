@@ -2,6 +2,9 @@
 
 private ["_trigDist","_debug","_delay"];
 
+if(isNil "nou_cache_header")then{nou_cache_header = 1;};
+if (nou_cache_header == 0) exitWith{};
+
 _debug = false;
 
 _trigDist = if(_debug) then {100} else {1000};
