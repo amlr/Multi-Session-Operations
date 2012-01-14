@@ -73,6 +73,14 @@ CRB_fnc_createShepherd = {
                 ];
         };
         
+        if("cwr2_civ" in _civfaction) then {
+                _shepherdClasses = _shepherdClasses + [
+			"cwr2_civilian5",
+			"cwr2_civilian7",
+			"cwr2_Civilian8"
+                ];
+        };
+        
         _shepherdClass = _shepherdClasses call BIS_fnc_selectRandom;
         _shepherd = (createGroup civilian) createUnit [_shepherdClass, _pos, [], _dist, "NONE"];
         [_shepherd] joinSilent _grp;

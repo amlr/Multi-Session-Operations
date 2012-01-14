@@ -56,10 +56,9 @@ tup_seatraffic_getSeaDestinations = {
         _mapsize = _this select 0;
         _sealandings = [];
         //Find boathouses, piers , fuelling stations on map. tup_seatraffic_amount = 1 reduced, tup_seatraffic_amount = 0 full
-        if (tup_seatraffic_amount == 1) then {
-                _sealandings = ["land_nav_boathouse","land_nav_pier_m_end","Land_Nav_Boathouse_PierT"];
-        } else {
-                _sealandings = ["land_nav_boathouse","land_nav_pier_m_fuel","land_nav_pier_m_end","land_nav_pier_c2_end","Land_Nav_Boathouse_PierT","land_nav_pier_c_t15"];
+        _sealandings = ["land_nav_boathouse","land_nav_pier_m_end","Land_Nav_Boathouse_PierT","BuoyBig","Land_cwr2_nabrezi_najezd"];
+        if (tup_seatraffic_amount == 0) then {
+                _sealandings = _sealandings + ["land_nav_pier_m_fuel","land_nav_pier_c2_end","land_nav_pier_c_t15","BuoySmall"];
                 //_sealandings = ["land_nav_boathouse","land_nav_pier_m_fuel","land_nav_pier_m_end","land_nav_pier_c2_end","land_nav_pier_c","land_nav_pier_c2","land_nav_pier_m_1","land_nav_pier_m_2"];
         };
         [_sealandings, [], _mapsize, tup_seatraffic_debug,"ColorBlack","boat"] call mso_core_fnc_findObjectsByType;

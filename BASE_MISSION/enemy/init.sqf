@@ -56,7 +56,7 @@ if(!isNil "faction_CWR2_RU") then {
 };
 if(!isNil "faction_CWR2_FIA") then {
         if(faction_CWR2_FIA == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["CWR2_FIA"];
+                MSO_FACTIONS = MSO_FACTIONS + ["cwr2_fia"];
         };
 };
 
