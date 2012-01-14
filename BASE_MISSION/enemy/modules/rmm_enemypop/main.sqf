@@ -16,7 +16,8 @@ if(!isServer) exitWith{};
 
 _debug = false;
 if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 3;};
-ep_dist = 2000;
+if(isNil "rmm_ep_spawn_dist")then{rmm_ep_spawn_dist = 2000;};
+if(isNil "rmm_ep_safe_zone")then{rmm_ep_safe_zone = 2000;};
 ep_groups = [];
 ep_total = 0;
 ep_campprob = 0.25;
@@ -46,7 +47,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
         _type = "";
         _pos = [];
 
-        if(!([position _loc, ep_dist] call fPlayersInside)) then {
+        if(!([position _loc, rmm_ep_safe_zone] call fPlayersInside)) then {
                 if (type _loc == "Hill") then {
                         if (random 1 > 0.33) then {
                                 ep_total = ep_total + 1;
@@ -74,6 +75,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 _camp = _camp + ["MediumTentCamp_local","SmallTentCamp2_local","SmallTentCamp_local"];
                                         };
                                         if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "cwr2_fia" in MSO_FACTIONS) then {
+                                        if("RU" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8"];
                                                 f_builder = mso_core_fnc_createComposition;
                                         };
@@ -99,7 +101,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         _pos = _params select 0;
                                         _flag = _params select 1;
                                         _type= _params select 2;
-                                        if(([_pos, ep_dist] call fPlayersInside)) then {
+                                        if(([_pos, rmm_ep_spawn_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
                                                 _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
@@ -147,6 +149,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 _camp = _camp + ["anti-air_tk1","camp_tk1","camp_tk2","firebase_tk1","heli_park_tk1","mediumtentcamp2_tk","mediumtentcamp3_tk","mediumtentcamp_tk","radar_site_tk1","fuel_dump_tk1","vehicle_park_tk1","weapon_store_tk1"];
                                         };
                                         if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "cwr2_fia" in MSO_FACTIONS) then {
+                                        if("RU" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8","citybase01","cityBase02","cityBase03","cityBase04"];
                                                 f_builder = mso_core_fnc_createComposition;
                                         };
@@ -176,7 +179,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         _pos = _params select 0;
                                         _flag = _params select 1;
                                         _type= _params select 2;
-                                        if(([_pos, ep_dist] call fPlayersInside)) then {
+                                        if(([_pos, rmm_ep_spawn_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
                                                 _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
@@ -236,6 +239,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 _camp = _camp + ["MediumTentCamp_local","SmallTentCamp2_local","SmallTentCamp_local"];
                                         };
                                         if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "cwr2_fia" in MSO_FACTIONS) then {
+                                        if("RU" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8","citybase01","cityBase02","cityBase03","cityBase04"];
                                                 f_builder = mso_core_fnc_createComposition;
                                         };
@@ -261,7 +265,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         _pos = _params select 0;
                                         _flag = _params select 1;
                                         _type= _params select 2;
-                                        if(([_pos, ep_dist] call fPlayersInside)) then {
+                                        if(([_pos, rmm_ep_spawn_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
                                                 _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
@@ -321,6 +325,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 _camp = _camp + ["MediumTentCamp_local","SmallTentCamp2_local","SmallTentCamp_local"];
                                         };
                                         if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "cwr2_fia" in MSO_FACTIONS) then {
+                                        if("RU" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
                                                 f_builder = mso_core_fnc_createComposition;
                                         };
                                         if("BIS_TK" in MSO_FACTIONS || "BIS_TK_INS" in MSO_FACTIONS || "BIS_TK_GUE" in MSO_FACTIONS) then {
@@ -344,7 +349,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         _pos = _params select 0;
                                         _flag = _params select 1;
                                         _type= _params select 2;
-                                        if(([_pos, ep_dist] call fPlayersInside)) then {
+                                        if(([_pos, rmm_ep_spawn_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
                                                 _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
