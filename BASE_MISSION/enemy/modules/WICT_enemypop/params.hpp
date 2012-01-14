@@ -34,6 +34,12 @@ class wict_ep_campprob {
         texts[]= {"25%","50%","80%","100%"}; 
         default = 0;
 };
+class wict_spawnBLUFOR {
+        title = "        WICT - Spawn BLUFOR units"; 
+        values[]= {0,1}; 
+        texts[]= {"false","true"}; 
+        default = 0;
+};
 class wict_debugmodule {
         title = "        WICT - Debug (or show bases)"; 
         values[]= {0,1,2}; 

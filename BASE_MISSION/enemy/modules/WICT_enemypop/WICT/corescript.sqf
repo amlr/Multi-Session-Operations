@@ -56,6 +56,7 @@ if (isServer) then
 			
 			WICT_playerPos set [0, _posA];
 			WICT_playerPos set [1, _posB];
+			WICT_playerPos = nearestLocation [WICT_playerPos,"CityCenter"];
 		}
 		else
 		{
@@ -80,6 +81,18 @@ if (isServer) then
 				
 				WICT_playerPos set [0, _posA];
 				WICT_playerPos set [1, _posB];
+
+				WICT_CityPos = position nearestLocation [WICT_playerPos,"CityCenter"];
+				WICT_HillPos = position nearestLocation [WICT_playerPos,"Hill"];
+				
+				if 	(
+					(WICT_CityPos distance WICT_playerPos) > (WICT_HillPos distance WICT_playerPos)
+					) then 	{
+							WICT_playerPos = position nearestLocation [WICT_playerPos,"Hill"];
+							} else {
+							WICT_playerPos = position nearestLocation [WICT_playerPos,"CityCenter"];
+				};
+
 			} else {
 				// Should stop WICT here
 			};
@@ -152,12 +165,16 @@ if (isServer) then
 
 		WICT_clutch = 0;
 
-		execFSM (WICT_PATH + "WICT\exeSpawnE.fsm");
+		if ((count allGroups) < WICT_numAIg) then {
+					execFSM (WICT_PATH + "WICT\exeSpawnE.fsm");
+					waitUntil {WICT_clutch == 1};
+		};
+	
 
-		waitUntil {WICT_clutch == 1};
-
-		if (WICT_debug == "yes") then {diag_log format ["Number of AI groups: %4, west base: %1, east base: %2, neutral base: %3",WICT_wb,WICT_eb,WICT_nb,(count allGroups)];};
-
+		if (WICT_debug == "yes") then {
+					diag_log format ["Number of AI groups: %4, west base: %1, east base: %2, neutral base: %3",WICT_wb,WICT_eb,WICT_nb,(count allGroups)];
+					hint format ["Number of AI groups: %4, west base: %1, east base: %2, neutral base: %3",WICT_wb,WICT_eb,WICT_nb,(count allGroups)];
+		};
 		sleep WICT_time;
 	};
 };

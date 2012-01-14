@@ -18,6 +18,7 @@ if (WICT_wict_header == 0) exitWith{};
 WICT_PATH = "enemy\modules\WICT_enemypop\";
 
 private ["_debug","_d","_camp","_flag","_WICTM","_WICTMN","_group","_pos2"];
+
 _debug = false;
 
 if(isNil "wict_ep_intensity")then{wict_ep_intensity = 1;};
@@ -42,10 +43,10 @@ if (isNil "wict_debugmodule") then {wict_debugmodule = 0};
 						"empty"
 					};
 					case 1: {
-						"Strongpoint"
+						"mil_circle";
 					};
 					case 2: {
-						"Strongpoint"
+						"mil_circle"
 					};
 				};
 
@@ -69,7 +70,7 @@ ep_dist = 2000;
 ep_groups = [];
 ep_total = 0;
 //wict_ep_campprob = 1;
-WICTMC = 1;
+WICTMC = 0;
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
@@ -165,7 +166,6 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
         if(!([position _x, ep_dist] call fPlayersInside) && !_skip) then {
                 if (type _x in _baselocations03) then {
                         if (random 1 > 0.33) then {
-                                ep_total = ep_total + 1;
                                 _d = 500;
                                 _pos = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                                 _flag = random 1;
@@ -485,19 +485,19 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
         };
         if (count _pos != 0) then {
                 if(ep_total mod 10 == 0) then {
-                        diag_log format["MSO-%1 WICT Population # %2", time, ep_total];
-                        if(_debug) then {hint format["MSO-%1 WICT Population # %2", time, ep_total];};
+                        diag_log format["MSO-%1 WICT Bases # %2", time, WICTMC];
+                        if(_debug) then {hint format["MSO-%1 WICT Bases # %2", time, WICTMC];};
                 };
-                if(_debug) then {
-                        private["_t","_m"];
-                        _t = format["op%1",floor(random 10000)];
-                        if(isNil "_type") then {_type = "";};
-                        _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-                };
+//                if(_debug) then {
+//                        private["_t","_m"];
+//                        _t = format["op%1",floor(random 10000)];
+//                        if(isNil "_type") then {_type = "";};
+//                        _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+//                };
         };
 } foreach CRB_LOCS;
 
 [0,[],{[] call compile preprocessFileLineNumbers "enemy\modules\WICT_enemypop\init.sqf";}] call mso_core_fnc_ExMP;
 
-diag_log format["MSO-%1 WICT Population # %2", time, ep_total];
-if(_debug)then{hint format["MSO-%1 WICT Population # %2", time, ep_total];};
+diag_log format["MSO-%1 WICT bases # %2", time, WICTMC];
+if(_debug)then{hint format["MSO-%1 WICT bases # %2", time, WICTMC];};

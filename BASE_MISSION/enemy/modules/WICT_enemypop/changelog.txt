@@ -1,0 +1,17 @@
+changelog WICT // tested:
+
+- Added Mission-Parameter for turning of BLUFOR-Spawning (on/off) in order to preserve performance (setupW.sqf/params.hpp) 
+
+- changed base markers to mil_circle for wict-bases in "show bases"-mode in main.sqf
+
+- fixed wrong base-count in diag_log and debug-hints // tested
+
+- added AI-count debug-hint in corescript.sqf // tested
+
+- added maximum AI-Group Cap from missionparameters to gain performance in corescript.sqf // tested
+
+- moved battlefront away from player to near strategic places in corescript.sqf // tested
+
+
+
+
