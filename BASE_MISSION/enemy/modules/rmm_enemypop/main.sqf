@@ -82,11 +82,15 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8"];
                                                 f_builder = mso_core_fnc_createCompositionE;
                                         };
-					if (count _camp > 0) then {
+										if (count _camp == 0) then {
+											_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
+											f_builder = mso_core_fnc_createComposition;
+										};
+										if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
         	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                 	                        [_camp, random 360, _pos] call f_builder;
-					};
+										};
                                 };
                                 
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[4,3,2,1]] call mso_core_fnc_selectRandomBias;
@@ -161,6 +165,10 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         if("BIS_TK" in MSO_FACTIONS && type _loc == "Airport") then {
                                                 _camp = ["airplane_park_tk1"];
                                         };
+										if (count _camp == 0) then {
+											_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
+											f_builder = mso_core_fnc_createComposition;
+										};
                                         _camp = _camp call BIS_fnc_selectRandom;
                                         _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                         [_camp, random 360, _pos] call f_builder;
@@ -244,6 +252,10 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8","citybase01","cityBase02","cityBase03","cityBase04"];
                                                 f_builder = mso_core_fnc_createCompositionE;
                                         };
+										if (count _camp == 0) then {
+											_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
+											f_builder = mso_core_fnc_createComposition;
+										};
 					if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
         	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
@@ -327,6 +339,10 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         if("BIS_TK" in MSO_FACTIONS || "BIS_TK_INS" in MSO_FACTIONS || "BIS_TK_GUE" in MSO_FACTIONS) then {
                                                 f_builder = mso_core_fnc_createCompositionE;
                                         };
+										if (count _camp == 0) then {
+											_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
+											f_builder = mso_core_fnc_createComposition;
+										};
 					if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
         	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
