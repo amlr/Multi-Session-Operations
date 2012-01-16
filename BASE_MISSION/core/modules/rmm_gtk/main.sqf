@@ -1,4 +1,10 @@
 private ["_groups","_range","_type","_sleep","_array","_forEachIndex","_functions","_fnc_init"];
+
+if(isNil "gtk_cache_header")then{gtk_cache_header = 1;};
+if (gtk_cache_header == 0) exitWith{};
+
+
+
 _range = 1000;
 _type = "";
 _sleep = 1;
