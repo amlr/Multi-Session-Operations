@@ -59,6 +59,12 @@ if(!isNil "faction_CWR2_FIA") then {
                 MSO_FACTIONS = MSO_FACTIONS + ["cwr2_fia"];
         };
 };
+if(!isNil "faction_tigerianne") then {
+        if(faction_tigerianne == 1) then {
+                MSO_FACTIONS = MSO_FACTIONS + ["tigerianne"];
+        };
+};
+
 
 if(count MSO_FACTIONS == 0) then {
 
