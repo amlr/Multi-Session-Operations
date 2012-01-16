@@ -5,6 +5,7 @@ private ["_g_nomad","_s_nomad"];
 if (isdedicated) exitwith {};
 
 if(isNil "nomadHeader")then{nomadHeader = 1;};
+if(isNil "nomadTime")then{nomadTime = 60;};
 if (nomadHeader == 0) exitWith{};
 
 waituntil {not isnull player};
