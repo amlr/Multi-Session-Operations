@@ -7,10 +7,10 @@
 #define SPYDER_ONU
 #define RMM_GTK
 #define NOU_CACHE
+#define CEP_CACHE
 
 // To fix
 //#define RMM_OSOM
-//#define CEP_CACHE
 
 
 
