@@ -22,11 +22,11 @@ if (isnil "bis_fnc_init") then {
 };
 
 //--- Is Garbage collector running?
-if (isnil "BIS_GC_trashItFunc") then {
-	(group BIS_functions_mainscope) createUnit ["GarbageCollector", position BIS_functions_mainscope, [], 0, "NONE"];
-	waitUntil{!isNil "BIS_GC"};
+if (isnil "BIS_GC") then {
+	BIS_GC = (group BIS_functions_mainscope) createUnit ["GarbageCollector", position BIS_functions_mainscope, [], 0, "NONE"];
 };
 
+waitUntil{!isNil "BIS_GC"};
 //BIS_GC setVariable ["auto", false];
 _result = _result && ([(!isNil "BIS_GC") && (BIS_GC getVariable "auto"), "GC loaded and auto-scavenge set"] call _fnc_testStat);
 
