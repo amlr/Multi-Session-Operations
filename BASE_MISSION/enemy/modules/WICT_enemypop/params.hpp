@@ -7,7 +7,7 @@ class WICT_wict_header {
 class wict_ai_groups {
         title = "        WICT - Maximum AI Groups"; 
         values[]= {0,1,2,3}; 
-        texts[]= {"55","80","100","150"}; 
+        texts[]= {"55","80","100","120"}; 
         default = 0;
 };
 class wict_scandistance {

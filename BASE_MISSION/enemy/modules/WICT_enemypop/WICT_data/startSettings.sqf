@@ -100,7 +100,7 @@ if (isServer) then
 	/* Let's remove some "far, far away" units (in meters) */
 	WICT_removeMan = 20000;
 	/* Let's remove some "far, far away" vehicles (in meters) */
-	WICT_removeVehicle = 5000;
+	WICT_removeVehicle = 20000;
 	/* Remove body (in seconds) */
 	WICT_removeBody = 600;
 
@@ -119,7 +119,7 @@ if (isServer) then
 				100;
 			};
 			case 3: {
-				150;
+				120;
 			};
 	};
 
@@ -253,6 +253,12 @@ oooooo   oooooo     oooo ooooo   .oooooo.   ooooooooooooo                       
 
         //getting factions from MSO_FACTIONS and load the specific faction-class-file
 	_WICT_FACTION_ACQUIRED = false;
+
+	if (("IRAN" in MSO_FACTIONS) && !(_WICT_FACTION_ACQUIRED)) then {
+			call compile preprocessfilelinenumbers (WICT_PATH + "WICT_data\IRAN.hpp");
+			sleep 0.5; 
+			_WICT_FACTION_ACQUIRED = true;
+	};
 	
 	if (("BIS_TK" in MSO_FACTIONS) && !(_WICT_FACTION_ACQUIRED)) then {
 			call compile preprocessfilelinenumbers (WICT_PATH + "WICT_data\BIS_TK.hpp");
@@ -278,6 +284,7 @@ oooooo   oooooo     oooo ooooo   .oooooo.   ooooooooooooo                       
 			sleep 0.5; 
 			_WICT_FACTION_ACQUIRED = true;
 	};
+
 
 	if !(_WICT_FACTION_ACQUIRED) then {call compile preprocessfilelinenumbers (WICT_PATH + "WICT_data\RU_INS.hpp"); sleep 0.5; _WICT_FACTION_ACQUIRED = true;};
 };

@@ -16,7 +16,7 @@ __          __        _     _   _          _____             __ _ _      _     _
 if (isServer) then	{
 	if (isNil "wict_spawnBLUFOR") then {wict_spawnBLUFOR = 1};
 
-		_null = switch(wict_spawnBLUFOR) do {
+		switch(wict_spawnBLUFOR) do {
 			case 0: {
 					private["_configParams","_i"];
 
