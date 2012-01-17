@@ -10,11 +10,11 @@ switch (toUpper(_this)) do {
 	};
 	case "NOUJAY" : { // NouberNou's and Jaynus' Caching
 		[
-			{_this call noujay_fnc_init},
+			{allGroups},
 			nil,
 			{_this call noujay_fnc_cache},
 			{_this call noujay_fnc_uncache},
-			{_this call noujay_fnc_refresh}
+			{allGroups}
 		]
 	};
 	case "OSOM" : { // Outta Sight Outta Mind
