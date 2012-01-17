@@ -9,7 +9,7 @@ _Trg = leaderHQ;
 
 RydHQ_NearestE = ObjNull;
 
-if (isNil ("RydHQ_Orderfirst")) then {RydHQ_Orderfirst = true;RydHQ_FlankReady = false};
+if (isNil ("RydHQ_Orderfirst")) then {RydHQ_Orderfirst = true; RydHQ_FlankReady = false};
 
 if (isNil ("RydHQ_Obj")) then {_Trg = leaderHQ} else {_Trg = RydHQ_Obj};
 _landE = RydHQ_KnEnemiesG - (RydHQ_EnNavalG + RydHQ_EnAirG);

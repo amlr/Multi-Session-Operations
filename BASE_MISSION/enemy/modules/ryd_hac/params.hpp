@@ -2,7 +2,7 @@ class Ryd_Header {
         title = "    Enable Enemy AI Commander"; 
         values[]= {0,1}; 
         texts[]= {"Off","On"}; 
-        default = 1;
+        default = 0;
 };
 class RydHQ_Order_Param {
         title = "        Enemy Posture"; 

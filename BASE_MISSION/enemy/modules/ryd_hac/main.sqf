@@ -65,8 +65,8 @@ _leaderLoc = [["Strategic"],false,"colorRed","o_hq"] call mso_core_fnc_findLocat
 _leaderPos = (_leaderLoc) call BIS_fnc_selectRandom;
 _leaderHQPos = position _leaderPos;
 
-if ( _leaderHQPos distance hospital < 2000) then {
-	_leaderHQPos = [0,0,0];
+if ( _leaderHQPos distance (getmarkerpos "hospital") < 2000) then {
+	_leaderHQPos = [CRB_LOC_DIST/2,CRB_LOC_DIST/2,0];
 };
 
 // Create leaderHQ unit
@@ -76,16 +76,32 @@ _pos2 = [_leaderHQPos, 10, 100, 10, 0, 5, 0] call bis_fnc_findSafePos;
 _group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
 leaderHQ = leader _group;
 leaderHQ addweapon "EvMoney";
-leaderHQ addweapon "PMC_documents";
+leaderHQ addweapon "EvMap";
 leaderHQ addweapon "Kostey_photos";
-leaderHQ addweapon "acre_prc148";
+leaderHQ addweapon "itemradio";
 leaderHQ addweapon "itemgps";
 leaderHQ setskill 1;
 (group leaderHQ) allowFleeing 1;
 
-if (RydHQ_Debug) then {
-	diag_log format ["MSO-%1 HETMAN: leaderHQ is %2 - %3 located at %4", time, name leaderHQ, typeOf leaderHQ, _leaderHQPos];
-};
+diag_log format ["MSO-%1 HETMAN: leaderHQ is %2 - %3 located at %4", time, name leaderHQ, typeOf leaderHQ, _leaderHQPos];
+
+// Set RydHQ_Obj
+// Options nearest town, town nearest BLUFOR Base or list of Strategic locations, halfway between OPFOR and BLUFOR
+// BLUFOR Base
+RydHQ_Obj = createtrigger ["EmptyDetector", getmarkerpos "hospital"];
+
+// Town nearest BLUFOR Base
+//RydHQ_Obj = [getmarkerpos "hospital", false] call mso_core_fnc_getNearestTown;
+
+// Nearest Town
+// RydHQ_Obj = [_leaderHQPos, false] call mso_core_fnc_getNearestTown;
+
+// Halfway between OPFOR and BLUFOR
+/*_x1 = ((_leaderHQPos select 0) + ((getmarkerpos "hospital") select 0)) / 2;
+_y1 = ((_leaderHQPos select 1) + ((getmarkerpos "hospital") select 1)) / 2;
+RydHQ_Obj = [[_x1,_y1,0], false] call mso_core_fnc_getNearestTown;*/
+
+diag_log format ["MSO-%1 HETMAN: OPFOR Objective is at %2", time, mapgridposition RydHQ_Obj];
 
 if not (isNil ("leaderHQ")) then {
 	nul = [] execvm (RYD_HAC_PATH + "A\HQSitRep.sqf");

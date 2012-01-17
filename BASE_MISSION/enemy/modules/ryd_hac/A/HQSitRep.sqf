@@ -78,7 +78,7 @@ RydHQ_CCurrent = 0;
 RydHQ_CIMoraleC = 0;
 RydHQ_CLMoraleC = 0;
 RydHQ_Surrender = false;
-
+RydHQ_Cycle = 0;
 RydHQ_FirstEMark = true;
 RydHQ_LastE = 0;
 
@@ -88,7 +88,8 @@ while {not ((isNull RydHQ) or (RydHQ_Surrender))} do
 	{
 	//diag_Log format ["(A) A done: %1 B done: %2",RydHQ_Done,RydHQB_Done];
 	if not (RydHQ_Fast) then {waituntil {sleep 1.1;((RydHQ_Done) and (RydHQB_Done))}};
-	
+	RydHQ_Cycle = RydHQ_Cycle + 1;
+	diag_log format ["MSO-%1 HETMAN: RydHQ_Cycle = %2", time, RydHQ_Cycle];
 	RydHQ_Done = false;
 	leaderHQ = leader RydHQ;
 	RydHQ_recon = [];
@@ -208,9 +209,6 @@ while {not ((isNull RydHQ) or (RydHQ_Surrender))} do
 	foreach allGroups;
 
 	RydHQ_Friends = RydHQ_Friends - [RydHQ];
-	
-	if (RydHQ_Debug) then {diag_log format ["MSO-%1 HETMAN: Friends: %2",time, count RydHQ_Friends]};
-	if (RydHQ_Debug) then {diag_log format ["MSO-%1 HETMAN: Enemies: %2",time, count RydHQ_Enemies]};
 
 	// Count OPFOR numbers
 	if (RydHQ_Init) then 
@@ -227,6 +225,9 @@ while {not ((isNull RydHQ) or (RydHQ_Surrender))} do
 		RydHQ_CCurrent = RydHQ_CCurrent + (count (units _x))
 		}
 	foreach RydHQ_Friends;
+	
+	if (RydHQ_Debug) then {diag_log format ["MSO-%1 HETMAN: Friendly Groups: %2. Friendly Units: %3",time, count RydHQ_Friends, RydHQ_CCurrent]};
+	if (RydHQ_Debug) then {diag_log format ["MSO-%1 HETMAN: Enemy Groups: %2",time, count RydHQ_Enemies]};
 
 	// Work out which enemies OPFOR know abouts
 		{

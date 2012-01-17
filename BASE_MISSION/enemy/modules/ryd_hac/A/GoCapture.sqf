@@ -105,9 +105,11 @@ waituntil
 	if ((speed (leader _unitG)) == 0) then {_timer = _timer + 5};
 	((count (waypoints _unitG)) < 1) or (_timer > 120)
 	};
-if not (_alive) exitwith {if (RydHQ_Debug) then {[-1,{deleteMarker _this},  ("markAttack" + str (_unitG))] call CBA_fnc_globalExecute}};
-
-_wp = _unitG addWaypoint [_Trg, 0, 1];
+if not (_alive) exitwith {if (RydHQ_Debug) then {[-1,{deleteMarker _this},  ("markAttack" + str (_unitG))] call CBA_fnc_globalExecute;};};
+_atpos = [];
+diag_log format ["Trg = %1 at %2, PosObj1 = %3",str _Trg, position _Trg, _PosObj1];
+if !(alive _Trg) then {_atpos = _PosObj1; } else { _atpos = position _Trg;}; 
+_wp = _unitG addWaypoint [_atpos, 0, 1];
 _wp setWaypointType "SAD";
 _wp setWaypointBehaviour "AWARE";
 _wp setWaypointCombatMode "RED";
@@ -125,7 +127,7 @@ waituntil
 	if ((speed (leader _unitG)) == 0) then {_timer =_timer + 5};
 	((count (waypoints _unitG)) < 1) or (_timer > 120)
 	};
-if not (_alive) exitwith {if (RydHQ_Debug) then {[-1,{deleteMarker _this},  ("markAttack" + str (_unitG))] call CBA_fnc_globalExecute}};
+if not (_alive) exitwith {if (RydHQ_Debug) then {[-1,{deleteMarker _this},  ("markAttack" + str (_unitG))] call CBA_fnc_globalExecute;};};
 
 if (RydHQ_Debug) then {[-1,{_i setmarkercolor _this},  "ColorBlue"] call CBA_fnc_globalExecute};
 
