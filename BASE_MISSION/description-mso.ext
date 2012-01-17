@@ -138,6 +138,9 @@ class cfgFunctions {
 #ifdef RMM_HELP
 	#include <core\modules\rmm_help\functions.hpp>
 #endif
+#ifdef CEP_CACHE
+	#include <core\modules\cep_cache\functions.hpp>
+#endif
 #ifdef NOU_CACHE
 	#include <core\modules\nou_cache\functions.hpp>
 #endif

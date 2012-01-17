@@ -1,11 +1,11 @@
 switch (toUpper(_this)) do {
 	case "CEP" : { // Coop Essentials Pack Caching
 		[
+			{allGroups},
 			nil,
-			nil,
-			nil,
-			nil,
-			nil
+			{_this call cep_fnc_cache},
+			{_this call cep_fnc_uncache},
+			{allGroups}
 		]
 	};
 	case "NOUJAY" : { // NouberNou's and Jaynus' Caching
