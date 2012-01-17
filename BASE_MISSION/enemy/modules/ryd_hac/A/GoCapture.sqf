@@ -107,7 +107,7 @@ waituntil
 	};
 if not (_alive) exitwith {if (RydHQ_Debug) then {[-1,{deleteMarker _this},  ("markAttack" + str (_unitG))] call CBA_fnc_globalExecute;};};
 _atpos = [];
-diag_log format ["Trg = %1 at %2, PosObj1 = %3",str _Trg, position _Trg, _PosObj1];
+diag_log format ["Trg = %1 at %2, PosObj1 = %3",typeof _Trg, position _Trg, _PosObj1];
 if !(alive _Trg) then {_atpos = _PosObj1; } else { _atpos = position _Trg;}; 
 _wp = _unitG addWaypoint [_atpos, 0, 1];
 _wp setWaypointType "SAD";
