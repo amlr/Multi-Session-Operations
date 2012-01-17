@@ -9,7 +9,6 @@
 #define NOU_CACHE
 
 // To fix
-//#define RMM_OSL
 //#define RMM_OSOM
 //#define CEP_CACHE
 
