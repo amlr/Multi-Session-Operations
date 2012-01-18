@@ -18,6 +18,15 @@ _count = 0;
 	                _x setPosATL _pos;
 		};
                 _count = _count + 1;
+	} else {
+                _x allowDamage true;
+                _x enableSimulation true;
+                
+                _x enableAI "TARGET";
+                _x enableAI "AUTOTARGET";
+                _x enableAI "MOVE";
+                _x enableAI "ANIM";
+                _x enableAI "FSM";
         };
 } forEach units _this;
 
