@@ -1,3 +1,4 @@
+private ["_ref","_groups","_array"];
 _groups = _this;
 _array = [];
 {

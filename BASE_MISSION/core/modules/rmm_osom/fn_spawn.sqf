@@ -1,4 +1,4 @@
-private ["_data", "_group", "_logic", "_type", "_position", "_weapons", "_magazines", "_vehicle", "_damage", "_skill", "_rank", "_unit"];
+private ["_data","_group","_logic","_type","_position","_weapons","_magazines","_vehicle","_damage","_skill","_rank","_unit","_vehicle_pos"];
 _data = _this select 0;
 _group = _this select 1;
 _logic = _this select 2;

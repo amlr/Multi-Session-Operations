@@ -1,4 +1,5 @@
-private ["_group", "_params", "_array", "_waypoint", "_waypoints", "_list"];
+hint "y";
+private ["_group","_params","_array","_waypoints","_list"];
 _group = _this getvariable "group";
 _params = [
 	side _group,
@@ -43,3 +44,5 @@ _list = [];
 } foreach (units _group);
 _group call CBA_fnc_deleteEntity;
 _this setvariable ["data",[_list,_waypoints,_params]];
+
+diag_log format["MSO-%1 OSOM Total Units: %2", time, count allUnits];
