@@ -1,35 +1,59 @@
 private ["_groups","_range","_type","_sleep","_array","_forEachIndex","_functions","_fnc_init"];
 
-if(isNil "gtk_cache_header")then{gtk_cache_header = 1;};
-if (gtk_cache_header == 0) exitWith{};
+if(isNil "gtk_cache_header") then { gtk_cache_header = 1; };
+if(gtk_cache_header == 0) exitWith{};
 
+_debug = false;
 
+_groups = allGroups;
+_range = 1500; 
+_sleep = 3;
 
-_range = 1000;
-_type = "";
-_sleep = 1;
+if(_debug) then {
+	_range = 100;
+	_sleep = 1;
+	gtk_cache_header = 2;
+};
+
+if(!isNil "gtk_cache_distance") then { _range = gtk_cache_distance; };
+if(!isNil "gtk_cache_interval") then {  _sleep = gtk_cache_interval; };
+switch(gtk_cache_header) do {
+        case 1: {
+                _type = "NOUJAY";
+        };
+        case 2: {
+                _type = "CEP";
+        };
+//        case 3: {
+//                _type = "OSOM";
+//        };
+};
 
 // Check if from the Editor or scripted
-if (tolower(typename _this) == "object") then {
-        _groups = synchronizedObjects _this;
-        _range = _this getvariable ["range", _range];
-        _type = _this getvariable ["type", _type];
-        _sleep = _this getvariable ["sleep", _sleep];
-} else {
-        _groups = _this select 0;
-        if (typeName _groups != "ARRAY") then {
-                _groups = [group (_this select 0)];
-        };
-
-        if (count _this > 0) then {
-                _range = _this select 1;
-        };
-        if (count _this > 1) then {
-                _type = _this select 2;
-        };
-        if (count _this > 2) then {
-                _sleep = _this select 3;
-        };
+if (!isNil "_this") then {
+	if (tolower(typename _this) == "object") then {
+        	_groups = synchronizedObjects _this;
+	        _range = _this getvariable ["range", _range];
+        	_type = _this getvariable ["type", _type];
+	        _sleep = _this getvariable ["sleep", _sleep];
+	} else {
+        	if (count _this > 0) then {
+		        _groups = _this select 0;
+		};
+	        if (typeName _groups != "ARRAY") then {
+        	        _groups = [group (_this select 0)];
+	        };
+        
+        	if (count _this > 1) then {
+                	_range = _this select 1;
+	        };
+        	if (count _this > 2) then {
+                	_type = _this select 2;
+	        };
+        	if (count _this > 3) then {
+                	_sleep = _this select 3;
+	        };
+	};
 };
 
 // Check if all items are group objects
@@ -52,9 +76,8 @@ if(!isNil "_fnc_init") then {
 
 diag_log format["MSO-%1 GTK Initialised %2 Groups", time, count _array];
 
-
 [_array, _range, _type, _sleep] spawn {
-        private ["_array","_range","_type","_sleep","_functions","_fnc_sync","_exclude","_cached","_fnc_cache","_fnc_uncache"];
+        private ["_array","_range","_type","_sleep","_functions","_fnc_sync","_exclude","_cached","_fnc_cache","_fnc_uncache","_fnc_refresh"];
         _array = _this select 0;
         _range = _this select 1;
         _type = _this select 2;
@@ -104,7 +127,7 @@ diag_log format["MSO-%1 GTK Initialised %2 Groups", time, count _array];
                 } foreach _array;
                 
                 sleep _sleep;
-		_array = _array call _fnc_refresh;
+                _array = _array call _fnc_refresh;
         };
 };
 
