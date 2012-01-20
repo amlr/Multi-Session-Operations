@@ -28,7 +28,8 @@ class Mission
 		"CAWheeled2_MMT",
 		"CAMisc",
 		"zargabad",
-		"cacharacters2"
+		"cacharacters2",
+		"ca_missions_secops"
 	};
 	addOnsAuto[]=
 	{
@@ -40,6 +41,7 @@ class Mission
 		"BI_SRRS",
 		"cba_main",
 		"caweapons_e",
+		"ca_missions_secops",
 		"camisc_e_wf",
 		"cawheeled_e_stryker",
 		"CATracked_E_M2A2_Bradley",
@@ -73,7 +75,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=22;
+		items=23;
 		class Item0
 		{
 			side="EAST";
@@ -612,6 +614,7 @@ class Mission
 					rank="SERGEANT";
 					skill=0.59999996;
 					description="US Team Lead";
+					synchronizations[]={174};
 				};
 				class Item1
 				{
@@ -713,6 +716,7 @@ class Mission
 					rank="SERGEANT";
 					skill=0.59999996;
 					description="CZ Team Lead";
+					synchronizations[]={174};
 				};
 				class Item1
 				{
@@ -845,6 +849,27 @@ class Mission
 					{
 					};
 					showWP="NEVER";
+				};
+			};
+		};
+		class Item22
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					presenceCondition="isServer";
+					position[]={4942.5903,29.534925,6112.8706};
+					id=174;
+					side="LOGIC";
+					vehicle="SecOpManager";
+					leader=1;
+					lock="UNLOCKED";
+					skill=0.60000002;
+					init="this setVariable [""settings"",[[""ambush"", ""attack_location"", ""trap"", ""rescue"", ""patrol"", ""escort"", ""defend_location"", ""destroy"", ""search""], true, [""ALPHA"", [""Alpha""], ""H.Q."", [""HQ""]], 30, true, 300, 0.7, [500, 2500]],true];";
+					synchronizations[]={31,42};
 				};
 			};
 		};
