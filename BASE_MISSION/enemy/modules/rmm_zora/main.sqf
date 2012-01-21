@@ -20,8 +20,8 @@ waitUntil{!isNil "BIS_Zora_Mainscope"};
 BIS_Zora_Mainscope setVariable ["debug",false];
 BIS_Zora_Mainscope setvariable ["bordersize",10000];
 BIS_Zora_Mainscope setvariable ["factionlist",MSO_FACTIONS];
-BIS_Zora_Mainscope setvariable ["search_radius",1000];
-BIS_Zora_Mainscope setvariable ["maxgroups",1];
+BIS_Zora_Mainscope setvariable ["search_radius",300];
+BIS_Zora_Mainscope setvariable ["maxgroups",3];
 BIS_Zora_Mainscope setvariable ["mindist",1500];
 BIS_Zora_Mainscope setvariable ["maxdist", 2500];
 
