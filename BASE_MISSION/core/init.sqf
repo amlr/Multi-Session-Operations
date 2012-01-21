@@ -152,12 +152,13 @@ execNow "core\modules\rmm_weather\main.sqf";
 execNow "core\modules\rmm_settings\main.sqf";	
 #else
 if(isDedicated) then {
-	setViewDistance 3000;
+	setViewDistance 5000;
+	setTerrainGrid 25;
 } else {
-	setViewDistance 1500;
+	setViewDistance 2500;
+	setTerrainGrid 50;
 };
 #endif
-setTerrainGrid 25;
 
 #ifdef SPYDER_ONU
 "Spyder Object Network Updater" call mso_core_fnc_initStat;
