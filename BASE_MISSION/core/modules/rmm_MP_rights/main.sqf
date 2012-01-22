@@ -9,10 +9,10 @@ _update_rate = 30; //minimum 30 seconds
 if (isserver) then {       
         {
                 if (_x iskindof "Air") then {
-                        _x addEventhandler ["GetIn", {[_this,{MSO_R_Air}] execFSM "core\modules\mp_rights\vehicledrivercheck.fsm"}];
+                        _x addEventhandler ["GetIn", {[_this,{MSO_R_Air}] execFSM "core\modules\rmm_mp_rights\vehicledrivercheck.fsm"}];
                 };
                 if (_x iskindof "Tank") then {
-                        _x addEventhandler ["GetIn", {[_this,{MSO_R_Crew}] execFSM "core\modules\mp_rights\vehicledrivercheck.fsm"}];
+                        _x addEventhandler ["GetIn", {[_this,{MSO_R_Crew}] execFSM "core\modules\rmm_mp_rights\vehicledrivercheck.fsm"}];
                 };
         } foreach vehicles;
         

@@ -1,11 +1,11 @@
-/*%FSM<COMPILE "C:\Program Files\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, nomad">*/
+/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, nomad">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"wait",4,218,350.000000,250.000000,450.000000,300.000000,0.000000,"wait"};
-item1[] = {"start",0,250,350.000000,175.000000,450.000000,225.000000,0.000000,"start"};
+item1[] = {"start",0,4346,350.000000,175.000000,450.000000,225.000000,0.000000,"start"};
 item2[] = {"wait",3,250,350.000000,475.000000,450.000000,525.000000,0.000000,"wait"};
 item3[] = {"time___wait",4,218,475.000000,550.000000,575.000000,600.000000,0.000000,"time > wait"};
-item4[] = {"update",3,4346,350.000000,550.000000,450.000000,600.000000,0.000000,"update"};
+item4[] = {"update",3,250,350.000000,550.000000,450.000000,600.000000,0.000000,"update"};
 item5[] = {"disconnect",1,250,100.000000,400.000000,200.000000,450.000000,0.000000,"disconnect"};
 item6[] = {"exit",1,250,100.000000,175.000000,200.000000,225.000000,0.000000,"exit"};
 item7[] = {"SP_or_isServer",4,218,225.000000,175.000000,325.000000,225.000000,1.000000,"SP or" \n "isServer"};
@@ -26,8 +26,8 @@ link9[] = {8,11};
 link10[] = {9,2};
 link11[] = {10,2};
 link12[] = {11,5};
-globals[] = {25.000000,1,0,0,0,640,480,1,205,6316128,1,18.169765,606.057312,766.314758,79.698067,786,918,1};
-window[] = {2,-1,-1,-1,-1,1084,110,1295,145,3,804};
+globals[] = {25.000000,1,0,0,0,640,480,1,205,6316128,1,18.169765,606.057312,793.348328,80.234657,784,951,1};
+window[] = {2,-1,-1,-32000,-32000,989,50,1235,50,3,802};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -43,6 +43,8 @@ class FSM
        "_variables = _this select 0;" \n
        "_onspawn = _this select 1;" \n
        "_disconnect = false;" \n
+       "updatePlayerStateNow = false;" \n
+       "nomadUpdated = false;" \n
        "" \n
        "if (count _variables != (count _onspawn) - 1) then {hint format [""ERROR: Nomad has been parsed invalid number of parameters (%1 : %2)"",count _variables, (count _onspawn) - 1];};"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -75,7 +77,7 @@ class FSM
     class wait
     {
       name = "wait";
-      init = /*%FSM<STATEINIT""">*/"_wait = time + 3;"/*%FSM</STATEINIT""">*/;
+      init = /*%FSM<STATEINIT""">*/"_wait = time + nomadTime;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -95,7 +97,7 @@ class FSM
           priority = 0.000000;
           to="update";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"time > _wait and (alive player)"/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(time > _wait and (alive player)) OR (updatePlayerStateNow and (alive player))"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
@@ -135,7 +137,10 @@ class FSM
        "if (str _data != str _ndata) then {" \n
        "	missionnamespace setvariable [_string,_ndata];" \n
        "	publicvariable _string;" \n
-       "};"/*%FSM</STATEINIT""">*/;
+       "};" \n
+       "" \n
+       "nomadUpdated = true;" \n
+       "updatePlayerStateNow = false;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {

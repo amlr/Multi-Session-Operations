@@ -91,8 +91,10 @@ if(isNil "CRB_LOCS") then {
 
 "Mission Parameters" call mso_core_fnc_initStat;
 if (!isNil "paramsArray") then {
+	diag_log format["MSO-%1 Mission Parameters", time];
         for "_i" from 0 to ((count paramsArray)-1) do {
                 missionNamespace setVariable [configName ((missionConfigFile/"Params") select _i),paramsArray select _i];
+		diag_log format["MSO-%1    %2 = %3", time, configName ((missionConfigFile/"Params") select _i), paramsArray select _i];
         };
 };
 
@@ -135,19 +137,9 @@ execNow "core\modules\rmm_debug\main.sqf";
 execNow "core\modules\rmm_nomad\main.sqf";
 #endif
 
-#ifdef CEP_CACHE
-"CEP AI Unit Caching" call mso_core_fnc_initStat;
-execNow "core\modules\CEP_cache\main.sqf";
-#endif
-
-#ifdef NOU_CACHE
-"Nou AI Unit Caching" call mso_core_fnc_initStat;
-execNow "core\modules\Nou_cache\main.sqf";
-#endif
-
-#ifdef JCACHE
-"Jaynus AI Unit Caching" call mso_core_fnc_initStat;
-execNow "core\modules\jcache\init.sqf";
+#ifdef RMM_GTK
+"Group Tracking" call mso_core_fnc_initStat;
+execNow "core\modules\rmm_gtk\main.sqf";
 #endif
 
 #ifdef RMM_WEATHER
@@ -160,12 +152,13 @@ execNow "core\modules\rmm_weather\main.sqf";
 execNow "core\modules\rmm_settings\main.sqf";	
 #else
 if(isDedicated) then {
-	setViewDistance 3000;
+	setViewDistance 5000;
+	setTerrainGrid 25;
 } else {
-	setViewDistance 1500;
+	setViewDistance 2500;
+	setTerrainGrid 50;
 };
 #endif
-setTerrainGrid 25;
 
 #ifdef SPYDER_ONU
 "Spyder Object Network Updater" call mso_core_fnc_initStat;
@@ -174,5 +167,8 @@ execNow "core\modules\spyder_onu\main.sqf";
 
 "Remove Destroyed Objects" call mso_core_fnc_initStat;
 //--- Is Garbage collector running?
-if (isnil "BIS_GC") then {BIS_GC = (group BIS_functions_mainscope) createUnit ["GarbageCollector", position BIS_functions_mainscope, [], 0, "NONE"]};
-BIS_GC setVariable ["auto", true, true];
+if (isnil "BIS_GC") then {
+	BIS_GC = (group BIS_functions_mainscope) createUnit ["GarbageCollector", position BIS_functions_mainscope, [], 0, "NONE"];
+};
+waitUntil{!isNil "BIS_GC"};
+BIS_GC setVariable ["auto", true];

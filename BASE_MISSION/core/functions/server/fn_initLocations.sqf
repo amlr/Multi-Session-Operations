@@ -95,7 +95,35 @@ switch toLower(worldName) do {
                 CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
         };
         case "eden": {
-                CRB_LOC_DIST = 9000;
+		CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
+                {(createVehicle ["HeliHCivil", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
+			[[4864.86,11911.2], 270],
+			[[4864.86,11881.3], 270]
+		];
+                {(createVehicle ["HeliHRescue", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
+			[[3877,8242.5], 2]
+		];
+                {(createVehicle ["HeliHEmpty", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
+			[[9917.374,1566.8381], 35]
+		];
+                {(createVehicle ["ED102_Hangar", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
+			[[4881.6035,11835.9], 90]
+		];
+                {(createVehicle ["ED102_HangarOffice", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
+			[[4882.4565,11792.185], 90]
+		];
+                {(createVehicle ["BuoyBig", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
+			[[6199.21,3287.34,-9],0],
+			[[6405.95,3106.01,-9],0],
+			[[7545.28,9280.17,-9],0],
+			[[6727.19,9063.23,-9],0],
+			[[6590.69,9330.45,-9],0],
+			[[5714.9,11919.6,-9],0],
+			[[3946.06,12328.4,-9],0],
+			[[3846.12,10823,-9],0],
+			[[3660.39,11844.1,-9],0]
+		];
+                [] call mso_core_fnc_createLocations;
                 [] call _initNeighbors;
         };
         case "utes": {
@@ -143,7 +171,7 @@ switch toLower(worldName) do {
         };
        
         case "torabora": {
-				CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
+		CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
                 [] call mso_core_fnc_createLocations;
                 [] call _initNeighbors;
         };
@@ -151,6 +179,7 @@ switch toLower(worldName) do {
         default {
                 CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
                 [] call mso_core_fnc_createLocations;
+                [] call _initNeighbors;
         };
 };
 
@@ -221,7 +250,8 @@ if (_debug) then {
 
 if (_debug) then {player globalChat format["initLocs: Shuffle Locs(%1)", count _locs];};
 _locs = [_locs] call CBA_fnc_shuffle;
-if (_debug) then {player globalChat format["initLocs: Final Locs(%1)", count _locs];};
+
+diag_log format["MSO-%1 Initialise Locations (%2)", time, count _locs];
 
 CRBPROFILERSTOP
 

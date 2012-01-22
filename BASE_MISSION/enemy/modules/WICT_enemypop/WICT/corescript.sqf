@@ -56,6 +56,16 @@ if (isServer) then
 			
 			WICT_playerPos set [0, _posA];
 			WICT_playerPos set [1, _posB];
+			WICT_SavePos = [WICT_playerPos select 0, WICT_playerPos select 1];
+
+			//Moves the battlefront away from players to nearby strategic places City or Hill
+			WICT_CityPos = position nearestLocation [WICT_playerPos,"CityCenter"];
+			WICT_HillPos = position nearestLocation [WICT_playerPos,"Hill"];
+			WICT_FlatAreaPos = position nearestLocation [WICT_playerPos,"FlatArea"];
+
+			_nearlocations = [WICT_CityPos, WICT_HillPos, WICT_FlatAreaPos];
+			WICT_playerPos = [_nearLocations, WICT_playerPos] call BIS_fnc_nearestPosition;
+	
 		}
 		else
 		{
@@ -80,6 +90,14 @@ if (isServer) then
 				
 				WICT_playerPos set [0, _posA];
 				WICT_playerPos set [1, _posB];
+				WICT_SavePos = [WICT_playerPos select 0, WICT_playerPos select 1];
+				
+				//Moves the battlefront away from players to nearby strategic places City or Hill
+				WICT_CityPos = position nearestLocation [WICT_playerPos,"CityCenter"];
+				WICT_HillPos = position nearestLocation [WICT_playerPos,"Hill"];
+				_nearlocations = [WICT_CityPos, WICT_HillPos];
+				WICT_playerPos = [_nearLocations, WICT_playerPos] call BIS_fnc_nearestPosition;
+
 			} else {
 				// Should stop WICT here
 			};
@@ -152,12 +170,18 @@ if (isServer) then
 
 		WICT_clutch = 0;
 
-		execFSM (WICT_PATH + "WICT\exeSpawnE.fsm");
+		//Max. AI-Group Cap based on Mission-Parameter Settings. No enemy Units will be spawned if WICT_numAIg is reached
+		if ((count allGroups) < WICT_numAIg) then {
+					execFSM (WICT_PATH + "WICT\exeSpawnE.fsm");
+					waitUntil {WICT_clutch == 1};
+		};
+	
 
-		waitUntil {WICT_clutch == 1};
-
-		if (WICT_debug == "yes") then {diag_log format ["Number of AI groups: %4, west base: %1, east base: %2, neutral base: %3",WICT_wb,WICT_eb,WICT_nb,(count allGroups)];};
-
+		if (WICT_debug == "yes") then {
+					diag_log format ["Number of AI groups: %4, west base: %1, east base: %2, neutral base: %3",WICT_wb,WICT_eb,WICT_nb,(count allGroups)];
+					//Added AI-Count hint within the mission
+					hint format ["Number of AI groups: %4, west base: %1, east base: %2, neutral base: %3",WICT_wb,WICT_eb,WICT_nb,(count allGroups)];
+		};
 		sleep WICT_time;
 	};
 };

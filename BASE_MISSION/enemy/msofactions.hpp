@@ -60,3 +60,9 @@
 		texts[]= {"false","true"}; 
 		default = DEFAULT_CWR2_FIA;
 	};
+	class faction_tigerianne {
+		title = "    Enable Tigerian Army"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = DEFAULT_tigerianne;
+	};

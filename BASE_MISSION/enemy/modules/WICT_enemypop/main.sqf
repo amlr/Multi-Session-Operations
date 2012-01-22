@@ -18,6 +18,7 @@ if (WICT_wict_header == 0) exitWith{};
 WICT_PATH = "enemy\modules\WICT_enemypop\";
 
 private ["_debug","_d","_camp","_flag","_WICTM","_WICTMN","_group","_pos2"];
+
 _debug = false;
 
 if(isNil "wict_ep_intensity")then{wict_ep_intensity = 1;};
@@ -42,10 +43,10 @@ if (isNil "wict_debugmodule") then {wict_debugmodule = 0};
 						"empty"
 					};
 					case 1: {
-						"Strongpoint"
+						"mil_circle";
 					};
 					case 2: {
-						"Strongpoint"
+						"mil_circle"
 					};
 				};
 
@@ -69,7 +70,7 @@ ep_dist = 2000;
 ep_groups = [];
 ep_total = 0;
 //wict_ep_campprob = 1;
-WICTMC = 1;
+WICTMC = 0;
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
@@ -165,7 +166,6 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
         if(!([position _x, ep_dist] call fPlayersInside) && !_skip) then {
                 if (type _x in _baselocations03) then {
                         if (random 1 > 0.33) then {
-                                ep_total = ep_total + 1;
                                 _d = 500;
                                 _pos = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                                 _flag = random 1;
@@ -177,7 +177,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                         if("INS" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["camp_ins1","camp_ins2"];
                                         };
-                                        if("GUE" in MSO_FACTIONS) then {
+                                        if("GUE" in MSO_FACTIONS || "tigerianne" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["MediumTentCamp_napa","SmallTentCamp2_napa","SmallTentCamp_napa"];
                                         };
                                         if("BIS_TK" in MSO_FACTIONS) then {
@@ -189,7 +189,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                         if("BIS_TK_GUE" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["MediumTentCamp_local","SmallTentCamp2_local","SmallTentCamp_local"];
                                         };
-                                        if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
+                                        if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "cwr2_fia" in MSO_FACTIONS || "tigerianne" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8"];
                                                 f_builder = mso_core_fnc_createComposition;
                                         };
@@ -197,6 +197,10 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8"];
                                                 f_builder = mso_core_fnc_createCompositionE;
                                         };
+										if (count _camp == 0) then {
+											_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
+											f_builder = mso_core_fnc_createComposition;
+										};
 					if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
         	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
@@ -258,7 +262,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                         if("BIS_TK" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["anti-air_tk1","camp_tk1","camp_tk2","firebase_tk1","heli_park_tk1","mediumtentcamp2_tk","mediumtentcamp3_tk","mediumtentcamp_tk","radar_site_tk1","fuel_dump_tk1","vehicle_park_tk1","weapon_store_tk1"];
                                         };
-                                        if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
+                                        if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "cwr2_fia" in MSO_FACTIONS || "tigerianne" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8","citybase01","cityBase02","cityBase03","cityBase04"];
                                                 f_builder = mso_core_fnc_createComposition;
                                         };
@@ -281,6 +285,10 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                         if("BIS_TK" in MSO_FACTIONS && type _x == "Airport") then {
                                                 _camp = ["airplane_park_tk1"];
 					};
+										if (count _camp == 0) then {
+											_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
+											f_builder = mso_core_fnc_createComposition;
+										};
                                         _camp = _camp call BIS_fnc_selectRandom;
                                         _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                         [_camp, random 360, _pos] call f_builder;
@@ -339,7 +347,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                         if("INS" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["camp_ins1","camp_ins2"];
                                         };
-                                        if("GUE" in MSO_FACTIONS) then {
+                                        if("GUE" in MSO_FACTIONS || "tigerianne" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["MediumTentCamp_napa","SmallTentCamp2_napa","SmallTentCamp_napa"];
                                         };
                                         if("BIS_TK" in MSO_FACTIONS) then {
@@ -351,7 +359,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                         if("BIS_TK_GUE" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["MediumTentCamp_local","SmallTentCamp2_local","SmallTentCamp_local"];
                                         };
-                                        if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
+                                        if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "cwr2_fia" in MSO_FACTIONS || "tigerianne" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8","citybase01","cityBase02","cityBase03","cityBase04"];
                                                 f_builder = mso_core_fnc_createComposition;
                                         };
@@ -359,6 +367,10 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                                 _camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8","citybase01","cityBase02","cityBase03","cityBase04"];
                                                 f_builder = mso_core_fnc_createCompositionE;
                                         };
+										if (count _camp == 0) then {
+											_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
+											f_builder = mso_core_fnc_createComposition;
+										};
 					if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
         	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
@@ -419,7 +431,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                         if("INS" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["camp_ins1","camp_ins2"];
                                         };
-                                        if("GUE" in MSO_FACTIONS) then {
+                                        if("GUE" in MSO_FACTIONS || "tigerianne" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["MediumTentCamp_napa","SmallTentCamp2_napa","SmallTentCamp_napa"];
                                         };
                                         if("BIS_TK" in MSO_FACTIONS) then {
@@ -431,12 +443,16 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                         if("BIS_TK_GUE" in MSO_FACTIONS) then {
                                                 _camp = _camp + ["MediumTentCamp_local","SmallTentCamp2_local","SmallTentCamp_local"];
                                         };
-                                        if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS) then {
+                                        if("RU" in MSO_FACTIONS || "INS" in MSO_FACTIONS || "GUE" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS || "cwr2_fia" in MSO_FACTIONS || "tigerianne" in MSO_FACTIONS) then {
                                                 f_builder = mso_core_fnc_createComposition;
                                         };
                                         if("BIS_TK" in MSO_FACTIONS || "BIS_TK_INS" in MSO_FACTIONS || "BIS_TK_GUE" in MSO_FACTIONS) then {
                                                 f_builder = mso_core_fnc_createCompositionE;
                                         };
+										if (count _camp == 0) then {
+											_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
+											f_builder = mso_core_fnc_createComposition;
+										};
 					if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
         	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
@@ -485,19 +501,19 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
         };
         if (count _pos != 0) then {
                 if(ep_total mod 10 == 0) then {
-                        diag_log format["MSO-%1 WICT Population # %2", time, ep_total];
-                        if(_debug) then {hint format["MSO-%1 WICT Population # %2", time, ep_total];};
+                        diag_log format["MSO-%1 WICT Bases # %2", time, WICTMC];
+                        if(_debug) then {hint format["MSO-%1 WICT Bases # %2", time, WICTMC];};
                 };
-                if(_debug) then {
-                        private["_t","_m"];
-                        _t = format["op%1",floor(random 10000)];
-                        if(isNil "_type") then {_type = "";};
-                        _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-                };
+//                if(_debug) then {
+//                        private["_t","_m"];
+//                        _t = format["op%1",floor(random 10000)];
+//                        if(isNil "_type") then {_type = "";};
+//                        _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+//                };
         };
 } foreach CRB_LOCS;
 
 [0,[],{[] call compile preprocessFileLineNumbers "enemy\modules\WICT_enemypop\init.sqf";}] call mso_core_fnc_ExMP;
 
-diag_log format["MSO-%1 WICT Population # %2", time, ep_total];
-if(_debug)then{hint format["MSO-%1 WICT Population # %2", time, ep_total];};
+diag_log format["MSO-%1 WICT bases # %2", time, WICTMC];
+if(_debug)then{hint format["MSO-%1 WICT bases # %2", time, WICTMC];};

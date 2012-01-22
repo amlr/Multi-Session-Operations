@@ -9,8 +9,8 @@ set ZIPNAME=MSO_Missions
 set MP_DIR=MPMissions
 set M_DIR=missions
 set BASE_DIR=BASE_MISSION
-set D_VER=4-02
-set D_BNVER=4.02
+set D_VER=4-10
+set D_BNVER=4.10
 set CODE_DIR=MSO_%BASE_DIR%_CODE_%D_VER%
 
 echo Creating temporary mission folders and placing base mission code into each mission
@@ -69,7 +69,6 @@ call ..\..\mso_maker\clean_modules.bat ambience\modules
 call ..\..\mso_maker\clean_modules.bat core\modules
 call ..\..\mso_maker\clean_modules.bat enemy\modules
 call ..\..\mso_maker\clean_modules.bat support\modules
-
 cd ..
 FOR /F "tokens=1,2 delims=." %%U IN ('echo %MISSION_FOLDER_NAME%') DO (CALL :setMissionNames %%U %%V)
 set MISSION_FILENAME=mso_%MISSION_NAME%_%D_VER%.%MISSION_ISLAND%

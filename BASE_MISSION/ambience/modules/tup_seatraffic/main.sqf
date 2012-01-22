@@ -56,10 +56,9 @@ tup_seatraffic_getSeaDestinations = {
         _mapsize = _this select 0;
         _sealandings = [];
         //Find boathouses, piers , fuelling stations on map. tup_seatraffic_amount = 1 reduced, tup_seatraffic_amount = 0 full
-        if (tup_seatraffic_amount == 1) then {
-                _sealandings = ["land_nav_boathouse","land_nav_pier_m_end","Land_Nav_Boathouse_PierT"];
-        } else {
-                _sealandings = ["land_nav_boathouse","land_nav_pier_m_fuel","land_nav_pier_m_end","land_nav_pier_c2_end","Land_Nav_Boathouse_PierT","land_nav_pier_c_t15"];
+        _sealandings = ["land_nav_boathouse","land_nav_pier_m_end","Land_Nav_Boathouse_PierT","BuoyBig","Land_cwr2_nabrezi_najezd"];
+        if (tup_seatraffic_amount == 0) then {
+                _sealandings = _sealandings + ["land_nav_pier_m_fuel","land_nav_pier_c2_end","land_nav_pier_c_t15","BuoySmall"];
                 //_sealandings = ["land_nav_boathouse","land_nav_pier_m_fuel","land_nav_pier_m_end","land_nav_pier_c2_end","land_nav_pier_c","land_nav_pier_c2","land_nav_pier_m_1","land_nav_pier_m_2"];
         };
         [_sealandings, [], _mapsize, tup_seatraffic_debug,"ColorBlack","boat"] call mso_core_fnc_findObjectsByType;
@@ -110,7 +109,7 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
 {
         
         [_forEachIndex, _x, _seadest, _mapsize] spawn {
-                private ["_timeout","_destpos","_j","_spawnpos","_seadest","_currentseadest","_mapsize","_maxdist","_shipClass","_seaportside","_factions","_ship","_front","_vehiclelist","_shipVehicle","_shipCrew","_grp","_wp","_center","_p1","_p2"];
+                private ["_timeout","_destpos","_j","_spawnpos","_seadest","_currentseadest","_mapsize","_maxdist","_shipClass","_seaportside","_factions","_ship","_front","_vehiclelist","_shipVehicle","_shipCrew","_grp","_wp","_center","_p1","_p2","_cargoMan","_classManx","_cargo"];
                 _j = _this select 0;
                 _currentseadest = _this select 1;
                 _seadest = _this select 2;
@@ -134,6 +133,7 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
                         // Define a random sea port
                         _destpos = [position (_seadest call BIS_fnc_selectRandom), 200, 1000, 10, 2, 0, 0] call BIS_fnc_findSafePos;
                         if (str _destpos == "[0,0,0]" || random 1 > 0.75) then {
+                                _center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
                                 // Define a random place at the edge of the map to fly to
                                 _destpos = [_center, _mapsize-10, _mapsize, 10, 2, 0, 0] call BIS_fnc_findSafePos;
                         };
@@ -186,6 +186,15 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
                         _shipCrew = _ship select 1;
                         {_x setSkill 0.1} forEach _shipCrew;
                         _grp = _ship select 2;
+                        
+                        _classManx = [_seaportside, configFile >> "CfgVehicles" >> _shipClass] call BIS_fnc_selectCrew;
+                        _cargo = getNumber(configFile >> "CfgVehicles" >> _shipClass >> "transportSoldier");
+                        for "_i" from 1 to floor(random _cargo) do {
+                                _cargoMan = _grp createunit [_classManx,position _shipVehicle,[],0,"none"];
+                                _cargoMan setSkill 0;
+                                _cargoMan assignascargo _shipVehicle;
+                                _cargoMan moveincargo _shipVehicle;	
+                        };
                         
                         if (tup_seatraffic_debug) then {
                                 diag_log format["MSO-%1 Sea Traffic: #%2, Vehicle: %5 Group: %7 Faction: %6 Start: %3 Landing: %4", time, _j, _spawnpos, _destpos, typeOf _shipVehicle, _factions, _grp];

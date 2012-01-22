@@ -56,9 +56,15 @@ if(!isNil "faction_CWR2_RU") then {
 };
 if(!isNil "faction_CWR2_FIA") then {
         if(faction_CWR2_FIA == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["CWR2_FIA"];
+                MSO_FACTIONS = MSO_FACTIONS + ["cwr2_fia"];
         };
 };
+if(!isNil "faction_tigerianne") then {
+        if(faction_tigerianne == 1) then {
+                MSO_FACTIONS = MSO_FACTIONS + ["tigerianne"];
+        };
+};
+
 
 if(count MSO_FACTIONS == 0) then {
 
@@ -88,6 +94,11 @@ execNow "enemy\modules\rmm_enemypop\main.sqf";
 #ifdef WICT_ENEMYPOP
 "WICT Populate" call mso_core_fnc_initStat;
 execNow "enemy\modules\wict_enemypop\main.sqf";
+#endif
+
+#ifdef RYD_HAC
+"Enemy AI Commander" call mso_core_fnc_initStat;
+execNow "enemy\modules\ryd_hac\main.sqf";
 #endif
 
 #ifdef BIS_WARFARE

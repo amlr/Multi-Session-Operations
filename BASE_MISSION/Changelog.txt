@@ -12,6 +12,103 @@ Thanks to:
 - Robalo, USMCWall, Muzzleflash, Wobbleyheadedbob, Hatedread, Zonekiller, VoW Widow, Swedge, Lonestar, SBSMac, Prymsuspec, zGuba, Fireball, Nou, Jaynus, Norrin for bits and pieces we got from you
 - CWR² team, IceBreakr, Shezan, Commander, Old Bear for making your mods and islands MSO friendly
 
+v4.1
+Core
+====
+- NOU Cache - if group leader dies while group is cached, uncache next leader
+- Increased default view distance to 2500m
+- Disable OSOM until fixed
+- Updated GTK with mission params
+- Added support for Nielsen's Civilian Interaction Module (running Interaction, Reaction and Extraction components) - init-custom.sqf
+- Added ACE hand cuffs, ear plugs and safety googles to players running ACE
+- If group is newly split from another group, uncache leader and any drivers
+- Removed OSL as now obsolete
+- Removed JCache as now obsolete
+- Simplified NOU caching further
+- Enabled CEP caching to use GTK
+- Fixed GC check during init
+- Fixed vehicles caching
+- Using GTK with NOUJAY Cache
+- CWR² changes
+- Standardised RPT message for versioning
+- Fixed GC initialisation
+- Added GC test script
+- Added RPT line for total Locations found
+- Fixed Default, Eden and Tora Bora settings
+- Updated NOMAD to support manual player state save
+- Increased options for Nomad save time in nomad params
+- Add menu selection for player to manually save position/state using interaction menu
+- Added the use of CBA_fnc_AddMagazineVerified (now that it is working) when restoring player weapon magazines on reconnect (Nomad)
+- Added support in NOMAD for adding ACRE base radios on reconnect rather than ACRE radios with IDs.
+- Added parameter to control how often Nomad saves player data
+- Print mission parameters in RPT
+- Added support for EOD Addon - automatically add THOR III ECM to select (ACRE Box, ACE Ruck Box, Basic Weapons Box) ammo crates near "ammo" or "ammo_1" markers.
+- Added support for EOD Radio Controlled IED for terrorist vehicles, added IED object to support any IED detection items.
+- Fixed path to vehicledrivercheck.fsm
+
+Ambience
+========
+- Added another potential police station building for Everon
+- Added passengers to ambient sea vehicles
+- Fixed Never Fire code spelling mistake, all removed ammo from aircraft.
+
+Support
+====
+- SOM fixes to work on dedicated server
+- Fixed CASEVAC to check for hospital or ammo marker for RTB
+- Added colour selection to JIP Markers
+
+Enemy
+====
+- Increased ZORA max groups and decreased search radius (overall intensity increase)
+- Added Highhead's WICT Module updates
+- Updated logging on HAC scripts
+- Added additional parameter value for EN POP spawn distance (20km), so that all EN Pop are spawned on maps smaller than 20km.
+- Updated Rydygier's HAC module, fixed acre issue and disabled by default
+- Added Tigerian faction
+- Fixed WICT if unknown faction is used - camps set to russian by default.
+- Fixed enemy pop if unknown faction is used - defaults to russian camps.
+- Added new Enemy Pop parameters to control how close enemy may be placed and how close they spawn
+- Added RYD HETMAN AI Commander (HAC) as an Enemy Module, added Nou Cache parameters to allow caching to be turned off.
+- WICT Update - http://forums.bistudio.com/showthread.php?p=2088863#89 (thanks Highhead)
+	- Added Mission-Parameter for turning of BLUFOR-Spawning (on/off) in order to preserve performance (setupW.sqf/params.hpp)
+	- Added maximum AI-Group Cap from missionparameters to gain performance
+	- Changed base markers to mil_circle for wict-bases in "show bases"-mode in main.sqf
+	- Fixed wrong base-count in diag_log and debug-hints // tested
+	- Added AI-count debug-hint in corescript.sqf // tested
+	- moved battlefront away from player to near strategic places in corescript.sqf // tested
+
+Missions
+========
+- Added SOM to Zargabad mission
+- Added MSO Tigeria mission
+- Added hospital marker to CLAfghan mission
+- Fixed CLAfghan and Tora Bora US respawn issues.
+
+v4.03
+Core
+====
+- Tupolov is tired
+
+Enemy
+====
+- Fixed WICT so that is restarts after playable units >0
+
+Missions
+========
+- Fixed respawn markers in missions
+
+v4.02
+Core
+====
+- Moved disabledAI to description.ext
+
+Missions
+========
+- added log to make sure WICT restarts
+- Fixed missions with incorrect respawn markers
+- Fixed A2Free CTI mission
+
 v4.01
 Core
 ====

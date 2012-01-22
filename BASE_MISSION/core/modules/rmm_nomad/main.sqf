@@ -5,10 +5,17 @@ private ["_g_nomad","_s_nomad"];
 if (isdedicated) exitwith {};
 
 if(isNil "nomadHeader")then{nomadHeader = 1;};
+if(isNil "nomadTime")then{nomadTime = 60;};
 if (nomadHeader == 0) exitWith{};
 
 waituntil {not isnull player};
 waituntil {!isMultiplayer || getplayeruid player != ""};
+
+if (nomadTime == 43200) then {
+	// Setup UI option to Save Player State
+	["player", [mso_interaction_key], 4, ["core\modules\rmm_nomad\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+	["SPS","updatePlayerStateNow = true"] call mso_core_fnc_updateMenu;
+};
 
 _g_nomad = [
         /*{deaths player} //auto-integrated*/
@@ -47,16 +54,29 @@ _s_nomad = [
         },
         {
                 {player removemagazine _x;} foreach (magazines player);
-		// Wait until CBA release fix publicly
-                //if(!isNil "CBA_fnc_AddMagazineVerified" && !isClass(configFile>>"CfgPatches">>"ace_main")) then {
-                //        {[player, _x, 1] call CBA_fnc_AddMagazineVerified;} foreach _this;
-                //} else {
+				// Wait until CBA release fix publicly
+                if(!isNil "CBA_fnc_AddMagazineVerified" && !isClass(configFile>>"CfgPatches">>"ace_main")) then {
+                        {[player, _x, 1] call CBA_fnc_AddMagazineVerified;} foreach _this;
+                } else {
                         {player addmagazine _x;} foreach _this;
-                //};
+                };
         },
         {
                 {player removeweapon _x;} foreach ((weapons player) + (items player));
-                {player addweapon _x;} foreach _this;
+				{
+					if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
+					// Catch any acre radios and store as base radio (do not store radio with ID) http://tracker.idi-systems.com/issues/2
+						private ["_ret"];
+						_ret = [_x] call acre_api_fnc_getBaseRadio;
+						if (typeName _ret == "STRING") then {
+							player addweapon _ret;
+						} else {
+							player addweapon _x;
+						};
+					} else {
+						player addweapon _x;
+					};
+				} foreach _this;
                 player selectweapon (primaryweapon player);
         },
         {

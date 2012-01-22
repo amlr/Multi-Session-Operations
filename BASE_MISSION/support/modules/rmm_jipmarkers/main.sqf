@@ -14,6 +14,22 @@ RMM_jipmarkers_types = [
 	"mil_unknown"
 ];
 
+RMM_jipmarkers_colors = [
+    "Default",
+    "ColorBlack",
+    "ColorRed",
+    "ColorRedAlpha",
+    "ColorGreen",
+    "ColorGreenAlpha",
+    "ColorBlue",
+    "ColorYellow",
+    "ColorOrange",
+    "ColorWhite",
+    "ColorPink",
+    "ColorBrown",
+    "ColorKhaki" 
+];
+
 if (isnil "RMM_jipmarkers") then {
 	RMM_jipmarkers = [];
 	publicvariable "RMM_jipmarkers";
@@ -24,6 +40,7 @@ if (isnil "RMM_jipmarkers") then {
 			_mkr = createMarkerLocal [(_x select 0),(_x select 1)];
 			_mkr setmarkertypelocal (_x select 2);
 			_mkr setmarkertextlocal (_x select 3);
+			_mkr setmarkercolorlocal (_x select 5);
 		};
 	} foreach RMM_jipmarkers;
 };
@@ -40,6 +57,7 @@ onMapSingleClick CRB_MAPCLICK;
 			_mkr = createMarkerLocal [(_x select 0),(_x select 1)];
 			_mkr setmarkertypelocal (_x select 2);
 			_mkr setmarkertextlocal (_x select 3);
+			_mkr setmarkercolorlocal (_x select 5);
 		};
 	} forEach (_this select 1);
 };

@@ -28,10 +28,10 @@ if (isNil "tup_airtraffic_ROE") then {tup_airtraffic_ROE = 1;};
 
 switch(tup_airtraffic_ROE) do {
         case 1: {
-                tup_airtraffic_combateMode = "BLUE";
+                tup_airtraffic_combatMode = "BLUE";
         };
         case 2: {
-                tup_airtraffic_combateMode = "GREEN";
+                tup_airtraffic_combatMode = "GREEN";
         };
         case 3: {
                 tup_airtraffic_combatMode = "WHITE";
@@ -108,7 +108,7 @@ tup_airtraffic_getHangars = {
         private ["_destairfield","_planelandings"];
         _destairfield = _this select 0;
         //_planelandings = ["Land_Hangar_2","Land_SS_hangar","Land_SS_hangarD","Land_Mil_hangar_EP1"];
-        _planelandings = ["Land_SS_hangar","Land_SS_hangarD","Land_Mil_hangar_EP1"];
+        _planelandings = ["Land_SS_hangar","Land_SS_hangarD","Land_Mil_hangar_EP1","ED102_Hangar","ED102_HangarOffice"];
         ([_planelandings, [], _mapsize * 1.4,tup_airtraffic_debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType);
 };
 
@@ -196,6 +196,10 @@ tup_airtraffic_createAircraft = {
         if (tup_airtraffic_combatMode == "BLUE") then {
                 {_x disableAI "AUTOTARGET"} foreach _aircraftCrew;
                 {_x disableAI "TARGET"} foreach _aircraftCrew;
+				_aircraftVehicle setVehicleAmmo 0;
+				if (tup_airtraffic_debug) then {
+					diag_log format ["MSO-%1 Air Traffic: %4 %2  Removed weapons for Aircraft %3", time, _j, _aircraftClass, _currentairfield];
+				};
         };
         
         _aircraftVehicle;

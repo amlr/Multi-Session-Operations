@@ -1,4 +1,5 @@
-private ["_data", "_list", "_waypoints", "_params", "_side", "_behaviour", "_combatmode", "_speedmode", "_formation", "_group", "_array", "_current", "_waypoint"];
+hint "x";
+private ["_data","_list","_waypoints","_params","_side","_behaviour","_combatmode","_speedmode","_formation","_group","_array","_current"];
 _data = _this getvariable "data";
 _list = _data select 0;
 _waypoints = _data select 1;
@@ -40,3 +41,5 @@ _group setcurrentwaypoint [_group,_current];
 
 _this setvariable ["group",_group];
 _this setvariable ["data",nil];
+
+diag_log format["MSO-%1 OSOM Total Units: %2", time, count allUnits];

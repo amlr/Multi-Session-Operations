@@ -229,14 +229,15 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 				_this disableAI "TARGET";
 				_this disableAI "AUTOTARGET";
 				
-				// Set LZ
-				_lz = (call (RMM_casevac_lines select 0)) select (lbCurSel 0);
-				
 				// Set LZ marker
 				_marker = (call (RMM_casevac_lines select 6)) select (lbCurSel 6);
 				
 				// Set endpos
-				_hospital = [markerpos "hospital", 0, 50, 15, 0, 0, 0] call BIS_fnc_findSafePos;
+				if !(str (markerPos "hospital") == "[0,0,0]") then { 
+					_hospital = [markerpos "hospital", 0, 50, 15, 0, 0, 0] call BIS_fnc_findSafePos;
+				} else {
+					_hospital = [markerpos "ammo", 0, 50, 15, 0, 0, 0] call BIS_fnc_findSafePos;
+				};
 
 				// Check no players are crew members?
 				waitUntil {sleep 5;{isplayer _x} count (crew _this) == 0};

@@ -48,7 +48,7 @@ switch toLower(worldName) do {
         case "eden": {                
                 BIS_alice_mainscope setvariable ["trafficDistance",700];                
                 BIS_alice_mainscope setvariable ["spawnDistance",350];                
-                BIS_alice_mainscope setVariable ["townsFaction",["cwr2_civ","CIV_RU"]];                
+                BIS_alice_mainscope setVariable ["townsFaction",["cwr2_civ","CIV","CIV_RU"]];                
                 [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
         };
         case "fallujah": {                
