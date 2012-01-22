@@ -11,7 +11,7 @@ switch (toUpper(_this)) do {
 	case "NOUJAY" : { // NouberNou's and Jaynus' Caching
 		[
 			{allGroups},
-			nil,
+			{_this call noujay_fnc_sync},
 			{_this call noujay_fnc_cache},
 			{_this call noujay_fnc_uncache},
 			{allGroups}

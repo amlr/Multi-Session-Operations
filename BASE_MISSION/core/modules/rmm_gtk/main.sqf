@@ -12,7 +12,7 @@ _sleep = 3;
 if(_debug) then {
 	_range = 100;
 	_sleep = 1;
-	gtk_cache_header = 2;
+	gtk_cache_header = 1;
 };
 
 if(!isNil "gtk_cache_distance") then { _range = gtk_cache_distance; };
