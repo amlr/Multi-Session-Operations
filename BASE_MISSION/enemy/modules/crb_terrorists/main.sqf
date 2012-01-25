@@ -91,7 +91,7 @@ PGM_fnc_CreateIntel = {
                 (getPosATL _cache select 1) + _sign2*(random _radius)
         ]; 
         _range  = ceil((position _cache distance _pos) / 50) * 50;
-        [format["%1intel%2", _cache, _i], _pos, "Icon", [0.5,0.5], "TEXT:", format["%1m", _range], "TYPE:", intelMarkerType, "COLOR:", "ColorRed", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
+        [format["%1intel%2", _cache, _i], _pos, "Icon", [0.5,0.5], "TEXT:", format["%1m", _range], "TYPE:", intelMarkerType, "COLOR:", "ColorRed", "GLOBAL"] call CBA_fnc_createMarker;
         [2,[],{player sideChat "Intelligence received - map updated";}] call mso_core_fnc_ExMP;
 
 	CRBPROFILERSTOP
@@ -397,7 +397,7 @@ CRB_fnc_RecruitMember = {
         if (_debug) then {
                 _t = format["tcell_r%1", _tcid];
                 hint format["Cell#%1 - recruiting %2", _tcid, _t];
-                _tcrm = [_t, _recpos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Dot", "COLOR:", "ColorBlue", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
+                _tcrm = [_t, _recpos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Dot", "COLOR:", "ColorBlue", "GLOBAL"] call CBA_fnc_createMarker;
         };
         
         if(isNil "CRB_classlistFaction") then {
@@ -456,7 +456,7 @@ CRB_fnc_SplitCell = {
                 _str = format["MSO-%1 Cell#%2 - splitting %3 %4", time, _tcid, _t, _newveh];
                 hint _str;
                 diag_log _str;
-                _tcrm = [_t, position _newveh, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Dot", "COLOR:", "ColorYellow", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
+                _tcrm = [_t, position _newveh, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Dot", "COLOR:", "ColorYellow", "GLOBAL"] call CBA_fnc_createMarker;
         };
         
         _newlead = leader _newcell;
@@ -520,7 +520,7 @@ CRB_fnc_SpawnNewCell = {
         _tcdm = "";
         if (_debug) then {
                 _t = format["tcell_s%1", _tcid];
-                _tcsm = [_t, _spawn, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Dot", "COLOR:", "ColorGreen", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
+                _tcsm = [_t, _spawn, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Dot", "COLOR:", "ColorGreen", "GLOBAL"] call CBA_fnc_createMarker;
         };
         
         _terrorlead setSkill 1;
@@ -550,7 +550,7 @@ CRB_fnc_SpawnNewCell = {
         _pos = _bldgpos call BIS_fnc_selectRandom;
         if (_debug) then {
                 _t = format["tcell_d%1", _tcid];
-                _tcdm = [_t, _pos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Dot", "COLOR:", "ColorRed", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
+                _tcdm = [_t, _pos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Dot", "COLOR:", "ColorRed", "GLOBAL"] call CBA_fnc_createMarker;
         };
 
         units _terrorlead orderGetIn true;
