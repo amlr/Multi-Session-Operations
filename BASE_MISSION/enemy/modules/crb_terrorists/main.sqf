@@ -20,24 +20,34 @@ crb_tc_intensity = switch(crb_tc_intensity) do {
 		0;
 	};
 	case 1: {
-		0.25;
+		0.12;
 	};
 	case 2: {
-		0.5;
+		0.25;
 	};
 	case 3: {
-		1;
+		0.5;
 	};
 	case 4: {
-		2;
+		1;
 	};
 	case 5: {
-		3;
+		2;
 	};
 };
 if(crb_tc_intensity == 0 || AmbientCivs == 0) exitWith{};
 
-if(isNil "crb_tc_markers")then{crb_tc_markers = 1;};
+if(crb_tc_intensity < 1) then {
+	switch toLower(worldName) do {		
+        	case "zargabad": { 
+                	BIS_alice_mainscope setVariable ["civilianCount","round (3 * (sqrt %1))"];   
+	                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];  
+        	        BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 1)"];
+	        };
+	};
+};
+
+if(isNil "crb_tc_markers")then{crb_tc_markers = 0;};
 
 CRB_fnc_debugPositions = {
 	CRBPROFILERSTART("CRB Terrorists debugPositions")
