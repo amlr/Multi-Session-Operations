@@ -53,11 +53,11 @@ BIS_Zora_Mainscope setvariable ["maxdist", 2500];
                 } else {
                         if(BIS_Zora_pause) then {
                                 call _fnc_status;
-                                _waittime = ((random 60) * 60);
+                                _waittime = ((random 60) * 10);
                                 BIS_Zora_pause = false;
                         } else {
                                 call _fnc_status;
-                                _waittime = ((random 60) * 60);
+                                _waittime = ((random 60) * 10);
                                 BIS_Zora_pause = true;
                         };
                 };

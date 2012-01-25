@@ -44,6 +44,8 @@ class FSM
        "_logic = bis_zora_mainscope;" \n
        "_search = _logic getvariable ""search_radius"";" \n
        "if (isnil ""_search"") then {_logic setvariable [""search_radius"",100]; _search = 100;};" \n
+       "_zora_maxdist = _logic getvariable ""maxdist"";" \n
+       "if (isnil ""_zora_maxdist"") then {_logic setvariable [""maxdist"",2000]; _zora_maxdist = 2000};" \n
        "" \n
        "_defpos = position (leader _grp);" \n
        "//hint str _defpos;" \n
@@ -206,7 +208,8 @@ class FSM
           priority = 2.000000;
           to="End";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"{alive _x} count units _grp == 0;"/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"{alive _x} count units _grp == 0 ||" \n
+           "(leader _grp) distance _prey > _zora_maxdist"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
@@ -251,7 +254,8 @@ class FSM
           priority = 2.000000;
           to="End";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"{alive _x} count units _grp == 0;"/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"{alive _x} count units _grp == 0 ||" \n
+           "(leader _grp) distance _prey > _zora_maxdist"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
