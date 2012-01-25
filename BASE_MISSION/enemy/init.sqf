@@ -9,66 +9,55 @@
 #endif
 
 MSO_FACTIONS = [];
-if(!isNil "faction_RU") then {
-        if(faction_RU == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["RU"];
-        };
-};
-if(!isNil "faction_ACE_RU") then {
-        if(faction_ACE_RU == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["ACE_VDV","ACE_GRU","ACE_MVD"];
-        };
-};
-if(!isNil "faction_INS") then {
-        if(faction_INS == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["INS"];
-        };
-};
-if(!isNil "faction_GUE") then {
-        if(faction_GUE == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["GUE"];
-        };
-};
-if(!isNil "faction_BIS_TK") then {
-        if(faction_BIS_TK == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK"];
-        };
-};
-if(!isNil "faction_BIS_TK_INS") then {
-        if(faction_BIS_TK_INS == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK_INS"];
-        };
-};
-if(!isNil "faction_BIS_TK_GUE") then {
-        if(faction_BIS_TK_GUE == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK_GUE"];
-        };
-};
-if(!isNil "faction_CWR2_US") then {
-        if(faction_CWR2_US == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["cwr2_us"];
-        };
-};
-if(!isNil "faction_CWR2_RU") then {
-        if(faction_CWR2_RU == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["cwr2_ru"];
-        };
-};
-if(!isNil "faction_CWR2_FIA") then {
-        if(faction_CWR2_FIA == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["cwr2_fia"];
-        };
-};
-if(!isNil "faction_tigerianne") then {
-        if(faction_tigerianne == 1) then {
-                MSO_FACTIONS = MSO_FACTIONS + ["tigerianne"];
-        };
-};
 
+if(isNil "faction_RU") then {faction_RU = DEFAULT_RU;};
+if(faction_RU == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["RU"];
+};
+if(isNil "faction_ACE_RU") then {faction_ACE_RU = DEFAULT_ACE_RU;};
+if(faction_ACE_RU == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["ACE_VDV","ACE_GRU","ACE_MVD"];
+};
+if(isNil "faction_INS") then {faction_INS = DEFAULT_INS;};
+if(faction_INS == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["INS"];
+};
+if(isNil "faction_GUE") then {faction_GUE = DEFAULT_GUE;};
+if(faction_GUE == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["GUE"];
+};
+if(isNil "faction_BIS_TK") then {faction_BIS_TK = DEFAULT_BIS_TK;};
+if(faction_BIS_TK == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK"];
+};
+if(isNil "faction_BIS_TK_INS") then {faction_BIS_TK_INS = DEFAULT_BIS_TK_INS;};
+if(faction_BIS_TK_INS == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK_INS"];
+};
+if(isNil "faction_BIS_TK_GUE") then {faction_BIS_TK_GUE = DEFAULT_BIS_TK_GUE;};
+if(faction_BIS_TK_GUE == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["BIS_TK_GUE"];
+};
+if(isNil "faction_CWR2_US") then {faction_CWR2_US = DEFAULT_CWR2_US;};
+if(faction_CWR2_US == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["cwr2_us"];
+};
+if(isNil "faction_CWR2_RU") then {faction_CWR2_RU = DEFAULT_CWR2_RU;};
+if(faction_CWR2_RU == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["cwr2_ru"];
+};
+if(isNil "faction_CWR2_FIA") then {faction_CWR2_FIA = DEFAULT_CWR2_FIA;};
+if(faction_CWR2_FIA == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["cwr2_fia"];
+};
+if(isNil "faction_tigerianne") then {faction_tigerianne = DEFAULT_tigerianne;};
+if(faction_tigerianne == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["tigerianne"];
+};
 
 if(count MSO_FACTIONS == 0) then {
-
-	MSO_FACTIONS = MSO_FACTIONS + ["RU"];
+        
+        MSO_FACTIONS = MSO_FACTIONS + ["RU"];
 };
 
 #ifdef CRB_CONVOYS
