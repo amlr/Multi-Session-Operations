@@ -8,7 +8,7 @@ _delay = 60;
         _repeat = true;
         while{_repeat} do {
                 {
-                        if(side _x == east) then {
+                        if((west getFriend (side _x)) < 0.6) then {
                                 if(str (markerPos (str _x)) == "[0,0,0]") then {
                                         _m = createMarkerLocal [str _x, position _x];
                                         //_m setMarkerShapeLocal "ICON";
