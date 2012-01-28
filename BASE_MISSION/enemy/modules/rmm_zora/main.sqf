@@ -22,8 +22,8 @@ BIS_Zora_Mainscope setvariable ["bordersize",10000];
 BIS_Zora_Mainscope setvariable ["factionlist",MSO_FACTIONS];
 BIS_Zora_Mainscope setvariable ["search_radius",300];
 BIS_Zora_Mainscope setvariable ["maxgroups",3];
-BIS_Zora_Mainscope setvariable ["mindist",1500];
-BIS_Zora_Mainscope setvariable ["maxdist", 2500];
+BIS_Zora_Mainscope setvariable ["mindist",1000];
+BIS_Zora_Mainscope setvariable ["maxdist", 2000];
 
 [] spawn {
         private ["_mx","_fnc_status","_waittime"];
