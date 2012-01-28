@@ -4,6 +4,9 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
+//Create the comms menu on all machines.
+[] call BIS_fnc_commsMenuCreate; 
+
 // Add briefing for MSO
 _nul = [] execVM "core\scripts\briefing.sqf";
 
@@ -169,6 +172,9 @@ execNow "core\modules\spyder_onu\main.sqf";
 //--- Is Garbage collector running?
 if (isnil "BIS_GC") then {
 	BIS_GC = (group BIS_functions_mainscope) createUnit ["GarbageCollector", position BIS_functions_mainscope, [], 0, "NONE"];
+};
+if (isnil "BIS_GC_trashItFunc") then {
+	BIS_GC_trashItFunc = compile preprocessFileLineNumbers "ca\modules\garbage_collector\data\scripts\trashIt.sqf";
 };
 waitUntil{!isNil "BIS_GC"};
 BIS_GC setVariable ["auto", true];
