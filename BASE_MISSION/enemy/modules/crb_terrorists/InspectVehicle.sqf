@@ -6,7 +6,7 @@ Expected behaviour is that if a Terrorist Cell travelling by car detects BLUFOR 
 	3. Get out and fight
 	4. Surrender */
 	
-private ["_terrorist","_debug","_vehicle","_grp","_fate","_pos","_trg","_targets","_destpos","_waittime"];
+private ["_terrorist","_debug","_vehicle","_grp","_fate","_pos","_trg","_targets","_destpos","_waittime","_wp"];
 
 if(!isServer) exitWith{};
 
@@ -34,7 +34,7 @@ If !(isNull driver _vehicle) then {
 	
 	// Stop Terrorists from doing anything
 	_grp setBehaviour "CARELESS";
-	leader _grp stop stop;
+        doStop (leader _grp);
 
 	_fate = round(random 6); // roll the dice!
 	
