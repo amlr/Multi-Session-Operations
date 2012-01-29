@@ -15,7 +15,7 @@ CRB_timeSync = {
 CRB_randomOvercast = {
         private ["_value","_delay"];
         _value = random 1; //new overcast% (0-1)
-        _delay = 300 + random 6900; // finish
+        _delay = 300 + random 1500; // finish
         
         [overcast, _value, time, time + _delay];
 };
@@ -24,11 +24,10 @@ CRB_randomFog = {
         private ["_value","_delay"];
         if (daytime > 1 && daytime < 8) then {
                 _value = random 1; //new fog% (0-0.5)
-	        _delay = 300 + random 300; // finish
         } else {
-                _value = 0;
-	        _delay = 300 + random 3300; // finish
+                _value = random 0.25;
         };
+        _delay = 300 + random 300; // finish
         
         [fog, _value, time, time + _delay];
 };
@@ -36,7 +35,7 @@ CRB_randomFog = {
 CRB_randomRain = {
         private ["_value","_delay"];
         _value = random 1; //new rain% (0-1)
-        _delay = 300 + random 3300; // finish
+        _delay = 300 + random 1500; // finish
         
         [rain, _value, time, time + _delay];
 };
@@ -99,7 +98,7 @@ if (isserver) then {
         publicvariable "CRB_t";
         
         // Set random weather on server
-        _overcast = random 1;
+       	_overcast = random 1;
         diag_log format["MSO-%1 Weather Server Start: Overcast=%2", time, _overcast];
         0 setOvercast _overcast;
         
