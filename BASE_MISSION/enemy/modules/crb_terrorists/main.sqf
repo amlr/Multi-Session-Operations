@@ -37,16 +37,6 @@ crb_tc_intensity = switch(crb_tc_intensity) do {
 };
 if(crb_tc_intensity == 0 || AmbientCivs == 0) exitWith{};
 
-if(crb_tc_intensity < 1) then {
-	switch toLower(worldName) do {		
-        	case "zargabad": { 
-                	BIS_alice_mainscope setVariable ["civilianCount","round (3 * (sqrt %1))"];   
-	                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];  
-        	        BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 1)"];
-	        };
-	};
-};
-
 if(isNil "crb_tc_markers")then{crb_tc_markers = 0;};
 
 CRB_fnc_debugPositions = {
@@ -139,7 +129,7 @@ CRB_fnc_FindVehicle = {
         _vehs = nearestObjects [_pos, ["Car"], 250];
         [_vehs, "vehicles", _debug] call CRB_fnc_debugPositions;
         {
-                if((_x emptyPositions "cargo") >= _vcargo && ((_x distance _pos) < _vdist) && isNull (assignedDriver _x)) then {
+                if((_x emptyPositions "cargo") >= _vcargo && ((_x distance _pos) < _vdist) /*&& isNull (assignedDriver _x)*/) then {
                         _newveh = _x;
                         _vdist = _x distance _pos;
                 };
@@ -247,7 +237,7 @@ CRB_fnc_ArmFromAmmo = {
 CRB_fnc_GetBuildingPosForTown = {
 	CRBPROFILERSTART("CRB Terrorists getBuildingPosForTown")
 
-        private ["_i","_j","_twn","_bldgpos","_nearbldgs","_debug"];
+        private ["_i","_twn","_bldgpos","_nearbldgs","_debug"];
         _twn = _this select 0;
         _debug = _this select 1;
         _bldgpos = _twn getVariable "BuldingPositions";
@@ -256,7 +246,6 @@ CRB_fnc_GetBuildingPosForTown = {
         } else {
                 _bldgpos = [];
                 _i = 0;
-                _j = 0;
                 _nearbldgs = nearestObjects [ position _twn, ["Building"], 400];
 				if (count _nearbldgs > 0) then
 				{				
@@ -265,10 +254,11 @@ CRB_fnc_GetBuildingPosForTown = {
 							private["_y"];
 							_y = _x buildingPos _i;
 							while {format["%1", _y] != "[0,0,0]"} do {
-									_bldgpos set [_j, _y];
-									_i = _i + 1;
-									_j = _j + 1;
-									_y = _x buildingPos _i;
+								if(_y select 2 < 3) then {
+									_bldgpos set [count _bldgpos, _y];
+								};
+								_i = _i + 1;
+								_y = _x buildingPos _i;
 							};
 							_i = 0;
 						};
@@ -311,7 +301,9 @@ CRB_fnc_GetNearestTown = {
                 };
         } forEach (bis_alice_mainscope getvariable "townlist") - [_nearest];
 		
+	if(random 1 > 0.5) then {
 		_neighbours set [count _neighbours, _nearest];
+	};
         
         [_neighbours, "neighbours", _debug] call CRB_fnc_debugPositions;
         
@@ -491,7 +483,7 @@ CRB_fnc_SplitCell = {
         _newlead move _pos;
         _waittime = time + 300;
 
-        waitUntil{sleep 1;_newlead distance _pos < 50 || _waittime < time};
+        waitUntil{sleep 1;_newlead distance _pos < 5 || _waittime < time};
 
         sleep 15;
         
@@ -579,7 +571,7 @@ CRB_fnc_SpawnNewCell = {
         sleep 15;
         
         _ammo setPos _pos;
-        _ammo setVectorUp [0,0,1];
+        _ammo setVelocity [0,0,-1];
         
         _terrorlead setBehaviour "ALERT";
         (group _terrorlead) leaveVehicle _vehicle;
