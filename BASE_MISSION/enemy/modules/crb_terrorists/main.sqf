@@ -388,8 +388,7 @@ CRB_fnc_RecruitMember = {
 		if(isNil "_twn") then {
 			_twn = [position leader _grp, _debug] call CRB_fnc_GetNearestTown;
 			_grp setVariable ["nearestTown", _twn, true];
-		};
-        _bldgpos = [_twn,_debug] call CRB_fnc_GetBuildingPosForTown;
+		};        _bldgpos = [_twn,_debug] call CRB_fnc_GetBuildingPosForTown;
         _recpos = _bldgpos call BIS_fnc_selectRandom;
         if(isNil "_recpos") exitWith {
 		hint "No recruit spawn position";
@@ -684,8 +683,7 @@ for "_i" from 1 to _numcells do {
                 
 				//DEBUG:_twn = nearestLocation [_spawn, "CityCenter"];
                 _twn = [_spawn, _debug] call CRB_fnc_GetNearestTown;
-                _grp setVariable ["nearestTown", _twn, true];
-                
+                _grp setVariable ["nearestTown", _twn, true];                
                 _terrorcrgo = [];
                 for "_i" from 0 to floor(random _vcargo) do {
                         _classMan  = CRB_classlistMen call BIS_fnc_selectRandom;
