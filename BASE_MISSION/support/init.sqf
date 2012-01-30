@@ -92,3 +92,9 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 	AAWinf_HelmChangeAnyWhere = true; 
 	execNow "support\scripts\ace_aaw_fix.sqf";
 };
+
+#ifdef BIS_SOM
+"BI Secondary Ops Mgr" call mso_core_fnc_initStat;
+execNow "support\modules\bis_som\main.sqf";	
+#endif
+
