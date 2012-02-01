@@ -19,8 +19,10 @@ if (isNil "_this") exitWith {debugLog "Log: [trashIt] There should be 1 mandator
 private ["_object", "_queue", "_timeToDie"];
 _object = _this select 0;
 
-waitUntil{typeName (BIS_GC getVariable "queue") == "ARRAY"};
-_queue = BIS_GC getVariable "queue";
+_queue = [];
+if(typeName (BIS_GC getVariable "queue") == "ARRAY") then {
+	_queue = BIS_GC getVariable "queue";
+};
 
 switch (typeName _object) do
 {
