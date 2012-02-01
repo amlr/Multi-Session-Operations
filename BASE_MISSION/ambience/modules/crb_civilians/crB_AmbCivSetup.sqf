@@ -54,7 +54,7 @@ switch toLower(worldName) do {
         case "fallujah": {                
                 BIS_alice_mainscope setvariable ["trafficDistance",600];      
                 BIS_alice_mainscope setvariable ["spawnDistance",250];      
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"]];
+                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
 	};  
         case "isladuala": {      
                 BIS_alice_mainscope setvariable ["trafficDistance",1000];             
@@ -67,12 +67,12 @@ switch toLower(worldName) do {
                 BIS_alice_mainscope setvariable ["spawnDistance",700];        
 		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"]; 
                 // Add some rare english speaking civilians to the mix          
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"]];
+                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
         };   
         case "torabora": {       
                 BIS_alice_mainscope setvariable ["trafficDistance",1500];       
                 BIS_alice_mainscope setvariable ["spawnDistance",600];        
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"]];  
+                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];  
         };
         case "utes": {        
                 BIS_alice_mainscope setvariable ["trafficDistance",650];      
@@ -85,7 +85,7 @@ switch toLower(worldName) do {
                 BIS_alice_mainscope setvariable ["spawnDistance",600];      
                 BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"];   
                 // Add some rare english speaking civilians to the mix            
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV","BIS_CIV_special"]];  
+                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];  
                 //[BIS_alice_mainscope, "civilianRarity",["CIV_EuroWoman01_EP1", 5, "CIV_EuroWoman02_EP1", 5, "Dr_Annie_Baker_EP1", 10, "Rita_Ensler_EP1", 10, "CIV_EuroMan01_EP1", 5, "CIV_EuroMan02_EP1", 5, "Haris_Press_EP1", 10, "Dr_Hladik_EP1", 10, "Citizen2_EP1", 5, "Citizen3_EP1", 5, "Profiteer2_EP1", 5, "Functionary1_EP1", 5, "Functionary2_EP1", 3]] call BIS_fnc_variableSpaceAdd;
         };
 };
