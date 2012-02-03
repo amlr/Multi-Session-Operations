@@ -145,9 +145,13 @@ execNow "core\modules\rmm_nomad\main.sqf";
 execNow "core\modules\rmm_gtk\main.sqf";
 #endif
 
-#ifdef RMM_WEATHER
 "Weather" call mso_core_fnc_initStat;
+#ifdef RMM_WEATHER
 execNow "core\modules\rmm_weather\main.sqf";
+#endif
+#ifdef DRN_WEATHER
+execNow "core\modules\DRN_weather\CommonLib.sqf";
+[10, 60, 10, 60, true] execNow "core\modules\DRN_weather\DynamicWeatherEffects.sqf";
 #endif
 
 #ifdef RMM_SETTINGS

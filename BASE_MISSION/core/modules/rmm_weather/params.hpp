@@ -4,13 +4,14 @@ class weatherHeader {
         texts[]= {" "}; 
         default = 0;
 };
+/*
 class disableFog {
         title = "    Disable Fog"; 
         values[]= {0,1}; 
         texts[]= {"false","true"}; 
         default = 0;
 };
-
+*/
 class timeSync {
         title = "    Time Sync Check";
         values[] = {60,300,600,3600,7200};

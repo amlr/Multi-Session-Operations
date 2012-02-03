@@ -1,3 +1,4 @@
+#define DRN_WEATHER
 #define RMM_DEBUG
 #define RMM_HELP
 #define RMM_MP_RIGHTS

@@ -11,7 +11,7 @@ CRB_timeSync = {
                 setDate _stime;
         };
 };
-
+/*
 CRB_randomOvercast = {
         private ["_value","_delay"];
         _value = random 1; //new overcast% (0-1)
@@ -39,12 +39,13 @@ CRB_randomRain = {
         
         [rain, _value, time, time + _delay];
 };
-
+*/
 if (isserver) then {        
+/*
         if(isNil "disableFog") then {
                 disableFog = 0;
         };
-        
+*/        
         if(isNil "timeSync") then {
                 timeSync = 300;
         };
@@ -96,7 +97,7 @@ if (isserver) then {
         
         CRB_t = [date];
         publicvariable "CRB_t";
-        
+/*        
         // Set random weather on server
        	_overcast = random 1;
         diag_log format["MSO-%1 Weather Server Start: Overcast=%2", time, _overcast];
@@ -117,7 +118,7 @@ if (isserver) then {
         RMM_w = RMM_o + RMM_f + RMM_r;
         RMM_w call weather_fnc_sync;
         publicVariable "RMM_w";
-        
+
         [{               
                 private ["_oend","_fend","_rend","_publish"];
                 _publish = false;
@@ -143,18 +144,19 @@ if (isserver) then {
                         publicVariable "RMM_w";
                 };
         }, 30, []] call mso_core_fnc_addLoopHandler;
-        
+*/        
         [{CRB_t = [date]; publicvariable "CRB_t";}, timeSync, []] call mso_core_fnc_addLoopHandler;
         
 };
 
 if(!isDedicated) then {
         "CRB_t" addPublicVariableEventHandler {CRB_t call CRB_timeSync;};
+/*
         "RMM_w" addPublicVariableEventHandler {RMM_w call weather_fnc_sync;};
-        
+*/        
         waitUntil{!isNil "CRB_t"};
         CRB_t call CRB_timeSync;
-        
+/*
         waitUntil{!isNil "RMM_w"};
         _ocurrent = RMM_w select 0;
         _oforecast = RMM_w select 1;
@@ -187,4 +189,5 @@ if(!isDedicated) then {
         0 setRain _rain;
         
         RMM_w call weather_fnc_sync;
+*/
 };
