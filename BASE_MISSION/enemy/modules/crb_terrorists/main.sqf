@@ -101,7 +101,7 @@ PGM_fnc_CreateIntel = {
 
 
 TUP_fnc_AddVehicleTrigger = {
-	private ["_vehicle", "_debug"];
+	private ["_vehicle","_debug","_trg"];
 	
 	_vehicle = _this select 0;
 	_debug = _this select 1;
@@ -153,7 +153,7 @@ CRB_fnc_FindVehicle = {
 CRB_fnc_SpawnVehicle = {
 	CRBPROFILERSTART("CRB Terrorists spawnVehicle")
 
-        private ["_vehicle","_vcargo","_tmp","_pos","_crew"];
+        private ["_vehicle","_vcargo","_tmp","_pos","_crew","_debug"];
         _pos = _this select 0;
         _crew = 1;
         if(count _this > 1) then {
@@ -192,7 +192,7 @@ CRB_fnc_SpawnRandomAmmo = {
         _pos = _this select 0;
         _aclass = [
                 ["GuerillaCacheBox_EP1","GuerillaCacheBox","LocalBasicWeaponsBox"],
-                [1,5,5]
+                [2,3,3]
         ] call mso_core_fnc_selectRandomBias;
         _ammo = createVehicle [_aclass, _pos, [], 0, "NONE"];
         //        _ammo setPos _pos;
@@ -497,7 +497,7 @@ CRB_fnc_SplitCell = {
         _newtwn = _newtwn call BIS_fnc_selectRandom;
         */        
         _newtwn = [_pos, _debug] call CRB_fnc_GetNearestTown;
-        _newcell setVariable ["nearestTown", _newtwn, true];        
+        _newcell setVariable ["nearestTown", _newtwn, true];        
         if (_debug) then {
                 deleteMarker _tcrm;
         };
@@ -631,14 +631,11 @@ _spawnpoints = [];
         };
 } forEach CRB_LOCS;
 
-if (count _spawnpoints == 0) then 
+private ["_tmplocs"];
+_tmplocs = bis_functions_mainscope getvariable "locations";
 {
-	private ["_tmplocs"];
-	_tmplocs = bis_functions_mainscope getvariable "locations";
-	{
-		_spawnpoints = _spawnpoints + [position _x];
-	} forEach _tmplocs;
-};
+	_spawnpoints = _spawnpoints + [position _x];
+} forEach _tmplocs;
 
 waitUntil{!isNil "bis_alice_mainscope"};
 
