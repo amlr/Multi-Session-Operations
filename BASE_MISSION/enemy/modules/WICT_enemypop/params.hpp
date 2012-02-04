@@ -2,7 +2,7 @@ class WICT_wict_header {
         title = "    Enemy - World In Conflict Tool"; 
         values[]= {0, 1}; 
         texts[]= {"Off","On"}; 
-        default = 1;
+        default = 0;
 };
 class wict_ai_groups {
         title = "        WICT - Maximum AI Groups"; 

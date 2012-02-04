@@ -2,7 +2,7 @@ class tup_airtraffic_factions {
         title = "    Enable Ambient Air Factions"; 
         values[]= {0,1,2}; 
         texts[]= {"All Factions","Civilian Only","None"}; 
-        default = 1;
+        default = 0;
 };
 class tup_airtraffic_intensity {
         title = "        Ambient Air Intensity"; 
