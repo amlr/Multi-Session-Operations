@@ -10,14 +10,19 @@ if(leader player == player) then {
                 
                 // Sync leader
                 _SOM synchronizeObjectsAdd [_this];
+
+		_this setVariable ["SOM", _SOM, true];
                 
-                [_SOM, _this] spawn {                                
-                        private ["_SOM","_leader"];
-                        _SOM = _this select 0;
-                        _leader = _this select 1;
-                        // Setup Support
-                        waitUntil{_SOM getVariable "initDone"};
-                        [["transport", "aerial_reconnaissance", "supply_drop", "tactical_airstrike", "artillery_barrage","gunship_run"], _leader] call BIS_SOM_addSupportRequestFunc;
-                };
         }] call mso_core_fnc_ExMP;
+
+	waitUntil{!isNil {player getVariable "SOM"}};
+	[player getVariable "SOM", player] spawn {                                
+		private ["_SOM","_leader"];
+		_SOM = _this select 0;
+		_leader = _this select 1;
+		// Setup Support
+		waitUntil{_SOM getVariable "initDone"};
+		[["transport", "aerial_reconnaissance", "supply_drop", "tactical_airstrike", "artillery_barrage","gunship_run"], _leader] call BIS_SOM_addSupportRequestFunc;
+	};
+
 };
