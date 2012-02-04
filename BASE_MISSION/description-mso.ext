@@ -18,6 +18,9 @@ class CfgSounds {
 #ifdef AEG
 	#include <ambience\modules\AEG\Sounds\AEG_Sounds.hpp>
 #endif
+#ifdef TUP_IED
+	#include <enemy\modules\tup_ied\CfgSounds.hpp>
+#endif
 #ifdef RMM_CAS
 	#include <support\modules\rmm_cas\LDL_ac130\Includes\CfgSounds.hpp>
 #endif
@@ -97,6 +100,9 @@ class Params {
 #endif
 #ifdef CRB_CONVOYS
 	#include <enemy\modules\crb_convoys\params.hpp>
+#endif
+#ifdef TUP_IED
+	#include <enemy\modules\tup_ied\params.hpp>
 #endif
 #ifdef CRB_TERRORISTS
 	#include <enemy\modules\crb_terrorists\params.hpp>
@@ -189,6 +195,9 @@ class cfgFunctions {
 #endif
 #ifdef RMM_TYRES
 	#include <support\modules\rmm_tyres\functions.hpp>
+#endif
+#ifdef TUP_IED
+	#include <enemy\modules\tup_ied\functions.hpp>
 #endif
 };
 

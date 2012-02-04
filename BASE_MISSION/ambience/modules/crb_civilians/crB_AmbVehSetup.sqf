@@ -84,6 +84,13 @@ BIS_silvie_mainscope setVariable ["vehicleInit",{
 //                _this setDamage (random 0.5);
         };
 
+		// 10% (set in params) chance its a VB-IED (radio controlled if EOD) - never a bike
+		if (isNil "tup_vbied_threat")then{tup_vbied_threat = 10;};
+		If ((random 100 < tup_vbied_threat) && (tup_vbied_threat > 0) && !(_this iskindOf  "Motorcycle")) then {
+			_this lock true;
+			[_this,true] execvM "enemy\modules\tup_ied\vbied.sqf";
+		};
+		
         _this addEventHandler ["Engine", {
                 if(_this select 1) then {
                         driver (_this select 0) addRating -400;

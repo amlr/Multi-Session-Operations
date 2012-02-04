@@ -6,6 +6,7 @@
 #define RMM_ZORA
 
 // - To Test
+#define TUP_IED
 #define WICT_ENEMYPOP
 #define RYD_HAC
 //#define BIS_WARFARE

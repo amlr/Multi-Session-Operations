@@ -118,10 +118,10 @@ if (isClass(configFile>>"CfgPatches">>"nielsen_cim")) then {
 			_marker = [_markername, position _x, "Icon", [1, 1], "GLOBAL"] call CBA_fnc_createMarker;
 		} foreach (bis_functions_mainscope getvariable "locations");
 		
-		// Place CRM module and sync to player group
+		// Place CRM module and sync to players
 		("nielsen_crm" createUnit [position BIS_functions_mainscope,group BIS_functions_mainscope,"
 			this setVariable ['nielsen_crm_events_range',300]; 
-			this setVariable ['nielsen_crm_events_chance',0.8]; 
+			this setVariable ['nielsen_crm_events_chance',0.66]; 
 			this setVariable ['nielsen_crm_events',['gathering','intel','ambush']];
 			this setVariable ['nielsen_crm_evidence',true];
 			this setVariable ['nielsen_crm_evidence_time',180];

@@ -70,6 +70,11 @@ execNow "enemy\modules\crb_convoys\main.sqf";
 execNow "enemy\modules\rmm_zora\main.sqf";
 #endif
 
+#ifdef TUP_IED
+"Ambient IEDs" call mso_core_fnc_initStat;
+execNow "enemy\modules\tup_ied\main.sqf";
+#endif
+
 #ifdef CRB_TERRORISTS
 "Terrorist Cells" call mso_core_fnc_initStat;
 execNow "enemy\modules\crb_terrorists\main.sqf";
