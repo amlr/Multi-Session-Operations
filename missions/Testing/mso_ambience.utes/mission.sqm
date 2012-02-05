@@ -27,11 +27,10 @@ class Mission
 		"CAWheeled",
 		"ca_modules_functions",
 		"ca_missions_garbagecollector",
+		"cba_main",
 		"ca_modules_clouds",
 		"ca_modules_e_weather",
 		"ca_modules_marta",
-		"BI_SRRS",
-		"cba_main",
 		"utes"
 	};
 	randomSeed=3869952;
@@ -49,7 +48,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=9;
+		items=7;
 		class Item0
 		{
 			side="WEST";
@@ -71,6 +70,7 @@ class Mission
 				class Item1
 				{
 					position[]={3469.7537,18.89266,3650.7329};
+					special="FLY";
 					id=1;
 					side="WEST";
 					vehicle="AW159_Lynx_BAF";
@@ -358,7 +358,7 @@ class Mission
 			side="LOGIC";
 			class Vehicles
 			{
-				items=2;
+				items=7;
 				class Item0
 				{
 					position[]={3458.8113,19.479034,3705.979};
@@ -380,27 +380,28 @@ class Mission
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
-			};
-		};
-		class Item7
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=5;
-				class Item0
+				class Item2
+				{
+					position[]={3483.0105,19.56665,3705.6665};
+					azimut=0.57764745;
+					id=19;
+					side="LOGIC";
+					vehicle="CBA_main_require";
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+				class Item3
 				{
 					presenceCondition="!isDedicated";
 					position[]={3484.7126,18.811483,3693.0669};
 					azimut=-0.075824231;
-					id=19;
+					id=18;
 					side="LOGIC";
 					vehicle="BIS_clouds_Logic";
-					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
-				class Item1
+				class Item4
 				{
 					presenceCondition="!isDedicated";
 					position[]={3471.5554,19,3692.813};
@@ -411,7 +412,7 @@ class Mission
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
-				class Item2
+				class Item5
 				{
 					presenceCondition="!isDedicated";
 					position[]={3457.3269,19,3692.7368};
@@ -422,7 +423,7 @@ class Mission
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
-				class Item3
+				class Item6
 				{
 					presenceCondition="!isDedicated";
 					position[]={3457.4509,19,3679.2368};
@@ -432,37 +433,7 @@ class Mission
 					vehicle="MartaManager";
 					lock="UNLOCKED";
 					skill=0.60000002;
-					init="setGroupIconsVisible [true, false]; BIS_marta_mainscope setvariable [""delay"", 300];";
-				};
-				class Item4
-				{
-					presenceCondition="!isDedicated";
-					position[]={3471.697,18.932116,3679.2563};
-					azimut=-0.075824231;
-					id=18;
-					side="LOGIC";
-					vehicle="BIS_SRRS_Logic";
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item8
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={3483.0105,19.56665,3705.6665};
-					azimut=0.57764745;
-					id=20;
-					side="LOGIC";
-					vehicle="CBA_main_require";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
+					init="setGroupIconsVisible [true, false]; BIS_marta_mainscope setvariable [""delay"", 15];";
 				};
 			};
 		};
