@@ -22,4 +22,9 @@ class tup_vbied_threat {
         texts[]= {"None","Low","Med","High"}; 
         default = 10;
 };
-
+class tup_ied_eod{
+        title = "        Integrate with EOD Add-on (if available)"; 
+        values[]= {0,1}; 
+        texts[]= {"Off","On"}; 
+        default = 1;
+};

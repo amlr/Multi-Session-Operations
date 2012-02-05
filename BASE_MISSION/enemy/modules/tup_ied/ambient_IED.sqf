@@ -9,13 +9,11 @@ _size = _this select 1;
 _debug = false;
 _numIEDs = round ((_size / 50) * (tup_ied_threat / 100));
 
-if (_debug) then {
-	diag_log format ["MSO-%1 IED: creating %2 IEDs at %3", time, _numIEDs, mapgridposition _location];
-};
+diag_log format ["MSO-%1 IED: creating %2 IEDs at %3", time, _numIEDs, mapgridposition _location];
 
 for "_j" from 1 to _numIEDs do {
 
-	if (isClass(configFile>>"CfgPatches">>"reezo_eod")) then {
+	if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1)) then {
 		("reezo_eod_iedarea" createUnit [_location, group BIS_functions_mainscope,
 			format["this setVariable ['reezo_eod_range',[0,%1]];
 			this setVariable ['reezo_eod_probability',1];
@@ -34,12 +32,16 @@ for "_j" from 1 to _numIEDs do {
 			[_IED, typeOf _IED] execvm "enemy\modules\tup_ied\arm_ied.sqf";
 			_IED addeventhandler ["HandleDamage",{
 				deletevehicle ((_this select 0) getvariable "Trigger");
-				diag_log format ["MSO-%1 IED: %2 explodes due to damage by %3", time, (_this select 0), (_this select 3)];
+				if (_debug) then {
+					diag_log format ["MSO-%1 IED: %2 explodes due to damage by %3", time, (_this select 0), (_this select 3)];
+				};
 				"Sh_82_HE" createVehicle position (_this select 0);
 				deletevehicle (_this select 0);
 			}];
 		} else {
-			diag_log format ["MSO-%1 IED: Invalid position (%2) for IED. Skipping.", time, _IEDpos];
+			if (_debug) then {
+				diag_log format ["MSO-%1 IED: Invalid position (%2) for IED. Skipping.", time, _IEDpos];
+			};
 		};
 	};
 };

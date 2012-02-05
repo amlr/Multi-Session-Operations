@@ -3,8 +3,9 @@
 
 if (!isServer) exitWith{};
 
-private ["_soldier", "_rangeMin", "_rangeMax"];
+private ["_soldier", "_rangeMin", "_rangeMax","_debug"];
 _soldier = _this select 0;
+_debug = false;
 
 if ((getPos _soldier) select 2 > 5) exitWith {};
 
@@ -26,7 +27,7 @@ private ["_nearRoads","_goodSpots","_nearRoads"];
 _goodSpots = []; 
 _nearRoads = (getPos _soldier) nearRoads _rangeMax;
 
-if (count _nearRoads == 0) exitWith {diag_log format ["IED exiting as no roads found %1",_nearRoads];}; //Exit if no roads are found
+if (count _nearRoads == 0) exitWith {if (_debug) then {diag_log format ["IED exiting as no roads found %1",_nearRoads];};}; //Exit if no roads are found
 
 //FIND SUITABLE SPOTS AT LEAST 2/3 OF THE SOLDIER POSITION
 private ["_i"];
@@ -46,7 +47,7 @@ private ["_IEDpos","_IEDskins","_IED"];
 _IEDpos = _goodSpots select (floor (random (count _goodSpots)));
 private ["_nearBodies"];
 _nearBodies = _IEDpos nearEntities [["Man","Car","Motorcycle","Tank"],15];
-if (count _nearBodies > 0) exitWith {diag_log format ["IED exiting as near objects found %1",_nearBodies];}; //Exit if bodies are near (this way the IED does not auto-explode on spawn)
+if (count _nearBodies > 0) exitWith {if (_debug) then {diag_log format ["IED exiting as near objects found %1",_nearBodies];};}; //Exit if bodies are near (this way the IED does not auto-explode on spawn)
 
 //IF IT IS ALL GOOD, SPAWN THE IED
 _soldier setVariable ["reezo_eod_avail",false];

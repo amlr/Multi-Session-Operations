@@ -9,7 +9,7 @@ _radio = _this select 1;
 		_IED attachTo [_vehicle,[0,0,0]];
 		
 		// If EOD addon is detected then add reezo eventhandler for radio controlled IED else set detonation trigger for normal IED
-		if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (_radio)) then {
+		if (((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1)) && (_radio)) then {
 			// add dicker to ensure IED is not interfered with
 			private ["_dicker","_skins","_group"];
 			_group = createGroup civilian;

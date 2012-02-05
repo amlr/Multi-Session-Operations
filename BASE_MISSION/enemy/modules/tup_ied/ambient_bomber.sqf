@@ -10,7 +10,7 @@ _size = _this select 2;
 
 _debug = false;
 
-	if (isClass(configFile>>"CfgPatches">>"reezo_eod")) then {
+	if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1)) then {
 		("reezo_eod_suicarea" createUnit [_location, group BIS_functions_mainscope, 
 			format ["this setVariable ['reezo_eod_range',[0,%1]];
 			this setVariable ['reezo_eod_probability',1];
@@ -41,7 +41,9 @@ _debug = false;
 			"Sh_82_HE" createVehicle (position _bomber);
 		} else {
 			sleep 1;
-			diag_log format ["Deleting Suicide Bomber %1 as out of time or dead.", _bomber];
+			if (_debug) then {
+				diag_log format ["Deleting Suicide Bomber %1 as out of time or dead.", _bomber];
+			};
 			sleep 120;
 			deletevehicle _bomber;
 		};

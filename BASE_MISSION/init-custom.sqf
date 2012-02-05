@@ -57,8 +57,9 @@ if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
 };
 
 // EOD Mod Configuration
+if (isNil "tup_ied_eod")then{tup_ied_eod = 1;};
 if (isServer) then {
-	if (isClass(configFile>>"CfgPatches">>"reezo_eod")) then {
+	if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1)) then {
 		
 		// Add THOR 3 backpacks to ammo crates or ACRE_RadioBox
 		private ["_thors","_boxes","_crates","_boxmarkers","_crate","_number"];

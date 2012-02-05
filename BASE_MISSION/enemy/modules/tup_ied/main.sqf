@@ -8,7 +8,7 @@ _debug = false;
 
 if (isNil "tup_ied_header")then{tup_ied_header = 1;};
 if ((!isServer) || (tup_ied_header == 0)) exitWith{};
-
+if (isNil "tup_ied_eod")then{tup_ied_eod = 1;};
 if (isNil "tup_ied_threat")then{tup_ied_threat = 50;};
 if (isNil "tup_suic_threat")then{tup_suic_threat = 20;};
 
@@ -18,7 +18,9 @@ if (isNil "tup_suic_threat")then{tup_suic_threat = 20;};
 	_pos = position _x;
 	_twn = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Strategic","VegetationVineyard","NameLocal"], 50]) select 0;
 	_size = (size _twn) select 0;
-	diag_log format ["town is %1 at %2. %3m in size and type %4", text _twn, position _twn, _size, type _twn];
+	if (_debug) then {
+		diag_log format ["town is %1 at %2. %3m in size and type %4", text _twn, position _twn, _size, type _twn];
+	};
 	if ({position _x in _twn} count ([] call BIS_fnc_listPlayers) == 0) then {		
 		_fate = random 100;
 		if (_fate < tup_suicide_threat) then {

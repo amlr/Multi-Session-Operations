@@ -9,7 +9,7 @@ _debug = false;
 _IEDplaced = round ((_size / 50) * (tup_ied_threat / 100));
 _ieds = [];
 
-if (isClass(configFile>>"CfgPatches">>"reezo_eod")) then {
+if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1)) then {
 	_ieds = nearestobjects [_location,["reezo_eod_iedarea"],_size];
 } else {
 	_IEDskins = ["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC"];
@@ -23,7 +23,7 @@ for "_j" from 0 to ((count _ieds) -1) do {
 	_IED = _ieds select _j;
 	if (count (nearestobjects [ _IED, ["Car"], 4]) == 0) then {
 		// delete trigger too if non-eod IED
-		if !(isClass(configFile>>"CfgPatches">>"reezo_eod")) then {
+		if (!(isClass(configFile>>"CfgPatches">>"reezo_eod")) || ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 0))) then {
 			deletevehicle (_IED getvariable "Trigger");
 		};
 		deletevehicle _IED;
