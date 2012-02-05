@@ -1,3 +1,6 @@
+if (isNil "bis_som_header")then{bis_som_header = 1;};
+if (bis_som_header == 0) exitWith{};
+
 if(leader player == player) then {
         [0,player,{
                 private ["_SOM"];

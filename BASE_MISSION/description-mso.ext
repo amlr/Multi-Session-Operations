@@ -89,6 +89,9 @@ class Params {
 #ifdef CRB_TWNMGR
 	#include <support\modules\CRB_twnmgr\params.hpp>
 #endif
+#ifdef BIS_SOM
+	#include <support\modules\bis_som\params.hpp>
+#endif
 #ifdef WHB_MULTISPAWN
 	#include <support\modules\WHB_Multispawn\params.hpp>
 #endif
