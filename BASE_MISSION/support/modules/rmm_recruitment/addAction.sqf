@@ -1,13 +1,10 @@
 waitUntil{!isNil "bis_fnc_init"};
 
-_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_baf"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && typeOf _this == ""BAF_Soldier_TL_MTP"";"];
-_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_us"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && typeOf _this == ""US_Soldier_TL_EP1"";"];
-_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_usmc"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && typeOf _this == ""USMC_Soldier_TL"";"];
-_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_ru"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && typeOf _this == ""RU_Soldier_TL"";"];
-_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_gue"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && typeOf _this == ""GUE_Soldier_CO"";"];
-_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_gue"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && typeOf _this == ""GUE_Commander"";"];
-
-
+_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_baf"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && (typeOf _this == ""BAF_Soldier_TL_MTP"" || typeOf _this == ""BAF_Soldier_SL_MTP"");"];
+_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_us"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && (typeOf _this == ""US_Soldier_TL_EP1"" || typeOf _this == ""US_Soldier_SL_EP1"");"];
+_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_usmc"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && (typeOf _this == ""USMC_Soldier_TL"" || typeOf _this == ""USMC_Soldier_SL"");"];
+_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_ru"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && (typeOf _this == ""RU_Soldier_TL"" || typeOf _this == ""RU_Soldier_SL"");"];
+_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_gue"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && (typeOf _this == ""GUE_Soldier_CO"" || typeOf _this == ""GUE_Commander"");"];
 
 _this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_cz"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && typeOf _this == ""CZ_Soldier_SL_DES_EP1"";"];
 _this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_aaw"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && (typeOf _this == ""aawInfantrySecco1"");"];
