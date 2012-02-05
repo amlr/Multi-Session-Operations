@@ -10,13 +10,14 @@ if (isNil "tup_ied_header")then{tup_ied_header = 1;};
 if ((!isServer) || (tup_ied_header == 0)) exitWith{};
 if (isNil "tup_ied_eod")then{tup_ied_eod = 1;};
 if (isNil "tup_ied_threat")then{tup_ied_threat = 50;};
-if (isNil "tup_suic_threat")then{tup_suic_threat = 20;};
+if (isNil "tup_suicide_threat")then{tup_suicide_threat = 20;};
 
 {
 	private ["_fate","_pos","_trg","_twn"];
 	// Set up Bombers and IEDs at each location (except any player starting location)
 	_pos = position _x;
-	_twn = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Strategic","VegetationVineyard","NameLocal"], 50]) select 0;
+	//_twn = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Strategic","VegetationVineyard","NameLocal"], 50]) select 0;
+	_twn = nearestLocation [_pos, ""];
 	_size = (size _twn) select 0;
 	if (_debug) then {
 		diag_log format ["town is %1 at %2. %3m in size and type %4", text _twn, position _twn, _size, type _twn];
