@@ -29,7 +29,7 @@ _debug = false;
 		sleep (random 60);
 		_victim = units (group _victim) call BIS_fnc_selectRandom;
 		_time = time + 600;
-		waitUntil {_bomber doMove position _victim; sleep 5; (_bomber distance _victim < 8) || (time > _time) || !(alive _bomber)};
+		waitUntil {_bomber doMove getposATL _victim; sleep 5; (_bomber distance _victim < 8) || (time > _time) || !(alive _bomber)};
 		if ((_bomber distance _victim < 8) && (alive _bomber)) then {
 			_bomber playMoveNow "AmovPercMstpSsurWnonDnon";
 			[_bomber, "reezo_eod_sound_akbar"] call CBA_fnc_globalSay3d;
@@ -38,7 +38,7 @@ _debug = false;
 			_bomber disableAI "MOVE";
 			_bomber addRating -1000;
 			diag_log format ["BANG! Suicide Bomber %1", _bomber];
-			"Sh_82_HE" createVehicle (position _bomber);
+			"Sh_82_HE" createVehicle (getposATL _bomber);
 		} else {
 			sleep 1;
 			if (_debug) then {

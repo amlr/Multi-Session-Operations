@@ -63,22 +63,20 @@ If !(isNull driver _vehicle) then {
 	
 	//	2. Approach BLUFOR then Detonate a bomb
 	If (_fate == 4) then {
+		private ["_booby","_victim"];	
+		_booby = [_vehicle, typeOf _vehicle, "Sh_125_HE"] execvm "enemy\modules\tup_ied\arm_ied.sqf";
+		waitUntil {sleep 1; scriptDone _booby};
+		_victim = _targets call BIS_fnc_selectRandom;
 		if (_debug) then {
-			diag_log format ["MSO-%1 Terrorists Cells: Terrorist car %2 at %3 is now suicide car bomb (Activated by %4)", time, typeof _vehicle, mapgridposition _vehicle, typeof (_targets select 0)];
-		};	
-		_trg = createTrigger["EmptyDetector",getPos _vehicle]; 
-		_trg setTriggerArea[15,15,0,false];
-		_trg setTriggerActivation["WEST","PRESENT",false];
-		_trg setTriggerStatements["this && ({vehicle _x in thisList} count ([] call BIS_fnc_listPlayers) > 0)", "_bomb = nearestObject [getPos (thisTrigger), 'Car']; boom = 'Sh_105_HE' createVehicle position _bomb;", ""]; 
-		_trg attachTo [_vehicle,[0,0,0]];
-		
+			diag_log format ["MSO-%1 Terrorists Cells: Terrorist car %2 at %3 is now suicide car bomb (Activated by %4)", time, typeof _vehicle, mapgridposition _vehicle, typeof _victim];
+		};
 		_grp setBehaviour "CARELESS";
 		_grp setCombatMode "BLUE";
 		_grp setSpeedMode "FULL";
 		{_x enableAI "MOVE"; _x enableAI "ANIM"} foreach units _grp;
-		while {_terrorist distance (_targets select 0) > 10} do {
+		while {_terrorist distance _victim > 4} do {
 			sleep 1; 
-			_terrorist move getpos (_targets select 0);
+			_terrorist domove getposATL _victim;
 		};
 	};	
 	
@@ -116,6 +114,7 @@ If !(isNull driver _vehicle) then {
 } else {
 	// No driver
 	// Check to see if it is booby trapped
+	
 	if (_debug) then {
 		diag_log format ["MSO-%1 Terrorists Cells: No driver in Terrorist car %2", time, typeof _vehicle];
 	};
@@ -127,6 +126,7 @@ If !(isNull driver _vehicle) then {
 	};
 	
 	if (_chance > 2) then {
+		private "_booby";
 		if (_chance > 4) then {
 			_radio = true; 
 		} else { 

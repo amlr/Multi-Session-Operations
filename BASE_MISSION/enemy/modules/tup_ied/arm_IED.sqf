@@ -16,13 +16,13 @@ if (count _this > 2) then {
 _proximity = 1 + round(random 7);
 
 if (_debug) then {
-	diag_log format ["MSO-%1 IED: arming IED at %2 of %3 as %4 with proximity of %5",time, position _IED,_type,_shell,_proximity];
+	diag_log format ["MSO-%1 IED: arming IED at %2 of %3 as %4 with proximity of %5",time, getposATL _IED,_type,_shell,_proximity];
 };
 
-_trg = createTrigger["EmptyDetector", getPos _IED]; 
+_trg = createTrigger["EmptyDetector", getposATL _IED]; 
 _trg setTriggerArea[_proximity,_proximity,0,false];
 _trg setTriggerActivation["WEST","PRESENT",false];
-_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((position vehicle _x) select 2 < 8)} count ([] call BIS_fnc_listPlayers) > 0)", format["_bomb = nearestObject [getPos (thisTrigger), '%1']; boom = '%2' createVehicle position _bomb;",_type,_shell], ""]; 
+_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL  vehicle _x) select 2 < 8)} count ([] call BIS_fnc_listPlayers) > 0)", format["_bomb = nearestObject [getposATL (thisTrigger), '%1']; boom = '%2' createVehicle getposATL _bomb;",_type,_shell], ""]; 
 
 _IED setvariable ["Trigger", _trg];
 

@@ -9,7 +9,7 @@ _size = _this select 1;
 _debug = false;
 _numIEDs = round ((_size / 50) * (tup_ied_threat / 100));
 
-diag_log format ["MSO-%1 IED: creating %2 IEDs at %3", time, _numIEDs, mapgridposition _location];
+diag_log format ["MSO-%1 IED: creating %2 IEDs at %3", time, _numIEDs, mapgridposition  _location];
 
 for "_j" from 1 to _numIEDs do {
 
@@ -22,7 +22,7 @@ for "_j" from 1 to _numIEDs do {
 	} else {
 		// Create non-eod IED
 		private ["_IEDskins","_IED","_IEDpos","_pos","_posloc","_cen"];
-		_cen = getArray(configFile >> "CfgWorlds" >> worldName >> "centerPosition");
+		_cen = getArray(configFile >> "CfgWorlds" >> worldName >> "centerposition ");
 		_posloc = [_location, true, true, true, _size] call tup_ied_fnc_placeIED;
 		_pos = _posloc call BIS_fnc_selectRandom;
 		_IEDpos = [_pos, 2, 10, 2, 0, 0, 0] call BIS_fnc_findSafePos;
@@ -35,12 +35,12 @@ for "_j" from 1 to _numIEDs do {
 				if (_debug) then {
 					diag_log format ["MSO-%1 IED: %2 explodes due to damage by %3", time, (_this select 0), (_this select 3)];
 				};
-				"Sh_82_HE" createVehicle position (_this select 0);
+				"Sh_82_HE" createVehicle getposATL (_this select 0);
 				deletevehicle (_this select 0);
 			}];
 		} else {
 			if (_debug) then {
-				diag_log format ["MSO-%1 IED: Invalid position (%2) for IED. Skipping.", time, _IEDpos];
+				diag_log format ["MSO-%1 IED: Invalid getposATL (%2) for IED. Skipping.", time, _IEDpos];
 			};
 		};
 	};
