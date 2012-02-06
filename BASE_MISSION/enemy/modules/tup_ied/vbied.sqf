@@ -1,4 +1,5 @@
-private ["_IEDskins","_IED","_trg","_vehicle"];
+private ["_IEDskins","_IED","_trg","_vehicle","_debug"];
+_debug = false;
 _vehicle = _this select 0;
 _radio = _this select 1;
 
