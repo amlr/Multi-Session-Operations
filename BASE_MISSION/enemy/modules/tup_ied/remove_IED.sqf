@@ -5,7 +5,6 @@ if !(isServer) exitWith {diag_log "RemoveIED Not running on server!";};
 
 _location = _this select 0;
 _size = _this select 1;
-_debug = false;
 _IEDplaced = round ((_size / 50) * (tup_ied_threat / 100));
 _ieds = [];
 
@@ -32,6 +31,5 @@ for "_j" from 0 to ((count _ieds) -1) do {
 	};
 };
 
-if (_debug) then {
-	diag_log format ["Deleted %1 IEDs of %2 placed", (count _ieds) - _nodel, _IEDplaced];
-};
+
+diag_log format ["Deleted %1 IEDs of %2 placed", (count _ieds) - _nodel, _IEDplaced];

@@ -6,11 +6,11 @@ Expected behaviour is that if a Terrorist Cell travelling by car detects BLUFOR 
 	3. Get out and fight
 	4. Surrender */
 	
-private ["_terrorist","_debug","_vehicle","_grp","_fate","_pos","_trg","_targets","_destpos","_waittime","_wp"];
+private ["_terrorist","_debug","_vehicle","_grp","_fate","_pos","_trg","_targets","_destpos","_waittime","_wp","_chance","_radio"];
 
 if(!isServer) exitWith{};
 
-_debug = false;
+_debug = true;
 	
 // Get the terrorist vehicle
 _pos = getpos (_this select 0);
@@ -22,7 +22,7 @@ _waittime = time + 180;
 _targets = _this select 1;
 
  if (_debug) then {
-	diag_log format ["MSO-%1 Terrorists Cells: West Detected near %2 at %3:%4", time, typeof _vehicle, _pos, mapgridposition _pos];
+	diag_log format ["MSO-%1 Terrorists Cells: West Detected near %2 at %3 (%4)", time, typeof _vehicle, _pos, mapgridposition _pos];
 };
 
 // Check to see if vehicle has a driver
@@ -34,7 +34,7 @@ If !(isNull driver _vehicle) then {
 	
 	// Stop Terrorists from doing anything
 	_grp setBehaviour "CARELESS";
-        doStop (leader _grp);
+     doStop (leader _grp);
 
 	_fate = round(random 6); // roll the dice!
 	
@@ -69,7 +69,7 @@ If !(isNull driver _vehicle) then {
 		_trg = createTrigger["EmptyDetector",getPos _vehicle]; 
 		_trg setTriggerArea[15,15,0,false];
 		_trg setTriggerActivation["WEST","PRESENT",false];
-		_trg setTriggerStatements["this && ({vehicle _x in thisList} count ([] call BIS_fnc_listPlayers) > 0)", "_bomb = nearestObject [getPos (thisTrigger), 'Car']; boom = 'Bo_MK82' createVehicle position _bomb;", ""]; 
+		_trg setTriggerStatements["this && ({vehicle _x in thisList} count ([] call BIS_fnc_listPlayers) > 0)", "_bomb = nearestObject [getPos (thisTrigger), 'Car']; boom = 'Sh_105_HE' createVehicle position _bomb;", ""]; 
 		_trg attachTo [_vehicle,[0,0,0]];
 		
 		_grp setBehaviour "CARELESS";
@@ -89,7 +89,7 @@ If !(isNull driver _vehicle) then {
 		if (_debug) then {
 			diag_log format ["MSO-%1 Terrorists Cells: Terrorist car %2 at %3 will surrender if approached by %4 (Activated by %5)", time, typeof _vehicle, mapgridposition _vehicle, _waittime, typeof (_targets select 0)];
 		};	
-		waitUntil {sleep 1; _vehicle distance (_targets select 0) < 25 || _waittime < time};
+		waitUntil {sleep 1; ((_vehicle distance (_targets select 0) < 25) && (((position (_targets select 0)) select 2) < 5)) || _waittime < time};
 		
 		{_x enableAI "MOVE"; _x enableAI "ANIM"} foreach units _grp;
 		
@@ -105,36 +105,37 @@ If !(isNull driver _vehicle) then {
 				sleep (random 1);
 			} foreach units _grp;
 		};	
-		
-		//	3. Get out and fight
-		If (_fate < 3) then {
-			_grp setBehaviour "COMBAT";
-			{_x enableAI "MOVE"; _x enableAI "ANIM"} foreach units _grp;
-		};
-	
 	};
+	
+	//	3. Get out and fight
+	If (_fate < 3) then {
+		_grp setBehaviour "COMBAT";
+		{_x enableAI "MOVE"; _x enableAI "ANIM"} foreach units _grp;
+	};
+	
 } else {
 	// No driver
 	// Check to see if it is booby trapped
-	 if (_debug) then {
+	if (_debug) then {
 		diag_log format ["MSO-%1 Terrorists Cells: No driver in Terrorist car %2", time, typeof _vehicle];
 	};
 	
 	if (_debug) then {
-		_fate = 6; 
+		_chance = 6; 
 	} else {
-		_fate = random 6; //roll the dice!
+		_chance = random 6; //roll the dice!
 	};
 	
-	if (_fate > 2) then {
-		if (_fate > 4) then {
+	if (_chance > 2) then {
+		if (_chance > 4) then {
 			_radio = true; 
 		} else { 
 			_radio = false
 		};
-		[_vehicle,_radio] execVM "enemy\modules\tup_ied\vbied.sqf";
+		_booby = [_vehicle, _radio] execVM "enemy\modules\tup_ied\vbied.sqf";
+		waitUntil {sleep 1; scriptDone _booby};
 		 if (_debug) then {
-			diag_log format ["MSO-%1 Terrorists Cells: Terrorist car %2 at %3 is boobytrapped", time, typeof _vehicle, mapgridposition _vehicle];
+			diag_log format ["MSO-%1 Terrorists Cells: Terrorist car %2 at %3 is boobytrapped", time, typeof _vehicle, position _vehicle];
 		};
 	};	
 		

@@ -22,11 +22,11 @@ if (_debug) then {
 _trg = createTrigger["EmptyDetector", getPos _IED]; 
 _trg setTriggerArea[_proximity,_proximity,0,false];
 _trg setTriggerActivation["WEST","PRESENT",false];
-_trg setTriggerStatements[format ["this && ({vehicle _x in thisList} count ([] call BIS_fnc_listPlayers) > 0)",_type], format["boom = '%1' createVehicle position thisTrigger;",_shell], ""]; 
+_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((position vehicle _x) select 2 < 8)} count ([] call BIS_fnc_listPlayers) > 0)", format["_bomb = nearestObject [getPos (thisTrigger), '%1']; boom = '%2' createVehicle position _bomb;",_type,_shell], ""]; 
 
 _IED setvariable ["Trigger", _trg];
 
 if !(typeof _IED == _type) then {
 	// Attach trigger to moving vehicle/person
-	_trg attachTo [_IED,[0,0,0]];
+	_trg attachTo [_IED,[0,0,-0.5]];
 };

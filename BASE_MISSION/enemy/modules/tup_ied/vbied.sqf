@@ -1,15 +1,15 @@
 private ["_IEDskins","_IED","_trg","_vehicle"];
-_debug = false;
+_debug = true;
 _vehicle = _this select 0;
 _radio = _this select 1;
 
 		// create IED object and attach to vehicle
 		_IEDskins = ["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC"];
 		_IED = createVehicle [_IEDskins select (floor (random (count _IEDskins))),getpos _vehicle, [], 0, "CAN_COLLIDE"];
-		_IED attachTo [_vehicle,[0,0,0]];
+		_IED attachTo [_vehicle,[0,0,-0.5]];
 		
 		// If EOD addon is detected then add reezo eventhandler for radio controlled IED else set detonation trigger for normal IED
-		if (((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1)) && (_radio)) then {
+		if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1) && (_radio)) then {
 			// add dicker to ensure IED is not interfered with
 			private ["_dicker","_skins","_group"];
 			_group = createGroup civilian;
@@ -21,7 +21,9 @@ _radio = _this select 1;
 			_dicker addWeapon "ItemRadio";
 			_dicker doWatch (getPos _ied);			
 			_dicker setVariable ["reezo_eod_avail",false];
-			
+			if (_debug) then {
+				diag_log format ["MSO-%1 IED: Creating Dicker (for Reezo VBIED %3) at %2", time, position _dicker, typeof _vehicle];
+			};
 			// Setup IED as Reezo IED radio controlled 
 			_IED setVariable ["reezo_eod_trigger","radio"];
 			nul0 = [_dicker, _IED, 200] execVM "x\eod\addons\eod\IED_postServerInit.sqf";
@@ -30,7 +32,8 @@ _radio = _this select 1;
 			};
 		} else {
 			// Set up trigger to detonate IED
-			[_IED, typeOf _vehicle, "Sh_125_HE"] execvm "enemy\modules\tup_ied\arm_ied.sqf";
+			_booby = [_IED, typeOf _vehicle, "Sh_125_HE"] execvm "enemy\modules\tup_ied\arm_ied.sqf";
+			waitUntil {sleep 1; scriptDone _booby};
 			if (_debug) then {
 				diag_log format ["MSO-%1 IED: Creating VB-IED for %2 at %3", time, typeof _vehicle, position _vehicle];
 			};
