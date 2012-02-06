@@ -17,9 +17,10 @@ if (isNil "tup_suicide_threat")then{tup_suicide_threat = 20;};
 	private ["_fate","_pos","_trg","_twn"];
 	// Set up Bombers and IEDs at each location (except any player starting location)
 	_pos = getposATL _x;
-	//_twn = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Strategic","VegetationVineyard","NameLocal"], 50]) select 0;
+	//_twn = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Strategic","VegetationVineyard","NameLocal"], 200]) select 0;
 	_twn = nearestLocation [_pos, ""];
 	_size = (size _twn) select 0;
+	if (_size < 150) then {_size = 250;};
 	if (_debug) then {
 		diag_log format ["town is %1 at %2. %3m in size and type %4", text _twn, position _twn, _size, type _twn];
 	};
