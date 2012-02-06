@@ -1,5 +1,5 @@
 private ["_IEDskins","_IED","_trg","_vehicle"];
-_debug = true;
+_debug = false;
 _vehicle = _this select 0;
 _radio = _this select 1;
 
