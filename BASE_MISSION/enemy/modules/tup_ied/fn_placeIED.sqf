@@ -36,6 +36,5 @@ If (_addroads) then {
 		_goodspots = _goodspots + [getposATL  _x];
 	} foreach (_location nearRoads _size);
 };
-diag_log format ["Goodspots = %1", _goodspots];
 
 _goodspots

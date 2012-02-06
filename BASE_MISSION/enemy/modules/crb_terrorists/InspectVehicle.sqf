@@ -74,7 +74,7 @@ If !(isNull driver _vehicle) then {
 		_grp setCombatMode "BLUE";
 		_grp setSpeedMode "FULL";
 		{_x enableAI "MOVE"; _x enableAI "ANIM"} foreach units _grp;
-		while {_terrorist distance _victim > 4} do {
+		while {(_terrorist distance _victim > 4) && (alive _victim)} do {
 			sleep 1; 
 			_terrorist domove getposATL _victim;
 		};

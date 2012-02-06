@@ -108,9 +108,9 @@ TUP_fnc_AddVehicleTrigger = {
 	
 	// Create trigger and attach to vehicle to check for enemy - in order to control reaction
 	_trg = createTrigger["EmptyDetector",getPos _vehicle]; 
-	_trg setTriggerArea[300,300,0,false];
+	_trg setTriggerArea[200,200,0,false];
 	_trg setTriggerActivation["WEST","EAST D",false];
-	_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((position _x) select 2 <8)} count ([] call BIS_fnc_listPlayers) > 0)", "null = [thisTrigger, thisList] execvm 'enemy\modules\crb_terrorists\inspectvehicle.sqf'", ""]; 
+	_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((position _x) select 2 <50)} count ([] call BIS_fnc_listPlayers) > 0)", "null = [thisTrigger, thisList] execvm 'enemy\modules\crb_terrorists\inspectvehicle.sqf'", ""]; 
 	_trg attachTo [_vehicle,[0,0,-0.5]];
 	 if (_debug) then {
 		diag_log format ["MSO-%1 Terrorists Cells: %2 created at %3", time, typeof _vehicle, position _vehicle];
