@@ -9,7 +9,7 @@ _size = _this select 1;
 _debug = false;
 _numIEDs = round ((_size / 50) * (tup_ied_threat / 100));
 
-diag_log format ["MSO-%1 IED: creating %2 IEDs at %3", time, _numIEDs, mapgridposition  _location];
+diag_log format ["MSO-%1 IED: creating %2 IEDs at %3 (size %4)", time, _numIEDs, mapgridposition  _location, _size];
 
 for "_j" from 1 to _numIEDs do {
 

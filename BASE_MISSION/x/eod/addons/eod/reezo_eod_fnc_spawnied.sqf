@@ -5,7 +5,7 @@ if (!isServer) exitWith{};
 
 private ["_soldier", "_rangeMin", "_rangeMax","_debug"];
 _soldier = _this select 0;
-_debug = true;
+_debug = false;
 
 if ((getPos _soldier) select 2 > 5) exitWith {};
 

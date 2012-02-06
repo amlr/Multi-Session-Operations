@@ -6,7 +6,7 @@ class tup_ied_header{
 };
 class tup_ied_threat {
         title = "        Ambient IED Threat"; 
-        values[]= {0,30,50,85,100}; 
+        values[]= {0,30,50,85,200}; 
         texts[]= {"None","Low","Med","High","Extreme"}; 
         default = 50;
 };
