@@ -1,7 +1,7 @@
 // Ambient IED - create IED at location (could be EOD IED)
-private ["_location","_twn","_debug","_numIEDs","_j","_size"];
+private ["_location","_twn","_debug","_numIEDs","_j","_size","_posloc"];
 
-if !(isServer) exitWith {diag_log "Ambient Bomber Not running on server!";};
+if !(isServer) exitWith {diag_log "Ambient IED Not running on server!";};
 
 _location = _this select 0;
 _size = _this select 1;
@@ -11,24 +11,53 @@ _numIEDs = round ((_size / 50) * (tup_ied_threat / 100));
 
 diag_log format ["MSO-%1 IED: creating %2 IEDs at %3 (size %4)", time, _numIEDs, mapgridposition  _location, _size];
 
-for "_j" from 1 to _numIEDs do {
+// Find positions in area
+_posloc = [];
+_posloc = [_location, true, true, true, _size] call tup_ied_fnc_placeIED;
+if (_debug) then {
+	diag_log format ["MSO-%1 IED: Found %2 spots for IEDs",time, count _posloc];
+	{
+		//Mark IED position
+		_t = format["spot_r%1", random 10000];
+		_spotm = [_t, _x, "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorBlack", "GLOBAL"] call CBA_fnc_createMarker;
+	} foreach _posloc;
+};
 
-	if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1)) then {
-		("reezo_eod_iedarea" createUnit [_location, group BIS_functions_mainscope,
+for "_j" from 1 to _numIEDs do {
+	private ["_IEDpos","_pos","_cen","_near"];
+	// Select Position for IED and remove position used
+	_index = round (random ((count _posloc) -1));
+	_pos = _posloc select _index;
+	_posloc set [_index, -1];
+	_posloc = _posloc - [-1];
+	// Find safe location - if no safe pos find random position within 6m
+	_IEDpos = [_pos, 4, 20, 2, 0, 0, 0,[],[[((_pos select 0) - 6) + random 12, ((_pos select 1) - 6) + random 12, 0]]] call BIS_fnc_findSafePos;
+
+	private ["_IEDskins","_IED","_near","_choice"];
+	// Check no other IEDs nearby
+	_near = nearestObjects [_IEDpos, ["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC"], 10];
+	if (count _near > 0) exitWith {diag_log format ["MSO-%1 IED: exiting as other IEDs found %2",time,_near];}; //Exit if other IEDs are found
+	
+	// Choose EOD or TUP_IED (50/50 chance)
+	private "_choice";
+	_choice = random 1;
+	if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1) && (_choice > 0.4)) then {
+		("reezo_eod_iedarea" createUnit [_IEDpos, group BIS_functions_mainscope,
 			format["this setVariable ['reezo_eod_range',[0,%1]];
 			this setVariable ['reezo_eod_probability',1];
 			this setVariable ['reezo_eod_interval',1];",_size], 
 			0, ""]);
 	} else {
 		// Create non-eod IED
-		private ["_IEDskins","_IED","_IEDpos","_pos","_posloc","_cen"];
-		_cen = getArray(configFile >> "CfgWorlds" >> worldName >> "centerposition ");
-		_posloc = [_location, true, true, true, _size] call tup_ied_fnc_placeIED;
-		_pos = _posloc call BIS_fnc_selectRandom;
-		_IEDpos = [_pos, 2, 10, 2, 0, 0, 0] call BIS_fnc_findSafePos;
-		if (count (_IEDpos - _cen) > 0) then {
+		// Select type of IED
+		if (isOnRoad _IEDpos) then {
 			_IEDskins = ["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC"];
-			_IED = createVehicle [_IEDskins select (floor (random (count _IEDskins))),_IEDpos, [], 0, ""];
+		} else {
+			_IEDskins =["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC","Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC","Land_Misc_Rubble_EP1","Land_Misc_Garb_Heap_EP1","Garbage_container","Misc_TyreHeapEP1","Misc_TyreHeap","Garbage_can","Land_bags_EP1","Paleta2"];
+		};
+		_IED = createVehicle [_IEDskins call BIS_fnc_selectRandom,_IEDpos, [], 0, ""];
+		// Choose IED or Fake IED
+		if (random 1 < 0.80) then {
 			[_IED, typeOf _IED] execvm "enemy\modules\tup_ied\arm_ied.sqf";
 			_IED addeventhandler ["HandleDamage",{
 				deletevehicle ((_this select 0) getvariable "Trigger");
@@ -40,7 +69,7 @@ for "_j" from 1 to _numIEDs do {
 			}];
 		} else {
 			if (_debug) then {
-				diag_log format ["MSO-%1 IED: Invalid getposATL (%2) for IED. Skipping.", time, _IEDpos];
+				diag_log format ["MSO-%1 IED: Planting fake IED (%2) at %3.", time, typeOf _IED, _IEDpos];
 			};
 		};
 	};

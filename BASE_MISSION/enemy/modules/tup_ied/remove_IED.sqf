@@ -26,6 +26,7 @@ for "_j" from 0 to ((count _ieds) -1) do {
 			deletevehicle (_IED getvariable "Trigger");
 		};
 		deletevehicle _IED;
+		
 	} else {
 		_nodel = _nodel + 1;
 	};

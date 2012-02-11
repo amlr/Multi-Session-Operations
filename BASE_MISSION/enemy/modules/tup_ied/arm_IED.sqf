@@ -13,10 +13,14 @@ if (count _this > 2) then {
 	_shell = [["Grenade","Sh_82_HE","Sh_105_HE","Sh_120_HE","Sh_125_HE"],[4,8,2,1,1]] call mso_core_fnc_selectRandomBias;
 };
 
-_proximity = 1 + round(random 7);
+_proximity = 2 + floor(random 10);
 
 if (_debug) then {
 	diag_log format ["MSO-%1 IED: arming IED at %2 of %3 as %4 with proximity of %5",time, getposATL _IED,_type,_shell,_proximity];
+	//Mark IED position
+	_t = format["ied_r%1", random 10000];
+	_tcrm = [_t, position _IED, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Dot", "COLOR:", "ColorRed", "GLOBAL"] call CBA_fnc_createMarker;
+	_IED setvariable ["Marker", _tcrm];
 };
 
 _trg = createTrigger["EmptyDetector", getposATL _IED]; 

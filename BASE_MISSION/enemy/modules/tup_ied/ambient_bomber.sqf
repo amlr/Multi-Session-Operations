@@ -1,7 +1,7 @@
 // Ambient Bomber - create EOD Mod Ambient Bomber module at location
 private ["_location","_twn","_debug","_victim","_size"];
 
-if !(isServer) exitWith {diag_log "AmbientBomber Not running on server!";};
+if !(isServer) exitWith {diag_log "Ambient Bomber Not running on server!";};
 
 _victim = objNull;
 _location = _this select 0;
@@ -31,12 +31,12 @@ _debug = false;
 		_time = time + 600;
 		waitUntil {_bomber doMove getposATL _victim; sleep 5; (_bomber distance _victim < 8) || (time > _time) || !(alive _bomber)};
 		if ((_bomber distance _victim < 8) && (alive _bomber)) then {
+			_bomber addRating -2001;
 			_bomber playMoveNow "AmovPercMstpSsurWnonDnon";
 			[_bomber, "reezo_eod_sound_akbar"] call CBA_fnc_globalSay3d;
 			sleep 5;
 			_bomber disableAI "ANIM";
 			_bomber disableAI "MOVE";
-			_bomber addRating -1000;
 			diag_log format ["BANG! Suicide Bomber %1", _bomber];
 			"Sh_82_HE" createVehicle (getposATL _bomber);
 		} else {
