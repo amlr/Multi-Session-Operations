@@ -24,6 +24,9 @@ class CfgSounds {
 #ifdef RMM_CAS
 	#include <support\modules\rmm_cas\LDL_ac130\Includes\CfgSounds.hpp>
 #endif
+#ifdef ROY_Patrol_Ops
+#include <enemy\modules\roy_patrolops\mps\dialog\mps_sounds.sqf>
+#endif
 };
 
 //http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
@@ -115,6 +118,9 @@ class Params {
 #endif
 #ifdef WICT_ENEMYPOP
 	#include <enemy\modules\WICT_enemypop\params.hpp>
+#endif
+#ifdef ROY_Patrol_Ops
+	#include <enemy\modules\roy_patrolops\mps\dialog\mps_params.sqf>
 #endif
 }; 
 
@@ -256,6 +262,9 @@ class cfgFunctions {
 #endif
 #ifdef RMM_TASKS
 	#include <support\modules\rmm_tasks\dialog.hpp>
+#endif
+#ifdef ROY_Patrol_Ops
+#include <enemy\modules\roy_patrolops\mps\dialog\mps_dialog.hpp>
 #endif
 
 // Add BAF and TK Flight groups

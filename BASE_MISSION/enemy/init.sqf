@@ -100,3 +100,7 @@ execNow "enemy\modules\ryd_hac\main.sqf";
 execNow "enemy\modules\bis_warfare\main.sqf";
 #endif
 
+#ifdef ROY_Patrol_Ops
+"OCB Patrol Ops" call mso_core_fnc_initStat;
+[] execVM "enemy\modules\roy_patrolops\init.sqf";
+#endif

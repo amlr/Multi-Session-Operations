@@ -8,3 +8,7 @@
 #ifdef RMM_RECRUITMENT
 #include <support\stringtable.csv>
 #endif
+
+#ifdef ROY_Patrol_Ops
+#include <enemy\modules\roy_patrolops\stringtable.csv>
+#endif
