@@ -24,7 +24,7 @@ class CfgSounds {
 #ifdef RMM_CAS
 	#include <support\modules\rmm_cas\LDL_ac130\Includes\CfgSounds.hpp>
 #endif
-#ifdef ROY_Patrol_Ops
+#ifdef ROY_PATROLOPS
 #include <enemy\modules\roy_patrolops\mps\dialog\mps_sounds.sqf>
 #endif
 };
@@ -119,7 +119,7 @@ class Params {
 #ifdef WICT_ENEMYPOP
 	#include <enemy\modules\WICT_enemypop\params.hpp>
 #endif
-#ifdef ROY_Patrol_Ops
+#ifdef ROY_PATROLOPS
 	#include <enemy\modules\roy_patrolops\mps\dialog\mps_params.sqf>
 #endif
 }; 
@@ -263,7 +263,7 @@ class cfgFunctions {
 #ifdef RMM_TASKS
 	#include <support\modules\rmm_tasks\dialog.hpp>
 #endif
-#ifdef ROY_Patrol_Ops
+#ifdef ROY_PATROLOPS
 #include <enemy\modules\roy_patrolops\mps\dialog\mps_dialog.hpp>
 #endif
 

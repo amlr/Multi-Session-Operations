@@ -9,5 +9,5 @@
 #define TUP_IED
 #define WICT_ENEMYPOP
 #define RYD_HAC
-#define ROY_Patrol_Ops
+#define ROY_PATROLOPS
 //#define BIS_WARFARE
