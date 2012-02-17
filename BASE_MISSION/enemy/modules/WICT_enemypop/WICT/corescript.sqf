@@ -17,13 +17,18 @@ if (isServer) then
 {	
 	while {WICT_state == "start"} do
 	{	
-		/* Clear memory if there are too many groups */
+    
+    	/*
+        //obsolete since AI caching and WICT AI Cap
+
+		//Clear memory if there are too many groups 
 		if ((count allGroups) > WICT_numAIg) then
 		{
 			_null = [] spawn {wait_clearing = [] execVM (WICT_PATH + "WICT\clearMemory.sqf")};
 			waitUntil {scriptDone wait_clearing};
 		};
-
+		*/
+        
 		/* Find the average position of the group - "center of the mass" */
 		if ((alive player) and (!(isNull player))) then {WICT_playerPos = position player;} else {WICT_playerPos = getArray(configFile >> "CfgWorlds" >> worldName >> "centerPosition");};
 		

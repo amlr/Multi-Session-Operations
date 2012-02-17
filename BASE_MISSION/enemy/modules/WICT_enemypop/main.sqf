@@ -17,7 +17,7 @@ if (WICT_wict_header == 0) exitWith{};
 
 WICT_PATH = "enemy\modules\WICT_enemypop\";
 
-private ["_debug","_d","_camp","_flag","_WICTM","_WICTMN","_group","_pos2"];
+private ["_debug","_d","_camp","_flag","_WICTM","_WICTMN","_group","_pos2_WICT"];
 
 _debug = false;
 
@@ -83,19 +83,19 @@ if(_debug) then {hint format["MSO-%1 WICT Population initLocations %2", time, co
 BIN_fnc_taskDefend = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskDefend.sqf";
 
 fPlayersInside = {
-        private["_pos","_dist"];
-        _pos = _this select 0;
+        private["_pos_WICT","_dist"];
+        _pos_WICT = _this select 0;
         _dist = _this select 1;
-        ({_pos distance _x < _dist} count ([] call BIS_fnc_listPlayers) > 0);
+        ({_pos_WICT distance _x < _dist} count ([] call BIS_fnc_listPlayers) > 0);
 };
 
 if(isNil "wict_baselocations")then{wict_baselocations = 0};
 
 {
-        private ["_group","_pos","_type"];
+        private ["_group","_pos_WICT","_type"];
         _group = grpNull;
         _type = "";
-        _pos = [];
+        _pos_WICT = [];
 	_skip = false;
 
 	if (_forEachIndex % wict_ep_intensity < 1) then {
@@ -115,7 +115,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 			};
 			//countryside
 			case 2: {
-				["Hill","FlatArea","VegetationBroadleaf","VegetationFir"];
+				["StrongpointArea"];
 			};
 			
 		};
@@ -128,7 +128,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 				["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"];
 			};
 			case 2: {
-				["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"];
+				["StrongpointArea"];
 			};
 			
 		};
@@ -141,7 +141,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 				["FlatArea","NameMarine"];
 			};
 			case 2: {
-				["FlatArea","NameMarine"];
+				["StrongpointArea"];
 			};
 			
 		};
@@ -154,7 +154,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 				["ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
 			};
 			case 2: {
-				["ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
+				["StrongpointArea"];
 			};
 			
 		};
@@ -166,8 +166,8 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
         if(!([position _x, ep_dist] call fPlayersInside) && !_skip) then {
                 if (type _x in _baselocations03) then {
                         if (random 1 > 0.33) then {
-                                _d = 500;
-                                _pos = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
+                                _d = 20;
+                                _pos_WICT = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                                 _flag = random 1;
                                 if(_flag < wict_ep_campprob) then {
                                         _camp = [];
@@ -203,11 +203,12 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 										};
 					if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
-        	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-                	                        [_camp, random 360, _pos] call f_builder;
+        	                                _pos_WICT = [_pos_WICT, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                	                        //[_camp, random 360, _pos_WICT] call f_builder;
+                                            _WICT_composition = [_pos_WICT, random 360, ["ru"]] call (compile (preprocessFileLineNumbers "ca\modules\dyno\data\scripts\objectMapper.sqf"));
 
 					call compile format ["_WICTMN = 'lightvehicles_%1'",WICTMC];
-					_WICTM = createMarker [_WICTMN, _pos];
+					_WICTM = createMarker [_WICTMN, _pos_WICT];
 					_WICTM setMarkerShape "ICON";
 					_WICTMN setMarkerType _debugmarker;
 					_WICTMN setMarkerColor "ColorRed";
@@ -216,20 +217,20 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 					_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[4,3,2,1]] call mso_core_fnc_selectRandomBias;
 					
 					[{
-					private ["_pos","_pos2","_flag","_group","_grp2","_type","_params","_handle"];
+					private ["_pos_WICT","_pos2_WICT","_flag","_group","_grp2","_type","_params","_handle"];
                                         _params = _this select 0;
                                         _handle = _this select 1;
-                                        _pos = _params select 0;
+                                        _pos_WICT = _params select 0;
                                         _flag = _params select 1;
                                         _type= _params select 2;
-                                        if(([_pos, ep_dist] call fPlayersInside)) then {
+                                        if(([_pos_WICT, ep_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
-                                                _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                                                _pos2_WICT = [_pos_WICT, 10, 20, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 
 
 						while{isNil "_group"} do {
-                                                        _group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
+                                                        _group = [_pos2_WICT, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
                                                 };
 
                                                 (leader _group) setBehaviour "AWARE";
@@ -240,7 +241,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                                 ep_groups set [count ep_groups, _group];
                                         };
 					
-                                }, 3, [_pos, _flag, _type]] call mso_core_fnc_addLoopHandler;
+                                }, 3, [_pos_WICT, _flag, _type]] call mso_core_fnc_addLoopHandler;
 
 					};
                                 };
@@ -251,8 +252,8 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                 if (type _x in _baselocations06) then {
                         if (random 1 > 0.6) then {
                                 ep_total = ep_total + 1;
-                                _d = 800;
-                                _pos = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
+                                _d = 20;
+                                _pos_WICT = [position _x, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
                                 _flag = random 1;
                                 if(_flag < wict_ep_campprob) then {
                                         _camp = [];
@@ -273,9 +274,9 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                         if("RU" in MSO_FACTIONS && type _x == "Airport") then {
                                                 _camp = ["airplane_park_ru1"];
 						
-						_posAP = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+						_pos_WICTAP = [_pos_WICT, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
 						call compile format ["_WICTMN = 'airCavalry_%1'",WICTMC];
-						_WICTM = createMarker [_WICTMN, _posAP];
+						_WICTM = createMarker [_WICTMN, _pos_WICTAP];
 						_WICTM setMarkerShape "ICON";
 						_WICTMN setMarkerType _debugmarker;
 						_WICTMN setMarkerColor "ColorRed";
@@ -290,11 +291,12 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 											f_builder = mso_core_fnc_createComposition;
 										};
                                         _camp = _camp call BIS_fnc_selectRandom;
-                                        _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-                                        [_camp, random 360, _pos] call f_builder;
+                                        _pos_WICT = [_pos_WICT, 10, 20, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                                        //[_camp, random 360, _pos_WICT] call f_builder;
+                                        _WICT_composition = [_pos_WICT, random 360, ["ru"]] call (compile (preprocessFileLineNumbers "ca\modules\dyno\data\scripts\objectMapper.sqf"));
 
 					call compile format ["_WICTMN = 'mediumVehicles_%1'",WICTMC];
-					_WICTM = createMarker [_WICTMN, _pos];
+					_WICTM = createMarker [_WICTMN, _pos_WICT];
 					_WICTM setMarkerShape "ICON";
 					_WICTMN setMarkerType _debugmarker;
 					_WICTMN setMarkerColor "ColorRed";
@@ -303,20 +305,20 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 					_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[4,3,2,1]] call mso_core_fnc_selectRandomBias;
 					
 					[{
-					private ["_pos","_pos2","_flag","_group","_grp2","_type","_params","_handle"];
+					private ["_pos_WICT","_pos2_WICT","_flag","_group","_grp2","_type","_params","_handle"];
                                         _params = _this select 0;
                                         _handle = _this select 1;
-                                        _pos = _params select 0;
+                                        _pos_WICT = _params select 0;
                                         _flag = _params select 1;
                                         _type= _params select 2;
-                                        if(([_pos, ep_dist] call fPlayersInside)) then {
+                                        if(([_pos_WICT, ep_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
-                                                _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                                                _pos2_WICT = [_pos_WICT, 10, 20, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 
 
 						while{isNil "_group"} do {
-                                                        _group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
+                                                        _group = [_pos2_WICT, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
                                                 };
 
                                                 (leader _group) setBehaviour "AWARE";
@@ -327,7 +329,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                                 ep_groups set [count ep_groups, _group];
                                         };
 					
-                                }, 3, [_pos, _flag, _type]] call mso_core_fnc_addLoopHandler;
+                                }, 3, [_pos_WICT, _flag, _type]] call mso_core_fnc_addLoopHandler;
 
                                 };
                                                                 
@@ -336,8 +338,8 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                 if (type _x in _baselocations08) then {
                         if (random 1 > 0.8) then {
                                 ep_total = ep_total + 1;
-                                _d = 400;
-                                _pos = [position _x, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
+                                _d = 20;
+                                _pos_WICT = [position _x, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
                                 _flag = random 1;
                                 if(_flag < wict_ep_campprob) then {
                                         _camp = [];
@@ -373,11 +375,12 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 										};
 					if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
-        	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-                	                        [_camp, random 360, _pos] call f_builder;
+        	                                _pos_WICT = [_pos_WICT, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                	                        //[_camp, random 360, _pos_WICT] call f_builder;
+                                            _WICT_composition = [_pos_WICT, random 360, ["ru"]] call (compile (preprocessFileLineNumbers "ca\modules\dyno\data\scripts\objectMapper.sqf"));
 
 					call compile format ["_WICTMN = 'heavyArmor_%1'",WICTMC];
-					_WICTM = createMarker [_WICTMN, _pos];
+					_WICTM = createMarker [_WICTMN, _pos_WICT];
 					_WICTM setMarkerShape "ICON";
 					_WICTMN setMarkerType _debugmarker;
 					_WICTMN setMarkerColor "ColorRed";
@@ -386,20 +389,20 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 					_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[4,3,2,1]] call mso_core_fnc_selectRandomBias;
 					
 					[{
-					private ["_pos","_pos2","_flag","_group","_grp2","_type","_params","_handle"];
+					private ["_pos_WICT","_pos2_WICT","_flag","_group","_grp2","_type","_params","_handle"];
                                         _params = _this select 0;
                                         _handle = _this select 1;
-                                        _pos = _params select 0;
+                                        _pos_WICT = _params select 0;
                                         _flag = _params select 1;
                                         _type= _params select 2;
-                                        if(([_pos, ep_dist] call fPlayersInside)) then {
+                                        if(([_pos_WICT, ep_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
-                                                _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                                                _pos2_WICT = [_pos_WICT, 10, 20, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 
 
 						while{isNil "_group"} do {
-                                                        _group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
+                                                        _group = [_pos2_WICT, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
                                                 };
 
                                                 (leader _group) setBehaviour "AWARE";
@@ -410,7 +413,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                                 ep_groups set [count ep_groups, _group];
                                         };
 					
-                                }, 3, [_pos, _flag, _type]] call mso_core_fnc_addLoopHandler;
+                                }, 3, [_pos_WICT, _flag, _type]] call mso_core_fnc_addLoopHandler;
 
 					};
                                 };
@@ -420,8 +423,8 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                 if (type _x in _baselocations09) then {
                         if (random 1 > 0.9) then {
                                 ep_total = ep_total + 1;
-                                _d = 300;
-                                _pos = [position _x, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
+                                _d = 20;
+                                _pos_WICT = [position _x, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                                 _flag = random 1;
                                 if(_flag < wict_ep_campprob) then {
                                         _camp = [];
@@ -455,11 +458,12 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 										};
 					if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
-        	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-                	                        [_camp, random 360, _pos] call f_builder;
+        	                                _pos_WICT = [_pos_WICT, 10, 20, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                	                        //[_camp, random 360, _pos_WICT] call f_builder;
+                                            _WICT_composition = [_pos_WICT, random 360, ["ru"]] call (compile (preprocessFileLineNumbers "ca\modules\dyno\data\scripts\objectMapper.sqf"));
 
 					call compile format ["_WICTMN = 'lightvehicles_%1'",WICTMC];
-					_WICTM = createMarker [_WICTMN, _pos];
+					_WICTM = createMarker [_WICTMN, _pos_WICT];
 					_WICTM setMarkerShape "ICON";
 					_WICTMN setMarkerType _debugmarker;
 					_WICTMN setMarkerColor "ColorRed";
@@ -468,20 +472,20 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 					_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[4,3,2,1]] call mso_core_fnc_selectRandomBias;
 					
 					[{
-					private ["_pos","_pos2","_flag","_group","_grp2","_type","_params","_handle"];
+					private ["_pos_WICT","_pos2_WICT","_flag","_group","_grp2","_type","_params","_handle"];
                                         _params = _this select 0;
                                         _handle = _this select 1;
-                                        _pos = _params select 0;
+                                        _pos_WICT = _params select 0;
                                         _flag = _params select 1;
                                         _type= _params select 2;
-                                        if(([_pos, ep_dist] call fPlayersInside)) then {
+                                        if(([_pos_WICT, ep_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
-                                                _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                                                _pos2_WICT = [_pos_WICT, 10, 20, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 
 
 						while{isNil "_group"} do {
-                                                        _group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
+                                                        _group = [_pos2_WICT, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
                                                 };
 
                                                 (leader _group) setBehaviour "AWARE";
@@ -492,14 +496,14 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                                                 ep_groups set [count ep_groups, _group];
                                         };
 					
-                                }, 3, [_pos, _flag, _type]] call mso_core_fnc_addLoopHandler;
+                                }, 3, [_pos_WICT, _flag, _type]] call mso_core_fnc_addLoopHandler;
 
 					};
                                 };
                          };
                 };
         };
-        if (count _pos != 0) then {
+        if (count _pos_WICT != 0) then {
                 if(ep_total mod 10 == 0) then {
                         diag_log format["MSO-%1 WICT Bases # %2", time, WICTMC];
                         if(_debug) then {hint format["MSO-%1 WICT Bases # %2", time, WICTMC];};
@@ -508,7 +512,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
 //                        private["_t","_m"];
 //                        _t = format["op%1",floor(random 10000)];
 //                        if(isNil "_type") then {_type = "";};
-//                        _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+//                        _m = [_t, _pos_WICT, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
 //                };
         };
 } foreach CRB_LOCS;

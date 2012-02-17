@@ -26,6 +26,10 @@ changelog WICT_module from vanilla MSO 4.03 (Takistan, only files in WICT module
 
 >>>>>> v.028 tested and working
 
+26.01.2012, v.04.10.001
+- removed clearmemory script in corescript.sqf (obsolete due to WICT AI cap and AI caching modules)!
+- changed max. safepos in main.sqf for camps and AI to have baseguards and to get better spawning positions of bases (not in hills and elevation)
+- changed private variables _pos and _pos2 to _pos_WICT and _pos2_WICT in main.sqf in order to have no interference with rmm_enemypop in fnc_loophandler
 
 
 
