@@ -20,6 +20,18 @@ PO_Path = "enemy\modules\roy_patrolops\";
 //[] execVM PO_Path + "notes.sqf";
 
 Receiving_finish = false;
+
+if(isNil "paramsArray") then {
+// Mission Parameters (set directly by class to allow module)
+	MISSIONTIME	= 9;
+	MISSIONTYPE	= 5;
+	MISSIONCOUNT	= 3;
+	ACEWOUNDENBLE	= 1;
+	MISSIONDIFF	= 1;
+	AMBIECOUNT	= 30;
+	AMBAIRPARTOLS	= 0;
+};
+
 /*
 // For SP/Mission Testing
 //	if(isNil "paramsArray") then { paramsArray = [9,5,3,0,3,1,0,1,1,1,1,1,1,30,1,0,0]; };
@@ -59,18 +71,27 @@ Receiving_finish = false;
 //	mps_ais_factor = INJURYFACTOR;
 
 	[] execVM PO_Path + "mps\init_mps.sqf";
-    
-   	//make Check-in Action on MHQ available for all players and add action locally (for JIP);
-    HQ = nearestobject [getmarkerpos "respawn_UK","M1130_HQ_unfolded_Base_EP1"];
-    
+//	[] execVM PO_Path + "tasks\checkin_mhq.sqf";
+
+if(isNil "HQ") then {
+	//make Check-in Action on MHQ available for all players and add action locally (for JIP);
+	HQ = nearestobject [getmarkerpos format["respawn_%1", playerSide],"M1130_HQ_unfolded_Base_EP1"];
+};
+
     [3,[],{
 	    HQaction = HQ addaction ["Check in for special operations", PO_Path + "tasks\checkin_mhq.sqf"];
     }] call mso_core_fnc_ExMP;
-    
+/*    
     //Crediting Patrol Ops - Team (locally)
     [3,[],{
 	    [] execVM PO_Path + "credits.sqf";
     }] call mso_core_fnc_ExMP;
+*/
+player createDiaryRecord ["Diary", ["Patrol Ops 2", "<br/>DESCRIPTION<br/>
+===========<br/><br/>
+Online Combat Battalion Australia Presents...<br/>
+Patrol Operations 2 By [OCB]EightySix<br/><br/>
+Don't Kill Civillians..."]]; 
 
 if(!isDedicated) then {
 	onPreloadFinished { Receiving_finish = true; onPreloadFinished {}; };
@@ -95,5 +116,5 @@ if(!isDedicated) then {
 // This calls the Patrol Ops Mission
 // To use just the framework for your own missions, delete the line below.
 */
-	["patrol_ops"] call mps_mission_sequence;
+	["patrol_ops"] spawn mps_mission_sequence;
 

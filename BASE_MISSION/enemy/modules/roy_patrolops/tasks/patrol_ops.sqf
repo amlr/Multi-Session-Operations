@@ -5,7 +5,7 @@ mps_loc_viewpoints = [];
 mps_loc_passes = [];
 mps_mission_score = 0;
 
-_locations = nearestLocations [[0,0],["Name","NameLocal","NameVillage","NameCity","NameCityCapital","Hill","Airport","ViewPoint"],30000];
+//_locations = nearestLocations [[0,0],["Name","NameLocal","NameVillage","NameCity","NameCityCapital","Hill","Airport","ViewPoint"],30000];
 
 {	if( position _x distance getMarkerPos format["respawn_%1",(SIDE_A select 0)] > 3000 ) then {
 		switch (type _x) do {
@@ -19,8 +19,7 @@ _locations = nearestLocations [[0,0],["Name","NameLocal","NameVillage","NameCity
 			case "ViewPoint": {mps_loc_viewpoints = mps_loc_viewpoints + [_x];};
 		};
 	};
-} foreach _locations;
-
+} foreach CRB_LOCS;
 
 if(count mps_loc_hills > 0) then {
 	_location = (mps_loc_hills call mps_getRandomElement);
@@ -66,7 +65,7 @@ for "_i" from 1 to MISSIONCOUNT do {
     }] call mso_core_fnc_ExMP;
     
     //wait for a player to check in
-    while {!(MPS_TASKCHECKIN)} do {sleep 1};
+    waitUntil{sleep 1;MPS_TASKCHECKIN};
     
     //let mission-setup begin    
     sleep 10;
