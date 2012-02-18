@@ -18,9 +18,11 @@ _debug = false;
 	} else {
 		// Create non-eod suicide bomber
 		private ["_grp","_skins","_bomber","_pos","_time"];
-		_grp = createGroup CIVILIAN;
+//		_grp = createGroup CIVILIAN;
+		_grp = createGroup EAST;
 		_pos = [_location, 0, _size - 10, 3, 0, 0, 0] call BIS_fnc_findSafePos;
-		_skins = ["TK_CIV_Takistani01_EP1","TK_CIV_Takistani02_EP1","TK_CIV_Takistani03_EP1","TK_CIV_Takistani04_EP1","TK_CIV_Takistani05_EP1","TK_CIV_Takistani06_EP1","TK_CIV_Worker01_EP1","TK_CIV_Worker02_EP1"];
+//		_skins = ["TK_CIV_Takistani01_EP1","TK_CIV_Takistani02_EP1","TK_CIV_Takistani03_EP1","TK_CIV_Takistani04_EP1","TK_CIV_Takistani05_EP1","TK_CIV_Takistani06_EP1","TK_CIV_Worker01_EP1","TK_CIV_Worker02_EP1"];
+		_skins = BIS_alice_mainscope getvariable "ALICE_classes";
 		_bomber = _grp createUnit [_skins call BIS_fnc_selectRandom, _pos, [], _size, "NONE"];
 		_bomber addweapon "EvMoney";
 		if (_debug) then {

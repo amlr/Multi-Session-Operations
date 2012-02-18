@@ -12,8 +12,10 @@ _radio = _this select 1;
 		if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1) && (_radio)) then {
 			// add dicker to ensure IED is not interfered with
 			private ["_dicker","_skins","_group"];
-			_group = createGroup civilian;
-			_skins = ["TK_CIV_Takistani01_EP1","TK_CIV_Takistani02_EP1","TK_CIV_Takistani03_EP1","TK_CIV_Takistani04_EP1","TK_CIV_Takistani05_EP1","TK_CIV_Takistani06_EP1","TK_CIV_Worker01_EP1","TK_CIV_Worker02_EP1"];
+//			_group = createGroup civilian;
+			_group = createGroup EAST;
+//			_skins = ["TK_CIV_Takistani01_EP1","TK_CIV_Takistani02_EP1","TK_CIV_Takistani03_EP1","TK_CIV_Takistani04_EP1","TK_CIV_Takistani05_EP1","TK_CIV_Takistani06_EP1","TK_CIV_Worker01_EP1","TK_CIV_Worker02_EP1"];
+			_skins = BIS_alice_mainscope getvariable "ALICE_classes";
 			_dicker = _group createUnit [_skins select (floor (random (count _skins))), getposATL _ied, [], 200, "NONE"];
 			removeAllItems _dicker;
 			removeAllWeapons _dicker;
