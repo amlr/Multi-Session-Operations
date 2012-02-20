@@ -44,7 +44,11 @@ switch toLower(worldName) do {
         };
         case "zargabad": {
                 {createLocation ["BorderCrossing",_x,1,1]} foreach [[3430,8150,0],[2925,50,0],[3180,50,0],[5048,50,0]];
-                {(createVehicle ["HeliH", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[3534.1, 3939.4], 270],[[4568,4124], 110]];
+                {(createVehicle ["HeliH", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
+			[[3534.1, 3939.4], 270],
+			[[4568,4124], 110],
+			[[4871.61,4678.55,0.010273]. 143.708]
+		];
                 {_twn = (group bis_functions_mainscope) createUnit ["LOGIC", (_x select 0), [], 0, "NONE"]; _twn setVariable ["name", (_x select 1)];[[_twn]] call BIS_fnc_locations;} foreach [
                         [[3489,1983,0], "Shabaz"],
                         [[4053,2081,0], "East Shabaz"],
