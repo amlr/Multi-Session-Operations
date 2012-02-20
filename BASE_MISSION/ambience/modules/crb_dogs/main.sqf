@@ -1,6 +1,6 @@
 #include <crbprofiler.hpp>
 
-private ["_debug","_types","_dogs","_side","_grp","_maxdist"];
+private ["_debug","_types","_dogs","_side","_maxdist"];
 if (!isServer) exitWith{};
 
 if(isNil "ambientDogs")then{ambientDogs = 1;};
@@ -34,67 +34,68 @@ if(count _this > 0) then {
                         // randomise wild dog positions
                         _pos = position _x;
                         _pos = [_pos, 0, _maxdist, 1, 0, 50, 0] call bis_fnc_findSafePos;
-                        missionNamespace setVariable [_name, _pos];
-                        _grp = createGroup _side;
                         _dogs set [count _dogs, _name];
                         
                         if (_debug) then {
                                 ["m_" + _name, _pos,  "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _name,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
                         };
                         
-                        [{
-				CRBPROFILERSTART("Wild dogs")
-
-                                private ["_pos","_name","_debug","_params","_grp","_maxdist","_leader","_handle"];
-                                _params = _this select 0;
-                                _handle = _this select 1;
-                                _name = _params select 0;
-                                _grp = _params select 1;
-                                _maxdist = _params select 2;
-                                _debug = _params select 3;
-                                _leader = leader _grp;
-                                if(isNil "_pos") then {
-                                        _pos = missionNamespace getVariable _name;
-                                };
+                        [_name, _pos, _side, _maxdist, _debug] spawn {
+                                CRBPROFILERSTART("Wild dogs")
                                 
-                                if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) > 0) then {
-                                        if(count(units _grp) == 0) then {
-                                                if(_debug) then {
-							player globalChat format["Dogs: creating %1",  _name];
-						};
-						diag_log format["MSO-%1 Dog Packs creating %2", time, _name];
-                                                (units ([_pos, _grp] call dogs_fnc_wilddogs)) joinSilent _grp;
-                                        };
-                                        
-                                        if(_debug && alive _leader)then{
-                                                format["m_%1", _name] setMarkerPos position _leader;
-                                        };
-                                }  else {
-                                        if(count(units _grp) > 0) then {
-                                                if(_debug) then {player globalChat format["Destroying %1", _name];};
-						diag_log format["MSO-%1 Dog Packs destroying %2", time, _name];
-                                                {deleteVehicle _x} foreach units _grp;
-                                                [_handle] call mso_core_fnc_removeLoopHandler;
-                                        };
-                                        
-                                        if (_grp getVariable "wait" < time) then {
-                                                private["_oldpos"];
-                                                _oldpos = _pos;
-                                                _pos = [_pos, _maxdist] call CBA_fnc_randPos;
-                                                _grp setVariable ["wait", time + (_oldpos distance _pos) * 1.5, true];
-                                                if(_debug) then {
-                                                        player globalChat format["Moving %1", _name];
-                                                        format["m_%1",_name] setMarkerPos _pos;
+                                private ["_pos","_name","_debug","_grp","_maxdist","_leader","_wait","_side"];
+                                _name = _this select 0;
+                                _pos = _this select 1;
+                                _side = _this select 2;
+                                _maxdist = _this select 3;
+                                _debug = _this select 4;
+
+                                _wait = 0;
+                                
+                                while{true} do {
+                                        if({_pos distance _x < 800} count ([] call BIS_fnc_listPlayers) > 0) then {
+                                                if(isNil "_grp") then {
+                                                        _grp = createGroup _side;
+                                                        if(_debug) then {
+                                                                player globalChat format["Dogs: creating %1",  _name];
+                                                        };
+                                                        diag_log format["MSO-%1 Dog Packs creating %2", time, _name];
+                                                        [_pos, _grp] call dogs_fnc_wilddogs;
+                                                } else {
+                                                        _leader = leader _grp;
+                                                        if(_debug && alive _leader)then{
+                                                                format["m_%1", _name] setMarkerPos position _leader;
+                                                        };
+                                                };
+                                        }  else {
+                                                if(!isNil "_grp") then {
+                                                        if(count(units _grp) > 0) then {
+                                                                if(_debug) then {player globalChat format["Destroying %1", _name];};
+                                                                diag_log format["MSO-%1 Dog Packs destroying %2", time, _name];
+                                                                {deleteVehicle _x} foreach units _grp;
+                                                                deleteGroup _grp;
+                                                        };
+                                                };
+                                                
+                                                if (_wait < time) then {
+                                                        private["_oldpos"];
+                                                        _oldpos = _pos;
+                                                        _pos = [_pos, _maxdist] call CBA_fnc_randPos;
+                                                        _wait = time + (_oldpos distance _pos) * 1.5;
+                                                        if(_debug) then {
+                                                                player globalChat format["Moving %1", _name];
+                                                                format["m_%1",_name] setMarkerPos _pos;
+                                                        };
                                                 };
                                         };
-
-					sleep 3;
+                                        
+                                        CRBPROFILERSTOP
+                                        sleep 3;
                                 };
-
-				CRBPROFILERSTOP
-                        }, 1, [_name, _grp, _maxdist, _debug]] call mso_core_fnc_addLoopHandler;
+                        };
                 };
         };
 } forEach CRB_LOCS;
+
 diag_log format["MSO-%1 Dog Packs # %2", time, count _dogs];
 if(_debug) then {hint format["MSO-%1 Dog Packs # %2", time, count _dogs];};
