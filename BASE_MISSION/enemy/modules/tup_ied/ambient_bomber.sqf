@@ -1,5 +1,5 @@
 // Ambient Bomber - create EOD Mod Ambient Bomber module at location
-private ["_location","_twn","_debug","_victim","_size"];
+private ["_location","_debug","_victim","_size"];
 
 if !(isServer) exitWith {diag_log "Ambient Bomber Not running on server!";};
 
@@ -22,8 +22,8 @@ _debug = false;
 		_grp = createGroup EAST;
 		_pos = [_location, 0, _size - 10, 3, 0, 0, 0] call BIS_fnc_findSafePos;
 //		_skins = ["TK_CIV_Takistani01_EP1","TK_CIV_Takistani02_EP1","TK_CIV_Takistani03_EP1","TK_CIV_Takistani04_EP1","TK_CIV_Takistani05_EP1","TK_CIV_Takistani06_EP1","TK_CIV_Worker01_EP1","TK_CIV_Worker02_EP1"];
-		_skins = BIS_alice_mainscope getvariable "ALICE_classes";
-		_bomber = _grp createUnit [_skins call BIS_fnc_selectRandom, _pos, [], _size, "NONE"];
+		_skins = (BIS_alice_mainscope getvariable "ALICE_classes") call BIS_fnc_selectRandom;
+		_bomber = _grp createUnit [_skins select 0, _pos, [], _size, "NONE"];
 		_bomber addweapon "EvMoney";
 		if (_debug) then {
 			diag_log format ["MSO-%1 Suicide Bomber: created at %2", time, _pos];

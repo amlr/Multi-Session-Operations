@@ -11,7 +11,7 @@ if ((!isServer) || (tup_ied_header == 0)) exitWith{};
 
 if (isNil "tup_ied_eod")then{tup_ied_eod = 1;};
 if (isNil "tup_ied_threat")then{tup_ied_threat = 50;};
-if (isNil "tup_suicide_threat")then{tup_suicide_threat = 20;};
+if (isNil "tup_suicide_threat")then{tup_suicide_threat = 10;};
 
 {
 	private ["_fate","_pos","_trg","_twn"];

@@ -85,7 +85,7 @@ BIS_silvie_mainscope setVariable ["vehicleInit",{
         };
 
 		// 10% (set in params) chance its a VB-IED (radio controlled if EOD) - never a bike
-		if (isNil "tup_vbied_threat")then{tup_vbied_threat = 10;};
+		if (isNil "tup_vbied_threat")then{tup_vbied_threat = 5;};
 		If ((random 100 < tup_vbied_threat) && (tup_vbied_threat > 0) && !(_this iskindOf  "Motorcycle")) then {
 			_this lock true;
 			[_this,true] execvM "enemy\modules\tup_ied\vbied.sqf";
