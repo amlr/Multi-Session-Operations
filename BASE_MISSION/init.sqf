@@ -14,4 +14,5 @@ execNow "enemy\init.sqf";
 execNow "init-custom.sqf";
 
 "Completed" call mso_core_fnc_initStat;
+diag_log format["MSO-%1 Initialisation Completed", time];
 execNow "core\scripts\intro.sqf";
