@@ -1,0 +1,106 @@
+version=11;
+class Mission
+{
+	addOns[]=
+	{
+		"desert_e",
+		"cacharacters_e"
+	};
+	addOnsAuto[]=
+	{
+		"cacharacters_e",
+		"desert_e"
+	};
+	randomSeed=7877741;
+	class Intel
+	{
+		briefingName="MSO Debug";
+		startWeather=0;
+		forecastWeather=0;
+		year=2012;
+		month=6;
+		day=24;
+	};
+	class Groups
+	{
+		items=1;
+		class Item0
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={1390.748,71.213486,1470.0172};
+					id=0;
+					side="CIV";
+					vehicle="CIV_EuroMan01_EP1";
+					player="PLAYER COMMANDER";
+					leader=1;
+					skill=0.60000002;
+				};
+			};
+		};
+	};
+};
+class Intro
+{
+	addOns[]=
+	{
+		"desert_e"
+	};
+	addOnsAuto[]=
+	{
+		"desert_e"
+	};
+	randomSeed=8811152;
+	class Intel
+	{
+		startWeather=0.30000001;
+		forecastWeather=0.30000001;
+		year=2012;
+		month=6;
+		day=24;
+	};
+};
+class OutroWin
+{
+	addOns[]=
+	{
+		"desert_e"
+	};
+	addOnsAuto[]=
+	{
+		"desert_e"
+	};
+	randomSeed=11081366;
+	class Intel
+	{
+		startWeather=0.30000001;
+		forecastWeather=0.30000001;
+		year=2012;
+		month=6;
+		day=24;
+	};
+};
+class OutroLoose
+{
+	addOns[]=
+	{
+		"desert_e"
+	};
+	addOnsAuto[]=
+	{
+		"desert_e"
+	};
+	randomSeed=6272615;
+	class Intel
+	{
+		startWeather=0.30000001;
+		forecastWeather=0.30000001;
+		year=2012;
+		month=6;
+		day=24;
+	};
+};
