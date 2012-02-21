@@ -1,4 +1,5 @@
 // - Tested
+//#define BIS_SOM
 #define RMM_AAR
 #define RMM_CAS
 #define RMM_CASEVAC
