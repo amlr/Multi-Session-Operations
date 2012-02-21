@@ -46,9 +46,9 @@ _taskid = format["%1%2%3",round (_position select 0),round (_position select 1),
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
-While{ _pilot1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] > 15 && alive _pilot1 } do {sleep 1};
+While{!ABORTTASK && _pilot1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] > 15 && alive _pilot1 } do {sleep 1};
 
-if( alive _pilot1 && damage _crashchopper >= 1 ) then {
+if(!ABORTTASK && alive _pilot1 && damage _crashchopper >= 1 ) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

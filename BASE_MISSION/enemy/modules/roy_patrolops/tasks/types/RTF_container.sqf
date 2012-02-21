@@ -26,13 +26,13 @@ _grp = [_position,"INS",(5 + random 5),50,"patrol" ] call CREATE_OPFOR_SQUAD;
 	_position
 ] call mps_tasks_add;
 
-while { damage _cont1 < 1 && damage _cont2 < 1 && count nearestObjects[_position,["Land_Misc_Cargo1E_EP1","Misc_Cargo1B_military"],30] < 2 } do { sleep 5 };
+while {!ABORTTASK && damage _cont1 < 1 && damage _cont2 < 1 && count nearestObjects[_position,["Land_Misc_Cargo1E_EP1","Misc_Cargo1B_military"],30] < 2 } do { sleep 5 };
 
-if( damage _cont1 >= 1 || damage _cont2 >= 1) then {
+if(damage _cont1 >= 1 || damage _cont2 >= 1 || ABORTTASK) then {
 	[format["TASK%1",_taskid],"failed"] call mps_tasks_upd;
 	mps_mission_status = 3;
 }else{
-	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
+    [format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 };
 

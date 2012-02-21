@@ -45,7 +45,12 @@ if( _diffresult > 0.24 ) then {
 	[_position] spawn CREATE_OPFOR_TOWER;
 };
 
-while{ {alive _x && side _x == (SIDE_B select 0)} count nearestObjects[_position,["MAN","LandVehicle","Air"],300] > 3 } do { sleep 5 };
+while{!ABORTTASK && {alive _x && side _x == (SIDE_B select 0)} count nearestObjects[_position,["MAN","LandVehicle","Air"],300] > 3 } do { sleep 5 };
 
-[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
-mps_mission_status = 2;
+if(!ABORTTASK) then {
+	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
+	mps_mission_status = 2;
+}else{
+	[format["TASK%1",_taskid],"failed"] call mps_tasks_upd;
+	mps_mission_status = 3;
+};

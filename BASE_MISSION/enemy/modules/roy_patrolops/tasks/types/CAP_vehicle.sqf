@@ -62,12 +62,12 @@ publicVariable "mps_civilian_intel";
 	_position
 ] call mps_tasks_add;
 
-while { alive _object && _object distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 10 || alive _object && (position _object) select 2 > 3 } do { sleep 5 };
+while {!ABORTTASK && alive _object && _object distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 10 || alive _object && (position _object) select 2 > 3 } do { sleep 5 };
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
 
-if(alive _object) then {
+if(!ABORTTASK && alive _object) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

@@ -51,6 +51,8 @@ for "_i" from 1 to MISSIONCOUNT do {
     //reset Check-In for everyone and remove action from MHQ again to be sure it's not doubled!
     PO2_assigned = false;
     Publicvariable "PO2_assigned";
+    runningmission = false;
+    Publicvariable "runningmission";
     
     [0,[],{
         HQ removeaction HQaction;
@@ -67,15 +69,24 @@ for "_i" from 1 to MISSIONCOUNT do {
     //wait for a player to check in
     waitUntil{sleep 1;MPS_TASKCHECKIN};
     
+    [0,[],{
+        HQ removeaction HQaction;
+    }] call mso_core_fnc_ExMP;
+       
     //let mission-setup begin    
     sleep 10;
+    
+    [0,[],{
+	    HQaction = HQ addaction ["Abort operation", PO_Path + "tasks\abort.sqf"];
+    }] call mso_core_fnc_ExMP;
 
 	_j = (count _list - 1) min (round random (count _list));
 	_next = _list select _j;
 
 	mps_mission_status = 1;
 	_script = [] execVM format[PO_Path + "tasks\types\%1.sqf",_next];
-
+	runningmission = true;
+    Publicvariable "runningmission";
 	while {!(scriptdone _script)} do {sleep 1};
 
 	switch (mps_mission_status) do {

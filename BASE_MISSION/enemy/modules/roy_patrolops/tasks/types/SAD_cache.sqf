@@ -117,7 +117,7 @@ publicVariable "mps_civilian_intel";
 	_position
 ] call mps_tasks_add;
 
-While { damage _cache0 < 1 || damage _cache1 < 1 || damage _cache2 < 1 } do { sleep (10); };
+While {!ABORTTASK or damage _cache0 < 1 || damage _cache1 < 1 || damage _cache2 < 1 } do { sleep (10); };
 
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
