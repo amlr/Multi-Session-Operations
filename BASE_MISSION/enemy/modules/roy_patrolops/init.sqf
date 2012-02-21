@@ -77,11 +77,20 @@ if(isNil "HQ") then {
 	//make Check-in Action on MHQ available for all players and add action locally (for JIP);
 	HQ = nearestobject [getmarkerpos format["respawn_%1", playerSide],"M1130_HQ_unfolded_Base_EP1"];
 };
-
+    if (isnil "runningmission") then {runningmission = false};
+    
+    if (!runningmission) then {    
     [3,[],{
 	    HQaction = HQ addaction ["Check in for special operations", PO_Path + "tasks\checkin_mhq.sqf"];
     }] call mso_core_fnc_ExMP;
-/*    
+    };
+    
+    if (runningmission) then {    
+    [3,[],{
+	    HQaction = HQ addaction ["Abort operation", PO_Path + "tasks\abort.sqf"];
+    }] call mso_core_fnc_ExMP;
+    };
+/* 
     //Crediting Patrol Ops - Team (locally)
     [3,[],{
 	    [] execVM PO_Path + "credits.sqf";
@@ -94,8 +103,9 @@ Patrol Operations 2 By [OCB]EightySix<br/><br/>
 Don't Kill Civillians..."]]; 
 
 if(!isDedicated) then {
-	onPreloadFinished { Receiving_finish = true; onPreloadFinished {}; };
-	WaitUntil{ !(isNull player) && !isNil "mps_init" && Receiving_finish };
+//	onPreloadFinished { Receiving_finish = true; onPreloadFinished {}; };
+//	WaitUntil{ !(isNull player) && !isNil "mps_init" && Receiving_finish };
+	WaitUntil{ !(isNull player) && !isNil "mps_init" };
 }else{
 	WaitUntil{!isNil "mps_init"};
 };

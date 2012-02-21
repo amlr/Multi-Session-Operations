@@ -11,6 +11,8 @@ if !(PO2_assigned) then {
 	PAPABEAR sideChat format ["%1 this is PAPA BEAR. Request Authorised. Transmitting INTEL!", group player];
     PO2_assigned = true;
     Publicvariable "PO2_assigned";
+    ABORTTASK = false;
+    Publicvariable "ABORTTASK";
     } else {
     PAPABEAR sideChat format ["%1 this is PAPA BEAR. You are already assigned. Follow your orders!", group player];
 };

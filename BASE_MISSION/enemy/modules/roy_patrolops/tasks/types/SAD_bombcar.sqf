@@ -60,7 +60,7 @@ _SuicideBomberType = ["TK_CIV_Takistani03_EP1","TK_CIV_Takistani04_EP1","TK_CIV_
 					SuicideBomberG move _positionE;
 
 //now waiting for some conditions to be met and else move 'em along, just check not too often					                    
-while {	
+while {	!ABORTTASK and
 		(_killtasktime < 1800) and
         (alive SuicideBomberD) and
         (damage SuicideBomberV < 0.3) and
@@ -75,7 +75,7 @@ while {
 
 //after one condition has been met instantly check whats going finishing the task
 
-if ((!(alive SuicideBomberD)) and (damage SuicideBomberV < 0.4)) then {
+if (!ABORTTASK && (!(alive SuicideBomberD)) and (damage SuicideBomberV < 0.4)) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	{deletevehicle _x} foreach units SuicideBomberG;
     deletevehicle SuicideBomberV;

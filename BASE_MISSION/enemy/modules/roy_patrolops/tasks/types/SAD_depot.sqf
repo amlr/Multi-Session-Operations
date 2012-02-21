@@ -60,7 +60,7 @@ publicVariable "mps_civilian_intel";
 	_markerpos
 ] call mps_tasks_add;
 
-while { {damage _x < 1} count _fueltanks > 0 } do { sleep 5 };
+while {!ABORTTASK && {damage _x < 1} count _fueltanks > 0 } do { sleep 5 };
 
 _dirn = "NORTH"; if( _position select 1 < _markerpos select 1) then {_dirn = "SOUTH"};
 _dire = "EAST"; if( _position select 0 < _markerpos select 0) then {_dire = "WEST"};
@@ -68,8 +68,13 @@ _distintel = _position distance _markerpos;
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
-[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
-mps_mission_status = 2;
+if(!ABORTTASK) then {
+	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
+	mps_mission_status = 2;
+}else{
+	[format["TASK%1",_taskid],"failed"] call mps_tasks_upd;
+	mps_mission_status = 3;
+};
 
 [_troops] spawn {
 	sleep 60;

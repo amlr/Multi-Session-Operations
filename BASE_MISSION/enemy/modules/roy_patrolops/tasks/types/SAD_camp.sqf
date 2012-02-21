@@ -59,12 +59,17 @@ publicVariable "mps_civilian_intel";
 	_markerpos
 ] call mps_tasks_add;
 
-while { {alive _x} count _troops > 2 } do { sleep 5 };
+while {!ABORTTASK && {alive _x} count _troops > 2 } do { sleep 5 };
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
-[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
-mps_mission_status = 2;
+if(!ABORTTASK) then {
+	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
+	mps_mission_status = 2;
+}else{
+	[format["TASK%1",_taskid],"failed"] call mps_tasks_upd;
+	mps_mission_status = 3;
+};
 
 [_troops] spawn {
 	sleep 60;

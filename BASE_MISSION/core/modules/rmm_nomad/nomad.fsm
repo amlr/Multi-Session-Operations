@@ -38,7 +38,7 @@ class FSM
     class start
     {
       name = "start";
-      init = /*%FSM<STATEINIT""">*/"private [""_variables"",""_onspawn""];" \n
+      init = /*%FSM<STATEINIT""">*/"private [""_variables"",""_onspawn"",""_deaths"",""_maxLives""];" \n
        "" \n
        "_variables = _this select 0;" \n
        "_onspawn = _this select 1;" \n
@@ -111,11 +111,17 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"private [""_data"",""_ndata""];" \n
        "_data = missionnamespace getvariable _string;" \n
        "_ndata = +_data;" \n
-       "	" \n
-       "private [""_deaths""];" \n
-       "_deaths = _ndata select 0;" \n
-       "_deaths call (_onspawn select 0);" \n
        "" \n
+       "_dayspassed = (time / 86400);" \n
+       "if(nomadReinforcements == 999) then {_dayspassed = 999;};" \n
+       "_maxLives = _dayspassed * (nomadRespawns / nomadReinforcements);" \n
+       "" \n
+       "_deaths = _ndata select 0;" \n
+       "if (_deaths >= _maxLives) then {_disconnect = true;};" \n
+       "" \n
+       "_livesAccumulated = _maxLives - _deaths;" \n
+       "_hrsPerLife = (nomadReinforcements / nomadRespawns) * 24;" \n
+       "	" \n
        "private [""_i""];" \n
        "for ""_i"" from 1 to ((count _variables) - 1) do {" \n
        "	if (count _data > _i) then {" \n
@@ -161,10 +167,14 @@ class FSM
     class disconnect
     {
       name = "disconnect";
-      init = /*%FSM<STATEINIT""">*/"private ""_trigger"";" \n
+      init = /*%FSM<STATEINIT""">*/"private [""_trigger""];" \n
+       "" \n
+       "cutText [format[""\n\nNext life in %1 hrs"", [-_livesAccumulated * _hrsPerLife, 2] call BIS_fnc_cutDecimals], ""PLAIN DOWN""];" \n
+       "" \n
        "_trigger = createtrigger [""emptydetector"", [0,0]];" \n
        "_trigger settriggertype ""end6"";" \n
-       "_trigger settriggerstatements [""true"","""",""""];"/*%FSM</STATEINIT""">*/;
+       "_trigger settriggerstatements [""true"","""",""""];" \n
+       ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {

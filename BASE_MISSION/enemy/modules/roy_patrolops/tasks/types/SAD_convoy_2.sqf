@@ -61,7 +61,7 @@ deleteGroup _armorgroup;
 	_position
 ] call mps_tasks_add;
 
-While{ canMove _truck || canMove _armor || canMove _apc } do { sleep 5 };
+While{!ABORTTASK && canMove _truck || canMove _armor || canMove _apc } do { sleep 5 };
 
 if(!canMove _truck && !canMove _armor && !canMove _apc) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
