@@ -41,11 +41,7 @@ _g_nomad = [
 ];
 
 _s_nomad = [
-        {
-                _dayspassed = 1 + time / 86400;
-                _maxLives = nomadRespawns * (nomadReinforcements * _dayspassed);
-                if (_this > _maxLives) then {_disconnect = true;};
-        },
+        {}, /*auto-integrated*/
         {
                 if (nomadClassRestricted == 1 && typeof player != _this) then {_disconnect = true;};
         },
