@@ -9,8 +9,8 @@ set ZIPNAME=MSO_Missions
 set MP_DIR=MPMissions
 set M_DIR=missions
 set BASE_DIR=BASE_MISSION
-set D_VER=4-10
-set D_BNVER=4.10
+set D_VER=4-20RC
+set D_BNVER=4.20RC
 set CODE_DIR=MSO_%BASE_DIR%_CODE_%D_VER%
 
 echo Creating temporary mission folders and placing base mission code into each mission

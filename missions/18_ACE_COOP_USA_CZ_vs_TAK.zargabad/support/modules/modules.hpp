@@ -1,4 +1,5 @@
 // - Tested
+//#define BIS_SOM
 #define RMM_AAR
 #define RMM_CAS
 #define RMM_CASEVAC
@@ -10,9 +11,8 @@
 #define RMM_RECRUITMENT
 //#define RMM_REVIVE
 #define RMM_TASKS
-#define RMM_TYRES
-#define WHB_MULTISPAWN
-#define ZKS_BUILD
+//#define RMM_TYRES
+//#define WHB_MULTISPAWN
 
 // WIP
 //#define GC_PACK_COW

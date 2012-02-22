@@ -87,7 +87,7 @@ CRB_fnc_createShepherd = {
         _shepherd setSkill 0.5 + (random 0.5);
         _shepherd allowFleeing 0;
         _shepherd setSpeedMode "LIMITED";
-        _shepherd setBehaviour "SAFE";
+        _shepherd setBehaviour "CARELESS";
         _shepherd setRank "CORPORAL";
         _shepherd setVariable ["attacking", false];
         
@@ -134,11 +134,12 @@ CRB_fnc_shepherdAttack = {
         _target addRating -400;
         if(_shepherd getVariable "attacking") exitWith{};
         _shepherd setVariable ["attacking", true];
-        if(crb_shepherds_debug) then {diag_log format["MSO-%1 shepherds: %2 Attacking!", time, _name];};
+        diag_log format["MSO-%1 shepherds: %2 Attacking %3!", time, _shepherd, _target];
         
         _delaytime = time + 30;
         _shepherd setUnitPos "UP";
         _shepherd setSpeedMode "FULL";
+        _shepherd setBehaviour "CARELESS";
         _shepherd reveal _target;
 	_dogs = [];
 
@@ -153,15 +154,16 @@ CRB_fnc_shepherdAttack = {
         while{alive _shepherd && alive _target && time < _delaytime} do {
                 _shepherd doWatch position _target;
                 _shepherd doTarget _target;
-                _shepherd doFire _target;
+                {_shepherd doFire _target;} count [1,2,3];
 		{
-			if(_x distance _target <= 2) then {[_target, _x] spawn dogs_fnc_dogattack;};
+			_x domove position _target;
+			if(_x distance _target < 2.5) then {[_target, _x] spawn dogs_fnc_dogattack;};
 		} forEach _dogs;
-                sleep random 2;
+                sleep (1 + random 2);
         };
         _shepherd setUnitPos "AUTO";
         _shepherd setSpeedMode "LIMITED";
-        _shepherd setBehaviour "SAFE";
+        _shepherd setBehaviour "CARELESS";
         _shepherd setVariable ["attacking", false];
         _shepherd action ["WeaponOnBack", _shepherd];
         
@@ -185,8 +187,10 @@ CRB_fnc_createDogs = {
                 _dog allowFleeing 0;
                 if(isDedicated) then {
                         _dog addMPEventHandler ["MPKilled",{_this spawn CRB_fnc_shepherdAttack;}];
+                        _dog addMPEventHandler ["MPHit",{_this spawn CRB_fnc_shepherdAttack;}];
                 } else {
                         _dog addEventHandler ["Killed",{_this spawn CRB_fnc_shepherdAttack;}];
+                        _dog addEventHandler ["Hit",{_this spawn CRB_fnc_shepherdAttack;}];
                 };
                 _dogs set [count _dogs, _dog];
         };
@@ -235,8 +239,10 @@ CRB_fnc_createHerd = {
                 _h setBehaviour "SAFE";
                 if(isDedicated) then {
                         _h addMPEventHandler ["MPKilled",{_this spawn CRB_fnc_shepherdAttack;}];
+                        _h addMPEventHandler ["MPHit",{_this spawn CRB_fnc_shepherdAttack;}];
                 } else {
                         _h addEventHandler ["Killed",{_this spawn CRB_fnc_shepherdAttack;}];
+                        _h addEventHandler ["Hit",{_this spawn CRB_fnc_shepherdAttack;}];
                 };
                 _herd set [count _herd, _h];
         };
@@ -279,7 +285,7 @@ _shepherds = [];
                                 _name = _this select 0;
                                 _pos = _this select 1;
                                 _grp = nil;
-                                _maxdist = 10;
+                                _maxdist = 20;
                                 _wait = time + 60 + random 60;                                
                                 
                                 while{true} do {
@@ -299,7 +305,7 @@ _shepherds = [];
                                                         _shepherd setPos _pos;
                                                         
                                                         _shepherd setSpeedMode "LIMITED";
-                                                        _shepherd setBehaviour "SAFE";
+                                                        _shepherd setBehaviour "CARELESS";
                                                         _shepherd setFormation "DELTA";
                                                         
                                                         _grp enableAttack true;
@@ -308,9 +314,7 @@ _shepherds = [];
                                                 if(!isNil "_grp") then {
                                                         _leader = leader _grp;
                                                         
-                                                        if(_leader getVariable "attacking") then {
-                                                                if(crb_shepherds_debug) then {diag_log format["MSO-%1 shepherds: %2 Attacking!", time, _name] ;};
-                                                        } else {
+                                                        if(!(_leader getVariable "attacking")) then {
                                                                 if(crb_shepherds_debug) then {
                                                                         //player globalChat format["Checking %1", _name];
                                                                         if(alive _leader) then {format["m_%1",_name] setMarkerPos position _leader;};
@@ -322,16 +326,6 @@ _shepherds = [];
                                                                         _wait = _h getVariable "wait";
                                                                         if(isNil "_wait") then {
                                                                                 _h setVariable ["wait", time];
-                                                                        };
-                                                                        
-                                                                        if(_leader distance _h < _maxdist && typeOf _h != "Pastor" && typeOf _h != "Fin") then {  
-                                                                                // limited speed
-                                                                                //if(crb_shepherds_debug) then {player globalChat format["Limited %1", _h];};
-                                                                                _h setSpeedMode "LIMITED";
-                                                                        } else {
-                                                                                // full speed
-                                                                                //if(crb_shepherds_debug) then {player globalChat format["Full %1", _h];};
-                                                                                _h setSpeedMode "FULL";
                                                                         };
                                                                         
                                                                         // Not Man  && unit near leader && unit ready (stopped units are never ready)
@@ -378,7 +372,11 @@ _shepherds = [];
                                                                                 (_leader != _h && _h distance _leader < _maxdist * 0.1)) &&
                                                                                 (typeOf _x != "Pastor" && typeOf _x != "Fin")
                                                                         ) then {
-                                                                                _pos = [position _leader, if(_leader == _h || unitReady _h) then{_maxdist * 10} else { _maxdist}] call CBA_fnc_randPos;
+                                                                                if(_leader == _h || unitReady _h) then{
+	                                                                                _pos = [_leader modelToWorld [0,_maxdist,0], _maxdist * 5] call CBA_fnc_randPos;
+										} else {
+											_pos = [_leader modelToWorld [0,_maxdist,0], _maxdist] call CBA_fnc_randPos;
+										};
                                                                                 _h doMove _pos;
                                                                                 if(_leader == _h) then {
                                                                                         if(crb_shepherds_debug) then {
@@ -391,6 +389,17 @@ _shepherds = [];
                                                                                 
                                                                                 _h setVariable ["wait", time + (_h distance _pos) * random 1.5];
                                                                         };
+
+                                                                        if (_leader distance _h < _maxdist / 2 && typeOf _h != "Pastor" && typeOf _h != "Fin" || _leader == _h ) then {  
+                                                                                // limited speed
+                                                                                //if(crb_shepherds_debug) then {player globalChat format["Limited %1", _h];};
+                                                                                _h setSpeedMode "LIMITED";
+                                                                        } else {
+                                                                                // full speed
+                                                                                //if(crb_shepherds_debug) then {player globalChat format["Full %1", _h];};
+                                                                                _h setSpeedMode "FULL";
+                                                                        };
+                                                                        
                                                                 } forEach units _grp;
                                                         };
                                                 };
@@ -415,7 +424,7 @@ _shepherds = [];
                                         };
                                         
                                         CRBPROFILERSTOP
-                                        sleep 2;
+                                        sleep 5;
                                 };
                         };
                 };

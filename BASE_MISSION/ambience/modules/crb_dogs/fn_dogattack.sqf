@@ -1,7 +1,7 @@
 private ["_victim","_dog"];
 _victim = _this select 0;
 _dog = _this select 1;
-_dog setVariable ["attacking", true, true];
+_dog setVariable ["attacking", true];
 
 _dog attachTo [_victim,[0,1,0], "lholen"];
 _dog setDir 180;
@@ -17,10 +17,10 @@ while {alive _dog && alive _victim && vehicle _victim == _victim} do {
         
         _victim setdamage (damage _victim + 0.05);
         _dog setDir 160 + (floor(random 8) * 5);
-        sleep 0.5 + random 1;
+        sleep (0.5 + random 1);
 };
 [2, _victim,{_this say3D "";}] call mso_core_fnc_ExMP;
 detach _dog;
-_dog setVariable ["attacking", false, true];
+_dog setVariable ["attacking", false];
 
 if (true) exitWith {};
