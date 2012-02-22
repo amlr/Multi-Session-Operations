@@ -17,7 +17,7 @@ while {alive _dog && alive _victim && vehicle _victim == _victim} do {
         
         _victim setdamage (damage _victim + 0.05);
         _dog setDir 160 + (floor(random 8) * 5);
-        sleep 0.5 + random 1;
+        sleep (0.5 + random 1);
 };
 [2, _victim,{_this say3D "";}] call mso_core_fnc_ExMP;
 detach _dog;

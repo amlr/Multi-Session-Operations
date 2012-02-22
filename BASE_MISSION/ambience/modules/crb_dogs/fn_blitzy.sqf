@@ -74,8 +74,8 @@ if (isServer) then {
                                         _dog domove _pos;
                                 };
                         } else {
-                                if (_r > 0.75) then {
-                                        _dog domove (_leader modelToWorld [0,8,0]);
+                                if (_r > 0.5) then {
+                                        _dog domove (_leader modelToWorld [0,10,0]);
                                 };
                         };
                         if (_r > 0.95) then {
