@@ -2,7 +2,7 @@
 
 // ACE configuration
 if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
-	enableEngineArtillery false;  //disable BI arty comp
+	enableEngineArtillery true;  //disable BI arty comp
 	Ace_sys_wounds_no_medical_gear = true;  //disable ACE adding medical items
 	ace_sys_wounds_noai = true;  //disable wounds for AI for performance
 	ace_sys_eject_fnc_weaponcheck = {};  //disable aircraft weapon removal
@@ -78,6 +78,34 @@ if (isServer) then {
 			} foreach _thors;
 		} foreach _crates;
 		diag_log format ["Added %1 THOR III devices to %2 crate(s)", (count _thors) * (count playableunits), count _crates];
+		
+		// Add Loudspeaker to any vehicles nearby ammo markers
+		_speakernum = 1;
+		{
+			private ["_prob","_tits","_posx","_list"];
+			_tits = 0;
+			_posx = markerPos _x;
+			if !(str (markerPos _x) == "[0,0,0]") then {
+				_prob = 0.7 + random 0.3;
+				// Create Loudspeaker logic
+				"reezo_eod_loudspeaker" createUnit [_posx, group BIS_functions_mainscope,
+					format["loudspeaker_%2 = this; this setVariable ['reezo_eod_range',[0,50]];
+					this setVariable ['reezo_eod_probability',%1];
+					this setVariable ['reezo_eod_interval',20];",_prob, _speakernum], 
+					0, ""];
+				// Find cars nearby
+				_list = nearestObjects [_posx, ["Car"], 150];
+				// Sync cars to loudspeaker
+				{
+					if ((_x isKindOf "Wheeled_APC") || (_x isKindOf "LandRover_Base") || (_x isKindOf "HMMWV_Base") || (_x isKindOf "BAF_Jackal2_BASE_D") || (_x isKindOf "UAZ_Base")) then {
+						call compile format ["loudspeaker_%1 synchronizeObjectsadd [_x];",_speakernum];
+						_tits = _tits + 1;
+					};
+				} foreach _list;
+				diag_log format ["Synchronised %2 out of %1 possible cars to EOD Loudspeaker.", count _list, _tits];
+				_speakernum = _speakernum + 1;
+			};
+		} foreach _boxmarkers;
 	};
 };
 

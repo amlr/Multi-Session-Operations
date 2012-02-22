@@ -9,6 +9,12 @@ _size = _this select 1;
 _debug = false;
 _numIEDs = round ((_size / 50) * (tup_ied_threat / 100));
 
+// Check for Enemy in vicinty - if so double IED count
+if ({(side leader _x == east) && (getposATL leader _x in _location)} count (allgroups) > 0) then {
+	_numIEDs = _numIEDs * 2;
+	if (_numIEDs > 400) then {_numIEDs = 400;};
+};
+
 diag_log format ["MSO-%1 IED: creating %2 IEDs at %3 (size %4)", time, _numIEDs, mapgridposition  _location, _size];
 
 // Find positions in area
@@ -35,7 +41,7 @@ for "_j" from 1 to _numIEDs do {
 
 	private ["_IEDskins","_IED","_near","_choice"];
 	// Check no other IEDs nearby
-	_near = nearestObjects [_IEDpos, ["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC","Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC","Land_Misc_Rubble_EP1","Land_Misc_Garb_Heap_EP1","Garbage_container","Misc_TyreHeapEP1","Misc_TyreHeap","Garbage_can","Land_bags_EP1","Paleta2"], 10];
+	_near = nearestObjects [_IEDpos, ["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC","Land_Misc_Rubble_EP1","Land_Misc_Garb_Heap_EP1","Garbage_container","Misc_TyreHeapEP1","Misc_TyreHeap","Garbage_can","Land_bags_EP1"], 10];
 	if (count _near > 0) exitWith {diag_log format ["MSO-%1 IED: exiting as other IEDs found %2",time,_near];}; //Exit if other IEDs are found
 	
 	// Choose EOD or TUP_IED (50/50 chance)
@@ -53,7 +59,7 @@ for "_j" from 1 to _numIEDs do {
 		if (isOnRoad _IEDpos) then {
 			_IEDskins = ["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC"];
 		} else {
-			_IEDskins =["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC","Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC","Land_Misc_Rubble_EP1","Land_Misc_Garb_Heap_EP1","Garbage_container","Misc_TyreHeapEP1","Misc_TyreHeap","Garbage_can","Land_bags_EP1","Paleta2"];
+			_IEDskins =["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC","Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC","Land_Misc_Rubble_EP1","Land_Misc_Garb_Heap_EP1","Garbage_container","Misc_TyreHeapEP1","Misc_TyreHeap","Garbage_can","Land_bags_EP1"];
 		};
 		_IED = createVehicle [_IEDskins call BIS_fnc_selectRandom,_IEDpos, [], 0, ""];
 		// Choose IED or Fake IED

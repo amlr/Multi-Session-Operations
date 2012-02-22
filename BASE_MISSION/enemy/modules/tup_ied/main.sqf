@@ -13,9 +13,9 @@ if (isNil "tup_ied_eod")then{tup_ied_eod = 1;};
 if (isNil "tup_ied_threat")then{tup_ied_threat = 50;};
 if (isNil "tup_suicide_threat")then{tup_suicide_threat = 10;};
 
+// Set up Bombers and IEDs at each location (except any player starting location)
 {
 	private ["_fate","_pos","_trg","_twn"];
-	// Set up Bombers and IEDs at each location (except any player starting location)
 	_pos = getposATL _x;
 	//_twn = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Strategic","VegetationVineyard","NameLocal"], 200]) select 0;
 	_twn = nearestLocation [_pos, ""];
