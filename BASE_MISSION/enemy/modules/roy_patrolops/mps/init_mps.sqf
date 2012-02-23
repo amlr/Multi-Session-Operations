@@ -67,11 +67,7 @@
 
 // Set total number of expected players
 	mps_ref_playercount = 32;	// Max number of players
-/*
-// Set details for mission intro / outro music
-	mps_mission_intro = "EP1_Track11";
-	mps_mission_outro = "EP1_Track07";
-*/
+
 // =========================================================================================================
 //	Only modify these configs if you know what you are doing **** Thanks BON!!!
 // =========================================================================================================
@@ -90,31 +86,14 @@
 
 // File path folder
 	mps_path = PO_Path + "mps\";
-/*
-// Set Default Variables in case of not being declared
-	if(isNil "mps_hud_active") then { mps_hud_active = false; };
-	if(isNil "mps_airdrop_enable") then { mps_airdrop_enable = false; };
-	if(isNil "mps_airdrop_enable") then {mps_airdrop_enable = false};
-	if(isNil "mps_ace_wounds") then {mps_ace_wounds = false};
-	if(isnil "mps_class_limit") then {mps_class_limit = false};
-	if(isNil "mps_liftchopper_enable") then {mps_liftchopper_enable = false};
-	if(isNil "mps_sys_rank") then {mps_sys_rank = false};
-	if(isNil "mps_recruitable_ai") then {mps_recruitable_ai = false};
-	if(isNil "mps_moveable_unload") then {mps_moveable_unload = ""};
-	if(isNil "mps_lock_action") then {mps_lock_action = false};
-	if(isNil "mps_rank_sys_enabled") then {mps_rank_sys_enabled = false};
-	if(isNil "mps_acre_enabled") then {mps_acre_enabled = false};
-*/
 
 // Load the Configruation Variables
 	[] call compile preprocessFileLineNumbers (mps_path+"config\config_ammobox.sqf");
 	[] call compile preprocessFileLineNumbers (mps_path+"config\config_units.sqf");
 	[] call compile preprocessFileLineNumbers (mps_path+"config\config_vehicles.sqf");
-	[] call compile preprocessFileLineNumbers (mps_path+"config\config_backpacks.sqf");
 	[] call compile preprocessFileLineNumbers (mps_path+"func\mps_func_functions.sqf");
 
 // FUNCTIONS LISTS which are called when needed.
-//	mps_weapons_list		= compile preprocessFileLineNumbers (mps_path+"config\config_armoury.sqf");
 	mps_cleanup			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_cleanup.sqf");
 	mps_get_position		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_get_position.sqf");
 	mps_getnearbylocation		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_nearbylocation.sqf");
@@ -126,52 +105,13 @@
 	mps_new_position		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_new_position.sqf");
 	mps_object_c4only		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_c4only.sqf");
 	mps_random_position		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_random_location.sqf");
-//	mps_setdate 			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_date_set.sqf");
 	mps_adv_hint			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_advhint.sqf");
 	mps_tasks_init			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_taskmaster.sqf");
-//	mps_class_check			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_class_check.sqf");
-//	mps_intro			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_intro_sequence.sqf");
-//	mps_intro_camera		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_intro_camera.sqf");
-//	mps_outro			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_outro_sequence.sqf");
-//	mps_outro_camera		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_outro_camera.sqf");
-//	mps_player_killed		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_respawn_killed.sqf");
-//	mps_func_death_pos		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_respawn_deathpos.sqf");
-//	mps_func_death_cam		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_respawn_deathcam.sqf");
-//	mps_func_respawn		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_respawn_select.sqf");
-//	mps_respawn_delay		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_respawn_delay.sqf");
-//	mps_respawn_dialog_upd 		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_respawn_dialog.sqf");
-//	mps_respawn_gear 		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_respawn_gear.sqf");
-//	mps_get_new_type 		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_mhq_gettype.sqf");
-//	mps_mhq_toggle			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_mhq_toggle.sqf");
-//	mps_mhq_respawn			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_mhq_respawn.sqf");
-//	mps_mhq_update			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_mhq_update.sqf");
-//	mps_rank_promote		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_rank_promote.sqf");
-//	mps_rank_demote			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_rank_demote.sqf");
-//	mps_rank_update			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_rank_update.sqf");
-//	mps_rank_proxy			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_rank_proximity.sqf");
-//	mps_rank_init			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_rank_system.sqf");
-//	mps_rank_hud			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_rank_hud.sqf");
-//	mps_func_hud_aimpoint		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_hud_aimpoint.sqf");
-//	mps_func_hud_3d			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_hud_3d.sqf");
-//	mps_func_hud_menu_update	= compile preprocessFileLineNumbers (mps_path+"func\mps_func_hud_menu_update.sqf");
-//	mps_func_hud_teamlist		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_hud_teamlist.sqf");
-//	mps_func_calculate_alpha	= compile preprocessFileLineNumbers (mps_path+"func\mps_func_calculate_alpha.sqf");
-//	mps_func_display_getnameNrank	= compile preprocessFileLineNumbers (mps_path+"func\mps_func_getnamerank.sqf");
-//	mps_func_keyspressed		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_keypressed.sqf");
-//	mps_ammobox			= compile preprocessFileLineNumbers (mps_path+"func\mps_func_ammobox_init.sqf");
-//	mps_fill_ammobox		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_ammobox_fill.sqf");
-//	mps_ammobox_remove		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_ammobox_remove.sqf");
 	mps_patrol_init 		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_patrol_init.sqf");
 	mps_spawn_vehicle 		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_spawn_vehicle.sqf");
 	mps_object_offset		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_object_offset.sqf");
-	mps_moveable_unload		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_moveable_unload.sqf");
-//	mps_injury_sys_init		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_ais_init.sqf");
-//	mps_backpack_dialog_upd		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_bkp_dialogupd.sqf");
-//	mps_lift_chopper_init 		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_liftchopper_init.sqf");
 	mps_mission_sequence		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_mission_sequence.sqf");
 	mps_replace_with_ace		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_replace_with_ace.sqf");
-//	mps_recruit_build_list		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_recruit_dialog.sqf");
-//	mps_recruit_create_new		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_recruit_create_unit.sqf");
 	CREATE_OPFOR_SQUAD		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_spawn_opforsquad.sqf");
 	CREATE_OPFOR_ARMY		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_spawn_opforarmy.sqf");
 	CREATE_OPFOR_STATIC		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_spawn_opforstatic.sqf");
@@ -185,21 +125,6 @@
 
 // Dynamic BIS Object spawner
 	BIS_fnc_dyno			= compile preprocessFileLineNumbers "ca\modules\dyno\data\scripts\objectMapper.sqf";
-
-/*
-// BON Visualisation Adaption
-	visual_settings_maxallowed_viewdist = 10000;
-	vpos = viewdistance;
-	GrassLayer = 1;
-
-// Bon Recruitment Variables
-	mps_group_maxsize = 10;
-	mps_recruit_queue = [];
-
-// Calling Public Event Handlers
-	[] call compile preprocessFileLineNumbers (mps_path+"func\mps_func_ammobox_pevh.sqf");
-	[] call compile preprocessFileLineNumbers (mps_path+"func\mps_func_rank_pevh.sqf");
-*/
 
 // Begin Task sytem by Shuko
 	[] call mps_tasks_init;

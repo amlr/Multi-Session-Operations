@@ -116,11 +116,11 @@ class Params {
 #ifdef MSOFACTIONS
 	#include <enemy\msofactions.hpp>
 #endif
+#ifdef ROY_PATROLOPS
+	#include <enemy\modules\roy_patrolops\params.hpp>
+#endif
 #ifdef WICT_ENEMYPOP
 	#include <enemy\modules\WICT_enemypop\params.hpp>
-#endif
-#ifdef ROY_PATROLOPS
-	#include <enemy\modules\roy_patrolops\mps\dialog\mps_params.sqf>
 #endif
 }; 
 

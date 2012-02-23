@@ -7,8 +7,6 @@ _ammoboxes = ["USSpecialWeaponsBox","RUSpecialWeaponsBox","GuerillaCacheBox"];
 // Arma 2 OA
 if(mps_oa) then { _ammoboxes = ["USBasicWeapons_EP1","TKBasicWeapons_EP1","LocalBasicAmmunitionBox"]; };
 
-
-
 // =========================================================================================================
 //	DO NOT TOUCH CODE BELOW THIS LINE
 // =========================================================================================================

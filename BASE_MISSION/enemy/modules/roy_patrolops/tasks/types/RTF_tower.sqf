@@ -1,4 +1,4 @@
-if(count mps_loc_hills < 1) exitWith{};
+if(count mps_loc_hills < 1) exitWith{PAPABEAR sideChat format ["%1 this is PAPA BEAR. We have had to postpone the mission due to logistical issues.", group player];};
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK RTF_tower.sqf"];
 

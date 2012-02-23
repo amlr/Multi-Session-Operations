@@ -96,7 +96,7 @@ if (isClass (configFile >> "CfgVehicles" >> "ACE_Required_Logic")) then
 		["ACE_Truck5tReammo_Base", 35],
 		["ACE_Truck5tRefuel", 10],
 		["ACE_Truck5tRefuel_Base", 10],
-		["ACE_Truck5tMG_Base", 50],
+		["ACE_Truck5tMG_Base", 120],
 		["ACE_UralReammo_TK_EP1", 35],
 		["ACE_UralRefuel_TK_EP1", 10],
 		["ACE_UralRepair_TK_EP1", 35],

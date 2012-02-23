@@ -164,7 +164,7 @@ R3F_LOG_CFG_objets_heliportables = R3F_LOG_CFG_objets_heliportables +
  */
 R3F_LOG_CFG_transporteurs = R3F_LOG_CFG_transporteurs +
 [
-	["CH47_base_EP1", 80],
+	["CH47_base_EP1", 120],
 	["AH6_Base_EP1", 25],
 	["Mi17_base", 60],
 	["Mi24_Base", 50],
@@ -195,7 +195,7 @@ R3F_LOG_CFG_transporteurs = R3F_LOG_CFG_transporteurs +
 	["MtvrReammo", 35],
 	["MtvrRepair", 35],
 	["MtvrRefuel", 10],
-	["MTVR", 50],
+	["MTVR", 120],
 	["GRAD_Base", 10],
 	["Ural_ZU23_Base", 12],
 	["Ural_CDF", 50],

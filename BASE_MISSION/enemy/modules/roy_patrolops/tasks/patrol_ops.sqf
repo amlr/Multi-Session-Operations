@@ -33,18 +33,18 @@ _list = switch (MISSIONTYPE) do {
 	// Town Capture
     case 1: {["CAP_town"]};
 	// RTF Tasks
-	case 2: {["CAP_target","SAD_cache_2","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","RTF_container","RTF_tower","SAD_bombcar"]};
+	case 2: {["CAP_target","SAD_cache_2","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","RTF_tower","SAD_bombcar"]};
 	// Search and Rescue
 	case 3: {["SAR_pilot","SAR_pow"]};
 	// Mix Easy
-	case 4: {["CAP_target","CAP_town","CAP_vehicle","RTF_container","SAD_cache","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","SAD_scud","SAD_tower","SAR_pilot","SAD_bombcar"]};
+	case 4: {["CAP_target","CAP_town","CAP_vehicle","SAD_cache","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","SAD_scud","SAD_tower","SAR_pilot","SAD_bombcar"]};
 	// Mix Hard
 	case 5: {["CAP_target_2","CAP_town","CAP_vehicle","RTF_tower","SAD_cache_2","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","SAD_scud","SAD_tower","SAR_pow","SAD_bombcar"]};
 
-	default {["CAP_target","CAP_target_2","CAP_town","CAP_vehicle","RTF_container","RTF_tower","SAD_cache","SAD_cache_2","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","SAD_scud","SAR_pilot","SAR_pow","SAD_bombcar"]};
+	default {["CAP_target","CAP_target_2","CAP_town","CAP_vehicle","RTF_tower","SAD_cache","SAD_cache_2","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","SAD_scud","SAR_pilot","SAR_pow","SAD_bombcar"]};
 };
 
-//_list = ["CAP_target"];
+_list = ["RTF_container","RTF_container","RTF_container"];
 
 for "_i" from 1 to MISSIONCOUNT do {
 	

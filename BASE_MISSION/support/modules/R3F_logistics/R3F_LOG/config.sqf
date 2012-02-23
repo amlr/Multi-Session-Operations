@@ -167,7 +167,7 @@ R3F_LOG_CFG_transporteurs =
 	["KamazRefuel", 5],
 	["Kamaz_Base", 40],
 	["MtvrRefuel", 5],
-	["MTVR", 40],
+	["MTVR", 110],
 	["GRAD_Base", 2],
 	["Ural_Base", 40],
 	["ACE_Truck5tMG", 40],
@@ -285,7 +285,7 @@ R3F_LOG_CFG_objets_transportables =
 	["Land_HBarrier_large", 5],
 	["Base_WarfareBBarrier5x", 5],
 	["Land_Misc_deerstand", 10],
-	
+	["Misc_Cargo1B_military", 55],
 	["Land_Misc_Cargo1Ao", 55],
 	["Land_Misc_Cargo1B", 55],
 	["Land_Misc_Cargo1Bo", 55],
