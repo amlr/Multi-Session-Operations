@@ -1,7 +1,7 @@
-#include <crbprofiler.hpp>
+ï»¿#include <crbprofiler.hpp>
 
 // Simple Guard Post Script 1.0
-// by Tophe of Östgöta Ops
+// by Tophe of ï¿½stgï¿½ta Ops
 //
 // Usage with default values:
 // nul = [this] execVM "GuardPost.sqf"
@@ -36,51 +36,44 @@ then
 
 _unit setUnitPos _stance;
 
-[{
-	CRBPROFILERSTART("GuardPost")
-
-        private ["_left","_right","_dir","_zaxis","_pos","_params","_handle","_unit","_startdir","_range","_height","_enemy","_delay"];
-        _params = _this select 0;
-        _handle = _this select 1;
-        _unit = _params select 0;
-        _startdir = _params select 1;
-        _range = _params select 2;
-        _height = _params select 3;
-        _enemy = _params select 4;
-        _delay = _params select 5;
+[_unit, _startdir, _range, _height, _enemy, _delay] spawn {
+        private ["_left","_right","_dir","_zaxis","_pos","_unit","_startdir","_range","_height","_enemy","_delay"];
+        _unit = _this select 0;
+        _startdir = _this select 1;
+        _range = _this select 2;
+        _height = _this select 3;
+        _enemy = _this select 4;
+        _delay = _this select 5;
         
-        if(!alive _unit) exitWith {
-                [_handle] call mso_core_fnc_removeLoopHandler;
-        };
         
-        // Start scanning 
-        // Pause if unit is engaging
-        if(
-                _unit getVariable ["GuardPosWait", 0] < time &&
-                {if (side _x == _enemy) then {_unit knowsAbout _x > 1.4}} count AllUnits == 0
-        ) then {
-                _left = _startdir - (_range/2);
-                _right = _startdir + (_range/2);
+        while{alive _unit} do {
+                CRBPROFILERSTART("GuardPost")
                 
-                if (_left > _right) then {
+                // Start scanning 
+                // Pause if unit is engaging
+                if({if (side _x == _enemy) then {_unit knowsAbout _x > 1.4}} count AllUnits == 0) then {
                         _left = _startdir - (_range/2);
                         _right = _startdir + (_range/2);
-                }; 
-                
-                _left = round _left;
-                _right = round _right;
-                
-                _dir = (random (_right - _left)) + _left;
-                if (_dir < 0) then {_dir = _dir + 360}; 
-                
-                _pos = position _unit;
-                if (_height) then {_zaxis = random 20};
-                if (!_height) then {_zaxis = _pos select 2};
-                _pos = [(_pos select 0) + 50*sin _dir, (_pos select 1) + 50*cos _dir, _zaxis];
-                
-                _unit doWatch _pos;
-                
-                _unit setVariable ["GuardPosWait", (random 10) + _delay + time];
+                        
+                        if (_left > _right) then {
+                                _left = _startdir - (_range/2);
+                                _right = _startdir + (_range/2);
+                        }; 
+                        
+                        _left = round _left;
+                        _right = round _right;
+                        
+                        _dir = (random (_right - _left)) + _left;
+                        if (_dir < 0) then {_dir = _dir + 360}; 
+                        
+                        _pos = position _unit;
+                        if (_height) then {_zaxis = random 20};
+                        if (!_height) then {_zaxis = _pos select 2};
+                        _pos = [(_pos select 0) + 50*sin _dir, (_pos select 1) + 50*cos _dir, _zaxis];
+                        
+                        _unit doWatch _pos;                        
+                };
+                CRBPROFILERSTOP
+		sleep ((random 10) + _delay);
         };
-	CRBPROFILERSTOP
-}, 3, [_unit, _startdir, _range, _height, _enemy, _delay]] call mso_core_fnc_addLoopHandler;
+};
