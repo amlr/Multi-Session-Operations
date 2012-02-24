@@ -81,20 +81,19 @@ for "_i" from 1 to _random do {
                                                 } else {
                                                         _dog setSpeedMode "full";
                                                         _dog domove _pos;
-                                                        sleep random 1;
                                                 };
+                	                        if (_r > 0.95) then {
+        	                                        [2, _dog,{_this say3D (["dog_01","dog_02","dog_yelp"] call BIS_fnc_selectRandom)}] call mso_core_fnc_ExMP
+	                                        };
                                         } else {
                                                 if (_r > 0.66 ) then {
                                                         _dog domove ([_dog, 50] call CBA_fnc_randPos);
                                                         _dog setspeedmode (["LIMITED","NORMAL","FULL"]call BIS_fnc_selectRandom);
                                                 };
                                         };
-                                        if (_r > 0.95) then {
-                                                [2, _dog,{_this say3D (["dog_01","dog_02","dog_yelp"] call BIS_fnc_selectRandom)}] call mso_core_fnc_ExMP
-                                        };
                                 };
                         } forEach units _grp;
-                        sleep 1;
+                        sleep (1 + (random 1));
                         
                         CRBPROFILERSTOP
                 };

@@ -9,8 +9,8 @@ set ZIPNAME=MSO_Missions
 set MP_DIR=MPMissions
 set M_DIR=missions
 set BASE_DIR=BASE_MISSION
-set D_VER=4-20RC
-set D_BNVER=4.20RC
+set D_VER=4-20RC2
+set D_BNVER=4.20RC2
 set CODE_DIR=MSO_%BASE_DIR%_CODE_%D_VER%
 
 echo Creating temporary mission folders and placing base mission code into each mission
@@ -61,8 +61,8 @@ xcopy ..\%BASE_DIR% %MISSION_FOLDER_NAME% /E /Y /Q
 echo Copying Mission customisations to %MISSION_FOLDER_NAME%
 xcopy ..\%M_DIR%\%MISSION_FOLDER_NAME% %MISSION_FOLDER_NAME% /S /Y /Q /EXCLUDE:..\mso_maker\exclude.txt
 
-echo Checking for A2Free version
-for /f "tokens=1,2 delims=_" %%U in ('echo %MISSION_FOLDER_NAME%') do (CALL :processA2Free %%V)
+rem echo Checking for A2Free version
+rem for /f "tokens=1,2 delims=_" %%U in ('echo %MISSION_FOLDER_NAME%') do (CALL :processA2Free %%V)
 
 cd %MISSION_FOLDER_NAME%
 call ..\..\mso_maker\clean_modules.bat ambience\modules

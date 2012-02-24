@@ -73,13 +73,13 @@ if (isServer) then {
                                 } else {
                                         _dog domove _pos;
                                 };
+                	        if (_r > 0.95) then {
+        	                        [2, _dog,{_this say3D (["dog_01","dog_02","dog_yelp"] call BIS_fnc_selectRandom)}] call mso_core_fnc_ExMP
+	                        };
                         } else {
                                 if (_r > 0.5) then {
                                         _dog domove (_leader modelToWorld [0,10,0]);
                                 };
-                        };
-                        if (_r > 0.95) then {
-                                [2, _dog,{_this say3D (["dog_01","dog_02","dog_yelp"] call BIS_fnc_selectRandom)}] call mso_core_fnc_ExMP
                         };
                 };
                 
