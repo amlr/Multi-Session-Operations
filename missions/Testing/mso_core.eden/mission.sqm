@@ -208,6 +208,7 @@ class Mission
 					id=9;
 					side="WEST";
 					vehicle="cwr2_OfficerW";
+					player="PLAYER COMMANDER";
 					leader=1;
 					rank="SERGEANT";
 					skill=0.46666664;
@@ -257,6 +258,7 @@ class Mission
 					id=14;
 					side="CIV";
 					vehicle="Mi17_Civilian";
+					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
 					init="this flyInHeight 100;";
@@ -268,7 +270,7 @@ class Mission
 					id=15;
 					side="CIV";
 					vehicle="Citizen1";
-					player="PLAYER COMMANDER";
+					player="PLAY CDG";
 					skill=0.60000002;
 				};
 			};
