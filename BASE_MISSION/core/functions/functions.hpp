@@ -17,6 +17,7 @@ class mso_core {
 		class getUnitsInArea {};
 		class getDominantSide {};
 		class getFactions {};
+		class spawnCrew {};
 		class profiler {};
 		class addLoopHandler {};
 		class removeLoopHandler {};
