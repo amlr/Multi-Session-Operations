@@ -44,8 +44,6 @@ _list = switch (MISSIONTYPE) do {
 	default {["CAP_target","CAP_target_2","CAP_town","CAP_vehicle","RTF_tower","SAD_cache","SAD_cache_2","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","SAD_scud","SAR_pilot","SAR_pow","SAD_bombcar"]};
 };
 
-_list = ["RTF_container","RTF_container","RTF_container"];
-
 for "_i" from 1 to MISSIONCOUNT do {
 	
     //reset Check-In for everyone and remove action from MHQ again to be sure it's not doubled!
