@@ -8,3 +8,4 @@
 #define DEFAULT_CWR2_US 0
 #define DEFAULT_CWR2_RU 0
 #define DEFAULT_CWR2_FIA 0
+#define DEFAULT_tigerianne 0

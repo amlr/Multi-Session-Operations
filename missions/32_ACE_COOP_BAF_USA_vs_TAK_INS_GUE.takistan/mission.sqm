@@ -4423,7 +4423,7 @@ class Mission
 		};
 		class Item5
 		{
-			position[]={27.80928,606.15936,23.280273};
+			position[]={2624.7134,197.32567,5109.9097};
 			name="respawn_west";
 			type="Empty";
 		};
@@ -4571,7 +4571,7 @@ class Mission
 	};
 	class Sensors
 	{
-		items=3;
+		items=2;
 		class Item0
 		{
 			position[]={2632.9692,197.09467,5105.6895};
@@ -4597,20 +4597,6 @@ class Mission
 			interruptable=1;
 			age="UNKNOWN";
 			name="BIS_Zora_1";
-			class Effects
-			{
-			};
-		};
-		class Item2
-		{
-			position[]={1.7995663,609.42004,-0.3616333};
-			a=300;
-			b=300;
-			activationBy="WEST";
-			repeating=1;
-			interruptable=1;
-			age="UNKNOWN";
-			expActiv="{switch(typeOf _x)do{case ""BAF_Soldier_MTP"":{_x setPos markerPos ""respawn_UK"";}; case ""BAF_Soldier_TL_MTP"":{_x setPos markerPos ""respawn_UK"";}; case ""US_Soldier_EP1"":{_x setPos markerPos ""respawn_US"";}; case ""US_Soldier_TL_EP1"":{_x setPos markerPos ""respawn_US"";}; }; } forEach thisList;";
 			class Effects
 			{
 			};
