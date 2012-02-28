@@ -580,6 +580,14 @@ CRB_fnc_SpawnNewCell = {
         };
         
         [group _terrorlead, _pos] execVM "enemy\scripts\BIN_taskDefend.sqf";
+		
+		// Check to see if Cell sets up roadblock
+		if ((random 1 > 0.7) || (_debug)) then {
+			[group _terrorlead, _pos] execVM "enemy\scripts\TUP_deployRoadBlock.sqf";
+			if (_debug) then {
+                diag_log format["Cell#%1 - Deployed Road Block", _tcid];
+			};
+		};
         
         //{alive _x} count units _grp> 0 && 
         while{count((getWeaponCargo _ammo) select 0) != 0 || count((getMagazineCargo _ammo) select 0) != 0} do {
