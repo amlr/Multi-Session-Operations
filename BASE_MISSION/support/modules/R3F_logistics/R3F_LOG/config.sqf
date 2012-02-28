@@ -29,6 +29,8 @@
  * List of class names of (ground or air) vehicles which can tow towables objects.
  * Liste des noms de classes des véhicules terrestres pouvant remorquer des objets remorquables.
  */
+ 
+ //beware to check for duplicates when removing vehicles
 R3F_LOG_CFG_remorqueurs =
 [
 	// e.g. : "MyTowingVehicleClassName1", "MyTowingVehicleClassName2"
@@ -466,6 +468,552 @@ R3F_LOG_CFG_objets_deplacables =
  * Liste des fichiers ajoutant des objets dans les tableaux de fonctionnalités logistiques (ex : R3F_LOG_CFG_remorqueurs)
  * Ajoutez une inclusion vers votre nouveau fichier ici si vous souhaitez utilisez la logistique avec un nouvel addon.
  */
-#include "addons_config\ACE_OA_objects.sqf"
-#include "addons_config\BAF_objects.sqf"
-#include "addons_config\arma2_CO_objects.sqf"
+ 
+ 
+ //ARMA CO Config (beware to check for duplicates when removing vehicles)
+ 
+R3F_LOG_CFG_remorqueurs = R3F_LOG_CFG_remorqueurs +
+[
+	"TowingTractor",
+	"Tractor",
+	"Kamaz_Base",
+	"MTVR",
+	"GRAD_Base",
+	"Ural_Base",
+	"V3S_Base",
+	"BRDM2_Base",
+	"BTR90_Base",
+	"GAZ_Vodnik_HMG",
+	"LAV25_Base",
+	"StrykerBase_EP1",
+	"M2A2_Base",
+	"MLRS"
+];
+
+R3F_LOG_CFG_objets_remorquables = R3F_LOG_CFG_objets_remorquables +
+[
+	"M119",
+	"D30_base",
+	"ZU23_base",
+	"A10",
+	"A10_US_EP1"
+];
+
+R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
+[
+	"CH47_base_EP1",
+	"Mi17_base",
+	"Mi24_Base",
+	"UH1H_base",
+	"UH1_Base",
+	"UH60_Base",
+	"MV22"
+];
+
+
+R3F_LOG_CFG_objets_heliportables = R3F_LOG_CFG_objets_heliportables +
+[
+	"ReammoBox",
+	"ATV_Base_EP1",
+	"HMMWV_Base",
+	"Ikarus_TK_CIV_EP1",
+	"Lada_base",
+	"LandRover_Base",
+	"Offroad_DSHKM_base",
+	"Pickup_PK_base",
+	"S1203_TK_CIV_EP1",
+	"SUV_Base_EP1",
+	"SkodaBase",
+	"TowingTractor",
+	"Tractor",
+	"Kamaz_Base",
+	"MTVR",
+	"GRAD_Base",
+	"Ural_Base",
+	"Ural_ZU23_Base",
+	"V3S_Base",
+	"UAZ_Base",
+	"VWGolf",
+	"Volha_TK_CIV_Base_EP1",
+	"BTR40_MG_base_EP1",
+	"hilux1_civil_1_open",
+	"hilux1_civil_3_open_EP1",
+	"D30_base",
+	"M119",
+	"ZU23_base",
+	"Boat",
+	"Fishing_Boat",
+	"SeaFox",
+	"Smallboat_1",
+	"Land_Misc_Cargo1A_EP1",
+	"Land_Misc_Cargo1B",
+	"Land_Misc_Cargo1B_EP1",
+	"Land_Misc_Cargo1C",
+	"Land_Misc_Cargo1C_EP1",
+	"Land_Misc_Cargo1D",
+	"Land_Misc_Cargo1D_EP1",
+	"Land_Misc_Cargo1E",
+	"Land_Misc_Cargo1E_EP1",
+	"Land_Misc_Cargo1Eo_EP1",
+	"Land_Misc_Cargo1F",
+	"Land_Misc_Cargo1G",
+	"Land_Misc_Cargo2A_EP1",
+	"Land_Misc_Cargo2B",
+	"Land_Misc_Cargo2B_EP1",
+	"Land_Misc_Cargo2C",
+	"Land_Misc_Cargo2C_EP1",
+	"Land_Misc_Cargo2D",
+	"Land_Misc_Cargo2D_EP1",
+	"Land_Misc_Cargo2E",
+	"Land_Misc_Cargo2E_EP1",
+	"Base_WarfareBContructionSite",
+	"Misc_cargo_cont_net1",
+	"Misc_cargo_cont_net2",
+	"Misc_cargo_cont_net3",
+	"Misc_cargo_cont_small",
+	"Misc_cargo_cont_small2",
+	"Misc_cargo_cont_tiny"
+];
+
+R3F_LOG_CFG_transporteurs = R3F_LOG_CFG_transporteurs +
+[
+	["CH47_base_EP1", 120],
+	["AH6_Base_EP1", 25],
+	["Mi17_base", 60],
+	["Mi24_Base", 50],
+	["UH1H_base", 35],
+	["UH1_Base", 30],
+	["UH60_Base", 40],
+	["An2_Base_EP1", 40],
+	["C130J", 150],
+	["MV22", 80],
+	["ATV_Base_EP1", 5],
+	["HMMWV_Avenger", 5],
+	["HMMWV_M998A2_SOV_DES_EP1", 12],
+	["HMMWV_Base", 18],
+	["Ikarus", 50],
+	["Lada_base", 10],
+	["LandRover_Base", 15],
+	["Offroad_DSHKM_base", 15],
+	["Pickup_PK_base", 15],
+	["S1203_TK_CIV_EP1", 20],
+	["SUV_Base_EP1", 15],
+	["SkodaBase", 10],
+	["TowingTractor", 5],
+	["Tractor", 5],
+	["KamazRefuel", 10],
+	["Kamaz", 50],
+	["Kamaz_Base", 35],
+	["MAZ_543_SCUD_Base_EP1", 10],
+	["MtvrReammo", 35],
+	["MtvrRepair", 35],
+	["MtvrRefuel", 10],
+	["MTVR", 120],
+	["GRAD_Base", 10],
+	["Ural_ZU23_Base", 12],
+	["Ural_CDF", 50],
+	["Ural_INS", 50],
+	["UralRefuel_Base", 10],
+	["Ural_Base", 35],
+	["V3S_Refuel_TK_GUE_EP1", 10],
+	["V3S_Civ", 35],
+	["V3S_Base_EP1", 50],
+	["UAZ_Base", 10],
+	["VWGolf", 8],
+	["Volha_TK_CIV_Base_EP1", 8],
+	["BRDM2_Base", 15],
+	["BTR40_MG_base_EP1", 15],
+	["BTR90_Base", 25],
+	["GAZ_Vodnik_HMG", 25],
+	["LAV25_Base", 25],
+	["StrykerBase_EP1", 25],
+	["hilux1_civil_1_open", 12],
+	["hilux1_civil_3_open_EP1", 12],
+	["Motorcycle", 3],
+	["2S6M_Tunguska", 10],
+	["M113_Base", 12],
+	["M1A1", 5],
+	["M2A2_Base", 15],
+	["MLRS", 8],
+	["T34", 5],
+	["T55_Base", 5],
+	["T72_Base", 5],
+	["T90", 5],
+	["AAV", 12],
+	["BMP2_Base", 7],
+	["BMP3", 7],
+	["ZSU_Base", 5],
+	["RHIB", 10],
+	["RubberBoat", 5],
+	["Fishing_Boat", 10],
+	["SeaFox", 5],
+	["Smallboat_1", 8],
+	["Fort_Crate_wood", 5],
+	["Land_Misc_Cargo1A_EP1", 100],
+	["Land_Misc_Cargo1B", 100],
+	["Misc_Cargo1B_military", 100],
+	["Land_Misc_Cargo1B_EP1", 100],
+	["Land_Misc_Cargo1C", 100],
+	["Land_Misc_Cargo1C_EP1", 100],
+	["Land_Misc_Cargo1D", 100],
+	["Land_Misc_Cargo1D_EP1", 100],
+	["Land_Misc_Cargo1E", 100],
+	["Land_Misc_Cargo1E_EP1", 100],
+	["Land_Misc_Cargo1Eo_EP1", 100],
+	["Land_Misc_Cargo1F", 100],
+	["Land_Misc_Cargo1G", 100],
+	["Land_Misc_Cargo2A_EP1", 200],
+	["Land_Misc_Cargo2B", 200],
+	["Land_Misc_Cargo2B_EP1", 200],
+	["Land_Misc_Cargo2C", 200],
+	["Land_Misc_Cargo2C_EP1", 200],
+	["Land_Misc_Cargo2D", 200],
+	["Land_Misc_Cargo2D_EP1", 200],
+	["Land_Misc_Cargo2E", 200],
+	["Land_Misc_Cargo2E_EP1", 200],
+	["Base_WarfareBContructionSite", 100],
+	["Misc_cargo_cont_net1", 18],
+	["Misc_cargo_cont_net2", 36],
+	["Misc_cargo_cont_net3", 60],
+	["Misc_cargo_cont_small", 50],
+	["Misc_cargo_cont_small2", 40],
+	["Misc_cargo_cont_tiny", 35]
+];
+
+R3F_LOG_CFG_objets_transportables = R3F_LOG_CFG_objets_transportables +
+[
+	["SatPhone", 1], // Needed for the R3F_ARTY module (arty HQ) (nécessaire pour le module R3F_ARTY (PC d'arti))
+	["Pchela1T", 15],
+	["ATV_Base_EP1", 20],
+	["FoldChair_with_Cargo", 1],
+	["MMT_base", 1],
+	["Old_bike_base_EP1", 1],
+	["M1030", 5],
+	["Old_moto_base", 5],
+	["TT650_Base", 5],
+	["Igla_AA_pod_East", 7],
+	["Stinger_Pod_base", 7],
+	["Metis", 4],
+	["SPG9_base", 4],
+	["TOW_TriPod", 5],
+	["TOW_TriPod_Base", 5],
+	["AGS_base", 4],
+	["MK19_TriPod", 4],
+	["DSHKM_base", 4],
+	["KORD_Base", 5],
+	["M2StaticMG_base", 4],
+	["WarfareBMGNest_M240_base", 10],
+	["WarfareBMGNest_PK_Base", 10],
+	["2b14_82mm", 4],
+	["M252", 4],
+	["Warfare2b14_82mm_Base", 4],
+	["StaticSEARCHLight", 4],
+	["FlagCarrierSmall", 1],
+	["Fort_Crate_wood", 2],
+	["Fort_RazorWire", 2],
+	["Gunrack1", 3],
+	["Base_WarfareBBarrier10xTall", 10],
+	["Base_WarfareBBarrier10x", 7],
+	["Base_WarfareBBarrier5x", 5],
+	["Fort_EnvelopeBig", 1],
+	["Fort_EnvelopeSmall", 1],
+	["Land_A_tent", 2],
+	["Land_Antenna", 4],
+	["Land_Fire_barrel", 1],
+	["Land_GuardShed", 3],
+	["Land_Misc_Cargo1A_EP1", 110],
+	["Land_Misc_Cargo1B", 110],
+	["Misc_Cargo1B_military", 110],
+	["Land_Misc_Cargo1B_EP1", 110],
+	["Land_Misc_Cargo1C", 110],
+	["Land_Misc_Cargo1C_EP1", 110],
+	["Land_Misc_Cargo1D", 110],
+	["Land_Misc_Cargo1D_EP1", 110],
+	["Land_Misc_Cargo1E", 110],
+	["Land_Misc_Cargo1E_EP1", 110],
+	["Land_Misc_Cargo1F", 110],
+	["Land_Misc_Cargo1G", 110],
+	["Land_Misc_Cargo2A_EP1", 220],
+	["Land_Misc_Cargo2B", 220],
+	["Land_Misc_Cargo2B_EP1", 220],
+	["Land_Misc_Cargo2C", 220],
+	["Land_Misc_Cargo2C_EP1", 220],
+	["Land_Misc_Cargo2D", 220],
+	["Land_Misc_Cargo2D_EP1", 220],
+	["Land_Misc_Cargo2E", 220],
+	["Land_Misc_Cargo2E_EP1", 220],
+	["Land_fort_bagfence_corner", 2],
+	["Land_fort_bagfence_long", 2],
+	["Land_fort_bagfence_round", 3],
+	["Land_fortified_nest_small", 6],
+	["Land_tent_east", 6],
+	["Land_BagFenceCorner", 2],
+	["Land_HBarrier_large", 3],
+	["Land_Toilet", 3],
+	["RoadBarrier_light", 2],
+	["WarfareBunkerSign", 1],
+	["Base_WarfareBContructionSite", 110],
+	["ACamp", 3],
+	["Camp", 5],
+	["CampEast", 6],
+	["MASH", 5],
+	["FlagCarrier", 1],
+	["FlagCarrierChecked", 1],
+	["Hedgehog", 3],
+	["Hhedgehog_concrete", 6],
+	["Hhedgehog_concreteBig", 9],
+	["AmmoCrate_NoInteractive_Base_EP1", 5],
+	["Misc_cargo_cont_net1", 40],
+	["Misc_cargo_cont_net2", 50],
+	["Misc_cargo_cont_net3", 100],
+	["Misc_cargo_cont_small", 55],
+	["Misc_cargo_cont_small2", 50],
+	["Misc_cargo_cont_tiny", 40],
+	["RUVehicleBox", 12],
+	["TKVehicleBox_EP1", 12],
+	["USVehicleBox_EP1", 12],
+	["USVehicleBox", 12],
+	["ReammoBox", 5],
+	["TargetE", 2],
+	["TargetEpopup", 2],
+	["TargetPopUpTarget", 2],
+	["Desk", 1],
+	["FoldChair", 1],
+	["FoldTable", 1],
+	["Land_Barrel_empty", 1],
+	["Land_Barrel_sand", 1],
+	["Land_Barrel_water", 1],
+	["Land_arrows_yellow_L", 1],
+	["Land_arrows_yellow_R", 1],
+	["Land_coneLight", 1],
+	["BarrelBase", 2],
+	["Fuel_can", 1],
+	["Notice_board", 1],
+	["Pallets_comlumn", 1],
+	["Unwrapped_sleeping_bag", 1],
+	["Wheel_barrow", 1],
+	["RoadCone", 1],
+	["Sign_1L_Border", 1],
+	["Sign_Danger", 1],
+	["SmallTable", 1],
+	["EvPhoto", 1],
+	["MetalBucket", 1],
+	["Notebook", 1],
+	["Radio", 1],
+	["SmallTV", 1],
+	["Land_Chair_EP1", 1],
+	["Suitcase", 1],
+	["WeaponBagBase_EP1", 3]
+];
+
+
+R3F_LOG_CFG_objets_deplacables = R3F_LOG_CFG_objets_deplacables +
+[
+	"SatPhone", // Needed for the R3F_ARTY module (arty HQ) (nécessaire pour le module R3F_ARTY (PC d'arti))
+	"FoldChair_with_Cargo",
+	"StaticWeapon",
+	"FlagCarrierSmall",
+	"Fort_Crate_wood",
+	"Fort_RazorWire",
+	"Gunrack1",
+	"Base_WarfareBBarrier5x",
+	"Fort_EnvelopeBig",
+	"Fort_EnvelopeSmall",
+	"Land_A_tent",
+	"Land_Antenna",
+	"Land_Fire_barrel",
+	"Land_GuardShed",
+	"Land_fort_bagfence_corner",
+	"Land_fort_bagfence_long",
+	"Land_fort_bagfence_round",
+	"Land_fortified_nest_small",
+	"Land_tent_east",
+	"Land_HBarrier_large",
+	"Land_Toilet",
+	"RoadBarrier_light",
+	"WarfareBunkerSign",
+	"ACamp",
+	"Camp",
+	"CampEast",
+	"MASH",
+	"FlagCarrier",
+	"FlagCarrierChecked",
+	"Hedgehog",
+	"Hhedgehog_concrete",
+	"Hhedgehog_concreteBig",
+	"AmmoCrate_NoInteractive_Base_EP1",
+	"ReammoBox",
+	"TargetE",
+	"TargetEpopup",
+	"TargetPopUpTarget",
+	"Desk",
+	"FoldChair",
+	"FoldTable",
+	"Land_Barrel_empty",
+	"Land_Barrel_sand",
+	"Land_Barrel_water",
+	"Land_arrows_yellow_L",
+	"Land_arrows_yellow_R",
+	"Land_coneLight",
+	"BarrelBase",
+	"Fuel_can",
+	"Notice_board",
+	"Pallets_comlumn",
+	"Unwrapped_sleeping_bag",
+	"Wheel_barrow",
+	"RoadCone",
+	"Sign_1L_Border",
+	"Sign_Danger",
+	"SmallTable",
+	"EvPhoto",
+	"MetalBucket",
+	"Notebook",
+	"Radio",
+	"SmallTV",
+	"Land_Chair_EP1",
+	"Suitcase",
+	"WeaponBagBase_EP1"
+];
+ 
+ 
+// BAF content
+
+R3F_LOG_CFG_remorqueurs = R3F_LOG_CFG_remorqueurs +
+[
+	"BAF_Jackal2_Base",
+	"BAF_Offroad_Base"
+];
+
+R3F_LOG_CFG_objets_remorquables = R3F_LOG_CFG_objets_remorquables +
+[
+	"BAF_Jackal2_Base",
+	"BAF_Offroad_Base"	
+];
+
+R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
+[
+	"BAF_Merlin_HC3_D"	
+];
+
+R3F_LOG_CFG_objets_heliportables = R3F_LOG_CFG_objets_heliportables +
+[
+	"BAF_Jackal2_Base",
+	"BAF_Offroad_Base"	
+];
+
+R3F_LOG_CFG_transporteurs = R3F_LOG_CFG_transporteurs +
+[
+	["BAF_Merlin_HC3_D", 50],
+	["BAF_Jackal2_Base", 15],
+	["BAF_Offroad_Base", 15]
+];
+
+R3F_LOG_CFG_objets_transportables = R3F_LOG_CFG_objets_transportables +
+[
+	["BAF_GMG_Tripod_D", 4]
+];
+
+R3F_LOG_CFG_objets_deplacables = R3F_LOG_CFG_objets_deplacables +
+[
+	
+]; 
+ 
+
+// ACE OA est-il présent ? (is ACE OA activated ?)
+if (isClass (configFile >> "CfgVehicles" >> "ACE_Required_Logic")) then
+{
+
+	R3F_LOG_CFG_remorqueurs = R3F_LOG_CFG_remorqueurs +
+	[
+		"ACE_Truck5tMG_Base"
+	];
+
+	R3F_LOG_CFG_objets_remorquables = R3F_LOG_CFG_objets_remorquables +
+	[
+		"ACE_EASA_Vehicle"
+	];
+	
+
+	R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
+	[
+		// Aucun lifteur fourni par ACE OA
+	];
+	
+
+	R3F_LOG_CFG_objets_heliportables = R3F_LOG_CFG_objets_heliportables +
+	[
+		"ACE_Truck5tMG_Base",
+		"ACE_Lifeboat",
+		"ACE_EASA_Vehicle"
+	];
+
+	R3F_LOG_CFG_transporteurs = R3F_LOG_CFG_transporteurs +
+	[
+		["ACE_Truck5tRepair", 35],
+		["ACE_Truck5tRepair_Base", 35],
+		["ACE_Truck5tReammo", 35],
+		["ACE_Truck5tReammo_Base", 35],
+		["ACE_Truck5tRefuel", 10],
+		["ACE_Truck5tRefuel_Base", 10],
+		["ACE_Truck5tMG_Base", 120],
+		["ACE_UralReammo_TK_EP1", 35],
+		["ACE_UralRefuel_TK_EP1", 10],
+		["ACE_UralRepair_TK_EP1", 35],
+		["ACE_V3S_Reammo_TK_GUE_EP1", 35],
+		["ACE_V3S_Refuel_TK_GUE_EP1", 10],
+		["ACE_V3S_Repair_TK_GUE_EP1", 35],
+		["ACE_Lifeboat", 5]
+	];
+	
+	R3F_LOG_CFG_objets_transportables = R3F_LOG_CFG_objets_transportables +
+	[
+		["ACE_Stretcher", 2],
+		["ACE_KonkursTripod_NoGeo", 5],
+		["ACE_M3Tripod", 3],
+		["ACE_Konkurs", 7],
+		["ACE_SpottingScope", 3],
+		["ACE_Lifeboat", 7],
+		["ACE_Sandbag_NoGeo", 1],
+		["ACE_BandageBoxWest", 4],
+		["ACE_CSW_Box_Base", 12],
+		["ACE_RuckBox_East", 12],
+		["ACE_RuckBox_Ind", 12],
+		["ACE_RUCK_Box_Base", 35],
+		["ACE_Rope_Box_Base", 35],
+		["ACE_SandBox", 35],
+		["ACE_GuerillaCacheBox", 9],
+		["ACE_RUBasicAmmunitionBox", 5],
+		["ACE_RUOrdnanceBox", 9],
+		["ACE_RUVehicleBox", 40],
+		["ACE_RUBasicWeaponsBox", 15],
+		["ACE_RULaunchers", 9],
+		["ACE_RULaunchersBox", 9],
+		["ACE_RUSpecialWeaponsBox", 15],
+		["ACE_LocalBasicAmmunitionBox", 5],
+		["ACE_LocalBasicWeaponsBox", 10],
+		["ACE_EmptyBox", 5],
+		["ACE_HuntIRBox", 4],
+		["ACE_KnicklichtBox", 4],
+		["ACE_USBasicAmmunitionBox", 4],
+		["ACE_USOrdnanceBox", 4],
+		["ACE_USVehicleBox", 35],
+		["ACE_USVehicleBox_EP1", 35],
+		["ACE_USBasicWeaponsBox", 12],
+		["ACE_USLaunchersBox", 9],
+		["ACE_SpecialWeaponsBox", 12],
+		["ACE_USSpecialWeaponsBox", 12],
+		["ACE_TargetBase", 2],
+		["ACE_UsedTubes", 2],
+		["ACE_MS2000_STROBE_OBJECT", 1]
+	];
+	
+	R3F_LOG_CFG_objets_deplacables = R3F_LOG_CFG_objets_deplacables +
+	[
+		"ACE_Stretcher",
+		"ACE_Lifeboat",
+		"ACE_Sandbag_NoGeo",
+		"ACE_TargetBase",
+		"ACE_UsedTubes",
+		"ACE_MS2000_STROBE_OBJECT"
+	];
+};
