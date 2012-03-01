@@ -1,11 +1,13 @@
-if(count mps_loc_towns < 1) exitWith{};
+if(count mps_loc_towns < 1) exitWith{PAPABEAR sideChat format ["%1 this is PAPA BEAR. Mission Cancelled!", group player]};
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK CAP_town.sqf"];
 
 private["_location","_position","_taskid","_rmin","_rmax","_rplayers","_ra","_rb","_diffresult"];
 
-_location = (mps_loc_towns call mps_getRandomElement);
-mps_loc_towns = mps_loc_towns - [_location];
+while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
+	sleep 0.1;
+};
+mps_loc_last = _location;
 
 _position = [(position _location) select 0,(position _location) select 1, 0];
 //_position = [_position,80,0.1,2] call mps_getFlatArea;

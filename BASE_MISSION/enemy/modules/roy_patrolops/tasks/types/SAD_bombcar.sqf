@@ -7,12 +7,18 @@ private["_location","_position","_taskid","_positionS","_locationE","_positionE"
 _killtasktime = 0;
 
 // regular task inits
-_location = (mps_loc_towns call mps_getRandomElement);
-_locationE = (mps_loc_towns call mps_getRandomElement);
+while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
+	sleep 0.1;
+};
+mps_loc_last = _location;
+while { _locationE = (mps_loc_towns call mps_getRandomElement); _locationE == mps_loc_last } do {
+	sleep 0.1;
+};
+mps_loc_last = _locationE;
 _position = [(position _location) select 0,(position _location) select 1, 0];
 _positionE = [(position _locationE) select 0,(position _locationE) select 1, 0];
 _taskid = format["%1%2%3",round (_position select 0),round (_position select 1),(round random 999)];
-mps_loc_towns = mps_loc_towns - [_location];
+
 
 
 //switched _position and _positionE

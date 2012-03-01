@@ -4,8 +4,10 @@ diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK DEF_town.sqf"];
 
 private["_location","_defendpos","_spawnpos","_taskid","_rmin","_rmax","_rplayers","_ra","_rb","_diffresult","_enemyforce"];
 
-_location = (mps_loc_towns call mps_getRandomElement);
-mps_loc_towns = mps_loc_towns - [_location];
+while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
+	sleep 0.1;
+};
+mps_loc_last = _location;
 _enemyforce = [];
 
 _defendpos = [(position _location) select 0,(position _location) select 1, 0];

@@ -4,14 +4,15 @@ diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_chemical.sqf"];
 
 private["_location","_position","_taskid","_object","_grp","_stance ","_b","_camptype","_troops"];
 
-_location = (mps_loc_towns call mps_getRandomElement);
+while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
+	sleep 0.1;
+};
+mps_loc_last = _location;
 _markerpos = [(position _location) select 0,(position _location) select 1, 0];
 _position = [[(position _location) select 0,(position _location) select 1, 0],1000,0.1,2] call mps_getFlatArea;
 _taskid = format["%1%2%3",round (_position select 0),round (_position select 1),(round random 999)];
 _b = (2 max (round (random (playersNumber (SIDE_A select 0) / 4)))) * MISSIONDIFF;
 _troops = [];
-
-mps_loc_towns = mps_loc_towns - [_location];
 
 _camptype = "Land_Ind_Quarry";
 if(mps_oa) then {_camptype = "Land_Ind_Quarry";};

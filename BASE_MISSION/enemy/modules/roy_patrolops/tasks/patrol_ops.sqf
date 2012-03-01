@@ -7,7 +7,7 @@ mps_mission_score = 0;
 
 //_locations = nearestLocations [[0,0],["Name","NameLocal","NameVillage","NameCity","NameCityCapital","Hill","Airport","ViewPoint"],30000];
 
-{	if( position _x distance getMarkerPos format["respawn_%1",(SIDE_A select 0)] > 3000 ) then {
+{	if( position _x distance getMarkerPos format["respawn_%1",(SIDE_A select 0)] > 1500 ) then {
 		switch (type _x) do {
 			case "Name": {mps_loc_passes = mps_loc_passes + [_x];};
 			case "NameLocal": {mps_loc_passes = mps_loc_passes + [_x];};
@@ -26,6 +26,8 @@ if(count mps_loc_hills > 0) then {
 	mps_loc_hills = mps_loc_hills - [_location];
 	[_location] spawn CREATE_OPFOR_AIRPATROLS;
 };
+
+mps_loc_last = mps_loc_towns select 0;
 
 _list = switch (MISSIONTYPE) do {
 	// Capture
@@ -74,6 +76,7 @@ for "_i" from 1 to MISSIONCOUNT do {
     //let mission-setup begin    
     sleep 10;
     
+
     [0,[],{
 	    HQaction = HQ addaction ["Abort operation", PO_Path + "tasks\abort.sqf"];
     }] call mso_core_fnc_ExMP;
@@ -83,10 +86,12 @@ for "_i" from 1 to MISSIONCOUNT do {
 
 	mps_mission_status = 1;
 	_script = [] execVM format[PO_Path + "tasks\types\%1.sqf",_next];
+	if (mps_debug) then {diag_log format ["MSO-%1 PO2: Launching %2 mission", time, _next];};
 	runningmission = true;
     Publicvariable "runningmission";
 	while {!(scriptdone _script)} do {sleep 1};
-
+	if (mps_debug) then {diag_log format ["MSO-%1 PO2: %2 mission finished.", time, _next];};
+	
 	switch (mps_mission_status) do {
 		case 2 : {mps_mission_score = mps_mission_score + 1;};
 		case 3 : {mps_mission_score = mps_mission_score - 1;};
