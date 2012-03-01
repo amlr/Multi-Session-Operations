@@ -32,38 +32,40 @@ if(AMBAIRPARTOLS > 0) then {mps_ambient_air = true};
 
 [] execVM PO_Path + "mps\init_mps.sqf";
 
-if(isNil "HQ") then {
-	//make Check-in Action on MHQ available for all players and add action locally (for JIP);
-	HQ = nearestobject [getmarkerpos format["respawn_%1", playerSide],"M1130_HQ_unfolded_Base_EP1"];
-	
-	// If no HQ then create one
-	if (isNull HQ) then {
-		private ["_radiomarkers"];
-		_radiomarkers = ["ammo","ammo_1"];
-		{
+if (isServer) then {
+	if(isNil "HQ") then {
+		//make Check-in Action on MHQ available for all players and add action locally (for JIP);
+		HQ = nearestobject [markerpos "ammo","M1130_HQ_unfolded_Base_EP1"];
+		
+		// If no HQ then create one
+		if (isNull HQ) then {
 			private ["_pos","_newpos"];
-			if !(str (markerPos _x) == "[0,0,0]") then {
-				_pos = markerPos _x;
-				_newpos = [_pos, 0, 20, 2, 0, 0, 0] call BIS_fnc_findSafePos;
+			if !(str (markerPos "ammo") == "[0,0,0]") then {
+				_pos = markerPos "ammo";
+				_newpos = [_pos, 0, 50, 2, 0, 0, 0] call BIS_fnc_findSafePos;
 				HQ = "M1130_HQ_unfolded_Base_EP1" createVehicle _newpos;
 				diag_log format ["Creating Patrol Ops MHQ at %1", _newpos];
 			};
-		} foreach _radiomarkers;
+		};
+		publicvariable "HQ";
 	};
 };
-    if (isnil "runningmission") then {runningmission = false};
-    
-    if (!runningmission) then {    
-    [3,[],{
-	    HQaction = HQ addaction ["Check in for special operations", PO_Path + "tasks\checkin_mhq.sqf"];
-    }] call mso_core_fnc_ExMP;
-    };
-    
-    if (runningmission) then {    
-    [3,[],{
-	    HQaction = HQ addaction ["Abort operation", PO_Path + "tasks\abort.sqf"];
-    }] call mso_core_fnc_ExMP;
-    };
+
+WaitUntil { !(isNil "HQ")};
+
+if (isnil "runningmission") then {runningmission = false};
+
+if (!runningmission) then {    
+	[3,[],{
+		HQaction = HQ addaction ["Check in for special operations", PO_Path + "tasks\checkin_mhq.sqf"];
+	}] call mso_core_fnc_ExMP;
+};
+
+if (runningmission) then {    
+	[3,[],{
+		HQaction = HQ addaction ["Abort operation", PO_Path + "tasks\abort.sqf"];
+	}] call mso_core_fnc_ExMP;
+};
 
 // Credit Roy
 player createDiaryRecord ["Diary", ["Patrol Ops 2", "<br/>DESCRIPTION<br/>
