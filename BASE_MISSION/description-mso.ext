@@ -258,6 +258,7 @@ class cfgFunctions {
 	#include <support\modules\rmm_recruitment\dialog_cz.hpp>
 	#include <support\modules\rmm_recruitment\dialog_gue.hpp>
 	#include <support\modules\rmm_recruitment\dialog_aaw.hpp>
+	#include <support\modules\rmm_recruitment\dialog_cwr2_us.hpp>
 	#include <support\modules\rmm_recruitment\TeamStatusDialog\TeamStatusDialog.hpp>
 #endif
 #ifdef RMM_TASKS

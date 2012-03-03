@@ -10,6 +10,8 @@ _this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "
 _this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_aaw"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && (typeOf _this == ""aawInfantrySecco1"");"];
 _this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_aaw_dpduDpcu"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && (typeOf _this == ""aawInfantrySecco1_dpduDpcu"");"];
 
+_this addAction ["Recruitment",CBA_fnc_actionargument_path, [[],{createDialog  "RMM_ui_recruitment_cwr2_us"}], -1, false, true, "", "rank _this in [""CORPORAL"",""SERGEANT"",""LIEUTENANT""] && (typeOf _this == ""cwr2_OfficerW"");"];
+
 _this addAction ["Team Status", "support\modules\rmm_recruitment\TeamStatusDialog\TeamStatusDialog.sqf", [
       ["Page", "Team"], // Page to show initially (only include 1 of these 4 "Page" options)
       //["Page", "Group"],
