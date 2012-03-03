@@ -17,6 +17,9 @@ _camotype = switch(typeOf _mhq) do {
 		case "M1130_CV_EP1": {
 			"Land_CamoNetB_NATO_EP1";
 		};
+		case "cwr2_M113_HQ": {
+			"Land_CamoNetB_NATO_EP1";
+		};
 	};
 
 // 1 - Start Deployment (Tell the clients)
@@ -49,6 +52,9 @@ _camo allowDamage false;
 		};
 		case "M1130_CV_EP1": {
 			"M1130_HQ_unfolded_Base_EP1";
+		};
+		case "cwr2_M113_HQ": {
+			"cwr2_M113_HQ_Unfolded";
 		};
 	};
 

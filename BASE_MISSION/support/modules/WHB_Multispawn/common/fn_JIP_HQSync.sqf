@@ -31,6 +31,17 @@ _vehicles = _this select 0;
 			_x addAction [("<t color=""#dddd00"">" + "Pack up FOB HQ" + "</t>"), "support\modules\WHB_Multispawn\common\fn_addAction_unDeploy.sqf"];
 		};
 	//-------------------------------------------------------------------------------------------------
+		case "cwr2_M113_HQ":
+		{
+			_x addAction [("<t color=""#dddd00"">" + "Deploy FOB HQ" + "</t>"), "support\modules\WHB_Multispawn\common\fn_addAction_Deploy.sqf"]; 
+		};
+	//-------------------------------------------------------------------------------------------------
+		case "cwr2_M113_HQ_Unfolded":
+		{
+			_x addAction [("<t color=""#dddd00"">" + "Sign in at FOB" + "</t>"), "support\modules\WHB_Multispawn\common\fn_addAction_SignInFOB.sqf"];
+			_x addAction [("<t color=""#dddd00"">" + "Pack up FOB HQ" + "</t>"), "support\modules\WHB_Multispawn\common\fn_addAction_unDeploy.sqf"];
+		};
+	//-------------------------------------------------------------------------------------------------
 		Default 
 		{
 			//Do nothing for all other vehicles

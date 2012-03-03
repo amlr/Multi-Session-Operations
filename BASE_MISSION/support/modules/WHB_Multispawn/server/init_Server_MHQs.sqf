@@ -38,6 +38,20 @@ PV_hqArray = [];
 			PV_hqArray set [count PV_hqArray, _x];
 		};
 	//-------------------------------------------------------------------------------------------------
+		case "cwr2_M113_HQ":
+		{
+			//player sideChat format ["PV HQ Array: %1", PV_hqArray];
+			//player sideChat format ["Adding object: %1", _x];
+			PV_hqArray set [count PV_hqArray, _x];
+		};
+	//-------------------------------------------------------------------------------------------------
+		case "cwr2_M113_HQ_Unfolded":
+		{
+			//player sideChat format ["PV HQ Array: %1", PV_hqArray];
+			//player sideChat format ["Adding object: %1", _x];
+			PV_hqArray set [count PV_hqArray, _x];
+		};
+	//-------------------------------------------------------------------------------------------------
 		Default 
 		{
 			//Do nothing for all other vehicles

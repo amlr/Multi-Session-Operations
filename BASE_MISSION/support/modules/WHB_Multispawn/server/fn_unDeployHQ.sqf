@@ -31,6 +31,9 @@ _fobHQ removeAction 1;
 		case "M1130_HQ_unfolded_Base_EP1": {
 			"M1130_CV_EP1";
 		};
+		case "cwr2_M113_HQ_Unfolded": {
+			"cwr2_M113_HQ";
+		};
 	};
 	
 	//Wait a while...
