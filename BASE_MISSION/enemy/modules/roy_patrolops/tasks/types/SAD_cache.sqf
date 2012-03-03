@@ -2,10 +2,19 @@ if(count mps_loc_towns < 1) exitWith{};
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_cache.sqf"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
-	sleep 0.1;
+_location = (mps_loc_towns call mps_getRandomElement);
+
+while {_location == mps_loc_last} do {
+	_location = (mps_loc_towns call mps_getRandomElement); 
+    sleep 0.1;
 };
+
 mps_loc_last = _location;
+
+/*
+_location = (mps_loc_towns call mps_getRandomElement);
+mps_loc_towns = mps_loc_towns - [_location];
+*/
 
 _position = [(position _location) select 0,(position _location) select 1, 0];
 _position = [_position,20,0.1,2] call mps_getFlatArea;
@@ -119,7 +128,16 @@ publicVariable "mps_civilian_intel";
 	_position
 ] call mps_tasks_add;
 
-While {!ABORTTASK or damage _cache0 < 1 || damage _cache1 < 1 || damage _cache2 < 1 } do { sleep (10); };
+cachesalive = true;
+While {!ABORTTASK AND cachesalive} do {
+    									if (damage _cache0 < 1 || damage _cache1 < 1 || damage _cache2 < 1) then {cachesalive = true} else {cachesalive = false};
+    									sleep (10);
+                                        };
 
-	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
+if (!cachesalive) then {
+    [format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
+} else {
+    [format["TASK%1",_taskid],"failed"] call mps_tasks_upd;
+	mps_mission_status = 3;
+};

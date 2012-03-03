@@ -34,7 +34,7 @@ if(AMBAIRPARTOLS > 0) then {mps_ambient_air = true};
 
 if (isServer) then {
 	if(isNil "HQ") then {
-		//make Check-in Action on MHQ available for all players and add action locally (for JIP);
+		//get nearest HQ
 		HQ = nearestobject [markerpos "ammo","M1130_HQ_unfolded_Base_EP1"];
 		
 		// If no HQ then create one
@@ -45,7 +45,13 @@ if (isServer) then {
 				_newpos = [_pos, 0, 50, 2, 0, 0, 0] call BIS_fnc_findSafePos;
 				HQ = "M1130_HQ_unfolded_Base_EP1" createVehicle _newpos;
 				diag_log format ["Creating Patrol Ops MHQ at %1", _newpos];
-			};
+			} else {
+                //failsafe if no marker with name ammo is there (respawn should always be there)
+                _pos = markerPos "respawn_west";
+				_newpos = [_pos, 0, 50, 2, 0, 0, 0] call BIS_fnc_findSafePos;
+				HQ = "M1130_HQ_unfolded_Base_EP1" createVehicle _newpos;
+				diag_log format ["Creating Patrol Ops MHQ at %1", _newpos];
+            };
 		};
 		publicvariable "HQ";
 	};
@@ -55,6 +61,7 @@ WaitUntil { !(isNil "HQ")};
 
 if (isnil "runningmission") then {runningmission = false};
 
+//make Check-in and Abort actions on MHQ available for all players and add action locally (for JIP);
 if (!runningmission) then {    
 	[3,[],{
 		HQaction = HQ addaction ["Check in for special operations", PO_Path + "tasks\checkin_mhq.sqf"];
