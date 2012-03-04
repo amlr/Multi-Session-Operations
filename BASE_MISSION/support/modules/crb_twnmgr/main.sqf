@@ -51,9 +51,9 @@ CRB_updateDetectedMarker = {
         _color = _this select 4;
 
 	if(_detector == civilian) then {
-		format["""%1_mgr"" setMarkerColorLocal ""%2""; [playerSide, ""HQ""] sideChat ""%1 HUMINT reports %2 movement at %3 (%4)"";", _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos, _name];
+		format["""%1_mgr"" setMarkerColorLocal ""%2""; [playerSide, ""HQ""] sideChat ""%3 HUMINT reports %4 movement at %1 (%5)"";", _name, _color, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
 	} else {
-                format["""%1_mgr"" setMarkerColorLocal ""%2""; [%3, ""HQ""] sideChat ""HUMINT reports %5 movement at %1 (%6)"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
+                format["""%1_mgr"" setMarkerColorLocal ""%2""; [%3, ""HQ""] sideChat ""%3 HUMINT reports %5 movement at %1 (%6)"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
 	};
 };
 
@@ -142,22 +142,20 @@ CRB_createSeizedTrigger = {
 
 // Setup triggers per location
 {
-        private ["_size","_name", "_pos","_trg","_type","_loc"];
+        private ["_size","_name", "_pos","_trg","_type","_loc","_colour"];
         _pos = position _x;
-		_name = _x getVariable "name";
-		//if (isNil "bis_alice_mainscope") then {
-		_size = 250;
-		//} else {
-		//	_size = _x getVariable ["ALICE_townsize", bis_alice_mainscope getVariable "ALICE_townsize"];	// needs alice to be running
-		//};
+	_name = _x getVariable "name";
+	_size = 250;
 		
-		// Get location object nearest each CityCenter (City Centers typically don't have text friendly names)
+	// Get location object nearest each CityCenter (City Centers typically don't have text friendly names)
         _loc = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Airport","Strategic","VegetationVineyard","NameLocal"], _size]) select 0;
 
         if(!isNil "_loc") then {
                 // Get the town size and town name
                 _size = (size _loc) select 0;
-                if (_size < 250) then {_size = 250;};
+                if (_size < 250) then {
+			_size = _x getVariable ["ALICE_townsize", bis_alice_mainscope getVariable "ALICE_townsize"];	// needs alice to be running
+		};
                 _name = text _loc;
         };
 		
@@ -166,7 +164,18 @@ CRB_createSeizedTrigger = {
         } else {
                 _type = "ICON";
         };
-        [format["%1_mgr", _name], _pos, _type, [_size, _size], "COLOR:", "ColorWhite", "BRUSH:", "Cross"] call CBA_fnc_createMarker;
+
+	_colour = "ColorWhite";
+        //_side = _x getVariable "crb_twnmgr_side";
+        //if(!isNil "_side") then {
+        //        switch (_side) do {
+	//		case civilian: {_colour = "ColorWhite";};
+	//		case resistance: {_colour = "ColorGreen";};
+	//		case west: {_colour = "ColorBlue";};
+	//		case east: {_colour = "ColorRed";};
+	//	};
+        //};
+        [format["%1_mgr", _name], _pos, _type, [_size, _size], "COLOR:", _colour, "BRUSH:", "Cross"] call CBA_fnc_createMarker;
 		
 		if (twnmgr_detected == 1) then {
 			//////////////////////////////////////////
