@@ -592,7 +592,7 @@ CRB_fnc_SpawnNewCell = {
         //{alive _x} count units _grp> 0 && 
         while{count((getWeaponCargo _ammo) select 0) != 0 || count((getMagazineCargo _ammo) select 0) != 0} do {
                 _forcesplit = false;
-                waitUntil{sleep 1;count ([] call BIS_fnc_listPlayers) > 1 || !isMultiplayer};
+                waitUntil{sleep 15;(count ([] call BIS_fnc_listPlayers) > 1 || !isMultiplayer) && (east countSide allUnits < 150)};
                 if(_debug) then {sleep 15} else {sleep ((1800 + random 1800) * crb_tc_intensity)};
                 _grp = group _terrorlead;
                 if(count units _grp < _maxgroupsize) then {
