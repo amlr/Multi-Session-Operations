@@ -24,40 +24,43 @@ _queue = BIS_GC getVariable "queue";
 
 _i = 0;
 {
+
 	private ["_entry", "_time"];
 	_entry = _x;
-	_time = _entry select 1;
+	if(typeName _x == "ARRAY") then {
+		_time = _entry select 1;
 
-	//Check the object was in the queue for at least the assigned time (expiry date).
-	if (_time <= time) then
-	{
-		private ["_object"];
-		_object = _entry select 0;
-
-		switch (typeName _object) do
+		//Check the object was in the queue for at least the assigned time (expiry date).
+		if (_time <= time) then
 		{
-			case (typeName objNull):
-			{
-				//Player and his squadmates cannot be too close.
-				//ToDo: use 'cameraOn' as well?
-				if (({(_x distance _object) <= 500} count ([] call BIS_fnc_listPlayers)) == 0) then
-				{
-					deleteVehicle _object;
-				};
-				_queue set [_i, -1];
-			};
+			private ["_object"];
+			_object = _entry select 0;
 
-			case (typeName grpNull):
+			switch (typeName _object) do
 			{
-				//Make sure the group is empty.
-				if (({alive _x} count (units _object)) == 0) then
+				case (typeName objNull):
 				{
-					deleteGroup _object;
+					//Player and his squadmates cannot be too close.
+					//ToDo: use 'cameraOn' as well?
+					if (({(_x distance _object) <= 500} count ([] call BIS_fnc_listPlayers)) == 0) then
+					{
+						deleteVehicle _object;
+					};
+					_queue set [_i, -1];
 				};
-				_queue set [_i, -1];
-			};
 
-			default {};
+				case (typeName grpNull):
+				{
+					//Make sure the group is empty.
+					if (({alive _x} count (units _object)) == 0) then
+					{
+						deleteGroup _object;
+					};
+					_queue set [_i, -1];
+				};
+
+				default {};
+			};
 		};
 	};
 	_i = _i + 1;
