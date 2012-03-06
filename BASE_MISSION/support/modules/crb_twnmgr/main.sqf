@@ -153,6 +153,9 @@ CRB_createSeizedTrigger = {
         if(!isNil "_loc") then {
                 // Get the town size and town name
                 _size = (size _loc) select 0;
+		if (isNil "_size") then {
+			_size = 250;
+		};
                 if (_size < 250) then {
 			_size = _x getVariable ["ALICE_townsize", bis_alice_mainscope getVariable "ALICE_townsize"];	// needs alice to be running
 		};
