@@ -149,7 +149,7 @@ CRB_createSeizedTrigger = {
 		
 	// Get location object nearest each CityCenter (City Centers typically don't have text friendly names)
         _loc = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Airport","Strategic","VegetationVineyard","NameLocal"], _size]) select 0;
-
+/*
         if(!isNil "_loc") then {
                 // Get the town size and town name
                 _size = (size _loc) select 0;
@@ -161,7 +161,7 @@ CRB_createSeizedTrigger = {
 		};
                 _name = text _loc;
         };
-		
+*/	
         if(twnmgr_status == 1) then {
                 _type = "ELLIPSE";
         } else {
