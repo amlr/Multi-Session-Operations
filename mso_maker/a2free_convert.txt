@@ -1,0 +1,15 @@
+Pull and rebase A2Free branch (Wolffy has a copy)
+
+Copy BASE_MISSION directory, rename it to A2Free_MISSION and move to root of develop branch.
+
+Delete the files that are stored within a2free_convert.7z
+
+To create the patch, use the following from DOS command prompt:
+
+> mso_maker\diff.exe -rupN BASE_MISSION\ A2Free_MISSION\ > a2free_patch.txt
+
+This will NOT capture binaries like images, so you need to zip them separately in cba-x.7z for example.
+
+To apply the patch to a BASE_MISSION directory, from a DOS command prompt:
+
+> patch --binary -p0 < a2free_patch.txt

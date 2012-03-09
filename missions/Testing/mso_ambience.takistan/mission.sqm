@@ -1,0 +1,657 @@
+version=11;
+class Mission
+{
+	addOns[]=
+	{
+		"CACharacters_BAF",
+		"cacharacters_e",
+		"ca_modules_functions",
+		"ca_missions_garbagecollector",
+		"ca_modules_clouds",
+		"ca_modules_e_weather",
+		"ca_modules_marta",
+		"BI_SRRS",
+		"cba_main",
+		"cawheeled_d_baf",
+		"camisc_e",
+		"takistan",
+		"CAAir_E_UH60M"
+	};
+	addOnsAuto[]=
+	{
+		"CACharacters_BAF",
+		"cawheeled_d_baf",
+		"cacharacters_e",
+		"CAAir_E_UH60M",
+		"ca_modules_functions",
+		"ca_missions_garbagecollector",
+		"ca_modules_clouds",
+		"ca_modules_e_weather",
+		"ca_modules_marta",
+		"BI_SRRS",
+		"cba_main",
+		"takistan"
+	};
+	randomSeed=4564339;
+	class Intel
+	{
+		briefingName="MSO Ambience Testing v3.6";
+		resistanceEast=1;
+		startWeather=0.39999998;
+		forecastWeather=0.39999998;
+		year=2009;
+		day=28;
+		hour=17;
+		minute=50;
+	};
+	class Groups
+	{
+		items=9;
+		class Item0
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=4;
+				class Item0
+				{
+					position[]={8122.3735,296.04001,1990.4568};
+					azimut=-120.568;
+					special="CARGO";
+					id=0;
+					side="WEST";
+					vehicle="BAF_Soldier_TL_DDPM";
+					player="PLAY CDG";
+					leader=1;
+					rank="CORPORAL";
+					skill=0.33333331;
+				};
+				class Item1
+				{
+					position[]={8125.1489,296.04001,1995.5858};
+					azimut=-120.568;
+					id=1;
+					side="WEST";
+					vehicle="BAF_Offroad_D";
+					player="PLAY CDG";
+					skill=0.2;
+				};
+				class Item2
+				{
+					position[]={8124.1333,296.04001,1997.3058};
+					azimut=-120.568;
+					special="CARGO";
+					id=2;
+					side="WEST";
+					vehicle="BAF_Soldier_DDPM";
+					player="PLAY CDG";
+					skill=0.2;
+				};
+				class Item3
+				{
+					position[]={8123.1177,296.04001,1999.0259};
+					azimut=-120.568;
+					special="CARGO";
+					id=3;
+					side="WEST";
+					vehicle="BAF_Soldier_DDPM";
+					player="PLAY CDG";
+					skill=0.2;
+				};
+			};
+			class Waypoints
+			{
+				items=5;
+				class Item0
+				{
+					position[]={6094.6411,292.47217,1160.3263};
+					speed="FULL";
+					combat="SAFE";
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+				class Item1
+				{
+					position[]={6532.2896,348.35999,2086.8376};
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+				class Item2
+				{
+					position[]={8442.4336,306.24158,2446.7759};
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+				class Item3
+				{
+					position[]={9299.3359,352.26645,1798.6976};
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+				class Item4
+				{
+					position[]={8212.8271,296.04001,1819.5122};
+					type="CYCLE";
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+			};
+		};
+		class Item1
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=2;
+				class Item0
+				{
+					position[]={7969.5527,296.08218,1944.1672};
+					azimut=-73.35537;
+					id=4;
+					side="WEST";
+					vehicle="BAF_Soldier_AR_MTP";
+					leader=1;
+					rank="CORPORAL";
+					skill=0.46666664;
+					init="{_x setskill 0; _x disableai ""AUTOTARGET"";} foreach (units this); 0 = [this] spawn dogs_fnc_blitzy;";
+				};
+				class Item1
+				{
+					position[]={7975.2109,296.04666,1945.6157};
+					azimut=-73.35537;
+					id=5;
+					side="WEST";
+					vehicle="BAF_Soldier_AAR_MTP";
+					skill=0.33333331;
+				};
+			};
+			class Waypoints
+			{
+				items=2;
+				class Item0
+				{
+					position[]={8062.3589,296.04001,1997.4421};
+					speed="LIMITED";
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+				class Item1
+				{
+					position[]={7970.4609,296.04828,1949.3633};
+					type="CYCLE";
+					speed="FULL";
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+			};
+		};
+		class Item2
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=4;
+				class Item0
+				{
+					position[]={8115.981,296.04001,2000.7317};
+					azimut=-120.568;
+					special="CARGO";
+					id=6;
+					side="WEST";
+					vehicle="US_Soldier_TL_EP1";
+					player="PLAY CDG";
+					leader=1;
+					rank="CORPORAL";
+					skill=0.33333331;
+				};
+				class Item1
+				{
+					position[]={8118.7622,296.04001,2005.8572};
+					azimut=-120.568;
+					special="FLY";
+					id=7;
+					side="WEST";
+					vehicle="UH60M_EP1";
+					player="PLAY CDG";
+					skill=0.2;
+					init="this flyInHeight 100;";
+				};
+				class Item2
+				{
+					position[]={8117.7388,296.04001,2007.5819};
+					azimut=-120.568;
+					special="CARGO";
+					id=8;
+					side="WEST";
+					vehicle="US_Soldier_EP1";
+					player="PLAYER COMMANDER";
+					skill=0.2;
+				};
+				class Item3
+				{
+					position[]={8116.7251,296.04001,2009.3058};
+					azimut=-120.568;
+					special="CARGO";
+					id=9;
+					side="WEST";
+					vehicle="US_Soldier_EP1";
+					player="PLAY CDG";
+					skill=0.2;
+				};
+			};
+			class Waypoints
+			{
+				items=7;
+				class Item0
+				{
+					position[]={11836.452,376.19708,2608.165};
+					speed="FULL";
+					combat="SAFE";
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+				class Item1
+				{
+					position[]={8782.0469,271.31995,5222.7354};
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+				class Item2
+				{
+					position[]={9129.0693,203.49652,6756.4946};
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+				class Item3
+				{
+					position[]={6294.9121,59.833878,11244.822};
+					class Effects
+					{
+					};
+					timeoutMin=30;
+					timeoutMid=30;
+					timeoutMax=30;
+					showWP="NEVER";
+				};
+				class Item4
+				{
+					position[]={5182.1094,145.08646,6131.5254};
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+				class Item5
+				{
+					position[]={4652.1875,317.62537,686.01306};
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+				class Item6
+				{
+					position[]={8104.4609,296.04001,1993.0732};
+					type="CYCLE";
+					class Effects
+					{
+					};
+					showWP="NEVER";
+				};
+			};
+		};
+		class Item3
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=2;
+				class Item0
+				{
+					position[]={8180.6299,296.04001,2025.7794};
+					azimut=0.57764745;
+					id=10;
+					side="LOGIC";
+					vehicle="FunctionsManager";
+					leader=1;
+					skill=0.60000002;
+					init="BIS_fnc_locations = compile preprocessFileLineNumbers ""CA\modules\functions\systems\fn_locations.sqf"";";
+				};
+				class Item1
+				{
+					position[]={8192.834,296.04001,2025.6763};
+					azimut=0.57764745;
+					id=11;
+					side="LOGIC";
+					vehicle="GarbageCollector";
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item4
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=5;
+				class Item0
+				{
+					presenceCondition="!isDedicated";
+					position[]={8206.5313,296.04001,2012.8674};
+					azimut=-0.075824231;
+					id=16;
+					side="LOGIC";
+					vehicle="BIS_clouds_Logic";
+					leader=1;
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+				class Item1
+				{
+					presenceCondition="!isDedicated";
+					position[]={8193.374,296.04001,2012.6138};
+					azimut=-0.075824231;
+					id=13;
+					side="LOGIC";
+					vehicle="WeatherParticlesManager";
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+				class Item2
+				{
+					presenceCondition="!isDedicated";
+					position[]={8179.1455,296.04001,2012.5367};
+					azimut=-0.075824231;
+					id=12;
+					side="LOGIC";
+					vehicle="WeatherPostprocessManager";
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+				class Item3
+				{
+					presenceCondition="!isDedicated";
+					position[]={8179.2695,296.04001,1999.0364};
+					azimut=-0.075824231;
+					id=14;
+					side="LOGIC";
+					vehicle="MartaManager";
+					lock="UNLOCKED";
+					skill=0.60000002;
+					init="setGroupIconsVisible [true, false]; BIS_marta_mainscope setvariable [""delay"", 300];";
+				};
+				class Item4
+				{
+					presenceCondition="!isDedicated";
+					position[]={8193.5156,296.04001,1999.0566};
+					azimut=-0.075824231;
+					id=15;
+					side="LOGIC";
+					vehicle="BIS_SRRS_Logic";
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item5
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={8204.8291,296.04001,2025.4674};
+					azimut=0.57764745;
+					id=17;
+					side="LOGIC";
+					vehicle="CBA_main_require";
+					leader=1;
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item6
+		{
+			side="EAST";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					presence=0;
+					position[]={8221.2139,296.04001,2000.4576};
+					azimut=-2.463995;
+					id=18;
+					side="EAST";
+					vehicle="TK_Soldier_EP1";
+					leader=1;
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item7
+		{
+			side="GUER";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					presence=0;
+					position[]={8225.5605,296.04001,2000.4774};
+					azimut=-2.463995;
+					id=19;
+					side="GUER";
+					vehicle="TK_GUE_Soldier_EP1";
+					leader=1;
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item8
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					presence=0;
+					position[]={8230.6396,296.04001,2000.4633};
+					azimut=-2.463995;
+					id=20;
+					side="CIV";
+					vehicle="TK_CIV_Takistani01_EP1";
+					leader=1;
+					skill=0.60000002;
+				};
+			};
+		};
+	};
+	class Markers
+	{
+		items=2;
+		class Item0
+		{
+			position[]={7969.2285,296.06985,1946.4203};
+			name="dog";
+			text="Dog Patrol Testing";
+			type="mil_dot";
+			angle=-31.070044;
+		};
+		class Item1
+		{
+			position[]={8530.4697,321.3848,2392.0225};
+			name="ctp";
+			text="Call To Prayer Testing";
+			type="mil_dot";
+			angle=-31.070044;
+		};
+	};
+	class Sensors
+	{
+		items=5;
+		class Item0
+		{
+			position[]={8220.7695,296.04001,2009.9398};
+			a=0;
+			b=0;
+			angle=1.1023238;
+			activationBy="ALPHA";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="BIS FNC Help";
+			expActiv="[] call bis_fnc_help;";
+			class Effects
+			{
+			};
+		};
+		class Item1
+		{
+			position[]={8240.9385,296.04001,2010.2222};
+			a=0;
+			b=0;
+			angle=1.10232;
+			activationBy="CHARLIE";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Teleport Group";
+			expActiv="player onMapSingleClick {{_x setPos _pos;} forEach units player; onMapSingleClick CRB_MAPCLICK;};";
+			class Effects
+			{
+			};
+		};
+		class Item2
+		{
+			position[]={8250.373,296.04001,2011.0072};
+			a=0;
+			b=0;
+			angle=1.10232;
+			activationBy="DELTA";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Teleport Player";
+			expActiv="player onMapSingleClick {player setPos _pos; onMapSingleClick CRB_MAPCLICK;};";
+			class Effects
+			{
+			};
+		};
+		class Item3
+		{
+			position[]={8022.7461,296.04001,1872.3203};
+			a=450;
+			b=200;
+			angle=330;
+			rectangular=1;
+			interruptable=1;
+			age="UNKNOWN";
+			name="BIS_arz_0";
+			class Effects
+			{
+			};
+		};
+		class Item4
+		{
+			position[]={5665.6221,83.040001,11479.179};
+			a=700;
+			b=350;
+			angle=315;
+			rectangular=1;
+			interruptable=1;
+			age="UNKNOWN";
+			name="BIS_arz_1";
+			class Effects
+			{
+			};
+		};
+	};
+};
+class Intro
+{
+	addOns[]=
+	{
+		"takistan"
+	};
+	addOnsAuto[]=
+	{
+		"takistan"
+	};
+	randomSeed=15475055;
+	class Intel
+	{
+		startWeather=0.40000001;
+		forecastWeather=0.40000001;
+		year=2009;
+		day=28;
+		hour=16;
+		minute=20;
+	};
+};
+class OutroWin
+{
+	addOns[]=
+	{
+		"takistan"
+	};
+	addOnsAuto[]=
+	{
+		"takistan"
+	};
+	randomSeed=12177460;
+	class Intel
+	{
+		startWeather=0.40000001;
+		forecastWeather=0.40000001;
+		year=2009;
+		day=28;
+		hour=16;
+		minute=20;
+	};
+};
+class OutroLoose
+{
+	addOns[]=
+	{
+		"takistan"
+	};
+	addOnsAuto[]=
+	{
+		"takistan"
+	};
+	randomSeed=10983040;
+	class Intel
+	{
+		startWeather=0.40000001;
+		forecastWeather=0.40000001;
+		year=2009;
+		day=28;
+		hour=16;
+		minute=20;
+	};
+};
