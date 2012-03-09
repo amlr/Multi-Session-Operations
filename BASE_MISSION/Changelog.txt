@@ -1,16 +1,104 @@
 Change Log:
 Thanks to:
-- MSO development team: Wolffy.au, Tupolov, Ryan, friznit, highhead, zorrobyte, HateDread, kieran, Kolmain, and Rommel
+- MSO development team: Wolffy.au, Tupolov, Ryan, friznit, highhead, WobblyHeadedBob, zorrobyte, HateDread, kieran, Kolmain, and Rommel
 - Ryan, Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
-- Friznit, Tupolov, DaveP and Volunteer Combat Battalion (VCB)
+- Friznit, Tupolov, DaveP and Volunteer Commando Battalion (VCB)
 - Krause, Beta, Sandiford, JollyResq - United Operations (UO)
-- Capt.Alderman and MilitaryGaming.org (MilGO)
-- Kremator, SCAJolly, Katipo66, vengeance1, 16AA and AEF clans for testing
+- Kremator, SCAJolly, Katipo66, vengeance1, 16AA, VCB and AEF clans for testing
 - Alef and Sickboy for CBA conversion for A2Free
 - Xeno and Mikero for their Mission Builder Script
 - Spyder for Object Network Update (ONU), LoyalGuard for ARMA Electrical Grids (AEG), ArmaIIholic and Highhead for World In Conflict (WICT), LurchiDerLurch for AC130 CAS
 - Robalo, USMCWall, Muzzleflash, Wobbleyheadedbob, Hatedread, Zonekiller, VoW Widow, Swedge, Lonestar, SBSMac, Prymsuspec, zGuba, Fireball, Nou, Jaynus, Norrin for bits and pieces we got from you
 - CWR² team, IceBreakr, Shezan, Commander, Old Bear for making your mods and islands MSO friendly
+- Roy86 for Patrol Ops 2 Module
+- Enigma for Weather Module
+
+v4.2
+Core
+- Added CWR² M113 HQ to WHB Multispawn
+- Added CWR² US units to Recruitment
+- Updated init.sqf scripts so that we have a separate init-mods.sqf for mods supported by MSO.
+- Added message telling players when they can reconnect
+- Added function descriptors in NOUJAY messages
+- Initialisation completed message in log
+- removed clearmemory script in corescript.sqf (obsolete due to WICT AI cap and AI caching modules)!
+- Added DRN Dynamic Weather (thanks Engima)
+- Pre-initialise the Communications Menu to be compatible with BIS modules
+- Initalise the GC trashIt function if required
+
+Support
+- Fixed Town Manager marker coloring bug (Bug #28901)
+- Added content of R3F_Log/addons_config/ configfiles to config.sqf  (more comfortable to mission makers) and deleted obsolete files. https://dev-heaven.net/issues/28894
+- Fixed mission construction module entry
+- Disable BIS SOM until completely working
+- Added SL's to recruitment
+- Cleaned up support module parameters (specifically Mobile HQ/Multispawn)
+- Updated BIS_SOM module to include a parameter to turn it on or off at mission time.
+- Updates to BI SOM module
+- Enabled SOM support requests but still not completely working on dedi
+- Added the BIS SOM Module to Support (currently side missions only)
+
+Enemy
+- Prevented TCells from recruiting if > 150 OPFOR units exist (Feature #27597)
+- Made CRB_Convoy a PO2 task
+- Updated PO2 to use locations more wisely (improves Zargabad usage)
+- Added server check for spawning HQ and then broadcasting as a public variable
+- Updated Terror Cells to now randomly setup road block near town (30% chance)
+- Added script that allows enemy to setup roadblock
+- Cleaned up Patrol Ops 2 and updated R3F to support some of the PO2 RTF missions
+- TUP_IED improvements - added EOD loudspeakers to vehicles, double number of IEDs if enemy present, cleaned up IED object lists
+- Update of PO2 to v082
+- Reduced default intensity of TUP_IED
+- Updated WICT (26.01.2012, v.04.10.001, thanks Highhead
+- changed max. safepos in main.sqf for camps and AI to have baseguards and to get better spawning positions of bases (not in hills and elevation)
+- Added OCB Roy86's Patrol Ops 2 enemy module, courtesy of Highhead
+- TUP_IED bug fixes and general improvements
+- Terrorists don't react when travelling in car unless BLUFOR are within 200m and below 50 feet
+- Updated TUP_IED so IED's only spawn if players are on the ground (less than 25m)
+- Reduced ZORA max groups to 2
+- Improved logging on TUP_IED and added parameter to use EOD add-on or not if it is available
+- WICT is changed to off as default as this can load the server and may not be a common choice
+- Added TUP_IED module, places ambient IEDs, VBIEDs and Suicide Bombers on any map, also automatically integrates with Reezo's EOD addon (optional)
+- Improved Reezo EOD addon by replacing addon scripts in mission (IEDs only detonate for players now, random smaller charges, better logging)
+- Updated Terrorist Cells to use TUP_IED for VBIEDs
+- Added towns to possible spawn locations (Tcells)
+- Increased chances of ammo boxes with launchers
+- Default 8 recruits per hour
+- Allowed previously driven cars to be used by terrorists
+- Fixed ammo crates on roofs problem
+- Fixed cars parked in middle of the road problem
+- Fixed ammo crates in the air problem
+- Fixed bug where TCell recruitment stuck at 1 per hour
+- Fixed mark enemy based on friendliness
+- ZORA deletes groups out of maxdist range
+
+Ambience
+- Dogs only bark when approached
+- Made shepherds more reactive when their flock are shot or injured (except by vehicles)
+- Minor dogs fixes
+- Converted dogs from MSO Loop method to WaitUnitl
+- Fixed ALICE civilians selection
+- Changed selection of skins from ALICE_classes
+- Changed default parameters for Ambient Air (All Factions by default) and WICT (Off by default)
+- Ambient Air is changed now that aircraft truly Never Fire when told to do so, so enemy aircraft pose no threat (and sound/look very good)
+- Updated Civilian Vehicles so certain amount are VBIEDs (if enabled in params)
+- Removed BIS_CIV_special from ambient civilians
+- Removed ALICE2 customisations
+- Random door closer
+
+Missions
+- Updated 32_ACE_COOP_BAF_USA_vs_TAK_INS_GUE
+* disabled RMM_Tyres
+* moved respawn_west marker to somewhere close
+* updated custom files
+- Updated urban ops missions
+- Obsoleted support for A2Free until someone tells us they are using it
+- Added Villa helipad to Zargabad
+
+Other
+- Fixed guard post and House patrol scripts
+- Added spawnCrew function (searches the area for vehicles and spawns crew, useful for compositions)
+- Fixed default factions in SP
 
 v4.1
 Core
