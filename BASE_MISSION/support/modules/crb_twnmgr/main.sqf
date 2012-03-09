@@ -149,8 +149,9 @@ CRB_createSeizedTrigger = {
 		
 	// Get location object nearest each CityCenter (City Centers typically don't have text friendly names)
         _loc = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Airport","Strategic","VegetationVineyard","NameLocal"], _size]) select 0;
-/*
+
         if(!isNil "_loc") then {
+/*
                 // Get the town size and town name
                 _size = (size _loc) select 0;
 		if (isNil "_size") then {
@@ -159,9 +160,10 @@ CRB_createSeizedTrigger = {
                 if (_size < 250) then {
 			_size = _x getVariable ["ALICE_townsize", bis_alice_mainscope getVariable "ALICE_townsize"];	// needs alice to be running
 		};
+*/
                 _name = text _loc;
         };
-*/	
+
         if(twnmgr_status == 1) then {
                 _type = "ELLIPSE";
         } else {
