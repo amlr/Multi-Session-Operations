@@ -4,9 +4,13 @@ diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_tower.sqf"];
 
 private["_location","_position","_taskid","_tower"];
 
-while { _location = (mps_loc_hills call mps_getRandomElement); _location == mps_loc_last } do {
+_location = (mps_loc_hills call mps_getRandomElement);
+
+while {_location == mps_loc_last} do {
+    _location = (mps_loc_hills call mps_getRandomElement);
 	sleep 0.1;
 };
+
 mps_loc_last = _location;
 
 _position = [(position _location) select 0,(position _location) select 1, 0];

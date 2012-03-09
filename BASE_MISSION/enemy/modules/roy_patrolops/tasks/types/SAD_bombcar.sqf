@@ -7,10 +7,14 @@ private["_location","_position","_taskid","_positionS","_locationE","_positionE"
 _killtasktime = 0;
 
 // regular task inits
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
+_location = (mps_loc_towns call mps_getRandomElement);
+while {_location == mps_loc_last } do {
+    _location = (mps_loc_towns call mps_getRandomElement);
 	sleep 0.1;
 };
+
 mps_loc_last = _location;
+
 while { _locationE = (mps_loc_towns call mps_getRandomElement); _locationE == mps_loc_last } do {
 	sleep 0.1;
 };

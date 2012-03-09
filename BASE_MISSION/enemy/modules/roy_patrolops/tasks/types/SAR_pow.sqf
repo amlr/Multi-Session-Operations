@@ -2,10 +2,15 @@ if(count mps_loc_towns < 1) exitWith{};
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAR_pow.sqf"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
-	sleep 0.1;
+_location = (mps_loc_towns call mps_getRandomElement);
+
+while {_location == mps_loc_last} do {
+	_location = (mps_loc_towns call mps_getRandomElement); 
+    sleep 0.1;
 };
+
 mps_loc_last = _location;
+
 
 _position = [(position _location) select 0,(position _location) select 1, 0];
 _houses = [_position,200] call mps_getEnterableHouses;

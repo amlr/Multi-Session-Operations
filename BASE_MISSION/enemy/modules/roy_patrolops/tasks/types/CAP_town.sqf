@@ -4,7 +4,9 @@ diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK CAP_town.sqf"];
 
 private["_location","_position","_taskid","_rmin","_rmax","_rplayers","_ra","_rb","_diffresult"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
+_location = (mps_loc_towns call mps_getRandomElement);
+while {_location == mps_loc_last } do {
+    _location = (mps_loc_towns call mps_getRandomElement);
 	sleep 0.1;
 };
 mps_loc_last = _location;
