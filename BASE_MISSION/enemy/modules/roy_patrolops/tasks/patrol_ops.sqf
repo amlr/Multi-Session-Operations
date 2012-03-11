@@ -42,9 +42,12 @@ _list = switch (MISSIONTYPE) do {
 	case 4: {["CAP_target","CAP_town","CAP_vehicle","SAD_cache","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","CRB_convoy","SAD_scud","SAD_tower","SAR_pilot","SAD_bombcar"]};
 	// Mix Hard
 	case 5: {["CAP_target_2","CAP_town","CAP_vehicle","RTF_tower","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","SAD_scud","SAD_tower","SAR_pow","SAD_bombcar","CRB_convoy"]};
+	// Air Only
+	case 6: {["AIR_SEAD","AIR_strike","SAR_pilot","SAR_pow","AIR_CAP","AIR_scud"]}; //,"AIR_CAS","AIR_supply","AIR_escort","AIR_transport","AIR_CASEVAC","AIR_convoy"
 
 	default {["CAP_target","CAP_target_2","CAP_town","CAP_vehicle","RTF_tower","SAD_cache","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","SAD_scud","SAR_pilot","SAR_pow","SAD_bombcar","CRB_convoy"]};
 };
+
 
 for "_i" from 1 to MISSIONCOUNT do {
 	
@@ -63,7 +66,7 @@ for "_i" from 1 to MISSIONCOUNT do {
     
     //Add action again
     [0,[],{
-	    HQaction = HQ addaction ["Check in for special operations", PO_Path + "tasks\checkin_mhq.sqf"];
+	    HQaction = HQ addaction ["Check in for operational taskings", PO_Path + "tasks\checkin_mhq.sqf"];
     }] call mso_core_fnc_ExMP;
     
     //wait for a player to check in
