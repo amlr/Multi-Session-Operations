@@ -85,13 +85,15 @@ _grp setFormation "DIAMOND";
 _b = (2 max (round (random (playersNumber (SIDE_A select 0) / 4)))) * MISSIONDIFF;
 
 for "_i" from 1 to _b do {
-	_grp = [_position,"AA",(2 + random 3),150,"patrol"] call CREATE_OPFOR_SQUAD;
-	if(random 1 > 0.8) then {
-		_car_type = (mps_opfor_car+mps_opfor_apc) call mps_getRandomElement;
-		_vehgrp = [_car_type,(SIDE_B select 0),_position,100] call mps_spawn_vehicle;
-		(units _vehgrp) joinSilent _grp;
+	if (random 1 > 0.5) then {
+		_grp = [_position,"AA",(2 + random 3),150,"patrol"] call CREATE_OPFOR_SQUAD;
+		if(random 1 > 0.8) then {
+			_car_type = (mps_opfor_car+mps_opfor_apc) call mps_getRandomElement;
+			_vehgrp = [_car_type,(SIDE_B select 0),_position,100] call mps_spawn_vehicle;
+			(units _vehgrp) joinSilent _grp;
+		};
+		_troops = _troops + (units _grp);
 	};
-	_troops = _troops + (units _grp);
 };
 
 [format["TASK%1",_taskid],
@@ -106,6 +108,7 @@ for "_i" from 1 to _b do {
 while {!ABORTTASK && ({damage _x < 1} count nearestObjects[_position,[typeof _target1],80] > 0) } do { sleep 5 };
 
 if(!ABORTTASK) then {
+PAPABEAR sideChat format ["%1 this is PAPA BEAR. Target Destroyed! RTB. Over.", group player];
 [format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 mps_mission_status = 2;
 } else {

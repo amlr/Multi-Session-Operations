@@ -46,6 +46,7 @@ for "_i" from 1 to _b do {
 while {!ABORTTASK && {damage _x < 1} count _radartower > 0 } do { sleep 5 };
 
 if(!ABORTTASK) then {
+	PAPABEAR sideChat format ["%1 this is PAPA BEAR. Target Destroyed! RTB. Over.", group player];
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{
