@@ -6,9 +6,9 @@ class PO2_ON {
 };
 class MISSIONTYPE { // MISSION TYPE
 	title= "        Mission Type";
-	values[]={0,1,2,3,4,5};
+	values[]={0,1,2,3,4,5,6};
 	default=4;
-	texts[]={"Target Capture","Domination","Reconstruction","Search and Rescue","Mix Standard","Mix Hard"};
+	texts[]={"Target Capture","Domination","Reconstruction","Search and Rescue","Mix Standard","Mix Hard","Air Only"};
 };
 class MISSIONCOUNT { // MISSION COUNT
 	title="        Number of Missions";
