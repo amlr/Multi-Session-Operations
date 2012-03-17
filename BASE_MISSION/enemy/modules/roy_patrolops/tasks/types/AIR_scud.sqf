@@ -55,7 +55,7 @@ for "_i" from 1 to _b do {
 scudcount = 0;
 fired = false;
 
-While {!ABORTTASK && {damage _x < 1} count [_target1,_target2] > 0 && scudcount < 1200} do { 
+While {!ABORTTASK_AIR && {damage _x < 1} count [_target1,_target2] > 0 && scudcount < 1200} do { 
 	scudcount = scudcount + 1;
 	sleep 1;
 	if(damage _target1 < 1) then {

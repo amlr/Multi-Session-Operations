@@ -36,7 +36,7 @@ for "_i" from 1 to 2 do {
 	_defendpos
 ] call mps_tasks_add;
 
-while{!ABORTTASK && {alive _x && side _x == (SIDE_A select 0)} count nearestObjects[_defendpos,["MAN","LandVehicle","Air"],100] == 0 } do { sleep 5 };
+while{!ABORTTASK_PO && {alive _x && side _x == (SIDE_A select 0)} count nearestObjects[_defendpos,["MAN","LandVehicle","Air"],100] == 0 } do { sleep 5 };
 
 _enemyforce = [];
 _b = 2 max (round (random (playersNumber (SIDE_A select 0) / 3)));
@@ -59,10 +59,10 @@ for "_i" from 0 to (round random 1) do {
 	_enemyforce = _enemyforce + (units _regrp);
 };
 
-while{!ABORTTASK && {alive _x && side _x == (SIDE_A select 0)} count nearestObjects[_defendpos,["MAN","LandVehicle","Air"],100] > 0 && {alive _x} count _enemyforce > 3} do { sleep 5 };
+while{!ABORTTASK_PO && {alive _x && side _x == (SIDE_A select 0)} count nearestObjects[_defendpos,["MAN","LandVehicle","Air"],100] > 0 && {alive _x} count _enemyforce > 3} do { sleep 5 };
 
 
-if(!ABORTTASK && {alive _x} count _enemyforce < 3 ) then {
+if(!ABORTTASK_PO && {alive _x} count _enemyforce < 3 ) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

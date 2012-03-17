@@ -64,7 +64,7 @@ publicVariable "mps_civilian_intel";
 	_markerpos
 ] call mps_tasks_add;
 
-while {!ABORTTASK && damage _building < 1 } do { sleep 5 };
+while {!ABORTTASK_PO && damage _building < 1 } do { sleep 5 };
 
 _dirn = "NORTH"; if( _position select 1 < _markerpos select 1) then {_dirn = "SOUTH"};
 _dire = "EAST"; if( _position select 0 < _markerpos select 0) then {_dire = "WEST"};
@@ -72,7 +72,7 @@ _distintel = _position distance _markerpos;
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
-if(!ABORTTASK) then {
+if(!ABORTTASK_PO) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

@@ -105,9 +105,9 @@ for "_i" from 1 to _b do {
 	_position
 ] call mps_tasks_add;
 
-while {!ABORTTASK && ({damage _x < 1} count nearestObjects[_position,[typeof _target1],80] > 0) } do { sleep 5 };
+while {!ABORTTASK_AIR && ({damage _x < 1} count nearestObjects[_position,[typeof _target1],80] > 0) } do { sleep 5 };
 
-if(!ABORTTASK) then {
+if(!ABORTTASK_AIR) then {
 PAPABEAR sideChat format ["%1 this is PAPA BEAR. Target Destroyed! RTB. Over.", group player];
 [format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 mps_mission_status = 2;

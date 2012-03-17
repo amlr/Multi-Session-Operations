@@ -76,12 +76,12 @@ publicVariable "mps_civilian_intel";
 	_position
 ] call mps_tasks_add;
 
-while {!ABORTTASK && alive _object && _object distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 10 } do { sleep 5 };
+while {!ABORTTASK_PO && alive _object && _object distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 10 } do { sleep 5 };
 
 mps_civilian_intel = [];
 publicVariable "mps_civilian_intel";
 
-if(!ABORTTASK && alive _object) then {
+if(!ABORTTASK_PO && alive _object) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{
@@ -95,6 +95,6 @@ deleteVehicle _object;
 deleteGroup _grp;
 
 [_troops,_position] spawn {
-	while{!ABORTTASK && {isPlayer _x} count nearestObjects[(_this select 1),["Man","LandVehicle","Plane"],1500] > 0} do { sleep 10 };
+	while{!ABORTTASK_PO && {isPlayer _x} count nearestObjects[(_this select 1),["Man","LandVehicle","Plane"],1500] > 0} do { sleep 10 };
 	{ _x setDamage 1}forEach (_this select 0);
 };

@@ -25,11 +25,11 @@ _container = [format["return_point_%1",(SIDE_A select 0)]] call CREATE_MOVEABLE_
 	_position
 ] call mps_tasks_add;
 
-while {!ABORTTASK && count nearestObjects[ _position, ["Land_Vysilac_FM"], 80] == 0 && damage _container < 1} do { sleep 5 };
+while {!ABORTTASK_PO && count nearestObjects[ _position, ["Land_Vysilac_FM"], 80] == 0 && damage _container < 1} do { sleep 5 };
 
 sleep 2;
 
-if(!ABORTTASK && count nearestObjects[ _position, ["Land_Vysilac_FM"], 80] > 0) then {
+if(!ABORTTASK_PO && count nearestObjects[ _position, ["Land_Vysilac_FM"], 80] > 0) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

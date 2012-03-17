@@ -4,11 +4,17 @@ class PO2_ON {
 	texts[]= {"On","Off"}; 
 	default = 1;
 };
-class MISSIONTYPE { // MISSION TYPE
-	title= "        Mission Type";
+class MISSIONTYPE_PO { // MISSION TYPE
+	title= "        Mission Type Patrol Ops";
 	values[]={0,1,2,3,4,5,6};
 	default=4;
-	texts[]={"Target Capture","Domination","Reconstruction","Search and Rescue","Mix Standard","Mix Hard","Air Only"};
+	texts[]={"Off","Domination","Reconstruction","Search and Rescue","Mix Standard","Mix Hard","Target Capture"};
+};
+class MISSIONTYPE_AIR { // MISSION TYPE
+	title= "        Mission Type Air Ops";
+	values[]={0,1};
+	default=0;
+	texts[]={"Off","Experimental"};
 };
 class MISSIONCOUNT { // MISSION COUNT
 	title="        Number of Missions";

@@ -55,7 +55,7 @@ objective_intel_KILLED = {
 			_ev = (["EvMap","EvMoscow","EvPhoto"] call mps_getRandomElement) createvehicle _pos;
 			_ev setPosATL _pos;
 			_ev spawn {
-				while{!ABORTTASK && alive TARGET_CACHE && {isPlayer _x && side _x == (SIDE_A select 0)} count nearestObjects[position _this,["All"],3] == 0} do {sleep 2};
+				while{!ABORTTASK_PO && alive TARGET_CACHE && {isPlayer _x && side _x == (SIDE_A select 0)} count nearestObjects[position _this,["All"],3] == 0} do {sleep 2};
 				if(!alive TARGET_CACHE) exitWith {deleteVehicle _this};
 				deleteVehicle _this;
 				mission_sidechat = "Gained new intel about the caches possible location."; publicVariable "mission_sidechat"; player sideChat mission_sidechat;
@@ -93,7 +93,7 @@ for "_i" from 1 to 2 do {
 } forEach (nearestLocations [_position,["Name","NameLocal","NameVillage","NameCity","NameCityCapital"],3000]);
 
 [] spawn {
-	While{!ABORTTASK && alive TARGET_CACHE} do {
+	While{!ABORTTASK_PO && alive TARGET_CACHE} do {
 		{
 			_xmarkerposition = getMarkerPos _x;
 			_xmarkercolor = getMarkerColor _x;
@@ -141,11 +141,11 @@ publicVariable "mps_civilian_intel";
 
 {_x spawn objective_intel_KILLED;} foreach _enemies;
 
-while {!ABORTTASK && damage TARGET_CACHE < 1 } do { sleep 5 };
+while {!ABORTTASK_PO && damage TARGET_CACHE < 1 } do { sleep 5 };
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
-if(!ABORTTASK && damage TARGET_CACHE >= 1) then {
+if(!ABORTTASK_PO && damage TARGET_CACHE >= 1) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

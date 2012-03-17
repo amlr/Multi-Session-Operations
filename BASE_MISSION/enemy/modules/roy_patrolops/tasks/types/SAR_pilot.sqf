@@ -54,9 +54,9 @@ diag_log format ["SAR_pilot.sqf debug. TaskID: %1, Position: %2",_taskid,_positi
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
-While{!ABORTTASK && _pilot1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] > 15 && alive _pilot1 } do {sleep 1};
+While{!ABORTTASK_PO && _pilot1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] > 15 && alive _pilot1 } do {sleep 1};
 
-if(!ABORTTASK && alive _pilot1 && !alive _crashchopper) then {
+if(!ABORTTASK_PO && alive _pilot1 && !alive _crashchopper) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

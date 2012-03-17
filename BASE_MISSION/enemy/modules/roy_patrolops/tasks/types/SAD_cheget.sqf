@@ -20,7 +20,7 @@ _taskid = format["%1%2%3",round (_position select 0),round (_position select 1),
 _football_location = _position;
 _radius = 1000;
 
-While{!ABORTTASK && _position distance getmarkerpos format["respawn_%1",(SIDE_A select 0)] < 3000} do {
+While{!ABORTTASK_PO && _position distance getmarkerpos format["respawn_%1",(SIDE_A select 0)] < 3000} do {
 	_radius = _radius + 100;
 	_position = [position _location,random 360,_radius,false,2] call mps_new_position;
 };
@@ -72,7 +72,7 @@ _houses = [_position,1000] call mps_getEnterableHouses;
 				_ev = (["EvMap","EvMoscow","EvPhoto"] call getRandomElement) createvehicle _pos;
 				_ev setPosATL _pos;
 				_ev spawn {
-					while{!ABORTTASK && not isNil "football_device" && {isPlayer _x && side _x == friendly_side} count nearestObjects[position _this,["All"],3] == 0} do {sleep 3};
+					while{!ABORTTASK_PO && not isNil "football_device" && {isPlayer _x && side _x == friendly_side} count nearestObjects[position _this,["All"],3] == 0} do {sleep 3};
 					if(isNil "football_device") exitWith {deleteVehicle _this};
 					deleteVehicle _this;
 					mission_sidechat = "Gained new intel about the footballs possible location.";
@@ -87,7 +87,7 @@ _houses = [_position,1000] call mps_getEnterableHouses;
 	
 					football_marker = football_marker + [_markername];
 	
-					While{!ABORTTASK && not isNil "football_device"} do {
+					While{!ABORTTASK_PO && not isNil "football_device"} do {
 						_marker = createMarker [_markername,_markerpos];
 						_marker setMarkerType "hd_unknown";
 						_marker setMarkerSize [0.75,0.75];
@@ -110,9 +110,9 @@ _houses = [_position,1000] call mps_getEnterableHouses;
 	"created"
 ] call mps_tasks_add;
 
-While {!ABORTTASK && alive football_device && timercount < 360} do { sleep 10; timercount = timercount + 1; };
+While {!ABORTTASK_PO && alive football_device && timercount < 360} do { sleep 10; timercount = timercount + 1; };
 
-if (!ABORTTASK && !alive football_device) then {
+if (!ABORTTASK_PO && !alive football_device) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{
