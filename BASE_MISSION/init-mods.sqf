@@ -74,7 +74,7 @@ if (isServer) then {
 		{
 			_crate = _x;
 			{
-				_crate addweaponcargo [_x, _number];
+				_crate addweaponcargoglobal [_x, _number];
 			} foreach _thors;
 		} foreach _crates;
 		diag_log format ["Added %1 THOR III devices to %2 crate(s)", (count _thors) * (count playableunits), count _crates];
