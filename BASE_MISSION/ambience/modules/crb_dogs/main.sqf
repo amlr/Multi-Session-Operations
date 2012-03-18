@@ -13,7 +13,7 @@ if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
-_types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
+_types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","Hill"];
 _maxdist = 100;
 _dogs = [];
 _side = east;
