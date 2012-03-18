@@ -1,4 +1,3 @@
-/*
 // - Tested
 #define MSOFACTIONS
 //#define CRB_CONVOYS
@@ -10,6 +9,5 @@
 #define TUP_IED
 //#define WICT_ENEMYPOP
 //#define RYD_HAC
-#define ROY_PATROLOPS
+//#define ROY_PATROLOPS
 //#define BIS_WARFARE
-*/
