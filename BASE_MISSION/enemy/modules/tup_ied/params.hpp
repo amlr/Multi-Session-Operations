@@ -4,6 +4,12 @@ class tup_ied_header{
         texts[]= {"Off","On"}; 
         default = 1;
 };
+class tup_ied_enemy {
+        title = "        Towns with IEDs"; 
+        values[]= {0,1}; 
+        texts[]= {"Random","Enemy Occupied Only"}; 
+        default = 0;
+};
 class tup_ied_threat {
         title = "        Ambient IED Threat"; 
         values[]= {0,50,100,200,350}; 

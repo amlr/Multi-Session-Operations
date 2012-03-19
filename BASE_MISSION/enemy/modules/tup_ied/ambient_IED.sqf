@@ -44,6 +44,9 @@ for "_j" from 1 to _numIEDs do {
 	_near = nearestObjects [_IEDpos, ["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC","Land_Misc_Rubble_EP1","Land_Misc_Garb_Heap_EP1","Garbage_container","Misc_TyreHeapEP1","Misc_TyreHeap","Garbage_can","Land_bags_EP1"], 10];
 	if (count _near > 0) exitWith {diag_log format ["MSO-%1 IED: exiting as other IEDs found %2",time,_near];}; //Exit if other IEDs are found
 	
+	// Check not placed near a player
+	if ({(getpos _x distance _IEDpos) < 75} count ([] call BIS_fnc_listPlayers) > 0) exitWith {diag_log format ["MSO-%1 IED: exiting as placement too close to player.",time];}; //Exit if position is too close to a player
+	
 	// Choose EOD or TUP_IED (50/50 chance)
 	private "_choice";
 	_choice = random 1;
