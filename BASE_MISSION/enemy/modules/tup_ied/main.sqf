@@ -24,7 +24,7 @@ if (isNil "tup_suicide_threat")then{tup_suicide_threat = 10;};
 	if (_debug) then {
 		diag_log format ["town is %1 at %2. %3m in size and type %4", text _twn, position _twn, _size, type _twn];
 	};
-	if ({getposATL  _x in _twn} count ([] call BIS_fnc_listPlayers) == 0) then {		
+	if (({(getpos _x distance _pos) < _size} count ([] call BIS_fnc_listPlayers) == 0) && ((_pos distance getmarkerpos "ammo") > 250) && ((_pos distance getmarkerpos "ammo_1") > 250)) then {		
 		_fate = random 100;
 		if (_fate < tup_suicide_threat) then {
 			// Place Suicide Bomber trigger
@@ -43,7 +43,7 @@ if (isNil "tup_suicide_threat")then{tup_suicide_threat = 10;};
 			_trg = createTrigger["EmptyDetector",getpos _twn]; 
 			_trg setTriggerArea[(_size+250), (_size+250),0,false];
 			_trg setTriggerActivation["WEST","PRESENT",true];
-			_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL _x) select 2 < 25)} count ([] call BIS_fnc_listPlayers) > 0)", format ["null = [getpos (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Ambient_IED.sqf';",_size], format ["null = [getposATL (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Remove_IED.sqf';",_size]];
+			_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL _x) select 2 < 75)} count ([] call BIS_fnc_listPlayers) > 0)", format ["null = [getpos (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Ambient_IED.sqf';",_size], format ["null = [getposATL (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Remove_IED.sqf';",_size]];
 
 			if (_debug) then {
 				diag_log format ["MSO-%1 IED Trigger: created at %2 (%3)", time, text _twn, mapgridposition  _x];
