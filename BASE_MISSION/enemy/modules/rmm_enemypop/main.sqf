@@ -18,6 +18,10 @@ _debug = false;
 if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 3;};
 if(isNil "rmm_ep_spawn_dist")then{rmm_ep_spawn_dist = 2000;};
 if(isNil "rmm_ep_safe_zone")then{rmm_ep_safe_zone = 2000;};
+if(isNil "rmm_ep_inf")then{rmm_ep_inf = 4;};
+if(isNil "rmm_ep_mot")then{rmm_ep_mot = 3;};
+if(isNil "rmm_ep_mec")then{rmm_ep_mech = 2;};
+if(isNil "rmm_ep_arm")then{rmm_ep_arm = 1;};
 ep_groups = [];
 ep_total = 0;
 ep_campprob = 0.25;
@@ -52,7 +56,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                         if (random 1 > 0.33) then {
                                 ep_total = ep_total + 1;
                                 //_pos = [position _loc, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
-								_pos = [position _loc,40,0.1,20] call mps_getFlatArea; 
+								_pos = [position _loc,30,0.1,10] call mps_getFlatArea; 
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];
@@ -94,7 +98,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 										};
                                 };
                                 
-                                _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[4,3,2,1]] call mso_core_fnc_selectRandomBias;
+                                _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                                 
                                 [{
 					CRBPROFILERSTART("RMM EnemyPop Hill")
@@ -176,10 +180,10 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 										if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
                                 };
                                 
-                                _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[8,6,3,1]] call mso_core_fnc_selectRandomBias;
+                                _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                                 
                                 [{
-					CRBPROFILERSTART("RMM EnemyPop Strategic")
+										CRBPROFILERSTART("RMM EnemyPop Strategic")
 
                                         private ["_pos","_pos2","_flag","_group","_grp2","_type","_params","_handle"];
                                         _params = _this select 0;
@@ -216,7 +220,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 };
                                         };
                                         ep_groups set [count ep_groups, _group];
-					CRBPROFILERSTOP
+										CRBPROFILERSTOP
                                 }, 3, [_pos, _flag, _type]] call mso_core_fnc_addLoopHandler;
                         };
                 };
@@ -257,18 +261,18 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
 											f_builder = mso_core_fnc_createComposition;
 										};
-					if (count _camp > 0) then {
+										if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
         	                                _pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
                 	                        [_camp, random 360, _pos] call f_builder;
 											if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
-					};
+										};
                                 };
                                 
-                                _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[4,3,2,1]] call mso_core_fnc_selectRandomBias;
+                                _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                                 
                                 [{
-					CRBPROFILERSTART("RMM EnemyPop FlatArea")
+										CRBPROFILERSTART("RMM EnemyPop FlatArea")
 
                                         private ["_pos","_pos2","_flag","_group","_grp2","_type","_params","_handle"];
                                         _params = _this select 0;
@@ -291,7 +295,14 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 };
                                                 if(_flag < ep_campprob && _type == "Infantry") then {
                                                         leader _group setPos _pos;
-                                                        [_group] call BIN_fnc_taskDefend;
+														if (count (nearestObjects [_pos, ["Building"], 300]) > 2) then {
+															if (_debug) then {
+																diag_log format["MSO-%1 Enemy Population - %3 is patrolling buildings near %2", time, _pos2, leader _group];
+															};
+															[leader _group, 300, true, 240 + random 360] execVM "support\scripts\crb_scripts\crB_HousePos.sqf";	
+														} else {
+															[_group] call BIN_fnc_taskDefend;
+														};
                                                 };
                                                 if(_flag < ep_campprob && _type != "Infantry") then {
                                                         [_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
@@ -303,6 +314,13 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                         [_grp2] call BIN_fnc_taskDefend;
                                                         ep_groups set [count ep_groups, _grp2];
                                                 };
+												// Check to see if Enemy sets up roadblock
+												if (((random 1 > 0.5) && (count (_pos nearRoads 500) > 0)) || (_debug)) then {
+													if (_debug) then {
+														diag_log format["MSO-%1 Enemy Population - Attempted to Deploy Road Block near %2", time, _pos2];
+													};
+													[_group, _pos] execVM "enemy\scripts\TUP_deployRoadBlock.sqf";	
+												};
                                         };
                                         ep_groups set [count ep_groups, _group];
 					CRBPROFILERSTOP
@@ -353,7 +371,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 					};
                                 };
                                 
-                                _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[8,6,3,1]] call mso_core_fnc_selectRandomBias;
+                                _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                                 
                                 [{
 					CRBPROFILERSTART("RMM EnemyPop ViewPoint")
