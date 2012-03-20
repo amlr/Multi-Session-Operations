@@ -60,7 +60,7 @@ objective_intel_KILLED = {
 			_ev = (["EvMap","EvMoscow","EvPhoto"] call mps_getRandomElement) createvehicle _pos;
 			_ev setPosATL _pos;
 			_ev spawn {
-				while{!ABORTTASK && alive CAPT2_target && {isPlayer _x && side _x == (SIDE_A select 0)} count nearestObjects[position _this,["All"],3] == 0} do {sleep 2};
+				while{!ABORTTASK_PO && alive CAPT2_target && {isPlayer _x && side _x == (SIDE_A select 0)} count nearestObjects[position _this,["All"],3] == 0} do {sleep 2};
 				if(!alive CAPT2_target) exitWith {deleteVehicle _this};
 				deleteVehicle _this;
 				mission_sidechat = "Gained new intel about the targets possible location."; publicVariable "mission_sidechat"; player sideChat mission_sidechat;
@@ -98,7 +98,7 @@ for "_i" from 1 to 2 do {
 } forEach (nearestLocations [_position,["Name","NameLocal","NameVillage","NameCity","NameCityCapital"],3000]);
 
 [] spawn {
-	While{!ABORTTASK && alive CAPT2_target} do {
+	While{!ABORTTASK_PO && alive CAPT2_target} do {
 		{
 			_xmarkerposition = getMarkerPos _x;
 			_xmarkercolor = getMarkerColor _x;
@@ -150,11 +150,11 @@ publicVariable "mps_civilian_intel";
 
 {_x spawn objective_intel_KILLED;} foreach _enemies;
 
-while {!ABORTTASK && alive CAPT2_target && CAPT2_target distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 10 } do { sleep 5 };
+while {!ABORTTASK_PO && alive CAPT2_target && CAPT2_target distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 10 } do { sleep 5 };
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
-if(!ABORTTASK && _random_scenario > 0 && alive CAPT2_target) then {
+if(!ABORTTASK_PO && _random_scenario > 0 && alive CAPT2_target) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

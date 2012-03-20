@@ -113,7 +113,6 @@ for "_j" from 1 to _numconvoys do {
                                 };
                         };
                         
-                        {_x setSkill 0.2;} forEach units _grp;
                         
                         _wp = _grp addwaypoint [_startpos, 0];
                         _wp setWaypointFormation "FILE";
@@ -160,6 +159,11 @@ for "_j" from 1 to _numconvoys do {
                         
                         _t = format["e%1",_cid];
                         [_t, _endpos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "End", "COLOR:", "ColorRed", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                        
+                        {
+                        	_x setSkill 0.9;
+                        	_x setVariable ["CEP_disableCache", true, true];
+                        } forEach units _grp;
                         
                         //KIERANS ADDITION - task addition
                         
@@ -227,13 +231,16 @@ for "_j" from 1 to _numconvoys do {
                         
                         //END KIERANS ADDITION	   
                        
-                        while {(!ABORTTASK) && (_grp call CBA_fnc_isAlive)} do {
+                        while {(!ABORTTASK_PO) && (_grp call CBA_fnc_isAlive)} do {
                             sleep 5;
+                            {
+                        		if (vehicle _x == _x) then {deletevehicle _x};
+                            } foreach units _grp;
                         };
                         
                         //alert the players
                         
-                        if(!ABORTTASK && !(_grp call CBA_fnc_isAlive)) then {
+                        if(!ABORTTASK_PO && !(_grp call CBA_fnc_isAlive)) then {
 						[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 						mps_mission_status = 2;
 						}else{
@@ -259,7 +266,7 @@ for "_j" from 1 to _numconvoys do {
 
 diag_log format["MSO-%1 Convoys # %2", time, _numconvoys];
 
-while {!ABORTTASK && !stopscript} do {
+while {!ABORTTASK_PO && !stopscript} do {
     diag_log [diag_frameno, diag_ticktime, time, "waiting..."];
     sleep 5;
 };

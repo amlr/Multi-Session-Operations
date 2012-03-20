@@ -49,9 +49,9 @@ mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 	_position
 ] call mps_tasks_add;
 
-while {!ABORTTASK && {damage _x < 1} count nearestObjects[_position,["Land_Vysilac_FM"],80] > 0 } do { sleep 5 };
+while {!ABORTTASK_PO && {damage _x < 1} count nearestObjects[_position,["Land_Vysilac_FM"],80] > 0 } do { sleep 5 };
 
-if(!ABORTTASK) then {
+if(!ABORTTASK_PO) then {
 [format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 mps_mission_status = 2;
 } else {

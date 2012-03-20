@@ -63,9 +63,9 @@ _truckgroup setFormation "COLUMN";
 	_position
 ] call mps_tasks_add;
 
-While{!ABORTTASK && (canMove _truck || canMove _armor || canMove _apc) && _truck distance _position > 100 && _armor distance _position > 100 && _apc distance _position > 100 } do { sleep 5 };
+While{!ABORTTASK_PO && (canMove _truck || canMove _armor || canMove _apc) && _truck distance _position > 100 && _armor distance _position > 100 && _apc distance _position > 100 } do { sleep 5 };
 
-if(!ABORTTASK && !canMove _truck && !canMove _armor && !canMove _apc) then {
+if(!ABORTTASK_PO && !canMove _truck && !canMove _armor && !canMove _apc) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

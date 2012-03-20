@@ -67,7 +67,7 @@ mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 	_position
 ] call mps_tasks_add;
 
-While{!ABORTTASK && _pow1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] > 15 && alive _pow1 } do {sleep 1};
+While{!ABORTTASK_PO && _pow1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] > 15 && alive _pow1 } do {sleep 1};
 
 if( (alive _pow1) and (_pow1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] < 15)) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;

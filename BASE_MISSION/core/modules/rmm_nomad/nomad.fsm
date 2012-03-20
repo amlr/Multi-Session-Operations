@@ -66,7 +66,10 @@ class FSM
           priority = 0.000000;
           to="player_init";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"not isnull player and getplayeruid player != """""/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!isnull player &&" \n
+           "getplayeruid player != """" &&" \n
+           "time > ((2 * 60) + random nomadTime)" \n
+           ""/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/

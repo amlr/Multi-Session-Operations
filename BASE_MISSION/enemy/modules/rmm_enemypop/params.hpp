@@ -22,3 +22,27 @@ class rmm_ep_safe_zone {
         texts[]= {"500m","1000m","2000m","4000m"}; 
         default = 2000;
 };
+class rmm_ep_inf {
+        title = "    Enemy Infantry Units"; 
+        values[]= {0,9,8,7,6,5,4,3,2,1}; 
+        texts[]= {"Disabled","90%","80%","70%","60%","50%","40%","30%","20%","10%"}; 
+        default = 4;
+};
+class rmm_ep_mot {
+        title = "    Enemy Motorized Units"; 
+        values[]= {0,9,8,7,6,5,4,3,2,1}; 
+        texts[]= {"Disabled","90%","80%","70%","60%","50%","40%","30%","20%","10%"}; 
+        default = 3;
+};
+class rmm_ep_mec {
+        title = "    Enemy Mechanized Units"; 
+        values[]= {0,9,8,7,6,5,4,3,2,1}; 
+        texts[]= {"Disabled","90%","80%","70%","60%","50%","40%","30%","20%","10%"}; 
+        default = 2;
+};
+class rmm_ep_arm {
+        title = "    Enemy Armoured Units"; 
+        values[]= {0,9,8,7,6,5,4,3,2,1}; 
+        texts[]= {"Disabled","90%","80%","70%","60%","50%","40%","30%","20%","10%"}; 
+        default = 1;
+};

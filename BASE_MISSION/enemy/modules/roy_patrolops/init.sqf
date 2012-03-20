@@ -30,49 +30,25 @@ if(isNil "paramsArray") then {
 
 if(AMBAIRPARTOLS > 0) then {mps_ambient_air = true};
 
+//define Team leaders that are allowed to sign in and abort operations
+PO_teamleads = [
+	"BAF_Soldier_TL_MTP",
+	"BAF_Soldier_SL_MTP",
+	"US_Soldier_TL_EP1",
+	"US_Soldier_SL_EP1",
+	"USMC_Soldier_SL",
+	"USMC_Soldier_TL",
+	"RU_Soldier_SL",
+	"RU_Soldier_TL",
+	"GUE_Soldier_CO",
+	"GUE_Commander",
+	"CZ_Soldier_SL_DES_EP1",
+	"aawInfantrySecco1",
+	"aawInfantrySecco1_dpduDpcu",
+	"cwr2_OfficerW"
+];
+
 [] execVM PO_Path + "mps\init_mps.sqf";
-
-if (isServer) then {
-	if(isNil "HQ") then {
-		//get nearest HQ
-		HQ = nearestobject [markerpos "ammo","M1130_HQ_unfolded_Base_EP1"];
-		
-		// If no HQ then create one
-		if (isNull HQ) then {
-			private ["_pos","_newpos"];
-			if !(str (markerPos "ammo") == "[0,0,0]") then {
-				_pos = markerPos "ammo";
-				_newpos = [_pos, 0, 50, 2, 0, 0, 0] call BIS_fnc_findSafePos;
-				HQ = "M1130_HQ_unfolded_Base_EP1" createVehicle _newpos;
-				diag_log format ["Creating Patrol Ops MHQ at %1", _newpos];
-			} else {
-                //failsafe if no marker with name ammo is there (respawn should always be there)
-                _pos = markerPos "respawn_west";
-				_newpos = [_pos, 0, 50, 2, 0, 0, 0] call BIS_fnc_findSafePos;
-				HQ = "M1130_HQ_unfolded_Base_EP1" createVehicle _newpos;
-				diag_log format ["Creating Patrol Ops MHQ at %1", _newpos];
-            };
-		};
-		publicvariable "HQ";
-	};
-};
-
-WaitUntil { !(isNil "HQ")};
-
-if (isnil "runningmission") then {runningmission = false};
-
-//make Check-in and Abort actions on MHQ available for all players and add action locally (for JIP);
-if (!runningmission) then {    
-	[3,[],{
-		HQaction = HQ addaction ["Check in for special operations", PO_Path + "tasks\checkin_mhq.sqf"];
-	}] call mso_core_fnc_ExMP;
-};
-
-if (runningmission) then {    
-	[3,[],{
-		HQaction = HQ addaction ["Abort operation", PO_Path + "tasks\abort.sqf"];
-	}] call mso_core_fnc_ExMP;
-};
 
 // Credit Roy
 player createDiaryRecord ["Diary", ["Patrol Ops 2", "<br/>DESCRIPTION<br/>
@@ -91,5 +67,5 @@ if(!isDedicated) then {
 // This calls the Patrol Ops Mission
 // To use just the framework for your own missions, delete the line below.
 */
-	["patrol_ops"] spawn mps_mission_sequence;
 
+_patrol_ops = [] execVM PO_path + "tasks\operations_init.sqf";

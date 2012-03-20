@@ -255,12 +255,12 @@ if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
-_types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
+_types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","NameVillage","NameLocal","ViewPoint","Hill"];
 _shepherds = [];
 {
         // find a spawn area
         if(type _x in _types) then {
-                if (random 1 > 0.8) then {
+                if (random 1 > 0.9) then {
                         _name = format["shepherd_%1", floor(random 10000)];
                         if(crb_shepherds_debug) then {
                                 diag_log format["MSO-%1 shepherds: start %2", time, _name];
