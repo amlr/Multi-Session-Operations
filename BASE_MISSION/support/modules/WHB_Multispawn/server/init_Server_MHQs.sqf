@@ -1,63 +1,20 @@
 // Script used by the Server to build an array of all available MHQs
+// State variable is also initialised as they are added to the list.
 // Static HQ buildings will need the relevant actions manually added in the editor
 // Author: WobbleyheadedBob aka CptNoPants
-
-private ["_vehicles","_array1","_array2"];
+private ["_vehicles","_isMHQ"];
 _vehicles = _this select 0;
 PV_hqArray = [];
 
 {
-	switch (typeOf _x) do
-	{
-	//-------------------------------------------------------------------------------------------------
-		case "LAV25_HQ":
-		{
-			//player sideChat format ["PV HQ Array: %1", PV_hqArray];
-			//player sideChat format ["Adding object: %1", _x];
-			PV_hqArray set [count PV_hqArray, _x];
-		};
-	//-------------------------------------------------------------------------------------------------
-		case "LAV25_HQ_UNFOLDED":
-		{
-			//player sideChat format ["PV HQ Array: %1", PV_hqArray];
-			//player sideChat format ["Adding object: %1", _x];
-			PV_hqArray set [count PV_hqArray, _x];
-		};
-	//-------------------------------------------------------------------------------------------------
-		case "M1130_CV_EP1":
-		{
-			//player sideChat format ["PV HQ Array: %1", PV_hqArray];
-			//player sideChat format ["Adding object: %1", _x];
-			PV_hqArray set [count PV_hqArray, _x];
-		};
-	//-------------------------------------------------------------------------------------------------
-		case "M1130_HQ_unfolded_Base_EP1":
-		{
-			//player sideChat format ["PV HQ Array: %1", PV_hqArray];
-			//player sideChat format ["Adding object: %1", _x];
-			PV_hqArray set [count PV_hqArray, _x];
-		};
-	//-------------------------------------------------------------------------------------------------
-		case "cwr2_M113_HQ":
-		{
-			//player sideChat format ["PV HQ Array: %1", PV_hqArray];
-			//player sideChat format ["Adding object: %1", _x];
-			PV_hqArray set [count PV_hqArray, _x];
-		};
-	//-------------------------------------------------------------------------------------------------
-		case "cwr2_M113_HQ_Unfolded":
-		{
-			//player sideChat format ["PV HQ Array: %1", PV_hqArray];
-			//player sideChat format ["Adding object: %1", _x];
-			PV_hqArray set [count PV_hqArray, _x];
-		};
-	//-------------------------------------------------------------------------------------------------
-		Default 
-		{
-			//Do nothing for all other vehicles
-		};
-	};
+	_isMHQ = [_x] call fn_getMHQType;
 	
-	//Broadcast the new list out to everyone.
+	if (_isMHQ != "non_mhq_vehicle") then 
+	{
+		_x setVariable ["MHQState", 0, true];
+		PV_hqArray set [count PV_hqArray, _x];
+	};
 } forEach _vehicles;
+
+//Broadcast the new list out to everyone.
 publicvariable "PV_hqArray";
