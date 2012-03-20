@@ -21,7 +21,7 @@ if(isNil "rmm_ep_safe_zone")then{rmm_ep_safe_zone = 2000;};
 ep_groups = [];
 ep_total = 0;
 ep_campprob = 0.25;
-
+mps_getFlatArea = compile preprocessFileLineNumbers ("enemy\modules\roy_patrolops\mps\func\mps_func_getflatarea.sqf");
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
@@ -51,8 +51,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                 if (type _loc == "Hill") then {
                         if (random 1 > 0.33) then {
                                 ep_total = ep_total + 1;
-                                _d = 500;
-                                _pos = [position _loc, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
+                                //_pos = [position _loc, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
+								_pos = [position _loc,40,0.1,20] call mps_getFlatArea; 
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];
@@ -88,8 +88,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 										};
 										if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
-        	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+        	                                _pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
                 	                        [_camp, random 360, _pos] call f_builder;
+											if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
 										};
                                 };
                                 
@@ -107,7 +108,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         if(([_pos, rmm_ep_spawn_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
-                                                _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                                                _pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 while{isNil "_group"} do {
                                                         _group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
                                                 };
@@ -140,8 +141,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                 if (type _loc in ["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"]) then {
                         if (random 1 > 0.5) then {
                                 ep_total = ep_total + 1;
-                                _d = 800;
-                                _pos = [position _loc, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
+                                _d = 500;
+                                _pos = [position _loc,_d / 2 + random _d,0.1,40] call mps_getFlatArea;		
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];
@@ -170,8 +171,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											f_builder = mso_core_fnc_createComposition;
 										};
                                         _camp = _camp call BIS_fnc_selectRandom;
-                                        _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                                        _pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
                                         [_camp, random 360, _pos] call f_builder;
+										if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
                                 };
                                 
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[8,6,3,1]] call mso_core_fnc_selectRandomBias;
@@ -188,7 +190,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         if(([_pos, rmm_ep_spawn_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
-                                                _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                                                _pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 while{isNil "_group"} do {
                                                         _group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
                                                 };
@@ -219,10 +221,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                         };
                 };
                 if (type _loc in ["FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown"]) then {
-                        if (random 1 > 0.66) then {
+                        if (random 1 > 0.6) then {
                                 ep_total = ep_total + 1;
-                                _d = 400;
-                                _pos = [position _loc, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;			
+                                _pos = [position _loc,250,0.1,40] call mps_getFlatArea;			
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];
@@ -258,8 +259,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 										};
 					if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
-        	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+        	                                _pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
                 	                        [_camp, random 360, _pos] call f_builder;
+											if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
 					};
                                 };
                                 
@@ -277,7 +279,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         if(([_pos, rmm_ep_spawn_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
-                                                _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                                                _pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 while{isNil "_group"} do {
                                                         _group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
                                                 };
@@ -310,8 +312,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                 if (type _loc in ["ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"]) then {
                         if (random 1 > 0.75) then {
                                 ep_total = ep_total + 1;
-                                _d = 300;
-                                _pos = [position _loc, 0,  _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
+                                _d = 200;
+                                _pos = [position _loc,_d / 2 + random _d,0.1,40] call mps_getFlatArea;
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];
@@ -345,8 +347,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 										};
 					if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
-        	                                _pos = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+        	                                _pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
                 	                        [_camp, random 360, _pos] call f_builder;
+											if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
 					};
                                 };
                                 
@@ -364,7 +367,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         if(([_pos, rmm_ep_spawn_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
-                                                _pos2 = [_pos, 10, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
+                                                _pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                                 while{isNil "_group"} do {
                                                         _group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
                                                 };
