@@ -46,3 +46,9 @@ class rmm_ep_arm {
         texts[]= {"Disabled","90%","80%","70%","60%","50%","40%","30%","20%","10%"}; 
         default = 1;
 };
+class rmm_ep_aa {
+        title = "    Enemy Anti-Air Units"; 
+        values[]= {0,1,2}; 
+        texts[]= {"None","with AA Missiles","without AA Missiles"}; 
+        default = 2;
+};

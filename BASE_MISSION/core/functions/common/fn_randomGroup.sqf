@@ -13,7 +13,7 @@
 //   OR	single faction = USMC,RU,INS,GUE,etc e.g. "INS"
 //   OR	multiple factions = USMC,RU,INS,GUE,etc e.g. ["RU","INS"]
 ///////////////////////////////////////////////////////////////////
-private ["_pos","_type","_fac","_facs","_sidex","_side","_grpx","_grps","_grp","_fx","_facx","_s","_spawnGrp","_wp"];
+private ["_pos","_type","_fac","_facs","_sidex","_side","_grpx","_grps","_grp","_fx","_facx","_s","_spawnGrp","_wp","_nonConfigs"];
 if(!isServer) exitWith{};
 
 CRBPROFILERSTART("mso_core_fnc_randomGroup")
@@ -21,6 +21,13 @@ CRBPROFILERSTART("mso_core_fnc_randomGroup")
 _pos = _this select 0;
 _type = _this select 1;
 _fac = nil;
+
+if (rmm_ep_aa > 1) then {
+	_nonConfigs = ["TK_InfantrySectionAA","RU_InfSection_AA","INS_InfSection_AA","TK_INS_AATeam","ACE_RU_InfSection_AA_D","TK_GUE_AATeam"];
+} else {
+	_nonConfigs = [""]; // Add any groups you don't want returned in this array
+};
+
 // setup default param
 if (count _this > 2) then { _fac = _this select 2; };
 if (isNil "_fac") then { _fac = east; };
@@ -92,7 +99,7 @@ if(!isNil "_facs") then {
                 {
                         _grpx = count(configFile >> "CfgGroups" >> _s >> _x >> _type);
                         for "_y" from 1 to _grpx - 1 do {
-                                if (!(_x in _facx)) then {
+                                if (!(_x in _facx)) then { 
                                         _facx set [count _facx, _x];
                                 };
                         };
@@ -137,9 +144,14 @@ _s = switch(_side) do {
 //hint str _s;
 _grpx = count(configFile >> "CfgGroups" >> _s >> _fac >> _type);
 for "_y" from 1 to _grpx - 1 do {
-        _grps set [count _grps, (configFile >> "CfgGroups" >> _s >> _fac >> _type) select _y];
+		private "_cx";
+		_cx = configName ((configFile >> "CfgGroups" >> _s >> _fac >> _type) select _y);
+		if ( {(_cx == _x)} count _nonConfigs == 0 ) then {	
+			_grps set [count _grps, (configFile >> "CfgGroups" >> _s >> _fac >> _type) select _y];			
+		};	
 };
 //hint str _grps;
+
 _grp = _grps select floor(random count _grps);
 
 //player globalChat format["%1 %2 %3 %4", _pos, _s, _side, _grp];

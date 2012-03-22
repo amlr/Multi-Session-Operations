@@ -22,10 +22,13 @@ if(isNil "rmm_ep_inf")then{rmm_ep_inf = 4;};
 if(isNil "rmm_ep_mot")then{rmm_ep_mot = 3;};
 if(isNil "rmm_ep_mec")then{rmm_ep_mech = 2;};
 if(isNil "rmm_ep_arm")then{rmm_ep_arm = 1;};
+if(isNil "rmm_ep_aa")then{rmm_ep_aa = 2;};
+
 ep_groups = [];
 ep_total = 0;
 ep_campprob = 0.25;
 mps_getFlatArea = compile preprocessFileLineNumbers ("enemy\modules\roy_patrolops\mps\func\mps_func_getflatarea.sqf");
+
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
@@ -92,7 +95,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 										if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
         	                                _pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
-                	                        [_camp, random 360, _pos] call f_builder;
+                	                        [_camp, [_pos, position _loc] call BIS_fnc_dirTo, _pos] call f_builder;
 											if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
 										};
                                 };
@@ -107,7 +110,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         _handle = _this select 1;
                                         _pos = _params select 0;
                                         _flag = _params select 1;
-                                        _type= _params select 2;
+                                        _type = _params select 2;
+										_debug = false;
                                         if(([_pos, rmm_ep_spawn_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
@@ -135,6 +139,10 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                         [_grp2] call BIN_fnc_taskDefend;
                                                         ep_groups set [count ep_groups, _grp2];
                                                 };
+												// Check to see if Enemy sets up AA site
+												if ((random 1 > 0.5) || _debug) then {
+													[_pos, "static", 1 + random 2] execVM "enemy\scripts\TUP_spawnAA.sqf";
+												};
                                                 ep_groups set [count ep_groups, _group];
                                         };
 					CRBPROFILERSTOP
@@ -175,7 +183,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 										};
                                         _camp = _camp call BIS_fnc_selectRandom;
                                         _pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
-                                        [_camp, random 360, _pos] call f_builder;
+                                        [_camp, [_pos, position _loc] call BIS_fnc_dirTo, _pos] call f_builder;
 										if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
                                 };
                                 
@@ -189,7 +197,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         _handle = _this select 1;
                                         _pos = _params select 0;
                                         _flag = _params select 1;
-                                        _type= _params select 2;
+                                        _type = _params select 2;
+										_debug = false;
                                         if(([_pos, rmm_ep_spawn_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
@@ -217,6 +226,10 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                         [_grp2] call BIN_fnc_taskDefend;
                                                         ep_groups set [count ep_groups, _grp2];
                                                 };
+												// Check to see if Enemy sets up AA defense
+												if ((random 1 > 0.5) || _debug) then {
+													[_pos, "mixed", 1 + random 4] execVM "enemy\scripts\TUP_spawnAA.sqf";
+												};
                                         };
                                         ep_groups set [count ep_groups, _group];
 										CRBPROFILERSTOP
@@ -263,7 +276,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 										if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
         	                                _pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
-                	                        [_camp, random 360, _pos] call f_builder;
+                	                        [_camp, [_pos, position _loc] call BIS_fnc_dirTo, _pos] call f_builder;
 											if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
 										};
                                 };
@@ -366,7 +379,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 					if (count _camp > 0) then {
 	                                        _camp = _camp call BIS_fnc_selectRandom;
         	                                _pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
-                	                        [_camp, random 360, _pos] call f_builder;
+                	                        [_camp, [_pos, position _loc] call BIS_fnc_dirTo, _pos] call f_builder;
 											if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
 					};
                                 };
