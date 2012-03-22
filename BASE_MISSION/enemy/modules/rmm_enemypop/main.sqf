@@ -44,14 +44,13 @@ fPlayersInside = {
 };
 
 for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
-	if(_i >= count CRB_LOCS) exitWith{};
+		if(_i >= count CRB_LOCS) exitWith{};
         private ["_loc","_group","_pos","_type"];
-	_loc = CRB_LOCS select _i;
+		_loc = CRB_LOCS select _i;
         _group = grpNull;
         _type = "";
         _pos = [];
-
-        if(!([position _loc, rmm_ep_safe_zone] call fPlayersInside)) then {
+        if ( !([position _loc, rmm_ep_safe_zone] call fPlayersInside) && (position _loc distance getmarkerpos "ammo" > rmm_ep_safe_zone) && (position _loc distance getmarkerpos "ammo_1" > rmm_ep_safe_zone) ) then {
                 if (type _loc == "Hill") then {
                         if (random 1 > 0.33) then {
                                 ep_total = ep_total + 1;
@@ -274,12 +273,13 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                 [{
 										CRBPROFILERSTART("RMM EnemyPop FlatArea")
 
-                                        private ["_pos","_pos2","_flag","_group","_grp2","_type","_params","_handle"];
+                                        private ["_pos","_pos2","_flag","_group","_grp2","_type","_params","_handle","_debug"];
                                         _params = _this select 0;
                                         _handle = _this select 1;
                                         _pos = _params select 0;
                                         _flag = _params select 1;
                                         _type= _params select 2;
+										_debug = false;
                                         if(([_pos, rmm_ep_spawn_dist] call fPlayersInside)) then {
                                                 [_handle] call mso_core_fnc_removeLoopHandler;
                                                 _group = nil;
@@ -290,19 +290,19 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 (leader _group) setBehaviour "COMBAT";
                                                 _group setSpeedMode "LIMITED";
                                                 _group setFormation "DIAMOND";
-                                                if(_flag >= ep_campprob || count units _group <= 2) then {
-                                                        [_group,_group,400,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [360,520,680]] call CBA_fnc_taskPatrol;
-                                                };
-                                                if(_flag < ep_campprob && _type == "Infantry") then {
-                                                        leader _group setPos _pos;
-														if (count (nearestObjects [_pos, ["Building"], 300]) > 2) then {
+                                                if(_flag >= ep_campprob || count units _group <= 2 ) then {
+														if ((count (nearestObjects [_pos, ["Building"], 300]) > 2) && (count units _group > 2) ) then {
 															if (_debug) then {
 																diag_log format["MSO-%1 Enemy Population - %3 is patrolling buildings near %2", time, _pos2, leader _group];
 															};
 															[leader _group, 300, true, 240 + random 360] execVM "support\scripts\crb_scripts\crB_HousePos.sqf";	
 														} else {
-															[_group] call BIN_fnc_taskDefend;
-														};
+															[_group,_group,400,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [360,520,680]] call CBA_fnc_taskPatrol;
+														};  
+                                                };
+                                                if(_flag < ep_campprob && _type == "Infantry") then {
+                                                        leader _group setPos _pos;
+														[_group] call BIN_fnc_taskDefend;
                                                 };
                                                 if(_flag < ep_campprob && _type != "Infantry") then {
                                                         [_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
@@ -315,7 +315,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                         ep_groups set [count ep_groups, _grp2];
                                                 };
 												// Check to see if Enemy sets up roadblock
-												if (((random 1 > 0.5) && (count (_pos nearRoads 500) > 0)) || (_debug)) then {
+												if (((random 1 > 0.5) && (count (_pos nearRoads 500) > 0)) ) then {
 													if (_debug) then {
 														diag_log format["MSO-%1 Enemy Population - Attempted to Deploy Road Block near %2", time, _pos2];
 													};
