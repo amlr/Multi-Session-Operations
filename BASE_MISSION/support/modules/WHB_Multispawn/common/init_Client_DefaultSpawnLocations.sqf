@@ -31,6 +31,11 @@ switch(faction player) do
 	case "CIV_RU":			{myRespawnPoint = (markerPos "respawn_RU");}; 
 	case "BIS_TK_CIV":		{myRespawnPoint = (markerPos "respawn_TK_CIV");}; 
 	case "BIS_CIV_special":	{myRespawnPoint = (markerPos "respawn_CIV_special");};
+	
+	Default 
+	{
+		{myRespawnPoint = (markerPos "respawn_west");};
+	};
 };
 
 if (str myRespawnPoint == "[0,0,0]") then {
