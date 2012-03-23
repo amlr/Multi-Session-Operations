@@ -8,6 +8,7 @@ if(rmm_ep_aa == 0) exitWith{};
 
 private ["_choice","_aa","_pos","_number","_type","_aa","_veh","_debug","_aatypes"];
 
+_debug = false;
 _pos = _this select 0;
 _type = _this select 1;
 if (count _this > 2) then {
@@ -25,6 +26,7 @@ if (count (nearestobjects [_pos,_aatypes,200]) > 0) exitWith {};
 // Spawn mobile AA
 if (_type == "mobile" || _type == "mixed") then {
 	if ( (rmm_ep_aa == 1) && (random 1 > 0.5) && ("RU" in MSO_FACTIONS) ) then {_aa = ["2S6M_Tunguska"]};
+	if ("RU" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS) then { _aa = _aa + ["Ural_ZU23_Gue"]};
 	if ("GUE" in MSO_FACTIONS || "tigerianne" in MSO_FACTIONS) then { _aa = _aa + ["Ural_ZU23_Gue"]};
 	if ("INS" in MSO_FACTIONS || "cwr2_fia" in MSO_FACTIONS) then { _aa = _aa + ["Ural_ZU23_INS","ZSU_INS"]};
 	if ("BIS_TK" in MSO_FACTIONS) then { _aa = _aa + ["Ural_ZU23_TK_EP1","ZSU_TK_EP1"]};
