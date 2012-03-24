@@ -4,19 +4,12 @@ class weatherHeader {
         texts[]= {" "}; 
         default = 0;
 };
-/*
-class disableFog {
-        title = "    Disable Fog"; 
-        values[]= {0,1}; 
-        texts[]= {"false","true"}; 
-        default = 0;
-};
-*/
+
 class timeSync {
         title = "    Time Sync Check";
-        values[] = {60,300,600,3600,7200};
-        texts[] = {"1 min","5 mins","10 mins","1 hour","2 hours"};
-        default = 300;
+        values[] = {0,60,300,600,3600,7200};
+        texts[] = {"Monitor", "1 min","5 mins","10 mins","1 hour","2 hours"};
+        default = 0;
 };
 
 class timeDiff {
