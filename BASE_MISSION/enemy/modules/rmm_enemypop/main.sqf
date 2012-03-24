@@ -20,14 +20,41 @@ if(isNil "rmm_ep_spawn_dist")then{rmm_ep_spawn_dist = 2000;};
 if(isNil "rmm_ep_safe_zone")then{rmm_ep_safe_zone = 2000;};
 if(isNil "rmm_ep_inf")then{rmm_ep_inf = 4;};
 if(isNil "rmm_ep_mot")then{rmm_ep_mot = 3;};
-if(isNil "rmm_ep_mec")then{rmm_ep_mech = 2;};
+if(isNil "rmm_ep_mec")then{rmm_ep_mec = 2;};
 if(isNil "rmm_ep_arm")then{rmm_ep_arm = 1;};
 if(isNil "rmm_ep_aa")then{rmm_ep_aa = 2;};
 
 ep_groups = [];
 ep_total = 0;
 ep_campprob = 0.25;
-mps_getFlatArea = compile preprocessFileLineNumbers ("enemy\modules\roy_patrolops\mps\func\mps_func_getflatarea.sqf");
+
+rmm_ep_getFlatArea = {
+// Written by BON_IF
+
+private ['_position','_radius','_pos','_maxgradient','_gradientarea'];
+
+_position = _this select 0;
+if(count _this > 1) then {_radius = _this select 1;} else {_radius = 2;};
+if(count _this > 2) then {_maxgradient = _this select 2} else {_maxgradient = 0.1};   // in [0,1]
+if(count _this > 3) then {_gradientarea = _this select 3} else {_gradientarea = 5};   // in metres
+
+for "_i" from 1 to 10000 do {
+	_pos = [(_position select 0) + _radius - random (2*_radius),(_position select 1) + _radius - random (2*_radius),0];
+	_pos = 	_pos isflatempty [
+		20,				//--- Minimal distance from another object
+		1,				//--- If 0, just check position. If >0, select new one
+		_maxgradient,			//--- Max gradient
+		_gradientarea,			//--- Gradient area
+		0,				//--- 0 for restricted water, 2 for required water,
+		false,				//--- True if some water can be in 25m radius
+		ObjNull				//--- Ignored object
+	];
+	if(if(count _pos > 0) then{_pos set [2,0]; if(count (_pos nearRoads 20) == 0) then{true} else{false}} else{false}) exitWith{};
+};
+if(count _pos == 0) then{_pos = [(_position select 0) + _radius - random (2*_radius),(_position select 1) + _radius - random (2*_radius),0];};
+
+_pos;
+};
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
@@ -58,7 +85,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                         if (random 1 > 0.33) then {
                                 ep_total = ep_total + 1;
                                 //_pos = [position _loc, 0, _d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
-								_pos = [position _loc,30,0.1,10] call mps_getFlatArea; 
+								_pos = [position _loc,30,0.1,10] call rmm_ep_getFlatArea; 
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];
@@ -153,7 +180,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                         if (random 1 > 0.5) then {
                                 ep_total = ep_total + 1;
                                 _d = 500;
-                                _pos = [position _loc,_d / 2 + random _d,0.1,40] call mps_getFlatArea;		
+                                _pos = [position _loc,_d / 2 + random _d,0.1,40] call rmm_ep_getFlatArea;		
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];
@@ -239,7 +266,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                 if (type _loc in ["FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown"]) then {
                         if (random 1 > 0.6) then {
                                 ep_total = ep_total + 1;
-                                _pos = [position _loc,250,0.1,40] call mps_getFlatArea;			
+                                _pos = [position _loc,250,0.1,40] call rmm_ep_getFlatArea;			
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];
@@ -344,7 +371,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                         if (random 1 > 0.75) then {
                                 ep_total = ep_total + 1;
                                 _d = 200;
-                                _pos = [position _loc,_d / 2 + random _d,0.1,40] call mps_getFlatArea;
+                                _pos = [position _loc,_d / 2 + random _d,0.1,40] call rmm_ep_getFlatArea;
                                 _flag = random 1;
                                 if(_flag < ep_campprob) then {
                                         _camp = [];

@@ -42,7 +42,7 @@ switch toLower(worldName) do {
                 BIS_alice_mainscope setvariable ["trafficDistance",1000];                
                 BIS_alice_mainscope setvariable ["spawnDistance",700];                
                 BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];                
-		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"]; 
+		BIS_alice_mainscope setVariable ["civilianCount","round (1.5 * (sqrt %1))"]; 
                 [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";        
         };        
         case "eden": {                

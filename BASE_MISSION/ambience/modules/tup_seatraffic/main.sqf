@@ -8,7 +8,8 @@ tup_seatraffic_debug = false;
 _center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
 
 if (isNil "tup_seatraffic_amount") then {tup_seatraffic_amount = 1;};
-if (tup_seatraffic_amount == 2) exitWith{};
+if (isNil "tup_seatraffic_factions") then {tup_seatraffic_factions = 1;};
+if (tup_seatraffic_factions == 2) exitWith{};
 if (isNil "tup_seatraffic_ROE") then {tup_seatraffic_ROE = 2;};
 if (isNil "tup_seatraffic_LHD") then {tup_seatraffic_LHD = 2;};
 
@@ -153,6 +154,9 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
                         // Work out side that controls destination (based on unit numbers)
                         _seaportside =  [_currentseadest, 1000, format["%1 %2",_currentseadest,_j],tup_seatraffic_debug] call mso_core_fnc_getDominantSide;                        
                         // Get the factions for the controlling side and count their units
+			if (tup_seatraffic_factions == 1) then {
+				_seaportside = civilian;
+			};
                         _factions = [_seaportside, _currentseadest, 1000,"factions",tup_seatraffic_debug,format["Seaport %2",_j]] call mso_core_fnc_getFactions;
                         //_factionsCount = [_seaportside, _currentseadest, 1000,"count",tup_seatraffic_debug,format["Seaport %2",_j]] call mso_core_fnc_getFactions;
                         
