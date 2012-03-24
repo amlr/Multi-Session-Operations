@@ -6,7 +6,7 @@ if(!isServer) exitWith{};
 
 if(rmm_ep_aa == 0) exitWith{};
 
-private ["_choice","_aa","_pos","_number","_type","_aa","_veh","_debug"];
+private ["_choice","_aa","_pos","_number","_type","_aa","_veh","_debug","_aatypes"];
 
 _debug = false;
 _pos = _this select 0;
@@ -18,6 +18,10 @@ if (count _this > 2) then {
 };
 
 _aa = [];
+_aatypes = ["2S6M_Tunguska","Ural_ZU23_Gue","Ural_ZU23_INS","ZSU_INS","Ural_ZU23_TK_EP1","ZSU_TK_EP1","ACE_Ural_ZU23_RU","ACE_ZSU_RU","Igla_AA_pod_EAST","Igla_AA_pod_TK_EP1","ZU23_Gue","ZU23_Ins","ZU23_TK_EP1","ZU23_TK_INS_EP1","ZU23_TK_GUE_EP1"];
+
+// Check to ensure there is no other AA site nearby
+if (count (nearestobjects [_pos,_aatypes,200]) > 0) exitWith {};
 
 // Spawn mobile AA
 if (_type == "mobile" || _type == "mixed") then {
@@ -43,12 +47,9 @@ if (_type == "static" || _type == "mixed") then {
 	if ("BIS_TK" in MSO_FACTIONS) then { _aa = _aa + ["ZU23_TK_EP1"]};
 	if ("BIS_TK_INS" in MSO_FACTIONS) then { _aa = _aa + ["ZU23_TK_INS_EP1"]};
 	if ("BIS_TK_GUE" in MSO_FACTIONS) then { _aa = _aa + ["ZU23_TK_GUE_EP1"]};
-	if (mps_ace_enabled && ("RU" in MSO_FACTIONS || "cwr2_ru" in MSO_FACTIONS)) then {
-			_aa = _aa + ["ACE_Ural_ZU23_RU","ACE_ZSU_RU"];
-	};
 	
 	// Spawn Fortification
-	if (random 1 > 0.33) then {
+	if (random 1 > 0.33 || _type == "static") then {
 		_camp = [];
 		if("RU" in MSO_FACTIONS) then {_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"]};
 		if("BIS_TK" in MSO_FACTIONS) then { _camp = _camp + ["anti-air_tk1","camp_tk1","camp_tk2","mediumtentcamp2_tk","mediumtentcamp3_tk","mediumtentcamp_tk","radar_site_tk1"]};
@@ -75,10 +76,12 @@ if (count _aa == 0) exitWith {diag_log format ["MSO-%1 Enemy Population - Did no
 
 // Create vehicle
 _choice = _aa call BIS_fnc_selectRandom;
-for "_i" from 0 to _number do {
-	_veh = [[_pos, 0, 50, 10, 0, 1, 0] call bis_fnc_findSafePos, random 360, _choice, EAST] call BIS_fnc_spawnVehicle;
+for "_i" from 1 to _number do {
+	_veh = [[_pos, 0, 20, 5, 0, 1, 0] call bis_fnc_findSafePos, random 360, _choice, EAST] call BIS_fnc_spawnVehicle;
 	if (_debug) then {
 		diag_log format["MSO-%1 Enemy Population - deploying AA asset %2 at %3", time, _choice, position (_veh select 0)];
 	};
+	(_veh select 2) setSpeedMode "LIMITED";
+    (_veh select 2) setFormation "DIAMOND";
 	[(_veh select 2)] call BIN_fnc_taskDefend;
 };
