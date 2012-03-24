@@ -18,9 +18,9 @@ class MISSIONTYPE_AIR { // MISSION TYPE
 };
 class MISSIONCOUNT { // MISSION COUNT
 	title="        Number of Missions";
-	values[]={1,3,5,7,9,15,20};
+	values[]={1,3,5,7,9,15,20,9999};
 	default=9;
-	texts[]={"1","3","5","7","9","15","20"};
+	texts[]={"1","3","5","7","9","15","20","unlimited"};
 };
 class PO2_EFACTION { // ENEMY FACTION
 	title="        Enemy Faction";

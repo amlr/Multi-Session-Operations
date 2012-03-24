@@ -41,8 +41,8 @@ for "_i" from 1 to _b do {
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
 [format["TASK%1",_taskid],
-	format["Destroy Comms Tower near %1", text _location],
-	format["Enemy have deployed a communications tower near %1. Disable their transmission ability to hinder their co-ordination.", text _location],
+	format["Destroy Comms Tower %1", text _location],
+	format["Enemy have deployed a communications tower. Disable their transmission ability to hinder their co-ordination.", text _location],
 	true,
 	[format["MARK%1",_taskid],(_position),"hd_objective","ColorRedAlpha"," Tower"],
 	"created",

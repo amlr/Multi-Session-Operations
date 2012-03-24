@@ -66,7 +66,7 @@ publicVariable "mps_civilian_intel";
 	_position
 ] call mps_tasks_add;
 
-while {!ABORTTASK_PO && alive _object && _object distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 10 || alive _object && (position _object) select 2 > 3 } do { sleep 5 };
+while {!ABORTTASK_PO && alive _object && _object distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 100} do { sleep 5 };
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 

@@ -165,6 +165,8 @@ for "_j" from 1 to _numconvoys do {
                         	_x setVariable ["CEP_disableCache", true, true];
                         } forEach units _grp;
                         
+                        _grp setVariable ["rmm_gtk_exclude", true];
+                        
                         //KIERANS ADDITION - task addition
                         
                         //declare private task vars

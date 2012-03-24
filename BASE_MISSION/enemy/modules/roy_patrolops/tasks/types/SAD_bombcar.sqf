@@ -56,9 +56,11 @@ _SuicideBomberType = ["TK_CIV_Takistani03_EP1","TK_CIV_Takistani04_EP1","TK_CIV_
                     
 // start the spawning and moving                    
                     SuicideBomberG = CreateGroup East;
-					SuicideBomberV = createVehicle [_carType, [(_positionS select 0), (_positionS select 1), 0], [], 180, "FLY"];
+                    SuicideBomberV = createVehicle [_carType, [(_positionS select 0), (_positionS select 1), 0], [], 180, "FLY"];
 					SuicideBomberD = SuicideBomberG createUnit [_SuicideBomberType, [(_positionS select 0)+5, (_positionS select 1), 0], [], 180, "CAN_COLLIDE"];
 					SuicideBomberC1 = SuicideBomberG createUnit ["TK_INS_Soldier_EP1", [(_positionS select 0)+3, (_positionS select 1), 0], [], 180, "CAN_COLLIDE"];
+                    SuicideBomberG setVariable ["rmm_gtk_exclude", true];
+                    
 					SuicideBomberD assignasDriver SuicideBomberV;
                     SuicideBomberD moveInDriver SuicideBomberV;
 					SuicideBomberC1 moveInCargo SuicideBomberV;
