@@ -137,11 +137,12 @@ execNow "core\modules\rmm_nomad\main.sqf";
 execNow "core\modules\rmm_gtk\main.sqf";
 #endif
 
-"Weather" call mso_core_fnc_initStat;
 #ifdef RMM_WEATHER
+"Time Sync" call mso_core_fnc_initStat;
 execNow "core\modules\rmm_weather\main.sqf";
 #endif
 #ifdef DRN_WEATHER
+"DRN Weather" call mso_core_fnc_initStat;
 execNow "core\modules\DRN_weather\CommonLib.sqf";
 [10, 60, 10, 60, true] execNow "core\modules\DRN_weather\DynamicWeatherEffects.sqf";
 #endif
