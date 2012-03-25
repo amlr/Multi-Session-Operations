@@ -1,5 +1,5 @@
 class tup_seatraffic_factions {
-        title = "    Enable Ambient Air Factions"; 
+        title = "    Enable Ambient Sea Factions"; 
         values[]= {0,1,2}; 
         texts[]= {"All Factions","Civilian Only","None"}; 
         default = 1;
