@@ -60,7 +60,8 @@ if !isDedicated then {
 	waituntil{!isNil "PV_hqArray"};
 	
 	// Initialise the default spawn locations and Deploy/Undeploy/SignIn actions to all HQ objects.
-	[] execvm "support\modules\WHB_Multispawn\common\init_client_defaultSpawnLocations.sqf";
+	{[_x] call fn_addAction_HQ} forEach PV_hqArray;
+	myRespawnPoint = (markerPos format["respawn_%1", faction player]);
 	
 	// Function that gets called when the Server updates the state of an HQ
 	fn_client_syncHQState = compile preprocessFileLineNumbers  "support\modules\WHB_Multispawn\common\fn_client_syncHQState.sqf";

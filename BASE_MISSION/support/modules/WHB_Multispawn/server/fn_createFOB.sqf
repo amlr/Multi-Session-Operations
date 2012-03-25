@@ -1,11 +1,12 @@
 //needs to be done Server-side just in case the client machine disconnects or crashes during the parameter defined delay.
 // Author: WobbleyheadedBob aka CptNoPants
 
-private ["_mhq","_locationHQ","_camo","_fobHQtype","_fobHQ","_vectorHQ"];
+private ["_mhq","_locationHQ","_camo","_fobHQtype","_fobHQ","_vectorHQ","_directionHQ"];
 _mhq = _this select 0;
 _locationHQ = position _mhq;
 _camo = _mhq getVariable "camo";
 _vectorHQ = vectorUp _mhq;
+_directionHQ = direction _mhq;
 _fobHQtype = [_mhq] call fn_getMHQType;
 
 //Wait a while - Parameter Specified Setup Delay
@@ -18,7 +19,7 @@ deleteVehicle _camo;
 
 //Create the FOB HQ
 _fobHQ = createVehicle [_fobHQtype, [0,0,0], [], 0, "NONE"];
-_fobHQ setDir direction _mhq;
+_fobHQ setDir _directionHQ;
 _fobHQ setVectorUp _vectorHQ;
 _fobHQ setPos _locationHQ;
 _fobHQ setVariable ["MHQState", 1, true];

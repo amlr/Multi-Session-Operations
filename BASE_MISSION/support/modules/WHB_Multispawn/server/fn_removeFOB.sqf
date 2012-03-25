@@ -1,10 +1,11 @@
 //needs to be done Server-side just in case the client machine disconnects or crashes during the parameter defined delay.
 // Author: WobbleyheadedBob aka CptNoPants
 
-private ["_fobHQ","_mhq","_mhqType","_locationHQ","_vectorHQ"];
+private ["_fobHQ","_mhq","_mhqType","_locationHQ","_vectorHQ","_directionHQ"];
 _fobHQ = _this select 0;
 _locationHQ = position _fobHQ;
 _vectorHQ = vectorUp _fobHQ;
+_directionHQ = direction _fobHQ;
 _mhqType = [_fobHQ] call fn_getMHQType;
 
 #ifdef RMM_JIPMARKERS
@@ -28,7 +29,7 @@ if (jipMarkers_enabled == 1) then
 
 //Create new MHQ
 _mhq = createVehicle [_mhqType, [0,0,0], [], 0, "NONE"];
-_mhq setDir direction _fobHQ;
+_mhq setDir _directionHQ;
 _mhq setVectorUp _vectorHQ;
 _mhq setPos _locationHQ;
 _mhq setVariable ["MHQState", 0, true];
