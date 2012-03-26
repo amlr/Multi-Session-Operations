@@ -2,13 +2,31 @@
 
 // ACE configuration
 if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
+
+	mps_ace_enabled = true;
 	enableEngineArtillery true;  //disable BI arty comp
-	Ace_sys_wounds_no_medical_gear = true;  //disable ACE adding medical items
-	ace_sys_wounds_noai = true;  //disable wounds for AI for performance
 	ace_sys_eject_fnc_weaponcheck = {};  //disable aircraft weapon removal
+	ace_sys_aitalk_radio_enabled = false;
+	ace_sys_repair_default_tyres = true;
+	ace_sys_tracking_markers_enabled = false;
 	[player,"ACE_KeyCuffs"] call CBA_fnc_addWeapon;
 	[player,"ACE_GlassesLHD_glasses"] call CBA_fnc_addWeapon;
 	[player,"ACE_Earplugs"] call CBA_fnc_addWeapon;
+	
+	// ACE WOUNDS
+
+	ace_sys_wounds_enabled = true;
+	Ace_sys_wounds_no_medical_gear = true;  //ACE adds medical items
+	ace_sys_wounds_noai = true;  //disable wounds for AI for performance
+	ACE_IFAK_Capacity = 6;  //medical gear slots
+	ace_sys_wounds_leftdam = 0; //damage left when healed in the field (def 0.07)
+	ace_sys_wounds_all_medics = true;  //everyone is a medic
+	ace_sys_wounds_ai_movement_bloodloss = true; 
+	ace_sys_wounds_player_movement_bloodloss = true;
+	ace_sys_wounds_auto_assist = true;  //non-medic AI help unconscious units in own group
+	ace_sys_wounds_auto_assist_any = false; //non-medic AI help unconscious units in other group
+	ace_sys_wounds_no_medical_vehicles = false;  //medical vehicles can be used for full heal
+
 };
 
 // ACRE Config and sync
@@ -58,9 +76,9 @@ if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
 
 // EOD Mod Configuration
 if (isNil "tup_ied_eod")then{tup_ied_eod = 1;};
-if (isServer) then {
-	if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1)) then {
-		
+
+if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1)) then {
+	if (isServer) then {		
 		// Add THOR 3 backpacks to ammo crates or ACRE_RadioBox
 		private ["_thors","_boxes","_crates","_boxmarkers","_crate","_number"];
 		_boxmarkers = ["ammo","ammo_1"];
@@ -80,32 +98,47 @@ if (isServer) then {
 		diag_log format ["Added %1 THOR III devices to %2 crate(s)", (count _thors) * (count playableunits), count _crates];
 		
 		// Add Loudspeaker to any vehicles nearby ammo markers
+		PV_EOD_Loudspeaker_Vehicles = [];
 		_speakernum = 1;
 		{
 			private ["_prob","_tits","_posx","_list"];
 			_tits = 0;
+			
 			_posx = markerPos _x;
 			if !(str (markerPos _x) == "[0,0,0]") then {
 				_prob = 0.7 + random 0.3;
 				// Create Loudspeaker logic
-				"reezo_eod_loudspeaker" createUnit [_posx, group BIS_functions_mainscope,
-					format["loudspeaker_%2 = this; this setVariable ['reezo_eod_range',[0,50]];
+/*				"reezo_eod_loudspeaker" createUnit [_posx, group BIS_functions_mainscope,
+					format["loudspeaker_%2 = this; this setVariable ['reezo_eod_range',[50,150]];
 					this setVariable ['reezo_eod_probability',%1];
 					this setVariable ['reezo_eod_interval',20];",_prob, _speakernum], 
-					0, ""];
+					0, ""];*/
 				// Find cars nearby
 				_list = nearestObjects [_posx, ["Car"], 150];
 				// Sync cars to loudspeaker
 				{
 					if ((_x isKindOf "Wheeled_APC") || (_x isKindOf "LandRover_Base") || (_x isKindOf "HMMWV_Base") || (_x isKindOf "BAF_Jackal2_BASE_D") || (_x isKindOf "UAZ_Base")) then {
-						call compile format ["loudspeaker_%1 synchronizeObjectsadd [_x];",_speakernum];
+//						call compile format ["loudspeaker_%1 synchronizeObjectsadd [_x];",_speakernum];
 						_tits = _tits + 1;
+						PV_EOD_Loudspeaker_Vehicles = PV_EOD_Loudspeaker_Vehicles + [_x];
 					};
 				} foreach _list;
 				diag_log format ["Synchronised %2 out of %1 possible cars to EOD Loudspeaker.", count _list, _tits];
 				_speakernum = _speakernum + 1;
 			};
 		} foreach _boxmarkers;
+		publicvariable "PV_EOD_Loudspeaker_Vehicles";
+	};
+	
+	// Add the addaction on the vehicles with Loudspeakers for each player
+	if (isMultiplayer && !isDedicated) then {
+		[] spawn { 
+			waitUntil {!isNull player && !isNil "PV_EOD_Loudspeaker_Vehicles"};
+			_prob = 0.7 + random 0.3;
+			{
+				_x addAction ['<t color="#FF9900">'+"Loudspeaker (Evacuate Civilians)"+'</t>', "x\eod\addons\eod\reezo_eod_action_loudspeaker_evacuate.sqf", [_x,[50,150],_prob,20], 0, false, true, "",""];
+			} foreach PV_EOD_Loudspeaker_Vehicles;
+		};
 	};
 };
 
@@ -127,7 +160,8 @@ if (isClass(configFile>>"CfgPatches">>"nielsen_cim")) then {
 		};
 		
 		// Create extraction helipad
-		_pos = [getmarkerpos "hospital", 0, 100, 20, 0, 3, 0] call BIS_fnc_findSafePos;
+		_pos = [getmarkerpos "ammo",200,0.1,20] call mps_getFlatArea;
+		_pos = [_pos, 0, 80, 20, 0, 2, 0] call BIS_fnc_findSafePos;
 		"HeliHCivil" createvehicle _pos;
 		_extractmarker = ["extraction", _pos, "Icon", [1, 1], "GLOBAL"] call CBA_fnc_createMarker;
 		
@@ -167,6 +201,7 @@ if (isClass(configFile>>"CfgPatches">>"nielsen_cim")) then {
 	
 	// Add JIP Code - add player group to CRM_ALLGroups
 	if !(isNull player) then {
+		waitUntil{!isNil "CRM_AllGroups"};
 		_grp = group player;
 		if !(_grp in CRM_AllGroups) then {
 			CRM_AllGroups = CRM_AllGroups + [_grp];
