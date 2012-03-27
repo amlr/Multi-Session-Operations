@@ -71,6 +71,11 @@ execNow "support\modules\WHB_Multispawn\main.sqf";
 execNow "support\modules\rmm_notebook\main.sqf";
 #endif
 
+#ifdef RMM_RECRUITMENT
+"Recruitment" call mso_core_fnc_initStat;
+execNow "support\modules\rmm_recruitment\main.sqf";
+#endif
+
 #ifdef RMM_TASKS
 "JIP Tasks" call mso_core_fnc_initStat;
 execNow "support\modules\rmm_tasks\main.sqf";	

@@ -190,6 +190,9 @@ class cfgFunctions {
 #ifdef RMM_LOGBOOK
 	#include <support\modules\rmm_logbook\functions.hpp>
 #endif
+#ifdef RMM_RECRUITMENT
+	#include <support\modules\rmm_recruitment\functions.hpp>
+#endif
 #ifdef RMM_LOGISTICS
 	#include <support\modules\rmm_logistics\functions.hpp>
 #endif
@@ -251,14 +254,7 @@ class cfgFunctions {
 	#include <support\modules\rmm_notebook\dialog.hpp>
 #endif
 #ifdef RMM_RECRUITMENT
-	#include <support\modules\rmm_recruitment\dialog_baf.hpp>
-	#include <support\modules\rmm_recruitment\dialog_us.hpp>
-	#include <support\modules\rmm_recruitment\dialog_ru.hpp>
-	#include <support\modules\rmm_recruitment\dialog_usmc.hpp>
-	#include <support\modules\rmm_recruitment\dialog_cz.hpp>
-	#include <support\modules\rmm_recruitment\dialog_gue.hpp>
-	#include <support\modules\rmm_recruitment\dialog_aaw.hpp>
-	#include <support\modules\rmm_recruitment\dialog_cwr2_us.hpp>
+	#include <support\modules\rmm_recruitment\dialog.hpp>
 	#include <support\modules\rmm_recruitment\TeamStatusDialog\TeamStatusDialog.hpp>
 #endif
 #ifdef RMM_TASKS
