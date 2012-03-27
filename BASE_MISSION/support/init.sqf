@@ -73,6 +73,7 @@ execNow "support\modules\rmm_notebook\main.sqf";
 
 #ifdef RMM_RECRUITMENT
 "Recruitment" call mso_core_fnc_initStat;
+execNow "support\modules\rmm_recruitment\main.sqf";
 #endif
 
 #ifdef RMM_TASKS
