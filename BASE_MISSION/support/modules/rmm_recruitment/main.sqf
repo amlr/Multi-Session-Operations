@@ -21,5 +21,7 @@ _type = "Man";
 // Get Classes
 {
 	_fac = _x;
-	tup_recruit_classes = tup_recruit_classes + [0,_fac,_type]call mso_core_fnc_findVehicleType;
+	tup_recruit_classes = tup_recruit_classes + [0,_fac,_type] call mso_core_fnc_findVehicleType;
 } foreach _faction;
+
+publicvariable "tup_recruit_classes";
