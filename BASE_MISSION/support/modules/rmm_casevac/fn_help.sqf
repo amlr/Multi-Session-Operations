@@ -84,4 +84,4 @@ _string = switch (_this select 0) do {
 	};
 	default {""};
 };
-hint parseText _string;
+hintsilent parseText _string;

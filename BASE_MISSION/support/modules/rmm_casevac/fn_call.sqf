@@ -1,4 +1,4 @@
-private ["_veh","_grp","_vehtype","_priority","_enemy","_patient","_equip","_startpos","_center","_mapsize","_chance","_debug","_armveh","_armvehtype","_speed","_behav","_cargo","_gunship","_invalid"];
+private ["_veh","_grp","_vehtype","_priority","_enemy","_patient","_equip","_startpos","_center","_mapsize","_chance","_debug","_armveh","_armvehtype","_speed","_behav","_cargo","_gunship","_invalid","_vehname","_hospital"];
 
 _debug = false;
 
@@ -50,26 +50,31 @@ switch(_cargo) do
     };
 };
 
-_grp = group player;
+_grp = creategroup (side player);
 _priority = (call (RMM_casevac_lines select 2)) select (lbCurSel 2);
 _patient = (call (RMM_casevac_lines select 7)) select (lbCurSel 7);
 _enemy = (call (RMM_casevac_lines select 5)) select (lbCurSel 5);
 _equip = (call (RMM_casevac_lines select 3)) select (lbCurSel 3);
+rmm_casevac_marker = (call (RMM_casevac_lines select 6)) select (lbCurSel 6);
 
 // Set startpos
-
+if (str (markerPos "hospital") != "[0,0,0]") then { 
+	_hospital = [markerpos "hospital", 0, 500, 15, 0, 0, 0, markerpos "hospital"] call BIS_fnc_findSafePos;
+} else {
+	_hospital = [markerpos "ammo", 0, 500, 15, 0, 0, 0,markerpos "ammo"] call BIS_fnc_findSafePos;
+};
 	
 // Work out odds of CASEVAC attending and set response parameters
 switch(_priority) do 
 {
     case "Urgent": {
         _chance = _chance + 0.25;
-		_startpos = [markerpos "hospital", 0, 50, 15, 0, 0, 0] call BIS_fnc_findSafePos;
+		_startpos = _hospital;
 		RMM_casevac_speed = "FULL";
     };
     case "Urgent Surgical": {
         _chance = _chance + 0.35;
-		_startpos = [markerpos "hospital", 0, 50, 15, 0, 0, 0] call BIS_fnc_findSafePos; // Could change to be within 2000m of players
+		_startpos = _hospital;
 		RMM_casevac_speed = "FULL";
 		RMM_casevac_behav = "CARELESS";
     };
@@ -140,13 +145,18 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 	
 	// Create aircraft at startpos, based on helicopter chosen
 	_vehtype = ([_cargo,faction player,"Helicopter"] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
+	// _startpos = [_startpos select 0, _startpos select 1, 1000];
 	_veh = ([_startpos, 0, _vehtype, _grp] call BIS_fnc_spawnVehicle) select 0;
 	
+	_vehname = getText (configFile >> "CfgVehicles" >> _vehtype >> "displayname");
+	
+	_callsign = ceil(random 9);
+	
 	// Hint details of CASEVAC
-	hintcadet format ["%1 (Call Sign: PEDRO ONE) requested to %2 by %3 for %4 CASEVAC of %5 personnel. %6 are expected. LZ will be marked with %7. Equipment requested: %8.", _vehtype , (call (RMM_casevac_lines select 0)) select (lbCurSel 0), _grp, _priority, _patient, _enemy, (call (RMM_casevac_lines select 6)) select (lbCurSel 6), _equip];
+	hint format ["%1 (Call Sign: PEDRO %9) requested to %2 by %3 for %4 CASEVAC of %5 personnel. %6 are expected. LZ will be marked with %7. Equipment requested: %8.", _vehname , (call (RMM_casevac_lines select 0)) select (lbCurSel 0), _grp, _priority, _patient, _enemy, (call (RMM_casevac_lines select 6)) select (lbCurSel 6), _equip, _callsign];
 		
 	// Log CASEVAC
-	diag_log format ["MSO-%9 CASEVAC: %1 requested to %2 by %3 for %4 CASEVAC of %5 personnel. %6 are expected. LZ will be marked with %7. Equipment requested: %8.", _vehtype , (call (RMM_casevac_lines select 0)) select (lbCurSel 0), _grp, _priority, _patient, _enemy, (call (RMM_casevac_lines select 6)) select (lbCurSel 6), _equip, time];
+	diag_log format ["MSO-%9 CASEVAC: %1 requested to %2 by %3 for %4 CASEVAC of %5 personnel. %6 are expected. LZ will be marked with %7. Equipment requested: %8.", _vehname , (call (RMM_casevac_lines select 0)) select (lbCurSel 0), _grp, _priority, _patient, _enemy, (call (RMM_casevac_lines select 6)) select (lbCurSel 6), _equip, time];
 	
 	// Confirm authorisation
 	[] spawn {
@@ -160,7 +170,8 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 		_gunship = ["AH64D","BAF_Apache_AH1_D","AH1Z","AH64D_EP1","UH1Y","AW159_Lynx_BAF","AH6J_EP1"];
 		_armvehtype = (_gunship) call BIS_fnc_selectRandom;
 		_armveh = ([position _veh, 0, _armvehtype, group _veh] call BIS_fnc_spawnVehicle) select 0;
-		diag_log format ["MSO-%1 CASEVAC: %2 providing armed escort", time, typeof _armveh];
+		_armavehname = getText (configFile >> "CfgVehicles" >> _armavehtype >> "displayname");
+		diag_log format ["MSO-%1 CASEVAC: %2 providing armed escort", time, _armavehname];
 		[2,_armveh,{_this flyinheight RMM_casevac_flyinheight - 100;}] call RMM_fnc_ExMP;
 		[2,_armveh,{_this lockdriver true;}] call mso_core_fnc_ExMP;
 		[2,_armveh,{
@@ -174,14 +185,14 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 						_x setskill 0.8;
 					} foreach (units (group _this));
 					sleep 10;
-					PAPABEAR sideChat format ["%1 this is PAPA BEAR. %2 will provide CAS for PEDRO. Over.", group player, typeof _this];
+					PAPABEAR sideChat format ["%1 this is PAPA BEAR. %2 will provide CAS for PEDRO. Over.", group player, _armavehname];
 					_wp = (group _this) addwaypoint [position player,0];
 					_wp setWaypointType "SAD";
 					_wp setWaypointBehaviour RMM_casevac_behav;
 					_wp setWaypointSpeed RMM_casevac_speed;
 					
 					waitUntil {sleep 3;(RMM_casevac_return) || !(alive _this)};
-					_hospital = [markerpos "hospital", 0, 50, 15, 0, 0, 0] call BIS_fnc_findSafePos;
+					_hospital = [markerpos "hospital", 0, 50, 15, 0, 0, 0,markerpos "hospital"] call BIS_fnc_findSafePos;
 					_wp = (group _this) addwaypoint [_hospital,0];
 					_wp setWaypointType "MOVE";
 					_wp setWaypointBehaviour RMM_casevac_behav;
@@ -194,7 +205,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 					
 					// Check for death of chopper
 					if !(alive _this) then {
-						hintcadet format ["CASEVAC: Armed Escort %1 has crashed!", typeof _this];
+						hint format ["CASEVAC: Armed Escort has crashed!", typeof _this];
 						diag_log format ["MSO-%2 CASEVAC: %1 has crashed!", typeof _this, time];
 					};
 					
@@ -213,64 +224,66 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 	};
 	
 	// Set fly in height
-	[2,_veh,{_this flyinheight RMM_casevac_flyinheight;}] call RMM_fnc_ExMP;	
+	[2,_veh,{_this flyinheight RMM_casevac_flyinheight;}] call mso_core_fnc_ExMP;	
 
 	// Lock driver of helicopter
 	[2,_veh,{_this lockdriver true;}] call mso_core_fnc_ExMP;
 
 	// Spawn vehicle and crew, set waypoint, do casevac
-	[2,_veh,{
+	[2,[_veh,_callsign],{
 		_this spawn {
-			private ["_lz","_marker","_wp","_hospital","_landend","_wounded","_medic","_destpos","_behav","_speed","_units","_mwp"];
-
-			if (alive _this) then 
+			private ["_lz","_wp","_hospital","_landend","_wounded","_medic","_destpos","_behav","_speed","_units","_mwp","_callsign","_unit"];
+			_unit = _this select 0;
+			_callsign = _this select 1;
+			if (alive _unit) then 
 			{
 				//Ensure CASEVAC doesn't engage targets during rescue
-				_this disableAI "TARGET";
-				_this disableAI "AUTOTARGET";
-				
-				// Set LZ marker
-				_marker = (call (RMM_casevac_lines select 6)) select (lbCurSel 6);
-				
+				_unit disableAI "TARGET";
+				_unit disableAI "AUTOTARGET";
+					
 				// Set endpos
-				if !(str (markerPos "hospital") == "[0,0,0]") then { 
-					_hospital = [markerpos "hospital", 0, 50, 15, 0, 0, 0] call BIS_fnc_findSafePos;
+				if (str (markerPos "hospital") != "[0,0,0]") then { 
+					_hospital = [markerpos "hospital", 0, 100, 15, 0, 0, 0,markerpos "hospital"] call BIS_fnc_findSafePos;
 				} else {
-					_hospital = [markerpos "ammo", 0, 50, 15, 0, 0, 0] call BIS_fnc_findSafePos;
+					_hospital = [markerpos "ammo", 0, 100, 15, 0, 0, 0,markerpos "ammo"] call BIS_fnc_findSafePos;
 				};
-
+				
 				// Check no players are crew members?
-				waitUntil {sleep 5;{isplayer _x} count (crew _this) == 0};
-				(crew _this) join (createGroup (side (driver _this)));
+				waitUntil {sleep 5;{isplayer _x} count (crew _unit) == 0};
+				(crew _unit) join (createGroup (side (driver _unit)));
 				{
 					_x setskill 0.8;
-				} foreach (units (group _this));
+				} foreach (units (group _unit));
 				
 				// Send Casevac to player's position or other location?
-				_destpos = [position player, 0, 50, 15, 0, 0, 0] call BIS_fnc_findSafePos;
-				_wp = (group _this) addwaypoint [_destpos,0];
+				_destpos = [position player, 0, 50, 15, 0, 0, 0, position player] call BIS_fnc_findSafePos;
+				_wp = (group _unit) addwaypoint [_destpos,10];
 				_wp setWaypointBehaviour RMM_casevac_behav;
 				_wp setWaypointSpeed RMM_casevac_speed;
 				
 				// Check for LZ marker	
-				waitUntil {sleep 3;( _this distance position player <= 600) || !(alive _this)};
-				if (alive _this) then {_this sideChat format ["%1 this is Pedro One. 600 meters out. Over.", group player];};
-				diag_log format ["MSO-%1 CASEVAC: Looking for LZ marker: %2", time, str _marker];
-				if (str _marker != "Nothing") then {
-					_this sideChat format ["%1 this is Pedro One. Mark LZ now. Over.", group player];
-					//Check for LZ marker and land near it - WIP
+				waitUntil {sleep 3;( _unit distance position player <= 600) || !(alive _unit) || damage _unit > 0.3};
+				if (alive _unit && damage _unit < 0.3) then {
+					_unit sideChat format ["%1 this is Pedro %2. 600 meters out. Over.", group player, _callsign];
+					diag_log format ["MSO-%1 CASEVAC: Looking for LZ marker: %2", time, rmm_casevac_marker];
+					if (rmm_casevac_marker != "Nothing") then {
+						_unit sideChat format ["%1 this is Pedro %3. Mark LZ now with %2. Over.", group player, rmm_casevac_marker, _callsign];
+						//Check for LZ marker and land near it - WIP
+						// Update _destpos based on location of marker
+						// Case statement for each looking for nearestobject
+					};
 				};
 				
 				// Setup Heli landing
 				_landEnd = "HeliHEmpty" createVehicle _destpos;
-				_this land "GET IN";
+				_unit land "GET IN";
 					
 				// Wait for helicopter landing
-				waitUntil {sleep 3;((position _this) select 2 <= 3) || !(alive _this)};
+				waitUntil {sleep 3;((position _unit) select 2 <= 3) || !(alive _unit) || damage _unit > 0.3};
 				
-				if (alive _this) then 
+				if (alive _unit && damage _unit < 0.3) then 
 				{
-					_this sideChat format ["%1 this is Pedro One. Touchdown. Over.", group player];
+					_unit sideChat format ["%1 this is Pedro %2. Touchdown. Over.", group player, _callsign];
 					
 					// Check for wounded (cannot stand) within 100m
 					_wounded = [];
@@ -281,7 +294,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 						};
 					} foreach _units;
 					
-					if (count _wounded > 0) then {_this sideChat format ["%1 this is Pedro One. Load the %2 wounded. Over.", group player, count _wounded];};
+					if (count _wounded > 0) then {_unit sideChat format ["%1 this is Pedro %3. Load the %2 wounded. Over.", group player, count _wounded, _callsign];};
 					
 					/*
 					// Crewman go pickup each wounded person (not already in helicopter) and put in helicopter
@@ -377,32 +390,33 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 					
 					// Waituntil wounded loaded then give the players 30 seconds to get in helicopter
 					if (count _wounded > 0) then {
-						waitUntil {sleep 3;{!(_x in _this)} count _wounded == 0};
-						_this sideChat format ["%1 this is Pedro One. Wounded now onboard. Over.", group player];
+						waitUntil {sleep 3;{!(_x in _unit)} count _wounded == 0};
+						_unit sideChat format ["%1 this is Pedro %2. Wounded now onboard. Over.", group player, _callsign];
 					};
 					
-					if (alive _this) then {
-						_this sideChat format ["%1 this is Pedro One. 30 seconds to dustoff. Over.", group player];
+					if (alive _unit) then {
+						_unit sideChat format ["%1 this is Pedro %2. 30 seconds to dustoff. Over.", group player, _callsign];
 						sleep 30;
 						deleteVehicle _landEnd;
 					};
 				};
 				
 				// Return to base
-				_wp = (group _this) addwaypoint [_hospital,0];
+				
+				_wp = (group _unit) addwaypoint [_hospital,0];
 				_wp setWaypointBehaviour RMM_casevac_behav;
 				_wp setWaypointSpeed RMM_casevac_speed;
 				RMM_casevac_return = true;
-				waitUntil {sleep 3;( _this distance _hospital <= 500) || !(alive _this)};
+				waitUntil {sleep 3;( _unit distance _hospital <= 600) || !(alive _unit) || damage _unit > 0.3};
 				
 				// Setup Heli landing
 				_landEnd = "HeliHEmpty" createVehicle _hospital;
-				_this land "GET OUT";
+				_unit land "GET OUT";
 				
-				waitUntil {sleep 3;((position _this) select 2 <= 3) || !(alive _this)};
-				if (alive _this) then {
+				waitUntil {sleep 3;((position _unit) select 2 <= 3) || !(alive _unit) || damage _unit > 0.3};
+				if (alive _unit && damage _unit < 0.3) then {
 					
-					_this sideChat format ["%1 this is Pedro One. Arrived at Field Hospital. Over.", group player];
+					_unit sideChat format ["%1 this is Pedro %2. Arrived at Field Hospital. Over.", group player, _callsign];
 					
 					/*
 					// Get Out, carry wounded to hospital
@@ -429,25 +443,25 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 					};*/
 				
 					// Wait for any players to getout
-					waitUntil {sleep 5;{(_x in _this)} count _wounded == 0};
-					_this sideChat format ["%1 this is Pedro One. Wounded have been moved to the field hospital. We are RTB. Over.", group player];
-					waitUntil {sleep 5;{isplayer _x} count (crew _this) == 0};
+					waitUntil {sleep 5;{(_x in _unit)} count _wounded == 0};
+					_unit sideChat format ["%1 this is Pedro %2. Wounded have been moved to the field hospital. We are RTB. Over.", group player, _callsign];
+					waitUntil {sleep 5;{isplayer _x} count (crew _unit) == 0};
 					
 					deleteVehicle _landEnd;
 				};
 				
 				// Fly away
-				(group _this) addwaypoint [[0,0,0],0];
-				waitUntil {sleep 5;( _this distance player > 1500) || !(alive _this)};
+				(group _unit) addwaypoint [[0,0,0],0];
+				waitUntil {sleep 5;( _unit distance player > 1500) || !(alive _unit) || damage _unit > 0.3};
 				
 				// Check for death of chopper
-				if !(alive _this) then {
-					hintcadet format ["CASEVAC: %1 has crashed!", typeof _this];
-					diag_log format ["MSO-%2 CASEVAC: %1 has crashed!", typeof _this, time];
+				if !(alive _unit || damage _unit > 0.3) then {
+					hint format ["CASEVAC: PEDRO %1 has crashed!", _callsign];
+					diag_log format ["MSO-%2 CASEVAC: %1 has crashed!", typeof _unit, time];
 				};
 				
 				// Delete Chopper
-				_this call CBA_fnc_deleteEntity;
+				_unit call CBA_fnc_deleteEntity;
 				RMM_casevac_active = false;
 			};
 		};
