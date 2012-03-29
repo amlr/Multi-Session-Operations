@@ -42,7 +42,7 @@ if ((!((LDL_weaponSlots select _weapon)select 3)) && (((LDL_weaponSlots select _
 				_pos = getPos _hellfire;
 				deleteVehicle _hellfire;
 				
-				[LDL_logic_object,[0,0,0],_pos,1,"Sh_125_HE",0.1]spawn LDL_hellfire;	
+				[LDL_logic_object,[0,0,0],_pos,1,"M_Hellfire_AT",0.1]spawn LDL_hellfire;	
 			}
 			else
 			{
