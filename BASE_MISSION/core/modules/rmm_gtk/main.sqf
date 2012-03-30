@@ -1,5 +1,7 @@
 private ["_groups","_range","_type","_sleep","_array","_forEachIndex","_functions","_fnc_init"];
 
+if !(isServer) exitWith {};
+
 if(isNil "gtk_cache_header") then { gtk_cache_header = 1; };
 if(gtk_cache_header == 0) exitWith{};
 
