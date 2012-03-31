@@ -83,14 +83,14 @@ BIS_silvie_mainscope setVariable ["vehicleInit",{
 		_this setDamage (random 0.5)^2;	// Up to 25% worn out
 //                _this setDamage (random 0.5);
         };
-
+#ifdef TUP_IED
 		// 10% (set in params) chance its a VB-IED (radio controlled if EOD) - never a bike
 		if (isNil "tup_vbied_threat")then{tup_vbied_threat = 5;};
 		If ((random 100 < tup_vbied_threat) && (tup_vbied_threat > 0) && !(_this iskindOf  "Motorcycle")) then {
 			_this lock true;
 			[_this,true] execvM "enemy\modules\tup_ied\vbied.sqf";
 		};
-		
+#endif
         _this addEventHandler ["Engine", {
                 if(_this select 1) then {
                         driver (_this select 0) addRating -400;
@@ -102,7 +102,7 @@ BIS_silvie_mainscope setVariable ["vehicleInit",{
         {
                 _this setHit [_x,(random 0.75)^3];
         } forEach _zgb_hitparts_car;	// Up to 42,1875% worn out
-}, true];
+}];
 
 // when creating car around building, if there is some road closer than this value, vehicle will be attached to this road instead of to building. 
 // BIS_silvie_mainscope setVariable ["roadDistance",25]; 

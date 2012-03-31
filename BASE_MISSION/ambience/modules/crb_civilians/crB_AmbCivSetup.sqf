@@ -62,6 +62,13 @@ switch toLower(worldName) do {
                 BIS_alice_mainscope setVariable ["civilianCount","round (5 * (sqrt %1))"];   
                 [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
         };       
+        case "lingor": { 
+                BIS_alice_mainscope setvariable ["trafficDistance", 500];
+                BIS_alice_mainscope setvariable ["spawnDistance", 400]; 
+                BIS_alice_mainscope setVariable ["townsFaction", ["CIV_AFR"]]; 
+                BIS_alice_mainscope setVariable ["civilianCount", "round (1.5 * (sqrt %1))"]; 
+                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf"; 
+        }; 
         case "takistan": {   
                 BIS_alice_mainscope setvariable ["trafficDistance",1000];      
                 BIS_alice_mainscope setvariable ["spawnDistance",700];        
