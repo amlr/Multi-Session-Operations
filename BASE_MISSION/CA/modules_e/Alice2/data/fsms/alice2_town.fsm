@@ -299,12 +299,12 @@ class FSM
        "		};" \n
        "		// From Rommel" \n
        "		// http://forums.bistudio.com/showthread.php?t=101935" \n
-       "/*" \n
+       "" \n
        "		private [""_i""];" \n
        "		for ""_i"" from 0 to 7 do {" \n
        "			_x animate [""dvere"" + str _i, random 1];" \n
        "		};" \n
-       "*/" \n
+       "" \n
        "	} foreach _houselistRaw;" \n
        "	_twn setvariable [""ALICE_houselist"",_houselist];" \n
        "};" \n
