@@ -4,11 +4,21 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
+//All client should have the Functions Manager initialized, to be sure.
+if (isnil "BIS_functions_mainscope") then {
+        createCenter sideLogic;
+        (createGroup sideLogic) createUnit ["FunctionsManager", [0,0,0], [], 0, "NONE"];
+};
+
+waitUntil{!isNil "BIS_fnc_init"};
+
+diag_log format["MSO-%1 Version: %2", time, "4.30"];
+
 //Create the comms menu on all machines.
 [] call BIS_fnc_commsMenuCreate; 
 
 // Add briefing for MSO
-_nul = [] execVM "core\scripts\briefing.sqf";
+[] execVM "core\scripts\briefing.sqf";
 
 //http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];

@@ -2,10 +2,6 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
-waitUntil{!isNil "BIS_fnc_init"};
-
-diag_log format["MSO-%1 Version: %2", time, "4.20"];
-
 execNow "core\init.sqf";
 execNow "ambience\init.sqf";
 execNow "support\init.sqf";
