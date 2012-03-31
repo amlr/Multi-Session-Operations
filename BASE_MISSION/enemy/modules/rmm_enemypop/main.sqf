@@ -12,7 +12,7 @@
 private ["_debug","_d","_camp","_flag"];
 if(!isServer) exitWith{};
 
-_debug = false;
+_debug = true;
 if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 3;};
 if(isNil "rmm_ep_spawn_dist")then{rmm_ep_spawn_dist = 2000;};
 if(isNil "rmm_ep_safe_zone")then{rmm_ep_safe_zone = 2000;};
@@ -29,8 +29,7 @@ ep_campprob = 0.25;
 rmm_ep_getFlatArea = {
         // Written by BON_IF
         
-        private ["_position","_radius","_pos","_maxgradient","_gradientarea","_debug"];
-        
+        private ["_position","_radius","_pos","_maxgradient","_gradientarea"];
         _position = _this select 0;
         if(count _this > 1) then {_radius = _this select 1;} else {_radius = 2;};
         if(count _this > 2) then {_maxgradient = _this select 2} else {_maxgradient = 0.1};   // in [0,1]
@@ -62,7 +61,7 @@ rmm_ep_getFlatArea = {
         };
 };
 if(count _pos == 0) then{_pos = [(_position select 0) + _radius - random (2*_radius),(_position select 1) + _radius - random (2*_radius),0];
-if (_debug) then {diag_log format["MSO-%1 RMM GETFLATAREA defaulting to original pos: %2", time, _pos]};
+if (_debug) then {diag_log format["MSO-%1 RMM GETFLATAREA defaulting to original pos after 10000 trys: %2", time, _pos]};
 };
 
 _pos;
