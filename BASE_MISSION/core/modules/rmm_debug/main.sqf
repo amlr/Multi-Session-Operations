@@ -4,6 +4,7 @@ if (!isdedicated) then {
 };
 
 displayStats = {
+        private ["_maxF","_avgF","_minF","_maxU","_avgU","_curU"];
 	_maxF = CRBSERVERFPS select 0;
 	_avgF = CRBSERVERFPS select 1;
 	_minF = CRBSERVERFPS select 2;
