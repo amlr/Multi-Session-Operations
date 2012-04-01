@@ -27,7 +27,7 @@ if (isNil "tup_suicide_threat")then{tup_suicide_threat = 10;};
 
 	if (({(getpos _x distance _pos) < _size} count ([] call BIS_fnc_listPlayers) == 0) && ((_pos distance getmarkerpos "ammo") > 250) && ((_pos distance getmarkerpos "ammo_1") > 250)) then {		
 		_fate = random 100;
-		if (_fate < tup_suicide_threat) then {
+		if (_fate < tup_suicide_threat && ambientCivs == 1) then {
 			// Place Suicide Bomber trigger
 			_trg = createTrigger["EmptyDetector",getpos _twn]; 
 			_trg setTriggerArea[(_size+250),(_size+250),0,false];
