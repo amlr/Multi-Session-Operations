@@ -12,7 +12,9 @@
 	Executed from init.sqf.
 */
 
-player createDiaryRecord ["Diary", ["Multi-Session Operations", 
+player createDiarySubject ["msoPage","MSO"];
+
+player createDiaryRecord ["msoPage", ["About", 
 "<br/>DESCRIPTION<br/>
 ===========<br/><br/>
 The Multi-Session Operation (MSO) is the ultimate in reality-based gameplay; it is a persistent mission simulating real-life warfare to the best of our capabilities.<br/><br/>
@@ -23,7 +25,7 @@ You have limited number of lives; after which you will be kicked from the server
 Check your tasks and the notes section for after action reports, upcoming missions and recon information.<br/><br/>
 
 <t size=2 align=left>Who with?</t><br/>
-Join our teamspeak 3 channel (ts.ausarma.org) to meet up with others on the map, or use the ingame VOIP. If you have skype, send your account name to an AAF/AEF CTB member and you will be added to the MSO conversation.</t><br/><br/>
+Join our teamspeak 3 channel (ts.ausarma.org) to meet up with others on the map, or use the ingame VOIP. If you have skype, send your account name to an AAF/AEF CTB member and you will be added to the MSO conversation.<br/><br/>
  
 CREDITS
 ========<br/><br/>

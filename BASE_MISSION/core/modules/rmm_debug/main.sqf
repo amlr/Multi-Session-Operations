@@ -5,12 +5,12 @@ if (!isdedicated) then {
 
 displayStats = {
         private ["_maxF","_avgF","_minF","_maxU","_avgU","_curU"];
-	_maxF = CRBSERVERFPS select 0;
-	_avgF = CRBSERVERFPS select 1;
-	_minF = CRBSERVERFPS select 2;
-	_maxU = CRBSERVERFPS select 3;
-	_avgU = CRBSERVERFPS select 4;
-	_curU = CRBSERVERFPS select 5;
+	_maxF = _this select 0;
+	_avgF = _this select 1;
+	_minF = _this select 2;
+	_maxU = _this select 3;
+	_avgU = _this select 4;
+	_curU = _this select 5;
 	hint format["Server FPS(Max/Avg/Min): %1/%2/%3\nUnits(Max/Avg/Cur): %4/%5/%6\nGroups: %7", _maxF, _avgF, _minF, _maxU, _avgU, _curU, count allGroups];
 	diag_log format["CRBSERVERFPS,%1,%2,%3,%4,%5,%6,%7,%8", time, _maxF, _avgF, _minF, _maxU, _avgU, _curU, count allGroups];
 };	
@@ -70,13 +70,7 @@ if(isServer && debug_serverfps != 0) then{
 			_avgU = (_avgU *  _i + _allunits) / (_i + 1);
 			_i = _i + 1;
 			
-			CRBSERVERFPS = [_fpsmax, _fpsavg, _fpsmin, _maxU, _avgU, _allunits];
-			publicVariable "CRBSERVERFPS";
-			call displayStats;
+			[0, [_fpsmax, _fpsavg, _fpsmin, _maxU, _avgU, _allunits], displayStats] call mso_core_fnc_ExMP;
 		};
 	};
-};
-
-"CRBSERVERFPS" addPublicVariableEventHandler {
-	call displayStats;
 };

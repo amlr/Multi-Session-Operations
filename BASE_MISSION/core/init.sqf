@@ -4,6 +4,8 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
+private ["_uid"];
+
 //All client should have the Functions Manager initialized, to be sure.
 if (isnil "BIS_functions_mainscope") then {
         createCenter sideLogic;
@@ -18,36 +20,10 @@ diag_log format["MSO-%1 Version: %2", time, "4.30"];
 [] call BIS_fnc_commsMenuCreate; 
 
 // Add briefing for MSO
-[] execVM "core\scripts\briefing.sqf";
+execNow  "core\scripts\briefing.sqf";
 
 //http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];
-
-MSO_Loop_Funcs = [];
-MSO_useCBA = false;
-
-// Thanks to Nou for this code
-[] spawn {
-        if(!MSO_useCBA) then {
-                if(!isDedicated) then {
-                        waitUntil { player == player && alive player };
-                };
-                waitUntil {
-		        private ["_f","_delta"];
-                        {
-                                if((count _x) > 0) then {
-                                        _f = _x select 0;
-                                        _delta = _x select 1;
-                                        if(diag_tickTime >= _delta) then {
-                                                [(_f select 2), _forEachIndex] call (_f select 0);
-                                                _x set[1, diag_tickTime + (_f select 1)];
-                                        };
-                                };
-                        } forEach MSO_Loop_Funcs;
-                        false;
-                };
-        };
-};
 
 CRB_MAPCLICK = "";
 
@@ -69,37 +45,29 @@ CRB_MAPCLICK = "";
 };
 
 mso_menuname = "Multi-Session Operations";
-mso_interaction_key = if (!isNil "ace_sys_interaction_key_self") then {
-        ace_sys_interaction_key_self
-} else {
-        [221,[false,false,false]]
-};
+mso_interaction_key = [221,[false,false,false]];
 
-mso_fnc_hasRadio = if (!isNil "ACE_fnc_hasRadio") then {
-        {if(player call ACE_fnc_hasRadio) then {true} else {hint "You require a radio.";false;};}
-} else {
+mso_fnc_hasRadio = {
+        // Thanks Sickboy
+        private ["_hasRadio"];
+        _hasRadio = false; 
         {
-		// Thanks Sickboy
-		_hasRadio = false; 
-		{
-			if (getText(configFile >> "CfgWeapons" >> _x >> "simulation") == "ItemRadio") exitWith { _hasRadio = true };
-		} forEach (weapons player);
-		if(_hasRadio) then {true} else {hint "You require a radio.";false;};
-	}
+                if (getText(configFile >> "CfgWeapons" >> _x >> "simulation") == "ItemRadio") exitWith { _hasRadio = true };
+        } forEach (weapons player);
+        if(_hasRadio) then {true} else {hint "You require a radio.";false;};
 };
 
 "Custom Locations(" + worldName + ")" call mso_core_fnc_initStat;
-waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
 "Mission Parameters" call mso_core_fnc_initStat;
 if (!isNil "paramsArray") then {
-	diag_log format["MSO-%1 Mission Parameters", time];
+        diag_log format["MSO-%1 Mission Parameters", time];
         for "_i" from 0 to ((count paramsArray)-1) do {
                 missionNamespace setVariable [configName ((missionConfigFile/"Params") select _i),paramsArray select _i];
-		diag_log format["MSO-%1    %2 = %3", time, configName ((missionConfigFile/"Params") select _i), paramsArray select _i];
+                diag_log format["MSO-%1    %2 = %3", time, configName ((missionConfigFile/"Params") select _i), paramsArray select _i];
         };
 };
 
@@ -162,11 +130,11 @@ execNow "core\modules\DRN_weather\CommonLib.sqf";
 execNow "core\modules\rmm_settings\main.sqf";	
 #else
 if(isDedicated) then {
-	setViewDistance 5000;
-	setTerrainGrid 25;
+        setViewDistance 5000;
+        setTerrainGrid 25;
 } else {
-	setViewDistance 2500;
-	setTerrainGrid 50;
+        setViewDistance 2500;
+        setTerrainGrid 50;
 };
 #endif
 
@@ -178,10 +146,10 @@ execNow "core\modules\spyder_onu\main.sqf";
 "Remove Destroyed Objects" call mso_core_fnc_initStat;
 //--- Is Garbage collector running?
 if (isnil "BIS_GC") then {
-	BIS_GC = (group BIS_functions_mainscope) createUnit ["GarbageCollector", position BIS_functions_mainscope, [], 0, "NONE"];
+        BIS_GC = (group BIS_functions_mainscope) createUnit ["GarbageCollector", position BIS_functions_mainscope, [], 0, "NONE"];
 };
 if (isnil "BIS_GC_trashItFunc") then {
-	BIS_GC_trashItFunc = compile preprocessFileLineNumbers "ca\modules\garbage_collector\data\scripts\trashIt.sqf";
+        BIS_GC_trashItFunc = compile preprocessFileLineNumbers "ca\modules\garbage_collector\data\scripts\trashIt.sqf";
 };
 waitUntil{!isNil "BIS_GC"};
 BIS_GC setVariable ["auto", true];
