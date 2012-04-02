@@ -175,7 +175,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         };
                                         // Check to see if Enemy sets up AA site
                                         if ((random 1 > 0.5) || _debug) then {
-                                                [_pos, "static", 1 + random 2] execVM "enemy\scripts\TUP_spawnAA.sqf";
+                                                [_pos, "static", 1 + random 1] execVM "enemy\scripts\TUP_spawnAA.sqf";
                                         };
                                         ep_groups set [count ep_groups, _group];
                                 };
@@ -256,8 +256,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											ep_groups set [count ep_groups, _grp2];
 									};
 									// Check to see if Enemy sets up AA defense
-									if ((random 1 > 0.5) || _debug) then {
-											[_pos, "mixed", 1 + random 4] execVM "enemy\scripts\TUP_spawnAA.sqf";
+									if ((random 1 > 0.6) || _debug) then {
+											[_pos, "mixed", 1 + random 2] execVM "enemy\scripts\TUP_spawnAA.sqf";
 									};
 									ep_groups set [count ep_groups, _group];
 							};
