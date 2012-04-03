@@ -36,6 +36,10 @@ if (isNil "_fac") then { _fac = east; };
 // init BIS funcs
 waitUntil {!isNil "bis_fnc_init"}; 
 
+if (isnil "mso_core_fnc_randomgroupbytype") then {
+mso_core_fnc_randomgroupbytype = compile preprocessFileLineNumbers "core\functions\common\fn_randomgroupbytype.sqf";
+};
+
 _facs = [];
 _side = nil;
 // get all factions
@@ -108,7 +112,9 @@ if(!isNil "_facs") then {
         
         _facs = _facx;
 };
-if (count _facs == 0) exitWith{nil;};
+
+//checking if there are factions with groupconfigs and if no are there using fn_randomspawnbytype
+if !(count _facs == 0) then {
 //hint format["FACS2: %1", _facs];
 
 // pick random faction and validate
@@ -141,6 +147,7 @@ _s = switch(_side) do {
         case civilian: {"Civilian";};
         default {str _side;};
 };
+
 //hint str _s;
 _grpx = count(configFile >> "CfgGroups" >> _s >> _fac >> _type);
 for "_y" from 1 to _grpx - 1 do {
@@ -165,6 +172,14 @@ if(_side == civilian) then {
 
 //player globalChat format["type: %1 fac: %2", _type, _fac];
 
+} else {
+    //randomspawnbytype
+    _side = EAST;
+	diag_log format ["MSO-%1 fn_randomgroup defaulting fnc_randomgroupbytype", time];
+    _spawnGrp = [_pos,_side,_type] call mso_core_fnc_randomgroupbytype;
+};
+
 CRBPROFILERSTOP
 
+if (isnil "_spawnGrp") then {diag_log format ["MSO-%1 fn_randomgroup failed, no _group created", time]};
 _spawnGrp;
