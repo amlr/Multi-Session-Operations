@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////////////
 // Function file for Armed Assault
 // Created by: BIS
-// Customised for OA by (AEF)Wolffy.au [CTB]
+// Customised for OA by (AEF)Wolffy.au
 // Created: 20110315
 // Contact: http://dev-heaven.net/projects/mip
 // Purpose: Enable house effects for ALICE2 module

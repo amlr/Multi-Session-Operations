@@ -6,7 +6,7 @@ diff -rupN BASE_MISSION\/ambience/modules/crb_civilians/crB_AmbCivSetup.sqf A2Fr
 +
  //////////////////////////////////////////////////////////////////
  // Function file for Armed Assault
- // Created by: (AEF)Wolffy.au [CTB]
+ // Created by: (AEF)Wolffy.au
 @@ -11,6 +13,7 @@ if(!isServer) exitWith{};
  waitUntil{!isNil "BIS_fnc_init"};
  waitUntil{!isNil "BIS_alice_mainscope"};
@@ -338,7 +338,7 @@ diff -rupN BASE_MISSION\/core/scripts/intro.sqf A2Free_MISSION\/core/scripts/int
  hint parsetext "<t size=2 align=left>MSO (FAQ)</t><t align=left><br/>
 @@ -6,6 +7,9 @@ You have limited number of lives; after 
  <t size=2 align=left>What Now?</t><br/>Check your tasks and the notes section for after action reports, upcoming missions and recon information.<br/><br/>
- <t size=2 align=left>Who with?</t><br/>Join our teamspeak 3 channel (ts.ausarma.org) to meet up with others on the map, or use the ingame VOIP. If you have skype, send your account name to an AAF/AEF CTB member and you will be added to the MSO conversation.</t>";
+ <t size=2 align=left>Who with?</t><br/>Join our teamspeak 3 channel (ts.ausarma.org) to meet up with others on the map, or use the ingame VOIP. If you have skype, send your account name to an AAF/AEF member and you will be added to the MSO conversation.</t>";
  sleep 10;
 -["Multi-Session","Operation"] call BIS_fnc_infoText;
 -["by the MSO", "Development Team"] call BIS_fnc_infoText;

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////
 // Function file for Armed Assault
-// Created by: (AEF)Wolffy.au [CTB]
+// Created by: (AEF)Wolffy.au
 // Created: 20090930
 // Modified: 20101027
 // Contact: http://creobellum.org

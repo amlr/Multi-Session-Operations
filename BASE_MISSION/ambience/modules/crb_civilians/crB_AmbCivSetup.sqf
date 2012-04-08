@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////
 // Function file for Armed Assault
-// Created by: (AEF)Wolffy.au [CTB]
+// Created by: (AEF)Wolffy.au
 // Created: 20110315
 // Modified: 20110926
 // Contact: http://dev-heaven.net/projects/mip
