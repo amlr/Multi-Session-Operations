@@ -38,13 +38,16 @@
 			case 2: {
 				"RU";
 			};
-			case 3: {
+            case 3: {
+				"GUE";
+			};
+			case 4: {
 				"cwr2_ru";
 			};
-            case 4: {
+            case 5: {
 				"cwr2_fia";
 			};
-            case 5: {
+            case 6: {
 				"tigerianne";
 			};
 	};
@@ -54,8 +57,14 @@
 			case 0: {
 				"BIS_TK_INS";
 			};
-			case 1: {
+            case 1: {
+				"BIS_TK_GUE";
+			};
+			case 2: {
 				"INS";
+			};
+            case 3: {
+				"GUE";
 			};
 	};
         

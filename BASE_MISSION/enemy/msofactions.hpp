@@ -66,3 +66,22 @@
 		texts[]= {"false","true"}; 
 		default = DEFAULT_tigerianne;
 	};
+	class faction_ibr_arl_faction {
+		title = "    Enable ARL Rebels Lingor"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = DEFAULT_ibr_arl_faction;
+	};
+	class faction_ibr_drg_faction {
+		title = "    Enable Druglords Army Lingor"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = DEFAULT_ibr_drg_faction;
+	};
+		class faction_NLA {
+		title = "    Enable Iranian Forces"; 
+		values[]= {0,1}; 
+		texts[]= {"false","true"}; 
+		default = DEFAULT_NLA;
+	};
+

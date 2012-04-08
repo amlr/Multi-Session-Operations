@@ -2,7 +2,7 @@ if(count mps_loc_hills < 1) exitWith{};
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_tower.sqf"];
 
-private["_location","_position","_taskid","_tower"];
+private["_location","_position","_taskid","_tower","_guards"];
 
 _location = (mps_loc_hills call mps_getRandomElement);
 
@@ -21,6 +21,14 @@ _troops = [];
 
 _tower = "Land_Vysilac_FM" createVehicle _position;
 [_tower] spawn mps_object_c4only;
+
+_guards = nil;
+
+while {isNil "_guards"} do {
+     _guards = [_position, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
+};
+[_guards] call BIN_fnc_taskDefend;
+_troops = _troops + (units _guards);
 
 _grp = [_position,"INS",(3 + random 3),50] call CREATE_OPFOR_SQUAD;
 (_grp addWaypoint [_position,20]) setWaypointType "HOLD";

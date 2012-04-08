@@ -24,15 +24,15 @@ class MISSIONCOUNT { // MISSION COUNT
 };
 class PO2_EFACTION { // ENEMY FACTION
 	title="        Enemy Faction";
-	values[]={0,1,2,3,4,5};
+	values[]={0,1,2,3,4,5,6};
 	default=0;
-	texts[]={"Takistani Army","Takistani Guerillas","Russia","CWR2 RU","CWR2 FIA","Tigerianne"};
+	texts[]={"Takistani Army","Takistani Guerillas","Russia","Guerillas","CWR2 RU","CWR2 FIA","Tigerianne"};
 };
 class PO2_IFACTION { // INS FACTION
 	title="        Insurgents Faction";
-	values[]={0,1};
+	values[]={0,1,2,3};
 	default=0;
-	texts[]={"Takistani Insurgents","European Insurgents"};
+	texts[]={"Takistani Insurgents","Takistani Guerillas","European Insurgents","Guerillas"};
 };
 class MISSIONDIFF { // MISSION Difficulty
 	title="        Difficulty";

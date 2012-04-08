@@ -80,6 +80,8 @@ CRB_fnc_createShepherd = {
 			"cwr2_Civilian8"
                 ];
         };
+
+	if (count _shepherdClasses < 1) then {_shepherdClasses = _shepherdClasses + ["TK_CIV_Takistani01_EP1"]};
         
         _shepherdClass = _shepherdClasses call BIS_fnc_selectRandom;
         _shepherd = (createGroup civilian) createUnit [_shepherdClass, _pos, [], _dist, "NONE"];

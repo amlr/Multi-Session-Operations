@@ -38,6 +38,7 @@ PO_teamleads = [
 	"US_Soldier_SL_EP1",
 	"USMC_Soldier_SL",
 	"USMC_Soldier_TL",
+	"FR_R",
 	"RU_Soldier_SL",
 	"RU_Soldier_TL",
 	"GUE_Soldier_CO",

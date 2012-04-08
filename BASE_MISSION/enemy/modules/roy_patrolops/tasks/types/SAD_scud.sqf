@@ -2,7 +2,7 @@ if(count mps_loc_towns < 1) exitWith{};
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_scud.sqf"];
 
-private["_location","_position","_taskid","_object","_vehtype","_target1"];
+private["_location","_position","_taskid","_object","_vehtype","_target1","_guards"];
 
 _location = (mps_loc_towns call mps_getRandomElement);
 
@@ -31,6 +31,15 @@ _vehtype = getText (configFile >> "CfgVehicles" >> typeof _target1  >> "displayN
 
 
 _troops = [];
+
+_guards = nil;
+
+while {isNil "_guards"} do {
+     _guards = [_position, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
+};
+[_guards] call BIN_fnc_taskDefend;
+_troops = _troops + (units _guards);
+
 _b = (2 max (round (random (playersNumber (SIDE_A select 0) / 3)))) * MISSIONDIFF;
 for "_i" from 1 to _b do {
 	_grp = [_position,"INF",(5 + random 5),50,"patrol"] call CREATE_OPFOR_SQUAD;

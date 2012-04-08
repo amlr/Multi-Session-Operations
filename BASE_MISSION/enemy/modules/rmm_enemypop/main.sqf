@@ -12,7 +12,7 @@
 private ["_debug","_d","_camp","_flag"];
 if(!isServer) exitWith{};
 
-_debug = true;
+_debug = false;
 if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 3;};
 if(isNil "rmm_ep_spawn_dist")then{rmm_ep_spawn_dist = 2000;};
 if(isNil "rmm_ep_safe_zone")then{rmm_ep_safe_zone = 2000;};

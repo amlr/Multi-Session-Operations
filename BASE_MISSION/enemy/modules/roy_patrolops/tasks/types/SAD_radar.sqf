@@ -2,7 +2,7 @@ if(count mps_loc_towns < 1) exitWith{};
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_radar.sqf"];
 
-private["_location","_position","_taskid","_object","_grp","_stance ","_b","_camptype","_troops"];
+private["_location","_position","_taskid","_object","_grp","_stance ","_b","_camptype","_troops","_guards"];
 
 _location = (mps_loc_towns call mps_getRandomElement);
 
@@ -27,6 +27,14 @@ _newComp = [_position,random 360,_camptype] call BIS_fnc_dyno;
 
 _radartower = nearestObjects[_position,["76n6ClamShell","76n6ClamShell_EP1","BASE_WarfareBAntiAirRadar"],100];
 _radartower spawn mps_object_c4only;
+
+_guards = nil;
+
+while {isNil "_guards"} do {
+     _guards = [_position, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
+};
+[_guards] call BIN_fnc_taskDefend;
+_troops = _troops + (units _guards);
 
 for "_i" from 1 to _b do {
 	_grp = [_position,"INF",(5 + random 5),50,"patrol"] call CREATE_OPFOR_SQUAD;

@@ -54,6 +54,18 @@ if(isNil "faction_tigerianne") then {faction_tigerianne = DEFAULT_tigerianne;};
 if(faction_tigerianne == 1) then {
         MSO_FACTIONS = MSO_FACTIONS + ["tigerianne"];
 };
+if(isNil "faction_ibr_arl_faction") then {faction_ibr_arl_faction = DEFAULT_ibr_arl_faction;};
+if(faction_ibr_arl_faction == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["ibr_arl_faction"];
+};
+if(isNil "faction_ibr_drg_faction") then {faction_ibr_drg_faction = DEFAULT_ibr_drg_faction;};
+if(faction_ibr_drg_faction == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["ibr_drg_faction"];
+};
+if(isNil "faction_NLA") then {faction_NLA = DEFAULT_NLA;};
+if(faction_NLA == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["NLA"];
+};
 
 if(count MSO_FACTIONS == 0) then {
         

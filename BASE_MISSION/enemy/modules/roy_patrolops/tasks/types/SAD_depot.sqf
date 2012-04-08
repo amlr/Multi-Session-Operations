@@ -2,7 +2,7 @@ if(count mps_loc_towns < 1) exitWith{PAPABEAR sideChat format ["%1 this is PAPA 
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_depot.sqf"];
 
-private["_location","_position","_taskid","_object","_grp","_stance ","_b","_camptype","_troops"];
+private["_location","_position","_taskid","_object","_grp","_stance ","_b","_camptype","_troops","_guards"];
 
 _location = (mps_loc_towns call mps_getRandomElement);
 
@@ -24,6 +24,14 @@ _camptype = "FuelDump1_RU";
 if(mps_oa) then {_camptype = "FuelDump1_TK_EP1";};
 
 _newComp = [_position,random 360,_camptype] call BIS_fnc_dyno;
+
+_guards = nil;
+
+while {isNil "_guards"} do {
+     _guards = [_position, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
+};
+[_guards] call BIN_fnc_taskDefend;
+_troops = _troops + (units _guards);
 
 _fueltanks = nearestObjects[_position,["Land_Ind_TankSmall","Land_Ind_TankSmall2"],100];
 
