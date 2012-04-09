@@ -54,7 +54,7 @@ class Mission
 	randomSeed=3869952;
 	class Intel
 	{
-		briefingName="MSO Core Testing v3.45";
+		briefingName="MSO Core Testing";
 		resistanceEast=1;
 		startWeather=0.39999998;
 		forecastWeather=0.25;
@@ -6922,7 +6922,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=12;
+		items=13;
 		class Item0
 		{
 			position[]={4593.3491,339,10529.414};
@@ -6970,7 +6970,7 @@ class Mission
 		{
 			position[]={4782.854,339,10149.004};
 			name="testgrp";
-			text="crB_disableCache Test Group";
+			text="Cache disable Test Group";
 			type="mil_marker";
 		};
 		class Item6
@@ -7036,6 +7036,12 @@ class Mission
 			b=200;
 			angle=-63.352222;
 			drawBorder=1;
+		};
+		class Item12
+		{
+			position[]={4592.2939,339,10515.835};
+			name="respawn_west";
+			type="Empty";
 		};
 	};
 	class Sensors
