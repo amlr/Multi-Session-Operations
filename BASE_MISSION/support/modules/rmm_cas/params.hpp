@@ -1,9 +1,3 @@
-class SupportHeader {
-        title = "Support"; 
-        values[]= {0}; 
-        texts[]= {" "}; 
-        default = 0;
-};
 class RMM_cas_frequency {
         title = "    CAS Availability"; 
         values[]= {120,1800,3600,10800}; 

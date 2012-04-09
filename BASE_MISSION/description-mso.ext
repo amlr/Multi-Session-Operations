@@ -35,6 +35,12 @@ class Params {
 // BIS Warfare Params must go first
 	#include <enemy\modules\BIS_Warfare\params.hpp>
 #endif
+class coreHeader {
+        title = "Core"; 
+        values[]= {0}; 
+        texts[]= {" "}; 
+        default = 0;
+};
 #ifdef RMM_DEBUG
 	#include <core\modules\rmm_debug\params.hpp>
 #endif
@@ -53,6 +59,12 @@ class Params {
 #ifdef RMM_WEATHER
 	#include <core\modules\rmm_weather\params.hpp>
 #endif
+class ambientHeader {
+        title = "Ambience"; 
+        values[]= {0}; 
+        texts[]= {" "}; 
+        default = 0;
+};
 #ifdef CRB_CIVILIANS
 	#include <ambience\modules\crb_civilians\params.hpp>
 #endif
@@ -86,6 +98,12 @@ class Params {
 #ifdef AEG
 	#include <ambience\modules\AEG\params.hpp>
 #endif
+class supportHeader {
+        title = "Support"; 
+        values[]= {0}; 
+        texts[]= {" "}; 
+        default = 0;
+};
 #ifdef RMM_CAS
 	#include <support\modules\rmm_cas\params.hpp>
 #endif
@@ -98,6 +116,12 @@ class Params {
 #ifdef WHB_MULTISPAWN
 	#include <support\modules\WHB_Multispawn\params.hpp>
 #endif
+class enemyHeader {
+        title = "Enemy"; 
+        values[]= {0}; 
+        texts[]= {" "}; 
+        default = 0;
+};
 #ifdef RMM_ENEMYPOP
 	#include <enemy\modules\rmm_enemypop\params.hpp>
 #endif
