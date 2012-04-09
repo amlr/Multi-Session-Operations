@@ -3994,11 +3994,11 @@ class Mission
 	};
 	class Markers
 	{
-		items=18;
+		items=19;
 		class Item0
 		{
 			position[]={9369.6992,5.0005341,4194.4805};
-			name="respawn_UK";
+			name="respawn_BIS_BAF";
 			text="FOB Halifax";
 			type="Faction_BritishArmedForces_BAF";
 			angle=-88.827599;
@@ -4006,7 +4006,7 @@ class Mission
 		class Item1
 		{
 			position[]={9390.1035,5.0005341,4173.4023};
-			name="respawn_US";
+			name="respawn_BIS_US";
 			text="FOB Lincoln";
 			type="Faction_US";
 			angle=0.87239766;
@@ -4135,6 +4135,12 @@ class Mission
 		{
 			position[]={9376.5352,5.0005341,4215.4907};
 			name="target";
+			type="Empty";
+		};
+		class Item18
+		{
+			position[]={9390.1035,5.0005341,4173.4023};
+			name="respawn_USMC";
 			type="Empty";
 		};
 	};

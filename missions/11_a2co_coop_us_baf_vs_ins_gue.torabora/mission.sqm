@@ -3761,7 +3761,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=18;
+		items=19;
 		class Item0
 		{
 			position[]={8387.501,82.759727,602.71582};
@@ -3785,7 +3785,7 @@ class Mission
 		class Item2
 		{
 			position[]={8418.1787,84.372932,439.80313};
-			name="respawn_UK";
+			name="respawn_BIS_BAF";
 			text="FOB Halifax";
 			type="Faction_BritishArmedForces_BAF";
 			angle=-29.970102;
@@ -3908,6 +3908,12 @@ class Mission
 			type="mil_start";
 			colorName="ColorBlue";
 			angle=-301.01944;
+		};
+		class Item18
+		{
+			position[]={8404.5664,84.783752,445.23868};
+			name="respawn_USMC";
+			type="Empty";
 		};
 	};
 	class Sensors

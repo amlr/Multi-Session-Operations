@@ -2929,7 +2929,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=6;
+		items=7;
 		class Item0
 		{
 			position[]={1362.6613,15.885103,1039.3521};
@@ -2969,6 +2969,12 @@ class Mission
 			type="Empty";
 			fillName="Border";
 			drawBorder=1;
+		};
+		class Item6
+		{
+			position[]={1362.6613,15.885103,1039.3521};
+			name="respawn_USMC";
+			type="Empty";
 		};
 	};
 };

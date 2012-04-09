@@ -1436,7 +1436,7 @@ class Mission
 			vehicle="M1130_HQ_unfolded_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf""; this addAction [""Set Spawn"", ""support\modules\WHB_Multispawn\common\fn_addAction_SignInFOB.sqf"", position player, 0, false, true, """", ""true""];";
+			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf""; this addAction [""Set Spawn"", ""support\modules\WHB_Multispawn\common\fn_Action_SignInFOB.sqf"", position player, 0, false, true, """", ""true""];";
 		};
 		class Item2
 		{
@@ -2543,7 +2543,7 @@ class Mission
 			vehicle="M1130_HQ_unfolded_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf""; this addAction [""Set Spawn"", ""support\modules\WHB_Multispawn\common\fn_addAction_SignInFOB.sqf"", position player, 0, false, true, """", ""true""];";
+			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf""; this addAction [""Set Spawn"", ""support\modules\WHB_Multispawn\common\fn_Action_SignInFOB.sqf"", position player, 0, false, true, """", ""true""];";
 		};
 		class Item114
 		{
@@ -3888,11 +3888,11 @@ class Mission
 	};
 	class Markers
 	{
-		items=26;
+		items=27;
 		class Item0
 		{
 			position[]={2629.8125,196.79866,5116.9199};
-			name="respawn_UK";
+			name="respawn_BIS_BAF";
 			text="FOB Halifax";
 			type="Faction_BritishArmedForces_BAF";
 		};
@@ -3929,7 +3929,7 @@ class Mission
 		class Item4
 		{
 			position[]={5176.9419,145.38622,6070.4927};
-			name="respawn_US";
+			name="respawn_BIS_US";
 			text="FOB Lincoln";
 			type="Faction_US";
 		};
@@ -4079,6 +4079,12 @@ class Mission
 			name="heli";
 			text="Helipad";
 			type="hd_dot";
+		};
+		class Item26
+		{
+			position[]={5176.9419,145.38622,6070.4927};
+			name="respawn_USMC";
+			type="Empty";
 		};
 	};
 	class Sensors

@@ -4014,18 +4014,18 @@ class Mission
 	};
 	class Markers
 	{
-		items=16;
+		items=17;
 		class Item0
 		{
 			position[]={6188.3906,12.221355,6781.4854};
-			name="respawn_UK";
+			name="respawn_BIS_BAF";
 			type="Faction_BritishArmedForces_BAF";
 			angle=-88.827599;
 		};
 		class Item1
 		{
 			position[]={6166.8472,12.221355,6781.2515};
-			name="respawn_US";
+			name="respawn_BIS_US";
 			type="Faction_US";
 			angle=0.87239802;
 		};
@@ -4140,6 +4140,12 @@ class Mission
 			name="target";
 			type="Empty";
 			angle=3.7590013;
+		};
+		class Item16
+		{
+			position[]={6166.8472,12.221355,6781.2515};
+			name="respawn_USMC";
+			type="Empty";
 		};
 	};
 	class Sensors
