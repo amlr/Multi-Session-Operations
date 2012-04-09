@@ -1308,7 +1308,7 @@ class Mission
 			vehicle="LAV25_HQ_unfolded";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf""; this addAction [""Set Spawn"", ""support\modules\WHB_Multispawn\common\fn_addAction_SignInFOB.sqf"", position player, 0, false, true, """", ""true""];";
+			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf""; this addAction [""Set Spawn"", ""support\modules\WHB_Multispawn\common\fn_Action_SignInFOB.sqf"", position player, 0, false, true, """", ""true""];";
 		};
 		class Item2
 		{
@@ -3117,7 +3117,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=17;
+		items=18;
 		class Item0
 		{
 			position[]={4841.2969,5.7493715,2328.9624};
@@ -3208,7 +3208,7 @@ class Mission
 		class Item12
 		{
 			position[]={4690.6938,9,2594.739};
-			name="respawn_UK";
+			name="respawn_BIS_BAF";
 			type="Empty";
 		};
 		class Item13
@@ -3236,7 +3236,13 @@ class Mission
 		class Item16
 		{
 			position[]={4690.6938,9,2594.739};
-			name="respawn_US";
+			name="respawn_BIS_US";
+			type="Empty";
+		};
+		class Item17
+		{
+			position[]={4690.6938,9,2594.739};
+			name="respawn_USMC";
 			type="Empty";
 		};
 	};

@@ -2407,7 +2407,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=5;
+		items=6;
 		class Item0
 		{
 			position[]={4936.4976,29.426275,6124.1079};
@@ -2444,6 +2444,12 @@ class Mission
 			type="Empty";
 			a=1.5;
 			b=1.5;
+		};
+		class Item5
+		{
+			position[]={4936.4976,29.426275,6124.1079};
+			name="respawn_USMC";
+			type="Empty";
 		};
 	};
 	class Sensors

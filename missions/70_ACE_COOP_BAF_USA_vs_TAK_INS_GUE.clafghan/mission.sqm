@@ -9510,7 +9510,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=25;
+		items=26;
 		class Item0
 		{
 			position[]={15468.856,2.8314047,935.71094};
@@ -9531,7 +9531,7 @@ class Mission
 		class Item2
 		{
 			position[]={15401.064,2.8314047,490.03702};
-			name="respawn_UK";
+			name="respawn_BIS_BAF";
 			text="FOB Halifax";
 			type="Faction_BritishArmedForces_BAF";
 			a=1.5;
@@ -9721,6 +9721,12 @@ class Mission
 			name="hospital";
 			type="empty";
 		};
+		class Item25
+		{
+			position[]={15649.296,6.432826,17179.867};
+			name="respawn_west";
+			type="Empty";
+		};
 	};
 	class Sensors
 	{
@@ -9749,7 +9755,7 @@ class Mission
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
-			expActiv="{switch(typeOf _x)do{case ""BAF_Soldier_MTP"":{_x setPos markerPos ""respawn_UK"";}; case ""BAF_Soldier_TL_MTP"":{_x setPos markerPos ""respawn_UK"";}; case ""US_Soldier_EP1"":{_x setPos markerPos ""respawn_US"";}; case ""US_Soldier_TL_EP1"":{_x setPos markerPos ""respawn_US"";}; }; } forEach thisList;";
+			expActiv="{switch(typeOf _x)do{case ""BAF_Soldier_MTP"":{_x setPos markerPos ""respawn_BIS_BAF"";}; case ""BAF_Soldier_TL_MTP"":{_x setPos markerPos ""respawn_BIS_BAF"";}; case ""US_Soldier_EP1"":{_x setPos markerPos ""respawn_BIS_US"";}; case ""US_Soldier_TL_EP1"":{_x setPos markerPos ""respawn_BIS_US"";}; }; } forEach thisList;";
 			class Effects
 			{
 			};
