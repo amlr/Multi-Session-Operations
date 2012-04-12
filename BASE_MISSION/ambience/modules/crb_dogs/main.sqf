@@ -6,7 +6,7 @@ if (!isServer) exitWith{};
 if(isNil "ambientDogs")then{ambientDogs = 1;};
 if (ambientDogs == 0) exitWith{};
 
-_debug = false;
+_debug = debug_mso;
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {

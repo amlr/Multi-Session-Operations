@@ -1,6 +1,6 @@
 private ["_veh","_grp","_vehtype","_priority","_enemy","_patient","_equip","_startpos","_center","_mapsize","_chance","_debug","_armveh","_armvehtype","_speed","_behav","_cargo","_gunship","_invalid","_vehname","_hospital"];
 
-_debug = false;
+_debug = debug_mso;
 
 RMM_casevac_return = false;
 

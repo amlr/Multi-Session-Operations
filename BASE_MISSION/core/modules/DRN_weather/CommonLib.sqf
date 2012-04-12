@@ -376,7 +376,7 @@ drn_fnc_CL_RunGarbageCollector = {
     
     _referenceGroup = _this select 0;
     if (count _this > 1) then {_cleanUpDistance = _this select 1;} else {_cleanUpDistance = 750};
-    if (count _this > 2) then { _debug = _this select 2; } else { _debug = false; };
+    if (count _this > 2) then { _debug = _this select 2; } else { _debug = debug_mso; };
     
     if (_debug) then {
         ["Garbage collector started."] call drn_fnc_CL_ShowDebugTextAllClients;

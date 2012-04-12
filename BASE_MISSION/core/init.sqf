@@ -57,10 +57,6 @@ mso_fnc_hasRadio = {
         if(_hasRadio) then {true} else {hint "You require a radio.";false;};
 };
 
-"Custom Locations(" + worldName + ")" call mso_core_fnc_initStat;
-if(isNil "CRB_LOCS") then {
-        CRB_LOCS = [] call mso_core_fnc_initLocations;
-};
 
 "Mission Parameters" call mso_core_fnc_initStat;
 if (!isNil "paramsArray") then {
@@ -69,6 +65,18 @@ if (!isNil "paramsArray") then {
                 missionNamespace setVariable [configName ((missionConfigFile/"Params") select _i),paramsArray select _i];
                 diag_log format["MSO-%1    %2 = %3", time, configName ((missionConfigFile/"Params") select _i), paramsArray select _i];
         };
+};
+
+if(isNil "debug_mso_setting") then {debug_mso = false;};
+if(debug_mso_setting == 0) then {debug_mso = false; debug_mso_loc = false;};
+if(debug_mso_setting == 1) then {debug_mso = true; debug_mso_loc = false;};
+if(debug_mso_setting == 2) then {debug_mso = true; debug_mso_loc = true;};
+publicvariable "debug_mso";
+publicvariable "debug_mso_loc";
+
+"Custom Locations(" + worldName + ")" call mso_core_fnc_initStat;
+if(isNil "CRB_LOCS") then {
+        CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
 "Player" call mso_core_fnc_initStat;

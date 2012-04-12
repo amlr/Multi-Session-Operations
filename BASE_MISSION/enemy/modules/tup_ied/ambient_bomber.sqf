@@ -8,7 +8,7 @@ _location = _this select 0;
 _victim = (_this select 1) select 0;
 _size = _this select 2;
 
-_debug = false;
+_debug = debug_mso;
 
 	if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1)) then {
 		("reezo_eod_suicarea" createUnit [_location, group BIS_functions_mainscope, 

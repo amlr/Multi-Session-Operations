@@ -7,7 +7,7 @@ if(!isServer) exitWith{};
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK CRB_convoy.sqf"];
 private["_taskid","_grp","_debug","_strategic","_spawnpoints","_convoydest","_numconvoys"];
 
-_debug = false;
+_debug = debug_mso;
 if(isNil "crb_convoy_intensity")then{crb_convoy_intensity = 1;};
 crb_convoy_intensity = switch(crb_convoy_intensity) do {
 	case 0: {

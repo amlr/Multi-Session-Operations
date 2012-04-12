@@ -18,7 +18,7 @@ if (count _this > 1) then { _maxWeatherChangeTimeMin = _this select 1; } else { 
 if (count _this > 2) then { _minTimeBetweenWeatherChangesMin = _this select 2; } else { _minTimeBetweenWeatherChangesMin = 5; };
 if (count _this > 3) then { _maxTimeBetweenWeatherChangesMin = _this select 3; } else { _maxTimeBetweenWeatherChangesMin = 15; };
 if (count _this > 4) then { _allowRain = _this select 4; } else { _allowRain = true; };
-if (count _this > 5) then { _debug = _this select 5; } else { _debug = false; };
+if (count _this > 5) then { _debug = _this select 5; } else { _debug = debug_mso; };
 
 if (isNil "drn_var_CL_CommonLibVersion") then {
     while {true} do {

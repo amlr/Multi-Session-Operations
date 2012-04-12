@@ -6,7 +6,7 @@ if !(isServer) exitWith {diag_log "Ambient IED Not running on server!";};
 _location = _this select 0;
 _size = _this select 1;
 
-_debug = false;
+_debug = debug_mso;
 _numIEDs = round ((_size / 50) * (tup_ied_threat / 100));
 
 // Check for Enemy in vicinty - if so double IED count
@@ -22,11 +22,6 @@ _posloc = [];
 _posloc = [_location, true, true, true, _size] call tup_ied_fnc_placeIED;
 if (_debug) then {
 	diag_log format ["MSO-%1 IED: Found %2 spots for IEDs",time, count _posloc];
-	{
-		//Mark IED position
-		_t = format["spot_r%1", random 10000];
-		_spotm = [_t, _x, "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorBlack", "GLOBAL"] call CBA_fnc_createMarker;
-	} foreach _posloc;
 };
 
 for "_j" from 1 to _numIEDs do {

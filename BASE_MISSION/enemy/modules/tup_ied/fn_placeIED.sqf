@@ -1,7 +1,7 @@
 // Find suitable spot for IED
 // Pass location and booleans to look for roads, objects, entrances
 // Returns an array of position s
-private ["_addroads","_addobjects","_addentrances","_goodspots","_location","_size","_debug"];
+private ["_addroads","_addobjects","_addentrances","_goodspots","_location","_size"];
 
 _location = _this select 0;
 _addroads = _this select 1;
@@ -36,7 +36,5 @@ If (_addroads) then {
 		_goodspots = _goodspots + [getposATL  _x];
 	} foreach (_location nearRoads _size);
 };
-
-
 
 _goodspots

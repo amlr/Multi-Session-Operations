@@ -2,7 +2,7 @@
 private ["_IED","_trg","_type","_shell","_proximity","_debug"];
 
 if !(isServer) exitWith {diag_log "ArmIED Not running on server!";};
-_debug = false;
+_debug = debug_mso;
 
 _IED = _this select 0;
 _type = _this select 1;

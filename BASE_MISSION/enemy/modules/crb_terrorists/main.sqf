@@ -12,7 +12,7 @@
 private ["_spawnpoints","_debug","_numcells"];
 if(!isServer) exitWith{};
 
-_debug = false;
+_debug = debug_mso;
 
 if(isNil "crb_tc_intensity")then{crb_tc_intensity = 1;};
 crb_tc_intensity = switch(crb_tc_intensity) do {

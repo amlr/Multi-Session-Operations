@@ -4,7 +4,7 @@
 
 private ["_debug"];
 
-_debug = false;
+_debug = debug_mso;
 
 if (isNil "tup_ied_header")then{tup_ied_header = 1;};
 if ((!isServer) || (tup_ied_header == 0)) exitWith{};

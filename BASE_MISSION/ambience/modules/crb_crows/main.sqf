@@ -4,7 +4,7 @@ private ["_debug","_d","_pos","_flocks"];
 if(isNil "ambientCrows")then{ambientCrows = 0;};
 if (!isServer || ambientCrows == 0) exitWith{};
 
-_debug = false;
+_debug = debug_mso;
 _d = 250;
 
 _flocks = ceil(count(bis_functions_mainscope getVariable "locations") / 6);

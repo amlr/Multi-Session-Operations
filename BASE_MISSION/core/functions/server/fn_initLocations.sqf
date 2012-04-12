@@ -5,7 +5,7 @@ if(!isServer) exitWith{};
 
 CRBPROFILERSTART("mso_core_fnc_initLocations")
 
-_debug = false;
+_debug = debug_mso_loc;
 
 _initNeighbors = {
         private ["_twn"];

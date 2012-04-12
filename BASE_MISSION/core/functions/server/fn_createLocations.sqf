@@ -13,7 +13,7 @@ CRBPROFILERSTART("mso_core_fnc_createLocations")
 // Choose whether or not to output the location configs
 _output = false;
 
-_debug = false;
+_debug = debug_mso_loc;
 
 if (_debug) then {
 	player globalChat format["Create Locations: %1 Mapsize is %2", worldname, CRB_LOC_DIST];

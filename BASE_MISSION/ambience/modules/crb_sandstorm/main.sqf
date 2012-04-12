@@ -4,7 +4,7 @@ private ["_debug","_d","_pos","_storms"];
 if(isNil "ambientSandstorms")then{ambientSandstorms = 0;};
 if (!isServer || ambientSandstorms == 0) exitWith{};
 
-_debug = false;
+_debug = debug_mso;
 _d = 500;
 _storms = ceil(count(bis_functions_mainscope getVariable "locations") / 8);
 

@@ -5,7 +5,7 @@ if !(isServer) exitWith {};
 if(isNil "gtk_cache_header") then { gtk_cache_header = 1; };
 if(gtk_cache_header == 0) exitWith{};
 
-_debug = false;
+_debug = debug_mso;
 
 _groups = allGroups;
 _range = 1500; 

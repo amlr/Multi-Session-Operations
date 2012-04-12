@@ -32,7 +32,7 @@ to do: Current issue if road ahead bends.
 
 private ["_grp","_pos","_roadpos","_vehicle","_vehtype","_blockers","_roads","_fac","_debug"];
 
-_debug = false;
+_debug = debug_mso;
 
 _grp = _this select 0;
 _pos = _this select 1;

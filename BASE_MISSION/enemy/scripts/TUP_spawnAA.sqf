@@ -8,7 +8,7 @@ if(rmm_ep_aa == 0) exitWith{};
 
 private ["_choice","_aa","_pos","_number","_type","_aa","_veh","_debug","_aatypes"];
 
-_debug = false;
+_debug = debug_mso;
 _pos = _this select 0;
 _type = _this select 1;
 if (count _this > 2) then {

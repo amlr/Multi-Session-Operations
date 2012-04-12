@@ -17,7 +17,7 @@ if (WICT_wict_header == 0) exitWith{};
 
 WICT_PATH = "enemy\modules\WICT_enemypop\";
 
-_debug = false;
+_debug = debug_mso;
 
 if(isNil "wict_ep_intensity")then{wict_ep_intensity = 1;};
 wict_ep_intensity = switch(wict_ep_intensity) do {

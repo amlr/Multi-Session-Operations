@@ -10,7 +10,7 @@
 private ["_debug","_strategic","_spawnpoints","_convoydest","_numconvoys"];
 if(!isServer) exitWith{};
 
-_debug = false;
+_debug = debug_mso;
 if(isNil "crb_convoy_intensity")then{crb_convoy_intensity = 1;};
 crb_convoy_intensity = switch(crb_convoy_intensity) do {
 	case 0: {

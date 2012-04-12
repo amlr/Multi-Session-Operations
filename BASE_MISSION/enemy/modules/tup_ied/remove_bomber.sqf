@@ -1,7 +1,7 @@
 // Remove Ambient Bomber
 private ["_suic","_location","_debug"];
 
-_debug = false;
+_debug = debug_mso;
 
 if !(isServer) exitWith {diag_log "RemoveBomber Not running on server!";};
 

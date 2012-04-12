@@ -1,7 +1,7 @@
 if(isServer) then {
         private["_debug","_logicCiv","_logicVeh","_logicAni"];
         
-        _debug = false;
+        _debug = debug_mso;
 
 	if(isNil "ambientCivs") then {ambientCivs = 1;};
 	if(isNil "ambientVehs") then {ambientVehs = 1;};

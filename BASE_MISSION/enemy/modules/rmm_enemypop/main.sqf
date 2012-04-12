@@ -12,7 +12,7 @@
 private ["_debug","_d","_camp","_flag"];
 if(!isServer) exitWith{};
 
-_debug = false;
+_debug = debug_mso;
 if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 3;};
 if(isNil "rmm_ep_spawn_dist")then{rmm_ep_spawn_dist = 2000;};
 if(isNil "rmm_ep_safe_zone")then{rmm_ep_safe_zone = 2000;};
@@ -146,7 +146,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         _pos = _this select 0;
                                         _flag = _this select 1;
                                         _type = _this select 2;
-                                        _debug = false;
+                                        _debug = debug_mso;
                                         waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
                                         _group = nil;
                                         _pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
@@ -228,7 +228,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 									_pos = _this select 0;
 									_flag = _this select 1;
 									_type = _this select 2;
-									_debug = false;
+									_debug = debug_mso;
 									waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
 									_group = nil;
 									_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
@@ -317,7 +317,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 									_pos = _this select 0;
 									_flag = _this select 1;
 									_type= _this select 2;
-									_debug = false;
+									_debug = debug_mso;
 									waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
 									_group = nil;
 									_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
