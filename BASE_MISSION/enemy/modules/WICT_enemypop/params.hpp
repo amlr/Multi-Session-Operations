@@ -1,5 +1,5 @@
 class WICT_wict_header {
-        title = "    Enemy - World In Conflict Tool"; 
+        title = "    Enemy - World In Conflict (do not mix with other enemypop-modules)"; 
         values[]= {0, 1}; 
         texts[]= {"Off","On"}; 
         default = 0;
