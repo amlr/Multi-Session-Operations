@@ -48,7 +48,10 @@ while {_roadpos = _roads call BIS_fnc_selectRandom; _roads = _roads - [_roadpos]
 	if (count _roads == 1) exitWith {_roadpos = _roads select 0};
 };
 if (_debug) then {
+	private "_id";
+	_id = floor (random 1000);
 	diag_log format["Position of Road Block is %1", getpos _roadpos];
+	[format["roadblock_%1", _id], _roadpos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", "RoadBlock",  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
 };
 
 // Define [ Gate, Blocks, Barriers, Guides, Nest, Wire, Weapon] for each faction

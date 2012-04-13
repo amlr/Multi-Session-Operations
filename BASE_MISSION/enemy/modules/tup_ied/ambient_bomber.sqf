@@ -17,7 +17,7 @@ _debug = debug_mso;
 			this setVariable ['reezo_eod_interval',1];",_size], 0, ""]);
 	} else {
 		// Create non-eod suicide bomber
-		private ["_grp","_skins","_bomber","_pos","_time"];
+		private ["_grp","_skins","_bomber","_pos","_time","_marker"];
 //		_grp = createGroup CIVILIAN;
 		_grp = createGroup EAST;
 		_pos = [_location, 0, _size - 10, 3, 0, 0, 0] call BIS_fnc_findSafePos;
@@ -27,6 +27,16 @@ _debug = debug_mso;
 		_bomber addweapon "EvMoney";
 		if (_debug) then {
 			diag_log format ["MSO-%1 Suicide Bomber: created at %2", time, _pos];
+			_marker = [format ["suic_%1", random 1000], _pos, "Icon", [1,1], "TEXT:", "Suicide", "TYPE:", "Dot", "COLOR:", "ColorRed", "GLOBAL"] call CBA_fnc_createMarker;
+			[_marker,_bomber] spawn {
+				_marker = _this select 0;
+				_bomber = _this select 1;
+				while {alive _bomber} do {
+					_marker setmarkerpos position _bomber;
+					sleep 0.1;
+				};
+				[_marker] call CBA_fnc_deleteEntity;
+			};
 		};
 		sleep (random 60);
 		_victim = units (group _victim) call BIS_fnc_selectRandom;
@@ -45,6 +55,7 @@ _debug = debug_mso;
 			sleep 1;
 			if (_debug) then {
 				diag_log format ["Deleting Suicide Bomber %1 as out of time or dead.", _bomber];
+				[_marker] call CBA_fnc_deleteEntity;
 			};
 			sleep 120;
 			deletevehicle _bomber;

@@ -6,7 +6,7 @@ if(!isServer) exitWith{};
 
 if(rmm_ep_aa == 0) exitWith{};
 
-private ["_choice","_aa","_pos","_number","_type","_aa","_veh","_debug","_aatypes"];
+private ["_choice","_aa","_pos","_number","_type","_aa","_veh","_debug","_aatypes","_id"];
 
 _debug = debug_mso;
 _pos = _this select 0;
@@ -65,7 +65,10 @@ if (_type == "static" || _type == "mixed") then {
 			_camp = _camp call BIS_fnc_selectRandom;
 			_pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
 			[_camp, random 360, _pos] call f_builder2;
-			if (_debug) then {diag_log format ["MSO-%1 Enemy Population - Anti Air Camp created at %2 (%3)", time, _pos, text _loc];};
+			if (_debug) then {
+				diag_log format ["MSO-%1 Enemy Population - Anti Air Camp created at %2 (%3)", time, _pos, text _loc]; 
+				
+			};
 		} else {
 			if (_debug) then {diag_log format ["MSO-%1 Enemy Population - Did not find AA camp for factions.", time];};
 		};
@@ -85,3 +88,6 @@ for "_i" from 1 to _number do {
     (_veh select 2) setFormation "DIAMOND";
 	[(_veh select 2)] call BIN_fnc_taskDefend;
 };
+
+_id = floor (random 1000);
+[format["AA_%1", _id], _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", "AA",  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;

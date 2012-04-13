@@ -3,6 +3,10 @@ if (!isdedicated) then {
 	["Debug","if((getPlayerUID player) in MSO_R_Admin) then {createDialog ""RMM_ui_debug""};"] call mso_core_fnc_updateMenu;
 };
 
+if (debug_mso) then {
+  [] execVM "enemy\scripts\mark_enemy.sqf";
+};
+
 displayStats = {
         private ["_maxF","_avgF","_minF","_maxU","_avgU","_curU"];
 	_maxF = _this select 0;

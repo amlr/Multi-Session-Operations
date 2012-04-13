@@ -30,19 +30,21 @@ if (isNil "tup_suicide_threat")then{tup_suicide_threat = 10;};
 		if (_fate < tup_suicide_threat && ambientCivs == 1) then {
 			// Place Suicide Bomber trigger
 			_trg = createTrigger["EmptyDetector",getpos _twn]; 
-			_trg setTriggerArea[(_size+250),(_size+250),0,false];
+			_trg setTriggerArea[(_size+252),(_size+252),0,false];
 			_trg setTriggerActivation["WEST","PRESENT",true];
 			_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL _x) select 2 < 25)} count ([] call BIS_fnc_listPlayers) > 0)", format ["null = [getpos (thisTrigger), thisList, %1] execvm 'enemy\modules\tup_ied\Ambient_Bomber.sqf';",_size], "null = [getposATL (thisTrigger)] execvm 'enemy\modules\tup_ied\Remove_Bomber.sqf';"]; 
 		
 			 if (_debug) then {
+				_t = format["suic_t%1", random 1000];
 				diag_log format ["MSO-%1 Suicide Bomber Trigger: created at %2 (%3)", time, text _twn, mapgridposition  _x];
+				[_t, getpos _twn, "Ellipse", [_size+250,_size+250], "TEXT:", text _twn, "COLOR:", "ColorOrange", "BRUSH:", "Border", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
 			};
 		};
 
 		if (_fate < tup_ied_threat) then {
 			// Place IED trigger
 			_trg = createTrigger["EmptyDetector",getpos _twn]; 
-			_trg setTriggerArea[(_size+250), (_size+250),0,false];
+			_trg setTriggerArea[(_size+248), (_size+248),0,false];
 			if (tup_ied_enemy == 1) then {
 				_trg setTriggerActivation["ANY","PRESENT",true];
 				_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL _x) select 2 < 75)} count ([] call BIS_fnc_listPlayers) > 0) && ({side _x == EAST} count (thisList) > 2)", format ["null = [getpos (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Ambient_IED.sqf';",_size], format ["null = [getposATL (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Remove_IED.sqf';",_size]];
@@ -52,7 +54,9 @@ if (isNil "tup_suicide_threat")then{tup_suicide_threat = 10;};
 			};
 
 			if (_debug) then {
+				_t = format["ied_t%1", random 1000];
 				diag_log format ["MSO-%1 IED Trigger: created at %2 (%3)", time, text _twn, mapgridposition  _x];
+				[_t, getpos _twn, "Ellipse", [_size+250,_size+250], "TEXT:", text _twn, "COLOR:", "ColorYellow", "BRUSH:", "Border", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
 			};
 		};
 	};

@@ -12,6 +12,7 @@ if(!isServer) exitWith{};
 
 _debug = debug_mso;
 if(isNil "crb_convoy_intensity")then{crb_convoy_intensity = 1;};
+
 crb_convoy_intensity = switch(crb_convoy_intensity) do {
 	case 0: {
 		0;
@@ -24,6 +25,8 @@ crb_convoy_intensity = switch(crb_convoy_intensity) do {
 	};
 };
 
+
+if(crb_convoy_intensity == 0) exitWith{};
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
@@ -39,14 +42,14 @@ _convoydest = [];
                 _spawnpoints = _spawnpoints + [position _x];
                 if (_debug) then {
                         _t = format["convoy_s%1", floor(random 10000)];
-                        _m = [_t, position _x, "Icon", [1,1], "TYPE:", "Destroy", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                        _m = [_t, position _x, "Icon", [1,1], "TYPE:", "Destroy", "TEXT:", _t,"GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
                 };
         };
         if(type _x in _strategic) then {
                 _convoydest = _convoydest + [position _x];
                 if (_debug) then {
                         _t = format["convoy_d%1", floor(random 10000)];
-                        _m = [_t, position _x, "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorOrange", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                        _m = [_t, position _x, "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorOrange", "TEXT:", _t,"GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
                 };
         };
 } forEach CRB_LOCS;
