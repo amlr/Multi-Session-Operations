@@ -67,7 +67,7 @@ if (!isNil "paramsArray") then {
         };
 };
 
-if(isNil "debug_mso_setting") then {debug_mso = false;};
+if(isNil "debug_mso_setting") then {debug_mso_setting = 0;};
 if(debug_mso_setting == 0) then {debug_mso = false; debug_mso_loc = false;};
 if(debug_mso_setting == 1) then {debug_mso = true; debug_mso_loc = false;};
 if(debug_mso_setting == 2) then {debug_mso = true; debug_mso_loc = true;};
