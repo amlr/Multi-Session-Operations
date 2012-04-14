@@ -6,8 +6,9 @@
 // =========================================================================================================
 
 // DeBuggint MPS
-	mps_debug = false;
-
+	if (isnil "debug_mso") then {debug_mso = false};
+	if (debug_mso) then {mps_debug = true} else {mps_debug = false};
+	
 // Declare a mission name and credits
 	mps_mission_name = "Patrol Ops 2";
 	mps_credits = "Patrol Ops 2 By [OCB]EightySix";
