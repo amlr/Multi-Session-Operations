@@ -1362,7 +1362,7 @@ class Mission
 			vehicle="cwr2_M113_HQ_Unfolded";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf""; this addAction [""Set Spawn"", ""support\modules\WHB_Multispawn\common\fn_Action_SignInFOB.sqf"", position player, 0, false, true, """", ""true""];";
+			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf""; this setVariable [""MHQState"",1,true];this addAction [""Set Spawn"", ""support\modules\WHB_Multispawn\common\fn_Action_SignInFOB.sqf"", position player, 0, false, true, """", ""true""];";
 		};
 		class Item2
 		{
