@@ -67,7 +67,7 @@ if (_debug) then {
 	diag_log format ["MSO-%1 EOD IED: arming IED at %2 of %3",time, position _IED, typeOf _IED];
 	//Mark IED position
 	_t = format["ied_r%1", floor (random 1000)];
-	_tcrm = [_t, position _IED, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Dot", "COLOR:", "ColorBlue", "GLOBAL"] call CBA_fnc_createMarker;
+	_tcrm = [_t, position _IED, "Icon", [1,1], "TEXT:", "EOD_IED", "TYPE:", "Dot", "COLOR:", "ColorBlue", "GLOBAL"] call CBA_fnc_createMarker;
 	_IED setvariable ["Marker", _tcrm];
 };
 
