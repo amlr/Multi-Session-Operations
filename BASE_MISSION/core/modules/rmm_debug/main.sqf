@@ -4,7 +4,21 @@ if (!isdedicated) then {
 };
 
 if (debug_mso) then {
-  [] execVM "enemy\scripts\mark_enemy.sqf";
+	// Mark all enemy units with a red dot
+	[] execVM "enemy\scripts\mark_enemy.sqf";
+  
+	// Show player spawn distance
+	if !(isnull player) then {
+		_t = format["player_%1", player];
+		_pm = [_t, position player, "ELLIPSE", [rmm_ep_spawn_dist,rmm_ep_spawn_dist], "TEXT:", _t, "BRUSH:", "Border", "COLOR:", "ColorGreen"] call CBA_fnc_createMarker;	
+		[_pm] spawn {
+			_pm = _this select 0;
+			while {true} do {
+				_pm  setmarkerpos position player;
+				sleep 0.3;
+			};
+		};
+	};
 };
 
 displayStats = {
