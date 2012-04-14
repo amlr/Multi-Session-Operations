@@ -11,7 +11,7 @@ _radio = _this select 1;
 		if (_debug) then {
 			private ["_vbiedm","_t"];
 			_t = format["vbied_r%1", floor (random 1000)];
-			_vbiedm = [_t, getposATL _vehicle, "Icon", [1,1], "TEXT:", "VBIED", "TYPE:", "Dot", "COLOR:", "ColorRed", "GLOBAL"] call CBA_fnc_createMarker;
+			_vbiedm = [_t, getposATL _vehicle, "Icon", [0.5,0.5], "TYPE:", "Warning", "COLOR:", "ColorRed", "GLOBAL"] call CBA_fnc_createMarker;
 			[_vbiedm,_vehicle] spawn {
 				_vbiedm = _this select 0;
 				_vehicle = _this select 1;
