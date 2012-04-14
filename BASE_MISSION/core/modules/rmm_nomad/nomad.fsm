@@ -117,7 +117,7 @@ class FSM
        "_maxLives = _dayspassed * (nomadRespawns / nomadReinforcements);" \n
        "" \n
        "_deaths = _ndata select 0;" \n
-       "if (_deaths >= _maxLives) then {_disconnect = true;};" \n
+       "if (_deaths >= _maxLives && nomadRespawns != 999) then {_disconnect = true;};" \n
        "" \n
        "_livesAccumulated = _maxLives - _deaths;" \n
        "_hrsPerLife = (nomadReinforcements / nomadRespawns) * 24;" \n
