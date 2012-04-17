@@ -46,11 +46,11 @@ if (isNil "tup_suicide_threat")then{tup_suicide_threat = 10;};
 			_trg = createTrigger["EmptyDetector",getpos _twn]; 
 			_trg setTriggerArea[(_size+250), (_size+250),0,false];
 			if (tup_ied_enemy == 1) then {
-				_trg setTriggerActivation["ANY","PRESENT",true];
-				_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL _x) select 2 < 75)} count ([] call BIS_fnc_listPlayers) > 0) && ({side _x == EAST} count (thisList) > 2)", format ["null = [getpos (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Ambient_IED.sqf';",_size], format ["null = [getposATL (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Remove_IED.sqf';",_size]];
+				_trg setTriggerActivation["ANY","PRESENT",false]; // true = repeated
+				_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL _x) select 2 < 75)} count ([] call BIS_fnc_listPlayers) > 0) && ({side _x == EAST} count (thisList) > 2)", format ["null = [getpos (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Ambient_IED.sqf';",_size], "",_size]]; // for repeated = format ["null = [getposATL (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Remove_IED.sqf';"
 			} else {
-				_trg setTriggerActivation["WEST","PRESENT",true];
-				_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL _x) select 2 < 75)} count ([] call BIS_fnc_listPlayers) > 0)", format ["null = [getpos (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Ambient_IED.sqf';",_size], format ["null = [getposATL (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Remove_IED.sqf';",_size]];
+				_trg setTriggerActivation["WEST","PRESENT",false]; // true = repeated
+				_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL _x) select 2 < 75)} count ([] call BIS_fnc_listPlayers) > 0)", format ["null = [getpos (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Ambient_IED.sqf';",_size], "",_size]]; // for repeated = format ["null = [getposATL (thisTrigger),%1] execvm 'enemy\modules\tup_ied\Remove_IED.sqf';"
 			};
 
 			if (_debug) then {
