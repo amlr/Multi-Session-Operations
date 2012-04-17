@@ -74,4 +74,4 @@ sleep 0.1;
 _array = nil;
 
 //radarea = "HeliHEmpty" createVehicle _nukepos;
-[_nukepos] execvm "scripts\nuke\radzone.sqf";
+[_nukepos] execvm "scripts\nuke\nuke_radzone_server.sqf";

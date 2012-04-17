@@ -1,3 +1,4 @@
+if (isserver) exitwith {};
 #include "nuke.h"
 
 private [
