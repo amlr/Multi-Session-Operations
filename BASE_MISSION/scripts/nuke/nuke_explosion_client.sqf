@@ -1,13 +1,31 @@
 if (isserver) exitwith {};
-private ["_nukepos","_cone","_top","_top2","_top3","_smoke","_wave","_light","_markerobj","_areaee"];
+private ["_cone","_top","_top2","_top3","_smoke","_wave","_light","_expdist","_vdold"];
 
 _nukepos = _this select 0;
+_vdold = viewdistance;
+_expdist = player distance _nukepos;
+
+waituntil {!isnil "_nukepos"};
 
 "dynamicBlur" ppEffectEnable true;
 "dynamicBlur" ppEffectAdjust [0.5];
 "dynamicBlur" ppEffectCommit 1;
 
-[_nukepos,40] execvm "scripts\nuke\nuke_sound_client.sqf";
+0 setfog 0;
+0 setOvercast 0;
+
+//important - setting viewdistance or nor Explosion will be seen
+if (viewdistance < (_expdist*2.2)) then {
+	[_expdist] spawn {
+    	
+		setviewdistance (_expdist*1.5);
+        while {
+            ((viewdistance < 10000) and (viewdistance < ((_this select 0)*2.2)))}
+            	do {
+            setviewdistance (viewdistance + 50);
+        };
+	};
+};
 
 _Cone = "#particlesource" createVehicleLocal _nukepos;
 _Cone setParticleParams [["\Ca\Data\ParticleEffects\Universal\Universal", 16, 7, 48], "", "Billboard", 1, 10, [0, 0, 0],
@@ -31,7 +49,6 @@ _smoke setParticleParams [["\Ca\Data\ParticleEffects\Universal\Universal", 16, 7
 _smoke setParticleRandom [0, [10, 10, 15], [15, 15, 7], 0, 0, [0, 0, 0, 0], 0, 0, 360];
 _smoke setDropInterval 0.005;
 
-
 _Wave = "#particlesource" createVehicleLocal _nukepos;
 _Wave setParticleParams [["\Ca\Data\ParticleEffects\Universal\Universal", 16, 7, 48], "", "Billboard", 1, 20, [0, 0, 0],
 				[0, 0, 0], 0, 1.5, 1, 0, [50, 100], [[0.1, 0.1, 0.1, 0.5], 
@@ -40,7 +57,7 @@ _Wave setParticleRandom [2, [20, 20, 20], [5, 5, 0], 0, 0, [0, 0, 0, 0.1], 0, 0]
 _Wave setParticleCircle [50, [-80, -80, 2.5]];
 _Wave setDropInterval 0.0002;
 
-_light = "#lightpoint" createVehicleLocal [((_nukepos select 0)),(_nukepos select 1),((_nukepos select 2)+500)];
+_light = "#lightpoint" createVehicleLocal [(_nukepos select 0),(_nukepos select 1),((_nukepos select 2)+500)];
 _light setLightAmbient[1500, 1200, 1000];
 _light setLightColor[1500, 1200, 1000];
 _light setLightBrightness 100000.0;
@@ -51,10 +68,10 @@ _light setLightBrightness 100000.0;
 "dynamicBlur" ppEffectAdjust [1];
 "dynamicBlur" ppEffectCommit 3;
 
+[_nukepos,40] execvm "scripts\nuke\nuke_sound_client.sqf";
 [_nukepos,40] execvm "scripts\nuke\nuke_shockwave_client.sqf";
 [_nukepos,40] execvm "scripts\nuke\nuke_shockimpact_client.sqf";
 
-0 setOvercast 0;
 sleep 0.1;
 
 _xHandle = []spawn
@@ -64,12 +81,13 @@ _xHandle = []spawn
 	"colorCorrections" ppEffectCommit 7;
 };
 
+sleep 1;
 
-sleep 1.5;
 "dynamicBlur" ppEffectAdjust [0.5];
 "dynamicBlur" ppEffectCommit 1;
 _Wave setDropInterval 0.001;
-addCamShake [10, 15, 25];
+
+addCamShake [10, 25, 25];
 
 deletevehicle _top;
 sleep 5;
@@ -106,6 +124,7 @@ deleteVehicle _light;
 
 sleep 2;
 
+setviewdistance 5000;
 "dynamicBlur" ppEffectAdjust [0];
 "dynamicBlur" ppEffectCommit 1;
 
@@ -119,18 +138,6 @@ _Cone setDropInterval 0.02;
 _Wave setDropInterval 0.01;
 
 sleep 15;
+
 deleteVehicle _Wave;
 deleteVehicle _cone;
-
-_areaee = createMarkerLocal ["areaee", _nukepos];
-"areaee" setMarkerShapeLocal "ELLIPSE";
-"areaee" setMarkerSizeLocal [1000, 1000];
-"areaee" setMarkerColorLocal "ColorRed";
-
-_markerobj = createMarkerLocal ["natext", _nukepos];
-_markerobj setMarkerShapeLocal "ICON";
-_markerobj setMarkerTypeLocal "Destroy";
-_markerobj setMarkerColorLocal "ColorRed";
-_markerobj setMarkerTextLocal "Nuclear Radiation";
-
-//["Fallout Map", {}] execVM "scripts\nuke\mando_giveme_mapfallout.sqf";

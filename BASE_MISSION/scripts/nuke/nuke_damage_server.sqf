@@ -1,35 +1,35 @@
 if !(isserver) exitwith {};
 
-private ["_nukepos"];
+private ["_array","_buildings","_center"];
 _nukepos = _this select 0;
 
-_array = _nukepos nearObjects ["All", 500];
-sleep 0.1;
-[_array] spawn {
-	{_x setdammage 1.0;
-	sleep 0.1;
-	} forEach (_this select 0);
-};
+[_nukepos, 800, 1138, [], true] call bis_fnc_destroyCity; //compile preprocessFileLineNumbers "ambience\modules\crb_destroycity\fn_destroyCity.sqf";
 
-_buildings = nearestObjects [_nukepos,["Static"], 800]; 
-{_x setDamage 1} foreach _buildings;
+sleep 0.9;
+_array = _nukepos nearObjects ["Thing", 800];
 sleep 0.1;
-
-_array = (nearestObjects [_nukepos,[], 100]) - ((_nukepos) nearObjects 800);
-{DeleteCollection _x} forEach _array;
+{_x setdammage 1} forEach _array;
 sleep 0.1;
-
-_array = (nearestObjects [_nukepos,[], 200]) - ((_nukepos) nearObjects 1000);
-{_x setdammage ((getdammage _x) + 1.0)} forEach _array;
+_array = _nukepos nearObjects ["Static", 800];
 sleep 0.1;
-
+{_x setdammage 1} forEach _array;
+sleep 0.1;
+_array = _nukepos nearObjects ["Strategic", 800];
+sleep 0.1;
+{_x setdammage 1} forEach _array;
+sleep 0.1;
+_array = _nukepos nearObjects ["NonStrategic", 800];
+sleep 0.1;
+{_x setdammage 1} forEach _array;
+sleep 0.1;
 _array = _nukepos nearObjects ["All", 1000];
-{_x setdammage ((getdammage _x) + 0.2)} forEach _array;
 sleep 0.1;
-
+{_x setdammage 0.8} forEach _array;
+sleep 0.1;
 _array = _nukepos nearObjects ["Man", 1500];
-{_x setdammage ((getdammage _x) + 0.4)} forEach _array;
+{_x setdammage 0.4} forEach _array;
 sleep 0.1;
+//
 
 _array = _nukepos nearObjects ["Land", 1200];
 {_x setdammage ((getdammage _x) + 0.3)} forEach _array;
@@ -71,7 +71,15 @@ _array = _nukepos nearObjects ["NonStrategic", 1000];
 {_x setdammage ((getdammage _x) + 0.4)} forEach _array;
 sleep 0.1;
 
-_array = nil;
-
-//radarea = "HeliHEmpty" createVehicle _nukepos;
 [_nukepos] execvm "scripts\nuke\nuke_radzone_server.sqf";
+
+/*
+[_nukepos, 40] spawn
+	{
+		for "_i" from 1 to 3 do 
+		{
+			Sleep 2;
+			[_this select 0, _this select 1, _i] spawn echo_nuke_fnc_fallout;
+		};
+	};
+*/
