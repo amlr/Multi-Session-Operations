@@ -7,7 +7,12 @@ if (Emergency == 0) exitWith{};
 waitUntil{!isNil "bis_functions_mainscope"};
 waitUntil{typeName (bis_functions_mainscope getVariable "locations") == "ARRAY"};
 
+crb_emergency_debug = debug_mso;
+
+if isnil "crb_emergency_debug" then {
 crb_emergency_debug = false;
+};
+
 _hospitals = [];
 _police = [];
 _repairs = [];
