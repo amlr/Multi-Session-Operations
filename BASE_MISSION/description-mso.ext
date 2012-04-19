@@ -77,15 +77,6 @@ class ambientHeader {
 #ifdef CRB_SHEPHERDS
 	#include <ambience\modules\crb_shepherds\params.hpp>
 #endif
-#ifdef CRB_CROWS
-	#include <ambience\modules\crb_crows\params.hpp>
-#endif
-#ifdef CRB_FLIES
-	#include <ambience\modules\crb_flies\params.hpp>
-#endif
-#ifdef CRB_SANDSTORM
-	#include <ambience\modules\crb_sandstorm\params.hpp>
-#endif
 #ifdef CRB_DESTROYCITY
 	#include <ambience\modules\crb_destroyCity\params.hpp>
 #endif
