@@ -120,7 +120,10 @@ BIS_alice_mainscope setvariable ["threatDecay", 0.00005];
 // [BIS_alice_mainscope,"ALICE_civilianinit",[{_this addweapon "Mk_48"}]] call bis_fnc_variablespaceadd; 
 // Dumb down civilian units to use less CPU (see http://creobellum.org/node/175)
 [BIS_alice_mainscope,"ALICE_civilianinit",[
-        {_this setSkill 0}, 
+        {
+            if (leader group _this == _this) then {setVariable ["rmm_gtk_exclude", true]}};
+        },
+        {_this setSkill 0},
         { 
                 {_this disableAI _x} count ["AUTOTARGET","TARGET"]
         },
