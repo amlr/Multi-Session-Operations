@@ -121,7 +121,7 @@ BIS_alice_mainscope setvariable ["threatDecay", 0.00005];
 // Dumb down civilian units to use less CPU (see http://creobellum.org/node/175)
 [BIS_alice_mainscope,"ALICE_civilianinit",[
         {
-            if (leader group _this == _this) then {setVariable ["rmm_gtk_exclude", true]}};
+            if (leader group _this == _this) then {_this setVariable ["rmm_gtk_exclude", true]};
         },
         {_this setSkill 0},
         { 
