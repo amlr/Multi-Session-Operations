@@ -269,7 +269,7 @@ for "_j" from 1 to _numconvoys do {
 diag_log format["MSO-%1 Convoys # %2", time, _numconvoys];
 
 while {!ABORTTASK_PO && !stopscript} do {
-    diag_log [diag_frameno, diag_ticktime, time, "waiting..."];
+    if (_debug) then {diag_log [diag_frameno, diag_ticktime, time, "waiting..."]};
     sleep 5;
 };
 
