@@ -13,6 +13,141 @@ Thanks to:
 - Roy86 for Patrol Ops 2 Module
 - Enigma for Weather Module
 
+v4.3
+
+[MISSIONS] - Updated missions to include Roy_patrolops2
+[MISSIONS] - USMC/UN vs INS on Chernarus
+[MISSIONS] - Updated missions to support WHB Multispawn (added MHQState variable to M1130)
+[MISSIONS] - Removed old mso factions def from lingor mission
+[MISSIONS] - Updated Lingor Enemy Module definition
+[MISSIONS] Pushed ACE mission with changed respawn_markers
+[MISSIONS] updated respawn_markers to respawn_%faction% in Non-ACE versions and changed "Set Spawn" on HQs to correct path
+[MISSIONS] - Updated Core on Chernarus
+[MISSIONS] - Added Ambience on Celle - Renamed mission name that was too long for editor
+[Missions] - Added Core test mission on Celle
+[Missions] - Updated debug mission
+[MISSIONS] - added CWR2 on Everon MSO - added 32 ACE COOP on Hazar-Kot - updated 32 ACE COOP on Zargabad
+[MISSIONS] - Added 32 ACE COOP US/CZ vs TAK on Zargabad
+
+[SCRIPTS] Performance improvements on nuke
+[SCRIPTS] Cleaned up Nuke code
+[SCRIPTS] forgot to stage Nuke code
+[SCRIPTS] Added MP compatible Nuke ([position] execvm "scripts\nuke\nuke.sqf", execute on all localities)
+
+[AMBIENCE] Switched off Emergency Services for stability (hopefully fixes crashes)
+[AMBIENCE] Added global debug to Emergency services
+[AMBIENCE] Added Celle 2 to Civilian Setup
+[CRB_CIVILIANS] Corrected CIV Faction to CIV_LGR to ensure compatibility with Lingor
+[CRB_SHEPERDS] Added default sheperdclass
+[CRB_CIVILIANS] - Added Lingor settings - Added #ifdef for TUP_IEDs to ambient vehicles - Removed broadcast setVariable
+[BIS Ambient Civs] - Re-enabling opening/closing doors as it is not the cause of game freezing
+[TUP_SEATRAFFIC] - Typo in params
+[TUP_SEATRAFFIC] - Added faction control
+[CRB_AMBIENTCIVS] - Reduced population count in Chernarus
+[BIS Civilians] - Disabled auto door closing until performance can be improved.
+[CRB_Dogs] - Added additional location types
+[CRB_Shepherd] - Added additional location types - Updated Hazar-Kot, still plenty of bugs
+
+[ENEMY] - Fixed IEDs not created (4 elements instead of 3 and a ] too much)
+[ENEMY] - Updated IED triggers to only occur once and not repeatedly
+[ENEMY] - Fixed AA debug issue
+[ENEMY] - Improved EOD_IED debug markers
+[ENEMY] - More debug improvements for TUP_IED
+[ENEMY] - Added global debug for Patrol Ops
+[ENEMY] - Further improvements to TUP_IED debugging, adding VB-IED markers
+[ENEMY] - Updated TUP_IED debugging to clearly show trigger circles for IEDs (yellow) and Suicides (orange)
+[ENEMY] - Reformatted factions parameters
+[ENEMY] - Added factions Iran (NLA), Lingor Rebels (ibr_ARL_faction), Lingor Druglords Army (ibr_DRG_faction)
+[RMM_ENEMYPOP] debug to false for release
+[ROY_PATROLOPS] Added FR_R to Teamleaders (Saboteurs are nice), added debug to flatarea in PO2 module
+[ROY_PATROLOPS] Added Guerillas to PO2 (nice on Lingor)
+[ROY_PATROLOPS] Added Baseguards for created Camps
+[ENEMY] Updated AA spawns to reduce the number of static guns
+[WICT_enemypop] statet, that its a standalone module
+[ENEMY] Fixed missing }; in Enemy Pop to ensure enemy locations are not spawned within safe distance.
+[ENEMY] Fixed TUP_IED so that Ambient Suicide Bombers only spawn if ambient civilians has been enabled.
+[RMM_ENEMYPOP] fixed error with private variable "_debug"
+[WICT_ENEMYPOP] - Removed dependency on add/removeLoopHandler
+[RMM_ENEMYPOP] - Removed dependency on add/removeLoopHandler
+[RMM_ENEMYPOP] fixed loading times and steep hillside camps
+[CRB_CONVOYS] turned off by default (is included in PO2)
+[ROY_PATROLOPS] changed return point to respawn_west
+[ROY_PATROLOPS] added "unlimited missions" parameter
+[ROY_PATROLOPS] changed trigger area in CAP_vehicle,SAR_Pilot,SAR_pow to 100 mtrs at RTP
+[ROY_PATROLOPS] turned off caching for task CRB_convoy
+[ROY_PATROLOPS] turned off caching for task SAD_bombcar
+[ROY_PATROLOPS] changed text for task SAD_tower (is better for unnamed hills)
+[RMM_ENEMYPOP] - Fixed typo - Changed function dependency on ROY_PATROLOPS to copy/paste of function - Renamed function name for future proofing
+[ENEMY] - Fixed missing lines in AA spawn script
+[ENEMY] - Updated AA spawn script so that AA sites are not spawned near each other, that static sites have some camp element and the static weapons are within 20m of the camp
+[ENEMY] - Added Anti Air site/unit spawning and parameters to enable/disable or specify guns only. - Updated fn_randomGroup to support filtering of AA units (or any other group) - Updated Enemy pop camps to point in direction of location they are defending
+[ENEMY] - Update Enemy population to exclude locations within spawn distance of ammo and ammo_1 markers.
+[ENEMY] - Fixed Enemy population house patrol issue (now executing when a camp does not exist)
+[ENEMY] - Updated Enemy Population to use parameters for defining possibility of Infantry, Motorized, Mechanized or Armoured Units
+[ENEMY] - Updated Enemy Population to randomly spawn road blocks near towns
+[ENEMY] - Updated Enemy Population to randomly patrol houses when nearby (using CRB_HousePos script)
+[ENEMY] - Updated Enemy Pop to use mps_getflatarea for camp locations, tweaked distances to suit locations
+[ENEMY] Updated TUP_IED giving choice of whether IEDs spawn in enemy occupied towns only or randomly.
+[ENEMY] - Fixed TUP_IED so that it no longer spawns IEDs in towns/locations where players spawn or where an "ammo" or "ammo_1" marker exists
+[PO2] splitted operation lines for air/armored/etc.-ops, switchoffable in Params
+[PO2] changed way of signing in (now over comms and interaction menu), disabled
+[PO2] split up many parts of PO2 and tweaked quite a bit
+[PO2] slight changes in CRB_convoy-task (diablecache)
+[ENEMY] - Patrol Ops 2 - Added correct params for Air ops
+[ENEMY] - Patrol Ops 2 - Updated Air tasks and function to check if target has been destroyed by aircraft
+[ENEMY] - Patrol Ops 2 - Added Air Ops for experimental use
+[PO2] fixed bug where no location was found in some tasks
+[CWR2 ENEMYPOP] - added CWR2 compositions
+
+[DEBUG] - Added player spawn zone marker, updated reezo IED marker
+[DEBUG] - Fixed debug for SP/Editor
+[DEBUG] - Updated debugging to provide better view using markers of what's going on
+[RMM_DEBUG] - Server FPS dependency on PublicVariable removed
+[RMM_DEBUG] - Private variable fix
+
+[RMM_NOMAD] - Fixed disconnect with Infinite lives set
+[RMM_NOMAD] - Removed CBA_fnc_AddMagazineVerified - Reverted back from initialisation delay, as it broke NOMAD functionality ie you wait for 2 mins before being teleported to your last location, etc - Removed one PublicVariable instance (2 to go)
+[RMM NOMAD] - Added initial delay minimum 2 mins + random nomadTime
+[CORE] - Disabled BIS Core Conversations for all players
+[CORE] - Implemented global debug param, updated version to 4.30
+[CORE] Updated ACE menu definition in init-mods.sqf to fix error in RPT
+[CORE] - Moved Mission Params Headers to decscription.ext - Formatted all other params accordingly
+[CORE] rewrote and optimized randomgroupbytype, added fallback to "man" to ensure lingor_units compatibility
+[CORE] - Signature changes
+[CORE] Introduced Function mso_core_fnc_randomgroupbytype, that creates a group of random vehicles of a certain type Infantry, Motorized, Mechanized, Armored - also works with no group defined configs.
+[CORE] fixed error when no usable groupconfigs are found in all MSOFactions! Defaulting to function fn_randomgroupbytype then.
+[CORE] - Reverted CBA GlobalExec change
+[CORE] - Moved initialisation messages to Map Menu - Move ACE specific code to init-mods.sqf
+[CORE] - Disabling add/removeLoopHandler as deprecated functions (Flies, Sandstorms and Crows still pending for removal)
+[CORE] - Moved version information to core\init.sqf - Added automatic load for BIS Functions if not enabled in editor
+[CORE] - Changed RMM_ExMP to use CBA_globalExecute instead
+[CORE] Fixed Caching so that it does not initialize client-side.
+[CORE] - Updated init-mods.sqf with ACE and ACE WOUNDS parameters. Also updated the EOD code to support the new EOD Loudspeaker implementation. Updated CIM extraction heli pad code to use mps_getFlatArea.
+[CORE] - Fixed EOD Loudspeaker, now works with JIP and on dedicated server.
+[CORE] - Fixed module messages (showing when disabled)
+[CORE] - Fixed compositions not spawning on dedicated servers, objects no longer created locally
+[CORE] - Fixed issue where EOD THOR devices were not being added to crates in dedicated server scenario
+[RMM_MPRIGHTS] - Removed dependency on add/removeLoopHandler
+[RMM_WEATHER] - Changed timesync default to monitor only - Change time check resolution to 1000's of a second (using time instead of date) - Using skipTime to adjust - Removed obsoleted dynamic weather out of code
+
+[SUPPORT] Updated CAS to abort if the aircraft is damaged
+[SUPPORT] Improved CAS code to provide more comms, reduce network load.
+[SUPPORT] Improved CAS module to include radio comms from CAS Pilot to update on status (ETA, RTB, Damaged)
+[SUPPORT] Fixed issue where UAV fired mounted Hellfire have little damage effect.
+[SUPPORT] Fixed CASEVAC module, no longer throws error when calling nine liner. Better selection of landing positions and more robust if CASEVAC is damaged.
+[SUPPORT] - Updated Recruitment module to provide performance enhancement on client side scripts
+[SUPPORT] Updated Recruitment so that script runs client-side only to reduce hit on server.
+[SUPPORT] - Fixed recruitment dedi server issue (forgot to broadcast the classes)
+[SUPPORT] - Upgraded Recruitment to now dynamically get all available Man classes irrespective of add-ons etc. for players faction
+[SUPPORT] - Code cleanup: added default case to the setDefaultSpawn method
+[SUPPORT] - Forgot to update path in support init
+[SUPPORT] Fixed - being able to deploy MHQ multiple times - Added - Option to autocreate JIP Marker on deploy
+[WHB_Multispawn] - Added failsafe for faction marker if absent.
+[WHB_Multispawn] - Added check to see if FOB hasn't been destroyed before respawning there
+[WHB_Multispawn] - Default spawn locations based on faction e.g. respawn_USMC, respawn_BIS_US, etc.
+[WHB_Multispawn] - Fixed a bug where the direction of the FOB/MHQ was not set correctly on dedi servers
+[TOWNMGR] Fixed wrong town names
+
 v4.2
 Core
 - Added CWR² M113 HQ to WHB Multispawn

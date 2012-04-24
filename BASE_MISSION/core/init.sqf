@@ -14,7 +14,7 @@ if (isnil "BIS_functions_mainscope") then {
 
 waitUntil{!isNil "BIS_fnc_init"};
 
-diag_log format["MSO-%1 Version: %2", time, "4.30"];
+diag_log format["MSO-%1 Version: %2", time, "4.31"];
 
 //Create the comms menu on all machines.
 [] call BIS_fnc_commsMenuCreate; 

@@ -42,7 +42,8 @@ if ((typeName _supReqs) == (typeName 0)) then
 	//if (BIS_SOM_a2Avail) then {_availReq = _availReq + ["transport", "supply_drop", "artillery_barrage"]};
 	if (BIS_SOM_ahAvail) then {_availReq = _availReq + ["gunship_run"]};
 	
-	for "_i" from 0 to (count _supReqs - 1) do 
+	// http://forums.bistudio.com/showthread.php?132307-Multi-Session-Operations-v4-2-released&p=2136015&viewfull=1#post2136015
+	for "_i" from 0 to (count _availReq - 1) do 
 	{
 		_supReqsTmp = _supReqsTmp + [_availReq call BIS_fnc_selectRandom];
 		if (BIS_SOM_a2Avail) then {};
