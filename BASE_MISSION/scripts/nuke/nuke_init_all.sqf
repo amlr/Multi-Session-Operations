@@ -1,5 +1,6 @@
 _nukepos = _this select 0;
 
+[] execvm "scripts\nuke\nuke_fx_fnc.sqf";
 waituntil {!isnil "_nukepos"};
 
 _center = "HeliHempty" createVehicle _nukepos;
@@ -31,9 +32,10 @@ if (isNil "echo_nuke_fnc_fallout") then {
 */
 
 if (isserver) then {
-    [_nukepos] execvm "scripts\nuke\nuke_damage_server.sqf";
+    [_nukepos,7200] execvm "scripts\nuke\nuke_damage_server.sqf";
 };
 
 if !(isserver) then {
     [_nukepos] execvm "scripts\nuke\nuke_explosion_client.sqf";
+    [_nukepos,7200] execvm "scripts\nuke\nuke_radzonefx_client.sqf";
 };
