@@ -669,6 +669,9 @@ for "_i" from 1 to _numcells do {
                 
                 // Pick a spawn point
                 _spawn =  _spawnpoints call BIS_fnc_selectRandom;
+                while {
+                (([_spawn, 1500] call fPlayersInside) or (_spawn distance getmarkerpos "ammo" < 1500) or (_spawn distance getmarkerpos "ammo_1" < 1500)) 
+                } do {_spawn = _spawnpoints call BIS_fnc_selectRandom; sleep 0.1};
                 
                 //DEBUG:player setPos _spawn;
                 //DEBUG:sleep 15;
