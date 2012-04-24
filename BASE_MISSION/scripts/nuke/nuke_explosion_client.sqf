@@ -1,6 +1,8 @@
 if (isserver) exitwith {};
 private ["_cone","_top","_top2","_top3","_smoke","_wave","_light","_expdist","_vdold"];
 
+nuke_on = true;
+
 _nukepos = _this select 0;
 _vdold = viewdistance;
 _expdist = player distance _nukepos;
@@ -77,7 +79,7 @@ sleep 0.1;
 _xHandle = []spawn
 {
 	Sleep 4;
-	"colorCorrections" ppEffectAdjust [1.0, 0.5, 0, [0.5, 0.5, 0.5, 0], [1.0, 1.0, 0.8, 0.4],[0.3, 0.3, 0.3, 0.1]];
+	"colorCorrections" ppEffectAdjust [1, 0.8, -0.001, [0.0, 0.0, 0.0, 0.0], [0.8*2, 0.5*2, 0.0, 0.7], [0.9, 0.9, 0.9, 0.0]];
 	"colorCorrections" ppEffectCommit 7;
 };
 
@@ -87,6 +89,8 @@ sleep 1;
 "dynamicBlur" ppEffectCommit 1;
 _Wave setDropInterval 0.001;
 
+windv = true;
+player spawn fnc_nuke_wind;
 addCamShake [10, 25, 25];
 
 deletevehicle _top;
@@ -120,13 +124,14 @@ while {_i < 100} do
 };
 deleteVehicle _light;
 
-"colorCorrections" ppEffectAdjust [1, 1, 0, [0.5, 0.5, 0.5, 0], [1.0, 1.0, 0.8, 0.4],[0.3, 0.3, 0.3, 0.1]];"colorCorrections" ppEffectCommit 1; "colorCorrections" ppEffectEnable TRUE;
+"colorCorrections" ppEffectAdjust [1, 1, 0, [0.5, 0.5, 0.5, 0], [1.0, 1.0, 0.8, 0.4],[0.3, 0.3, 0.3, 0.1]];"colorCorrections" ppEffectCommit 5; "colorCorrections" ppEffectEnable TRUE;
 
 sleep 2;
 
 setviewdistance 5000;
+
 "dynamicBlur" ppEffectAdjust [0];
-"dynamicBlur" ppEffectCommit 1;
+"dynamicBlur" ppEffectCommit 5;
 
 _Cone setDropInterval 0.01;
 _smoke setDropInterval 0.006;
@@ -138,6 +143,9 @@ _Cone setDropInterval 0.02;
 _Wave setDropInterval 0.01;
 
 sleep 15;
+windv = false;
+nuke_on = false;
 
+deleteVehicle _light;
 deleteVehicle _Wave;
 deleteVehicle _cone;
