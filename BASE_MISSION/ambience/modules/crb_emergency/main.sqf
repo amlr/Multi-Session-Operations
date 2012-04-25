@@ -67,7 +67,8 @@ _maxdist = 3000;
                 };
         } forEach _h;
         _hospitals = _hospitals + _hp;
-        _police = _police + _pp;        
+        _police = _police + _pp;
+
 } forEach (bis_functions_mainscope getVariable "locations");
 
 {

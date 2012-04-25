@@ -20,9 +20,9 @@ case "scalar" : {
 						private ["_type","_cost"];
 						_type = _x select 0;
 						_cost = _x select 2;
-						_types = _types + [_type];
-						_names = _names + [(gettext (configfile >> "CfgVehicles" >> _type >> "displayName")) + format ["	%1", _cost]];
-						_enabled = _enabled + [if (_supplies - _cost >= 0) then {1} else {0}];
+						_types set [count _types, _type];
+						_names set [count _names, ((gettext (configfile >> "CfgVehicles" >> _type >> "displayName")) + format ["	%1", _cost])];
+						_enabled set [count _enabled, if (_supplies - _cost >= 0) then {1} else {0}];
 					};
 				} foreach (cnstrct_center getvariable "cnstrct_items");
 				[[_category,true],"cnstrct_menu2",[_types,_names,_enabled],"","cnstrct_params = '%1'; showcommandingmenu ''"] call BIS_fnc_createmenu;

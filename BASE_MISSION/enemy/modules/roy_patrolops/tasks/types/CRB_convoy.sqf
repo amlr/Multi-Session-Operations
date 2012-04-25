@@ -33,14 +33,14 @@ _convoydest = [];
 {
         private["_t","_m"];
         if(type _x == "BorderCrossing") then {
-                _spawnpoints = _spawnpoints + [position _x];
+                _spawnpoints set [count _spawnpoints, position _x];
                 if (_debug) then {
                         _t = format["convoy_s%1", floor(random 10000)];
                         _m = [_t, position _x, "Icon", [1,1], "TYPE:", "Destroy", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
                 };
         };
         if(type _x in _strategic) then {
-                _convoydest = _convoydest + [position _x];
+                _convoydest set [count _convoydest, position _x];
                 if (_debug) then {
                         _t = format["convoy_d%1", floor(random 10000)];
                         _m = [_t, position _x, "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorOrange", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;

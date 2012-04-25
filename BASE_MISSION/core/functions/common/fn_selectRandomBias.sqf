@@ -8,7 +8,7 @@ _result = [];
 _j = 0;
 {
 	for "_i" from 1 to _x do {
-		_result = _result + [_choices select _j];
+        _result set [count _result, _choices select _j];
 	};
 	_j = _j + 1;
 } forEach _bias;

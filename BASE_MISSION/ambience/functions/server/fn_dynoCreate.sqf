@@ -61,7 +61,7 @@ for "_i" from 0 to ((count _objs) - 1) do
 		_newObj setPosATL _newPos;
 		if (!isNil "_fuel") then {_newObj setFuel _fuel};
 		if (!isNil "_damage") then {_newObj setDamage _damage};
-		_newObjs = _newObjs + [_newObj];
+		_newObjs set [count _newObjs, _newObj];
 };
 
 CRBPROFILERSTOP

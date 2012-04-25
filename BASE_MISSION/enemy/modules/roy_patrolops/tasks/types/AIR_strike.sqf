@@ -46,7 +46,7 @@ _faction = switch(PO2_EFACTION) do {
 for [{_i = 0}, {_i < _count}, {_i = _i + 1}] do {
 	_cfgiTags = getArray (_cfg select _i >> "tags");
 	_cfgiName = configName (_cfg select _i);
-	if (_faction in _cfgiTags) then { _compositions = _compositions + [_cfgiName];};
+	if (_faction in _cfgiTags) then { _compositions set [count _compositions, _cfgiName];};
 };
 
 _camptype = _compositions call BIS_fnc_selectRandom;
@@ -64,7 +64,7 @@ if (count _targets == 0) then {
 		if (_cx iskindof "WarfareBBaseStructure") then {
 			_fx = getText(_vehx >> "faction");
 			if (_fx == PO2_EFACTION) then {
-				_targets = _targets + [_cx];
+				_targets set [count _targets, _cx];
 			};
 		};
 	};

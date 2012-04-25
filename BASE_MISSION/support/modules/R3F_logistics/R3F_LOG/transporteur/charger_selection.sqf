@@ -69,7 +69,7 @@ else
 				if (_objet distance _transporteur <= 30) then
 				{
 					// On mémorise sur le réseau le nouveau contenu du véhicule
-					_objets_charges = _objets_charges + [_objet];
+					_objets_charges set [count _objets_charges, _objet];
 					_transporteur setVariable ["R3F_LOG_objets_charges", _objets_charges, true];
 					
 					player globalChat STR_R3F_LOG_action_charger_selection_en_cours;

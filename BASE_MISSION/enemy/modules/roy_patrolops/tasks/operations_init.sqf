@@ -10,14 +10,14 @@ private ["_location"];
 
 {	if( position _x distance getMarkerPos format["respawn_%1",(SIDE_A select 0)] > 1500 ) then {
 		switch (type _x) do {
-			case "Name": {mps_loc_passes = mps_loc_passes + [_x];};
-			case "NameLocal": {mps_loc_passes = mps_loc_passes + [_x];};
-			case "NameVillage": {mps_loc_towns = mps_loc_towns + [_x];};
-			case "NameCity": {mps_loc_towns = mps_loc_towns + [_x];};
-			case "NameCityCapital": {mps_loc_towns = mps_loc_towns + [_x];};
-			case "Hill": {mps_loc_hills = mps_loc_hills + [_x];};
-			case "Airport": {mps_loc_airports = mps_loc_airports + [_x];};
-			case "ViewPoint": {mps_loc_viewpoints = mps_loc_viewpoints + [_x];};
+			case "Name": {mps_loc_passes set [count mps_loc_passes, _x];};
+			case "NameLocal": {mps_loc_passes set [count mps_loc_passes, _x];};
+			case "NameVillage": {mps_loc_towns set [count mps_loc_towns, _x];};
+			case "NameCity": {mps_loc_towns set [count mps_loc_towns, _x];};
+			case "NameCityCapital": {mps_loc_towns set [count mps_loc_towns, _x];};
+			case "Hill": {mps_loc_hills set [count mps_loc_hills, _x];};
+			case "Airport": {mps_loc_airports set [count mps_loc_airports, _x];};
+			case "ViewPoint": {mps_loc_viewpoints set [count mps_loc_viewpoints, _x];};
 		};
 	};
 } foreach CRB_LOCS;

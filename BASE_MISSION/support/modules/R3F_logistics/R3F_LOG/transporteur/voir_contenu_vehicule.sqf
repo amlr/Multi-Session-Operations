@@ -46,7 +46,7 @@ else
 		
 		if !((typeOf _objet) in _tab_objets) then
 		{
-			_tab_objets = _tab_objets + [typeOf _objet];
+			_tab_objets set [count _tab_objets, typeOf _objet];
 			_tab_quantite = _tab_quantite + [1];
 		}
 		else

@@ -180,7 +180,7 @@ class FSM
            "" \n
            "if (count _driverlooktmp > 0) then {_driverlook = _driverlooktmp};" \n
            "" \n
-           "{if ((isNull assignedVehicle _x) && !(isPlayer _x) && ((vehicle _x) isKindOf ""man"") && (side _x == _side)) then {_veharray = _veharray + [_x]}} foreach _driverlook;" \n
+           "{if ((isNull assignedVehicle _x) && !(isPlayer _x) && ((vehicle _x) isKindOf ""man"") && (side _x == _side)) then {_veharray set [count _veharray, _x]}} foreach _driverlook;" \n
            "" \n
            "if ((vehicle _car isKindOf ""Plane"") && ((position _car select 2) > 10)) then {_veharray = []};" \n
            "" \n
@@ -188,7 +188,7 @@ class FSM
            "{" \n
            "_assignedtmp = [];" \n
            "" \n
-           "{if ((alive (_x select 0)) && !((_x select 0) in crew _car) && (_car == assignedVehicle (_x select 0))) then {_assignedtmp = _assignedtmp + [_x]}} foreach _assigned;" \n
+           "{if ((alive (_x select 0)) && !((_x select 0) in crew _car) && (_car == assignedVehicle (_x select 0))) then {_assignedtmp set [count _assignedtmp, _x]}} foreach _assigned;" \n
            "_assigned = _assignedtmp;" \n
            "_assignedtmp = [];" \n
            "_i = 0;" \n
@@ -273,7 +273,7 @@ class FSM
           action=/*%FSM<ACTION""">*/"" \n
            "_veharraytmp = [];" \n
            "" \n
-           "{if (_x distance _car > _lookdis) then {_veharraytmp = _veharraytmp + [_x]}} foreach _veharray;" \n
+           "{if (_x distance _car > _lookdis) then {_veharraytmp set [count _veharraytmp, _x]}} foreach _veharray;" \n
            "" \n
            "_veharray = _veharray - _veharraytmp;" \n
            ""/*%FSM</ACTION""">*/;

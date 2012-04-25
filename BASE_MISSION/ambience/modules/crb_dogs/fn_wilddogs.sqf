@@ -63,13 +63,13 @@ for "_i" from 1 to _random do {
                                         _alive_humans = [];
                                         {
                                                 if ((side _dog)getFriend (side _x) <0.6) then {
-                                                        _alive_humans = _alive_humans + [_x];
+                                                        _alive_humans set [count _alive_humans, _x];
                                                         _dog knowsabout _x;
                                                 }
                                         }forEach _near_humans;
                                         
                                         // or attack everything!!!
-                                        //{_alive_humans = _alive_humans + [_x];_dog knowsabout _x;}forEach _near_humans;
+                                        //{_alive_humans set [count _alive_humans, _x];_dog knowsabout _x;}forEach _near_humans;
                                         
                                         _r = random 1;                        
                                         if (count _alive_humans >0)  then {

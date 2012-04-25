@@ -149,7 +149,7 @@ CRB_fnc_shepherdAttack = {
 		if(typeOf _x == "Pastor" || typeOf _x == "Fin") then {  
 			_x setspeedmode "FULL";
 			_x domove position _target;
-			_dogs = _dogs + [_x];
+			_dogs set [count _dogs, _x];
 		}
 	} forEach units _shepherd;
 

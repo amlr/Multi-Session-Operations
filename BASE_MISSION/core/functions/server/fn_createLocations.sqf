@@ -45,7 +45,7 @@ if (_debug) then {diag_log format ["MSO-%1 Create Locations: locations = %2", ti
 // Count citycenters
 _twnlist = [];
 {
-	if ((_x getvariable "type") == "CityCenter") then {_twnlist = _twnlist + [_x]};
+	if ((_x getvariable "type") == "CityCenter") then {_twnlist set [count _twnlist, _x]};
 	if (_debug) then {diag_log format ["MSO-%1 Create Locations: Found %2 %3 class:%4", time, _x getvariable "type", _x getvariable "name", _x getvariable "class"];};
 } foreach _loc;
 if (_debug) then {diag_log format ["MSO-%1 Create Locations: CityCenter count = %2", time, count _twnlist]};;
@@ -340,7 +340,7 @@ if (_output) then
 		if !(isnil "_neighbors") then {
 			if (count _neighbors > 0) then {
 				{
-					_neigh = _neigh + [_x getvariable "class"];
+                    _neigh set [count _neigh,_x getvariable "class"];
 				} foreach _neighbors;
 			};
 		};

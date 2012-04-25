@@ -43,7 +43,7 @@ if (isServer) then
 			{
 				_soldier_element = [];
 				call compile format ["_soldier_element = _spawn_pool select %1;",_s];
-				_soldiers = _soldiers + [_soldier_element];
+				_soldiers set [count _soldiers, _soldier_element];
 			};
 		}
 		else
@@ -52,7 +52,7 @@ if (isServer) then
 			{
 				_soldier_element = [];
 				call compile format ["_soldier_element = _spawn_pool select %1;",_s];
-				_soldiers = _soldiers + [_soldier_element];
+				_soldiers set [count _soldiers, _soldier_element];
 			};
 		};
 		
@@ -209,7 +209,7 @@ if (isServer) then
 			{
 				_soldier_element = [];
 				call compile format ["_soldier_element = _spawn_pool select %1;",_s];
-				_soldiers = _soldiers + [_soldier_element];
+				_soldiers set [count _soldiers, _soldier_element];
 			};
 		}
 		else
@@ -218,7 +218,7 @@ if (isServer) then
 			{
 				_soldier_element = [];
 				call compile format ["_soldier_element = _spawn_pool select %1;",_s];
-				_soldiers = _soldiers + [_soldier_element];
+				_soldiers set [count _soldiers, _soldier_element];
 			};
 		};
 		

@@ -45,14 +45,14 @@ if !(isServer && isDedicated) then
 	R3F_LOG_classes_transporteurs = [];
 	
 	{
-		R3F_LOG_classes_transporteurs = R3F_LOG_classes_transporteurs + [_x select 0];
+		R3F_LOG_classes_transporteurs set [count R3F_LOG_classes_transporteurs, _x select 0];
 	} forEach R3F_LOG_CFG_transporteurs;
 	
 	// On construit la liste des classes des transportables dans les quantités associés (pour les nearestObjects, count isKindOf, ...)
 	R3F_LOG_classes_objets_transportables = [];
 	
 	{
-		R3F_LOG_classes_objets_transportables = R3F_LOG_classes_objets_transportables + [_x select 0];
+		R3F_LOG_classes_objets_transportables set [count R3F_LOG_classes_objets_transportables, _x select 0];
 	} forEach R3F_LOG_CFG_objets_transportables;
 	
 	R3F_LOG_FNCT_objet_init = compile preprocessFile "support\modules\R3F_logistics\R3F_LOG\objet_init.sqf";

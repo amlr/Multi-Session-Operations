@@ -85,7 +85,7 @@ _houses = [_position,1000] call mps_getEnterableHouses;
 					_markeraccuracy = 50 max (1000 - football_intel);
 					_markerpos = [football_location,random 360,random _markeraccuracy,false,2] call SHK_pos;
 	
-					football_marker = football_marker + [_markername];
+					football_marker set [count football_marker, _markername];
 	
 					While{!ABORTTASK_PO && not isNil "football_device"} do {
 						_marker = createMarker [_markername,_markerpos];

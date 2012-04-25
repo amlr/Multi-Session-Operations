@@ -72,7 +72,7 @@ objective_intel_KILLED = {
 				_marker setMarkerType "hd_unknown";
 				_marker setMarkerSize [0.75,0.75];
 				_marker setMarkerText format["%1m",_markeraccuracy];
-				objective_marker = objective_marker + [_markername]; publicVariable "objective_marker";
+				objective_marker set [count objective_marker, _markername]; publicVariable "objective_marker";
 			};
 		}];
 	};
@@ -111,7 +111,7 @@ for "_i" from 1 to 2 do {
 			_xmarker setMarkerSize [0.75,0.75];
 			_xmarker setMarkerColor _xmarkercolor;
 			_xmarker setMarkerText _xmarkertext;
-			objective_marker = objective_marker + [_xmarker];
+			objective_marker set [count objective_marker, _xmarker];
 		} forEach objective_marker;
 		sleep 30;
 	};

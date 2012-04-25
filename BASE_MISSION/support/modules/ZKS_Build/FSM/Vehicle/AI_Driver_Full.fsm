@@ -222,7 +222,7 @@ class FSM
            "(time > (_timeout + 10)))"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/"_assignedtmp = [];" \n
            "" \n
-           "{if ((alive (_x select 0)) && !((_x select 0) in crew _car) && (_car == assignedVehicle (_x select 0))) then {_assignedtmp = _assignedtmp + [_x]}} foreach _assigned;" \n
+           "{if ((alive (_x select 0)) && !((_x select 0) in crew _car) && (_car == assignedVehicle (_x select 0))) then {_assignedtmp set [count _assignedtmp, _x]}} foreach _assigned;" \n
            "_assigned = _assignedtmp;" \n
            "_assignedtmp = [];" \n
            "_i = 0;" \n

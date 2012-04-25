@@ -112,7 +112,7 @@ if (isServer) then
 
 		_wp_pos = [_prepos, 0, _slack, 6, 0, 50 * (pi / 180), 0, _blacklist,[_prepos]] call BIS_fnc_findSafePos;
 
-		_wp_array = _wp_array + [_wp_pos];
+		_wp_array set [count _wp_array, _wp_pos];
 
 		sleep 0.5;
 	};

@@ -128,7 +128,7 @@ if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1)) then
                                         if ((_x isKindOf "Wheeled_APC") || (_x isKindOf "LandRover_Base") || (_x isKindOf "HMMWV_Base") || (_x isKindOf "BAF_Jackal2_BASE_D") || (_x isKindOf "UAZ_Base")) then {
                                                 //						call compile format ["loudspeaker_%1 synchronizeObjectsadd [_x];",_speakernum];
                                                 _tits = _tits + 1;
-                                                PV_EOD_Loudspeaker_Vehicles = PV_EOD_Loudspeaker_Vehicles + [_x];
+                                                PV_EOD_Loudspeaker_Vehicles set [count PV_EOD_Loudspeaker_Vehicles, _x];
                                         };
                                 } foreach _list;
                                 diag_log format ["Synchronised %2 out of %1 possible cars to EOD Loudspeaker.", count _list, _tits];
@@ -213,7 +213,7 @@ if (isClass(configFile>>"CfgPatches">>"nielsen_cim")) then {
                 waitUntil{!isNil "CRM_AllGroups"};
                 _grp = group player;
                 if !(_grp in CRM_AllGroups) then {
-                        CRM_AllGroups = CRM_AllGroups + [_grp];
+                        CRM_AllGroups set [count CRM_AllGroups, _grp];
                         publicvariable "CRM_AllGroups";
                 };
         };

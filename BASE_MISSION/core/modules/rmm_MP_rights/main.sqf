@@ -43,27 +43,27 @@ if (isserver) then {
                                         _uid = _x select 0;
                                         MSO_R = _x select 2;
                                         if ("admin" in MSO_R) then {
-                                                MSO_R_Admin = MSO_R_Admin + [_uid];
+                                                MSO_R_Admin set [count MSO_R_Admin, _uid];
                                         } else {
                                                 MSO_R_Admin = MSO_R_Admin  - [_uid];
                                         };
                                         if (toUpper(_x select 1) in ["CORPORAL","SERGEANT","LIEUTENANT"] || "admin" in MSO_R) then {
-                                                MSO_R_Leader = MSO_R_Leader + [_uid];
+                                                MSO_R_Leader set [count MSO_R_Leader, _uid];
                                         } else {
                                                 MSO_R_Leader = MSO_R_Leader  - [_uid];
                                         };
                                         if (toUpper(_x select 1) == "LIEUTENANT" || "admin" in MSO_R) then {
-                                                MSO_R_Officer = MSO_R_Officer + [_uid];
+                                                MSO_R_Officer set [count MSO_R_Officer, _uid];
                                         } else {
                                                 MSO_R_Officer = MSO_R_Officer  - [_uid];
                                         };
                                         if ("pilot" in MSO_R || "admin" in MSO_R) then {
-                                                MSO_R_Air = MSO_R_Air + [_uid];
+                                                MSO_R_Air set [count MSO_R_Air, _uid];
                                         } else {
                                                 MSO_R_Air = MSO_R_Air  - [_uid];
                                         };
                                         if ("crew" in MSO_R || "admin" in MSO_R) then {
-                                                MSO_R_Crew = MSO_R_Crew + [_uid];
+                                                MSO_R_Crew set [count MSO_R_Crew, _uid];
                                         } else {
                                                 MSO_R_Crew = MSO_R_Crew  - [_uid];
                                         };

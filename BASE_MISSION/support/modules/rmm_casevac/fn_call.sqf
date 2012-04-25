@@ -290,7 +290,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 					_units = [_destpos, 100] call mso_core_fnc_getUnitsInArea;
 					{
 						if (!(canStand _x) && (faction _x == faction player)) then {
-							_wounded = _wounded + [_x];
+							_wounded set [count _wounded, _x];
 						};
 					} foreach _units;
 					

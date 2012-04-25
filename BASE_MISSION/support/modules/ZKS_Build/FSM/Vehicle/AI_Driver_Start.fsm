@@ -220,9 +220,9 @@ class FSM
            "_AIcrew = [];" \n
            "_AIcrew1 = [];" \n
            "_AIcrew2 = [];" \n
-           "{_AIcrew = _AIcrew + [typeOf _x]} foreach crew _car;" \n
-           "{_AIcrew1 = _AIcrew1 + [(assignedVehicleRole _x select 0)];" \n
-           " _AIcrew2 = _AIcrew2 + [(assignedVehicleRole _x select 1)];" \n
+           "{_AIcrew set [count _AIcrew, typeOf _x]} foreach crew _car;" \n
+           "{_AIcrew1 set [count _AIcrew1, (assignedVehicleRole _x select 0)];" \n
+           " _AIcrew2 set [count _AIcrew2, (assignedVehicleRole _x select 1)];" \n
            "} foreach crew _car;" \n
            "" \n
            "" \n

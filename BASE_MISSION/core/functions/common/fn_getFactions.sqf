@@ -45,7 +45,7 @@ _afactions = [];
         private["_fx"];
         _fx = getNumber(configFile >> "CfgFactionClasses" >> _x >> "side");
         if (_fx == _sidex) then {
-                _afactions = _afactions + [_x];
+                _afactions set [count _afactions, _x];
         };
 } forEach CRB_ALLFACS;
 _facs = _afactions;
@@ -59,8 +59,8 @@ if(count _this > 1) then {
                 
                 // Use the faction count as the bias - count factions
                 If (_currentFactionCount > 0) then {
-                        _factions = _factions + [_currentFaction];
-                        _factionsCount = _factionsCount + [_currentFactionCount];
+                        _factions set [count _factions, _currentFaction];
+                        _factionsCount set [count _factionsCount, _currentFactionCount];
                 };
         } foreach _afactions;
         

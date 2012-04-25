@@ -46,7 +46,7 @@ _staticWeapons = [];
 {
     if ((_x emptyPositions "gunner") > 0) then 
     {
-        _staticWeapons = _staticWeapons + [_x];    
+        _staticWeapons set [count _staticWeapons, _x];    
     };
 } forEach _list;
 
@@ -109,7 +109,7 @@ _wp3 setWaypointType "SAD";
         {
                 if ((_x emptyPositions 'gunner') > 0) then 
                 {
-                        _static_weapons = _static_weapons + [_x];    
+                        _static_weapons set [count _static_weapons, _x];    
                 };
         } forEach _list;
 	  {

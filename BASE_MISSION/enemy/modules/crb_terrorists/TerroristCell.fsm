@@ -39,7 +39,7 @@ class FSM
        "_spawnpoints = [];" \n
        "{" \n
        "	if(type _x == ""BorderCrossing"") then {" \n
-       "		_spawnpoints = _spawnpoints + [position _x];" \n
+       "		_spawnpoints set [count _spawnpoints, position _x];" \n
        "	};" \n
        "} forEach CRB_LOCS;" \n
        "" \n
