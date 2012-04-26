@@ -166,7 +166,7 @@ sleep 0.3;
 
 [format["TASK%1",_taskid],
 	"Nuclear Threat!",
-	format["We just received HUMINT of a nuclear threat! We know of 3 towns where Insurgents could hide a nuclear bomb and need to sort them out: %1, %2 or %3. We also know about two suitcases, at least one of them should be the trigger! Destroy them so we get time to defuse the bomb!", text _location01, text _location02, text _location03],
+	format["We just received HUMINT of a nuclear threat! We know of 3 towns where Insurgents could hide a nuclear bomb and need to search the following areas: %1, %2 or %3. We also know about two suitcases, at least one of them should be the trigger! Destroy them so we get time to defuse the bomb!", text _location01, text _location02, text _location03],
 	true,
 	[format["MARK%1",_taskid],(_position01),"hd_objective","ColorRedAlpha"," Target"],
 	"created",
@@ -191,7 +191,7 @@ if (!bombalive) then {
     [position _bomb] spawn {
         _sleep = 120 + floor(random 200);
         [2,[_sleep],{
-           PAPABEAR sideChat format ["%1 this is PAPA BEAR. Nuke countdown startet! You have about %2 minutes to clear the hot area!", group player, floor((_this select 0) / 60)];
+           PAPABEAR sideChat format ["%1 this is PAPA BEAR. Nuke countdown started! You have about %2 minutes to clear the area!", group player, floor((_this select 0) / 60)];
 		}] call mso_core_fnc_ExMP;
         sleep 30;
         _sleep = _sleep - 30;
