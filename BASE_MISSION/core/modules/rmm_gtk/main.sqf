@@ -14,7 +14,6 @@ _sleep = 3;
 if(_debug) then {
 	_range = 100;
 	_sleep = 1;
-	gtk_cache_header = 1;
 };
 
 if(!isNil "gtk_cache_distance") then { _range = gtk_cache_distance; };
@@ -76,7 +75,7 @@ if(!isNil "_fnc_init") then {
         _array = _groups;
 };
 
-diag_log format["MSO-%1 GTK Initialised %2 Groups", time, count _array];
+diag_log format["MSO-%1 GTK Initialised %2 Groups, launching %3 Caching...", time, count _array, _type];
 
 [_array, _range, _type, _sleep] spawn {
         private ["_array","_range","_type","_sleep","_functions","_fnc_sync","_exclude","_cached","_fnc_cache","_fnc_uncache","_fnc_refresh"];

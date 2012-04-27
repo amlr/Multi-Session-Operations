@@ -64,6 +64,10 @@ _cep_leader = leader _this;
         _count = _count + 1;
 } forEach _cep_typearray;
 
+if (debug_mso) then {
+	diag_log format["MSO-%1 CEP uncached: %2 of group:%3 leader:%4", time, _count, _this, typeof leader _this];
+};
+
 _this setVariable ["CEP_Array", nil];
 
 if(_count > 0) then {
