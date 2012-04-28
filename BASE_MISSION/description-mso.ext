@@ -137,6 +137,9 @@ class enemyHeader {
 #ifdef WICT_ENEMYPOP
 	#include <enemy\modules\WICT_enemypop\params.hpp>
 #endif
+#ifdef CQB_POP
+	#include <enemy\modules\HH_CQBpopulation\params.hpp>
+#endif
 }; 
 
 #ifdef R3F_LOGISTICS

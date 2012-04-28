@@ -116,3 +116,7 @@ execNow "enemy\modules\bis_warfare\main.sqf";
 "OCB Patrol Ops" call mso_core_fnc_initStat;
 execNow "enemy\modules\roy_patrolops\init.sqf";
 #endif
+#ifdef CQB_POP
+"CQB_Populator" call mso_core_fnc_initStat;
+execNow "enemy\modules\HH_CQBpopulation\main.sqf";
+#endif
