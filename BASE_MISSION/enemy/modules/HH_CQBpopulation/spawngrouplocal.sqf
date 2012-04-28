@@ -3,7 +3,7 @@ if (isserver) exitwith {};
 private ["_pos","_bldgpos","_nearbldgs","_unittype","_spawnpos","_endpos","_unit","_leader","_group"];
 waitUntil {!isNil "bis_fnc_init"};
 
-_debug = true;
+_debug = debug_mso;
 
 _pos = _this select 0;
 _bldgpos = [];
@@ -75,8 +75,9 @@ if (_debug) then {diag_log format["MSO-%1 CQB Population - Created group name %2
     sleep 20;
     
     {if (unitpos _x == "DOWN") then {_x setUnitPos "AUTO"}} foreach units (_group);
-    while {{_pos distance _x < 500} count ([] call BIS_fnc_listPlayers) > 0} do {sleep 5};
-    
+    while {({_pos distance _x < 500} count ([] call BIS_fnc_listPlayers) > 0) && (count units _group > 0)} do {sleep 5};
+    if !(count units _group > 0) then {if (_debug) then {diag_log format["MSO-%1 CQB Population - All units in group %2 are dead ...", time, _group]}};
+        
     _endpos = _bldgpos select floor(random count _bldgpos);
     if (_debug) then {diag_log format["MSO-%1 CQB Population - Group name %2 splitting up...", time, _group]};
     

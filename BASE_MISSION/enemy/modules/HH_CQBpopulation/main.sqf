@@ -1,12 +1,37 @@
 if (isnil "CQB_spawn") then {CQB_spawn = 1};
 if (CQB_spawn == 0) exitwith {diag_log format["MSO-%1 CQB Population turned off! Exiting...", time]};
 
-_debug = true;
+_debug = debug_mso;
 
 if (isserver) then {
 private ["_spawnhouses","_housecount","_positions","_position","_t","_m"];
 
-_spawnhouses = [markerpos "ammo_1",10000] call mps_getEnterableHouses;
+_base1 = markerpos "ammo_1";
+_base2 = markerpos "ammo";
+
+mso_fnc_getEnterableHouses = {
+// Written by BON_IF
+// Adapted by EightySix
+
+private ['_position','_radius'];
+
+_position = _this select 0;
+_radius = _this select 1;
+_houses = nearestObjects[_position,["House"],_radius];
+_houses_enterable=[];
+{	_house = _x;
+	_i = 0;
+	While{count ((_house buildingPos _i)-[0]) > 0} do {_i = _i+1};
+	_maxbuildingpos = _i - 1;
+
+	if(_maxbuildingpos>0) then{_houses_enterable = _houses_enterable + [[_house,_maxbuildingpos]]};
+} foreach _houses;
+
+_houses_enterable
+};
+
+
+_spawnhouses = [markerpos "ammo_1",10000] call mso_fnc_getEnterableHouses;
 _housecount = count _spawnhouses;
 if (_debug) then {diag_log format["MSO-%1 CQB Population: Houses found %2", time, _housecount]};
 
@@ -18,7 +43,7 @@ _i = 0;
 for "_i" from 0 to (_housecount-1) do {
     _position = position ((_spawnhouses select _i) select 0);
     
-    if ((random 1) > 0.9) then {
+    if (((random 1) > 0.9) && ((_position distance _base1) > rmm_ep_safe_zone) && ((_position distance _base2) > rmm_ep_safe_zone)) then {
         _positions set [count _positions, _position];
         if (_debug) then {
          		_t = format["op%1",_i];
