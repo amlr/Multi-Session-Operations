@@ -21,11 +21,13 @@ Receiving_finish = false;
 if(isNil "paramsArray") then {
 // Mission Parameters (set directly by class to allow module)
 	MISSIONTIME	= 9;
-	MISSIONTYPE	= 5;
 	MISSIONCOUNT	= 3;
-	ACEWOUNDENBLE	= 1;
 	MISSIONDIFF	= 1;
 	AMBAIRPARTOLS	= 0;
+    MISSIONTYPE_PO = 4;
+    MISSIONTYPE_AIR = 0;
+    PO2_EFACTION = 0;
+    PO2_IFACTION = 0;
 };
 
 if(AMBAIRPARTOLS > 0) then {mps_ambient_air = true};
