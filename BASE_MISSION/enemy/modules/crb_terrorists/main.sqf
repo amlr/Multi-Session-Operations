@@ -442,7 +442,7 @@ CRB_fnc_SplitCell = {
         _split = (ceil(random (_count / 2))) max 2;
         
         _newcell  = createGroup east;
-        _newcell setVariable ["CEP_disableCache", true, true];
+        _newcell setVariable ["rmm_gtk_exclude", true, true];
         for "_i" from 0 to _split do {
                 [(units _grp - [_terrorlead]) call BIS_fnc_selectRandom] joinSilent _newcell;
         };
@@ -528,7 +528,7 @@ CRB_fnc_SpawnNewCell = {
         _terrorlead setBehaviour "ALERT";
         _terrorlead setSpeedMode "FULL";
         _terrorlead allowFleeing 0;
-        (group _terrorlead) setVariable ["CEP_disableCache", true, true];
+        (group _terrorlead) setVariable ["rmm_gtk_exclude", true, true];
         _maxgroupsize = 6 + floor(random 10);
         
         _ammo = [_spawn] call CRB_fnc_SpawnRandomAmmo;
@@ -679,7 +679,7 @@ for "_i" from 1 to _numcells do {
                 // Create terrorist leader and vehicle
                 _classMan = CRB_classlistMen call BIS_fnc_selectRandom;
                 _grp  = createGroup east;
-                _grp setVariable ["CEP_disableCache", true, true];
+                _grp setVariable ["rmm_gtk_exclude", true, true];
                 _terrorlead = (createGroup civilian) createUnit [_classMan, _spawn, [], 0, "NONE"];
                 [_terrorlead] joinSilent _grp;
                 
