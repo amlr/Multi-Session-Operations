@@ -4,7 +4,7 @@ if (CQB_spawn == 0) exitwith {diag_log format["MSO-%1 CQB Population turned off!
 _debug = debug_mso;
 
 if (isserver) then {
-private ["_spawnhouses","_housecount","_positions","_position","_t","_m"];
+private ["_spawnhouses","_housecount","_positions","_position","_t","_m","_cqb_spawn_intensity"];
 
 _base1 = markerpos "ammo_1";
 _base2 = markerpos "ammo";
@@ -31,7 +31,7 @@ _houses_enterable
 };
 
 
-_spawnhouses = [markerpos "ammo_1",10000] call mso_fnc_getEnterableHouses;
+_spawnhouses = [markerpos "ammo_1",CRB_LOC_DIST] call mso_fnc_getEnterableHouses;
 _housecount = count _spawnhouses;
 if (_debug) then {diag_log format["MSO-%1 CQB Population: Houses found %2", time, _housecount]};
 
@@ -39,11 +39,13 @@ _positions = [];
 _position = position ((_spawnhouses select 0) select 0);
 _positions set [count _positions, _position];
 
+_cqb_spawn_intensity = 1 - (cqb_spawn / 10);
+
 _i = 0;
 for "_i" from 0 to (_housecount-1) do {
     _position = position ((_spawnhouses select _i) select 0);
     
-    if (((random 1) > 0.9) && ((_position distance _base1) > rmm_ep_safe_zone) && ((_position distance _base2) > rmm_ep_safe_zone)) then {
+    if (((random 1) > _cqb_spawn_intensity) && ((_position distance _base1) > rmm_ep_safe_zone) && ((_position distance _base2) > rmm_ep_safe_zone)) then {
         _positions set [count _positions, _position];
         if (_debug) then {
          		_t = format["op%1",_i];
