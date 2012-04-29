@@ -92,6 +92,11 @@ execNow "enemy\modules\tup_ied\main.sqf";
 execNow "enemy\modules\crb_terrorists\main.sqf";
 #endif
 
+#ifdef CQB_POP
+"CQB Populator" call mso_core_fnc_initStat;
+execNow "enemy\modules\CQB_POP\main.sqf";
+#endif
+
 #ifdef RMM_ENEMYPOP
 "Enemy Populate" call mso_core_fnc_initStat;
 execNow "enemy\modules\rmm_enemypop\main.sqf";
@@ -116,7 +121,5 @@ execNow "enemy\modules\bis_warfare\main.sqf";
 "OCB Patrol Ops" call mso_core_fnc_initStat;
 execNow "enemy\modules\roy_patrolops\init.sqf";
 #endif
-#ifdef CQB_POP
-"CQB_Populator" call mso_core_fnc_initStat;
-execNow "enemy\modules\HH_CQBpopulation\main.sqf";
-#endif
+
+

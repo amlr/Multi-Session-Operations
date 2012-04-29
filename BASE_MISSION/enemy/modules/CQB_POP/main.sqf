@@ -58,40 +58,45 @@ Publicvariable "CQBpositions";
 };
 
 if !(isserver) then {
-private ["_positionslocal","_suspendedpositions","_idx"];
 
-waituntil {!isnil "CQBpositions"};
-_positionslocal = CQBpositions;
-_suspendedpositions = [];
+	[_debug] spawn {
 
-	while {true} do {
-    
-	   if (_debug) then {diag_log format["MSO-%1 CQB Population: Count all positions: %2 ", time, count _positionslocal]};
-	   if (_debug) then {diag_log format["MSO-%1 CQB Population: Count suspended positions: %2 ", time, count _suspendedpositions]};
+		private ["_positionslocal","_suspendedpositions","_debug","_idx"];
+		
+		waituntil {!isnil "CQBpositions"};
+		_positionslocal = CQBpositions;
+		_suspendedpositions = [];
+		_debug = _this select 0;
+		
+		while {true} do {
+		
+		   if (_debug) then {diag_log format["MSO-%1 CQB Population: Count all positions: %2 ", time, count _positionslocal]};
+		   if (_debug) then {diag_log format["MSO-%1 CQB Population: Count suspended positions: %2 ", time, count _suspendedpositions]};
 
-		{        
-			if ((_x distance player < 400) && (((position player) select 2) < 5)) then {
-				[_x] execvm "enemy\modules\HH_CQBpopulation\spawngrouplocal.sqf";
-				_suspendedpositions set [count _suspendedpositions, _x];
-            
-	     	    _idx = [_positionslocal, _x] call BIS_fnc_arrayFindDeep;
- 	     	    _idx = _idx select 0;
-				_positionslocal set [_idx, ">REMOVE<"];
-				_positionslocal = _positionslocal - [">REMOVE<"];
-       		};
-    	} foreach _positionslocal;
-    
-    sleep 5;
-    
-    	{        
-        	if (_x distance player > 400) then {
-           		_positionslocal set [count _positionslocal, _x];
-            
-           		_idx = [_suspendedpositions, _x] call BIS_fnc_arrayFindDeep;
-            	_idx = _idx select 0;
-				_suspendedpositions set [_idx, ">REMOVE<"];
-				_suspendedpositions = _suspendedpositions - [">REMOVE<"];
-       		};
-    	} foreach _suspendedpositions;
+			{        
+				if ((_x distance player < 400) && (((position player) select 2) < 5)) then {
+					[_x] execvm "enemy\modules\CQB_POP\spawngrouplocal.sqf";
+					_suspendedpositions set [count _suspendedpositions, _x];
+				
+					_idx = [_positionslocal, _x] call BIS_fnc_arrayFindDeep;
+					_idx = _idx select 0;
+					_positionslocal set [_idx, ">REMOVE<"];
+					_positionslocal = _positionslocal - [">REMOVE<"];
+				};
+			} foreach _positionslocal;
+		
+		sleep 5;
+		
+			{        
+				if (_x distance player > 400) then {
+					_positionslocal set [count _positionslocal, _x];
+				
+					_idx = [_suspendedpositions, _x] call BIS_fnc_arrayFindDeep;
+					_idx = _idx select 0;
+					_suspendedpositions set [_idx, ">REMOVE<"];
+					_suspendedpositions = _suspendedpositions - [">REMOVE<"];
+				};
+			} foreach _suspendedpositions;
+		};
 	};
 };
