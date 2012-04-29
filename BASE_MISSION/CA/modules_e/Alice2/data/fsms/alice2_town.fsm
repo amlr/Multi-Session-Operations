@@ -94,7 +94,7 @@ class FSM
        "_twn setvariable [""ALICE_spawnDistance"",_distLimit];" \n
        "" \n
        "//--- Town size" \n
-       "_twnSize = if (isnil {_twn getvariable ""ALICE_townsize""}) then {_distLimit * 2/3} else {_twn getvariable ""ALICE_townsize"";};" \n
+       "_twnSize = if (isnil {_twn getvariable ""ALICE_townsize""}) then {_logic getvariable ""ALICE_townsize""} else {_twn getvariable ""ALICE_townsize"";};" \n
        "_twn setvariable [""ALICE_townsize"",_twnSize];" \n
        "" \n
        "//--- Restecpa!" \n
