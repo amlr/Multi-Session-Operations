@@ -22,6 +22,8 @@ if(isNil "rmm_ep_mec")then{rmm_ep_mec = 2;};
 if(isNil "rmm_ep_arm")then{rmm_ep_arm = 1;};
 if(isNil "rmm_ep_aa")then{rmm_ep_aa = 2;};
 
+if(rmm_ep_intensity == 0) exitWith{diag_log format ["MSO-%1 Enemy Populator Disabled - Exiting.",time];};
+
 ep_groups = [];
 ep_total = 0;
 ep_campprob = 0.25;
