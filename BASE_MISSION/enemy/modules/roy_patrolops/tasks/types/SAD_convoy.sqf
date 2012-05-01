@@ -2,25 +2,36 @@ if(count mps_loc_towns < 1) exitWith{};
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_convoy.sqf"];
 
-private["_location","_position","_taskid","_object","_grp","_stance ","_b"];
+private["_locationstart","_locationEnd","_positionStart","_positionEnd","_spawnpos","_taskid","_object","_grp","_stance ","_b"];
 
-_location = (mps_loc_towns call mps_getRandomElement);
+_locationStart = (mps_loc_towns call mps_getRandomElement);
 
-while {_location == mps_loc_last} do {
-	_location = (mps_loc_towns call mps_getRandomElement); 
+while {_locationstart == mps_loc_last} do {
+	_locationstart = (mps_loc_towns call mps_getRandomElement); 
     sleep 0.1;
 };
 
-mps_loc_last = _location;
+mps_loc_last = _locationstart;
 
-_position = [(position _location) select 0,(position _location) select 1, 0];
-_position = [_position,10,0.1,2] call mps_getFlatArea;
-_spawnpos = getMarkerPos format["respawn_%1",(SIDE_B select 0)];
+_locationEnd = (mps_loc_towns call mps_getRandomElement);
 
-_spawnpos = [_position,(-20 + random 40),2400] call mps_new_position;
+while {_locationEnd == mps_loc_last} do {
+	_locationEnd = (mps_loc_towns call mps_getRandomElement); 
+    sleep 0.1;
+};
+
+mps_loc_last = _locationEnd;
+
+
+_positionStart = [(position _locationStart) select 0,(position _locationStart) select 1, 0];
+_positionEnd = [(position _locationEnd) select 0,(position _locationEnd) select 1, 0];
+
+_spawnpos = [_positionStart,200,0.15,5] call rmm_ep_getFlatArea;
+waituntil {!isnil "_spawnpos"};
+
 _spawnpos = position ([_spawnpos] call mps_getnearestroad);
 
-_taskid = format["%1%2%3",round (_position select 0),round (_position select 1),(round random 999)];
+_taskid = format["%1%2%3",round (_positionEnd select 0),round (_positionEnd select 1),(round random 999)];
 
 _radius = 200;
 _nearRoads = [];
@@ -49,21 +60,23 @@ sleep 2;
 deleteGroup _apcgroup;
 deleteGroup _armorgroup;
 
-_truckgroup addWaypoint [_position,200];
+_truckgroup addWaypoint [_positionEnd,200];
 _truckgroup setBehaviour "SAFE";
 _truckgroup setSpeedMode "LIMITED";
 _truckgroup setFormation "COLUMN";
 
+leader _truckgroup setVariable ["rmm_gtk_exclude", true];
+
 [format["TASK%1",_taskid],
 	"Destroy Weapons Convoy",
-	format["A weapons supply convoy is moving towards %1. Destroy it before it reaches the town.", _location],
+	format["A weapons supply convoy is moving from %1 to %2. Destroy it before it reaches the town.", text _locationStart, text _locationEnd],
 	true,
-	[format["MARK%1",_taskid],(_position),"hd_objective","ColorRedAlpha"," Target"],
+	[format["MARK%1",_taskid],(_positionEnd),"hd_objective","ColorRedAlpha"," Target"],
 	"created",
-	_position
+	_positionEnd
 ] call mps_tasks_add;
 
-While{!ABORTTASK_PO && (canMove _truck || canMove _armor || canMove _apc) && _truck distance _position > 100 && _armor distance _position > 100 && _apc distance _position > 100 } do { sleep 5 };
+While{!ABORTTASK_PO && (canMove _truck || canMove _armor || canMove _apc) && (_truck distance _positionEnd > 100 && _armor distance _positionEnd > 100 && _apc distance _positionEnd > 100) } do { sleep 5 };
 
 if(!ABORTTASK_PO && !canMove _truck && !canMove _armor && !canMove _apc) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;

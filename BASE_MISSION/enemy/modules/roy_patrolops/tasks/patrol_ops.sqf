@@ -3,7 +3,7 @@ private ["_list","_j","_next","_script","_i"];
 
 _list = switch (MISSIONTYPE_PO) do {
 	// Town Capture
-    case 1: {["SAD_nuke"]};
+    case 1: {["SAD_convoy"]};
 	// RTF Tasks
 	case 2: {["CAP_target","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","RTF_tower","SAD_bombcar","CRB_convoy"]};
 	// Search and Rescue
