@@ -10,6 +10,7 @@ if (debug_mso) then {
         
         // Show player spawn distance
         if !(isnull player) then {
+            	if (isnil "rmm_ep_spawn_dist") then {rmm_ep_spawn_dist = 1500;};
                 _t = format["player_%1", player];
                 _pm = [_t, position player, "ELLIPSE", [rmm_ep_spawn_dist,rmm_ep_spawn_dist], "TEXT:", _t, "BRUSH:", "Border", "COLOR:", "ColorGreen"] call CBA_fnc_createMarker;	
                 [_pm] spawn {
