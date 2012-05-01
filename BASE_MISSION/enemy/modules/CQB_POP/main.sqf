@@ -8,6 +8,7 @@ private ["_spawnhouses","_housecount","_positions","_position","_t","_m","_cqb_s
 
 _base1 = markerpos "ammo_1";
 _base2 = markerpos "ammo";
+if (isnil "rmm_ep_safe_zone") then {rmm_ep_safe_zone = 1000};
 
 mso_fnc_getEnterableHouses = {
 // Written by BON_IF
@@ -66,39 +67,30 @@ if !(isserver) then {
 		private ["_positionslocal","_suspendedpositions","_debug","_idx"];
 		
 		waituntil {!isnil "CQBpositions"};
-		_positionslocal = CQBpositions;
-		_suspendedpositions = [];
+		CQBpositionsLocal = CQBpositions;
+		CQBsuspendedposLocal = [];
+        CQBclearedpos = [];
 		_debug = _this select 0;
 		
 		while {true} do {
 		
-		   if (_debug) then {diag_log format["MSO-%1 CQB Population: Count all positions: %2 ", time, count _positionslocal]};
-		   if (_debug) then {diag_log format["MSO-%1 CQB Population: Count suspended positions: %2 ", time, count _suspendedpositions]};
+		   if (_debug) then {
+               		diag_log format["MSO-%1 CQB Population: %2 total | %3 suspended |%4 cleared positions...", time, count CQBpositionsLocal, count CQBsuspendedposLocal, count CQBclearedpos];
+		   			diag_log format["MSO-%1 CQB Population: Count %2 local of %3 total AI...", time, {local _x} count allUnits, count allUnits];
+           };
 
 			{        
 				if ((_x distance player < 400) && (((position player) select 2) < 5)) then {
 					[_x] execvm "enemy\modules\CQB_POP\spawngrouplocal.sqf";
-					_suspendedpositions set [count _suspendedpositions, _x];
+					CQBsuspendedposLocal set [count CQBsuspendedposLocal, _x];
 				
-					_idx = [_positionslocal, _x] call BIS_fnc_arrayFindDeep;
+					_idx = [CQBpositionsLocal, _x] call BIS_fnc_arrayFindDeep;
 					_idx = _idx select 0;
-					_positionslocal set [_idx, ">REMOVE<"];
-					_positionslocal = _positionslocal - [">REMOVE<"];
+					CQBpositionsLocal set [_idx, ">REMOVE<"];
+					CQBpositionsLocal = CQBpositionsLocal - [">REMOVE<"];
 				};
-			} foreach _positionslocal;
-		
+			} foreach CQBpositionsLocal;
 		sleep 5;
-		
-			{        
-				if (_x distance player > 400) then {
-					_positionslocal set [count _positionslocal, _x];
-				
-					_idx = [_suspendedpositions, _x] call BIS_fnc_arrayFindDeep;
-					_idx = _idx select 0;
-					_suspendedpositions set [_idx, ">REMOVE<"];
-					_suspendedpositions = _suspendedpositions - [">REMOVE<"];
-				};
-			} foreach _suspendedpositions;
 		};
 	};
 };
