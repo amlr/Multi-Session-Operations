@@ -68,19 +68,18 @@ for "_i" from 0 to (1 + floor(random 2)) do {
 
 _leader = leader _group;
 
-if (_debug) then {diag_log format["MSO-%1 CQB Population - Created group name %2 with %3 units...", time, _group, count units _group]};
+diag_log format["MSO-%1 CQB Population - Created group name %2 with %3 units...", time, _group, count units _group];
 
 [_group, _pos, _bldgpos,_debug,_units] spawn {
-    
+    private ["_group","_units","_pos","_cleared","_counter"];
     _group = _this select 0;
     _pos = _this select 1;
     _bldgpos = _this select 2;
     _debug = _this select 3;
     _units = _this select 4;
-    _timeout = 0;
     _cleared = false;
     
-    [_group, _pos, 150] call BIS_fnc_taskPatrol;
+    [_group, _pos, 150] spawn BIN_fnc_taskPatrol;
     //[_group,_pos,120] execVM "enemy\scripts\BIN_tasksweep.sqf";
     sleep 20;
     
@@ -101,17 +100,19 @@ if (_debug) then {diag_log format["MSO-%1 CQB Population - Created group name %2
     
     {
         [_x] join grpNull;
-        _x domove _endpos; 
-    
+        _x domove _endpos;
     } foreach _units;
+    
+    
     {
-        while {(alive _x) && (_x distance _endpos > 1) && (_timeout < 3600)} do {
+        _counter = 0;
+        while {(alive _x) && (_x distance _endpos > 1) && ({_pos distance _x < 2500} count ([] call BIS_fnc_listPlayers) > 0)} do {
         _x domove _endpos; 
         if (_x distance _endpos < 4) then {deletevehicle _x};
+        if (_counter > 300) then {_endpos = _bldgpos select floor(random count _bldgpos); _counter = 0};
         sleep 10;
-        _timeout = _timeout + 10;
+        _counter = _counter + 10;
         };
-        
     } foreach _units;
 
     {deletevehicle _x} foreach _units;
@@ -130,7 +131,7 @@ if (_debug) then {diag_log format["MSO-%1 CQB Population - Created group name %2
 	CQBsuspendedposLocal set [_idx, ">REMOVE<"];
 	CQBsuspendedposLocal = CQBsuspendedposLocal - [">REMOVE<"];
     
-    if (_debug) then {diag_log format["MSO-%1 CQB Population - Group deleted - script end...", time]};
+    diag_log format["MSO-%1 CQB Population - Group deleted - script end...", time];
 };
 
 _group;

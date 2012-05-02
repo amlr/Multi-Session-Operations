@@ -3,6 +3,10 @@ if (CQB_spawn == 0) exitwith {diag_log format["MSO-%1 CQB Population turned off!
 
 _debug = debug_mso;
 
+if (isnil "BIN_fnc_taskDefend") then {BIN_fnc_taskDefend = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskDefend.sqf"};
+if (isnil "BIN_fnc_taskPatrol") then {BIN_fnc_taskPatrol = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskPatrol.sqf"};
+if (isnil "BIN_fnc_taskSweep") then {BIN_fnc_taskSweep = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskSweep.sqf"};
+
 if (isserver) then {
 private ["_spawnhouses","_housecount","_positions","_position","_t","_m","_cqb_spawn_intensity"];
 
