@@ -1,10 +1,7 @@
 private["_stage"];
-_stage = _this;
+_stage = format["Initialising: %1", _this];
 
 player createDiaryRecord ["msoPage", ["Initialisation", 
-	format["Initialising: %1", _stage]
+	_stage
 ]]; 
-
-
-
-
+titleText [_stage, "BLACK FADED"];

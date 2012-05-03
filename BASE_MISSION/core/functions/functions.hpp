@@ -19,9 +19,6 @@ class mso_core {
 		class getFactions {};
 		class spawnCrew {};
 		class profiler {};
-	};
-	class server {
-		file = "core\functions\server";
 		class initLocations {};
 		class createLocations {};
 	};

@@ -14,8 +14,8 @@ _logic = _this select 0;
 _logic setpos [1,1,1];
 
 //--- Default values
-_logic setvariable ["id",0,true];
-_logic setvariable ["pause",true,true];
+_logic setvariable ["id",0];
+_logic setvariable ["pause",true];
 
 createcenter west;
 createcenter east;
@@ -313,7 +313,7 @@ _twnrespect = ["SET"] call BIS_fnc_respect;
 	_type = _x getvariable "type";
 	_name = _x getvariable "name";
 	_pos = position _x;
-	if (isnil {_x getvariable "respect"}) then {_x setVariable ["respect",_twnrespect,true]};
+	if (isnil {_x getvariable "respect"}) then {_x setVariable ["respect",_twnrespect]};
 	_x setVariable ["ALICE_active",false];
 	_x setVariable ["ALICE_active_traffic",0];
 	_x setvariable ["ALICE_threat",-1];

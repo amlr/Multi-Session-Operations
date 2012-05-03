@@ -21,7 +21,7 @@ if (typename _this == typename "") then {_this = ["citycenter",[],true]}; //--- 
 
 _types = if (count _this > 0) then {_this select 0} else {["citycenter"]};
 _area = if (count _this > 1) then {_this select 1} else {[[0,0,0],1000000]};
-_debug = if (count _this > 2) then {true} else {false};
+_debug = if (count _this > 2) then {_this select 2} else {false};
 _logicFnc = bis_functions_mainscope;
 _result = [];
 
