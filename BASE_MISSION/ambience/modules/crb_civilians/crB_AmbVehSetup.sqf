@@ -6,7 +6,6 @@
 // Contact: http://dev-heaven.net/projects/mip
 // Purpose: Setup amibent civilian vehicles module
 ///////////////////////////////////////////////////////////////////
-if(!isServer) exitWith{};
 
 waitUntil{!isNil "BIS_fnc_init"};
 waitUntil{!isNil "BIS_silvie_mainscope"};

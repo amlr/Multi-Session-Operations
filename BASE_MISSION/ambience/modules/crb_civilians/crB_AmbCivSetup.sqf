@@ -6,7 +6,6 @@
 // Contact: http://dev-heaven.net/projects/mip
 // Purpose: Setup amibent civilian module
 ///////////////////////////////////////////////////////////////////
-if(!isServer) exitWith{};
 
 waitUntil{!isNil "BIS_fnc_init"};
 waitUntil{!isNil "BIS_alice_mainscope"};
@@ -39,10 +38,11 @@ BIS_ALICE2_fnc_civilianSet = compile preprocessFileLineNumbers "ca\modules_e\ali
 
 switch toLower(worldName) do {		
         case "chernarus": { 
-                BIS_alice_mainscope setvariable ["trafficDistance",1000];                
-                BIS_alice_mainscope setvariable ["spawnDistance",700];                
-                BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];                
-		BIS_alice_mainscope setVariable ["civilianCount","round (1.5 * (sqrt %1))"]; 
+                BIS_alice_mainscope setvariable ["trafficDistance",1000];
+                BIS_alice_mainscope setvariable ["spawnDistance",800];
+		BIS_alice_mainscope setvariable ["ALICE_townsize",800];
+                BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];
+		BIS_alice_mainscope setVariable ["civilianCount","round (2.6 * (sqrt %1))"];
                 [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";        
         };        
         case "eden": {                
@@ -70,10 +70,11 @@ switch toLower(worldName) do {
                 [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf"; 
         }; 
         case "takistan": {   
-                BIS_alice_mainscope setvariable ["trafficDistance",1000];      
-                BIS_alice_mainscope setvariable ["spawnDistance",700];        
-		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"]; 
-                // Add some rare english speaking civilians to the mix          
+                BIS_alice_mainscope setvariable ["trafficDistance",1000];
+                BIS_alice_mainscope setvariable ["spawnDistance",800];
+		BIS_alice_mainscope setvariable ["ALICE_townsize",800];
+		BIS_alice_mainscope setVariable ["civilianCount","round (3.2 * (sqrt %1))"];
+                // Add some rare english speaking civilians to the mix
                 BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
         };   
         case "torabora": {       
