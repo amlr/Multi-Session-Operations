@@ -33,23 +33,30 @@ if(isNil "paramsArray") then {
 if(AMBAIRPARTOLS > 0) then {mps_ambient_air = true};
 
 //define Team leaders that are allowed to sign in and abort operations
+
 PO_teamleads = [
-	"BAF_Soldier_TL_MTP",
-	"BAF_Soldier_SL_MTP",
-	"US_Soldier_TL_EP1",
-	"US_Soldier_SL_EP1",
-	"USMC_Soldier_SL",
-	"USMC_Soldier_TL",
-	"FR_Commander",
-	"FR_TL",
-	"RU_Soldier_SL",
-	"RU_Soldier_TL",
-	"GUE_Soldier_CO",
-	"GUE_Commander",
-	"CZ_Soldier_SL_DES_EP1",
-	"aawInfantrySecco1",
-	"aawInfantrySecco1_dpduDpcu",
-	"cwr2_OfficerW"
+ "BAF_Soldier_TL_MTP",
+ "BAF_Soldier_SL_MTP",
+ "BAF_Soldier_SL_DDPM",
+ "BAF_Soldier_TL_DDPM",
+ "BAF_Soldier_SL_W",
+ "GER_Soldier_TL_EP1",
+ "US_Soldier_TL_EP1",
+ "US_Soldier_SL_EP1",
+ "USMC_Soldier_SL",
+ "USMC_Soldier_TL",
+ "ACE_USMC_Soldier_SL_D",
+ "ACE_USMC_Soldier_TL_D",
+ "FR_Commander",
+ "FR_TL",
+ "RU_Soldier_SL",
+ "RU_Soldier_TL",
+ "GUE_Soldier_CO",
+ "GUE_Commander",
+ "CZ_Soldier_SL_DES_EP1",
+ "aawInfantrySecco1",
+ "aawInfantrySecco1_dpduDpcu",
+ "cwr2_OfficerW"
 ];
 
 [] execVM PO_Path + "mps\init_mps.sqf";
