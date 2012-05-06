@@ -1,7 +1,7 @@
 PAPABEAR = [West,"HQ"];
 
-if !(typeOf player in PO_teamleads) exitwith {
-    PAPABEAR sideChat format ["%1 this is PAPA BEAR. Only team leaders are authorized to sign in!", group player];
+if !(rank player in PO_ranks) exitwith {
+    PAPABEAR sideChat format ["%1 this is PAPA BEAR. Your current rank is not authorized to sign in!", group player];
 };
 
 if !(call mso_fnc_hasRadio) exitwith {
