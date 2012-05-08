@@ -1,6 +1,6 @@
-if (isserver) exitwith {};
+if (isDedicated) exitwith {};
 
-private ["_bldgpos","_nearbldgs","_unittype","_spawnpos","_endpos","_unit","_leader","_group","_count","_units","_cleared","_suspended","_patrol","_movehome","_near"];
+private ["_bldgpos","_nearbldgs","_unittype","_spawnpos","_endpos","_unit","_leader","_group","_count","_units","_cleared","_suspended","_patrol","_movehome","_near","_houseguards"];
 waitUntil {!isNil "bis_fnc_init"};
 
 _debug = debug_mso;
@@ -71,18 +71,64 @@ CQBgroupsLocal set [count CQBgroupsLocal, _group];
 
 diag_log format["MSO-%1 CQB Population - Created group name %2 with %3 units...", time, _group, count units _group];
 
-_cleared = false;
-_suspended = false;
-_patrol = false;
-_movehome = false;
-
+[_units] spawn {
 {
     if (unitpos _x == "DOWN") then {
         sleep 20;
         _x setUnitPos "AUTO";
     };
-} foreach _units;
+} foreach (_this select 0);
+};
+
+if ((random 1 > 0.6)) then {_houseguards = true;} else {_houseguards = false;};
+waituntil {!(isnil "_houseguards")};
+
+if (_houseguards) then {
     
+_cleared = false;
+_suspended = false;
+_patrol = false;
+_movehome = false;
+
+while {!(_cleared) && !(_suspended) && ({_pos distance _x < 2500} count ([] call BIS_fnc_listPlayers) > 0)} do {
+sleep 2;   
+	_near = ({_pos distance _x < 500} count ([] call BIS_fnc_listPlayers) > 0);
+    
+    if ((_near) && !(_patrol)) then {
+        if (_debug) then {diag_log format["MSO-%1 CQB Population - Telling group %2 to guard house...", time, _group]};
+        
+        {
+        	_x setUnitPos "AUTO";
+        	_x setbehaviour "AWARE";
+        	dostop _x;
+        } foreach units _group;
+
+        _patrol = true;
+        _movehome = false;
+    };
+    
+    if (!(_near) && !(_movehome)) then {
+        _patrol = false;
+        _movehome = true;
+        
+        if (_debug) then {diag_log format["MSO-%1 CQB Population - Deleting houseguards %2 ...", time, _group]};
+		while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
+		{
+            _x setdamage 1;
+            deletevehicle _x;
+		} foreach units _group;
+    };
+if ((count (units _group) == 0) && (_patrol)) then {_cleared = true} else {_cleared = false};
+if ((count (units _group) == 0) && (_movehome)) then {_suspended = true} else {_suspended = false};
+};
+    
+} else {
+    
+_cleared = false;
+_suspended = false;
+_patrol = false;
+_movehome = false;
+
 while {!(_cleared) && !(_suspended) && ({_pos distance _x < 2500} count ([] call BIS_fnc_listPlayers) > 0)} do {
 sleep 2;   
 	_near = ({_pos distance _x < 500} count ([] call BIS_fnc_listPlayers) > 0);
@@ -103,7 +149,7 @@ sleep 2;
 
         {
             _x domove _endpos;
-		} foreach _units;
+		} foreach units _group;
     };
     
 if (_movehome) then {
@@ -112,10 +158,12 @@ if (_movehome) then {
             _x setdamage 1;
        		deletevehicle _x;
         };
-    } foreach _units;
+    } foreach units _group;
 };
 if ((count (units _group) == 0) && (_patrol)) then {_cleared = true} else {_cleared = false};
 if ((count (units _group) == 0) && (_movehome)) then {_suspended = true} else {_suspended = false};
+};
+
 };
 
 {
