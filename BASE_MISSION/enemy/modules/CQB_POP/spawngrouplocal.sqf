@@ -1,6 +1,6 @@
 if (isserver) exitwith {};
 
-private ["_bldgpos","_nearbldgs","_unittype","_spawnpos","_endpos","_unit","_leader","_group"];
+private ["_bldgpos","_nearbldgs","_unittype","_spawnpos","_endpos","_unit","_leader","_group","_count","_units","_cleared","_suspended","_patrol","_movehome","_near"];
 waitUntil {!isNil "bis_fnc_init"};
 
 _debug = debug_mso;
@@ -67,71 +67,77 @@ for "_i" from 0 to (1 + floor(random 2)) do {
 };
 
 _leader = leader _group;
+CQBgroupsLocal set [count CQBgroupsLocal, _group];
 
 diag_log format["MSO-%1 CQB Population - Created group name %2 with %3 units...", time, _group, count units _group];
 
-[_group, _pos, _bldgpos,_debug,_units] spawn {
-    private ["_group","_units","_pos","_cleared","_counter"];
-    _group = _this select 0;
-    _pos = _this select 1;
-    _bldgpos = _this select 2;
-    _debug = _this select 3;
-    _units = _this select 4;
-    _cleared = false;
-    
-    [_group, _pos, 150] spawn BIN_fnc_taskPatrol;
-    //[_group,_pos,120] execVM "enemy\scripts\BIN_tasksweep.sqf";
-    sleep 20;
-    
-    {if (unitpos _x == "DOWN") then {_x setUnitPos "AUTO"}} foreach units (_group);
-    while {({_pos distance _x < 500} count ([] call BIS_fnc_listPlayers) > 0) && (count units _group > 0)} do {sleep 5};
-    
-    if !(count units _group > 0) then {
-        if (_debug) then {diag_log format["MSO-%1 CQB Population - All units in group %2 are dead ...", time, _group]
-        };
-        _cleared = true;
-    };
-        
-    _endpos = _bldgpos select floor(random count _bldgpos);
-    if (_debug) then {diag_log format["MSO-%1 CQB Population - Group name %2 splitting up...", time, _group]};
-    
-    while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
-    _group move _endpos;
-    
-    {
-        [_x] join grpNull;
-        _x domove _endpos;
-    } foreach _units;
-    
-    
-    {
-        _counter = 0;
-        while {(alive _x) && (_x distance _endpos > 1) && ({_pos distance _x < 2500} count ([] call BIS_fnc_listPlayers) > 0)} do {
-        _x domove _endpos; 
-        if (_x distance _endpos < 4) then {deletevehicle _x};
-        if (_counter > 300) then {_endpos = _bldgpos select floor(random count _bldgpos); _counter = 0};
-        sleep 10;
-        _counter = _counter + 10;
-        };
-    } foreach _units;
+_cleared = false;
+_suspended = false;
+_patrol = false;
+_movehome = false;
 
-    {deletevehicle _x} foreach _units;
-    deletegroup _group;
-        
-	if (_cleared) then {
+{
+    if (unitpos _x == "DOWN") then {
+        sleep 20;
+        _x setUnitPos "AUTO";
+    };
+} foreach _units;
+    
+while {!(_cleared) && !(_suspended) && ({_pos distance _x < 2500} count ([] call BIS_fnc_listPlayers) > 0)} do {
+sleep 2;   
+	_near = ({_pos distance _x < 500} count ([] call BIS_fnc_listPlayers) > 0);
+    
+    if ((_near) && !(_patrol)) then {
+        if (_debug) then {diag_log format["MSO-%1 CQB Population - Sending group %2 on patrol...", time, _group]};
+        [_group, _pos, 150] spawn BIN_fnc_taskPatrol;
+    	_patrol = true;
+        _movehome = false;
+    };
+    
+    if (!(_near) && !(_movehome)) then {
+        _patrol = false;
+        _movehome = true;
+        if (_debug) then {diag_log format["MSO-%1 CQB Population - Sending group %2 home...", time, _group]};
+		while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
+		_endpos = _bldgpos select floor(random count _bldgpos);
+
+        {
+            _x domove _endpos;
+		} foreach _units;
+    };
+    
+if (_movehome) then {
+	{
+		if (_x distance _endpos < 4) then {
+            _x setdamage 1;
+       		deletevehicle _x;
+        };
+    } foreach _units;
+};
+if ((count (units _group) == 0) && (_patrol)) then {_cleared = true} else {_cleared = false};
+if ((count (units _group) == 0) && (_movehome)) then {_suspended = true} else {_suspended = false};
+};
+
+{
+      _x setdamage 1;
+      deletevehicle _x;
+} foreach _units;
+       
+waituntil {count (units _group) == 0};
+diag_log format["MSO-%1 CQB Population - Group %2 deleted - script end...", time, _group];
+deletegroup _group;
+       
+if (_cleared) then {
             CQBclearedpos set [count CQBclearedpos, _pos];
-            if (_debug) then {diag_log format["MSO-%1 CQB Population - Setting cleared posistion %2...", time, _pos]};
-    } else {
+            if (_debug) then {diag_log format["MSO-%1 CQB Population - Posistion %2 cleared...", time, _pos]};
+} else {
             CQBpositionsLocal set [count CQBpositionsLocal, _pos];
             if (_debug) then {diag_log format["MSO-%1 CQB Population - Adding posistion back to spawnpoints %2...", time, _pos]};
-    };
+};
  
 	_idx = [CQBsuspendedposLocal, _pos] call BIS_fnc_arrayFindDeep;
 	_idx = _idx select 0;
 	CQBsuspendedposLocal set [_idx, ">REMOVE<"];
 	CQBsuspendedposLocal = CQBsuspendedposLocal - [">REMOVE<"];
-    
-    diag_log format["MSO-%1 CQB Population - Group deleted - script end...", time];
-};
 
 _group;

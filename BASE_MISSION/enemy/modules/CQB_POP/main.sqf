@@ -68,21 +68,16 @@ if !(isserver) then {
 
 	[_debug] spawn {
 
-		private ["_positionslocal","_suspendedpositions","_debug","_idx"];
+		private ["_positionslocal","_suspendedpositions","_debug","_idx","_loopcounter"];
 		
 		waituntil {!isnil "CQBpositions"};
 		CQBpositionsLocal = CQBpositions;
 		CQBsuspendedposLocal = [];
+        CQBgroupsLocal = [];
         CQBclearedpos = [];
 		_debug = _this select 0;
 		
 		while {true} do {
-		
-		   if (_debug) then {
-               		diag_log format["MSO-%1 CQB Population: %2 total | %3 suspended |%4 cleared positions...", time, count CQBpositionsLocal, count CQBsuspendedposLocal, count CQBclearedpos];
-		   			diag_log format["MSO-%1 CQB Population: Count %2 local of %3 total AI...", time, {local _x} count allUnits, count allUnits];
-           };
-
 			{        
 				if ((_x distance player < 400) && (((position player) select 2) < 5)) then {
 					[_x] execvm "enemy\modules\CQB_POP\spawngrouplocal.sqf";
@@ -94,7 +89,18 @@ if !(isserver) then {
 					CQBpositionsLocal = CQBpositionsLocal - [">REMOVE<"];
 				};
 			} foreach CQBpositionsLocal;
-		sleep 5;
+			sleep 5;
+        	{
+            	if (count (units _x) == 0) then {
+		   			if (_debug) then {
+              	 		diag_log format["MSO-%1 CQB Population: Garbage collecter deleting Group %2...", time, _x];
+		   				diag_log format["MSO-%1 CQB Population: Count %2 local AI in %4 CQB-groups (%3 total AI overall)...", time, {local _x} count allUnits, count allUnits, count CQBgroupsLocal];
+                        diag_log format["MSO-%1 CQB Population: %2 total | %3 suspended |%4 cleared positions...", time, count CQBpositionsLocal, count CQBsuspendedposLocal, count CQBclearedpos];
+           			};
+            	    CQBgroupsLocal = CQBgroupsLocal - [_x];
+           		    deletegroup _x;
+                };
+        	} foreach CQBgroupsLocal;
 		};
 	};
 };
