@@ -16,7 +16,7 @@ _position = [_position,250,0.1,2] call mps_getFlatArea;
 
 _taskid = format["%1%2%3",round (_position select 0),round (_position select 1),(round random 999)];
 
-_vehicles = (mps_opfor_apc+mps_opfor_armor+mps_opfor_atkh);
+_vehicles = (mps_opfor_apc+mps_opfor_armor);
 _object = (_vehicles) select (random ((count _vehicles) - 1)) createVehicle _position;
 _vehtype = getText (configFile >> "CfgVehicles" >> typeof _object >> "displayName");
 
