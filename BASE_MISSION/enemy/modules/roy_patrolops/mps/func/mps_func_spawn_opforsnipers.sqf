@@ -19,7 +19,7 @@ if(count _snipers == 0) exitWith{};
 
 _heights = nearestLocations [_position,["Mount"],500];
 
-_helih = "HeliHEmpty" createVehicleLocal _position;
+_helih = "Can_small" createVehicleLocal _position;
 _locationheight = (getposASL _helih) select 2;
 {
 	_helih setpos position _x;
