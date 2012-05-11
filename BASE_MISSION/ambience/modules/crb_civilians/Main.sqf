@@ -13,20 +13,17 @@ if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
-if(!isDedicated) then {
-        if (isNil "BIS_alice_mainscope" && ambientCivs == 1) then {
-                _logicCiv = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
-                BIS_alice_mainscope = _logicCiv;
-                private ["_ok"];
-                if(_debug) then {
-                        _logicCiv setVariable ["debug", true];
-                };
-                BIS_alice_mainscope setVariable ["townlist",(BIS_functions_mainscope getVariable "locations")];
-                _ok = [_logicCiv] execVM "ca\modules_e\alice2\data\scripts\main.sqf";
-                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\crB_AmbCivSetup.sqf";
-        };
+if (isNil "BIS_alice_mainscope" && ambientCivs == 1) then {
+	BIS_alice_mainscope = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
+	if(_debug) then {
+		BIS_alice_mainscope setVariable ["debug", true];
+	};
+	BIS_alice_mainscope setVariable ["townlist",(BIS_functions_mainscope getVariable "locations")];
+	[] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\crB_AmbCivSetup.sqf";
+	0 = [BIS_alice_mainscope ] execVM "ca\modules_e\alice2\data\scripts\main.sqf";
+};
         
-        
+if(isServer) then {        
         if (isNil 'BIS_silvie_mainscope' && ambientVehs == 1) then {
                 _logicVeh = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
                 BIS_silvie_mainscope = _logicVeh;

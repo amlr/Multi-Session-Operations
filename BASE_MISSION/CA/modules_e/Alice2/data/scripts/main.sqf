@@ -126,7 +126,7 @@ _twnlist = [];
 		};
 	} foreach _twnlistTemp;
 };
-_logic setvariable ["ALICE_alltowns",_twnlist];
+_logic setvariable ["ALICE_alltowns",_twnlist,true];
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Civilian & Vehicles Classes
@@ -295,8 +295,9 @@ _logic setvariable ["ALICE_topics",_allTopics];
 ///////////////////////////////////////////////////////////////////////////////////
 ///// Execute
 ///////////////////////////////////////////////////////////////////////////////////
-_fsm = _logic execfsm (BIS_Alice2_path + "fsms\alice2.fsm");
-
+if(!isServer || !isMultiplayer) then {
+	_fsm = _logic execfsm (BIS_Alice2_path + "fsms\alice2.fsm");
+};
 
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -314,8 +315,8 @@ _twnrespect = ["SET"] call BIS_fnc_respect;
 	_name = _x getvariable "name";
 	_pos = position _x;
 	if (isnil {_x getvariable "respect"}) then {_x setVariable ["respect",_twnrespect]};
-	_x setVariable ["ALICE_active",false];
-	_x setVariable ["ALICE_active_traffic",0];
+	_x setVariable ["ALICE_active",false,true];
+	_x setVariable ["ALICE_active_traffic",0,true];
 	_x setvariable ["ALICE_threat",-1];
 	_x setvariable ["ALICE_status","black"];
 	_x setVariable ["ALICE_population",[]];

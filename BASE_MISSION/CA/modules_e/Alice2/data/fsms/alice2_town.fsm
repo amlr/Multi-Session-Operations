@@ -108,7 +108,7 @@ class FSM
        "_grp = _twn getvariable ""ALICE_group"";" \n
        "if (isNil ""_grp"") then {" \n
        "	_grp = creategroup civilian;" \n
-       "	_twn setvariable [""ALICE_group"",_grp];" \n
+       "	_twn setvariable [""ALICE_group"",_grp,true];" \n
        "};" \n
        "" \n
        "_classlist = [];" \n
@@ -306,7 +306,7 @@ class FSM
        "		};" \n
        "" \n
        "	} foreach _houselistRaw;" \n
-       "	_twn setvariable [""ALICE_houselist"",_houselist];" \n
+       "	_twn setvariable [""ALICE_houselist"",_houselist,true];" \n
        "};" \n
        "_housecount = count _houselist;" \n
        "" \n
@@ -337,6 +337,16 @@ class FSM
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
+        /*%FSM<LINK "Terminate">*/
+        class Terminate
+        {
+          priority = 1.000000;
+          to="END";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!(_twn getvariable ""ALICE_active"")"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
         /*%FSM<LINK "No_Houses">*/
         class No_Houses
         {
@@ -370,6 +380,11 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"_grp = _twn getvariable ""ALICE_group"";" \n
        "" \n
        "{" \n
+       "	_id = _x getvariable ""ALICE_id"";" \n
+       "	deletemarker format [""BIS_alice_civ_%1"",_id];" \n
+       "	deletemarker format [""BIS_alice_civ_%1_w"",_id];" \n
+       "" \n
+       "	deletevehicle vehicle _x;" \n
        "	deletevehicle _x;" \n
        "} foreach units _grp;" \n
        "" \n

@@ -9,7 +9,7 @@ private ["_uid"];
 //All client should have the Functions Manager initialized, to be sure.
 if (isnil "BIS_functions_mainscope") then {
         createCenter sideLogic;
-        (createGroup sideLogic) createUnit ["FunctionsManager", [0,0,0], [], 0, "NONE"];
+        BIS_functions_mainscope = (createGroup sideLogic) createUnit ["FunctionsManager", [0,0,0], [], 0, "NONE"];
 };
 
 waitUntil{!isNil "BIS_fnc_init"};

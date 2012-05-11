@@ -40,14 +40,15 @@ _twn = if (count _this > 1) then {_this select 1} else {
 };
 if (typename _twn == "BOOL") exitwith {};
 _house = if (count _this > 2) then {_this select 2} else {
-	_houses = nearestobjects [position _twn,["bis_alice_emptydoor"],500];
+	_houses = _twn getvariable ["ALICE_houselist", []];
 	if (count _houses > 0) then {
 		_houses call BIS_fnc_selectRandom;
 	} else {
-		_houses = nearestobjects [position _twn,["house"],500];
+		_houses = nearestobjects [position _twn,["house","bis_alice_emptydoor"],500];
 		if (count _houses > 0) then {
 			_houses call BIS_fnc_selectRandom;
 		} else {debuglog format ["Log: [ALICE] Cannot add %1 - no houses available in %2!",_unit,_twn];false};
+		_twn setvariable ["ALICE_houselist",_houses,true];
 	};
 };
 if (typename _house == "BOOL") exitwith {};
