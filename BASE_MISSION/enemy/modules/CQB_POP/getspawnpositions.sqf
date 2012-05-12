@@ -2,12 +2,10 @@ private ["_spawnhouses","_housecount","_positions","_position","_t","_m","_cqb_s
 
 _base1 = markerpos "ammo_1";
 _base2 = markerpos "ammo";
+
 if (isnil "rmm_ep_safe_zone") then {rmm_ep_safe_zone = 1000};
 
 MSO_fnc_getEnterableHouses = {
-// Written by BON_IF
-// Adapted by EightySix
-
 private ['_position','_radius'];
 
 _position = _this select 0;
@@ -25,27 +23,34 @@ _houses_enterable=[];
 _houses_enterable
 };
 
+getGridPos = { 		
+    private ["_pos","_x","_y"];
+    
+ 	_pos = getPosATL _this; 
+ 	_x = _pos select 0;
+ 	_y = _pos select 1;
+ 	_x = _x - (_x % 100); 
+ 	_y = _y - (_y % 100); 
+	[_x + 50, _y + 50, 0]
+};
+
 _spawnhouses = [markerpos "ammo_1",CRB_LOC_DIST] call MSO_fnc_getEnterableHouses;
-_housecount = count _spawnhouses;
-if (_debug) then {diag_log format["MSO-%1 CQB Population: Houses found %2", time, _housecount]};
-
 _positions = [];
-_position = position ((_spawnhouses select 0) select 0);
-_positions set [count _positions, _position];
-
 _cqb_spawn_intensity = 1 - (cqb_spawn / 10);
 
-_i = 0;
-for "_i" from 0 to (_housecount-1) do {
-    _position = position ((_spawnhouses select _i) select 0);
-    
-    if (((random 1) > _cqb_spawn_intensity) && ((_position distance _base1) > rmm_ep_safe_zone) && ((_position distance _base2) > rmm_ep_safe_zone)) then {
-        _positions set [count _positions, _position];
-        if (_debug) then {
-         		_t = format["op%1",_i];
-    			_m = [_t, _position, "Icon", [1,1], "TYPE:", "Dot", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+{
+    if (((random 1) > _cqb_spawn_intensity) && (((position (_x select 0)) distance _base1) > rmm_ep_safe_zone) && (((position (_x select 0)) distance _base2) > rmm_ep_safe_zone)) then {
+        _positions set [count _positions,_x]
         };
-        
+} foreach _spawnhouses;
+
+if (_debug) then {
+    diag_log format["MSO-%1 CQB Population: Houses found %2", time, count _positions];
+
+    _i = 0;
+	for "_i" from 0 to ((count _positions) - 1) do {
+         _t = format["op%1",_i];
+    	_m = [_t, position ((_positions select _i) select 0), "Icon", [1,1], "TYPE:", "Dot", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
     };
 };
 
