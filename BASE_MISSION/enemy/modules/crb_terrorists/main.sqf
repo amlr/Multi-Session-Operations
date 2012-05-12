@@ -14,6 +14,8 @@ if(!isServer) exitWith{};
 
 _debug = debug_mso;
 
+if(isNil "rmm_ep_safe_zone")then{rmm_ep_safe_zone = 2000;};
+
 if(isNil "crb_tc_intensity")then{crb_tc_intensity = 1;};
 crb_tc_intensity = switch(crb_tc_intensity) do {
 	case 0: {
@@ -670,7 +672,7 @@ for "_i" from 1 to _numcells do {
                 // Pick a spawn point
                 _spawn =  _spawnpoints call BIS_fnc_selectRandom;
                 while {
-                (([_spawn, 1500] call fPlayersInside) or (_spawn distance getmarkerpos "ammo" < 1500) or (_spawn distance getmarkerpos "ammo_1" < 1500)) 
+                (([_spawn, rmm_ep_safe_zone] call fPlayersInside) or (_spawn distance getmarkerpos "ammo" < rmm_ep_safe_zone) or (_spawn distance getmarkerpos "ammo_1" < rmm_ep_safe_zone)) 
                 } do {_spawn = _spawnpoints call BIS_fnc_selectRandom; sleep 0.1};
                 
                 //DEBUG:player setPos _spawn;
