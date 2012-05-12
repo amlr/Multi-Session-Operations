@@ -111,8 +111,8 @@ sleep 2;
             deletevehicle _x;
 		} foreach units _group;
     };
-if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["cleared",true];} else {_house setvariable ["cleared",nil];};
-if ((count (units _group) == 0) && (_movehome)) then {_house setvariable ["suspended",nil];};
+if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["cleared",true,true]};
+if ((count (units _group) == 0) && (_movehome)) then {_house setvariable ["suspended",nil]};
 };
     
 } else {

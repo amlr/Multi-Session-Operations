@@ -34,9 +34,10 @@ getGridPos = {
 	[_x + 50, _y + 50, 0]
 };
 
-_spawnhouses = [markerpos "ammo_1",10000] call MSO_fnc_getEnterableHouses;
+_spawnhouses = [markerpos "ammo_1",CRB_LOC_DIST] call MSO_fnc_getEnterableHouses;
 _positions = [];
 _cqb_spawn_intensity = 1 - (cqb_spawn / 10);
+
 {
     if (((random 1) > _cqb_spawn_intensity) && (((position (_x select 0)) distance _base1) > rmm_ep_safe_zone) && (((position (_x select 0)) distance _base2) > rmm_ep_safe_zone)) then {
         _positions set [count _positions,_x]
