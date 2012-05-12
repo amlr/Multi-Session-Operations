@@ -32,10 +32,19 @@ to do: Current issue if road ahead bends.
 
 private ["_grp","_pos","_roadpos","_vehicle","_vehtype","_blockers","_roads","_fac","_debug"];
 
+if(isNil "rmm_ep_spawn_dist")then{rmm_ep_spawn_dist = 2000;};
+
 _debug = debug_mso;
 
 _grp = _this select 0;
 _pos = _this select 1;
+
+fPlayersInside = {
+        private["_pos","_dist"];
+        _pos = _this select 0;
+        _dist = _this select 1;
+        ({_pos distance _x < _dist} count ([] call BIS_fnc_listPlayers) > 0);
+};
 
 _fac = faction leader _grp;
 if (_fac == "BIS_TK_CIV" || _fac == "BIS_CIV_special") then {_fac = "BIS_TK_INS";};
@@ -155,7 +164,15 @@ _vehicle = _vehtype createVehicle (_roadpos modelToWorld [0,-13,0]);
 _vehicle setDir getdir _roadpos;
 
 // Spawn group and get them to defend
-_blockers = [getpos _roadpos, "infantry", _fac] call mso_core_fnc_randomGroup;
-_blockers addVehicle _vehicle;
-sleep 1;
-[_blockers, getpos _roadpos] execVM "enemy\scripts\BIN_taskDefend.sqf";
+[_vehicle, _roadpos, _fac] spawn {
+	private["_roadpos","_fac","_vehicle"];
+	_roadpos = _this select 0;
+	_vehicle = _this select 1;
+	_fac = _this select 2;
+	waitUntil{sleep 10; ([_roadpos, rmm_ep_spawn_dist] call fPlayersInside)};
+	// Spawn group and get them to defend
+	_blockers = [getpos _roadpos, "infantry", _fac] call mso_core_fnc_randomGroup;
+	_blockers addVehicle _vehicle;
+	sleep 1;
+	[_blockers, getpos _roadpos] execVM "enemy\scripts\BIN_taskDefend.sqf";
+}
