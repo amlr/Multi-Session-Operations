@@ -6,15 +6,8 @@ waitUntil {!isNil "bis_fnc_init"};
 _debug = debug_mso;
 
 _pos = _this select 0;
+_house = _this select 1;
 _bldgpos = [];
-
-_count = 0;
-{        
-	if ((str(_x) == str(_pos))) then {
-         _count = _count + 1;
-    };
-} foreach CQBclearedpos;
-if (_count > 0) exitwith {if (_debug) then {diag_log format["MSO-%1 CQB Population - Position already cleared, script exiting...", time]}};
 
 _nearbldgs = nearestObjects [_pos, ["Building"], 100];
 {
@@ -80,7 +73,7 @@ diag_log format["MSO-%1 CQB Population - Created group name %2 with %3 units..."
 } foreach (_this select 0);
 };
 
-if ((random 1 > 0.6)) then {_houseguards = true;} else {_houseguards = false;};
+if ((random 1 > 0.35)) then {_houseguards = true;} else {_houseguards = false;};
 waituntil {!(isnil "_houseguards")};
 
 if (_houseguards) then {
@@ -118,8 +111,8 @@ sleep 2;
             deletevehicle _x;
 		} foreach units _group;
     };
-if ((count (units _group) == 0) && (_patrol)) then {_cleared = true} else {_cleared = false};
-if ((count (units _group) == 0) && (_movehome)) then {_suspended = true} else {_suspended = false};
+if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["cleared",true];} else {_house setvariable ["cleared",nil];};
+if ((count (units _group) == 0) && (_movehome)) then {_house setvariable ["suspended",nil];};
 };
     
 } else {
@@ -160,8 +153,8 @@ if (_movehome) then {
         };
     } foreach units _group;
 };
-if ((count (units _group) == 0) && (_patrol)) then {_cleared = true} else {_cleared = false};
-if ((count (units _group) == 0) && (_movehome)) then {_suspended = true} else {_suspended = false};
+if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["cleared",true,true]};
+if ((count (units _group) == 0) && (_movehome)) then {_house setvariable ["suspended",nil];};
 };
 
 };
@@ -174,18 +167,6 @@ if ((count (units _group) == 0) && (_movehome)) then {_suspended = true} else {_
 waituntil {count (units _group) == 0};
 diag_log format["MSO-%1 CQB Population - Group %2 deleted - script end...", time, _group];
 deletegroup _group;
-       
-if (_cleared) then {
-            CQBclearedpos set [count CQBclearedpos, _pos];
-            if (_debug) then {diag_log format["MSO-%1 CQB Population - Posistion %2 cleared...", time, _pos]};
-} else {
-            CQBpositionsLocal set [count CQBpositionsLocal, _pos];
-            if (_debug) then {diag_log format["MSO-%1 CQB Population - Adding posistion back to spawnpoints %2...", time, _pos]};
-};
- 
-	_idx = [CQBsuspendedposLocal, _pos] call BIS_fnc_arrayFindDeep;
-	_idx = _idx select 0;
-	CQBsuspendedposLocal set [_idx, ">REMOVE<"];
-	CQBsuspendedposLocal = CQBsuspendedposLocal - [">REMOVE<"];
+_house setvariable ["suspended",nil];
 
 _group;
