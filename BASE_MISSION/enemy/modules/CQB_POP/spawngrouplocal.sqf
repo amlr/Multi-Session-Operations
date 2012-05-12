@@ -88,12 +88,13 @@ sleep 2;
 	_near = ({_pos distance _x < 500} count ([] call BIS_fnc_listPlayers) > 0);
     
     if ((_near) && !(_patrol)) then {
-        if (_debug) then {diag_log format["MSO-%1 CQB Population - Telling group %2 to guard house...", time, _group]};
+        if (_debug) then {diag_log format["MSO-%1 CQB Population: Telling group %2 to guard house...", time, _group]};
         
         {
         	_x setUnitPos "AUTO";
         	_x setbehaviour "AWARE";
         	dostop _x;
+            0 = [_x, 50, true, 300, _pos] spawn MSO_fnc_CQBhousepos;
         } foreach units _group;
 
         _patrol = true;
@@ -104,12 +105,22 @@ sleep 2;
         _patrol = false;
         _movehome = true;
         
-        if (_debug) then {diag_log format["MSO-%1 CQB Population - Deleting houseguards %2 ...", time, _group]};
+        if (_debug) then {diag_log format["MSO-%1 CQB Population: Sending group %2 home...", time, _group]};
 		while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
-		{
-            _x setdamage 1;
-            deletevehicle _x;
+		_endpos = _bldgpos select floor(random count _bldgpos);
+
+        {
+            _x domove _endpos;
 		} foreach units _group;
+    };
+    
+	if (_movehome) then {
+		{
+			if (_x distance _endpos < 4) then {
+        	    _x setdamage 1;
+       			deletevehicle _x;
+      		};
+    	} foreach units _group;
     };
 if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["cleared",true,true]};
 if ((count (units _group) == 0) && (_movehome)) then {_house setvariable ["suspended",nil]};

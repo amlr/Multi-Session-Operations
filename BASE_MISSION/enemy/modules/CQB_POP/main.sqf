@@ -9,6 +9,7 @@ if (isnil "BIN_fnc_taskSweep") then {BIN_fnc_taskSweep = compile preprocessFileL
 if (isnil "MSO_fnc_CQBspawnRandomgroup") then {MSO_fnc_CQBspawnRandomgroup = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\spawngrouplocal.sqf"};
 if (isnil "MSO_fnc_CQBspawnpositions") then {MSO_fnc_CQBspawnpositions = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\getspawnpositions.sqf"};
 if (isnil "MSO_fnc_CQBclientloop") then {MSO_fnc_CQBclientloop = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\clientloop.sqf"};
+if (isnil "MSO_fnc_CQBhousepos") then {MSO_fnc_CQBhousepos = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\CQB_HousePos.sqf"};
 
 if (isServer) then {
 CQBpositions = [] call MSO_fnc_CQBspawnpositions;
