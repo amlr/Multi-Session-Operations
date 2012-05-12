@@ -122,8 +122,8 @@ sleep 2;
       		};
     	} foreach units _group;
     };
-if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["cleared",true,true]};
-if ((count (units _group) == 0) && (_movehome)) then {_house setvariable ["suspended",nil]};
+if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["cleared",true,true]; _cleared = true};
+if ((count (units _group) == 0) && (_movehome)) then {_house setvariable ["suspended",nil]; _suspended = true};
 };
     
 } else {
@@ -164,8 +164,8 @@ if (_movehome) then {
         };
     } foreach units _group;
 };
-if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["cleared",true,true]};
-if ((count (units _group) == 0) && (_movehome)) then {_house setvariable ["suspended",nil];};
+if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["cleared",true,true]; _cleared = true};
+if ((count (units _group) == 0) && (_movehome)) then {_house setvariable ["suspended",nil]; _suspended = true};
 };
 
 };
