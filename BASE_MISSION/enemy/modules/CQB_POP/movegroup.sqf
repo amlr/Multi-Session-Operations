@@ -3,11 +3,14 @@ if (isDedicated) exitwith {};
 private ["_bldgpos","_nearbldgs","_unittype","_spawnpos","_endpos","_unit","_leader","_group","_count","_units","_cleared","_suspended","_patrol","_movehome","_near","_houseguards"];
 waitUntil {!isNil "bis_fnc_init"};
 
-_debug = debug_mso;
-
 _pos = _this select 0;
 _house = _this select 1;
+_group = _this select 2;
+_units = _this select 3;
+_debug = debug_mso;
 _bldgpos = [];
+
+_house setVariable ["s", true, CQBaiBroadcast];
 
 _nearbldgs = nearestObjects [_pos, ["Building"], 100];
 {
@@ -34,35 +37,16 @@ _nearbldgs = nearestObjects [_pos, ["Building"], 100];
     };
 } forEach _nearbldgs;
 
-if (_debug) then {diag_log format["MSO-%1 CQB Population - Found %2 buildingpositions...", time, count _bldgpos]};
-
-_group = creategroup EAST;
-_units = [];
-
-for "_i" from 0 to (1 + floor(random 2)) do {
-
-	_unittype = [0, MSO_FACTIONS,"Man"] call mso_core_fnc_findVehicleType;
-	_unittype = _unittype call BIS_fnc_selectRandom;
-	_spawnpos = _bldgpos select floor(random count _bldgpos);
-    
-	if (_i < 1) then {
-		_leader = _group createUnit [_unittype,[0,0,0],[],0,"NONE"];
-        _leader setpos _spawnpos;
-        if ((getposATL _leader select 2) > 2) then {_leader setUnitPos "DOWN"};
-        _units set [count _units,_leader];
-	} else {
-	_unit = _group createUnit [_unittype,[0,0,0],[],0,"NONE"];
-    _unit setpos _spawnpos;
-    if ((getposATL _unit select 2) > 3) then {_unit setUnitPos "DOWN"};
-    _units set [count _units,_unit];
-	};
-
-};
+if (_debug) then {diag_log format["MSO-%1 CQB Population: Found %2 buildingpositions...", time, count _bldgpos]};
 
 _leader = leader _group;
-CQBgroupsLocal set [count CQBgroupsLocal, _group];
 
-diag_log format["MSO-%1 CQB Population - Created group name %2 with %3 units...", time, _group, count units _group];
+for "_i" from 0 to ((count _units)-1) do {
+_spawnpos = _bldgpos select floor(random count _bldgpos);
+_unit = (_units select _i);
+_unit setpos _spawnpos;
+if ((getposATL _unit select 2) > 3) then {_unit setUnitPos "DOWN"};
+};
 
 [_units] spawn {
 {
@@ -122,8 +106,8 @@ sleep 2;
       		};
     	} foreach units _group;
     };
-if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["cleared",true,true]; _cleared = true};
-if ((count (units _group) == 0) && (_movehome)) then {_house setvariable ["suspended",nil]; _suspended = true};
+if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["c", true, true]; _cleared = true};
+if ((count (units _group) == 0) && (_movehome)) then {_suspended = true};
 };
     
 } else {
@@ -138,7 +122,7 @@ sleep 2;
 	_near = ({_pos distance _x < 500} count ([] call BIS_fnc_listPlayers) > 0);
     
     if ((_near) && !(_patrol)) then {
-        if (_debug) then {diag_log format["MSO-%1 CQB Population - Sending group %2 on patrol...", time, _group]};
+        if (_debug) then {diag_log format["MSO-%1 CQB Population: Sending group %2 on patrol...", time, _group]};
         [_group, _pos, 150] spawn BIN_fnc_taskPatrol;
     	_patrol = true;
         _movehome = false;
@@ -147,7 +131,7 @@ sleep 2;
     if (!(_near) && !(_movehome)) then {
         _patrol = false;
         _movehome = true;
-        if (_debug) then {diag_log format["MSO-%1 CQB Population - Sending group %2 home...", time, _group]};
+        if (_debug) then {diag_log format["MSO-%1 CQB Population: Sending group %2 home...", time, _group]};
 		while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
 		_endpos = _bldgpos select floor(random count _bldgpos);
 
@@ -164,8 +148,8 @@ if (_movehome) then {
         };
     } foreach units _group;
 };
-if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["cleared",true,true]; _cleared = true};
-if ((count (units _group) == 0) && (_movehome)) then {_house setvariable ["suspended",nil]; _suspended = true};
+if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["c", true, true]; _cleared = true};
+if ((count (units _group) == 0) && (_movehome)) then {_suspended = true};
 };
 
 };
@@ -176,8 +160,8 @@ if ((count (units _group) == 0) && (_movehome)) then {_house setvariable ["suspe
 } foreach _units;
        
 waituntil {count (units _group) == 0};
-diag_log format["MSO-%1 CQB Population - Group %2 deleted - script end...", time, _group];
+diag_log format["MSO-%1 CQB Population: Group %2 deleted - script end...", time, _group];
 deletegroup _group;
-_house setvariable ["suspended",nil];
+_house setvariable ["s",nil, CQBaiBroadcast];
 
 _group;

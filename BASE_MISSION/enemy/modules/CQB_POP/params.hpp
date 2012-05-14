@@ -4,3 +4,10 @@ class CQB_spawn {
 	texts[]= {"Off","10","20","30","40","50"}; 
 	default = 0;
 };
+
+class CQBaicap {
+	title = "     Enemy - CQB AI Limit (per player)";
+	values[]= {0,1,2,3,4}; 
+	texts[]= {"Off","15","25","50","100"};
+	default = 2;
+};
