@@ -20,6 +20,7 @@
                     if ((isnil "_suspend") && (isnil "_clear")) then {_activecount = _activecount + 1};
                     if (!(isnil "_suspend")) then {_suspendedcount = _suspendedcount + 1};
                     if (!(isnil "_clear")) then {_clearcount = _clearcount + 1};
+                    if (CQB_AUTO) then {CQBaicap = (count allUnits / count playableUnits)};
 	
                     if (((_x select 0) distance player < 400) && (((position player) select 2) < 5) && (({(local _x) && ((faction _x) in MSO_FACTIONS)} count allunits) < CQBaicap)) then {
                         if ((isnil "_suspend") && (isnil "_clear")) then {
