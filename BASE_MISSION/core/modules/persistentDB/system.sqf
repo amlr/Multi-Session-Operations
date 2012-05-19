@@ -115,7 +115,7 @@
 			
 			if (!_seen) then { 
 				
-			initText = "<br/>"+pdb_fullmissionName+"<br/><br/>Welcome<t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
+			initText = "<br/><br/>Welcome<t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
 			+name player+"</t><br/>Your details have been entered into the database.<br/><br/>";
 			hintSilent parseText (initText);
 			
@@ -124,7 +124,7 @@
 				 } 
 				else { 
 					
-			initText = "<br/>"+pdb_fullmissionName+"<br/><br/>Welcome back<t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
+			initText = "<br/><br/>Welcome back<t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
 			+name player+"</t><br/>Your details have been retrieved from the database.<br/><br/>";
 			hintSilent parseText (initText);
 			
