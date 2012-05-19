@@ -8,6 +8,7 @@ switch (CQBaicap) do {
     case 2: {CQBaicap = 25; CQBaiBroadcast = false};
     case 3: {CQBaicap = 50; CQBaiBroadcast = false};
     case 4: {CQBaicap = 100; CQBaiBroadcast = false};
+    case 5: {CQB_AUTO = true; CQBaiBroadcast = false};
 	default {CQBaicap = 15; CQBaiBroadcast = false};
 };
 
