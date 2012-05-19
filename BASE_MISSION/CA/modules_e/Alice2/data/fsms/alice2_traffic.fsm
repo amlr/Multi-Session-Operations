@@ -156,9 +156,6 @@ class FSM
        "_localInit = _twn getvariable ""ALICE_civilianinit"";" \n
        "if !(isnil ""_globalInit"") then {{_driver call _x} foreach _globalInit};" \n
        "if !(isnil ""_localInit"") then {{_driver call _x} foreach _localInit};" \n
-       "_driver setSkill 0.5;" \n
-       "{_driver disableAI _x} count [""AUTOTARGET"",""TARGET""];" \n
-       "_driver allowFleeing 0;" \n
        "_driver assignasdriver _car;" \n
        "_driver setbehaviour ""SAFE"";" \n
        "_driver moveindriver _car;" \n
@@ -267,7 +264,7 @@ class FSM
     {
       name = "Continue_";
       init = /*%FSM<STATEINIT""">*/"_timeNow = time;" \n
-       "_delay = random 60;"/*%FSM</STATEINIT""">*/;
+       "_delay = random 10;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
