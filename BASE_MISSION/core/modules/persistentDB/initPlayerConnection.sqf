@@ -616,12 +616,12 @@ if (pdb_ace_enabled) then {
 
 						if  (_length_ptype > 2) then { } else {_x set [16,  typeof _player];};						
 						if  (_length_prating > 2) then { _x set [17, parseNumber (_x select 17)];} else {_x set [17,0];};						
-						if  (_length_pviewdistance > 2) then { _x set [18, parseNumber (_x select 18)];} else {_x set [18,1600];};				
-						if  (_length_pterraindetail > 2) then { _x set [19, parseNumber (_x select 19)];} else {_x set [19,2];};				
+						if  (_length_pviewdistance > 2) then { _player setVariable ["viewdistance", parseNumber (_x select 18), true]; _x set [18, parseNumber (_x select 18)];} else {_x set [18,1600];};				
+						if  (_length_pterraindetail > 2) then { _player setVariable ["terraindetail", parseNumber (_x select 19), true]; _x set [19, parseNumber (_x select 19)];} else {_x set [19,2];};				
 						if  (_length_prank > 2) then { } else {_x set [20,  rank _player];};								
-						if  (_length_pshotsfired > 2) then { _x set [21, parseNumber (_x select 21)];} else {_x set [21,0];};			
-						if  (_length_penemykills > 2) then { _x set [22, parseNumber (_x select 22)];} else {_x set [22,0];};		
-						if  (_length_pcivkills > 2) then { _x set [23, parseNumber (_x select 23)];} else {_x set [23,0];};				
+						if  (_length_pshotsfired > 2) then { _player setVariable ["_thispshotsfired", parseNumber (_x select 21), true]; _x set [21, parseNumber (_x select 21)]; } else {_x set [21,0];};			
+						if  (_length_penemykills > 2) then { _player setVariable ["_thispenemykills", parseNumber (_x select 22), true];_x set [22, parseNumber (_x select 22)];} else {_x set [22,0];};		
+						if  (_length_pcivkills > 2) then {_player setVariable ["_thispcivkills", parseNumber (_x select 23), true]; _x set [23, parseNumber (_x select 23)];} else {_x set [23,0];};				
 						if  (_length_plifestate > 2) then { } else {_x set [24,  lifestate _player];};
 						
 						if (_length_weapons > 2) then { _x set [25, [(_x select 25), "|", ","] call CBA_fnc_replace]; _x set [25, "[" + (_x select 25) + "]"]; _x set [25, call compile (_x select 25)];}else {_x set [25, []];};

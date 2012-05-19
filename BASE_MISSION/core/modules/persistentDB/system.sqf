@@ -436,15 +436,12 @@
 				player setVariable ["_thispvehicle", _thispvehicle, false]; 
 				player setVariable ["_thispseat", _thispseat, false]; 
 				
-				player setVariable ["_thisptype", _thisptype, false];							
-				player addrating (-(rating player) + _thisprating);					
-				setviewdistance _thispviewdistance;	
+				player setVariable ["_thisptype", _thisptype, false];					
+				player addrating (-(rating player) + _thisprating);				
+				setviewdistance _thispviewdistance;		
                 setterraingrid ((-10 * _thispterraindetail + 50) max 1);
-                terraindetail = _thispterraindetail;			
+                terraindetail = _thispterraindetail;								
 				player setunitrank _thisprank;					
-				player setVariable ["_thispshotsfired", _thispshotsfired, false];				
-				player setVariable ["_thispenemykills", _thispenemykills, false];				
-				player setVariable ["_thispcivkills", _thispcivkills, false];
 				if (tolower(_thisplifestate) == "unconscious") then {
                         player setUnconscious true;
                 };		
