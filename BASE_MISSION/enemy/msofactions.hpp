@@ -84,6 +84,30 @@ class faction_ibr_drg_faction {
         texts[]= {"false","true"}; 
         default = DEFAULT_ibr_drg_faction;
 };
+class faction_ibr_unisol_faction {
+        title = "        Enable UniSol Company Lingor"; 
+        values[]= {0,1}; 
+        texts[]= {"false","true"}; 
+        default = DEFAULT_ibr_unisol_faction;
+};
+class faction_ibr_venator_faction {
+        title = "        Enable Venator PMC Lingor"; 
+        values[]= {0,1}; 
+        texts[]= {"false","true"}; 
+        default = DEFAULT_ibr_venator_faction;
+};
+class faction_ibr_police_unit {
+        title = "        Enable Police Lingor"; 
+        values[]= {0,1}; 
+        texts[]= {"false","true"}; 
+        default = DEFAULT_ibr_police_unit;
+};
+class faction_LIN_army {
+        title = "        Enable Army of Lingor"; 
+        values[]= {0,1}; 
+        texts[]= {"false","true"}; 
+        default = DEFAULT_LIN_army;
+};
 class faction_NLA {
         title = "        Enable Iranian Forces"; 
         values[]= {0,1}; 
