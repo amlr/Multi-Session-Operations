@@ -224,12 +224,9 @@ if (pdb_globalScores_enabled) then {
 		_ptype = typeof _player;
 		_prating = rating _player;
 		_pviewdistance = _player getvariable "viewdistance";
-				diag_log ["_pviewdistance:", _pviewdistance, typeName _pviewdistance];
 		_pterraindetail = _player getvariable "pterraindetail";
-				diag_log ["_pterraindetail:", _pterraindetail, typeName _pterraindetail];
-		_prank = rank _player;
+		_prank = _player getvariable "prank";
 		_pshotsfired = _player getVariable "_thispshotsfired";
-		diag_log ["_pshotsfired:", _pshotsfired, typeName _pshotsfired];
 		_penemykills = _player getVariable "_thispenemykills";
 		_pcivkills = _player getVariable "_thispcivkills";
 		_plifestate = lifestate _player;
