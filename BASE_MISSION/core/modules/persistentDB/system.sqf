@@ -265,23 +265,23 @@
 				_thispside = _data select 13; 							// returned player side
 				_thispvehicle = _data select 14; 							// returned players vehicle
 				_thispseat = _data select 15; 							// returned players vehicle seat
-				_thisweapons = _data select 16;  							// returned player weapons
-				_thismagazines = _data select 17;  							// returned player magazines
-				
-				_thisaceweapononback = _data select 18; 					// returned ace weapon on back
-				_thisaceruckweapons = _data select 19; 					// returned ace ruck weapons
-				_thisaceruckmagazines = _data select 20; 					// returned ace ruck magazines
-				
-				_thisptype = _data select 21;							// returned type
-				_thisprating = _data select 22;							// returned rating
-				_thispviewdistance = _data select 23;					// viewdistance
-				_thispterraindetail = _data select 24;					// terrain details
-				_thisprank = _data select 25;							// rank
-				_thispshotsfired = _data select 26;						// shots fired
-				_thispenemykills = _data select 27;						// enemy kills
-				_thispcivkills = _data select 28;						// civ kills
-				_thisplifestate = _data select 29;						// lifestate
 
+				_thisptype = _data select 16;							// returned type
+				_thisprating = _data select 17;							// returned rating
+				_thispviewdistance = _data select 18;					// viewdistance
+				_thispterraindetail = _data select 19;					// terrain details
+				_thisprank = _data select 20;							// rank
+				_thispshotsfired = _data select 21;						// shots fired
+				_thispenemykills = _data select 22;						// enemy kills
+				_thispcivkills = _data select 23;						// civ kills
+				_thisplifestate = _data select 24;						// lifestate
+
+				_thisweapons = _data select 25;  							// returned player weapons
+				_thismagazines = _data select 26;  							// returned player magazines
+				
+				_thisaceweapononback = _data select 27; 					// returned ace weapon on back
+				_thisaceruckweapons = _data select 28; 					// returned ace ruck weapons
+				_thisaceruckmagazines = _data select 29; 					// returned ace ruck magazines
 				
 			//	[player, _thispname] call FNC_INITPLAYER;
 				
@@ -308,6 +308,15 @@
 					diag_log ["PersistentDB: _thisaceruckweapons:", _thisaceruckweapons, typeName _thisaceruckweapons];
 					diag_log ["PersistentDB: _thisaceruckmagazines:", _thisaceruckmagazines, typeName _thisaceruckmagazines];
 				};
+				diag_log ["PersistentDB: _thisptype:", _thisptype, typeName _thisptype];
+				diag_log ["PersistentDB: _thisprating:", _thisprating, typeName _thisprating];
+				diag_log ["PersistentDB: _thispviewdistance:", _thispviewdistance, typeName _thispviewdistance];
+				diag_log ["PersistentDB: _thispterraindetail:", _thispterraindetail, typeName _thispterraindetail];
+				diag_log ["PersistentDB: _thisprank:", _thisprank, typeName _thisprank];
+				diag_log ["PersistentDB: _thispshotsfired:", _thispshotsfired, typeName _thispshotsfired];
+				diag_log ["PersistentDB: _thispenemykills:", _thispenemykills, typeName _thispenemykills];
+				diag_log ["PersistentDB: _thispcivkills:", _thispcivkills, typeName _thispcivkills];
+				diag_log ["PersistentDB: _thisplifestate:", _thisplifestate, typeName _thisplifestate];
 				
 				if (_thispdamage != -1) then {
 				   	if (pdb_ace_enabled) then {

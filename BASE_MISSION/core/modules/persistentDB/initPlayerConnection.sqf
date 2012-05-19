@@ -460,23 +460,24 @@ if (pdb_landvehicles_enabled) then {
 						
 						veh 14
 						sea 15
+								
+						typ 16
+						rat 17
+						vd 18
+						td 19
+						ran 20
+						fir 21
+						ek 22
+						ck 23
+						lif 24
 						
-						wea 16
-						mag 17
+						wea 25
+						mag 26
 						
-						awb 18
-						aw 19
-						arm 20
-				
-						typ 21
-						rat 22
-						vd 23
-						td 24
-						ran 25
-						fir 26
-						ek 27
-						ck 28
-						lif 29
+						awb 27
+						aw 28
+						arm 29
+
 						
 						*/
 
@@ -499,8 +500,8 @@ if (pdb_weapons_enabled) then {
 		   	
 						_playerwea = _response select 0;    // copy the returned row into array
 
-						_x set [16, _playerwea select 0];
-						_x set [17, _playerwea select 1];
+						_x set [25, _playerwea select 0];
+						_x set [26, _playerwea select 1];
 // END get player's vanilla weapons and ammo
 };
 
@@ -521,9 +522,9 @@ if (pdb_ace_enabled) then {
 		   	
 						_ace = _response select 0;    // copy the returned row into array
 	
-						_x set [18, _ace select 0];
-						_x set [19, _ace select 1];
-						_x set [20, _ace select 2];
+						_x set [27, _ace select 0];
+						_x set [28, _ace select 1];
+						_x set [29, _ace select 2];
 			
 						
 };
@@ -555,24 +556,22 @@ if (pdb_ace_enabled) then {
 						_thispside = _x select 13; // return player side					
 						_thispvehicle = _x select 14; // return players vehicle
 						_thispseat = _x select 15; // return players vehicle seat
-						_this_aceweapononback = _x select 18; // return player ace wob
-						_this_aceruckweapons = _x select 19; // return player ace ruck weapons
-						_this_aceruckmagazines = _x select 20; // return player ace ruck magazines
 						
-						_thisptype = _x select 21;							// returned type
-						_thisprating = _x select 22;							// returned rating
-						_thispviewdistance = _x select 23;					// viewdistance
-						_thispterraindetail = _x select 24;					// terrain details
-						_thisprank = _x select 25;							// rank
-						_thispshotsfired = _x select 26;						// shots fired
-						_thispenemykills = _x select 27;						// enemy kills
-						_thispcivkills = _x select 28;						// civ kills
-						_thisplifestate = _x select 29;						// lifestate
+						_thisptype = _x select 16;							// returned type
+						_thisprating = _x select 17;							// returned rating
+						_thispviewdistance = _x select 18;					// viewdistance
+						_thispterraindetail = _x select 19;					// terrain details
+						_thisprank = _x select 20;							// rank
+						_thispshotsfired = _x select 21;						// shots fired
+						_thispenemykills = _x select 22;						// enemy kills
+						_thispcivkills = _x select 23;						// civ kills
+						_thisplifestate = _x select 24;						// lifestate
 						
+						_this_aceweapononback = _x select 27; // return player ace wob
+						_this_aceruckweapons = _x select 28; // return player ace ruck weapons
+						_this_aceruckmagazines = _x select 29; // return player ace ruck magazines
 						
 						_length_position = [_x select 4] call CBA_fnc_strLen;  
-						_length_weapons = [_x select 16] call CBA_fnc_strLen; 
-						_length_magazines = [_x select 17] call CBA_fnc_strLen; 
 					    _length_damage = [_x select 6] call CBA_fnc_strLen;	 
 						_length_pdamage_head_hit = [_x select 7] call CBA_fnc_strLen; 
 						_length_pdamage_body = [_x select 8] call CBA_fnc_strLen; 
@@ -583,19 +582,22 @@ if (pdb_ace_enabled) then {
 						_length_pside = [_x select 13] call CBA_fnc_strLen; 
 						_length_pvehicle =  [_x select 14] call CBA_fnc_strLen; 
 						_length_pseat =  [_x select 15] call CBA_fnc_strLen; 
-						_length_aceweapononback = [_x select 18] call CBA_fnc_strLen; 
-						_length_aceruckweapons = [_x select 19] call CBA_fnc_strLen; 
-						_length_aceruckmagazines = [_x select 20] call CBA_fnc_strLen; 
 						
-						_length_ptype = [_x select 21] call CBA_fnc_strLen;						
-						_length_prating = [_x select 22] call CBA_fnc_strLen;						
-						_length_pviewdistance = [_x select 23] call CBA_fnc_strLen;			
-						_length_pterraindetail = [_x select 24] call CBA_fnc_strLen;				
-						_length_prank = [_x select 25] call CBA_fnc_strLen;							
-						_length_pshotsfired = [_x select 26] call CBA_fnc_strLen;				
-						_length_penemykills = [_x select 27] call CBA_fnc_strLen;			
-						_length_pcivkills = [_x select 28] call CBA_fnc_strLen;				
-						_length_plifestate = [_x select 29] call CBA_fnc_strLen;						
+						_length_ptype = [_x select 16] call CBA_fnc_strLen;						
+						_length_prating = [_x select 17] call CBA_fnc_strLen;						
+						_length_pviewdistance = [_x select 18] call CBA_fnc_strLen;			
+						_length_pterraindetail = [_x select 19] call CBA_fnc_strLen;				
+						_length_prank = [_x select 20] call CBA_fnc_strLen;							
+						_length_pshotsfired = [_x select 21] call CBA_fnc_strLen;				
+						_length_penemykills = [_x select 22] call CBA_fnc_strLen;			
+						_length_pcivkills = [_x select 23] call CBA_fnc_strLen;				
+						_length_plifestate = [_x select 24] call CBA_fnc_strLen;	
+						
+						_length_weapons = [_x select 25] call CBA_fnc_strLen; 
+						_length_magazines = [_x select 26] call CBA_fnc_strLen; 
+						_length_aceweapononback = [_x select 27] call CBA_fnc_strLen; 
+						_length_aceruckweapons = [_x select 28] call CBA_fnc_strLen; 
+						_length_aceruckmagazines = [_x select 29] call CBA_fnc_strLen; 
 				
 						if (_length_damage > 2) then { _x set [6, parseNumber (_x select 6)]; _player setVariable ["damage", _x select 6, true]; } else {_x set [6, -1];};
 						if (_length_pdamage_head_hit >2) then { _x set [7, parseNumber (_x select 7)]; _player setVariable ["head_hit", _x select 7, true]; } else {_x set [7, -1];};	
@@ -610,25 +612,25 @@ if (pdb_ace_enabled) then {
 						if (_length_pseat > 2) then { } else {_x set [15, ""];};
 						
 						if (_length_position >2) then { _x set [4, [(_x select 4), "|", ","] call CBA_fnc_replace]; _x set [4, "[" + (_x select 4) + "]"]; _x set [4, call compile (_x select 4)];};	
-						if (_length_position <2) then {  _x set [4, call compile (_x select 4)];  };
-										
-						if (_length_weapons > 2) then { _x set [16, [(_x select 16), "|", ","] call CBA_fnc_replace]; _x set [16, "[" + (_x select 16) + "]"]; _x set [16, call compile (_x select 16)];}else {_x set [16, []];};
-						if (_length_magazines > 2) then { _x set [17, [(_x select 17), "|", ","] call CBA_fnc_replace]; _x set [17, "[" + (_x select 17) + "]"];_x set [17, call compile (_x select 17)];}else {_x set [17, []];};
-						
-						if (_length_aceweapononback > 2) then { _player setVariable ["WOB", _x select 18, true]; }else {_x set [18, ""];};
-						if (_length_aceruckweapons > 2) then { 	_player setVariable ["WEAPON", (_x select 19), true];  _x set [19, [(_x select 19), "|", ","] call CBA_fnc_replace]; _x set [19, "[" + (_x select 19) + "]"];_x set [19, call compile (_x select 19)]; }else {_x set [19, []];};
-						if (_length_aceruckmagazines > 2) then { _player setVariable ["MAGAZINE", (_x select 20), true]; _x set [20, [(_x select 20), "|", ","] call CBA_fnc_replace]; _x set [20, "[" + (_x select 20) + "]"];_x set [20, call compile (_x select 20)];  }else {_x set [20, []];};
+						if (_length_position <2) then {  _x set [4, call compile (_x select 4)];  };	
 
-						if  (_length_ptype > 2) then { } else {_x set [ 21,  typeof player];};						
-						if  (_length_prating > 2) then { _x set [ 22, parseNumber (_x select 22)];} else {_x set [22,0];};						
-						if  (_length_pviewdistance > 2) then { _x set [ 23, parseNumber (_x select 23)];} else {_x set [23,1600];};				
-						if  (_length_pterraindetail > 2) then { _x set [ 24, parseNumber (_x select 24)];} else {_x set [24,2];};				
-						if  (_length_prank > 2) then { } else {_x set [ 25,  rank player];};								
-						if  (_length_pshotsfired > 2) then { _x set [ 26, parseNumber (_x select 26)];} else {_x set [26,0];};			
-						if  (_length_penemykills > 2) then { _x set [ 27, parseNumber (_x select 27)];} else {_x set [27,0];};		
-						if  (_length_pcivkills > 2) then { _x set [ 28, parseNumber (_x select 28)];} else {_x set [28,0];};				
-						if  (_length_plifestate > 2) then { } else {_x set [ 29,  lifestate player];};
-										
+						if  (_length_ptype > 2) then { } else {_x set [16,  typeof _player];};						
+						if  (_length_prating > 2) then { _x set [17, parseNumber (_x select 17)];} else {_x set [17,0];};						
+						if  (_length_pviewdistance > 2) then { _x set [18, parseNumber (_x select 18)];} else {_x set [18,1600];};				
+						if  (_length_pterraindetail > 2) then { _x set [19, parseNumber (_x select 19)];} else {_x set [19,2];};				
+						if  (_length_prank > 2) then { } else {_x set [20,  rank _player];};								
+						if  (_length_pshotsfired > 2) then { _x set [21, parseNumber (_x select 21)];} else {_x set [21,0];};			
+						if  (_length_penemykills > 2) then { _x set [22, parseNumber (_x select 22)];} else {_x set [22,0];};		
+						if  (_length_pcivkills > 2) then { _x set [23, parseNumber (_x select 23)];} else {_x set [23,0];};				
+						if  (_length_plifestate > 2) then { } else {_x set [24,  lifestate _player];};
+						
+						if (_length_weapons > 2) then { _x set [25, [(_x select 25), "|", ","] call CBA_fnc_replace]; _x set [25, "[" + (_x select 25) + "]"]; _x set [25, call compile (_x select 25)];}else {_x set [25, []];};
+						if (_length_magazines > 2) then { _x set [26, [(_x select 26), "|", ","] call CBA_fnc_replace]; _x set [26, "[" + (_x select 26) + "]"];_x set [26, call compile (_x select 26)];}else {_x set [26, []];};
+						
+						if (_length_aceweapononback > 2) then { _player setVariable ["WOB", _x select 27, true]; }else {_x set [27, ""];};
+						if (_length_aceruckweapons > 2) then { 	_player setVariable ["WEAPON", (_x select 28), true];  _x set [28, [(_x select 28), "|", ","] call CBA_fnc_replace]; _x set [28, "[" + (_x select 28) + "]"];_x set [28, call compile (_x select 28)]; }else {_x set [28, []];};
+						if (_length_aceruckmagazines > 2) then { _player setVariable ["MAGAZINE", (_x select 29), true]; _x set [29, [(_x select 29), "|", ","] call CBA_fnc_replace]; _x set [29, "[" + (_x select 29) + "]"];_x set [29, call compile (_x select 29)];  }else {_x set [29, []];};
+								
 						if (pdb_log_enabled) then {
 							
 							diag_log format["SERVER MSG: Welcome back, %1", _x select 1];
@@ -638,8 +640,8 @@ if (pdb_ace_enabled) then {
 							diag_log format["SERVER MSG: Database player: %1 score: %2", _x select 1, _x select 3];
 							diag_log format["SERVER MSG: Database player: %1 mission id: %2", _x select 1, _x select 5];
 							  
-							if (_length_weapons >2) then {diag_log format["SERVER MSG: Database player: %1 weapons: %2", _x select 1, _x select 16];};	 
-							if (_length_magazines >2) then { diag_log format["SERVER MSG: Database player: %1 magazines: %2", _x select 1, _x select 17];}; 
+							if (_length_weapons >2) then {diag_log format["SERVER MSG: Database player: %1 weapons: %2", _x select 1, _x select 25];};	 
+							if (_length_magazines >2) then { diag_log format["SERVER MSG: Database player: %1 magazines: %2", _x select 1, _x select 26];}; 
 							if (_length_position >2) then { diag_log format["SERVER MSG: Database player: %1 teleported to coords, %2", _x select 1, _x select 4];};
 							if (_length_damage > 2) then {	 diag_log format["SERVER MSG: Database player: %1 overall damage, %2", _x select 1, _x select 6];}; 
 							if (_length_pdamage_head_hit > 2) then {	 diag_log format["SERVER MSG: Database player: %1 head damage, %2", _x select 1, _x select 7];};
@@ -651,19 +653,25 @@ if (pdb_ace_enabled) then {
 							if (_length_pside > 2) then { diag_log format["SERVER MSG: Database player: %1 side: %2", _x select 1, _x select 13];};
 							if (_length_pvehicle > 2) then { diag_log format["SERVER MSG: Database player: %1 in vehicle: %2", _x select 1, _x select 14];};
 							if (_length_pseat > 2) then { diag_log format["SERVER MSG: Database player: %1 in vehicle seat: %2", _x select 1, _x select 15];};
-							if (_length_aceweapononback > 2) then {	diag_log format["SERVER MSG: Database player: %1 ace weapon on back: %2", _x select 1, _x select 18];};
-							if (_length_aceruckweapons > 2) then { diag_log format["SERVER MSG: Database player: %1 ace ruck weapons: %2", _x select 1, _x select 19];};
-							if (_length_aceruckmagazines > 2) then {	 diag_log format["SERVER MSG: Database player: %1 ace ruck magazines: %2", _x select 1, _x select 20];};
+							if (_length_aceweapononback > 2) then {	diag_log format["SERVER MSG: Database player: %1 ace weapon on back: %2", _x select 1, _x select 27];};
+							if (_length_aceruckweapons > 2) then { diag_log format["SERVER MSG: Database player: %1 ace ruck weapons: %2", _x select 1, _x select 28];};
+							if (_length_aceruckmagazines > 2) then {	 diag_log format["SERVER MSG: Database player: %1 ace ruck magazines: %2", _x select 1, _x select 29];};
 							
-							if  (_length_ptype > 2) then {diag_log format["SERVER MSG: Database player: %1 type: %2", _x select 1, _x select 21];};						
-							if  (_length_prating > 2) then {diag_log format["SERVER MSG: Database player: %1 rating: %2", _x select 1, _x select 22];};							
-							if  (_length_pviewdistance > 2) then {diag_log format["SERVER MSG: Database player: %1 viewdistance: %2", _x select 1, _x select 23];};				
-							if  (_length_pterraindetail > 2) then {diag_log format["SERVER MSG: Database player: %1 terraindetail: %2", _x select 1, _x select 24];};					
-							if  (_length_prank > 2) then {diag_log format["SERVER MSG: Database player: %1 rank: %2", _x select 1, _x select 25];};									
-							if  (_length_pshotsfired > 2) then {diag_log format["SERVER MSG: Database player: %1 shots fired: %2", _x select 1, _x select 26];};			
-							if  (_length_penemykills > 2) then {diag_log format["SERVER MSG: Database player: %1 enemy kills: %2", _x select 1, _x select 27];};			
-							if  (_length_pcivkills > 2) then {diag_log format["SERVER MSG: Database player: %1 civilian kills: %2", _x select 1, _x select 28];};					
-							if  (_length_plifestate > 2) then {diag_log format["SERVER MSG: Database player: %1 lifestate: %2", _x select 1, _x select 29];};	
+							if  (_length_ptype > 2) then {diag_log format["SERVER MSG: Database player: %1 type: %2", _x select 1, _x select 16];};	
+							diag_log format["SERVER MSG: Database player: %1 rating: %2", _x select 1, _x select 17];
+							diag_log format["SERVER MSG: Database player: %1 view distance: %2", _x select 1, _x select 18];
+							diag_log format["SERVER MSG: Database player: %1 terrain detail: %2", _x select 1, _x select 19];
+							//if  (_length_prating > 2) then {diag_log format["SERVER MSG: Database player: %1 rating: %2", _x select 1, _x select 22];};							
+							//if  (_length_pviewdistance > 2) then {diag_log format["SERVER MSG: Database player: %1 viewdistance: %2", _x select 1, _x select 23];};				
+							//if  (_length_pterraindetail > 2) then {diag_log format["SERVER MSG: Database player: %1 terraindetail: %2", _x select 1, _x select 24];};					
+							if  (_length_prank > 2) then {diag_log format["SERVER MSG: Database player: %1 rank: %2", _x select 1, _x select 20];};	
+							diag_log format["SERVER MSG: Database player: %1 shots fired: %2", _x select 1, _x select 21];
+							diag_log format["SERVER MSG: Database player: %1 enemy kills: %2", _x select 1, _x select 22];
+							diag_log format["SERVER MSG: Database player: %1 civilian kills: %2", _x select 1, _x select 23];
+							//if  (_length_pshotsfired > 2) then {diag_log format["SERVER MSG: Database player: %1 shots fired: %2", _x select 1, _x select 26];};			
+							//if  (_length_penemykills > 2) then {diag_log format["SERVER MSG: Database player: %1 enemy kills: %2", _x select 1, _x select 27];};			
+							//if  (_length_pcivkills > 2) then {diag_log format["SERVER MSG: Database player: %1 civilian kills: %2", _x select 1, _x select 28];};					
+							if  (_length_plifestate > 2) then {diag_log format["SERVER MSG: Database player: %1 lifestate: %2", _x select 1, _x select 24];};	
 						};
 						
 						if (pdb_persistentScores_enabled) then {
@@ -694,6 +702,8 @@ if (pdb_ace_enabled) then {
 			_player setVariable ["_thispshotsfired", 0, true]; 
 			_player setVariable ["_thispenemykills", 0, true]; 
 			_player setVariable ["_thispcivkills", 0, true]; 
+			_player setVariable ["viewdistance", 1600, true]; 
+			_player setVariable ["terraindetail", 2, true]; 
 			
 		   	_newscore = score _player; 
 		   	
