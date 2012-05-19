@@ -227,6 +227,7 @@ if (pdb_globalScores_enabled) then {
 		_pterraindetail = _player getvariable "terraindetail";
 		_prank = rank _player;
 		_pshotsfired = _player getVariable "_thispshotsfired";
+		diag_log ["_pshotsfired:", _pshotsfired, typeName _pshotsfired];
 		_penemykills = _player getVariable "_thispenemykills";
 		_pcivkills = _player getVariable "_thispcivkills";
 		_plifestate = lifestate _player;
@@ -280,6 +281,10 @@ if (pdb_globalScores_enabled) then {
 			 if (isNil "_aceweapononback") then {  _aceweapononback = ""; };
 			 if (isNil "_aceruckweapons") then {  _aceruckweapons = ""; };
 			 if (isNil "_aceruckmagazines") then {  _aceruckmagazines = ""; };
+			 
+			 if (isNil "_pshotsfired") then {  _pshotsfired = "0"; };
+			 if (isNil "_penemykills") then {  _penemykills = "0"; };
+			 if (isNil "_pcivkills") then {  _pcivkills = "0"; };
 			 
 /*
 				diag_log ["_newscore: ", _newscore, typeName _newscore];
