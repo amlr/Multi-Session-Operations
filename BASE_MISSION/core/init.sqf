@@ -14,7 +14,8 @@ if (isnil "BIS_functions_mainscope") then {
 
 waitUntil{!isNil "BIS_fnc_init"};
 
-diag_log format["MSO-%1 Version: %2", time, "4.31"];
+mso_version = "4.4";
+diag_log format["MSO-%1 Version: %2", time, mso_version];
 
 //Create the comms menu on all machines.
 [] call BIS_fnc_commsMenuCreate; 
@@ -116,6 +117,11 @@ execNow "core\modules\rmm_debug\main.sqf";
 #ifdef RMM_NOMAD
 "NOMAD" call mso_core_fnc_initStat;
 execNow "core\modules\rmm_nomad\main.sqf";
+#endif
+
+#ifdef persistentDB
+"Persistent DB" call mso_core_fnc_initStat;
+execNow "core\modules\persistentDB\main.sqf";
 #endif
 
 #ifdef RMM_GTK

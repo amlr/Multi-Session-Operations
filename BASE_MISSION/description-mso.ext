@@ -50,6 +50,9 @@ class coreHeader {
 #ifdef RMM_NOMAD
 	#include <core\modules\rmm_nomad\params.hpp>
 #endif
+#ifdef persistentDB
+	#include <core\modules\persistentDB\params.hpp>
+#endif
 #ifdef RMM_GTK
 	#include <core\modules\rmm_gtk\params.hpp>
 #endif
@@ -242,6 +245,9 @@ class cfgFunctions {
 #endif
 #ifdef RMM_SETTINGS
 	#include <core\modules\rmm_settings\dialog.hpp>
+#endif
+#ifdef persistentDB
+	#include <core\modules\persistentDB\dialog.hpp>
 #endif
 #ifdef AEG
 	#include "ambience\modules\AEG\Dialogs\AEG_Dialogs.hpp"
