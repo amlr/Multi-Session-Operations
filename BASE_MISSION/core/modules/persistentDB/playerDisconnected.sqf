@@ -225,7 +225,7 @@ if (pdb_globalScores_enabled) then {
 		_prating = rating _player;
 		_pviewdistance = _player getvariable "viewdistance";
 				diag_log ["_pviewdistance:", _pviewdistance, typeName _pviewdistance];
-		_pterraindetail = _player getvariable "terraindetail";
+		_pterraindetail = _player getvariable "pterraindetail";
 				diag_log ["_pterraindetail:", _pterraindetail, typeName _pterraindetail];
 		_prank = rank _player;
 		_pshotsfired = _player getVariable "_thispshotsfired";
@@ -287,7 +287,9 @@ if (pdb_globalScores_enabled) then {
 			 if (isNil "_pshotsfired") then {  _pshotsfired = "0"; };
 			 if (isNil "_penemykills") then {  _penemykills = "0"; };
 			 if (isNil "_pcivkills") then {  _pcivkills = "0"; };
-			 
+			 if (isNil "_pviewdistance") then {  _pviewdistance = "0"; };
+			 if (isNil "_pterraindetail") then {  _pterraindetail = "0"; };
+
 /*
 				diag_log ["_newscore: ", _newscore, typeName _newscore];
 				diag_log ["_pposition: ", _pposition, typeName _pposition];
