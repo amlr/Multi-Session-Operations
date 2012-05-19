@@ -62,6 +62,22 @@ if(isNil "faction_ibr_drg_faction") then {faction_ibr_drg_faction = DEFAULT_ibr_
 if(faction_ibr_drg_faction == 1) then {
         MSO_FACTIONS = MSO_FACTIONS + ["ibr_drg_faction"];
 };
+if(isNil "faction_ibr_unisol_faction") then {faction_ibr_unisol_faction = DEFAULT_ibr_unisol_faction;};
+if(faction_ibr_unisol_faction == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["ibr_unisol_faction"];
+};
+if(isNil "faction_ibr_venator_faction") then {faction_ibr_venator_faction = DEFAULT_ibr_venator_faction;};
+if(faction_ibr_venator_faction == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["ibr_venator_faction"];
+};
+if(isNil "faction_ibr_police_unit") then {faction_ibr_police_unit = DEFAULT_ibr_police_unit;};
+if(faction_ibr_police_unit == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["ibr_police_unit"];
+};
+if(isNil "faction_LIN_army") then {faction_LIN_army = DEFAULT_LIN_army;};
+if(faction_LIN_army == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["LIN_army"];
+};
 if(isNil "faction_NLA") then {faction_NLA = DEFAULT_NLA;};
 if(faction_NLA == 1) then {
         MSO_FACTIONS = MSO_FACTIONS + ["NLA"];

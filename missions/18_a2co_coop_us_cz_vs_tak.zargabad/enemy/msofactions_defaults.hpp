@@ -9,3 +9,10 @@
 #define DEFAULT_CWR2_RU 0
 #define DEFAULT_CWR2_FIA 0
 #define DEFAULT_tigerianne 0
+#define DEFAULT_ibr_arl_faction 0
+#define DEFAULT_ibr_drg_faction 0
+#define DEFAULT_ibr_unisol_faction 0
+#define DEFAULT_ibr_venator_faction 0
+#define DEFAULT_ibr_police_unit 0
+#define DEFAULT_LIN_army 0
+#define DEFAULT_NLA 0
