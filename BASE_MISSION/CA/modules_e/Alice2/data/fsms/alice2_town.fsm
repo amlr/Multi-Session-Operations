@@ -380,12 +380,6 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"_grp = _twn getvariable ""ALICE_group"";" \n
        "" \n
        "{" \n
-       "	_id = _x getvariable ""ALICE_id"";" \n
-       "	if(!isNil ""_id"" && _debug) then {" \n
-       "		deletemarker format [""BIS_alice_civ_%1"",_id];" \n
-       "		deletemarker format [""BIS_alice_civ_%1_w"",_id];" \n
-       "	};" \n
-       "" \n
        "	deletevehicle vehicle _x;" \n
        "	deletevehicle _x;" \n
        "} foreach units _grp;" \n

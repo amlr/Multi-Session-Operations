@@ -62,7 +62,7 @@ class FSM
        "_grp = grpnull;" \n
        "if (isnil {_twn getvariable ""ALICE_group""}) then {" \n
        "	_grp = creategroup civilian;" \n
-       "	_twn setvariable [""ALICE_group"",_grp];" \n
+       "	_twn setvariable [""ALICE_group"",_grp,true];" \n
        "};" \n
        "" \n
        "_neighbors = _twn getvariable ""neighbors"";" \n
@@ -150,6 +150,10 @@ class FSM
        "_car = createvehicle [_classVehicle,position _twnPos,[],0,""none""];" \n
        "_car setdir direction _twnPos;" \n
        "_grp = _twn getvariable ""ALICE_group"";" \n
+       "if (isNil ""_grp"") then {" \n
+       "	_grp = creategroup civilian;" \n
+       "	_twn setvariable [""ALICE_group"",_grp,true];" \n
+       "};" \n
        "_driver = _grp createunit [_classMan,position _car,[],0,""none""];" \n
        "//--- Custom init" \n
        "_globalInit = _logic getvariable ""ALICE_civilianinit"";" \n
@@ -264,7 +268,7 @@ class FSM
     {
       name = "Continue_";
       init = /*%FSM<STATEINIT""">*/"_timeNow = time;" \n
-       "_delay = random 10;"/*%FSM</STATEINIT""">*/;
+       "_delay = random 60;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {

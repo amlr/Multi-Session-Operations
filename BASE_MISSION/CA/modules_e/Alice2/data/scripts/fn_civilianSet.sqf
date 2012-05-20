@@ -22,7 +22,7 @@ if (typename _unit == typename "") then {
 	if (isNull _grp) then {
 		createcenter civilian;
 		_grp = creategroup civilian;
-		(_this select 1) setvariable ["ALICE_group",_grp];
+		(_this select 1) setvariable ["ALICE_group",_grp,true];
 	};
 	_class = _unit;
 	_pos = 	if (count _this > 2) then {position (_this select 2)} else {
