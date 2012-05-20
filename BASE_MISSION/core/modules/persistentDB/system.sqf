@@ -115,7 +115,7 @@
 			
 			if (!_seen) then { 
 				
-			initText = "<br/><br/>Welcome<t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
+			initText = "<br/>Multi-Session Operations<br/>Welcome<t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
 			+name player+"</t><br/>Your details have been entered into the database.<br/><br/>";
 			hintSilent parseText (initText);
 			
@@ -124,7 +124,7 @@
 				 } 
 				else { 
 					
-			initText = "<br/><br/>Welcome back<t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
+			initText = "<br/>Multi-Session Operations<br/>Welcome back<t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
 			+name player+"</t><br/>Your details have been retrieved from the database.<br/><br/>";
 			hintSilent parseText (initText);
 			
@@ -568,7 +568,6 @@
 		_element = _this select 5;  // value to search for
 		_where = _this select 6;  // value of where element
 		_andwhere = _this select 7;  // value of and where element
-
 		
 		_where = [_where, "'", ""] call CBA_fnc_replace; 
 		
