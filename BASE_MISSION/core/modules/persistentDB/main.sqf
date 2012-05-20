@@ -36,6 +36,7 @@ if(persistentDBHeader == 0) exitWith{diag_log format ["MSO-%1 Persistent DB Disa
     persistent_fnc_playerDamage = compile PP "core\modules\persistentDB\playerDamage.sqf";
     persistent_fnc_playerHeal = compile PP "core\modules\persistentDB\playerHeal.sqf";
     persistent_fnc_playerRespawn = compile PP "core\modules\persistentDB\playerRespawn.sqf";
+	persistent_fnc_playerFired = compile PP "core\modules\persistentDB\playerFired.sqf";
 	if (!isdedicated) then { VAR_DEFAULT(ENV_dedicated, false); };
 // ====================================================================================
 // PDB STARTUP
@@ -50,6 +51,7 @@ if(persistentDBHeader == 0) exitWith{diag_log format ["MSO-%1 Persistent DB Disa
 			player addeventhandler ["Dammaged", { _this call persistent_fnc_playerDamage; } ];
 			player addeventhandler ["animChanged", { _this call persistent_fnc_playerHeal; } ];
 			player addeventhandler ["Respawn", { _this call persistent_fnc_playerRespawn; } ];
+			player addeventhandler ["Fired", { _this call persistent_fnc_playerFired; } ];
 			player allowdamage false;
 		    processInitCommands;
 			finishMissionInit;

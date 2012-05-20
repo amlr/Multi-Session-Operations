@@ -68,11 +68,10 @@ class FSM
        "	_houses =  (position _twn) nearobjects [""House"",_twnSize];" \n
        "	_houses call BIS_fnc_selectRandom;" \n
        "};" \n
-       "_unit setspeedmode ""limited"";" \n
        "_unit domove position _destination;" \n
        "" \n
+       "_unit setspeedmode ""limited"";" \n
        "_unit setbehaviour ""safe"";" \n
-       "_unit forcewalk true;" \n
        "" \n
        "_delay = 5;" \n
        "_delayConversation = 120;" \n

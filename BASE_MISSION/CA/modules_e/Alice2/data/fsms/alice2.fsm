@@ -149,7 +149,9 @@ class FSM
        "_spawnDisMax = _spawnDisMin * 1.2;" \n
        "" \n
        "//--- Start " \n
-       "if (!_active && {_town distance _x < _spawnDisMin} count _players > 0) then {" \n
+       "if (!_active &&" \n
+       "{_town distance _x < _spawnDisMin} count _players > 0 &&" \n
+       "{local _x} count allUnits <= count allUnits / count _players) then {" \n
        "	_town setvariable [""ALICE_active"",true,true];" \n
        "	textLogFormat [""Log: [ALICE 2]: %1 populated."",_name];" \n
        "	_fsm = [_logic,_town] execfsm (BIS_Alice2_path + ""fsms\alice2_town.fsm"");" \n
