@@ -405,16 +405,15 @@ MSO_fnc_CQBclientloop = {
 	
                     if (((_x select 0) distance player < 800) && (((position player) select 2) < 5) && (({(local _x) && ((faction _x) in MSO_FACTIONS)} count allunits) < CQBaicap)) then {
                         
-                        
                         if (((_x select 0) distance player < 800) && _strategic) then {
                         	if ((isnil "_suspend") && (isnil "_clear")) then {
                     			[(_pos),(_x select 0),1000] call MSO_fnc_CQBspawnRandomgroup;
                     		};
                         };
                         
-                        if (((_x select 0) distance player < 400) && _regular) then {
+                        if (((_x select 0) distance player < 500) && ((_x select 0) distance player > 100) && _regular) then {
                         	if ((isnil "_suspend") && (isnil "_clear")) then {
-                    			[(_pos),(_x select 0),500] call MSO_fnc_CQBspawnRandomgroup;
+                    			[(_pos),(_x select 0),600] call MSO_fnc_CQBspawnRandomgroup;
                     		};
                         };
                     };
