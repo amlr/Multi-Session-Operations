@@ -76,8 +76,11 @@ publicvariable "debug_mso";
 publicvariable "debug_mso_loc";
 
 "Custom Locations(" + worldName + ")" call mso_core_fnc_initStat;
-if(isNil "CRB_LOCS") then {
+
+if (isserver) then {
+	if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
+	};
 };
 
 "Player" call mso_core_fnc_initStat;

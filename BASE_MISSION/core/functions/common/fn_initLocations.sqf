@@ -1,6 +1,7 @@
 #include <crbprofiler.hpp>
 
 private ["_twn","_locs","_debug","_strategic","_military","_names","_hills","_initNeighbors"];
+if !(isserver) exitwith {};
 
 CRBPROFILERSTART("mso_core_fnc_initLocations")
 
