@@ -22,6 +22,8 @@ if(persistentDBHeader == 0) exitWith{diag_log format ["MSO-%1 Persistent DB Disa
 	#define PP preprocessfilelinenumbers
 	#define VAR_DEFAULT(var,val) if (isNil #var) then {var=(val);}
 // ====================================================================================	
+
+
 // PDB SETUP	
 	_pdbsettings = [] execVM "core\modules\persistentDB\pdbSetup.sqf";
 	waitUntil {scriptDone _pdbsettings};
@@ -31,7 +33,7 @@ if(persistentDBHeader == 0) exitWith{diag_log format ["MSO-%1 Persistent DB Disa
 	[] call compile PP "core\modules\persistentDB\system.sqf";
 	pdb_serverError = 0;
 	pdb_clientError = 0;
-	if (isdedicated) then {	ENV_dedicated = true; publicVariable "ENV_dedicated"; onPlayerConnected {[_id, _name, _uid] call compile PP "core\modules\persistentDB\playerConnected.sqf"}; onPlayerDisconnected { [_id, _name, _uid] call compile PP "core\modules\persistentDB\playerDisconnected.sqf" }; };
+	if (isdedicated) then {	persistent_fnc_callDatabase = compile PP "core\modules\persistentDB\callDatabase.sqf"; ENV_dedicated = true; publicVariable "ENV_dedicated"; onPlayerConnected {[_id, _name, _uid] call compile PP "core\modules\persistentDB\playerConnected.sqf"}; onPlayerDisconnected { [_id, _name, _uid] call compile PP "core\modules\persistentDB\playerDisconnected.sqf" }; };
 	if (isServer) then { publicVariable "MISSIONDATA_LOADED";  if (isNil "MISSIONDATA_LOADED") then {	MISSIONDATA_LOADED = "false";  publicVariable "MISSIONDATA_LOADED"; 	}; };
     persistent_fnc_playerDamage = compile PP "core\modules\persistentDB\playerDamage.sqf";
     persistent_fnc_playerHeal = compile PP "core\modules\persistentDB\playerHeal.sqf";

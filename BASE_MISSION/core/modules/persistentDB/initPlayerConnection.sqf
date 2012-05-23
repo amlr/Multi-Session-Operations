@@ -49,17 +49,14 @@
 			
 		   MISSIONDATA set [0, pdb_fullmissionName]; //  array position 0
 		   
-
 		   _serverData = format["Mission: %1", pdb_fullmissionName];
 		   	PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
-
 		   	
-		   _databaseName = "arma"; _procedureName = "GetMissionByName"; _parameters = format["[tna=%1]",pdb_fullmissionName];
+		   _procedureName = "GetMissionByName"; _parameters = format["[tna=%1]",pdb_fullmissionName];
 		   	// diag_log ("callExtension->Arma2NETMySQL: GetMissionByName");		
-		   	_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];
+		   	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 			// diag_log ["callExtension->Arma2NETMySQL: GetMissionByName _response: ",  _response, typeName _response];
 			_missionArray = [];
-			_response = call compile _response;
 			_missionArray = _response select 0;    // copy the returned row into array
 			
 					
@@ -73,19 +70,23 @@
 								  _serverData = format["Mission: %1 not found...", pdb_fullmissionName];
 								 PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
 			
-								_databaseName = "arma"; _procedureName = "NewMission"; _parameters = format["[tna=%1]",pdb_fullmissionName];	
+								// Set new mission details
+			
+								 _procedureName = "NewMission"; 
+								_parameters = format["[tna=%1,ttd=%2,tsc=%3,tgsc=%4,tlog=%5,twea=%6,tace=%7,tlv=%8]",pdb_fullmissionName,mpdb_date_enabled,mpdb_persistentScores_enabled,mpdb_globalScores_enabled,mpdb_log_enabled,mpdb_weapons_enabled,mpdb_ace_enabled,mpdb_landvehicles_enabled];	
+								
 							//	diag_log ("callExtension->Arma2NETMySQL: NewMission");		
-							   	_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];
+							   	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 							  
 							  			  _serverData = format["Mission: %1 created an entry...", pdb_fullmissionName];
 			   								 PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
 								
-							_databaseName = "arma"; _procedureName = "GetMissionByName"; _parameters = format["[tna=%1]",pdb_fullmissionName];
+							_procedureName = "GetMissionByName"; _parameters = format["[tna=%1]",pdb_fullmissionName];
 						//	diag_log ("callExtension->Arma2NETMySQL: GetMissionByName");		
-							_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];
+							_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 						//	diag_log ["callExtension->Arma2NETMySQL: GetMissionByName _response: ",  _response, typeName _response];
 							   		
-						    _response = call compile _response;			
+						    			
 							_missionArray = _response select 0;    // copy the returned row into array
 						
 						 // END mission name not found in database
@@ -148,13 +149,13 @@ if (pdb_landvehicles_enabled) then {
 						
  
 						// Count the number of land vehicles associated with this mission id
-						_databaseName = "arma"; _procedureName = "CountLandVehicleIDsByMission"; 
+						_procedureName = "CountLandVehicleIDsByMission"; 
 						_parameters = format["[tmid=%1]",_missionid];
 						  
 					//	diag_log ("callExtension->Arma2NETMySQL: CountLandVehicleIDsByMission");		
-						_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
+						_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 					//    diag_log ["callExtension->Arma2NETMySQL: CountLandVehicleIDsByMission _response: ",  _response, typeName _response];
-					    _response = call compile _response;			
+					    			
 						   
 						  
 					 if (pdb_log_enabled) then {
@@ -172,7 +173,7 @@ if (pdb_landvehicles_enabled) then {
 	
 						 // now get the vehicledata per id
 						 
-						 _databaseName = "arma"; _procedureName = "GetLandVehicleByInitid"; 
+						 _procedureName = "GetLandVehicleByInitid"; 
 
 						 _countInDB = parseNumber (_landVehicleCountInDB select 0);
 
@@ -195,9 +196,9 @@ if (pdb_landvehicles_enabled) then {
 											 
 											 
 								//	diag_log ("callExtension->Arma2NETMySQL: GetLandVehicleByInitid");		
-									_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
+									_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 								//	diag_log ["callExtension->Arma2NETMySQL: GetLandVehicleByInitid _response: ",  _response, typeName _response];
-									_response = call compile _response;				 
+													 
 											
 													
 									_landVehicleData	= _response select 0;    // copy the returned row into array
@@ -333,9 +334,7 @@ if (pdb_landvehicles_enabled) then {
 // START addPublicVariableEventHandler
 // ====================================================================================	
 	"PDB_PLAYER_READY" addPublicVariableEventHandler { 
-		
 	
-
 	_data = _this select 1;
 	_puid = _data select 0;
 	_player = _data select 1;
@@ -343,22 +342,13 @@ if (pdb_landvehicles_enabled) then {
 	_playerSide = _data select 3;
 	
 	
-				
-	
 	diag_log["PASS: _player: ", _player];
 	diag_log["PASS: _puid: ", _puid];
 	diag_log["PASS: _pname: ", _pname];
 	diag_log["PASS: _playerSide: ", _playerSide];
 	
-
 	private["_x","_ace", "_playerwea", "_write","_databaseName","_procedureName","_parameters","_databaseProcedure","_found","_retPipe","_result","_temp","_response","_return_response","_thisPposition", "_thisweapons", "_thismagazines", "_newscore", "_thispdamage", "_this_pdamage_head_hit", "_this_pdamage_body", "_this_pdamage_hands", "_this_pdamage_legs", "_length_weapons", "_length_position", "_length_damage", "_length_pdamage_head_hit", "_length_pdamage_body", "_length_pdamage_hands", "_length_pdamage_legs", "_dbScore", "_length_aceruckweapons", "_length_aceruckmagazines","_thisPlayerGlobalscore","_globalPlayerScore", "_pscore", "_connectedplayer","_seen","_thispvehicle","_thispseat","_length_pvehicle","_length_pseat","_status","_bypassed"];
 	
-/*
-	_status = _player getVariable "status";	
-	 diag_log["_status: ", _status, typeName _status];
-	 waituntil {_status != "disconnecting"};
-*/
-
 			 _missionid = (MISSIONDATA select 1);
 			 if (pdb_log_enabled) then {
 				 	diag_log format["SERVER MSG: Mission ID (ARRAY) is %1", _missionid];
@@ -387,7 +377,10 @@ if (pdb_landvehicles_enabled) then {
 				_thispshotsfired = 0;
 				_thispenemykills = 0;
 				_thispcivkills = 0;
+				_thispfriendlykills = 0;
+				_thispsuicides = 0;
 				_thisplifestate = lifestate _player;
+				_thispdeaths = 0;
 				
 				// stance start
 				_animState = animationState _player;
@@ -413,7 +406,7 @@ if (pdb_landvehicles_enabled) then {
 						};
 				// stance end
 				
-				_length_pdamage_head_hit = [_this_pdamage_head_hit] call CBA_fnc_strLen;
+				/*_length_pdamage_head_hit = [_this_pdamage_head_hit] call CBA_fnc_strLen;
 				_length_pdamage_body = [_this_pdamage_body] call CBA_fnc_strLen;
 			    _length_pdamage_hands = [_this_pdamage_hands] call CBA_fnc_strLen;
 				_length_pdamage_legs = [_this_pdamage_legs] call CBA_fnc_strLen;
@@ -423,16 +416,16 @@ if (pdb_landvehicles_enabled) then {
 				_length_pseat = [_thispseat] call CBA_fnc_strLen;
 				_length_aceweapononback  = [_this_aceweapononback] call CBA_fnc_strLen;
 				_length_aceruckweapons  = [str(_this_aceruckweapons)] call CBA_fnc_strLen;
-				_length_aceruckmagazines  = [str(_this_aceruckmagazines)] call CBA_fnc_strLen;
+				_length_aceruckmagazines  = [str(_this_aceruckmagazines)] call CBA_fnc_strLen;*/
 
 				
 				//	diag_log ["callExtension->Arma2NETMySQL: GetPlayer _missionid: ",  _missionid, typeName _missionid];
 				//	diag_log ["callExtension->Arma2NETMySQL: GetPlayer _puid: ",  _puid, typeName _puid];
-				_databaseName = "arma"; _procedureName = "GetPlayer"; _parameters = format["[tmid=%1,tpid=%2]",_missionid,_puid];	
+				_procedureName = "GetPlayer"; _parameters = format["[tmid=%1,tpid=%2]",_missionid,_puid];	
 			   // diag_log ["callExtension->Arma2NETMySQL: GetPlayer _parameters: ",  _parameters, typeName _parameters];
-				_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
+				_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 				//diag_log ["callExtension->Arma2NETMySQL: GetPlayer _response: ",  _response, typeName _response];
-			    _response = call compile _response;			
+			    			
 					    
 				
 				_x = _response select 0;    // copy the returned row into array
@@ -469,14 +462,17 @@ if (pdb_landvehicles_enabled) then {
 						fir 21
 						ek 22
 						ck 23
-						lif 24
+						fk 24
+						sui 25
+						lif 26
+						dea 27
 						
-						wea 25
-						mag 26
+						wea 28
+						mag 29
 						
-						awb 27
-						aw 28
-						arm 29
+						awb 30
+						aw 31
+						arm 32
 
 						
 						*/
@@ -491,17 +487,17 @@ if (pdb_weapons_enabled) then {
 		   	PDB_CLIENT_LOADERSTATUS = [_player,_serverData]; publicVariable "PDB_CLIENT_LOADERSTATUS";
 		   	
 		   	
-		   		_databaseName = "arma"; _procedureName = "GetPlayerWeapons"; _parameters = format["[tmid=%1,tpid=%2]",_missionid,_puid];
+		   		 _procedureName = "GetPlayerWeapons"; _parameters = format["[tmid=%1,tpid=%2]",_missionid,_puid];
 				// diag_log ("callExtension->Arma2NETMySQL: GetPlayerWeapons");		
-				_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];
+				_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 				// diag_log ["callExtension->Arma2NETMySQL: GetPlayerWeapons _response: ",  _response, typeName _response];	
-			    _response = call compile _response;		
+			    		
 		   	
 		   	
 						_playerwea = _response select 0;    // copy the returned row into array
 
-						_x set [25, _playerwea select 0];
-						_x set [26, _playerwea select 1];
+						_x set [28, _playerwea select 0];
+						_x set [29, _playerwea select 1];
 // END get player's vanilla weapons and ammo
 };
 
@@ -509,23 +505,19 @@ if (pdb_weapons_enabled) then {
 // START get player's ACE weapons and ammo
 if (pdb_ace_enabled) then {				
 
-		   _serverData = format["Loading player ACE weapons..."];
-		   	PDB_CLIENT_LOADERSTATUS = [_player,_serverData]; publicVariable "PDB_CLIENT_LOADERSTATUS";
-		   			
-		   			
-		   		_databaseName = "arma"; _procedureName = "GetPlayerACE"; _parameters = format["[tmid=%1,tpid=%2]",_missionid,_puid];
-				// diag_log ("callExtension->Arma2NETMySQL: GetPlayerACE");		
-				_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
-				// diag_log ["callExtension->Arma2NETMySQL: GetPlayerACE _response: ",  _response, typeName _response];	
-			    _response = call compile _response;		
-		   	
-		   	
-						_ace = _response select 0;    // copy the returned row into array
-	
-						_x set [27, _ace select 0];
-						_x set [28, _ace select 1];
-						_x set [29, _ace select 2];
+   _serverData = format["Loading player ACE weapons..."];
+	PDB_CLIENT_LOADERSTATUS = [_player,_serverData]; publicVariable "PDB_CLIENT_LOADERSTATUS";
+				
+	 _procedureName = "GetPlayerACE"; _parameters = format["[tmid=%1,tpid=%2]",_missionid,_puid];
+	// diag_log ("callExtension->Arma2NETMySQL: GetPlayerACE");		
+	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
+	// diag_log ["callExtension->Arma2NETMySQL: GetPlayerACE _response: ",  _response, typeName _response];	
 			
+	_ace = _response select 0;    // copy the returned row into array
+
+	_x set [30, _ace select 0];
+	_x set [31, _ace select 1];
+	_x set [32, _ace select 2];		
 						
 };
 // END get player's ACE weapons and ammo
@@ -565,11 +557,16 @@ if (pdb_ace_enabled) then {
 						_thispshotsfired = _x select 21;						// shots fired
 						_thispenemykills = _x select 22;						// enemy kills
 						_thispcivkills = _x select 23;						// civ kills
-						_thisplifestate = _x select 24;						// lifestate
+						_thispfriendlykills = data select 24;					// friendly kills
+						_thispsuicides = data select 25;						// Suicide
+						_thisplifestate = _data select 26;						// lifestate
+						_thispdeaths = _data select 27;
 						
-						_this_aceweapononback = _x select 27; // return player ace wob
-						_this_aceruckweapons = _x select 28; // return player ace ruck weapons
-						_this_aceruckmagazines = _x select 29; // return player ace ruck magazines
+						if (pdb_ace_enabled) then {
+							_this_aceweapononback = _x select 30; // return player ace wob
+							_this_aceruckweapons = _x select 31; // return player ace ruck weapons
+							_this_aceruckmagazines = _x select 32; // return player ace ruck magazines
+						};
 						
 						_length_position = [_x select 4] call CBA_fnc_strLen;  
 					    _length_damage = [_x select 6] call CBA_fnc_strLen;	 
@@ -590,14 +587,18 @@ if (pdb_ace_enabled) then {
 						_length_prank = [_x select 20] call CBA_fnc_strLen;							
 						_length_pshotsfired = [_x select 21] call CBA_fnc_strLen;				
 						_length_penemykills = [_x select 22] call CBA_fnc_strLen;			
-						_length_pcivkills = [_x select 23] call CBA_fnc_strLen;				
-						_length_plifestate = [_x select 24] call CBA_fnc_strLen;	
+						_length_pcivkills = [_x select 23] call CBA_fnc_strLen;	
+						_length_pfriendlykills = [_x select 24] call CBA_fnc_strLen;	
+						_length_psuicides = [_x select 25] call CBA_fnc_strLen;	
+						_length_plifestate = [_x select 26] call CBA_fnc_strLen;
+						_length_pdeaths = [_x select 27] call CBA_fnc_strLen;							
 						
-						_length_weapons = [_x select 25] call CBA_fnc_strLen; 
-						_length_magazines = [_x select 26] call CBA_fnc_strLen; 
-						_length_aceweapononback = [_x select 27] call CBA_fnc_strLen; 
-						_length_aceruckweapons = [_x select 28] call CBA_fnc_strLen; 
-						_length_aceruckmagazines = [_x select 29] call CBA_fnc_strLen; 
+						_length_weapons = [_x select 28] call CBA_fnc_strLen; 
+						_length_magazines = [_x select 29] call CBA_fnc_strLen; 
+						
+						_length_aceweapononback = [_x select 30] call CBA_fnc_strLen; 
+						_length_aceruckweapons = [_x select 31] call CBA_fnc_strLen; 
+						_length_aceruckmagazines = [_x select 32] call CBA_fnc_strLen; 
 				
 						if (_length_damage > 2) then { _x set [6, parseNumber (_x select 6)]; _player setVariable ["damage", _x select 6, true]; } else {_x set [6, -1];};
 						if (_length_pdamage_head_hit >2) then { _x set [7, parseNumber (_x select 7)]; _player setVariable ["head_hit", _x select 7, true]; } else {_x set [7, -1];};	
@@ -621,16 +622,21 @@ if (pdb_ace_enabled) then {
 						if  (_length_prank > 2) then { _player setVariable ["prank", _x select 20, true];} else {_x set [20,  rank _player];};								
 						if  (_length_pshotsfired > 0) then { _player setVariable ["_thispshotsfired", parseNumber (_x select 21), true]; _x set [21, parseNumber (_x select 21)]; } else {_x set [21,0];};			
 						if  (_length_penemykills > 0) then { _player setVariable ["_thispenemykills", parseNumber (_x select 22), true];_x set [22, parseNumber (_x select 22)];} else {_x set [22,0];};		
-						if  (_length_pcivkills > 0) then {_player setVariable ["_thispcivkills", parseNumber (_x select 23), true]; _x set [23, parseNumber (_x select 23)];} else {_x set [23,0];};				
-						if  (_length_plifestate > 2) then { } else {_x set [24,  lifestate _player];};
+						if  (_length_pcivkills > 0) then {_player setVariable ["_thispcivkills", parseNumber (_x select 23), true]; _x set [23, parseNumber (_x select 23)];} else {_x set [23,0];};
+						if  (_length_pfriendlykills > 0) then {_player setVariable ["_thispfriendlykills", parseNumber (_x select 24), true]; _x set [24, parseNumber (_x select 24)];} else {_x set [24,0];};
+						if  (_length_psuicides > 0) then {_player setVariable ["_thispsuicides", parseNumber (_x select 25), true]; _x set [25, parseNumber (_x select 25)];} else {_x set [25,0];};
+						if  (_length_plifestate > 2) then { } else {_x set [26,  lifestate _player];};
+						if  (_length_pdeaths > 0) then {_player setVariable ["_thispdeaths", parseNumber (_x select 27), true]; _x set [27, parseNumber (_x select 27)];} else {_x set [27,0];};
 						
-						if (_length_weapons > 2) then { _x set [25, [(_x select 25), "|", ","] call CBA_fnc_replace]; _x set [25, "[" + (_x select 25) + "]"]; _x set [25, call compile (_x select 25)];}else {_x set [25, []];};
-						if (_length_magazines > 2) then { _x set [26, [(_x select 26), "|", ","] call CBA_fnc_replace]; _x set [26, "[" + (_x select 26) + "]"];_x set [26, call compile (_x select 26)];}else {_x set [26, []];};
+						if (_length_weapons > 2) then { _x set [28, [(_x select 28), "|", ","] call CBA_fnc_replace]; _x set [28, "[" + (_x select 28) + "]"]; _x set [28, call compile (_x select 28)];}else {_x set [28, []];};
+						if (_length_magazines > 2) then { _x set [29, [(_x select 29), "|", ","] call CBA_fnc_replace]; _x set [29, "[" + (_x select 29) + "]"];_x set [29, call compile (_x select 29)];}else {_x set [29, []];};
 						
-						if (_length_aceweapononback > 2) then { _player setVariable ["WOB", _x select 27, true]; }else {_x set [27, ""];};
-						if (_length_aceruckweapons > 2) then { 	_player setVariable ["WEAPON", (_x select 28), true];  _x set [28, [(_x select 28), "|", ","] call CBA_fnc_replace]; _x set [28, "[" + (_x select 28) + "]"];_x set [28, call compile (_x select 28)]; }else {_x set [28, []];};
-						if (_length_aceruckmagazines > 2) then { _player setVariable ["MAGAZINE", (_x select 29), true]; _x set [29, [(_x select 29), "|", ","] call CBA_fnc_replace]; _x set [29, "[" + (_x select 29) + "]"];_x set [29, call compile (_x select 29)];  }else {_x set [29, []];};
-								
+						if (pdb_ace_enabled) then {
+							if (_length_aceweapononback > 2) then { _player setVariable ["WOB", _x select 30, true]; }else {_x set [30, ""];};
+							if (_length_aceruckweapons > 2) then { 	_player setVariable ["WEAPON", (_x select 30), true];  _x set [30, [(_x select 30), "|", ","] call CBA_fnc_replace]; _x set [30, "[" + (_x select 30) + "]"];_x set [30, call compile (_x select 30)]; }else {_x set [30, []];};
+							if (_length_aceruckmagazines > 2) then { _player setVariable ["MAGAZINE", (_x select 31), true]; _x set [31, [(_x select 31), "|", ","] call CBA_fnc_replace]; _x set [31, "[" + (_x select 31) + "]"];_x set [31, call compile (_x select 31)];  }else {_x set [31, []];};
+						};
+						
 						if (pdb_log_enabled) then {
 							
 							diag_log format["SERVER MSG: Welcome back, %1", _x select 1];
@@ -640,8 +646,6 @@ if (pdb_ace_enabled) then {
 							diag_log format["SERVER MSG: Database player: %1 score: %2", _x select 1, _x select 3];
 							diag_log format["SERVER MSG: Database player: %1 mission id: %2", _x select 1, _x select 5];
 							  
-							if (_length_weapons >2) then {diag_log format["SERVER MSG: Database player: %1 weapons: %2", _x select 1, _x select 25];};	 
-							if (_length_magazines >2) then { diag_log format["SERVER MSG: Database player: %1 magazines: %2", _x select 1, _x select 26];}; 
 							if (_length_position >2) then { diag_log format["SERVER MSG: Database player: %1 teleported to coords, %2", _x select 1, _x select 4];};
 							if (_length_damage > 2) then {	 diag_log format["SERVER MSG: Database player: %1 overall damage, %2", _x select 1, _x select 6];}; 
 							if (_length_pdamage_head_hit > 2) then {	 diag_log format["SERVER MSG: Database player: %1 head damage, %2", _x select 1, _x select 7];};
@@ -653,9 +657,6 @@ if (pdb_ace_enabled) then {
 							if (_length_pside > 2) then { diag_log format["SERVER MSG: Database player: %1 side: %2", _x select 1, _x select 13];};
 							if (_length_pvehicle > 2) then { diag_log format["SERVER MSG: Database player: %1 in vehicle: %2", _x select 1, _x select 14];};
 							if (_length_pseat > 2) then { diag_log format["SERVER MSG: Database player: %1 in vehicle seat: %2", _x select 1, _x select 15];};
-							if (_length_aceweapononback > 2) then {	diag_log format["SERVER MSG: Database player: %1 ace weapon on back: %2", _x select 1, _x select 27];};
-							if (_length_aceruckweapons > 2) then { diag_log format["SERVER MSG: Database player: %1 ace ruck weapons: %2", _x select 1, _x select 28];};
-							if (_length_aceruckmagazines > 2) then {	 diag_log format["SERVER MSG: Database player: %1 ace ruck magazines: %2", _x select 1, _x select 29];};
 							
 							if  (_length_ptype > 2) then {diag_log format["SERVER MSG: Database player: %1 type: %2", _x select 1, _x select 16];};	
 							diag_log format["SERVER MSG: Database player: %1 rating: %2", _x select 1, _x select 17];
@@ -672,6 +673,14 @@ if (pdb_ace_enabled) then {
 							//if  (_length_penemykills > 2) then {diag_log format["SERVER MSG: Database player: %1 enemy kills: %2", _x select 1, _x select 27];};			
 							//if  (_length_pcivkills > 2) then {diag_log format["SERVER MSG: Database player: %1 civilian kills: %2", _x select 1, _x select 28];};					
 							if  (_length_plifestate > 2) then {diag_log format["SERVER MSG: Database player: %1 lifestate: %2", _x select 1, _x select 24];};	
+							
+							if (_length_weapons >2) then {diag_log format["SERVER MSG: Database player: %1 weapons: %2", _x select 1, _x select 28];};	 
+							if (_length_magazines >2) then { diag_log format["SERVER MSG: Database player: %1 magazines: %2", _x select 1, _x select 29];};
+							
+							if (_length_aceweapononback > 2) then {	diag_log format["SERVER MSG: Database player: %1 ace weapon on back: %2", _x select 1, _x select 30];};
+							if (_length_aceruckweapons > 2) then { diag_log format["SERVER MSG: Database player: %1 ace ruck weapons: %2", _x select 1, _x select 31];};
+							if (_length_aceruckmagazines > 2) then {	 diag_log format["SERVER MSG: Database player: %1 ace ruck magazines: %2", _x select 1, _x select 32];};
+						
 						};
 						
 						if (pdb_persistentScores_enabled) then {
@@ -698,10 +707,13 @@ if (pdb_ace_enabled) then {
 		   		_player setVariable ["loadedPlayerScore", 0, true]; 
 		   	};
 		   	
-			// set the players shots fired, enemy kills and civ kills
+			// set the players shots fired, kills, deaths, suicides - this variables are updated during game by eventhandlers or interaction
 			_player setVariable ["_thispshotsfired", 0, true]; 
 			_player setVariable ["_thispenemykills", 0, true]; 
 			_player setVariable ["_thispcivkills", 0, true]; 
+			_player setVariable ["_thispfriendlykills", 0, true]; 
+			_player setVariable ["_thispsuicides", 0, true]; 
+			_player setVariable ["_thispdeaths", 0, true]; 
 			_player setVariable ["viewdistance", 1600, true]; 
 			_player setVariable ["pterraindetail", 2, true];
 			_player setVariable ["prank",rank _player, true];
@@ -718,10 +730,10 @@ if (pdb_ace_enabled) then {
 		   	// get the player's side
 		   	_pside =  side _player;
 		   	
-				_databaseName = "arma"; _procedureName = "InsertPlayer"; _parameters = format["[tpid=%1,tna=%2,tmid=%3,tsid=%4,tpos=%5]",_puid,_pname,_missionid,_pside,_pposition];
+				 _procedureName = "InsertPlayer"; _parameters = format["[tpid=%1,tna=%2,tmid=%3,tsid=%4,tpos=%5]",_puid,_pname,_missionid,_pside,_pposition];
 					
 			//	diag_log ("callExtension->Arma2NETMySQL: InsertPlayer");	
-			  _response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
+			  _response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 		
 						
 		}; // end  if new player
@@ -733,11 +745,11 @@ if (pdb_ace_enabled) then {
 		   _serverData = format["Loading player global score..."];
 		   	PDB_CLIENT_LOADERSTATUS = [_player,_serverData]; publicVariable "PDB_CLIENT_LOADERSTATUS";
 		   	
-				_databaseName = "arma"; _procedureName = "GetGlobalScoreByPlayer"; _parameters = format["[tpid=%1]",_puid];
+				 _procedureName = "GetGlobalScoreByPlayer"; _parameters = format["[tpid=%1]",_puid];
 			//	diag_log ("callExtension->Arma2NETMySQL: GetGlobalScoreByPlayer");		
-				_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
+				_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 			//	diag_log ["callExtension->Arma2NETMySQL: GetGlobalScoreByPlayer _response: ",  _response, typeName _response];	
-			    _response = call compile _response;		
+			    		
 				
 
 					_thisPlayerGlobalscore = _response;

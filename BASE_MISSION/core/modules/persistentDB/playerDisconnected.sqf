@@ -34,26 +34,25 @@
 	if (_pname != "__SERVER__") then {
 		
 		
-			private["_found","_write","_databaseName","_procedureName","_parameters","_databaseProcedure","_retPipe","_result","_temp","_response","_return_response","_aceweapononback","_aceruckweapons","_aceruckmagazines","_pscore","_bypassed"];
+		private["_found","_write","_databaseName","_procedureName","_parameters","_databaseProcedure","_retPipe","_result","_temp","_response","_return_response","_aceweapononback","_aceruckweapons","_aceruckmagazines","_pscore","_bypassed"];
 			
 
 		_player = objNull;
-			{
-				
+		{
+			
 			if (pdb_log_enabled) then {
-				 	diag_log format["SERVER MSG: Loop. %1", getPlayerUID _x];
+					diag_log format["SERVER MSG: Loop. %1", getPlayerUID _x];
 			};	
 		
 			if (getPlayerUID _x == _puid) exitWith {
 			
-			if (pdb_log_enabled) then {		
-				 	diag_log format["SERVER MSG: Loop break. %1", getPlayerUID _x];
-			};
+				if (pdb_log_enabled) then {		
+						diag_log format["SERVER MSG: Loop break. %1", getPlayerUID _x];
+				};
 		
-				   _player = _x;
-			  };
-			} 
-			forEach playableUnits; // Return a list of playable units (occupied by both AI or players) in a multiplayer game. 
+			   _player = _x;
+			};
+		} forEach playableUnits; // Return a list of playable units (occupied by both AI or players) in a multiplayer game. 
 		
 		if !(isNull _player) then {	
 			
@@ -63,11 +62,6 @@
 			
 				if (CFG_ReturnKeysOnDeath == 1) then { [_player] call FNC_REMOVE_FROM_VEHICLE_KEYS_ARRAY;  };
 				
-					
-					
-					
-
-
 		
 // ====================================================================================	
 
@@ -196,13 +190,13 @@ if (pdb_globalScores_enabled) then {
 			// get it from from the player var incase they are dead and thus return CIV or tk'd this session thus returns ENEMY
 			_pside = _player getVariable "playerSide";
 
-		  diag_log ["pdb_ace_enabled:", pdb_ace_enabled, typeName pdb_ace_enabled];
+		diag_log ["pdb_ace_enabled:", pdb_ace_enabled, typeName pdb_ace_enabled];
 		if (pdb_ace_enabled) then {
-		 _aceweapononback = _player getVariable "WOB";
-		 _aceruckweapons = _player getVariable "WEAPON";
-		  diag_log ["_aceruckweapons:", _aceruckweapons, typeName _aceruckweapons];
-		 _aceruckmagazines = _player getVariable "MAGAZINE";
-		 diag_log ["_aceruckmagazines:", _aceruckmagazines, typeName _aceruckmagazines];
+			 _aceweapononback = _player getVariable "WOB";
+			 _aceruckweapons = _player getVariable "WEAPON";
+			  diag_log ["_aceruckweapons:", _aceruckweapons, typeName _aceruckweapons];
+			 _aceruckmagazines = _player getVariable "MAGAZINE";
+			 diag_log ["_aceruckmagazines:", _aceruckmagazines, typeName _aceruckmagazines];
 
 		};	 
 
@@ -229,7 +223,10 @@ if (pdb_globalScores_enabled) then {
 		_pshotsfired = _player getVariable "_thispshotsfired";
 		_penemykills = _player getVariable "_thispenemykills";
 		_pcivkills = _player getVariable "_thispcivkills";
+		_pfriendlykills = _player getVariable "_thispfriendlykills";
+		_psuicides = _player getVariable "_thispsuicides";
 		_plifestate = lifestate _player;
+		_pdeaths = _player getVariable "_thispdeaths";
 			
 // ====================================================================================
 // Save player data to db before exiting.
@@ -239,7 +236,6 @@ if (pdb_globalScores_enabled) then {
 			 // convert back to string for db update
 			_newscore = str(_pscore);	
 			
-
 //			_ppname =  "'" + _pname + "'";
 			_missionid = (MISSIONDATA select 1);
 //			_pposition =  "'" + _pposition + "'";
@@ -311,10 +307,8 @@ if (pdb_globalScores_enabled) then {
 */			
 
 // START save player's vanilla data
-			//			GVAR(arma2mysqlPipeHandle) = ["\\.\pipe\Arma2MySQLPipe"] call jayarma2lib_fnc_openpipe;
-			//			for [{_a=0},{_a < 2000},{_a=_a+1}] do {};
-						_databaseName = "arma"; _procedureName = "UpdatePlayer"; 
-						_parameters = format["[tsc=%1,tpos=%2,tdam=%3,tdhe=%4,tdbo=%5,tdha=%6,tdle=%7,tdir=%8,tsta=%9,tsid=%10,tveh=%11,tsea=%12,ttyp=%13,trat=%14,tvd=%15,ttd=%16,tran=%17,tfir=%18,tek=%19,tck=%20,tlif=%21,tpid=%22,tna=%23,tmid=%24]",_newscore,_pposition,_pdamage,_p_head_hit_damage,_p_body_damage,_p_hands_damage,_p_legs_damage,_pdirection,_pstance,_pside,_pvehicle,_pseat, _ptype, _prating, _pviewdistance, _pterraindetail, _prank, _pshotsfired, _penemykills, _pcivkills,_plifestate,_puid,_pname,_missionid];
+			 _procedureName = "UpdatePlayer"; 
+			_parameters = format["[tsc=%1,tpos=%2,tdam=%3,tdhe=%4,tdbo=%5,tdha=%6,tdle=%7,tdir=%8,tsta=%9,tsid=%10,tveh=%11,tsea=%12,ttyp=%13,trat=%14,tvd=%15,ttd=%16,tran=%17,tfir=%18,tek=%19,tck=%20,tfk=%21,tsui=%22,tlif=%23,tdea=%24,tpid=%25,tna=%26,tmid=%27]",_newscore,_pposition,_pdamage,_p_head_hit_damage,_p_body_damage,_p_hands_damage,_p_legs_damage,_pdirection,_pstance,_pside,_pvehicle,_pseat, _ptype, _prating, _pviewdistance, _pterraindetail, _prank, _pshotsfired, _penemykills, _pcivkills,_pfriendlykills,_psuicides,_plifestate,_pdeaths,_puid,_pname,_missionid];
 
 		if (pdb_log_enabled) then {
 			 	diag_log format["SERVER MSG: SQL output: %1", _parameters];
@@ -323,58 +317,52 @@ if (pdb_globalScores_enabled) then {
 		 
 		
 		//		diag_log ("callExtension->Arma2NETMySQL: UpdatePlayer");		
-				_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
+				_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 
 // END save player's vanilla data
 
 
 
-// START save player's vanilla weapons and ammo
-if (pdb_weapons_enabled) then {
-						_databaseName = "arma"; _procedureName = "UpdatePlayerWeapons"; 
-						_parameters = format["[twea=%1,tmag=%2,tpid=%3,tna=%4,tmid=%5]",_pweapons,_pmagazines,_puid,_pname,_missionid];
+		// START save player's vanilla weapons and ammo
+		if (pdb_weapons_enabled) then {
+								 _procedureName = "UpdatePlayerWeapons"; 
+								_parameters = format["[twea=%1,tmag=%2,tpid=%3,tna=%4,tmid=%5]",_pweapons,_pmagazines,_puid,_pname,_missionid];
 
 
-		 if (pdb_log_enabled) then {
-			 	diag_log format["SERVER MSG: SQL output: %1", _parameters];
-		 };
-						
-						
-							
-			//	diag_log ("callExtension->Arma2NETMySQL: UpdatePlayerWeapons");		
-				_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
+				 if (pdb_log_enabled) then {
+						diag_log format["SERVER MSG: SQL output: %1", _parameters];
+				 };
+								
+								
+									
+					//	diag_log ("callExtension->Arma2NETMySQL: UpdatePlayerWeapons");		
+						_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 
 
-// END save player's vanilla weapons and ammo
-};
+		// END save player's vanilla weapons and ammo
+		};
 
 
 
 		// Gotta split this into another call since jayarmalib limits data throughput. :(
 		if (pdb_ace_enabled) then {
 		
-						_databaseName = "arma"; _procedureName = "UpdatePlayerACE"; 
-						_parameters = format["[tawb=%1,taw=%2,tarm=%3,tpid=%4,tna=%5,tmid=%6]",_aceweapononback,_aceruckweapons,_aceruckmagazines,_puid,_pname,_missionid];
+			 _procedureName = "UpdatePlayerACE"; 
+			_parameters = format["[tawb=%1,taw=%2,tarm=%3,tpid=%4,tna=%5,tmid=%6]",_aceweapononback,_aceruckweapons,_aceruckmagazines,_puid,_pname,_missionid];
 
 
-		 if (pdb_log_enabled) then {
-			 	diag_log format["SERVER MSG: SQL output: %1", _parameters];
-		 };
+			 if (pdb_log_enabled) then {
+					diag_log format["SERVER MSG: SQL output: %1", _parameters];
+			 };
 		 
 		 
 		 	
-		//		diag_log ("callExtension->Arma2NETMySQL: UpdatePlayerACE");		
-				_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
+		//	diag_log ("callExtension->Arma2NETMySQL: UpdatePlayerACE");		
+			_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 		 
-		
 		};		
 		
-		
-				 	//Stop and close pipe
-		//		[GVAR(arma2mysqlPipeHandle)] call jayarma2lib_fnc_closepipe;
-		//		GVAR(arma2mysqlPipeHandle) = nil;
-		//		diag_log ("UpdatePlayer Pipe closed.");		
-				
+	
 		} else {
 			// player not found
 				if (pdb_log_enabled) then {
@@ -395,7 +383,7 @@ if (pdb_landvehicles_enabled) then {
 		//		GVAR(arma2mysqlPipeHandle) = ["\\.\pipe\Arma2MySQLPipe"] call jayarma2lib_fnc_openpipe;
 		//		for [{_a=0},{_a < 2000},{_a=_a+1}] do {};
 		
-				_databaseName = "arma"; _procedureName = "RemoveLandVehicles"; 
+				 _procedureName = "RemoveLandVehicles"; 
 				_parameters = format["[tmid=%1]",_missionid];
 
 					 if (pdb_log_enabled) then {
@@ -406,7 +394,7 @@ if (pdb_landvehicles_enabled) then {
 					 
 					
 		//		diag_log ("callExtension->Arma2NETMySQL: RemoveLandVehicles");		
-				_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
+				_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 
 
 // END remove mission's current LandVehicles data						
@@ -414,7 +402,7 @@ if (pdb_landvehicles_enabled) then {
 
 // START save mission's LandVehicles data
 				
-			_databaseName = "arma"; _procedureName = "InsertLandVehicles"; 
+			 _procedureName = "InsertLandVehicles"; 
 
 		
 			// get LandVehicle data
@@ -468,7 +456,7 @@ if (pdb_landvehicles_enabled) then {
 					 
  	
 			//	diag_log ("callExtension->Arma2NETMySQL: InsertLandVehicles");		
-				_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
+				_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 
 				
 				_landVehicleCount =_landVehicleCount+1;
@@ -498,7 +486,7 @@ if (pdb_date_enabled) then {
 //		GVAR(arma2mysqlPipeHandle) = ["\\.\pipe\Arma2MySQLPipe"] call jayarma2lib_fnc_openpipe;
 //		for [{_a=0},{_a < 2000},{_a=_a+1}] do {};
 	
-	_databaseName = "arma"; _procedureName = "UpdateDate";
+	 _procedureName = "UpdateDate";
 	_parameters = format["[tda=%1,tmid=%2]",_date,_missionid]; 
 	
 					 if (pdb_log_enabled) then {
@@ -507,7 +495,7 @@ if (pdb_date_enabled) then {
 					 
 					 
 			//	diag_log ("callExtension->Arma2NETMySQL: UpdateDate");		
-				_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
+				_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 
 					 
 					

@@ -288,6 +288,21 @@ class cfgFunctions {
 #include <enemy\modules\roy_patrolops\mps\dialog\mps_dialog.hpp>
 #endif
 
+// Extended Event Handlers
+#ifdef persistentDB
+	class Extended_PreInit_Eventhandlers
+	{
+		unit_killed_preinit = "persistent_fnc_unitKilled = compile preprocessFile 'core\modules\persistentDB\unitKilled.sqf'" ;
+	};
+	class Extended_Killed_Eventhandlers
+	{
+		class MAN
+		{
+			man_killed = "_this call persistent_fnc_unitKilled";
+		};
+	};
+#endif
+
 // Add BAF and TK Flight groups
 class CfgGroups {
 #ifdef TUP_AIRTRAFFIC

@@ -77,36 +77,34 @@
 			if  (ENV_dedicated) then { 	player setVariable ["loader", "Standby entering game"]; startLoadingScreen [(player getVariable "loader"), "PDB_loadingScreen"]; };	
 		   diag_log["PersistentDB: ACTIVATE PLAYER"];		  
 		   endLoadingScreen;
-		   player allowdamage true;
-		   
-		   if (pdb_ace_enabled) then {["ace_sys_ruck_changed", {call PDB_FNC_PLAYER_RUCK}] call CBA_fnc_addEventhandler; };
-		   if (pdb_ace_enabled) then { player addweapon "ace_map"; };
-		   
+		   player allowdamage true; 
 		 
-		   	   if (pdb_ace_enabled) then {				
-		   	   	// set the ace ruck variables now so that they can be saved to the DB even if the 'ace_sys_ruck_changed' has not been fired before the player decides to exit.
-					_thisWeaponsList = [player] call ACE_fnc_RuckWeaponsList;
-					_thisWeaponsList = str(_thisWeaponsList);
-					_thisWeaponsList = [_thisWeaponsList, "[", ""] call CBA_fnc_replace; 
-					_thisWeaponsList = [_thisWeaponsList, "]", ""] call CBA_fnc_replace; 
-					_thisWeaponsList = [_thisWeaponsList, ",", "|"] call CBA_fnc_replace;
-					player setVariable ["WEAPON", _thisWeaponsList, true];
-					
-					_thisMagazinesList = [player] call ACE_fnc_RuckMagazinesList;
-					_thisMagazinesList = str(_thisMagazinesList);
-					_thisMagazinesList = [_thisMagazinesList, "[", ""] call CBA_fnc_replace; 
-					_thisMagazinesList = [_thisMagazinesList, "]", ""] call CBA_fnc_replace; 
-					_thisMagazinesList = [_thisMagazinesList, ",", "|"] call CBA_fnc_replace;   	
-					player setVariable ["MAGAZINE", _thisMagazinesList, true];
-					
-					_thiswob = [player] call ACE_fnc_WeaponOnBackName;
-					_lengthThiswob = [_thiswob] call CBA_fnc_strLen;
-						if (_lengthThiswob > 0) then {
-							 player setVariable ["WOB", _thiswob, true];
-						};
-				};
-			
-			 
+		   if (pdb_ace_enabled) then {				
+			// set the ace ruck variables now so that they can be saved to the DB even if the 'ace_sys_ruck_changed' has not been fired before the player decides to exit.
+				["ace_sys_ruck_changed", {call PDB_FNC_PLAYER_RUCK}] call CBA_fnc_addEventhandler;
+				 player addweapon "ace_map";
+				 
+				_thisWeaponsList = [player] call ACE_fnc_RuckWeaponsList;
+				_thisWeaponsList = str(_thisWeaponsList);
+				_thisWeaponsList = [_thisWeaponsList, "[", ""] call CBA_fnc_replace; 
+				_thisWeaponsList = [_thisWeaponsList, "]", ""] call CBA_fnc_replace; 
+				_thisWeaponsList = [_thisWeaponsList, ",", "|"] call CBA_fnc_replace;
+				player setVariable ["WEAPON", _thisWeaponsList, true];
+				
+				_thisMagazinesList = [player] call ACE_fnc_RuckMagazinesList;
+				_thisMagazinesList = str(_thisMagazinesList);
+				_thisMagazinesList = [_thisMagazinesList, "[", ""] call CBA_fnc_replace; 
+				_thisMagazinesList = [_thisMagazinesList, "]", ""] call CBA_fnc_replace; 
+				_thisMagazinesList = [_thisMagazinesList, ",", "|"] call CBA_fnc_replace;   	
+				player setVariable ["MAGAZINE", _thisMagazinesList, true];
+				
+				_thiswob = [player] call ACE_fnc_WeaponOnBackName;
+				_lengthThiswob = [_thiswob] call CBA_fnc_strLen;
+					if (_lengthThiswob > 0) then {
+						 player setVariable ["WOB", _thiswob, true];
+					};
+			};
+				 
 			diag_log["PersistentDB: PLAYER READY: ", name player];
 
 			diag_log["PersistentDB: PLAYER CONNECTED"];
@@ -115,25 +113,25 @@
 			
 			if (!_seen) then { 
 				
-			initText = "<br/>Multi-Session Operations<br/>Welcome<t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
-			+name player+"</t><br/>Your details have been entered into the database.<br/><br/>";
-			hintSilent parseText (initText);
+				initText = "<br/>Multi-Session Operations<br/><br/>Welcome<br/><t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
+				+name player+"</t><br/><br/>Your details have been entered into the database.<br/><br/>";
+				hintSilent parseText (initText);
 			
-		//		player sideChat format["Welcome %1, your details have been entered into the database",  name player];
+				// player sideChat format["Welcome %1, your details have been entered into the database",  name player];
 				 diag_log ["PersistentDB: New player: ",  (name player), typeName  (name player)];
-				 } 
-				else { 
+				 
+			} else { 
 					
-			initText = "<br/>Multi-Session Operations<br/>Welcome back<t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
-			+name player+"</t><br/>Your details have been retrieved from the database.<br/><br/>";
-			hintSilent parseText (initText);
+				initText = "<br/>Multi-Session Operations<br/><br/>Welcome back<br/><t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
+				+name player+"</t><br/><br/>Your details have been retrieved from the database.<br/><br/>";
+				hintSilent parseText (initText);
 			
 				_pdbPrompt = createDialog "pdbTeleportPrompt";
 				noesckey = (findDisplay 1599) displayAddEventHandler ["KeyDown", "if ((_this select 1) == 1) then { true }"]; 
 			
-			//		 player sideChat format["Welcome back %1, your details have been retrieved from the database",  name player];
-					  diag_log ["PersistentDB: Existing player: ",  (name player), typeName  (name player)]; 
-					 };
+				// player sideChat format["Welcome back %1, your details have been retrieved from the database",  name player];
+				diag_log ["PersistentDB: Existing player: ",  (name player), typeName  (name player)]; 
+			};
 		};	
 // ====================================================================================
 
@@ -274,14 +272,19 @@
 				_thispshotsfired = _data select 21;						// shots fired
 				_thispenemykills = _data select 22;						// enemy kills
 				_thispcivkills = _data select 23;						// civ kills
-				_thisplifestate = _data select 24;						// lifestate
+				_thispfriendlykills = data select 24;					// friendly kills
+				_thispsuicides = data select 25;						// Suicide
+				_thisplifestate = _data select 26;						// lifestate
+				_thispdeaths = _data select 27;
 
-				_thisweapons = _data select 25;  							// returned player weapons
-				_thismagazines = _data select 26;  							// returned player magazines
+				_thisweapons = _data select 28;  							// returned player weapons
+				_thismagazines = _data select 29;  							// returned player magazines
 				
-				_thisaceweapononback = _data select 27; 					// returned ace weapon on back
-				_thisaceruckweapons = _data select 28; 					// returned ace ruck weapons
-				_thisaceruckmagazines = _data select 29; 					// returned ace ruck magazines
+				if (pdb_ace_enabled) then {
+					_thisaceweapononback = _data select 30; 					// returned ace weapon on back
+					_thisaceruckweapons = _data select 31; 					// returned ace ruck weapons
+					_thisaceruckmagazines = _data select 32; 				// returned ace ruck magazines
+				};
 				
 			//	[player, _thispname] call FNC_INITPLAYER;
 				
@@ -316,7 +319,10 @@
 				diag_log ["PersistentDB: _thispshotsfired:", _thispshotsfired, typeName _thispshotsfired];
 				diag_log ["PersistentDB: _thispenemykills:", _thispenemykills, typeName _thispenemykills];
 				diag_log ["PersistentDB: _thispcivkills:", _thispcivkills, typeName _thispcivkills];
+				diag_log ["PersistentDB: _thispfriendlykills:", _thispfriendlykills, typeName _thispfriendlykills];
+				diag_log ["PersistentDB: _thispsuicides:", _thispsuicides, typeName _thispsuicides];
 				diag_log ["PersistentDB: _thisplifestate:", _thisplifestate, typeName _thisplifestate];
+				diag_log ["PersistentDB: _thispdeaths:", _thispdeaths, typeName _thispdeaths];
 				
 				if (_thispdamage != -1) then {
 				   	if (pdb_ace_enabled) then {
@@ -395,7 +401,7 @@
 			//		player sideChat format["Player, %1 weapons restored", _thispname];
 					
 					
-			 if (pdb_ace_enabled) then {
+			if (pdb_ace_enabled) then {
 						if (_thisaceweapononback != "") then {	
 						_success = [player, _thisaceweapononback] call ACE_fnc_PutWeaponOnBack;
 					   //	player sideChat format["Player, %1 ace wob restored to %2", _thispname, _thisaceweapononback];
