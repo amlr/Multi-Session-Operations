@@ -375,7 +375,7 @@ _positionsStrategic;
 };
 
 MSO_fnc_CQBclientloop = {
-    	private ["_debug","_idx","_loopcounter","_localEnemyCount"];
+    	private ["_debug","_idx","_loopcounter","_localEnemyCount","_pU"];
 
         waituntil {!(isnil "CQBpositionsReg") && !(isnil "CQBpositionsStrat")};
 		CQBpositionsRegLocal = CQBpositionsReg;
@@ -401,7 +401,8 @@ MSO_fnc_CQBclientloop = {
                     if ((isnil "_suspend") && (isnil "_clear")) then {_activecount = _activecount + 1};
                     if (!(isnil "_suspend")) then {_suspendedcount = _suspendedcount + 1};
                     if (!(isnil "_clear")) then {_clearcount = _clearcount + 1};
-                    if (CQB_AUTO) then {CQBaicap = (count allUnits / count playableUnits)};
+					if (count playableUnits == 0) then {_pU = 1;} else { _pU = count playableUnits;};
+                    if (CQB_AUTO) then {CQBaicap = (count allUnits / _pU)};
 	
                     if (((_x select 0) distance player < 800) && (((position player) select 2) < 5) && (({(local _x) && ((faction _x) in MSO_FACTIONS)} count allunits) < CQBaicap)) then {
                         
