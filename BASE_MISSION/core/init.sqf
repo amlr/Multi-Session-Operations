@@ -13,6 +13,7 @@ if (isnil "BIS_functions_mainscope") then {
 };
 
 waitUntil{!isNil "BIS_fnc_init"};
+BIS_fnc_locations = compile preprocessFileLineNumbers "CA\modules\functions\systems\fn_locations.sqf";
 
 mso_version = "4.4";
 diag_log format["MSO-%1 Version: %2", time, mso_version];
@@ -77,10 +78,11 @@ publicvariable "debug_mso_loc";
 
 "Custom Locations(" + worldName + ")" call mso_core_fnc_initStat;
 
-if (isserver) then {
-	if(isNil "CRB_LOCS") then {
+if(isServer) then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
-	};
+	publicVariable "CRB_LOCS";
+} else {
+	waitUntil{!isNil "CRB_LOCS"};
 };
 
 "Player" call mso_core_fnc_initStat;

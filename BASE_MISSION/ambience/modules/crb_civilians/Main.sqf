@@ -19,8 +19,13 @@ if (isNil "BIS_alice_mainscope" && ambientCivs == 1) then {
 		BIS_alice_mainscope setVariable ["debug", true];
 	};
 	BIS_alice_mainscope setVariable ["townlist",(BIS_functions_mainscope getVariable "locations")];
+	BIS_ALICE2_fnc_civilianSet = compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\fn_civilianSet.sqf";
+	BIS_ALICE_fnc_houseEffects = compile preprocessFileLineNumbers "CA\modules\Alice\data\scripts\fnc_houseEffects.sqf";
 	[] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\crB_AmbCivSetup.sqf";
-	0 = [BIS_alice_mainscope ] execVM "ca\modules_e\alice2\data\scripts\main.sqf";
+	[BIS_alice_mainscope ] call compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\main.sqf";
+	if(!isDedicated) then {
+		[] call compile preprocessFileLineNumbers "ALICE2_houseEffects.sqf";
+	};
 };
         
 if(isServer) then {        

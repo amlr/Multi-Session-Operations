@@ -150,19 +150,30 @@ class FSM
        "" \n
        "//--- Start " \n
        "if (!_active &&" \n
-       "{_town distance _x < _spawnDisMin} count _players > 0 &&" \n
-       "!isDedicated &&" \n
-       "{local _x} count allUnits <= count allUnits / count _players) then {" \n
+       "	{_town distance _x < _spawnDisMin} count _players > 0 &&" \n
+       "	(!isServer || !isMultiplayer) &&" \n
+       "	{local _x} count allUnits <= count allUnits / count _players) then {" \n
        "	_town setvariable [""ALICE_active"",true,true];" \n
        "	textLogFormat [""Log: [ALICE 2]: %1 populated."",_name];" \n
        "	_fsm = [_logic,_town] execfsm (BIS_Alice2_path + ""fsms\alice2_town.fsm"");" \n
        "};" \n
        "" \n
        "//--- End" \n
-       "if (_active && {_town distance _x < _spawnDisMax} count _players == 0 && isServer) then {" \n
+       "if (_active && {_town distance _x < _spawnDisMax} count _players == 0) then {" \n
        "	_town setvariable [""ALICE_active"",false,true];" \n
        "	textLogFormat [""Log: [ALICE 2]: %1 depopulated."",_name];" \n
-       "	_fsm = [_logic,_town] execfsm (BIS_Alice2_path + ""fsms\alice2_town.fsm"");" \n
+       "" \n
+       "	_grp = _town getvariable ""ALICE_group"";" \n
+       "	{" \n
+       "		_id = _x getvariable ""ALICE_id"";" \n
+       "		if (_debug && !isNil ""_id"") then {" \n
+       "			deletemarker format [""BIS_alice_civ_%1"",_id];" \n
+       "			deletemarker format [""BIS_alice_civ_%1_w"",_id];" \n
+       "			deletemarker str driver _x;" \n
+       "		};" \n
+       "		deletevehicle vehicle _x;" \n
+       "		deletevehicle _x;" \n
+       "	} foreach units _grp;" \n
        "};" \n
        "" \n
        "////////////////////////////////////////////////////////////////////////////////////////////////" \n
@@ -171,7 +182,7 @@ class FSM
        "_trafficDisMax = _trafficDisMin * 1.2;" \n
        "" \n
        "//--- Start " \n
-       "_maxtraffic = ceil count (_town getvariable [""ALICE_population"", []]) / 25;" \n
+       "_maxtraffic = ceil count (_town getvariable [""ALICE_population"", []]) / 15;" \n
        "if (_activeTraffic < _maxtraffic && {_town distance _x < _trafficDisMin} count _players > 0) then {" \n
        "	_activeTraffic = _activeTraffic + 1;" \n
        "	_town setvariable [""ALICE_active_traffic"",_activeTraffic,true];" \n

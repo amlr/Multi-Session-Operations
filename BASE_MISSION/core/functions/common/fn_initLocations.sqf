@@ -1,7 +1,7 @@
 #include <crbprofiler.hpp>
 
 private ["_twn","_locs","_debug","_strategic","_military","_names","_hills","_initNeighbors"];
-if !(isserver) exitwith {};
+if(!isServer) exitWith{};
 
 CRBPROFILERSTART("mso_core_fnc_initLocations")
 
@@ -37,10 +37,9 @@ _hills = ["Hill","ViewPoint","RockArea","BorderCrossing","VegetationBroadleaf","
 
 if (_debug) then {player globalChat "initLocs: Custom Locs(" + worldName + ")";};
 [] call BIS_fnc_locations;
-CRB_LOC_DIST = 20000;
+CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
 switch toLower(worldName) do {		
         case "fallujah": {
-                CRB_LOC_DIST = 15000;
         };
         case "zargabad": {
                 {createLocation ["BorderCrossing",_x,1,1]} foreach [[3430,8150,0],[2925,50,0],[3180,50,0],[5048,50,0]];
@@ -60,7 +59,6 @@ switch toLower(worldName) do {
                         [[4040,5455,0], "South Hazar Bagh"]
                 ];
                 [] call _initNeighbors;
-                CRB_LOC_DIST = 8000;
         };
         case "takistan": {
                 {createLocation ["Airport",_x,1,1]} foreach [[8223.19,2061.85,0],[5930.27,11448.6,0]];
@@ -90,16 +88,13 @@ switch toLower(worldName) do {
                         [[8999.51,1875.36,0], "x19"]
                 ];
                 [] call _initNeighbors;
-                CRB_LOC_DIST = 16000;
         };
         case "chernarus": {
                 {createLocation ["BorderCrossing",_x,1,1]} foreach [[48.716465,1614.6689,0],[1823.8114,5080.3926,0],[1648.1056,7808.8857,0],[1964.0529,9121.2988,0],[2257.4221,15234.31,0],[9683.6787,13556.688,0],[11955.002,13150.367,0],[13388.054,12853.484,0],[4980.04,12584.29,0]];
                 {createLocation ["Airport",_x,1,1]} foreach [[12061,12642,0]];
                 {(createVehicle ["HeliHCivil", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[4700.1758,10249.779], 240],[[4685.6235,10276.778], 240],[[4669.2915,10305.309], 240],[[12171.944,12639.515], 200],[[12207.261,12625.699], 200],[[4836.9639,2521.9746], 120]];
-                CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
         };
         case "eden": {
-		CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
                 {(createVehicle ["HeliHCivil", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
 			[[4864.86,11911.2], 270],
 			[[4864.86,11881.3], 270]
@@ -139,10 +134,8 @@ switch toLower(worldName) do {
                         [[4418,3571,0], "Hamlet", ["CIV",1,"CIV_RU",0]]
                 ];
                 [] call _initNeighbors;
-                CRB_LOC_DIST = 2500;
         };
         case "clafghan": {
-				CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
 				[] call mso_core_fnc_createLocations;
                 {createLocation ["Airport",_x,1,1]} foreach [[15493.888,858.08838,0]];
                 {(createVehicle ["HeliHCivil", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[4700.1758,10249.779], 240],[[4685.6235,10276.778], 240],[[4669.2915,10305.309], 240],[[12171.944,12639.515], 200],[[12207.261,12625.699], 200],[[4836.9639,2521.9746], 120]];
@@ -152,10 +145,8 @@ switch toLower(worldName) do {
                 {(createVehicle ["HeliH", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[919,9214], 0],[[6478,6093], 0],[[2650,6819], 0],[[3709,4189], 0],[[2988.33,6640.74],264.161],[[2650,6819], 264]];
                 {(createVehicle ["HeliHCivil", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[3063.16,7974.41], 93], [[5135,6799], 0], [[5928,6798], 0], [[4237,6791], 20], [[3348,3589], 45],[[4191.1,1429.85],270],[[4191.27,1524],270],[[6493.83,6909.81],180],[[6581.21,6909.99],180],[[6626.48,6909.99],180]];
                 {(createVehicle ["HeliHRescue", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[6846,6461], 90],[[6863.47,4452],92.293]];
-                CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
         };
         case "tup_qom": {
-				CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
                 [] call mso_core_fnc_createLocations;
                 {(createVehicle ["HeliH", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
 					[[1636.63,7338.07], 0],
@@ -175,13 +166,11 @@ switch toLower(worldName) do {
         };
        
         case "torabora": {
-		CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
                 [] call mso_core_fnc_createLocations;
                 [] call _initNeighbors;
         };
        
         default {
-                CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8;
                 [] call mso_core_fnc_createLocations;
                 [] call _initNeighbors;
         };

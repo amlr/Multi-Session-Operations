@@ -43,13 +43,7 @@ _house = if (count _this > 2) then {_this select 2} else {
 	_houses = _twn getvariable ["ALICE_houselist", []];
 	if (count _houses > 0) then {
 		_houses call BIS_fnc_selectRandom;
-	} else {
-		_houses = nearestobjects [position _twn,["house","bis_alice_emptydoor"],500];
-		if (count _houses > 0) then {
-			_houses call BIS_fnc_selectRandom;
-		} else {debuglog format ["Log: [ALICE] Cannot add %1 - no houses available in %2!",_unit,_twn];false};
-		_twn setvariable ["ALICE_houselist",_houses,true];
-	};
+	} else {debuglog format ["Log: [ALICE] Cannot add %1 - no houses available in %2!",_unit,_twn];false};
 };
 if (typename _house == "BOOL") exitwith {};
 _id = _logic getvariable "id";
@@ -58,17 +52,25 @@ _id = _logic getvariable "id";
 sleep 0.01;
 
 //--- Set values
-if (_movein && _house isKindOf "bis_alice_emptydoor") then {
-	_unit setpos position _house;
-};
-
-if (_movein && _house isKindOf "house") then {
+if (_movein) then {
 	scopename "moveIn";
-	
+
 	_marker = if (_debug) then {_house call BIS_fnc_boundingBoxMarker;} else {""};
 
 	//--- In da house
 	_posList = [];
+	for "_i" from 1 to 10 do {
+		_point = _house selectionposition format ["AIDoor%1",_i];
+		if (_point distance [0,0,0] > 0.1) then {
+			_posList = _posList + [_point];
+			if (_debug) then {
+				_pointPos = _house modeltoworld _point;
+				_pointMarker = createmarker [format ["X%1",floor random 99999],_pointpos];
+				_pointMarker setmarkertype "mil_dot";
+				_pointMarker setmarkercolor "colorpink";
+			};
+		};
+	};
 	for "_i" from 0 to 10 do {
 		_point = _house selectionposition format ["AIspawnpos_%1",_i];
 		if (_point distance [0,0,0] > 0.1) then {

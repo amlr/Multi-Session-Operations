@@ -292,10 +292,11 @@ class FSM
        "		_bbox = abs((boundingbox _x select 1) select 0) min abs((boundingbox _x select 1) select 1);" \n
        "		_point = _x selectionposition ""AIspawnpos_0"";" \n
        "		if (_bbox > 3 && _point distance [0,0,0] > 0.1) then {" \n
-       "			_houselist = _houselist + [_x]" \n
-       "		} else {" \n
-       "			_doors = _x call BIS_ALICE_fnc_doorCreate;" \n
-       "			_houselist = _houselist + _doors;" \n
+       "			_houselist set [count _houselist, _x]" \n
+       "		};" \n
+       "		_point = _x selectionposition ""AIdoor1"";" \n
+       "		if (_point distance [0,0,0] > 0.1) then {" \n
+       "			_houselist set [count _houselist, _x];" \n
        "		};" \n
        "		// From Rommel" \n
        "		// http://forums.bistudio.com/showthread.php?t=101935" \n

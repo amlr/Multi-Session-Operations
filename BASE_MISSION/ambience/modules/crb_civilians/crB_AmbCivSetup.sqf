@@ -16,7 +16,6 @@ waitUntil{!isNil "BIS_alice_mainscope"};
 // - Added bis_alice_emptydoor code for A2 building compatibility
 // - Reduced default AI skill for less CPU
 // - Changed unit speed to LIMITED
-BIS_ALICE2_fnc_civilianSet = compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\fn_civilianSet.sqf";
 
 // See http://community.bistudio.com/wiki/Ambient_Civilians
 //BIS_alice_mainscope setVariable ["debug", true];
@@ -43,13 +42,11 @@ switch toLower(worldName) do {
 		BIS_alice_mainscope setvariable ["ALICE_townsize",800];
                 BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];
 		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"];
-                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";        
         };        
         case "eden": {                
                 BIS_alice_mainscope setvariable ["trafficDistance",700];                
                 BIS_alice_mainscope setvariable ["spawnDistance",350];                
                 BIS_alice_mainscope setVariable ["townsFaction",["cwr2_civ","CIV","CIV_RU"]];                
-                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
         };
         case "fallujah": {                
                 BIS_alice_mainscope setvariable ["trafficDistance",600];      
@@ -60,14 +57,12 @@ switch toLower(worldName) do {
                 BIS_alice_mainscope setvariable ["trafficDistance",1000];             
                 BIS_alice_mainscope setvariable ["spawnDistance",700];            
                 BIS_alice_mainscope setVariable ["civilianCount","round (5 * (sqrt %1))"];   
-                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
         };       
         case "lingor": { 
                 BIS_alice_mainscope setvariable ["trafficDistance", 500];
                 BIS_alice_mainscope setvariable ["spawnDistance", 400]; 
                 BIS_alice_mainscope setVariable ["townsFaction", ["CIV_LGR"]]; 
                 BIS_alice_mainscope setVariable ["civilianCount", "round (1.5 * (sqrt %1))"]; 
-                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf"; 
         }; 
         case "takistan": {   
                 BIS_alice_mainscope setvariable ["trafficDistance",750]; // default 500
@@ -85,8 +80,9 @@ switch toLower(worldName) do {
         case "utes": {        
                 BIS_alice_mainscope setvariable ["trafficDistance",650];      
                 BIS_alice_mainscope setvariable ["spawnDistance",500];       
+		BIS_alice_mainscope setvariable ["ALICE_townsize",500];
                 BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];  
-                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";  
+		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"];
         };
         case "zargabad": { 
                 BIS_alice_mainscope setvariable ["trafficDistance",750];      
@@ -100,8 +96,7 @@ switch toLower(worldName) do {
             	BIS_alice_mainscope setvariable ["trafficDistance",1000];                
                 BIS_alice_mainscope setvariable ["spawnDistance",700];                
                 BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];                
-				BIS_alice_mainscope setVariable ["civilianCount","round (1.5 * (sqrt %1))"]; 
-                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";      
+		BIS_alice_mainscope setVariable ["civilianCount","round (1.5 * (sqrt %1))"]; 
         };
 };
 
