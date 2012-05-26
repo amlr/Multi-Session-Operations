@@ -3,7 +3,7 @@ if (CQB_spawn == 0) exitwith {diag_log format["MSO-%1 CQB Population turned off!
 
 if (isnil "CQBaicap") then {CQBaicap = 2};
 switch (CQBaicap) do {
-    case 0: {CQBaicap = 0; CQBaiBroadcast = true};
+    case 0: {CQBaicap = 100; CQBaiBroadcast = true};
     case 1: {CQBaicap = 15; CQBaiBroadcast = false};
     case 2: {CQBaicap = 25; CQBaiBroadcast = false};
     case 3: {CQBaicap = 50; CQBaiBroadcast = false};
@@ -14,11 +14,24 @@ switch (CQBaicap) do {
 
 _debug = debug_mso;
 
+diag_log format["MSO-%1 CQB Population: starting to load functions...", time];
 if (isnil "BIN_fnc_taskDefend") then {BIN_fnc_taskDefend = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskDefend.sqf"};
 if (isnil "BIN_fnc_taskPatrol") then {BIN_fnc_taskPatrol = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskPatrol.sqf"};
 if (isnil "BIN_fnc_taskSweep") then {BIN_fnc_taskSweep = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskSweep.sqf"};
-if (isnil "CQB_functions") then {call compile preprocessFileLineNumbers "enemy\modules\CQB_POP\CQB_functions.sqf"};
-waituntil {!isnil "CQB_functions"};
+if (isnil "MSO_fnc_CQBclientloop") then {MSO_fnc_CQBclientloop = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBclientloop.sqf"};
+if (isnil "CQB_findnearhousepos") then {CQB_findnearhousepos = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_findnearhousepos.sqf"};
+if (isnil "CQB_setposgroup") then {CQB_setposgroup = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_setposgroup.sqf"};
+if (isnil "CQB_houseguardloop") then {CQB_houseguardloop = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_houseguardloop.sqf"};
+if (isnil "CQB_patrolloop") then {CQB_patrolloop = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_patrolloop.sqf"};
+if (isnil "MSO_fnc_CQBspawnRandomgroup") then {MSO_fnc_CQBspawnRandomgroup = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBspawnRandomgroup.sqf"};
+if (isnil "MSO_fnc_CQBmovegroup") then {MSO_fnc_CQBmovegroup = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBmovegroup.sqf"};
+if (isnil "MSO_fnc_getEnterableHouses") then {MSO_fnc_getEnterableHouses = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_getEnterableHouses.sqf"};
+if (isnil "MSO_fnc_CQBgetSpawnposRegular") then {MSO_fnc_CQBgetSpawnposRegular = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBgetSpawnposRegular.sqf"};
+if (isnil "MSO_fnc_CQBgetSpawnposStrategic") then {MSO_fnc_CQBgetSpawnposStrategic = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBgetSpawnposStrategic.sqf"};
+if (isnil "MSO_fnc_CQBhousepos") then {MSO_fnc_CQBhousepos = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBhousepos.sqf"};
+if (isnil "getGridPos") then {getGridPos = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\getGridPos.sqf"};
+if (isnil "CQB_GCS") then {CQB_GCS = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_GCS.sqf"};
+diag_log format["MSO-%1 CQB Population: loaded functions...", time];
 
 if (isServer) then {
 _spawnhouses = [markerpos "ammo_1",CRB_LOC_DIST] call MSO_fnc_getEnterableHouses;
@@ -27,6 +40,8 @@ CQBpositionsReg = [_spawnhouses] call MSO_fnc_CQBgetSpawnposRegular;
 
 Publicvariable "CQBpositionsStrat";
 Publicvariable "CQBpositionsReg";
+
+[] spawn CQB_GCS;
 };
 
 if !(isDedicated) then {
