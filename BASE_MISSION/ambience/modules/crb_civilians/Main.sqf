@@ -24,10 +24,10 @@ if (isNil "BIS_alice_mainscope" && ambientCivs == 1) then {
 	[] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\crB_AmbCivSetup.sqf";
 	[BIS_alice_mainscope ] call compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\main.sqf";
 	if(!isDedicated) then {
-		[] call compile preprocessFileLineNumbers "ALICE2_houseEffects.sqf";
+		[] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";
 	};
 };
-        
+
 if(isServer) then {        
         if (isNil 'BIS_silvie_mainscope' && ambientVehs == 1) then {
                 _logicVeh = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
