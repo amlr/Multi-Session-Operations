@@ -10,6 +10,7 @@ private ["_uid"];
 if (isnil "BIS_functions_mainscope") then {
         createCenter sideLogic;
         BIS_functions_mainscope = (createGroup sideLogic) createUnit ["FunctionsManager", [0,0,0], [], 0, "NONE"];
+	BIS_fnc_locations = compile preprocessFileLineNumbers "CA\modules\functions\systems\fn_locations.sqf";
 };
 
 waitUntil{!isNil "BIS_fnc_init"};
@@ -77,10 +78,9 @@ publicvariable "debug_mso_loc";
 
 "Custom Locations(" + worldName + ")" call mso_core_fnc_initStat;
 
-if (isserver) then {
-	if(isNil "CRB_LOCS") then {
+if (isServer) then {
+	["CityCenter",[],debug_mso_loc] call BIS_fnc_locations;
         CRB_LOCS = [] call mso_core_fnc_initLocations;
-	};
 };
 
 "Player" call mso_core_fnc_initStat;

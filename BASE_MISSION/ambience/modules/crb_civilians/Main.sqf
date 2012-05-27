@@ -9,11 +9,11 @@ if(isNil "ambientAnimals") then {ambientAnimals = 1;};
 
 waitUntil{!isNil "BIS_fnc_init"};
 
-if(isNil "CRB_LOCS") then {
+if(isServer && isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
-if (isNil "BIS_alice_mainscope" && ambientCivs == 1) then {
+if (ambientCivs == 1) then {
 	BIS_alice_mainscope = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
 	if(_debug) then {
 		BIS_alice_mainscope setVariable ["debug", true];
@@ -22,7 +22,7 @@ if (isNil "BIS_alice_mainscope" && ambientCivs == 1) then {
 	BIS_ALICE2_fnc_civilianSet = compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\fn_civilianSet.sqf";
 	BIS_ALICE_fnc_houseEffects = compile preprocessFileLineNumbers "CA\modules\Alice\data\scripts\fnc_houseEffects.sqf";
 	[] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\crB_AmbCivSetup.sqf";
-	[BIS_alice_mainscope ] call compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\main.sqf";
+	[BIS_alice_mainscope] call compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\main.sqf";
 	if(!isDedicated) then {
 		[] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";
 	};

@@ -163,7 +163,7 @@ class FSM
        "_driver assignasdriver _car;" \n
        "_driver setbehaviour ""SAFE"";" \n
        "_driver moveindriver _car;" \n
-       "_driver setSkill 0.5;" \n
+       "_driver setSkill (0.2 + random 0.8);" \n
        "" \n
        "_cargo = getNumber(configFile >> ""CfgVehicles"" >> _classVehicle >> ""transportSoldier"");" \n
        "for ""_i"" from 1 to floor(random _cargo) do {" \n

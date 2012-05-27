@@ -65,9 +65,9 @@ switch toLower(worldName) do {
                 BIS_alice_mainscope setVariable ["civilianCount", "round (1.5 * (sqrt %1))"]; 
         }; 
         case "takistan": {   
-                BIS_alice_mainscope setvariable ["trafficDistance",750]; // default 500
-                BIS_alice_mainscope setvariable ["spawnDistance",600]; // default 400
-		BIS_alice_mainscope setvariable ["ALICE_townsize",600]; // default 266.667
+                BIS_alice_mainscope setvariable ["trafficDistance",1000]; // default 500
+                BIS_alice_mainscope setvariable ["spawnDistance",800]; // default 400
+		BIS_alice_mainscope setvariable ["ALICE_townsize",800]; // default 266.667
 		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"]; // default round (4 * (sqrt %1))
                 // Add some rare english speaking civilians to the mix
                 BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
@@ -106,11 +106,9 @@ switch toLower(worldName) do {
 // Artificial coeficient to set how much will be town's respect decreased once some civilian is hit or killed.
 // The higher the number is, the more is respect towards killer's faction decreased. 
 // BIS_alice_mainscope setVariable ["respectModifyCoef",0.15]; 
-BIS_alice_mainscope setvariable ["respectModifyCoef", 0.7]; 
 
 // Value which is removed from town threat every 5 seconds (until threat reaches 0) 
 // BIS_alice_mainscope setVariable ["threatDecay",0.07 ];
-BIS_alice_mainscope setvariable ["threatDecay", 0.00005];
 
 // array of codes which is executed upon every civilian unit created. 
 // [BIS_alice_mainscope,"ALICE_civilianinit",[{_this addweapon "Mk_48"}]] call bis_fnc_variablespaceadd; 

@@ -87,7 +87,7 @@ tpw_flicker = {
                 _lt0 setLightBrightness _br2; 
                 if (_br2 > _brmax) then {_op = -1;_brmax = _br + (random _rng);_slp = random 0.2;_inc = _rng/((random 10) + 1);}; 
                 if (_br2 < _brmin) then {_op = 1;_brmin = _br - (random _rng);_slp = random 0.2;_inc = _rng/((random 10) + 1);};
-                sleep _slp;
+                sleep 1 + _slp;
         };
 };
 
@@ -124,7 +124,7 @@ switch (_mode) do {
                                 _logic = _this;
                                 while {true} do {
                                         _list = _logic getvariable "ALICE_houseffects";
-                                        //_delay = 100 / (count _list + 1);
+                                        _delay = 100 / (count _list + 1);
                                         {
                                                 _obj = _x;
                                                 if(!isNil {_obj getVariable "BIS_ALICE_PS"}) then {
@@ -157,8 +157,7 @@ switch (_mode) do {
                                                                         [_obj,"BIS_ALICE_PS",[_lp]] call bis_fnc_variablespaceadd;
                                                                 };
                                                         };
-                                                        //sleep _delay;
-                                                        sleep 0.2;
+                                                        sleep 1 + random _delay;
                                                 };
                                         } foreach _list;
                                         sleep random 15;
