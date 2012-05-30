@@ -17,7 +17,7 @@ for "_i" from 0 to (1 + floor(random 2)) do {
 };
 
 CQBgroupsLocal set [count CQBgroupsLocal, _group];
-leader _group setvariable ["PM","CQB",true];
+leader _group setvariable ["PM",_house,true];
 diag_log format["MSO-%1 CQB Population: Created group name %2 with %3 units...", time, _group, count units _group];
 
 [_pos, _house, _group, _units, _despawn] spawn MSO_fnc_CQBmovegroup;

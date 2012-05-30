@@ -42,16 +42,16 @@
                     if (!(isnil "_suspend")) then {_suspendedcount = _suspendedcount + 1};
                     if (!(isnil "_clear")) then {_clearcount = _clearcount + 1};
 
-                    if (((_x select 0) distance player < 800) && (((position player) select 2) < 5) && (({(local _x) && ((faction _x) in MSO_FACTIONS)} count allunits) < CQBaicap)) then {
+                    if (((_x select 0) distance player < 800) && ((_x select 0) distance player > 100) && (((position player) select 2) < 5) && (({(local _x) && ((faction _x) in MSO_FACTIONS)} count allunits) < CQBaicap)) then {
                         
-                        if (((_x select 0) distance player < 800) && (_activenow < 3) && _strategic) then {
+                        if (((_x select 0) distance player < 800) && (_activenow <= 5) && _strategic) then {
                         	if ((isnil "_suspend") && (isnil "_clear")) then {
                                 _activenow = _activenow + 1;
                     			[(_pos),(_x select 0),1000] call MSO_fnc_CQBspawnRandomgroup;
                     		};
                         };
       
-                        if (((_x select 0) distance player < 500) && ((_x select 0) distance player > 100) && (_activenow < 3) && _regular) then {
+                        if (((_x select 0) distance player < 500) && (_activenow <= 5) && _regular) then {
                         	if ((isnil "_suspend") && (isnil "_clear")) then {
                                 _activenow = _activenow + 1;
                     			[(_pos),(_x select 0),600] call MSO_fnc_CQBspawnRandomgroup;
