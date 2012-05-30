@@ -1,1 +1,0 @@
-{player setVariable ["NORRN_AAWinfAppearance",_this];},
