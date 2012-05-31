@@ -1,6 +1,6 @@
 private ["_locs"];
 if(isNil "TownManager")then{TownManager = 1;};
-if (TownManager == 0) exitWith{};
+if (TownManager == 0 || !isServer) exitWith{};
 
 if (isNil "bis_functions_mainscope") exitWith{};
 
@@ -180,7 +180,7 @@ CRB_createSeizedTrigger = {
 	//		case east: {_colour = "ColorRed";};
 	//	};
         //};
-        [format["%1_mgr", _name], _pos, _type, [_size, _size], "COLOR:", _colour, "BRUSH:", "Cross"] call CBA_fnc_createMarker;
+        [format["%1_mgr", _name], _pos, _type, [_size, _size], "COLOR:", _colour, "BRUSH:", "Cross", "PERSIST"] call CBA_fnc_createMarker;
 		
 		if (twnmgr_detected == 1) then {
 			//////////////////////////////////////////
