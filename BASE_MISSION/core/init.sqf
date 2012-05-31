@@ -138,8 +138,7 @@ execNow "core\modules\crb_timesync\main.sqf";
 #endif
 #ifdef DRN_WEATHER
 "DRN Weather" call mso_core_fnc_initStat;
-execNow "core\modules\DRN_weather\CommonLib.sqf";
-[10, 60, 10, 60, true] execNow "core\modules\DRN_weather\DynamicWeatherEffects.sqf";
+[-1, -1, -1, [-1, -1], debug_mso] execNow "core\modules\DRN_weather\DynamicWeatherEffects.sqf";
 #endif
 
 #ifdef RMM_SETTINGS

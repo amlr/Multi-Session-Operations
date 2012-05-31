@@ -63,7 +63,7 @@ CRB_timeSync = {
 
 if (isserver) then {        
         if(isNil "timeSync") then {
-                timeSync = 1;
+                timeSync = 2;
         };
         
         if(isNil "timeOptions") then {

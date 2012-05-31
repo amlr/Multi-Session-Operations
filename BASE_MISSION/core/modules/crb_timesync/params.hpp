@@ -2,7 +2,7 @@ class timeSync {
         title = "CRB Time Sync Check";
         values[] = {0,1,2};
         texts[] = {"Monitor", "skipTime", "setDate"};
-        default = 1;
+        default = 2;
 };
 
 class timeOptions {
