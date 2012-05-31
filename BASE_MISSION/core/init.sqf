@@ -132,9 +132,9 @@ execNow "core\modules\persistentDB\main.sqf";
 execNow "core\modules\rmm_gtk\main.sqf";
 #endif
 
-#ifdef RMM_WEATHER
+#ifdef CRB_TIMESYNC
 "Time Sync" call mso_core_fnc_initStat;
-execNow "core\modules\rmm_weather\main.sqf";
+execNow "core\modules\crb_timesync\main.sqf";
 #endif
 #ifdef DRN_WEATHER
 "DRN Weather" call mso_core_fnc_initStat;
