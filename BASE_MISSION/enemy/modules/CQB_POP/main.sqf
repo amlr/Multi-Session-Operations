@@ -3,7 +3,7 @@ if (CQB_spawn == 0) exitwith {diag_log format["MSO-%1 CQB Population turned off!
 
 if (isnil "CQBaicap") then {CQBaicap = 2};
 switch (CQBaicap) do {
-    case 0: {CQBaicap = 100; CQBaiBroadcast = true};
+    case 0: {CQB_AUTO = true; CQBaiBroadcast = true};
     case 1: {CQBaicap = 15; CQBaiBroadcast = false};
     case 2: {CQBaicap = 25; CQBaiBroadcast = false};
     case 3: {CQBaicap = 50; CQBaiBroadcast = false};
@@ -11,6 +11,8 @@ switch (CQBaicap) do {
     case 5: {CQB_AUTO = true; CQBaiBroadcast = false};
 	default {CQBaicap = 15; CQBaiBroadcast = false};
 };
+
+if (isnil "CQBmaxgrps") then {CQBmaxgrps = 50};
 
 _debug = debug_mso;
 

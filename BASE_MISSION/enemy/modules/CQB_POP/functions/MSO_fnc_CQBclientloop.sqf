@@ -24,15 +24,22 @@
                     _activenow = 0;
                     
                     if (CQB_AUTO) then {
-                        if (count playableUnits < 1) then {_pU = 1;} else { _pU = count playableUnits;};
-                        _CQBcnt = 0;
+                        _pU = {_pos distance _x < 800} count ([] call BIS_fnc_listPlayers);
+                        if (_pU < 1) then {_pU = 1};
+                        _CQBlocCnt = 0;
+                        _CQBglobCnt = 0;
                         {
                             _CQBgr = nil; _CQBgr = (leader _x) getvariable "PM";
-                            if !(isnil "_cqbgr") then {_CQBcnt = _CQBcnt + 1};
-                        } foreach allgroups; 
+                            if !(isnil "_cqbgr") then {
+                                _CQBglobCnt = _CQBglobCnt + 1;
+                                if (local leader _x) then {_CQBlocCnt = _CQBlocCnt + 1};
+                            };
+                        } foreach allgroups;
+                        
+                        _CQBavgGr = _CQBglobCnt / _pU;
 
-                        if (_CQBcnt < 55) then {
-							CQBaicap = (150 / _pU);
+                        if ((_CQBlocCnt <= _CQBavgGr) && (_CQBglobCnt <= CQBmaxgrps)) then {
+							CQBaicap = (count allunits / _pU);
                         } else {
                             CQBaicap = 0;
                         };
