@@ -20,6 +20,11 @@ if (!isNil "revive_test") then {
 };
 #endif
 
+#ifdef R3F_REVIVE
+"R3F Revive " call mso_core_fnc_initStat;
+execVM "support\modules\R3F_revive\revive_init.sqf";
+#endif
+
 #ifdef RMM_AAR
 "After Action Reports" call mso_core_fnc_initStat;
 execNow "support\modules\rmm_aar\main.sqf";
