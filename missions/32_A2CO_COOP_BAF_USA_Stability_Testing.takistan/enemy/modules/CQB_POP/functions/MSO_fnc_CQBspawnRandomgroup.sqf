@@ -9,10 +9,11 @@ sleep (random 1);
 _group = creategroup EAST;
 _units = [];
 
-for "_i" from 0 to (1 + floor(random 2)) do {
+for "_i" from 0 to (1 + floor(random 3)) do {
+    sleep 0.1;
 	_unittype = [0, MSO_FACTIONS,"Man"] call mso_core_fnc_findVehicleType;
 	_unittype = _unittype call BIS_fnc_selectRandom;
-	_unit = _group createUnit [_unittype,[0,0,0],[],0,"NONE"];
+	_unit = _group createUnit [_unittype,_pos,[],0,"NONE"];
     _units set [count _units,_unit];
 };
 
