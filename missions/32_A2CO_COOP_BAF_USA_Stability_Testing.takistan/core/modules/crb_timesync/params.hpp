@@ -1,22 +1,8 @@
-class weatherHeader {
-        title = "    Weather and Time"; 
-        values[]= {0}; 
-        texts[]= {" "}; 
-        default = 0;
-};
-
 class timeSync {
-        title = "        Time Sync Check";
-        values[] = {0,60,300,600,3600,7200};
-        texts[] = {"Monitor", "1 min","5 mins","10 mins","1 hour","2 hours"};
-        default = 0;
-};
-
-class timeDiff {
-        title = "        Acceptable Time Desync";
-        values[] = {0.25,2,5,10,20};
-        texts[] = {"15 sec","2 mins","5 mins","10 mins","20 mins"};
-        default = 5;
+        title = "CRB Time Sync Check";
+        values[] = {0,1,2};
+        texts[] = {"Monitor", "skipTime", "setDate"};
+        default = 2;
 };
 
 class timeOptions {

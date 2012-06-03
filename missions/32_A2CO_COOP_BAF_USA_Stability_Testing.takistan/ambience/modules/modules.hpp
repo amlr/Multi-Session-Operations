@@ -6,4 +6,4 @@
 //#define TUP_AIRTRAFFIC
 //#define TUP_SEATRAFFIC
 //#define CRB_DESTROYCITY
-//#define AEG
+#define AEG

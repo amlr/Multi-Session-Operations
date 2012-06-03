@@ -59,8 +59,8 @@ class coreHeader {
 #ifdef RMM_SETTINGS
 	#include <core\modules\rmm_settings\params.hpp>
 #endif
-#ifdef RMM_WEATHER
-	#include <core\modules\rmm_weather\params.hpp>
+#ifdef CRB_TIMESYNC
+	#include <core\modules\crb_timesync\params.hpp>
 #endif
 class ambientHeader {
         title = "Ambience"; 
@@ -109,6 +109,9 @@ class supportHeader {
 #endif
 #ifdef WHB_MULTISPAWN
 	#include <support\modules\WHB_Multispawn\params.hpp>
+#endif
+#ifdef R3F_REVIVE
+	#include "support\modules\R3F_revive\params.hpp"
 #endif
 class enemyHeader {
         title = "Enemy"; 
@@ -223,6 +226,7 @@ class cfgFunctions {
 #ifdef RMM_REVIVE
 	#include <support\modules\rmm_revive\functions.hpp>
 #endif
+
 #ifdef RMM_TASKS
 	#include <support\modules\rmm_tasks\functions.hpp>
 #endif
@@ -286,6 +290,9 @@ class cfgFunctions {
 #endif
 #ifdef ROY_PATROLOPS
 #include <enemy\modules\roy_patrolops\mps\dialog\mps_dialog.hpp>
+#endif
+#ifdef R3F_REVIVE
+	#include "support\modules\R3F_revive\dlg_attente_reanimation.h"
 #endif
 
 // Extended Event Handlers

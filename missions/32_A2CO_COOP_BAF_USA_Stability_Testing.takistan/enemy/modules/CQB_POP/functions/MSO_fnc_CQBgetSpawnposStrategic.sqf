@@ -34,7 +34,7 @@ _BuildingTypeStrategic = [
 "Land_Ind_PowerStation"];
 
 {
-    if ((typeof (_x select 0) in _BuildingTypeStrategic) && (((position (_x select 0)) distance _base1) > rmm_ep_safe_zone) && (((position (_x select 0)) distance _base2) > rmm_ep_safe_zone)) then {
+    if ((typeof (_x select 0) in _BuildingTypeStrategic) && (((position (_x select 0)) distance _base1) > rmm_ep_safe_zone) && (((position (_x select 0)) distance _base2) > rmm_ep_safe_zone) && (random 1 > 0.3)) then {
     	_positionsStrategic set [count _positionsStrategic,_x];
     };
 } foreach _spawnhouses;

@@ -5,13 +5,13 @@
 #endif
 
 private ["_uid"];
+
 //All client should have the Functions Manager initialized, to be sure.
 if (isnil "BIS_functions_mainscope") then {
         createCenter sideLogic;
         BIS_functions_mainscope = (createGroup sideLogic) createUnit ["FunctionsManager", [0,0,0], [], 0, "NONE"];
 	BIS_fnc_locations = compile preprocessFileLineNumbers "CA\modules\functions\systems\fn_locations.sqf";
 };
-
 
 waitUntil{!isNil "BIS_fnc_init"};
 
@@ -132,14 +132,13 @@ execNow "core\modules\persistentDB\main.sqf";
 execNow "core\modules\rmm_gtk\main.sqf";
 #endif
 
-#ifdef RMM_WEATHER
+#ifdef CRB_TIMESYNC
 "Time Sync" call mso_core_fnc_initStat;
-execNow "core\modules\rmm_weather\main.sqf";
+execNow "core\modules\crb_timesync\main.sqf";
 #endif
 #ifdef DRN_WEATHER
 "DRN Weather" call mso_core_fnc_initStat;
-execNow "core\modules\DRN_weather\CommonLib.sqf";
-[10, 60, 10, 60, true] execNow "core\modules\DRN_weather\DynamicWeatherEffects.sqf";
+[-1, -1, -1, [-1, -1], debug_mso] execNow "core\modules\DRN_weather\DynamicWeatherEffects.sqf";
 #endif
 
 #ifdef RMM_SETTINGS
