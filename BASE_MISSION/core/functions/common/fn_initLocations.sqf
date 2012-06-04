@@ -102,7 +102,7 @@ switch toLower(worldName) do {
                 {(createVehicle ["HeliHRescue", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
 			[[3877,8242.5], 2]
 		];
-                {(createVehicle ["HeliHEmpty", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
+                {(createVehicle ["HeliH", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
 			[[9917.374,1566.8381], 35]
 		];
                 {(createVehicle ["ED102_Hangar", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [
