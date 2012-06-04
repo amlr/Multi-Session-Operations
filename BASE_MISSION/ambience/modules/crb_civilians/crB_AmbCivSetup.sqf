@@ -53,6 +53,13 @@ switch toLower(worldName) do {
                 BIS_alice_mainscope setvariable ["spawnDistance",250];      
                 BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
 	};  
+        case "mcn_hazarkot": {
+                BIS_alice_mainscope setvariable ["trafficDistance",500];
+                BIS_alice_mainscope setvariable ["spawnDistance",400];
+		BIS_alice_mainscope setvariable ["ALICE_townsize",400];
+                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
+		//BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"];
+        };       
         case "isladuala": {      
                 BIS_alice_mainscope setvariable ["trafficDistance",1000];             
                 BIS_alice_mainscope setvariable ["spawnDistance",700];            
@@ -114,9 +121,9 @@ switch toLower(worldName) do {
 // [BIS_alice_mainscope,"ALICE_civilianinit",[{_this addweapon "Mk_48"}]] call bis_fnc_variablespaceadd; 
 // Dumb down civilian units to use less CPU (see http://creobellum.org/node/175)
 [BIS_alice_mainscope,"ALICE_civilianinit",[
-        {
-            if (leader group _this == _this) then {_this setVariable ["rmm_gtk_exclude", true]};
-        },
+//        {
+//            if (leader group _this == _this) then {_this setVariable ["rmm_gtk_exclude", true]};
+//        },
         {_this setSkill 0},
         { 
                 {_this disableAI _x} count ["AUTOTARGET","TARGET"]
