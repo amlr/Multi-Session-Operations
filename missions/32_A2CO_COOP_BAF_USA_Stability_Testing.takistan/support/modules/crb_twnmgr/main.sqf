@@ -51,9 +51,9 @@ CRB_updateDetectedMarker = {
         _color = _this select 4;
 
 	if(_detector == civilian) then {
-		format["""%1_mgr"" setMarkerColorLocal ""%2""; [playerSide, ""HQ""] sideChat ""%3 HUMINT reports %4 movement at %1 (%5)"";", _name, _color, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
+		format["""%1_mgr"" setMarkerColor ""%2""; [playerSide, ""HQ""] sideChat ""%3 HUMINT reports %4 movement at %1 (%5)"";", _name, _color, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
 	} else {
-                format["""%1_mgr"" setMarkerColorLocal ""%2""; [%3, ""HQ""] sideChat ""%3 HUMINT reports %5 movement at %1 (%6)"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
+                format["""%1_mgr"" setMarkerColor ""%2""; [%3, ""HQ""] sideChat ""%3 HUMINT reports %5 movement at %1 (%6)"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
 	};
 };
 
@@ -68,7 +68,7 @@ CRB_updateSeizedMarker = {
 		};
         _color = _this select 2;
 		
-	format["""%1_mgr"" setMarkerColorLocal ""%2""; [%3, ""HQ""] sideChat ""SIGINT suggests %1 has been secured by %4 forces"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText];
+	format["""%1_mgr"" setMarkerColor ""%2""; [%3, ""HQ""] sideChat ""SIGINT suggests %1 has been secured by %4 forces"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText];
 };
 
 CRB_createDetectTrigger = {
@@ -145,23 +145,14 @@ CRB_createSeizedTrigger = {
         private ["_size","_name", "_pos","_trg","_type","_loc","_colour"];
         _pos = position _x;
 	_name = _x getVariable "name";
-	_size = 250;
+	_size = _x getVariable ["ALICE_townsize", bis_alice_mainscope getVariable "ALICE_townsize"];	// needs alice to be running
 		
 	// Get location object nearest each CityCenter (City Centers typically don't have text friendly names)
         _loc = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Airport","Strategic","VegetationVineyard","NameLocal"], _size]) select 0;
 
-        if(!isNil "_loc") then {
-/*
-                // Get the town size and town name
-                _size = (size _loc) select 0;
-		if (isNil "_size") then {
-			_size = 250;
-		};
-                if (_size < 250) then {
-			_size = _x getVariable ["ALICE_townsize", bis_alice_mainscope getVariable "ALICE_townsize"];	// needs alice to be running
-		};
-*/
-                _name = text _loc;
+        if(isNil "_size") then {
+		_size = 250;
+                //_name = text _loc;
         };
 
         if(twnmgr_status == 1) then {

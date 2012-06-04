@@ -1,10 +1,10 @@
 // - Tested
 //#define BIS_SOM
 #define RMM_AAR
-#define RMM_CAS
+//#define RMM_CAS
 #define RMM_CASEVAC
 #define RMM_CNSTRCT
-#define CRB_TWNMGR
+//#define CRB_TWNMGR
 #define CRB_FLIPPABLE
 #define RMM_JIPMARKERS
 #define RMM_LOGBOOK

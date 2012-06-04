@@ -14,7 +14,9 @@ if(isServer && isNil "CRB_LOCS") then {
 };
 
 if (ambientCivs == 1) then {
-	BIS_alice_mainscope = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
+	if(isNil "BIS_alice_mainscope") then {
+		BIS_alice_mainscope = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
+	};
 	if(_debug) then {
 		BIS_alice_mainscope setVariable ["debug", true];
 	};

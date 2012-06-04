@@ -153,6 +153,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         _AAspawned = false;
                                         _spawned = false;
                                         
+                                        waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
+                                        
                                         if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                         while {!(_cleared)} do {
                                         sleep 3; 
@@ -202,13 +204,13 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
-                                            	{deletevehicle _x} foreach units _group;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
-                                            	{deletevehicle _x} foreach units _grp2;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
                                         	};
@@ -219,13 +221,13 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
-                                            	{deletevehicle _x} foreach units _group;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
-                                            	{deletevehicle _x} foreach units _grp2;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
                                         	};
@@ -288,6 +290,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     _cleared = false;
                                     _AAspawned = false;
                                      _spawned = false;
+                                     
+                                    waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
                                         
                                     if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                     while {!(_cleared)} do {
@@ -341,13 +345,13 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
-                                            	{deletevehicle _x} foreach units _group;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
-                                            	{deletevehicle _x} foreach units _grp2;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
                                         	};
@@ -358,13 +362,13 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
-                                            	{deletevehicle _x} foreach units _group;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
-                                            	{deletevehicle _x} foreach units _grp2;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
                                         	};
@@ -434,6 +438,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     _cleared = false;
                                     _RBspawned = false;
                                     _spawned = false;
+                                    
+                                    waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
  
                                     if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                        while {!(_cleared)} do {
@@ -496,13 +502,13 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
-                                            	{deletevehicle _x} foreach units _group;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
-                                            	{deletevehicle _x} foreach units _grp2;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
                                         	};
@@ -513,13 +519,13 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
-                                            	{deletevehicle _x} foreach units _group;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
-                                            	{deletevehicle _x} foreach units _grp2;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
                                         	};
@@ -586,9 +592,11 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 									_type= _this select 2;
                                     _debug = debug_mso;
                                     _cleared = false;
-                                        _spawned = false;
+                                    _spawned = false;
                                         
-                                        if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
+                                     waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
+                                        
+                                    if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                         while {!(_cleared)} do {
                                         sleep 3; 
                                         if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
@@ -631,13 +639,13 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
-                                            	{deletevehicle _x} foreach units _group;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
-                                            	{deletevehicle _x} foreach units _grp2;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
                                         	};
@@ -648,13 +656,13 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
-                                            	{deletevehicle _x} foreach units _group;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
-                                            	{deletevehicle _x} foreach units _grp2;
+                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
                                         	};

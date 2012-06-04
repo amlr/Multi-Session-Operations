@@ -72,7 +72,7 @@ class Mission
 	randomSeed=10170483;
 	class Intel
 	{
-		briefingName="32_A2CO_COOP_BAF_USA Perfstab rev 28 000";
+		briefingName="32_A2CO_COOP_BAF_USA Perfstab rev 29 000";
 		briefingDescription="An MSO Team Development (A2CO)";
 		resistanceWest=0;
 		resistanceEast=1;
