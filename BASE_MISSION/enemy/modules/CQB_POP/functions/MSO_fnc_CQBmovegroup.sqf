@@ -35,7 +35,7 @@ if (_houseguards) then {
 } foreach _units;
        
 waituntil {count (units _group) == 0};
-diag_log format["MSO-%1 CQB Population: Group %2 deleted - script end...", time, _group];
+if (_debug) then {diag_log format["MSO-%1 CQB Population: Group %2 deleted - script end...", time, _group];};
 deletegroup _group;
 _house setvariable ["s",nil, CQBaiBroadcast];
 true;
