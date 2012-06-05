@@ -10,9 +10,11 @@
 
 
 private ["_debug","_d","_camp","_flag"];
-if(!isServer) exitWith{};
+if !(isServer) exitWith {};
 
 _debug = debug_mso;
+if(isnil "rmm_dynamic") then {rmm_dynamic = 0};
+if (rmm_dynamic == 1) exitWith {call compile preprocessfilelinenumbers "enemy\modules\rmm_enemypop\main_dynamic.sqf"};
 if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 3;};
 if(isNil "rmm_ep_spawn_dist")then{rmm_ep_spawn_dist = 2000;};
 if(isNil "rmm_ep_safe_zone")then{rmm_ep_safe_zone = 2000;};
@@ -74,8 +76,8 @@ if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
-diag_log format["MSO-%1 Enemy Population initLocations %2", time, count CRB_LOCS];
-if(_debug) then {hint format["MSO-%1 Enemy Population initLocations %2", time, count CRB_LOCS];};
+diag_log format["MSO-%1 Enemy Population (static) initLocations %2", time, count CRB_LOCS];
+if(_debug) then {hint format["MSO-%1 Enemy Population (static) initLocations %2", time, count CRB_LOCS];};
 
 BIN_fnc_taskDefend = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskDefend.sqf";
 
