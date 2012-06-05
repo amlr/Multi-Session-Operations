@@ -69,6 +69,135 @@ if (_debug) then {diag_log format["MSO-%1 RMM GETFLATAREA defaulting to original
 _pos;
 };
 
+MSO_fnc_getrandomgrouptype = {
+private ["_type","_fac","_facs","_sidex","_side","_grpx","_grps","_grp","_fx","_facx","_s","_spawnGrp","_wp","_nonConfigs"];
+
+_type = _this select 0;
+_fac = nil;
+
+if (rmm_ep_aa > 1) then {
+	_nonConfigs = ["TK_InfantrySectionAA","RU_InfSection_AA","INS_InfSection_AA","TK_INS_AATeam","ACE_RU_InfSection_AA_D","TK_GUE_AATeam"];
+} else {
+	_nonConfigs = [""];
+};
+
+if (count _this > 2) then { _fac = _this select 2; };
+if (isNil "_fac") then { _fac = east; };
+
+waitUntil {!isNil "bis_fnc_init"}; 
+
+_facs = [];
+_side = nil;
+
+if(isNil "CRB_ALLFACS") then {
+	CRB_ALLFACS = [] call BIS_fnc_getFactions;
+
+};
+
+if(typeName _fac == "ANY" || typeName _fac == "SIDE") then {
+        if(typeName _fac == "SIDE") then {
+                _side = _fac;
+        };
+        
+        switch(_side) do {
+                case east: {
+                        _sidex = 0;
+                };
+                case west: {
+                        _sidex = 1;
+                };
+                case resistance: {
+                        _sidex = 2;
+                };
+                case civilian: {
+                        _sidex = 3;
+                };
+        };
+        
+        {
+                _fx = getNumber(configFile >> "CfgFactionClasses" >> _x >> "side");
+                if (_fx == _sidex) then {
+                        _facs set [count _facs, _x];
+                };
+        } forEach CRB_ALLFACS;
+        _fac = nil;
+} else {
+        switch(toUpper(typeName _fac)) do {
+                case "STRING": {
+                        _facs = [_fac];
+                };
+                case "ARRAY": {
+                        _facs = _fac;
+                };
+        };
+        _fac = nil;
+};
+
+if(!isNil "_facs") then {
+        _facx = [];
+        {
+                _s = switch(_x) do {
+                        case resistance: {"Guerrila";};
+                        case civilian: {"Civilian";};
+                        default {str _x;};
+                };
+                
+                private ["_x"];
+                {
+                        _grpx = count(configFile >> "CfgGroups" >> _s >> _x >> _type);
+                        for "_y" from 1 to _grpx - 1 do {
+                                if (!(_x in _facx)) then { 
+                                        _facx set [count _facx, _x];
+                                };
+                        };
+                } forEach _facs;
+        } forEach [west,east,resistance,civilian];
+        
+        _facs = _facx;
+};
+
+if (count _facs == 0) exitwith {};
+
+_fac = _facs select floor(random count _facs);
+if(isNil "_side") then {
+        _sidex = getNumber(configFile >> "CfgFactionClasses" >> _fac >> "side");
+        _side = nil;
+        switch(_sidex) do {
+                case 0: {
+                        _side = east;
+                };
+                case 1: {
+                        _side = west;
+                };
+                case 2: {
+                        _side = resistance;
+                };
+                case 3: {
+                        _side = civilian;
+                };
+        };
+};
+_grps = [];
+_s = switch(_side) do {
+        case resistance: {"Guerrila";};
+        case civilian: {"Civilian";};
+        default {str _side;};
+};
+
+_grpx = count(configFile >> "CfgGroups" >> _s >> _fac >> _type);
+for "_y" from 1 to _grpx - 1 do {
+		private "_cx";
+		_cx = configName ((configFile >> "CfgGroups" >> _s >> _fac >> _type) select _y);
+		if ( {(_cx == _x)} count _nonConfigs == 0 ) then {	
+			_grps set [count _grps, (configFile >> "CfgGroups" >> _s >> _fac >> _type) select _y];			
+		};	
+};
+
+_grp = _grps select floor(random count _grps);
+_grouptype = [_side, _grp];
+_grouptype;
+};
+
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
@@ -144,7 +273,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                                 
                                 [_pos, _flag, _type] spawn {
-                                        private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits"];
+                                        private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array"];
                                         _pos = _this select 0;
                                         _flag = _this select 1;
                                         _type = _this select 2;
@@ -155,6 +284,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         
                                         waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
                                         
+                                        _grouparray = [_type] call MSO_fnc_getrandomgrouptype;
+                                        _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;
+                                                                                                                        
                                         if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                         while {!(_cleared)} do {
                                         sleep 3; 
@@ -163,7 +295,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         _group = nil;
                                         _pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
                                         while{isNil "_group"} do {
-                                                _group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
+                                                _group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
                                         };
                                         if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
                                         (leader _group) setBehaviour "AWARE";
@@ -181,7 +313,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 _grp2 = grpNull;
                                                 while{count units _grp2 <= 2} do {
                                                         {deleteVehicle _x} count units _grp2;
-                                                        _grp2 = [_pos, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
+                                                        _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
                                                 };
                                                 if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
                                                 [_grp2] call BIN_fnc_taskDefend;
@@ -204,12 +336,14 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
+                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
+                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
@@ -221,12 +355,14 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
+                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
+                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
@@ -281,7 +417,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 							_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 
 							[_pos, _flag, _type] spawn {
-									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits"];
+									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array"];
                                         _pos = _this select 0;
 									_pos = _this select 0;
 									_flag = _this select 1;
@@ -292,7 +428,11 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                      _spawned = false;
                                      
                                     waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
-                                        
+                                    
+                                    _grouparray = [_type] call MSO_fnc_getrandomgrouptype;
+                                    _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;
+                                              
+                                                        
                                     if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                     while {!(_cleared)} do {
                                     sleep 3; 
@@ -301,9 +441,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 								    _spawned = true;
 									_group = nil;
 									_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-									while{isNil "_group"} do {
-											_group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
-									};
+                                        while{isNil "_group"} do {
+                                                _group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
+                                        };
                                     if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
 									(leader _group) setBehaviour "COMBAT";
 									_group setSpeedMode "LIMITED";
@@ -318,10 +458,10 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 									if(_flag < ep_campprob && _type != "Infantry") then {
 											[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
 											_grp2 = grpNull;
-											while{count units _grp2 <= 2} do {
-													{deleteVehicle _x} count units _grp2;
-													_grp2 = [_pos, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
-											};
+                                                while{count units _grp2 <= 2} do {
+                                                        {deleteVehicle _x} count units _grp2;
+                                                        _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
+                                                };
                                             if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
 											[_grp2] call BIN_fnc_taskDefend;
 											ep_groups set [count ep_groups, _grp2];
@@ -345,12 +485,14 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
+                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
+                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
@@ -362,12 +504,14 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
+                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
+                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
@@ -430,7 +574,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 							_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 							
 							[_pos, _flag, _type] spawn {
-									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_RBspawned","_locunits"];
+									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_RBspawned","_locunits","_grouparray","_grp2array"];
 									_pos = _this select 0;
 									_flag = _this select 1;
 									_type= _this select 2;
@@ -441,6 +585,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     
                                     waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
  
+                                    _grouparray = [_type] call MSO_fnc_getrandomgrouptype;
+                                    _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;
+  
                                     if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                        while {!(_cleared)} do {
                                            
@@ -449,9 +596,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 										_spawned = true;
 									_group = nil;
 									_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-									while{isNil "_group"} do {
-											_group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
-									};
+                                        while{isNil "_group"} do {
+                                                _group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
+                                        };
                                     if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
 									(leader _group) setBehaviour "COMBAT";
 									_group setSpeedMode "LIMITED";
@@ -473,10 +620,10 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 									if(_flag < ep_campprob && _type != "Infantry") then {
 											[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
 											_grp2 = grpNull;
-											while{count units _grp2 <= 2} do {
-													{deleteVehicle _x} count units _grp2;
-													_grp2 = [_pos, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
-											};
+                                                while{count units _grp2 <= 2} do {
+                                                        {deleteVehicle _x} count units _grp2;
+                                                        _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
+                                                };
 											[_grp2] call BIN_fnc_taskDefend;
                                             if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
 											ep_groups set [count ep_groups, _grp2];
@@ -502,29 +649,33 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
+                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
+                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
                                         	};
                                         	_spawned = false;
                                      };
-                                        
+
                                     if ((count _locunits < 1) && (_spawned)) then {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
+                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
+                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
@@ -586,7 +737,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 							_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 							
 							[_pos, _flag, _type] spawn {
-									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_locunits"];
+									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_locunits","_grouparray","_grp2array"];
 									_pos = _this select 0;
 									_flag = _this select 1;
 									_type= _this select 2;
@@ -595,7 +746,10 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     _spawned = false;
                                         
                                      waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
-                                        
+                                     
+                                     _grouparray = [_type] call MSO_fnc_getrandomgrouptype;
+                                     _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;                                    
+                                                
                                     if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                         while {!(_cleared)} do {
                                         sleep 3; 
@@ -603,9 +757,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 										_spawned = true;
 									_group = nil;
 									_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-									while{isNil "_group"} do {
-											_group = [_pos2, _type, MSO_FACTIONS] call mso_core_fnc_randomGroup;
-									};
+                                        while{isNil "_group"} do {
+                                                _group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
+                                        };
                                     if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
 									(leader _group) setBehaviour "STEALTH";
 									_group setSpeedMode "LIMITED";
@@ -620,10 +774,10 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 									if(_flag < ep_campprob && _type != "Infantry") then {
 											[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
 											_grp2 = grpNull;
-											while{count units _grp2 <= 2} do {
-													{deleteVehicle _x} count units _grp2;
-													_grp2 = [_pos, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
-											};
+                                                while{count units _grp2 <= 2} do {
+                                                        {deleteVehicle _x} count units _grp2;
+                                                        _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
+                                                };
 											[_grp2] call BIN_fnc_taskDefend;
                                             if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
 											ep_groups set [count ep_groups, _grp2];
@@ -639,29 +793,33 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
+                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
+                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
                                         	};
                                         	_spawned = false;
                                      };
-                                        
+
                                     if ((count _locunits < 1) && (_spawned)) then {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
+                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             	deletegroup _group;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];}; 
                                         	};
                                         	if !(isnil "_grp2") then {
                                                 ep_groups = ep_groups - [_grp2];
+                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
                                             	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
