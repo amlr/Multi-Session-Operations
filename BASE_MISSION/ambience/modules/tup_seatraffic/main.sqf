@@ -75,6 +75,8 @@ if (count _seadest < 1) exitWith {
 if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)) then {
 	_logic = createCenter sideLogic;
 	_group = createGroup _logic;
+	// Get center of map
+	_center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
 	_lhdpos = [_center, 2000, _mapsize, 500, 2, 0, 0] call BIS_fnc_findSafePos;
 	while {_lhdpos distance _center > _mapsize} do {
 		_lhdpos = [_center, 2000, _mapsize, 500, 2, 0, 0] call BIS_fnc_findSafePos;
