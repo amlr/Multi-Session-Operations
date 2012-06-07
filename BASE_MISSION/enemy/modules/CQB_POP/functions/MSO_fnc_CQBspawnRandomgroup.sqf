@@ -5,16 +5,18 @@ _pos = _this select 0;
 _house = _this select 1;
 _despawn = _this select 2;
 _debug = debug_mso;
+_grpPos = [_pos select 0,_pos select 1,-30];
 
 sleep (random 1);
 
+_types = [0, MSO_FACTIONS,"Man"] call mso_core_fnc_findVehicleType;
 _unittypes = [];
 for "_i" from 0 to (1 + floor(random 3)) do {
-	_unittype = [0, MSO_FACTIONS,"Man"] call mso_core_fnc_findVehicleType;
-	_unittype = _unittype call BIS_fnc_selectRandom;
+    _unittype = _types call BIS_fnc_selectRandom;
 	_unittypes set [count _unittypes, _unittype];
 };
-_group = [_pos, EAST, _unittypes] call BIS_fnc_spawnGroup;
+
+_group = [_grpPos, EAST, _unittypes] call BIS_fnc_spawnGroup;
 _units = units _group;
 
 CQBgroupsLocal set [count CQBgroupsLocal, _group];
