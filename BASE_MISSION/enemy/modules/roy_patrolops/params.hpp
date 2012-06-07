@@ -13,13 +13,13 @@ class MISSIONTYPE_PO { // MISSION TYPE
 class MISSIONTYPE_AIR { // MISSION TYPE
 	title= "        Mission Type Air Ops";
 	values[]={0,1};
-	default=0;
+	default=1;
 	texts[]={"Off","Experimental"};
 };
 class MISSIONCOUNT { // MISSION COUNT
 	title="        Number of Missions";
 	values[]={1,3,5,7,9,15,20,9999};
-	default=9;
+	default=9999;
 	texts[]={"1","3","5","7","9","15","20","unlimited"};
 };
 class PO2_EFACTION { // ENEMY FACTION

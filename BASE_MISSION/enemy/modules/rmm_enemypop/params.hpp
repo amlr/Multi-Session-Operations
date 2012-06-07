@@ -2,7 +2,7 @@ class rmm_dynamic {
         title = "    Dynamic Enemy Populator";
         values[]= {0,1}; 
         texts[]= {"Off","On"}; 
-        default = 0;
+        default = 1;
 };
 class rmm_ep_intensity {
         title = "    Enemy Intensity"; 
