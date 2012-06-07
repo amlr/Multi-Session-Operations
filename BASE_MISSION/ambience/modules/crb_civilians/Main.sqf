@@ -31,7 +31,7 @@ if (ambientCivs == 1) then {
 };
 
 if(isServer) then {        
-        if (isNil 'BIS_silvie_mainscope' && ambientVehs == 1) then {
+        if (isNil "BIS_silvie_mainscope" && ambientVehs == 1) then {
                 _logicVeh = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
                 BIS_silvie_mainscope = _logicVeh;
                 private ["_ok"];
@@ -43,7 +43,7 @@ if(isServer) then {
                 [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\crB_AmbVehSetup.sqf";
         };
         
-        if (isNil 'BIS_Animals_debug' && ambientAnimals == 1) then {
+        if (isNil "BIS_Animals_debug" && ambientAnimals == 1) then {
                 _logicAni = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
                 BIS_Animals_debug = _debug;
                 private ["_ok"];
