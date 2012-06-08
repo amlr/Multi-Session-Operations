@@ -9,9 +9,11 @@ _cleared = false;
 _suspended = false;
 _patrol = false;
 _movehome = false;
+_breakouttimer = 0;
 
-while {!(_cleared) && !(_suspended) && ({_pos distance _x < 2500} count ([] call BIS_fnc_listPlayers) > 0)} do {
-sleep 2;   
+while {!(_cleared) && !(_suspended) && (_breakouttimer < 20)} do {
+sleep 2;
+	if ({_pos distance _x < 2500} count ([] call BIS_fnc_listPlayers) < 1) then {_breakouttimer = _breakouttimer + 2} else {_breakouttimer = 0};   
 	_near = ({_pos distance _x < _despawn} count ([] call BIS_fnc_listPlayers) > 0);
     
     if ((_near) && !(_patrol)) then {
