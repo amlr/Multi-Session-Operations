@@ -8,7 +8,7 @@ class deployment_Time {
 	title="        Deployment Delay"; 
 	values[] = {5,300,600,1800}; 
 	texts[] = {"Debug","5 minutes","10 minutes","30 minutes"}; 
-	default = 5; 
+	default = 300; 
 };
 
 class undeployment_Time {
