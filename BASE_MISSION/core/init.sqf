@@ -141,17 +141,11 @@ execNow "core\modules\crb_timesync\main.sqf";
 [-1, -1, -1, [-1, -1], debug_mso] execNow "core\modules\DRN_weather\DynamicWeatherEffects.sqf";
 #endif
 
+setViewDistance 2500;
+setTerrainGrid 25;
 #ifdef RMM_SETTINGS
 "View Distance Settings" call mso_core_fnc_initStat;
 execNow "core\modules\rmm_settings\main.sqf";	
-#else
-if(isDedicated) then {
-        setViewDistance 5000;
-        setTerrainGrid 25;
-} else {
-        setViewDistance 2500;
-        setTerrainGrid 50;
-};
 #endif
 
 #ifdef SPYDER_ONU

@@ -1,4 +1,4 @@
-if(isNil "settings_maxvd") then {settings_maxvd = 5000;};
+if(isNil "settings_maxvd") then {settings_maxvd = 10000;};
 if(settings_maxvd != 10000) then {
         [settings_maxvd] spawn {
                 while{true} do {
