@@ -21,9 +21,6 @@ class CfgSounds {
 #ifdef TUP_IED
 	#include <enemy\modules\tup_ied\CfgSounds.hpp>
 #endif
-#ifdef RMM_CAS
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\CfgSounds.hpp>
-#endif
 #ifdef ROY_PATROLOPS
 #include <enemy\modules\roy_patrolops\mps\dialog\mps_sounds.sqf>
 #endif
@@ -152,18 +149,10 @@ class enemyHeader {
 	#include <support\modules\R3F_logistics\desc_include.h>
 #endif
 
-#ifdef RMM_CAS
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\uiDefines.hpp>
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\define.hpp>
-#endif
-
 class RscTitles
 {
 #ifdef R3F_LOGISTICS
 	#include <support\modules\R3F_logistics\desc_rsct_include.h>
-#endif
-#ifdef RMM_CAS
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\RscTitles.hpp>
 #endif
 };
 
@@ -261,10 +250,6 @@ class cfgFunctions {
 #endif
 #ifdef RMM_CAS
 	#include <support\modules\rmm_cas\dialog.hpp>
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogParent.hpp>
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogAC130.hpp>
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogUAV.hpp>
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogMap.hpp>
 #endif
 #ifdef RMM_CASEVAC
 	#include <support\modules\rmm_casevac\dialog.hpp>
