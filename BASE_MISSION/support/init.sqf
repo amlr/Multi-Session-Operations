@@ -8,21 +8,25 @@
 //[] execVM "scripts\firstaidfix.sqf";
 
 #ifdef RMM_REVIVE
-"Revive" call mso_core_fnc_initStat;
-waitUntil{!isnil "revive_fnc_init"};
-if (!isDedicated) then {
+if !(isClass(configFile>>"CfgPatches">>"ace_main")) then {
+	"Revive" call mso_core_fnc_initStat;
+	waitUntil{!isnil "revive_fnc_init"};
+	if (!isDedicated) then {
         player call revive_fnc_init;
-};
-if (!isNil "revive_test") then {
+	};
+	if (!isNil "revive_test") then {
         revive_test call revive_fnc_init;
         revive_test setDamage 0.6;
         revive_test call revive_fnc_unconscious;
+	};
 };
 #endif
 
 #ifdef R3F_REVIVE
-"R3F Revive " call mso_core_fnc_initStat;
-execVM "support\modules\R3F_revive\revive_init.sqf";
+if !(isClass(configFile>>"CfgPatches">>"ace_main")) then {
+    "R3F Revive " call mso_core_fnc_initStat;
+	execVM "support\modules\R3F_revive\revive_init.sqf";
+};
 #endif
 
 #ifdef RMM_AAR
@@ -92,8 +96,10 @@ execNow "support\modules\crb_twnmgr\main.sqf";
 #endif
 
 #ifdef RMM_TYRES
-"Tyre Changing" call mso_core_fnc_initStat;
-execNow "support\modules\rmm_tyres\main.sqf";
+if !(isClass(configFile>>"CfgPatches">>"ace_main")) then {
+	"Tyre Changing" call mso_core_fnc_initStat;
+	execNow "support\modules\rmm_tyres\main.sqf";
+};
 #endif
 
 // AAW INKO Fix
