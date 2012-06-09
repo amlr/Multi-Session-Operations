@@ -273,7 +273,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                                 
                                 [_pos, _flag, _type] spawn {
-                                        private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array"];
+                                        private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2"];
                                         _pos = _this select 0;
                                         _flag = _this select 1;
                                         _type = _this select 2;
@@ -286,90 +286,95 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         
                                         _grouparray = [_type] call MSO_fnc_getrandomgrouptype;
                                         _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;
+                                        _groupPos = nil;
+                                        _grp2Pos = nil;
                                                                                                                         
                                         if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                         while {!(_cleared)} do {
-                                        sleep 3; 
-                                        if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
-										_spawned = true;
-                                        _group = nil;
-                                        _pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-                                        while{isNil "_group"} do {
-                                                _group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
-                                        };
-                                        if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
-                                        (leader _group) setBehaviour "AWARE";
-                                        _group setSpeedMode "LIMITED";
-                                        _group setFormation "STAG COLUMN";
-                                        if(_flag >= ep_campprob || count units _group <= 2) then {
-                                                [_group,_group,800,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-                                        };
-                                        if(_flag < ep_campprob && _type == "Infantry") then {
-                                                leader _group setPos _pos;
-                                                [_group] call BIN_fnc_taskDefend;
-                                        };
-                                        if(_flag < ep_campprob && _type != "Infantry") then {
-                                                [_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-                                                _grp2 = grpNull;
-                                                while{count units _grp2 <= 2} do {
+                                        	sleep 3; 
+                                        	if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
+												_spawned = true;
+                                        		_group = nil;
+                                        		if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
+                                        		while{isNil "_group"} do {
+                                                	_group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
+                                        		};
+                                        		if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
+                                        		(leader _group) setBehaviour "AWARE";
+                                        		_group setSpeedMode "LIMITED";
+                                        		_group setFormation "STAG COLUMN";
+                                                
+                                        		if(_flag >= ep_campprob || count units _group <= 2) then {
+                                                	[_group,_group,800,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                        		};
+                                        		if(_flag < ep_campprob && _type == "Infantry") then {
+                                                	leader _group setPos _pos;
+                                                	[_group] call BIN_fnc_taskDefend;
+                                        		};
+                                        		if(_flag < ep_campprob && _type != "Infantry") then {
+                                                	[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                                	if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
+                                                    _grp2 = grpNull;
+                                                	while{count units _grp2 <= 2} do {
                                                         {deleteVehicle _x} count units _grp2;
-                                                        _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
-                                                };
-                                                if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
-                                                [_grp2] call BIN_fnc_taskDefend;
-                                                ep_groups set [count ep_groups, _grp2];
-                                        };
-                                        // Check to see if Enemy sets up AA site
-                                        if !(_AAspawned) then {
-                                            _AAspawned = true;
-                                        if ((random 1 > 0.5) || _debug) then {
-                                                [_pos, "static", 1 + random 1] execVM "enemy\scripts\TUP_spawnAA.sqf";
-                                        };
-                                        };
-                                        ep_groups set [count ep_groups, _group];
-                                        };
-                                        
-                                     _locunits = [];
-                                     if !(isnil "_group") then {{_locunits set [count _locunits, _x]} foreach units _group;};
-                                     if !(isnil "_grp2") then {{_locunits set [count _locunits, _x]} foreach units _grp2;};
-                                        
-                                    if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
-                                        	if !(isnil "_group") then {
-                                                ep_groups = ep_groups - [_group];
-                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
-                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
-                                            	deletegroup _group;
-                                                if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
+                                                        _grp2 = [_posGrp2, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
+                                                	};
+                                                	if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _posGrp2, _grp2];};
+                                                	[_grp2] call BIN_fnc_taskDefend;
+                                                	ep_groups set [count ep_groups, _grp2];
+                                        		};
+                                                
+                                        		// Check to see if Enemy sets up AA site
+                                        		if !(_AAspawned) then {
+                                            		_AAspawned = true;
+                                        			if ((random 1 > 0.5) || _debug) then {
+                                                		[_pos, "static", 1 + random 1] execVM "enemy\scripts\TUP_spawnAA.sqf";
+                                        			};
+                                        		};
+                                        		ep_groups set [count ep_groups, _group];
                                         	};
-                                        	if !(isnil "_grp2") then {
-                                                ep_groups = ep_groups - [_grp2];
-                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
-                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
-                                            	deletegroup _grp2;
-                                                if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
-                                        	};
-                                        	_spawned = false;
-                                     };
+                                        
+                                     		_locunits = [];
+                                     		if (count (units _group) > 0) then {{_locunits set [count _locunits, _x]} foreach units _group; if !(str(position (leader _group)) == "[0,0,0]") then {_groupPos = position (leader _group)}};
+                                     		if (count (units _grp2) > 0) then {{_locunits set [count _locunits, _x]} foreach units _grp2; if !(str(position (leader _grp2)) == "[0,0,0]") then {_grp2Pos = position (leader _grp2)}};
+                                        
+                                    		if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
+                                        		if !(isnil "_group") then {
+                                                	ep_groups = ep_groups - [_group];
+                                                	while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
+                                            		{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
+                                            		deletegroup _group;
+                                                	if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
+                                        		};
+                                        		if !(isnil "_grp2") then {
+                                                	ep_groups = ep_groups - [_grp2];
+                                                	while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
+                                            		{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
+                                            		deletegroup _grp2;
+                                                	if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
+                                        		};
+                                        		_spawned = false;
+                                     		};
 
-                                    if ((count _locunits < 1) && (_spawned)) then {
-                                            if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
-                                        	if !(isnil "_group") then {
-                                                ep_groups = ep_groups - [_group];
-                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
-                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
-                                            	deletegroup _group;
-                                                if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];}; 
+                                    		if ((count _locunits < 1) && (_spawned)) then {
+                                            	if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
+                                        		if !(isnil "_group") then {
+                                                	ep_groups = ep_groups - [_group];
+                                                	while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
+                                            		{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
+                                            		deletegroup _group;
+                                                	if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];}; 
+                                        		};
+                                        		if !(isnil "_grp2") then {
+                                                	ep_groups = ep_groups - [_grp2];
+                                                	while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
+                                            		{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
+                                            		deletegroup _grp2;
+                                                	if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
+                                        		};
+                                        		_spawned = false;
+                                        		_cleared = true;
                                         	};
-                                        	if !(isnil "_grp2") then {
-                                                ep_groups = ep_groups - [_grp2];
-                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
-                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
-                                            	deletegroup _grp2;
-                                                if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
-                                        	};
-                                        	_spawned = false;
-                                        	_cleared = true;
-                                        };
                                         };
                                 };
                         };
@@ -417,8 +422,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 							_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 
 							[_pos, _flag, _type] spawn {
-									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array"];
-                                        _pos = _this select 0;
+									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2"];
+                                    _pos = _this select 0;
 									_pos = _this select 0;
 									_flag = _this select 1;
 									_type = _this select 2;
@@ -431,58 +436,59 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     
                                     _grouparray = [_type] call MSO_fnc_getrandomgrouptype;
                                     _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;
+                                    _groupPos = nil;
+                                    _grp2Pos = nil;
                                               
-                                                        
-                                    if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
+									if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                     while {!(_cleared)} do {
-                                    sleep 3; 
-                                    if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
+                                    	sleep 3; 
+                                    	if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
                                         
-								    _spawned = true;
-									_group = nil;
-									_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-                                        while{isNil "_group"} do {
+								    		_spawned = true;
+											_group = nil;
+                                        	if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
+                                        	while{isNil "_group"} do {
                                                 _group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
-                                        };
-                                    if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
-									(leader _group) setBehaviour "COMBAT";
-									_group setSpeedMode "LIMITED";
-									_group setFormation "DIAMOND";
-									if(_flag >= ep_campprob || count units _group <= 2) then {
-											[_group,_group,800,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [240,400,560]] call CBA_fnc_taskPatrol;
-									};
-									if(_flag < ep_campprob && _type == "Infantry") then {
-											leader _group setPos _pos;
-											[_group] call BIN_fnc_taskDefend;
-									};
-									if(_flag < ep_campprob && _type != "Infantry") then {
-											[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-											_grp2 = grpNull;
+                                        	};
+                                    		if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
+											(leader _group) setBehaviour "COMBAT";
+											_group setSpeedMode "LIMITED";
+											_group setFormation "DIAMOND";
+											if(_flag >= ep_campprob || count units _group <= 2) then {
+												[_group,_group,800,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [240,400,560]] call CBA_fnc_taskPatrol;
+											};
+											if(_flag < ep_campprob && _type == "Infantry") then {
+												leader _group setPos _pos;
+												[_group] call BIN_fnc_taskDefend;
+											};
+											if(_flag < ep_campprob && _type != "Infantry") then {
+												[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                                if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
+                                                _grp2 = grpNull;
                                                 while{count units _grp2 <= 2} do {
-                                                        {deleteVehicle _x} count units _grp2;
-                                                        _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
+                                                	{deleteVehicle _x} count units _grp2;
+                                                    _grp2 = [_posGrp2, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
                                                 };
-                                            if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
-											[_grp2] call BIN_fnc_taskDefend;
-											ep_groups set [count ep_groups, _grp2];
-									};
-									// Check to see if Enemy sets up AA defense
-                                    if !(_AAspawned) then {
-                                        _AAspawned = true;
-										if ((random 1 > 0.6) || _debug) then {
-											[_pos, "mixed", 1 + random 2] execVM "enemy\scripts\TUP_spawnAA.sqf";
-										};
-                                    };
+                                            	if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _posGrp2, _grp2];};
+												[_grp2] call BIN_fnc_taskDefend;
+												ep_groups set [count ep_groups, _grp2];
+											};
+											// Check to see if Enemy sets up AA defense
+                                    		if !(_AAspawned) then {
+                                        		_AAspawned = true;
+												if ((random 1 > 0.6) || _debug) then {
+													[_pos, "mixed", 1 + random 2] execVM "enemy\scripts\TUP_spawnAA.sqf";
+												};
+                                    		};
                                     
-									ep_groups set [count ep_groups, _group];
-                                    };
+											ep_groups set [count ep_groups, _group];
+                                    	};
+                                        
+                                     	_locunits = [];
+                                     	if (count (units _group) > 0) then {{_locunits set [count _locunits, _x]} foreach units _group; if !(str(position (leader _group)) == "[0,0,0]") then {_groupPos = position (leader _group)}};
+                                     	if (count (units _grp2) > 0) then {{_locunits set [count _locunits, _x]} foreach units _grp2; if !(str(position (leader _grp2)) == "[0,0,0]") then {_grp2Pos = position (leader _grp2)}};
                                     
-                                     _locunits = [];
-                                     if !(isnil "_group") then {{_locunits set [count _locunits, _x]} foreach units _group;};
-                                     if !(isnil "_grp2") then {{_locunits set [count _locunits, _x]} foreach units _grp2;};
-                                   
-                                    
-                                    if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
+                                    	if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
                                                 while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
@@ -498,9 +504,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
                                         	};
                                         	_spawned = false;
-                                     };
+                                     	};
 
-                                    if ((count _locunits < 1) && (_spawned)) then {
+                                    	if ((count _locunits < 1) && (_spawned)) then {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
@@ -574,7 +580,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 							_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 							
 							[_pos, _flag, _type] spawn {
-									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_RBspawned","_locunits","_grouparray","_grp2array"];
+									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_RBspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2"];
 									_pos = _this select 0;
 									_flag = _this select 1;
 									_type= _this select 2;
@@ -587,66 +593,67 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
  
                                     _grouparray = [_type] call MSO_fnc_getrandomgrouptype;
                                     _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;
+                                    _groupPos = nil;
+                                    _grp2Pos = nil;
   
                                     if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
-                                       while {!(_cleared)} do {
-                                           
-                                        sleep 3; 
+                                    while {!(_cleared)} do {
+                                    	sleep 3; 
                                     	if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
-										_spawned = true;
-									_group = nil;
-									_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-                                        while{isNil "_group"} do {
+											_spawned = true;
+											_group = nil;
+                                        	if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
+                                        	while{isNil "_group"} do {
                                                 _group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
-                                        };
-                                    if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
-									(leader _group) setBehaviour "COMBAT";
-									_group setSpeedMode "LIMITED";
-									_group setFormation "DIAMOND";
-									if(_flag >= ep_campprob || count units _group <= 2 ) then {
-											if (count (nearestObjects [_pos, ["Building"], 500]) > 2) then {
+                                        	};
+                                    		if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
+											(leader _group) setBehaviour "COMBAT";
+											_group setSpeedMode "LIMITED";
+											_group setFormation "DIAMOND";
+											if(_flag >= ep_campprob || count units _group <= 2 ) then {
+												if (count (nearestObjects [_pos, ["Building"], 500]) > 2) then {
 													if (_debug) then {
 															diag_log format["MSO-%1 Enemy Population - %3 is patrolling buildings near %2", time, _pos2, leader _group];
 													};
 													[leader _group, 500, true, 240 + random 360] execVM "support\scripts\crb_scripts\crB_HousePos.sqf";	
-											} else {
+													} else {
 													[_group,_group,400,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [360,520,680]] call CBA_fnc_taskPatrol;
-											};  
-									};
-									if(_flag < ep_campprob && _type == "Infantry") then {
-											leader _group setPos _pos;
-											[_group] call BIN_fnc_taskDefend;
-									};
-									if(_flag < ep_campprob && _type != "Infantry") then {
-											[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-											_grp2 = grpNull;
-                                                while{count units _grp2 <= 2} do {
-                                                        {deleteVehicle _x} count units _grp2;
-                                                        _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
-                                                };
-											[_grp2] call BIN_fnc_taskDefend;
-                                            if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
-											ep_groups set [count ep_groups, _grp2];
-									};
-									// Check to see if Enemy sets up roadblock
-                                    
-                                    if !(_RBspawned) then {
-                                    	_RBspawned = true;
-									if (((random 1 > 0.5) && (count (_pos nearRoads 500) > 0)) ) then {
-											if (_debug) then {
-													diag_log format["MSO-%1 Enemy Population - Attempted to Deploy Road Block near %2", time, _pos2];
+												};  
 											};
-											[_group, _pos] execVM "enemy\scripts\TUP_deployRoadBlock.sqf";	
-									};
-                                    };
-									ep_groups set [count ep_groups, _group];
-                                    };
-                                    
-                                    _locunits = [];
-                                     if !(isnil "_group") then {{_locunits set [count _locunits, _x]} foreach units _group;};
-                                     if !(isnil "_grp2") then {{_locunits set [count _locunits, _x]} foreach units _grp2;};
-                                    
-                                    if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
+											if(_flag < ep_campprob && _type == "Infantry") then {
+												leader _group setPos _pos;
+												[_group] call BIN_fnc_taskDefend;
+											};
+											if(_flag < ep_campprob && _type != "Infantry") then {
+												[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                                if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
+                                                _grp2 = grpNull;
+                                                while{count units _grp2 <= 2} do {
+                                                	{deleteVehicle _x} count units _grp2;
+                                                    _grp2 = [_posGrp2, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
+                                                };
+												[_grp2] call BIN_fnc_taskDefend;
+                                            	if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
+												ep_groups set [count ep_groups, _grp2];
+											};
+											// Check to see if Enemy sets up roadblock
+                                    		if !(_RBspawned) then {
+                                    			_RBspawned = true;
+												if (((random 1 > 0.5) && (count (_pos nearRoads 500) > 0)) ) then {
+													if (_debug) then {
+														diag_log format["MSO-%1 Enemy Population - Attempted to Deploy Road Block near %2", time, _pos2];
+													};
+													[_group, _pos] execVM "enemy\scripts\TUP_deployRoadBlock.sqf";	
+												};
+                                    		};
+											ep_groups set [count ep_groups, _group];
+                                    	};
+                                        
+                                     	_locunits = [];
+                                     	if (count (units _group) > 0) then {{_locunits set [count _locunits, _x]} foreach units _group; if !(str(position (leader _group)) == "[0,0,0]") then {_groupPos = position (leader _group)}};
+                                     	if (count (units _grp2) > 0) then {{_locunits set [count _locunits, _x]} foreach units _grp2; if !(str(position (leader _grp2)) == "[0,0,0]") then {_grp2Pos = position (leader _grp2)}};
+                                        
+                                        if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
                                                 while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
@@ -662,9 +669,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
                                         	};
                                         	_spawned = false;
-                                     };
+                                     	};
 
-                                    if ((count _locunits < 1) && (_spawned)) then {
+                                    	if ((count _locunits < 1) && (_spawned)) then {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
@@ -683,7 +690,6 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         	_spawned = false;
                                         	_cleared = true;
                                         };
-                                    
                                     };
 							};
 					};
@@ -737,7 +743,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 							_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 							
 							[_pos, _flag, _type] spawn {
-									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_locunits","_grouparray","_grp2array"];
+									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2"];
 									_pos = _this select 0;
 									_flag = _this select 1;
 									_type= _this select 2;
@@ -745,52 +751,55 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     _cleared = false;
                                     _spawned = false;
                                         
-                                     waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
+                                    waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
                                      
-                                     _grouparray = [_type] call MSO_fnc_getrandomgrouptype;
-                                     _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;                                    
+                                    _grouparray = [_type] call MSO_fnc_getrandomgrouptype;
+                                    _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;
+                                    _groupPos = nil;
+                                    _grp2Pos = nil;                                    
                                                 
                                     if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
-                                        while {!(_cleared)} do {
-                                        sleep 3; 
-                                        if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
-										_spawned = true;
-									_group = nil;
-									_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;
-                                        while{isNil "_group"} do {
-                                                _group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
-                                        };
-                                    if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
-									(leader _group) setBehaviour "STEALTH";
-									_group setSpeedMode "LIMITED";
-									_group setFormation "DIAMOND";
-									if(_flag >= ep_campprob || count units _group <= 2) then {
-											[_group,_group,100,4 + random 4, "MOVE", "STEALTH", "RED", "LIMITED", "DIAMOND", "", [480,800,1120]] call CBA_fnc_taskPatrol;
-									};
-									if(_flag < ep_campprob && _type == "Infantry") then {
-											leader _group setPos _pos;
-											[_group] call BIN_fnc_taskDefend;
-									};
-									if(_flag < ep_campprob && _type != "Infantry") then {
-											[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-											_grp2 = grpNull;
-                                                while{count units _grp2 <= 2} do {
-                                                        {deleteVehicle _x} count units _grp2;
-                                                        _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
-                                                };
-											[_grp2] call BIN_fnc_taskDefend;
-                                            if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
-											ep_groups set [count ep_groups, _grp2];
-									};
-									ep_groups set [count ep_groups, _group];
-                                    if (_debug) then {diag_log format ["Count total %1 (%2)", _pos, count ep_groups];};
-                                    };
+                                    while {!(_cleared)} do {
+                                    	sleep 3; 
+                                    	if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
+											_spawned = true;
+											_group = nil;
+                                        	if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
+                                        	while{isNil "_group"} do {
+                                        		_group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
+                                        	};
+                                    		if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
+											(leader _group) setBehaviour "STEALTH";
+											_group setSpeedMode "LIMITED";
+											_group setFormation "DIAMOND";
+											if(_flag >= ep_campprob || count units _group <= 2) then {
+												[_group,_group,100,4 + random 4, "MOVE", "STEALTH", "RED", "LIMITED", "DIAMOND", "", [480,800,1120]] call CBA_fnc_taskPatrol;
+											};
+											if(_flag < ep_campprob && _type == "Infantry") then {
+												leader _group setPos _pos;
+												[_group] call BIN_fnc_taskDefend;
+											};
+											if(_flag < ep_campprob && _type != "Infantry") then {
+												[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                           		if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
+                                            	_grp2 = grpNull;
+                                           		while{count units _grp2 <= 2} do {
+                                            		{deleteVehicle _x} count units _grp2;
+                                                	_grp2 = [_posGrp2, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
+                                            	};
+												[_grp2] call BIN_fnc_taskDefend;
+                                            	if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
+												ep_groups set [count ep_groups, _grp2];
+											};
+											ep_groups set [count ep_groups, _group];
+                                    		if (_debug) then {diag_log format ["Count total %1 (%2)", _pos, count ep_groups];};
+                                    	};
                                     
-                                     _locunits = [];
-                                     if !(isnil "_group") then {{_locunits set [count _locunits, _x]} foreach units _group;};
-                                     if !(isnil "_grp2") then {{_locunits set [count _locunits, _x]} foreach units _grp2;};
-                                    
-                                    if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
+                                    	_locunits = [];
+                                    	if (count (units _group) > 0) then {{_locunits set [count _locunits, _x]} foreach units _group; if !(str(position (leader _group)) == "[0,0,0]") then {_groupPos = position (leader _group)}};
+                                    	if (count (units _grp2) > 0) then {{_locunits set [count _locunits, _x]} foreach units _grp2; if !(str(position (leader _grp2)) == "[0,0,0]") then {_grp2Pos = position (leader _grp2)}};
+                                        
+                                    	if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
                                                 while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
@@ -806,9 +815,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
                                         	};
                                         	_spawned = false;
-                                     };
+                                     	};
 
-                                    if ((count _locunits < 1) && (_spawned)) then {
+                                    	if ((count _locunits < 1) && (_spawned)) then {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
