@@ -6,38 +6,35 @@ class Mission
 		"cacharacters_e",
 		"ca_modules_functions",
 		"ca_missions_garbagecollector",
-		"ca_modules_clouds",
 		"ca_modules_e_weather",
-		"BI_SRRS",
 		"cba_main",
-		"camisc_e_wf",
-		"cawheeled_e_stryker",
-		"camisc3",
-		"cawheeled_e_hmmwv",
-		"CAWheeled_E",
-		"CAWheeled_E_LandRover",
-		"casigns_e",
-		"caweapons_e_ammoboxes",
-		"castructures_e_misc_misc_interier",
-		"camisc_e",
-		"CAAir_E_UH60M",
-		"CAMisc",
-		"zargabad",
-		"ace_sys_knicklicht",
-		"ace_sys_wounds",
-		"ace_sys_ruck",
-		"ace_c_weapon",
+		"ca_modules_clouds",
 		"ace_sys_repair",
 		"ace_main",
 		"ace_sys_playerhud",
+		"ace_sys_wounds",
 		"ace_sys_tracking",
-		"ca_missions_secops",
 		"ace_c_men",
-		"mcn_hazarkot",
-		"warfarebuildings",
-		"castructures_e_misc_misc_market",
+		"camisc_e_wf",
 		"acex_veh_stryker",
-		"acex_c_weapon"
+		"cawheeled_e_hmmwv",
+		"CAWheeled_E_LandRover",
+		"casigns_e",
+		"camisc3",
+		"CAAir_E_UH60M",
+		"caweapons_e_ammoboxes",
+		"CAMisc",
+		"camisc_e",
+		"CAWheeled_E_stryker",
+		"castructures_e_misc_misc_interier",
+		"castructures_e_misc_misc_market",
+		"warfarebuildings",
+		"CAWheeled_E",
+		"acex_c_weapon",
+		"ace_c_weapon",
+		"ace_sys_knicklicht",
+		"ace_sys_ruck",
+		"mcn_hazarkot"
 	};
 	addOnsAuto[]=
 	{
@@ -85,7 +82,7 @@ class Mission
 		forecastWeather=0;
 		year=2009;
 		day=29;
-		hour=6;
+		hour=3;
 	};
 	class Groups
 	{
@@ -1364,7 +1361,7 @@ class Mission
 			azimut=47.306343;
 			id=121;
 			side="EMPTY";
-			vehicle="Land_BagFenceCorner";
+			vehicle="Land_fort_bagfence_corner";
 			skill=0.60000002;
 		};
 		class Item75
@@ -1373,7 +1370,7 @@ class Mission
 			azimut=227.30641;
 			id=122;
 			side="EMPTY";
-			vehicle="Land_BagFenceCorner";
+			vehicle="Land_fort_bagfence_corner";
 			skill=0.60000002;
 		};
 		class Item76
@@ -1391,7 +1388,7 @@ class Mission
 			azimut=47.306343;
 			id=124;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -1411,7 +1408,7 @@ class Mission
 			azimut=47.306343;
 			id=126;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -1421,7 +1418,7 @@ class Mission
 			azimut=47.306343;
 			id=127;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -1431,7 +1428,7 @@ class Mission
 			azimut=137.30635;
 			id=128;
 			side="EMPTY";
-			vehicle="Land_BagFenceCorner";
+			vehicle="Land_fort_bagfence_corner";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -1441,7 +1438,7 @@ class Mission
 			azimut=47.306343;
 			id=129;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -1451,7 +1448,7 @@ class Mission
 			azimut=137.30635;
 			id=130;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -1461,7 +1458,7 @@ class Mission
 			azimut=317.30655;
 			id=131;
 			side="EMPTY";
-			vehicle="Land_BagFenceCorner";
+			vehicle="Land_fort_bagfence_corner";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -1471,7 +1468,7 @@ class Mission
 			azimut=47.306343;
 			id=132;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -1481,7 +1478,7 @@ class Mission
 			azimut=47.306343;
 			id=133;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2056,7 +2053,7 @@ class Mission
 			azimut=47.306343;
 			id=194;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2066,7 +2063,7 @@ class Mission
 			azimut=137.30635;
 			id=195;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2076,7 +2073,7 @@ class Mission
 			azimut=47.306343;
 			id=196;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2086,7 +2083,7 @@ class Mission
 			azimut=137.30635;
 			id=197;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2096,7 +2093,7 @@ class Mission
 			azimut=137.30635;
 			id=198;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -2106,7 +2103,7 @@ class Mission
 			azimut=317.30655;
 			id=199;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -2116,7 +2113,7 @@ class Mission
 			azimut=137.30635;
 			id=200;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2126,7 +2123,7 @@ class Mission
 			azimut=137.30635;
 			id=201;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -2136,7 +2133,7 @@ class Mission
 			azimut=137.30635;
 			id=202;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -2146,7 +2143,7 @@ class Mission
 			azimut=137.30635;
 			id=203;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -2175,7 +2172,7 @@ class Mission
 			azimut=47.306343;
 			id=206;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2185,7 +2182,7 @@ class Mission
 			azimut=47.306343;
 			id=207;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2195,7 +2192,7 @@ class Mission
 			azimut=47.306343;
 			id=208;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2205,7 +2202,7 @@ class Mission
 			azimut=47.306343;
 			id=209;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2215,7 +2212,7 @@ class Mission
 			azimut=47.306343;
 			id=210;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2225,7 +2222,7 @@ class Mission
 			azimut=47.306343;
 			id=211;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2271,7 +2268,7 @@ class Mission
 			azimut=47.306343;
 			id=216;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2281,7 +2278,7 @@ class Mission
 			azimut=47.306343;
 			id=217;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2398,7 +2395,7 @@ class Mission
 			azimut=137.30635;
 			id=229;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2418,7 +2415,7 @@ class Mission
 			azimut=137.30635;
 			id=231;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2428,7 +2425,7 @@ class Mission
 			azimut=137.30635;
 			id=232;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -2438,7 +2435,7 @@ class Mission
 			azimut=407.36099;
 			id=233;
 			side="EMPTY";
-			vehicle="Land_BagFenceCorner";
+			vehicle="Land_fort_bagfence_corner";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.8];";
 		};
@@ -2448,7 +2445,7 @@ class Mission
 			azimut=407.36148;
 			id=234;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.2];";
 		};
@@ -2458,7 +2455,7 @@ class Mission
 			azimut=317.36093;
 			id=235;
 			side="EMPTY";
-			vehicle="Land_BagFenceCorner";
+			vehicle="Land_fort_bagfence_corner";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.8];";
 		};
@@ -2468,7 +2465,7 @@ class Mission
 			azimut=317.36093;
 			id=236;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.8];";
 		};
@@ -2478,7 +2475,7 @@ class Mission
 			azimut=137.36079;
 			id=237;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.8];";
 		};
@@ -2664,7 +2661,7 @@ class Mission
 			azimut=47.306343;
 			id=256;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -2674,7 +2671,7 @@ class Mission
 			azimut=47.306343;
 			id=257;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -2684,7 +2681,7 @@ class Mission
 			azimut=47.306343;
 			id=258;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.2];";
 		};
@@ -2694,7 +2691,7 @@ class Mission
 			azimut=47.306343;
 			id=259;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.2];";
 		};
@@ -2704,7 +2701,7 @@ class Mission
 			azimut=47.306343;
 			id=260;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -2714,7 +2711,7 @@ class Mission
 			azimut=47.306343;
 			id=261;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -2724,7 +2721,7 @@ class Mission
 			azimut=47.306343;
 			id=262;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -2734,7 +2731,7 @@ class Mission
 			azimut=47.306343;
 			id=263;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -2744,7 +2741,7 @@ class Mission
 			azimut=137.30635;
 			id=264;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -2943,7 +2940,7 @@ class Mission
 			azimut=47.306343;
 			id=284;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -2953,7 +2950,7 @@ class Mission
 			azimut=47.306343;
 			id=285;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -2963,7 +2960,7 @@ class Mission
 			azimut=47.306343;
 			id=286;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -3466,7 +3463,7 @@ class Mission
 			azimut=137.30635;
 			id=338;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -3476,7 +3473,7 @@ class Mission
 			azimut=137.30635;
 			id=339;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -3496,7 +3493,7 @@ class Mission
 			azimut=137.30635;
 			id=341;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -3506,7 +3503,7 @@ class Mission
 			azimut=137.30635;
 			id=342;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -3516,7 +3513,7 @@ class Mission
 			azimut=137.30635;
 			id=343;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -3526,7 +3523,7 @@ class Mission
 			azimut=137.30635;
 			id=344;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -3536,7 +3533,7 @@ class Mission
 			azimut=137.30635;
 			id=345;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -3864,7 +3861,7 @@ class Mission
 			azimut=137.30635;
 			id=378;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.3];";
 		};
@@ -3874,7 +3871,7 @@ class Mission
 			azimut=137.30635;
 			id=379;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.3];";
 		};
@@ -3884,7 +3881,7 @@ class Mission
 			azimut=47.306343;
 			id=380;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.3];";
 		};
@@ -3894,7 +3891,7 @@ class Mission
 			azimut=47.306343;
 			id=381;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.3];";
 		};
@@ -4074,7 +4071,7 @@ class Mission
 			azimut=137.30635;
 			id=399;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 		};
 		class Item353
@@ -4083,7 +4080,7 @@ class Mission
 			azimut=137.30635;
 			id=400;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 		};
 		class Item354
@@ -4092,7 +4089,7 @@ class Mission
 			azimut=47.306343;
 			id=401;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 		};
 		class Item355
@@ -4101,7 +4098,7 @@ class Mission
 			azimut=47.306343;
 			id=402;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 		};
 		class Item356
@@ -4110,7 +4107,7 @@ class Mission
 			azimut=47.306343;
 			id=403;
 			side="EMPTY";
-			vehicle="Land_BagFenceCorner";
+			vehicle="Land_fort_bagfence_corner";
 			skill=0.60000002;
 		};
 		class Item357
@@ -5199,7 +5196,7 @@ class Mission
 			azimut=47.306343;
 			id=514;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -5209,7 +5206,7 @@ class Mission
 			azimut=47.306343;
 			id=515;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.2];";
 		};
@@ -5219,7 +5216,7 @@ class Mission
 			azimut=47.306343;
 			id=516;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.2];";
 		};
@@ -5299,7 +5296,7 @@ class Mission
 			azimut=47.306343;
 			id=524;
 			side="EMPTY";
-			vehicle="Land_BagFenceCorner";
+			vehicle="Land_fort_bagfence_corner";
 			skill=0.60000002;
 		};
 		class Item478
@@ -5308,7 +5305,7 @@ class Mission
 			azimut=227.30641;
 			id=525;
 			side="EMPTY";
-			vehicle="Land_BagFenceCorner";
+			vehicle="Land_fort_bagfence_corner";
 			skill=0.60000002;
 		};
 		class Item479
@@ -5408,7 +5405,7 @@ class Mission
 			azimut=137.30635;
 			id=535;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -5620,7 +5617,7 @@ class Mission
 			azimut=47.306343;
 			id=557;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -5630,7 +5627,7 @@ class Mission
 			azimut=47.306343;
 			id=558;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -5640,7 +5637,7 @@ class Mission
 			azimut=47.306343;
 			id=559;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -5650,7 +5647,7 @@ class Mission
 			azimut=47.306343;
 			id=560;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -5790,7 +5787,7 @@ class Mission
 			azimut=317.12491;
 			id=575;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -5800,7 +5797,7 @@ class Mission
 			azimut=317.12491;
 			id=576;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -5810,7 +5807,7 @@ class Mission
 			azimut=317.12491;
 			id=577;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -5820,7 +5817,7 @@ class Mission
 			azimut=227.1248;
 			id=578;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -5830,7 +5827,7 @@ class Mission
 			azimut=227.1248;
 			id=579;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -6320,7 +6317,7 @@ class Mission
 			azimut=317.12491;
 			id=628;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -6330,7 +6327,7 @@ class Mission
 			azimut=317.12491;
 			id=629;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -6340,7 +6337,7 @@ class Mission
 			azimut=317.12491;
 			id=630;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -6350,7 +6347,7 @@ class Mission
 			azimut=317.12491;
 			id=631;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -6360,7 +6357,7 @@ class Mission
 			azimut=317.12491;
 			id=632;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -6370,7 +6367,7 @@ class Mission
 			azimut=317.12491;
 			id=633;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -6380,7 +6377,7 @@ class Mission
 			azimut=227.1248;
 			id=634;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -6390,7 +6387,7 @@ class Mission
 			azimut=227.1248;
 			id=635;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -6820,7 +6817,7 @@ class Mission
 			azimut=227.1248;
 			id=678;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8131,7 +8128,7 @@ class Mission
 			azimut=227.1248;
 			id=809;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8141,7 +8138,7 @@ class Mission
 			azimut=227.1248;
 			id=810;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8151,7 +8148,7 @@ class Mission
 			azimut=227.1248;
 			id=811;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8161,7 +8158,7 @@ class Mission
 			azimut=227.1248;
 			id=812;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8171,7 +8168,7 @@ class Mission
 			azimut=227.1248;
 			id=813;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8181,7 +8178,7 @@ class Mission
 			azimut=227.1248;
 			id=814;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8191,7 +8188,7 @@ class Mission
 			azimut=137.12492;
 			id=815;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8201,7 +8198,7 @@ class Mission
 			azimut=137.12492;
 			id=816;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8211,7 +8208,7 @@ class Mission
 			azimut=137.12492;
 			id=817;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8221,7 +8218,7 @@ class Mission
 			azimut=137.12492;
 			id=818;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8231,7 +8228,7 @@ class Mission
 			azimut=137.12492;
 			id=819;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8241,7 +8238,7 @@ class Mission
 			azimut=137.12492;
 			id=820;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8251,7 +8248,7 @@ class Mission
 			azimut=137.12492;
 			id=821;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8261,7 +8258,7 @@ class Mission
 			azimut=137.12492;
 			id=822;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8271,7 +8268,7 @@ class Mission
 			azimut=137.12492;
 			id=823;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8281,7 +8278,7 @@ class Mission
 			azimut=227.1248;
 			id=824;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8291,7 +8288,7 @@ class Mission
 			azimut=227.1248;
 			id=825;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8301,7 +8298,7 @@ class Mission
 			azimut=227.1248;
 			id=826;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8311,7 +8308,7 @@ class Mission
 			azimut=227.1248;
 			id=827;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8321,7 +8318,7 @@ class Mission
 			azimut=227.1248;
 			id=828;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8331,7 +8328,7 @@ class Mission
 			azimut=227.1248;
 			id=829;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8341,7 +8338,7 @@ class Mission
 			azimut=227.1248;
 			id=830;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, -0.6]; ";
 		};
@@ -8351,7 +8348,7 @@ class Mission
 			azimut=137.29848;
 			id=831;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8371,7 +8368,7 @@ class Mission
 			azimut=137.29848;
 			id=833;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8381,7 +8378,7 @@ class Mission
 			azimut=137.29848;
 			id=834;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8409,7 +8406,7 @@ class Mission
 			azimut=137.29848;
 			id=837;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8419,7 +8416,7 @@ class Mission
 			azimut=137.29848;
 			id=838;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8429,7 +8426,7 @@ class Mission
 			azimut=137.29848;
 			id=839;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8439,7 +8436,7 @@ class Mission
 			azimut=137.29848;
 			id=840;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8449,7 +8446,7 @@ class Mission
 			azimut=137.29848;
 			id=841;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8477,7 +8474,7 @@ class Mission
 			azimut=137.29848;
 			id=844;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8707,7 +8704,7 @@ class Mission
 			azimut=47.306343;
 			id=868;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -8717,7 +8714,7 @@ class Mission
 			azimut=47.306343;
 			id=869;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -8727,7 +8724,7 @@ class Mission
 			azimut=47.306343;
 			id=870;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.18];";
 		};
@@ -8838,7 +8835,7 @@ class Mission
 			azimut=-42.814102;
 			id=882;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8876,7 +8873,7 @@ class Mission
 			azimut=-42.814102;
 			id=886;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8886,7 +8883,7 @@ class Mission
 			azimut=-42.814102;
 			id=887;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8896,7 +8893,7 @@ class Mission
 			azimut=-42.814102;
 			id=888;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8934,7 +8931,7 @@ class Mission
 			azimut=-42.814102;
 			id=892;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -8944,7 +8941,7 @@ class Mission
 			azimut=-42.814102;
 			id=893;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9475,7 +9472,7 @@ class Mission
 			azimut=137.29848;
 			id=947;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9495,7 +9492,7 @@ class Mission
 			azimut=137.29848;
 			id=949;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9505,7 +9502,7 @@ class Mission
 			azimut=137.29848;
 			id=950;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9533,7 +9530,7 @@ class Mission
 			azimut=137.29848;
 			id=953;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9543,7 +9540,7 @@ class Mission
 			azimut=137.29848;
 			id=954;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9553,7 +9550,7 @@ class Mission
 			azimut=137.29848;
 			id=955;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9563,7 +9560,7 @@ class Mission
 			azimut=137.29848;
 			id=956;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9573,7 +9570,7 @@ class Mission
 			azimut=137.29848;
 			id=957;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9601,7 +9598,7 @@ class Mission
 			azimut=137.29848;
 			id=960;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9641,7 +9638,7 @@ class Mission
 			azimut=407.0593;
 			id=964;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9651,7 +9648,7 @@ class Mission
 			azimut=317.05933;
 			id=965;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9670,7 +9667,7 @@ class Mission
 			azimut=317.05933;
 			id=967;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9680,7 +9677,7 @@ class Mission
 			azimut=317.05933;
 			id=968;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9699,7 +9696,7 @@ class Mission
 			azimut=407.0593;
 			id=970;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9791,7 +9788,7 @@ class Mission
 			azimut=407.0593;
 			id=979;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9801,7 +9798,7 @@ class Mission
 			azimut=407.0593;
 			id=980;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9820,7 +9817,7 @@ class Mission
 			azimut=137.29848;
 			id=982;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9830,7 +9827,7 @@ class Mission
 			azimut=137.29848;
 			id=983;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9840,7 +9837,7 @@ class Mission
 			azimut=317.05933;
 			id=984;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
@@ -9850,7 +9847,7 @@ class Mission
 			azimut=137.30635;
 			id=985;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -9910,7 +9907,7 @@ class Mission
 			azimut=137.30635;
 			id=991;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -9920,7 +9917,7 @@ class Mission
 			azimut=137.30635;
 			id=992;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -9930,7 +9927,7 @@ class Mission
 			azimut=137.30635;
 			id=993;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -9940,7 +9937,7 @@ class Mission
 			azimut=137.30635;
 			id=994;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -9950,7 +9947,7 @@ class Mission
 			azimut=137.30635;
 			id=995;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -10028,7 +10025,7 @@ class Mission
 			azimut=137.30635;
 			id=1003;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -10058,7 +10055,7 @@ class Mission
 			azimut=137.30635;
 			id=1006;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 2.78];";
 		};
@@ -10097,7 +10094,7 @@ class Mission
 			azimut=137.30635;
 			id=1010;
 			side="EMPTY";
-			vehicle="Land_BagFenceLong";
+			vehicle="Land_fort_bagfence_long";
 			skill=0.60000002;
 			init="this setpos [(getpos this) select 0, (getpos this) select 1, 1.35];";
 		};
