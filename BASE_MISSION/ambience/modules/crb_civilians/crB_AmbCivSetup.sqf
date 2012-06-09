@@ -45,12 +45,14 @@ switch toLower(worldName) do {
         };        
         case "eden": {                
                 BIS_alice_mainscope setvariable ["trafficDistance",700];                
-                BIS_alice_mainscope setvariable ["spawnDistance",350];                
+                BIS_alice_mainscope setvariable ["spawnDistance",600];                
+		BIS_alice_mainscope setvariable ["ALICE_townsize",600];
                 BIS_alice_mainscope setVariable ["townsFaction",["cwr2_civ","CIV","CIV_RU"]];                
         };
         case "fallujah": {                
                 BIS_alice_mainscope setvariable ["trafficDistance",600];      
-                BIS_alice_mainscope setvariable ["spawnDistance",250];      
+                BIS_alice_mainscope setvariable ["spawnDistance",400];      
+		BIS_alice_mainscope setvariable ["ALICE_townsize",400];
                 BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
 	};  
         case "mcn_hazarkot": {
@@ -63,11 +65,13 @@ switch toLower(worldName) do {
         case "isladuala": {      
                 BIS_alice_mainscope setvariable ["trafficDistance",1000];             
                 BIS_alice_mainscope setvariable ["spawnDistance",700];            
+		BIS_alice_mainscope setvariable ["ALICE_townsize",700];
                 BIS_alice_mainscope setVariable ["civilianCount","round (5 * (sqrt %1))"];   
         };       
         case "lingor": { 
                 BIS_alice_mainscope setvariable ["trafficDistance", 500];
                 BIS_alice_mainscope setvariable ["spawnDistance", 400]; 
+		BIS_alice_mainscope setvariable ["ALICE_townsize",400];
                 BIS_alice_mainscope setVariable ["townsFaction", ["CIV_LGR"]]; 
                 BIS_alice_mainscope setVariable ["civilianCount", "round (1.5 * (sqrt %1))"]; 
         }; 
@@ -82,6 +86,7 @@ switch toLower(worldName) do {
         case "torabora": {       
                 BIS_alice_mainscope setvariable ["trafficDistance",1500];       
                 BIS_alice_mainscope setvariable ["spawnDistance",600];        
+		BIS_alice_mainscope setvariable ["ALICE_townsize",600];
                 BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];  
         };
         case "utes": {        
@@ -94,6 +99,7 @@ switch toLower(worldName) do {
         case "zargabad": { 
                 BIS_alice_mainscope setvariable ["trafficDistance",750];      
                 BIS_alice_mainscope setvariable ["spawnDistance",600];      
+		BIS_alice_mainscope setvariable ["ALICE_townsize",600];
                 BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"];   
                 // Add some rare english speaking civilians to the mix            
                 BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];  
@@ -102,6 +108,7 @@ switch toLower(worldName) do {
         case "mbg_celle2": {
             	BIS_alice_mainscope setvariable ["trafficDistance",1000];                
                 BIS_alice_mainscope setvariable ["spawnDistance",700];                
+		BIS_alice_mainscope setvariable ["ALICE_townsize",700];
                 BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];                
 		BIS_alice_mainscope setVariable ["civilianCount","round (1.5 * (sqrt %1))"]; 
         };
