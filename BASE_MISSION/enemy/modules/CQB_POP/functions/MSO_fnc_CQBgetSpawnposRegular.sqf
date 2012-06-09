@@ -4,6 +4,7 @@ _spawnhouses = _this select 0;
 
 _base1 = markerpos "ammo_1";
 _base2 = markerpos "ammo";
+if ((str(_base1) == "[0,0,0]") && (str(_base2) == "[0,0,0]")) then {_base1 = markerpos "respawn_west"};
 if (isnil "rmm_ep_safe_zone") then {rmm_ep_safe_zone = 1000};
 
 _positions = [];

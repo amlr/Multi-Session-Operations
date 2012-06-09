@@ -11,9 +11,7 @@ switch (CQBaicap) do {
     case 5: {CQB_AUTO = true; CQBaiBroadcast = false};
 	default {CQBaicap = 15; CQBaiBroadcast = false};
 };
-
 if (isnil "CQBmaxgrps") then {CQBmaxgrps = 50};
-
 _debug = debug_mso;
 
 diag_log format["MSO-%1 CQB Population: starting to load functions...", time];
@@ -36,7 +34,8 @@ if (isnil "CQB_GCS") then {CQB_GCS = compile preprocessFileLineNumbers "enemy\mo
 diag_log format["MSO-%1 CQB Population: loaded functions...", time];
 
 if (isServer) then {
-_spawnhouses = [markerpos "ammo_1",CRB_LOC_DIST] call MSO_fnc_getEnterableHouses;
+_center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
+_spawnhouses = [_center,CRB_LOC_DIST] call MSO_fnc_getEnterableHouses;
 CQBpositionsStrat = [_spawnhouses] call MSO_fnc_CQBgetSpawnposStrategic;
 CQBpositionsReg = [_spawnhouses] call MSO_fnc_CQBgetSpawnposRegular;
 

@@ -1,16 +1,18 @@
 if (isdedicated) exitwith {};
 
+/*
 LDL_init = compile preprocessFileLineNumbers "support\modules\rmm_cas\LDL_ac130\LDL_init.sqf";
 []spawn LDL_init;	
 waitUntil {!isNil "LDL_initDone"};
 waitUntil {LDL_initDone};
+*/
 
 RMM_cas_types = [
 	"A10",
 	"AH64D",
-	"AH1Z",
-	"C130J",
-	"MQ9PredatorB"
+	"AH1Z"
+	//"C130J",
+	//"MQ9PredatorB"
 ];
 RMM_cas_lines = [
 	{[mapGridPosition player]},
