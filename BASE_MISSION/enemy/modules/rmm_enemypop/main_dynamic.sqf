@@ -273,7 +273,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                                 
                                 [_pos, _flag, _type] spawn {
-                                        private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2"];
+                                        private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2","_breakouttimer"];
                                         _pos = _this select 0;
                                         _flag = _this select 1;
                                         _type = _this select 2;
@@ -288,6 +288,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;
                                         _groupPos = nil;
                                         _grp2Pos = nil;
+                                        _breakouttimer = 0;
                                                                                                                         
                                         if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                         while {!(_cleared)} do {
@@ -339,21 +340,24 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                      		if (count (units _grp2) > 0) then {{_locunits set [count _locunits, _x]} foreach units _grp2; if !(str(position (leader _grp2)) == "[0,0,0]") then {_grp2Pos = position (leader _grp2)}};
                                         
                                     		if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
-                                        		if !(isnil "_group") then {
-                                                	ep_groups = ep_groups - [_group];
-                                                	while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
-                                            		{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
-                                            		deletegroup _group;
-                                                	if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
-                                        		};
-                                        		if !(isnil "_grp2") then {
-                                                	ep_groups = ep_groups - [_grp2];
-                                                	while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
-                                            		{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
-                                            		deletegroup _grp2;
-                                                	if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
-                                        		};
-                                        		_spawned = false;
+                                        		if (_breakouttimer > 20) then {
+                                                	if !(isnil "_group") then {
+                                                		ep_groups = ep_groups - [_group];
+                                                		while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
+                                            			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
+                                            			deletegroup _group;
+                                                		if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
+                                        			};
+                                        			if !(isnil "_grp2") then {
+                                                		ep_groups = ep_groups - [_grp2];
+                                                		while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
+                                            			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
+                                            			deletegroup _grp2;
+                                                		if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
+                                        			};
+                                                    _breakouttimer = 0;
+                                        			_spawned = false;
+                                            	} else {_breakouttimer = _breakouttimer + 3};
                                      		};
 
                                     		if ((count _locunits < 1) && (_spawned)) then {
@@ -422,7 +426,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 							_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 
 							[_pos, _flag, _type] spawn {
-									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2"];
+									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2","_breakouttimer"];
                                     _pos = _this select 0;
 									_pos = _this select 0;
 									_flag = _this select 1;
@@ -438,6 +442,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;
                                     _groupPos = nil;
                                     _grp2Pos = nil;
+                                    _breakouttimer = 0;
                                               
 									if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                     while {!(_cleared)} do {
@@ -489,21 +494,24 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                      	if (count (units _grp2) > 0) then {{_locunits set [count _locunits, _x]} foreach units _grp2; if !(str(position (leader _grp2)) == "[0,0,0]") then {_grp2Pos = position (leader _grp2)}};
                                     
                                     	if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
-                                        	if !(isnil "_group") then {
-                                                ep_groups = ep_groups - [_group];
-                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
-                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
-                                            	deletegroup _group;
-                                                if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
-                                        	};
-                                        	if !(isnil "_grp2") then {
-                                                ep_groups = ep_groups - [_grp2];
-                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
-                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
-                                            	deletegroup _grp2;
-                                                if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
-                                        	};
-                                        	_spawned = false;
+                                        		if (_breakouttimer > 20) then {
+                                                	if !(isnil "_group") then {
+                                                		ep_groups = ep_groups - [_group];
+                                                		while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
+                                            			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
+                                            			deletegroup _group;
+                                                		if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
+                                        			};
+                                        			if !(isnil "_grp2") then {
+                                                		ep_groups = ep_groups - [_grp2];
+                                                		while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
+                                            			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
+                                            			deletegroup _grp2;
+                                                		if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
+                                        			};
+                                                    _breakouttimer = 0;
+                                        			_spawned = false;
+                                            	} else {_breakouttimer = _breakouttimer + 3};
                                      	};
 
                                     	if ((count _locunits < 1) && (_spawned)) then {
@@ -580,7 +588,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 							_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 							
 							[_pos, _flag, _type] spawn {
-									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_RBspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2"];
+									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_RBspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2","_breakouttimer"];
 									_pos = _this select 0;
 									_flag = _this select 1;
 									_type= _this select 2;
@@ -595,6 +603,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;
                                     _groupPos = nil;
                                     _grp2Pos = nil;
+                                    _breakouttimer = 0;
   
                                     if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                     while {!(_cleared)} do {
@@ -653,22 +662,25 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                      	if (count (units _group) > 0) then {{_locunits set [count _locunits, _x]} foreach units _group; if !(str(position (leader _group)) == "[0,0,0]") then {_groupPos = position (leader _group)}};
                                      	if (count (units _grp2) > 0) then {{_locunits set [count _locunits, _x]} foreach units _grp2; if !(str(position (leader _grp2)) == "[0,0,0]") then {_grp2Pos = position (leader _grp2)}};
                                         
-                                        if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
-                                        	if !(isnil "_group") then {
-                                                ep_groups = ep_groups - [_group];
-                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
-                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
-                                            	deletegroup _group;
-                                                if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
-                                        	};
-                                        	if !(isnil "_grp2") then {
-                                                ep_groups = ep_groups - [_grp2];
-                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
-                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
-                                            	deletegroup _grp2;
-                                                if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
-                                        	};
-                                        	_spawned = false;
+                                    	if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
+                                        		if (_breakouttimer > 20) then {
+                                                	if !(isnil "_group") then {
+                                                		ep_groups = ep_groups - [_group];
+                                                		while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
+                                            			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
+                                            			deletegroup _group;
+                                                		if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
+                                        			};
+                                        			if !(isnil "_grp2") then {
+                                                		ep_groups = ep_groups - [_grp2];
+                                                		while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
+                                            			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
+                                            			deletegroup _grp2;
+                                                		if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
+                                        			};
+                                                    _breakouttimer = 0;
+                                        			_spawned = false;
+                                            	} else {_breakouttimer = _breakouttimer + 3};
                                      	};
 
                                     	if ((count _locunits < 1) && (_spawned)) then {
@@ -743,7 +755,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 							_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 							
 							[_pos, _flag, _type] spawn {
-									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2"];
+									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2","_breakouttimer"];
 									_pos = _this select 0;
 									_flag = _this select 1;
 									_type= _this select 2;
@@ -756,7 +768,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     _grouparray = [_type] call MSO_fnc_getrandomgrouptype;
                                     _grp2array = ["Infantry"] call MSO_fnc_getrandomgrouptype;
                                     _groupPos = nil;
-                                    _grp2Pos = nil;                                    
+                                    _grp2Pos = nil;
+                                    _breakouttimer = 0;                                    
                                                 
                                     if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
                                     while {!(_cleared)} do {
@@ -800,21 +813,24 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     	if (count (units _grp2) > 0) then {{_locunits set [count _locunits, _x]} foreach units _grp2; if !(str(position (leader _grp2)) == "[0,0,0]") then {_grp2Pos = position (leader _grp2)}};
                                         
                                     	if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
-                                        	if !(isnil "_group") then {
-                                                ep_groups = ep_groups - [_group];
-                                                while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
-                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
-                                            	deletegroup _group;
-                                                if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
-                                        	};
-                                        	if !(isnil "_grp2") then {
-                                                ep_groups = ep_groups - [_grp2];
-                                                while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
-                                            	{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
-                                            	deletegroup _grp2;
-                                                if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
-                                        	};
-                                        	_spawned = false;
+                                        		if (_breakouttimer > 20) then {
+                                                	if !(isnil "_group") then {
+                                                		ep_groups = ep_groups - [_group];
+                                                		while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
+                                            			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
+                                            			deletegroup _group;
+                                                		if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
+                                        			};
+                                        			if !(isnil "_grp2") then {
+                                                		ep_groups = ep_groups - [_grp2];
+                                                		while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
+                                            			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
+                                            			deletegroup _grp2;
+                                                		if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
+                                        			};
+                                                    _breakouttimer = 0;
+                                        			_spawned = false;
+                                            	} else {_breakouttimer = _breakouttimer + 3};
                                      	};
 
                                     	if ((count _locunits < 1) && (_spawned)) then {
