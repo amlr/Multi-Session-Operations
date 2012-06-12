@@ -305,19 +305,19 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         		_group setFormation "STAG COLUMN";
                                                 
                                         		if(_flag >= ep_campprob || count units _group <= 2) then {
-                                                	[_group,_group,800,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                                	[_group,_pos2,800,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
                                         		};
                                         		if(_flag < ep_campprob && _type == "Infantry") then {
                                                 	leader _group setPos _pos;
                                                 	[_group] call BIN_fnc_taskDefend;
                                         		};
                                         		if(_flag < ep_campprob && _type != "Infantry") then {
-                                                	[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-                                                	if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
+                                                	[_group,_pos2,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                                	//if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
                                                     _grp2 = grpNull;
                                                 	while{count units _grp2 <= 2} do {
                                                         {deleteVehicle _x} count units _grp2;
-                                                        _grp2 = [_posGrp2, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
+                                                        _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
                                                 	};
                                                 	if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _posGrp2, _grp2];};
                                                 	[_grp2] call BIN_fnc_taskDefend;
@@ -455,19 +455,19 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											_group setSpeedMode "LIMITED";
 											_group setFormation "DIAMOND";
 											if(_flag >= ep_campprob || count units _group <= 2) then {
-												[_group,_group,800,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [240,400,560]] call CBA_fnc_taskPatrol;
+												[_group,_pos2,800,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [240,400,560]] call CBA_fnc_taskPatrol;
 											};
 											if(_flag < ep_campprob && _type == "Infantry") then {
 												leader _group setPos _pos;
 												[_group] call BIN_fnc_taskDefend;
 											};
 											if(_flag < ep_campprob && _type != "Infantry") then {
-												[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-                                                if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
+												[_group,_pos2,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                                //if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
                                                 _grp2 = grpNull;
                                                 while{count units _grp2 <= 2} do {
                                                 	{deleteVehicle _x} count units _grp2;
-                                                    _grp2 = [_posGrp2, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
+                                                    _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
                                                 };
                                             	if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _posGrp2, _grp2];};
 												[_grp2] call BIN_fnc_taskDefend;
@@ -617,7 +617,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 													};
 													[leader _group, 500, true, 240 + random 360] execVM "support\scripts\crb_scripts\crB_HousePos.sqf";	
 													} else {
-													[_group,_group,400,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [360,520,680]] call CBA_fnc_taskPatrol;
+													[_group,_pos2,400,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [360,520,680]] call CBA_fnc_taskPatrol;
 												};  
 											};
 											if(_flag < ep_campprob && _type == "Infantry") then {
@@ -625,12 +625,12 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 												[_group] call BIN_fnc_taskDefend;
 											};
 											if(_flag < ep_campprob && _type != "Infantry") then {
-												[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-                                                if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
+												[_group,_pos2,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                                //if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
                                                 _grp2 = grpNull;
                                                 while{count units _grp2 <= 2} do {
                                                 	{deleteVehicle _x} count units _grp2;
-                                                    _grp2 = [_posGrp2, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
+                                                    _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
                                                 };
 												[_grp2] call BIN_fnc_taskDefend;
                                             	if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
@@ -773,19 +773,19 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											_group setSpeedMode "LIMITED";
 											_group setFormation "DIAMOND";
 											if(_flag >= ep_campprob || count units _group <= 2) then {
-												[_group,_group,100,4 + random 4, "MOVE", "STEALTH", "RED", "LIMITED", "DIAMOND", "", [480,800,1120]] call CBA_fnc_taskPatrol;
+												[_group,_pos2,100,4 + random 4, "MOVE", "STEALTH", "RED", "LIMITED", "DIAMOND", "", [480,800,1120]] call CBA_fnc_taskPatrol;
 											};
 											if(_flag < ep_campprob && _type == "Infantry") then {
 												leader _group setPos _pos;
 												[_group] call BIN_fnc_taskDefend;
 											};
 											if(_flag < ep_campprob && _type != "Infantry") then {
-												[_group,_group,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-                                           		if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
+												[_group,_pos2,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                           		//if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
                                             	_grp2 = grpNull;
                                            		while{count units _grp2 <= 2} do {
                                             		{deleteVehicle _x} count units _grp2;
-                                                	_grp2 = [_posGrp2, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
+                                                	_grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
                                             	};
 												[_grp2] call BIN_fnc_taskDefend;
                                             	if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
