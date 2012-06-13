@@ -126,7 +126,7 @@ switch toLower(worldName) do {
                 [] call _initNeighbors;
         };
         case "utes": {
-                {createLocation ["BorderCrossing",_x,1,1]} foreach [[2526.3879,3821.8804,0],[4024.5266,3116.47,0],[4471.8779,3149.2815,0],[3802.4563,4043.1611,0],[3502.8076,4173.7505,0],[3282.2849,4579.8604,0],[4424.123,3572.8301,0]];
+                //{createLocation ["BorderCrossing",_x,1,1]} foreach [[2526.3879,3821.8804,0],[4024.5266,3116.47,0],[4471.8779,3149.2815,0],[3802.4563,4043.1611,0],[3502.8076,4173.7505,0],[3282.2849,4579.8604,0],[4424.123,3572.8301,0]];
                 {(createVehicle ["HeliHCivil", (_x select 0), [],0,'NONE']) setDir (_x select 1);} foreach [[[3518.45,3541.0518], 0]];
                 {_twn = (group bis_functions_mainscope) createUnit ["LOGIC", (_x select 0), [], 0, "NONE"]; _twn setVariable ["name", (_x select 1)]; _twn setVariable ["demography", (_x select 2)]; [[_twn]] call BIS_fnc_locations;} foreach [
                         [[2526,3821,0], "Lighthouse", ["CIV",0,"CIV_RU",1]],
