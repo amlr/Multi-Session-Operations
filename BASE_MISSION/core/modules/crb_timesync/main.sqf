@@ -2,15 +2,6 @@ private ["_currentDate"];
 
 waitUntil{!isNil "bis_fnc_init"};
 
-if (timeSync == 3) exitwith {
-    if (isnil "timeSeasons") then {timeSeasons = 6};
-    if (isnil "timeHour") then {timeHour = 12};
-    if (isnil "timeMinute") then {timeMinute = 00};
-
-    setdate [2012,timeSeasons,28,timeHour,timeMinute];
-    diag_log format["MSO-%1 Time Sync off: Date %2", time, date];
-};
-
 CRB_timeSync = {
         private ["_timeSync","_update","_sdate","_cdate","_syr","_smt","_sdy","_shr","_smn","_cyr","_cmt","_cdy","_chr","_cmn"];
         _sdate = _this;
@@ -115,23 +106,25 @@ if (isserver) then {
                         setDate _currentDate;
                 };
         };
-        
-        timeSync spawn {
-                private ["_delay"];
-                _delay = 1;
-                CRB_TIME = date;
-                publicvariable "CRB_TIME";
-                waitUntil{
-                        CRB_TIME = date;
-                        publicvariable "CRB_TIME";
-                        sleep _delay;
-                        false;
-                };
+
+	// Time sync off
+	if (timeSync == 3) then {
+	    diag_log format["MSO-%1 Time Sync off: Date %2", time, date];
+	} else {       
+	        timeSync spawn {
+        	        private ["_delay"];
+                	_delay = 1;
+                	waitUntil{
+                        	CRB_TIME = date;
+	                        publicvariable "CRB_TIME";
+        	                sleep _delay;
+                	        false;
+	                };
+        	};
         };
-        
 };
 
-if(!isDedicated) then {
+if(!isDedicated && timeSync != 3) then {
         "CRB_TIME" addPublicVariableEventHandler {CRB_TIME call CRB_timeSync;};
         
         waitUntil{!isNil "CRB_TIME"};
