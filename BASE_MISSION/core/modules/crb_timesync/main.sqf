@@ -2,6 +2,15 @@ private ["_currentDate"];
 
 waitUntil{!isNil "bis_fnc_init"};
 
+if (timeSync == 3) exitwith {
+    if (isnil "timeSeasons") then {timeSeasons = 6};
+    if (isnil "timeHour") then {timeHour = 12};
+    if (isnil "timeMinute") then {timeMinute = 00};
+
+    setdate [2012,timeSeasons,28,timeHour,timeMinute];
+    diag_log format["MSO-%1 Time Sync off: Date %2", time, date];
+};
+
 CRB_timeSync = {
         private ["_timeSync","_update","_sdate","_cdate","_syr","_smt","_sdy","_shr","_smn","_cyr","_cmt","_cdy","_chr","_cmn"];
         _sdate = _this;

@@ -1,8 +1,8 @@
 class timeSync {
         title = "CRB Time Sync Check";
-        values[] = {0,1,2};
-        texts[] = {"Monitor", "skipTime", "setDate"};
-        default = 2;
+        values[] = {0,1,2,3};
+        texts[] = {"Monitor", "skipTime", "setDate","No sync"};
+        default = 3;
 };
 
 class timeOptions {

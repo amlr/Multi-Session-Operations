@@ -1,4 +1,4 @@
-//#define CRB_TIMESYNC
+#define CRB_TIMESYNC
 #define DRN_WEATHER
 #define RMM_DEBUG
 #define RMM_HELP
