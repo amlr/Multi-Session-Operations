@@ -25,6 +25,7 @@ if(isNil "rmm_ep_aa")then{rmm_ep_aa = 2;};
 if(rmm_ep_intensity == 0) exitWith{diag_log format ["MSO-%1 Enemy Populator Disabled - Exiting.",time];};
 
 ep_groups = [];
+ep_locations = [];
 ep_total = 0;
 ep_campprob = 0.25;
 
@@ -266,6 +267,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                                 //_pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
                                                 _pos = [_pos,200,0.15,5] call rmm_ep_getFlatArea; 
                                                 [_camp, [_pos, position _loc] call BIS_fnc_dirTo, _pos] call f_builder;
+                                                ep_locations set [count ep_locations,["Camp",_pos]];
                                                 if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
                                         };
                                 };
@@ -273,14 +275,17 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                                 
                                 [_pos, _flag, _type] spawn {
-                                        private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2","_breakouttimer"];
+                                        private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2","_breakouttimer","_AAflag","_idx"];
                                         _pos = _this select 0;
                                         _flag = _this select 1;
                                         _type = _this select 2;
                                         _debug = debug_mso;
                                         _cleared = false;
-                                        _AAspawned = false;
                                         _spawned = false;
+                                        _AAspawned = false;
+                                        _AAflag = false;
+                                        if ((random 1 > 0.5) || _debug) then {_AAflag = true; ep_locations set [count ep_locations,["AA",_pos]];};
+                                        ep_locations set [count ep_locations,[_type,_pos]];
                                         
                                         waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
                                         
@@ -326,11 +331,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         		};
                                                 
                                         		// Check to see if Enemy sets up AA site
-                                        		if !(_AAspawned) then {
+                                        		if (_AAflag && !(_AAspawned)) then {
                                             		_AAspawned = true;
-                                        			if ((random 1 > 0.5) || _debug) then {
-                                                		[_pos, "static", 1 + random 1] execVM "enemy\scripts\TUP_spawnAA.sqf";
-                                        			};
+                                                	[_pos, "static", 1 + random 1] execVM "enemy\scripts\TUP_spawnAA.sqf";
                                         		};
                                         		ep_groups set [count ep_groups, _group];
                                         	};
@@ -376,6 +379,13 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             		deletegroup _grp2;
                                                 	if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
                                         		};
+                                                
+                                            	_idx = [ep_locations, [_type,_pos]] call BIS_fnc_arrayFindDeep;
+                                            	if (typename _idx == "ARRAY") then {
+    									    		_idx = _idx select 0;
+    												ep_locations set [_idx, ">REMOVE<"];
+    												ep_locations = ep_locations - [">REMOVE<"];
+                                            	};
                                         		_spawned = false;
                                         		_cleared = true;
                                         	};
@@ -420,21 +430,24 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 									//_pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
 									_pos = [_pos,500,0.15,5] call rmm_ep_getFlatArea;
 									[_camp, [_pos, position _loc] call BIS_fnc_dirTo, _pos] call f_builder;
+                                    ep_locations set [count ep_locations,["Camp",_pos]];
 									if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
 							};
 							
 							_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 
 							[_pos, _flag, _type] spawn {
-									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2","_breakouttimer"];
+									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_AAspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2","_breakouttimer","_AAflag","_idx"];
                                     _pos = _this select 0;
 									_pos = _this select 0;
 									_flag = _this select 1;
 									_type = _this select 2;
 									_debug = debug_mso;
                                     _cleared = false;
-                                    _AAspawned = false;
                                      _spawned = false;
+                                     _AAspawned = false;
+                                     if ((random 1 > 0.5) || _debug) then {_AAflag = true; ep_locations set [count ep_locations,["AA",_pos]];};
+                                     ep_locations set [count ep_locations,[_type,_pos]];
                                      
                                     waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
                                     
@@ -479,12 +492,10 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 												ep_groups set [count ep_groups, _grp2];
 											};
 											// Check to see if Enemy sets up AA defense
-                                    		if !(_AAspawned) then {
-                                        		_AAspawned = true;
-												if ((random 1 > 0.6) || _debug) then {
-													[_pos, "mixed", 1 + random 2] execVM "enemy\scripts\TUP_spawnAA.sqf";
-												};
-                                    		};
+                                        	if (_AAflag && !(_AAspawned)) then {
+                                            		_AAspawned = true;
+                                                	[_pos, "static", 1 + random 1] execVM "enemy\scripts\TUP_spawnAA.sqf";
+                                        	};
                                     
 											ep_groups set [count ep_groups, _group];
                                     	};
@@ -530,6 +541,14 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
                                         	};
+                                            
+                                            _idx = [ep_locations, [_type,_pos]] call BIS_fnc_arrayFindDeep;
+                                            if (typename _idx == "ARRAY") then {
+    									    	_idx = _idx select 0;
+    											ep_locations set [_idx, ">REMOVE<"];
+    											ep_locations = ep_locations - [">REMOVE<"];
+                                            };
+                                            
                                         	_spawned = false;
                                         	_cleared = true;
                                         };
@@ -581,6 +600,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											//_pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
 											_pos = [_pos,300,0.15,5] call rmm_ep_getFlatArea;
 											[_camp, [_pos, position _loc] call BIS_fnc_dirTo, _pos] call f_builder;
+                                            ep_locations set [count ep_locations,["Camp",_pos]];
 											if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
 									};
 							};
@@ -588,7 +608,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 							_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 							
 							[_pos, _flag, _type] spawn {
-									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_RBspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2","_breakouttimer"];
+									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_RBspawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2","_breakouttimer","_RBspawned","_RBflag","_idx"];
 									_pos = _this select 0;
 									_flag = _this select 1;
 									_type= _this select 2;
@@ -596,6 +616,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     _cleared = false;
                                     _RBspawned = false;
                                     _spawned = false;
+                                    _RBflag = false;
+                                    if (((random 1 > 0.5) && (count (_pos nearRoads 500) > 0)) ) then {_RBflag = true;};
+                                    ep_locations set [count ep_locations,[_type,_pos]];
                                     
                                     waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
  
@@ -646,14 +669,13 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 												ep_groups set [count ep_groups, _grp2];
 											};
 											// Check to see if Enemy sets up roadblock
-                                    		if !(_RBspawned) then {
+                                    		if (!(_RBspawned) && _RBflag) then {
                                     			_RBspawned = true;
-												if (((random 1 > 0.5) && (count (_pos nearRoads 500) > 0)) ) then {
-													if (_debug) then {
+												if (_debug) then {
 														diag_log format["MSO-%1 Enemy Population - Attempted to Deploy Road Block near %2", time, _pos2];
-													};
-													[_group, _pos] execVM "enemy\scripts\TUP_deployRoadBlock.sqf";	
 												};
+												_RBpos = [_group, _pos] call compile preprocessfilelinenumbers "enemy\scripts\TUP_deployRoadBlock.sqf";
+                                                ep_locations set [count ep_locations,["RB",_RBpos]];
                                     		};
 											ep_groups set [count ep_groups, _group];
                                     	};
@@ -699,6 +721,14 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
                                         	};
+                                            
+                                            _idx = [ep_locations, [_type,_pos]] call BIS_fnc_arrayFindDeep;
+                                            if (typename _idx == "ARRAY") then {
+    									    	_idx = _idx select 0;
+    											ep_locations set [_idx, ">REMOVE<"];
+    											ep_locations = ep_locations - [">REMOVE<"];
+                                            };
+                                            
                                         	_spawned = false;
                                         	_cleared = true;
                                         };
@@ -748,6 +778,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											//_pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
 											_pos = [_pos,500,0.15,5] call rmm_ep_getFlatArea;
 											[_camp, [_pos, position _loc] call BIS_fnc_dirTo, _pos] call f_builder;
+                                            ep_locations set [count ep_locations,["Camp",_pos]];
 											if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
 									};
 							};
@@ -755,13 +786,14 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 							_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 							
 							[_pos, _flag, _type] spawn {
-									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2","_breakouttimer"];
+									private ["_pos","_pos2","_flag","_group","_grp2","_type","_debug","_cleared","_spawned","_locunits","_grouparray","_grp2array","_groupPos","_grp2Pos","_posGrp2","_breakouttimer","_AAflag","_idx"];
 									_pos = _this select 0;
 									_flag = _this select 1;
 									_type= _this select 2;
                                     _debug = debug_mso;
                                     _cleared = false;
                                     _spawned = false;
+                                    ep_locations set [count ep_locations,[_type,_pos]];
                                         
                                     waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
                                      
@@ -849,6 +881,14 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             	deletegroup _grp2;
                                                 if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
                                         	};
+                                            
+                                            _idx = [ep_locations, [_type,_pos]] call BIS_fnc_arrayFindDeep;
+                                            if (typename _idx == "ARRAY") then {
+    									    	_idx = _idx select 0;
+    											ep_locations set [_idx, ">REMOVE<"];
+    											ep_locations = ep_locations - [">REMOVE<"];
+                                            };
+                                            
                                         	_spawned = false;
                                         	_cleared = true;
                                         };
@@ -860,7 +900,11 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
         if (count _pos != 0) then {
                 if(ep_total mod 10 == 0) then {
                         diag_log format["MSO-%1 Enemy Population # %2", time, ep_total];
-                        if(_debug) then {hint format["MSO-%1 Enemy Population # %2", time, ep_total];};
+                        diag_log format["MSO-%1 Enemy Locations # %2", time, count ep_locations];
+                        if(_debug) then {
+                            hint format["MSO-%1 Enemy Population # %2", time, ep_total];
+                        	hint format["MSO-%1 Enemy Locations # %2", time, count ep_locations];
+                        };
                 };
                 if(_debug) then {
                         private["_t","_m"];

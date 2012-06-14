@@ -3,7 +3,7 @@ private ["_list","_j","_next","_script","_i"];
 
 _list = switch (MISSIONTYPE_PO) do {
 	// Town Capture
-    case 1: {["SAD_convoy"]};
+    case 1: {["CAP_town"]};
 	// RTF Tasks
 	case 2: {["CAP_target","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","RTF_tower","SAD_bombcar","CRB_convoy"]};
 	// Search and Rescue
@@ -14,7 +14,11 @@ _list = switch (MISSIONTYPE_PO) do {
 	case 5: {["CAP_target_2","CAP_town","CAP_vehicle","RTF_tower","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","SAD_scud","SAD_tower","SAR_pow","SAD_bombcar","CRB_convoy"]};
 	// Capture
 	case 6: {["CAP_target","CAP_target_2","CAP_town","CAP_vehicle","SAD_bombcar","CRB_convoy"]};
-
+	// MSO Autotasking
+    case 7: {["MSO_Auto"]};
+    // MSO Sniper Ops
+    case 8: {["SNI_HVT"]};
+    
    	default {["CAP_target","CAP_target_2","CAP_town","CAP_vehicle","RTF_tower","SAD_cache","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","SAD_scud","SAR_pilot","SAR_pow","SAD_bombcar","CRB_convoy"]};
 };
 

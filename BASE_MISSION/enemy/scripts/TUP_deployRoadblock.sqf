@@ -175,4 +175,6 @@ _vehicle setDir getdir _roadpos;
 	_blockers addVehicle _vehicle;
 	sleep 1;
 	[_blockers, getpos _roadpos] execVM "enemy\scripts\BIN_taskDefend.sqf";
-}
+};
+_roadposition = [getpos _roadpos select 0, getpos _roadpos select 1, 0];
+_roadposition;

@@ -6,9 +6,9 @@ class PO2_ON {
 };
 class MISSIONTYPE_PO { // MISSION TYPE
 	title= "        Mission Type Patrol Ops";
-	values[]={0,1,2,3,4,5,6};
-	default=4;
-	texts[]={"Off","Domination","Reconstruction","Search and Rescue","Mix Standard","Mix Hard","Target Capture"};
+	values[]={0,1,2,3,4,5,6,7,8};
+	default=7;
+	texts[]={"Off","Domination","Reconstruction","Search and Rescue","Mix Standard","Mix Hard","Target Capture","MSO Auto-tasking","MSO Sniper Operations"};
 };
 class MISSIONTYPE_AIR { // MISSION TYPE
 	title= "        Mission Type Air Ops";
