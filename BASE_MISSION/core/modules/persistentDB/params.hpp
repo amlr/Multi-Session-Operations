@@ -22,6 +22,12 @@ class mpdb_landvehicles_enabled {
         texts[]= {"On","Off"}; 
         default = 0;
 };
+class mpdb_objects_enabled {
+        title = "        Persistent Objects (experimental, requires R3F Logistics)"; 
+        values[]= {1,0}; 
+        texts[]= {"On","Off"}; 
+        default = 0;
+};
 class mpdb_persistentScores_enabled {
         title = "        Persistent Scores"; 
         values[]= {1,0}; 

@@ -19,10 +19,10 @@
 
 	_player = _this select 0;                              
 	
-	_shotsfired = (_player getvariable "_thispshotsfired") + 1;
+	_shotsfired = (_player getvariable "pshotsfired") + 1;
 	
 	//hintsilent format["%1", _shotsfired];
 
-	_player setVariable ["_thispshotsfired", _shotsfired, true];
+	_player setVariable ["pshotsfired", _shotsfired, true];
 		
 // ====================================================================================

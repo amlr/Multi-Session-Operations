@@ -22,12 +22,12 @@
 		if (player != _player) exitWith { };
 
 
-				_thisPosition = player getVariable "_thisPosition";	
-				_thispside = player getVariable "_thispside";	
-				_thispdirection = player getVariable "_thispdirection";	
-				_thispstance = player getVariable "_thispstance";	
-				_thispvehicle = player getVariable "_thispvehicle";	
-				_thispseat = player getVariable "_thispseat";	
+				_thisPosition = player getVariable "pPosition";	
+				_thispside = player getVariable "playerSide";	
+				_thispdirection = player getVariable "pdirection";	
+				_thispstance = player getVariable "pstance";	
+				_thispvehicle = player getVariable "pvehicle";	
+				_thispseat = player getVariable "pseat";	
 
 
 	diag_log ["PersistentDB: (teleportPlayer) _player:", _player, typeName _player];			
@@ -37,7 +37,7 @@
 	if (_teleportToLocation == 1) then {
 					
 						if ((count _thisPosition) >0) then {	
-								if (str(playerside) == _thispside) then { player setPosASL _thisPosition; };
+								if (str(playerside) == _thispside) then { player setPosATL _thisPosition; };
 						//		player sideChat format["Player, %1 teleported to coords %2", _thispname, _thisPosition];
 						};
 							
@@ -50,9 +50,7 @@
 								if (str(playerside) == _thispside) then {  player playAction _thispstance;  };
 						//		player sideChat format["Player, %1 stance restored to %2", _thispname, _thispstance];
 						};	
-						
 					
-				
 				
 					if (_thispvehicle != "") then {	
 						//	player sideChat format["Player, %1 entered vehicle %2", _thispname, _thispvehicle];
@@ -89,8 +87,7 @@
 					                         		  player moveInCargo _x;	
 												};								
 				 					};
-				 				} 
-			    				forEach allMissionObjects "LandVehicle"; 		
+				 				} forEach allMissionObjects "LandVehicle"; 		
 					};
 					
 					
