@@ -96,7 +96,7 @@ CREATE TABLE `players` (
   KEY `missionid` (`mid`),
   KEY `puid` (`pid`),
   KEY `pname` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=353 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=356 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,7 +164,7 @@ CREATE TABLE `missions` (
   `ban` int(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `missionName` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -560,4 +560,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-06-14 23:01:08
+-- Dump completed on 2012-06-15 14:30:41

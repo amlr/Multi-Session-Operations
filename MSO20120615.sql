@@ -40,7 +40,7 @@ CREATE TABLE `landvehicles` (
   `wmag` varchar(1000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=176 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `players` (
   KEY `missionid` (`mid`),
   KEY `puid` (`pid`),
   KEY `pname` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=350 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=356 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `objects` (
   `wmag` varchar(1000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +149,7 @@ CREATE TABLE `missions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `na` varchar(255) NOT NULL DEFAULT '',
   `td` int(1) DEFAULT '1',
-  `da` varchar(255) DEFAULT NULL,
+  `da` varchar(255) DEFAULT '',
   `sc` int(1) DEFAULT '1',
   `gsc` int(1) DEFAULT '1',
   `log` int(1) DEFAULT '1',
@@ -164,7 +164,7 @@ CREATE TABLE `missions` (
   `ban` int(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `missionName` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -560,4 +560,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-06-14 22:20:19
+-- Dump completed on 2012-06-15 14:30:41
