@@ -7,7 +7,7 @@ G_ACE_DATA_PARAMS = ["tawb","tarc","taw","tarm"];
 
 G_ACE_DATA = [
 	{(_this select 0) getVariable ["WOB",""];},
-	//{(_this select 0) getVariable ["RUCK",""];},  //[(_this select 0)] call ACE_fnc_FindRuck;
+	{(_this select 0) getVariable ["RUCK",""];},  //[(_this select 0)] call ACE_fnc_FindRuck;
 	{(_this select 0) getVariable ["WEAPON",""];},
 	{(_this select 0) getVariable ["MAGAZINE",""];}
 	/* OTHER ACE SETTINGS THAT COULD BE STORED
@@ -42,10 +42,7 @@ S_ACE_DATA = [
 		(_this select 1) addWeapon (_this select 0);
         [(_this select 1), (_this select 0)] call ACE_fnc_PutWeaponOnBack;}, // ACE Weapon on Back
 
-	/*{	if (count _this > 0) then {
-			(_this select 1) addWeapon (_this select 0);
-			[(_this select 1), "ALL"] call ACE_fnc_RemoveGear;
-	};}, // ACE Ruck*/
+	{}, // ACE Ruck
 		
 	{ 	(_this select 1) setVariable ["WEAPON", _this select 0, true];
 		if (typename (_this select 0) == "ARRAY") then {
