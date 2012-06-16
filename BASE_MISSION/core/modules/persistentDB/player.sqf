@@ -42,7 +42,8 @@ G_PLAYER_DATA = [
 			};
 		}; _thisstance;},
 	{ (_this select 0) getVariable "playerSide";},
-	{	if (vehicle (_this select 0) != (_this select 0)) then { 
+	{	diag_log format["vehicle = %1", vehicle (_this select 0)];
+		if (vehicle (_this select 0) != (_this select 0)) then { 
 			str (vehicle (_this select 0));
 		};},
 	

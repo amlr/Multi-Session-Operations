@@ -120,37 +120,37 @@ saveOnQuit = {
 			_vDam = 0;
 			_vPosition = [];
 			
-			_vObject = str(_thisObject);
-			if ([_vObject,"REMOTE"] call CBA_fnc_find != -1) then {
-				// Vehicle has been created since mission start and does not have vehiclevarname - store class instead
-				_vObject = typeof _thisObject;
+			if ([str(_thisObject),"REMOTE"] call CBA_fnc_find == -1) then {
+
+				_vObject = str _thisObject;
+
+				_vPosition = str(getPosATL _thisObject); // setPosATL
+				_vDam = str(getDammage _thisObject); // setDammage
+				_vDir = str(vectorDir _thisObject); // setVectorDirAndUp
+				_vUp = str(vectorUp _thisObject); //   setVectorDirAndUp
+				_vFuel = str(fuel _thisObject);  // setFuel
+				_vLocked = str(locked _thisObject); // Lock  || setVehicleLock ?
+				_vWeaponCargo = str(getWeaponCargo _thisObject); // addWeaponCargo 
+				_vEngine = str(isEngineOn _thisObject); // engineOn
+				_vMagazineCargo = str(getMagazineCargo _thisObject); // addMagazineCargo	
+				
+				_vPosition = [_vPosition, ",", "|"] call CBA_fnc_replace;
+				_vDir = [_vDir, ",", "|"] call CBA_fnc_replace;
+				_vUp = [_vUp, ",", "|"] call CBA_fnc_replace;
+				_vWeaponCargo = [_vWeaponCargo, ",", "|"] call CBA_fnc_replace; 	
+				_vMagazineCargo = [_vMagazineCargo, ",", "|"] call CBA_fnc_replace; 		
+								
+				_parameters = format["[tobj=%1,tpos=%2,tdir=%3,tup=%4,tdam=%5,tfue=%6,tlkd=%7,twcar=%8,teng=%9,twmag=%10,tmid=%11,tintid=%12]",_vObject, _vPosition, _vDir, _vUp, _vDam, _vFuel, _vLocked, _vWeaponCargo, _vEngine, _vMagazineCargo, _missionid, _landVehicleCount];
+				
+				if (pdb_log_enabled) then {
+					diag_log format["SERVER MSG: SQL output: %1", _parameters];
+				};
+				
+				//	diag_log ("callExtension->Arma2NETMySQL: InsertLandVehicles");		
+				_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
+				
+				_landVehicleCount =_landVehicleCount+1;
 			};
-			_vPosition = str(getPosATL _thisObject); // setPosATL
-			_vDam = str(getDammage _thisObject); // setDammage
-			_vDir = str(vectorDir _thisObject); // setVectorDirAndUp
-			_vUp = str(vectorUp _thisObject); //   setVectorDirAndUp
-			_vFuel = str(fuel _thisObject);  // setFuel
-			_vLocked = str(locked _thisObject); // Lock  || setVehicleLock ?
-			_vWeaponCargo = str(getWeaponCargo _thisObject); // addWeaponCargo 
-			_vEngine = str(isEngineOn _thisObject); // engineOn
-			_vMagazineCargo = str(getMagazineCargo _thisObject); // addMagazineCargo	
-			
-			_vPosition = [_vPosition, ",", "|"] call CBA_fnc_replace;
-			_vDir = [_vDir, ",", "|"] call CBA_fnc_replace;
-			_vUp = [_vUp, ",", "|"] call CBA_fnc_replace;
-			_vWeaponCargo = [_vWeaponCargo, ",", "|"] call CBA_fnc_replace; 	
-			_vMagazineCargo = [_vMagazineCargo, ",", "|"] call CBA_fnc_replace; 		
-							
-			_parameters = format["[tobj=%1,tpos=%2,tdir=%3,tup=%4,tdam=%5,tfue=%6,tlkd=%7,twcar=%8,teng=%9,twmag=%10,tmid=%11,tintid=%12]",_vObject, _vPosition, _vDir, _vUp, _vDam, _vFuel, _vLocked, _vWeaponCargo, _vEngine, _vMagazineCargo, _missionid, _landVehicleCount];
-			
-			if (pdb_log_enabled) then {
-				diag_log format["SERVER MSG: SQL output: %1", _parameters];
-			};
-			
-			//	diag_log ("callExtension->Arma2NETMySQL: InsertLandVehicles");		
-			_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
-			
-			_landVehicleCount =_landVehicleCount+1;
 			
 		} forEach allmissionobjects "LandVehicle"; 
 		

@@ -59,8 +59,6 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 		private "_tmp";
 		call compile format ["_tmp = %1",_vObject];
 		_thisObject = _tmp;
-	} else {
-		_thisObject = createVehicle [_vObject, [0,0,0], [], 0, "NONE"];
 	};
 
 	//_serverData = format["Loading Object: %1...", _thisObject];
