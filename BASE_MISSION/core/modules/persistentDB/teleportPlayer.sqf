@@ -21,7 +21,6 @@
 
 		if (player != _player) exitWith { };
 
-
 				_thisPosition = player getVariable "pPosition";	
 				_thispside = player getVariable "playerSide";	
 				_thispdirection = player getVariable "pdirection";	
@@ -87,7 +86,7 @@
 					                         		  player moveInCargo _x;	
 												};								
 				 					};
-				 				} forEach allMissionObjects "LandVehicle"; 		
+				 				} forEach vehicles; 		
 					};
 					
 					

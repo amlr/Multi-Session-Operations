@@ -238,7 +238,11 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				// parse the data
 
 				// Add Datamodel actions together
-				_dataModel = S_PLAYER_DATA + S_WEAPON_DATA + S_ACE_DATA;
+				_dataModel = [];
+				{
+					call compile format["_newArray = %1", _x];
+					_dataModel = _dataModel + _newArray;
+				} foreach PDB_CLIENT_SET_DATA;
 				
 				// Read in player data to client side player object
 				_i = 0;

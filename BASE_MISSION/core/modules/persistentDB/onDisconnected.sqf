@@ -152,7 +152,7 @@ saveOnQuit = {
 				_landVehicleCount =_landVehicleCount+1;
 			};
 			
-		} forEach allmissionobjects "LandVehicle"; 
+		} forEach vehicles; 
 		
 		// END save mission's LandVehicles data			
 		
@@ -180,7 +180,6 @@ saveOnQuit = {
 		
 		// Set list of objects to look for (based on R3F)
 		_objectType = "static";
-		_objectArray = R3F_LOG_CFG_objets_deplacables + R3F_LOG_CFG_objets_heliportables;
 		
 		// get Object data
 		_thisObject = objNull;
@@ -188,16 +187,10 @@ saveOnQuit = {
 		_objectCount = 1;
 		_missionObjects = "";
 		{
-			private "_hasVarName";
+
 			_thisObject = _x;
 			// Check to see if object should be persisted (i.e. a var name has been set)
 			if ([str(_thisObject),"REMOTE"] call CBA_fnc_find == -1) then {
-				_hasVarName = true;
-			} else {
-				_hasVarName = false;
-			};
-
-			if (({_thisObject isKindOf _x} count _objectArray > 0) && (_hasVarName)) then {
 
 				_vDir = [0,0,0];
 				_vUp = [0,0,0];

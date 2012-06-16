@@ -38,6 +38,7 @@ S_WEAPON_DATA = [
 			(_this select 1) selectweapon (primaryweapon (_this select 1));
 			_muzzles = getArray(configFile>>"cfgWeapons" >> primaryWeapon (_this select 1) >> "muzzles"); // Fix for weapons with grenade launcher
 			(_this select 1) selectWeapon (_muzzles select 0);
+			diag_log format ["muzzle: %1", _muzzles];
 		};}, // Weapons and Items
 		
 	{	{

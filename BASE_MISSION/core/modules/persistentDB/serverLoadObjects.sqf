@@ -55,7 +55,7 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	//diag_log ["_vObject: ",  _vObject, typeName _vObject];
 	
 	// Convert string to Object
-	if ([_vObject,"p3d"] call CBA_fnc_find ==-1) then {
+	if ([_vObject,"REMOTE"] call CBA_fnc_find ==-1) then {
 		private "_tmp";
 		call compile format ["_tmp = %1",_vObject];
 		_thisObject = _tmp;
