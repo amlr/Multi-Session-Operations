@@ -40,7 +40,7 @@ CREATE TABLE `landvehicles` (
   `wmag` varchar(1000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=176 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1060 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `players` (
   KEY `missionid` (`mid`),
   KEY `puid` (`pid`),
   KEY `pname` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=356 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=361 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `objects` (
   `wmag` varchar(1000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1755 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,7 +164,7 @@ CREATE TABLE `missions` (
   `ban` int(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `missionName` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -370,7 +370,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `InsertLandVehicles`(IN tobj VARCHAR(255), IN tpos VARCHAR(255), IN tdir VARCHAR(255), IN tup VARCHAR(255), IN tdam INTEGER(1), IN tfue INTEGER(1), IN tlkd VARCHAR(5), IN twcar VARCHAR(1000), IN teng VARCHAR(5), IN twmag VARCHAR(1000), IN tmid INTEGER(11), IN tintid INTEGER(11))
+/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `InsertLandVehicles`(IN tobj VARCHAR(255), IN tpos VARCHAR(255), IN tdir VARCHAR(255), IN tup VARCHAR(255), IN tdam FLOAT, IN tfue FLOAT, IN tlkd VARCHAR(5), IN twcar VARCHAR(1000), IN teng VARCHAR(5), IN twmag VARCHAR(1000), IN tmid INTEGER(11), IN tintid INTEGER(11))
 BEGIN
   INSERT INTO landvehicles (obj,pos,dir,up,dam,fue,lkd,wcar,eng,wmag,mid,intid) values (tobj,tpos,tdir,tup,tdam,tfue,tlkd,twcar,teng,twmag,tmid,tintid);
 END */;;
@@ -560,4 +560,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-06-15 14:30:41
+-- Dump completed on 2012-06-17 23:34:09
