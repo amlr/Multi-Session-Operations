@@ -15,7 +15,7 @@
 
 /*
  * There are two ways to manage new objects with the logistics system. The first is to add these objects in the
- * folowing appropriate lists. The second is to create a new external file in the /addons_config/ directory,
+ * following appropriate lists. The second is to create a new external file in the /addons_config/ directory,
  * according to the same scheme as the existing ones, and to add a #include at the end of this current file.
  * 
  * Deux moyens existent pour gérer de nouveaux objets avec le système logistique. Le premier consiste à ajouter
