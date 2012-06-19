@@ -44,6 +44,40 @@ if (isdedicated) then {
 	ENV_dedicated = true; publicVariable "ENV_dedicated"; 
 	onPlayerConnected {[_id, _name, _uid] call compile PP "core\modules\persistentDB\onConnected.sqf"}; 
 	onPlayerDisconnected { [_id, _name, _uid] call compile PP "core\modules\persistentDB\onDisconnected.sqf" }; 
+	
+	// Spawn auto-save process - server
+	[] spawn {
+		PDBLastSaveTimeServer = time;
+		while {mpdb_save_delay_server > 0} do {
+			waitUntil {
+				sleep 60; 
+				//diag_log format ["Time: %1, PDBLST: %2, PDBSD: %3", time, PDBLastSaveTimeServer, mpdb_save_delay_server];
+				(time > (PDBLastSaveTimeServer + mpdb_save_delay_server))
+			};
+			diag_log["PersistentDB: SERVER MSG - Saving Server Data, time: ", time];
+			[0, "__SERVER__", 0] call compile PP "core\modules\persistentDB\onDisconnected.sqf";
+			PDBLastSaveTimeServer = time;
+			sleep 5;
+		};
+	};
+	
+	// Spawn Auto-Save process - players
+	[] spawn {
+		PDBLastSaveTimePlayer = time;
+		while {mpdb_save_delay_player > 0} do {
+			waitUntil {
+				sleep (60 + random 15); 
+				//diag_log format ["Time: %1, PDBLST: %2, PDBSD: %3", time, PDBLastSaveTimePlayer, mpdb_save_delay_player];
+				(time > (PDBLastSaveTimePlayer + mpdb_save_delay_player))
+			};
+			{
+				diag_log["PersistentDB: SERVER MSG - Saving Player Data, time: ", time];
+				[0, name _x, getplayeruid _x] call compile PP "core\modules\persistentDB\onDisconnected.sqf";
+				sleep 5;
+			} foreach playableunits;
+			PDBLastSaveTimePlayer = time;
+		};
+	};
 };
 
 if (isServer) then { 

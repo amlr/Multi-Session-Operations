@@ -27,6 +27,9 @@ PDB_CLIENT_SET_DATA = ["S_PLAYER_DATA"];
 // pdb = setting used by pdb
 // Add any data models here as necessary
 
+if (isnil"mpdb_save_delay_server") then {mpdb_save_delay_server = 0;}; 
+if (isnil"mpdb_save_delay_player") then {mpdb_save_delay_player = 0;};
+
 if (isnil"mpdb_date_enabled" || mpdb_date_enabled == 1) then {pdb_date_enabled = true;} else {pdb_date_enabled = false;};
 if (isnil"mpdb_persistentScores_enabled" || mpdb_persistentScores_enabled == 1) then { pdb_persistentScores_enabled = true;} else { pdb_persistentScores_enabled = false;};
 if (isnil"mpdb_globalScores_enabled" || mpdb_globalScores_enabled == 1) then { pdb_globalScores_enabled = true;} else {pdb_globalScores_enabled = false;};

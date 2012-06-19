@@ -55,56 +55,55 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	//diag_log ["_vObject: ",  _vObject, typeName _vObject];
 	
 	// Convert string to Object
-	if ([_vObject,"REMOTE"] call CBA_fnc_find ==-1) then {
+
 		private "_tmp";
 		call compile format ["_tmp = %1",_vObject];
 		_thisObject = _tmp;
-	};
 
-	//_serverData = format["Loading Object: %1...", _thisObject];
-	//PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
-	
-	_vPosition =_objectData select 2;
-	_vPosition = [_vPosition, "|", ","] call CBA_fnc_replace; 
-	_vPosition = call compile _vPosition;
-	
-	//										diag_log ["_vPosition: ",  _vPosition, typeName _vPosition];
-	
-	_vDir = _objectData select 3;
-	_vDir = [_vDir, "|", ","] call CBA_fnc_replace;
-	_vDir = call compile _vDir;
-	
-	//										diag_log ["_vDir: ",  _vDir, typeName _vDir];
-	
-	_vUp = _objectData select 4;
-	_vUp = [_vUp, "|", ","] call CBA_fnc_replace;
-	_vUp = call compile _vUp;
-	
-	//											diag_log ["_vUp: ",  _vUp, typeName _vUp];
-	
-	_vDam = _objectData select 5;
-	_vDam = parseNumber _vDam;
-	
-	//										diag_log ["_vDam: ",  _vDam, typeName _vDam];
-	
-	_vWeaponCargo = _objectData select 6;
-	_vWeaponCargo = [_vWeaponCargo, "|", ","] call CBA_fnc_replace; 
-	_vWeaponCargo = call compile _vWeaponCargo;	
-	
-	
-	_vMagazineCargo = _objectData select 7;
-	_vMagazineCargo = [_vMagazineCargo, "|", ","] call CBA_fnc_replace; 
-	_vMagazineCargo = call compile _vMagazineCargo;	
-	//										diag_log ["_vWeaponCargo: ",  _vWeaponCargo, typeName _vWeaponCargo];
-	
-	// set the vehicles position
-	_thisObject setPosATL _vPosition;
-	// set the vehicles direction
-	_thisObject setVectorDirAndUp [_vDir,_vUp];
-	// set the vehicles damage
-	_thisObject setDammage _vDam;
-	// set the vehicles WeaponCargo 
-	_thisObject addWeaponCargo _vWeaponCargo;
-	_thisObject addMagazineCargo _vMagazineCargo;
+		//_serverData = format["Loading Object: %1...", _thisObject];
+		//PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+		
+		_vPosition =_objectData select 2;
+		_vPosition = [_vPosition, "|", ","] call CBA_fnc_replace; 
+		_vPosition = call compile _vPosition;
+		
+		//										diag_log ["_vPosition: ",  _vPosition, typeName _vPosition];
+		
+		_vDir = _objectData select 3;
+		_vDir = [_vDir, "|", ","] call CBA_fnc_replace;
+		_vDir = call compile _vDir;
+		
+		//										diag_log ["_vDir: ",  _vDir, typeName _vDir];
+		
+		_vUp = _objectData select 4;
+		_vUp = [_vUp, "|", ","] call CBA_fnc_replace;
+		_vUp = call compile _vUp;
+		
+		//											diag_log ["_vUp: ",  _vUp, typeName _vUp];
+		
+		_vDam = _objectData select 5;
+		_vDam = parseNumber _vDam;
+		
+		//										diag_log ["_vDam: ",  _vDam, typeName _vDam];
+		
+		_vWeaponCargo = _objectData select 6;
+		_vWeaponCargo = [_vWeaponCargo, "|", ","] call CBA_fnc_replace; 
+		_vWeaponCargo = call compile _vWeaponCargo;	
+		
+		
+		_vMagazineCargo = _objectData select 7;
+		_vMagazineCargo = [_vMagazineCargo, "|", ","] call CBA_fnc_replace; 
+		_vMagazineCargo = call compile _vMagazineCargo;	
+		//										diag_log ["_vWeaponCargo: ",  _vWeaponCargo, typeName _vWeaponCargo];
+		
+		// set the vehicles position
+		_thisObject setPosATL _vPosition;
+		// set the vehicles direction
+		_thisObject setVectorDirAndUp [_vDir,_vUp];
+		// set the vehicles damage
+		_thisObject setDammage _vDam;
+		// set the vehicles WeaponCargo 
+		_thisObject addWeaponCargo _vWeaponCargo;
+		_thisObject addMagazineCargo _vMagazineCargo;
 
 };

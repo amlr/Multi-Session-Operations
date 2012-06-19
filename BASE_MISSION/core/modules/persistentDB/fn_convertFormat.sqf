@@ -57,6 +57,9 @@ if (_action == "write") then {
 	
 	if (typename _origvar == "SCALAR") then {
 		_var =  str(_origvar);
+		if ([_var,","] call CBA_fnc_find !=-1) then {
+			_var = [_var,",","."] call CBA_fnc_replace;
+		};
 	};
 	
 	if (typename _origvar == "STRING") then {

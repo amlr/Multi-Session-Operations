@@ -120,9 +120,9 @@ saveOnQuit = {
 			_vDam = 0;
 			_vPosition = [];
 			
-			if ([str(_thisObject),"REMOTE"] call CBA_fnc_find == -1) then {
+			if (vehiclevarname _thisObject != "") then {
 
-				_vObject = str _thisObject;
+				_vObject = vehiclevarname _thisObject;
 
 				_vPosition = str(getPosATL _thisObject); // setPosATL
 				_vDam = str(getDammage _thisObject); // setDammage
@@ -190,14 +190,14 @@ saveOnQuit = {
 
 			_thisObject = _x;
 			// Check to see if object should be persisted (i.e. a var name has been set)
-			if ([str(_thisObject),"REMOTE"] call CBA_fnc_find == -1) then {
+			if (vehiclevarname _thisObject != "") then {
 
 				_vDir = [0,0,0];
 				_vUp = [0,0,0];
 				_vDam = 0;
 				_vPosition = [];
 				
-				_vObject = str(_thisObject);
+				_vObject = vehiclevarname _thisObject;
 				//if ([_vObject,"p3d"] call CBA_fnc_find != -1) then {
 					// object has been created since mission start and does not have varname - store class instead
 				//	_vObject = typeof _thisObject;
@@ -254,7 +254,7 @@ saveOnQuit = {
 	// __SERVER__ exit
 
 	if (pdb_log_enabled) then {
-		diag_log format["SERVER MSG: %1 exiting, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
+		diag_log format["SERVER MSG: %1 exiting/saving, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
 	};
 	exit;	
 			
@@ -264,7 +264,7 @@ saveOnQuit = {
 // MAIN	
 
 if (pdb_log_enabled) then {
-	diag_log format["SERVER MSG: Player %1, is leaving the server, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
+	diag_log format["SERVER MSG: Player %1, is either leaving the server or auto-saving, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
 };
 
 call saveOnQuit;
