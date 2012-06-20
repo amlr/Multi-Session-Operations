@@ -1,5 +1,5 @@
 class PO2_ON {
-	title = "    Enemy - OCB Patrol Ops 2"; 
+	title = "    OCB Patrol Ops 2"; 
 	values[]= {1, 0}; 
 	texts[]= {"On","Off"}; 
 	default = 1;
