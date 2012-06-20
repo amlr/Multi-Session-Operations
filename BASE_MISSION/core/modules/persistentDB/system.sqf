@@ -78,7 +78,6 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		   diag_log["PersistentDB: ACTIVATE PLAYER"];		  
 		   endLoadingScreen;
 		   player allowdamage true; 
-		   
 		 
 		   if (pdb_ace_enabled) then {				
 			// set the ace ruck variables now so that they can be saved to the DB even if the 'ace_sys_ruck_changed' has not been fired before the player decides to exit.
@@ -239,6 +238,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 
 				// Add Datamodel actions together
 				_dataModel = [];
+				_newArray = [];
 				{
 					call compile format["_newArray = %1", _x];
 					_dataModel = _dataModel + _newArray;
