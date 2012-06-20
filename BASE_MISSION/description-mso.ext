@@ -134,6 +134,9 @@ class enemyHeader {
 #ifdef CQB_POP
 	#include <enemy\modules\CQB_POP\params.hpp>
 #endif
+#ifdef RMM_ZORA
+	#include <enemy\modules\RMM_ZORA\params.hpp>
+#endif
 #ifdef MSOFACTIONS
 	#include <enemy\msofactions.hpp>
 #endif
