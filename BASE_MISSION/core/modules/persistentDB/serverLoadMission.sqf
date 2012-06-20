@@ -71,7 +71,7 @@ if (_missionArray select 1 == pdb_fullmissionName) then {  // START mission name
 		
 		_thisMissionDate = [(_missionArray select 3),"read"] call persistent_fnc_convertFormat;
 		
-		if (typename _thisMissionData == "ARRAY") then {
+		if (typename _thisMissionDate == "ARRAY") then {
 			
 			if ((count _thisMissionDate) == 5) then {
 				diag_log["setdate:  _thisMissionDate: ", _thisMissionDate];
