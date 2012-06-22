@@ -232,6 +232,64 @@ saveOnQuit = {
 		// END save mission's Object data			
 		
 	};
+	
+	if (pdb_locations_enabled) then {
+		
+		// START remove mission's current location data		
+		
+		_procedureName = "RemoveLocations"; 
+		_parameters = format["[tmid=%1]",_missionid];
+		
+		if (pdb_log_enabled) then {
+			diag_log format["SERVER MSG: SQL output: %1", _parameters];
+		};
+	
+		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
+		
+		// END remove mission's current Locations data						
+		
+		// START save mission's Locations data
+		_procedureName = "InsertLocations"; 
+				
+		// Set the locations arrays to use
+		_parentArrays = ["CQBPositionsReg","CQBPositionsStrat"];
+		
+		// get Locations data
+		_locationCount = 1;
+		{
+			_thisObject = objNull;
+			_locations = [];
+			_parentArrayName = _x;
+			call compile format ["_locations = %1", _parentArrayName];
+			{
+				_thisObject = _x select 0;
+					
+				_vObject = str _thisObject;
+				_vPosition = str(getPosATL _thisObject); // setPosATL
+				_vHousePositions = str (_x select 1);
+				_vCleared = str (_thisObject getvariable "c");
+				_vSuspended = str (_thisObject getvariable "s");
+				_vGroupType = str (_thisObject getvariable "groupType");
+				_vGroupStrength = str (_thisObject getvariable "groupStrength");
+				_vType = _thisObject getvariable "type";
+				
+				_vPosition = [_vPosition, ",", "|"] call CBA_fnc_replace;
+				_vGroupStrength = 0;
+								
+				_parameters = format["[tobj=%1,tpos=%2,thpo=%3,tcle=%4,tsus=%5,tgrt=%6,tgrs=%7,ttyp=%8,tpa=%9,tmid=%10,tintid=%11]",_vObject, _vPosition, _vHousePositions, _vCleared, _vSuspended, _vGroupType, _vGroupStrength, _vType, _ParentArrayName, _missionid, _locationCount];
+				
+				if (pdb_log_enabled) then {
+					diag_log format["SERVER MSG: SQL output: %1", _parameters];
+				};
+
+				_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
+				
+				_locationCount = _locationCount+1;
+				
+			} forEach _locations;
+		} forEach _parentArrays;
+				
+	};
 		
 	// START save the time and date
 	if (pdb_date_enabled) then {

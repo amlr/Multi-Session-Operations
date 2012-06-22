@@ -56,13 +56,13 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 
 // Experimental
 if (isnil"mpdb_landvehicles_enabled" || mpdb_landvehicles_enabled == 1) then { pdb_landvehicles_enabled = true;} else {pdb_landvehicles_enabled = false;};
-
-if (isnil"mpdb_objects_enabled" || mpdb_objects_enabled == 0) then { pdb_objects_enabled = false;} else {pdb_objects_enabled = true;}; // not yet implemented.
+if (isnil"mpdb_objects_enabled" || mpdb_objects_enabled == 0) then { pdb_objects_enabled = false;} else {pdb_objects_enabled = true;};
+if (isnil"mpdb_locations_enabled" || mpdb_locations_enabled == 0) then {pdb_locations_enabled = false;} else {pdb_locations_enabled = true;};
 
 // To be completed
-if (isnil"pdb_air_enabled" || pdb_air_enabled == 0) then {pdb_air_enabled = false;} else {pdb_air_enabled = true;}; // not yet implemented.
-if (isnil"pdb_ship_enabled" || pdb_ship_enabled == 0) then {pdb_ship_enabled = false;} else {pdb_ship_enabled = true;}; // not yet implemented.
-if (isnil"pdb_building_enabled" || pdb_building_enabled == 0) then {pdb_building_enabled = false;} else {pdb_building_enabled = true;}; // not yet implemented.
+
+if (isnil"pdb_tasks_enabled" || pdb_tasks_enabled == 0) then {pdb_tasks_enabled = false;} else {pdb_tasks_enabled = true;}; // not yet implemented.
+if (isnil"pdb_AAR_enabled" || pdb_AAR_enabled == 0) then {pdb_AAR_enabled = false;} else {pdb_AAR_enabled = true;}; // not yet implemented.
 if (isnil"pdb_marker_enabled" || pdb_marker_enabled == 0) then {pdb_marker_enabled = false;} else {pdb_marker_enabled = true;}; // not yet implemented.
 if (isnil"pdb_bans_enabled" || pdb_bans_enabled == 0) then {pdb_bans_enabled = false;} else {pdb_bans_enabled = true;}; // not yet implemented.
 

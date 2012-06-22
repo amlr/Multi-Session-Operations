@@ -56,6 +56,9 @@ if (( MISSIONDATA_LOADED == "false") && (_pname == "__SERVER__")) then {
 	};	
 	
 	// Load Locations?
+	if (pdb_locations_enabled) then {	
+		[_missionid] execVM "core\modules\persistentDB\serverLoadLocations.sqf";
+	};	
 	
 	MISSIONDATA_LOADED = "true";
 	publicVariable "MISSIONDATA_LOADED"; // update the global array	

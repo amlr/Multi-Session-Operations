@@ -33,7 +33,7 @@ if (isNil "_missionArray") then {
 	
 	// Set new mission details
 	_procedureName = "NewMission"; 
-	_parameters = format["[tna=%1,ttd=%2,tsc=%3,tgsc=%4,tlog=%5,twea=%6,tace=%7,tlv=%8,tobj=%9]",pdb_fullmissionName,mpdb_date_enabled,mpdb_persistentScores_enabled,mpdb_globalScores_enabled,mpdb_log_enabled,mpdb_weapons_enabled,mpdb_ace_enabled,mpdb_landvehicles_enabled,mpdb_objects_enabled];		
+	_parameters = format["[tna=%1,ttd=%2,tsc=%3,tgsc=%4,tlog=%5,twea=%6,tace=%7,tlv=%8,tobj=%9,tloc=%10]",pdb_fullmissionName,mpdb_date_enabled,mpdb_persistentScores_enabled,mpdb_globalScores_enabled,mpdb_log_enabled,mpdb_weapons_enabled,mpdb_ace_enabled,mpdb_landvehicles_enabled,mpdb_objects_enabled,mpdb_locations_enabled];		
 	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 	
 	_serverData = format["Mission: %1 created an entry...", pdb_fullmissionName];
@@ -61,9 +61,9 @@ if (_missionArray select 1 == pdb_fullmissionName) then {  // START mission name
 	if (_missionArray select 8 == "1") then { pdb_ace_enabled = true; } else { pdb_ace_enabled = false; };  // returned enable save/load player ACE weapon loadouts?
 	if (_missionArray select 9 == "1") then { pdb_landvehicles_enabled = true; } else { pdb_landvehicles_enabled = false; };  // returned enable persistent land vehicle data?
 	if (_missionArray select 10 == "1") then { pdb_objects_enabled = true; } else { pdb_objects_enabled = false; };  // returned enable persistent objects data?
-	if (_missionArray select 11 == "1") then { pdb_air_enabled = true; } else { pdb_air_enabled = false; };   // returned enable persistent air data?	
-	if (_missionArray select 12 == "1") then { pdb_ship_enabled = true; } else { pdb_ship_enabled = false; };  // returned enable persistent ship data?
-	if (_missionArray select 13 == "1") then { pdb_building_enabled = true; } else { pdb_building_enabled = false; };  // returned enable persistent building data?
+	if (_missionArray select 11 == "1") then { pdb_locations_enabled = true; } else { pdb_locations_enabled = false; };   // returned enable persistentlocations data?	
+	if (_missionArray select 12 == "1") then { pdb_tasks_enabled = true; } else { pdb_tasks_enabled = false; };  // returned enable persistent ship data?
+	if (_missionArray select 13 == "1") then { pdb_AAR_enabled = true; } else { pdb_AAR_enabled = false; };  // returned enable persistent building data?
 	if (_missionArray select 14 == "1") then { pdb_marker_enabled = true; } else { pdb_marker_enabled = false; };   // returned enable persistent marker data?
 	if (_missionArray select 15 == "1") then { pdb_bans_enabled = true; } else { pdb_bans_enabled = false; };  // returned enable player bans?	
 	

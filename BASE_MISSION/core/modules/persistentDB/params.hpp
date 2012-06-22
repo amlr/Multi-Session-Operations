@@ -40,6 +40,12 @@ class mpdb_objects_enabled {
         texts[]= {"On","Off"}; 
         default = 0;
 };
+class mpdb_locations_enabled {
+        title = "        Persistent Locations (CQB)"; 
+        values[]= {1,0}; 
+        texts[]= {"On","Off"}; 
+        default = 0;
+};
 class mpdb_persistentScores_enabled {
         title = "        Persistent Scores"; 
         values[]= {1,0}; 
