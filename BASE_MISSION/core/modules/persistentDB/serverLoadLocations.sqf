@@ -65,25 +65,17 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	
 	//diag_log ["_vlocation: ",  _vlocation, typeName _vlocation];
 	
-	// Given object string, get object
-	{
-		if (str _x == _vlocation) exitWith {
-			_thislocation = _x;
-		};
-	} foreach nearestObjects [_vPosition, ["house"], 30];
-	
-	if (isNull _thislocation) then {
-		_thislocation = nearestObject [_vPosition, "house"];
-	};
-		
+	// Given object position, find the nearest house - which should provide us with the correct object (may/will need better solution in future! Hoping Wolffy's hashmap function will provide this)
+	_thislocation = nearestObject [_vPosition, "house"];
+
 	_vHousePositions = _locationData select 3;
 	_vHousePositions  = parsenumber _vHousePositions ;
-	
+		
 	_vCleared = _locationData select 4;
-	if (_vCleared == "false") then { _vCleared = false; } else{ _vCleared = true; };
+	if (_vCleared == "true") then { _vCleared = true; } else{ _vCleared = false; };
 	
 	_vSuspended = _locationData select 5;
-	if (_vSuspended == "false") then { _vSuspended = false; } else{ _vSuspended = true; };
+	if (_vSuspended == "true") then { _vSuspended = true; } else{ _vSuspended = false; };
 	
 	_vGroupType = _locationData select 6;
 	
