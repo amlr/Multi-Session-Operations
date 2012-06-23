@@ -39,14 +39,4 @@ _BuildingTypeStrategic = [
     };
 } foreach _spawnhouses;
 
-if (_debug) then {
-    diag_log format["MSO-%1 CQB Population: Regular positions found %2", time, count _positions];
-    
-    _i = 0;
-	for "_i" from 0 to ((count _positions) - 1) do {
-         _t = format["op%1",_i];
-    	_m = [_t, position ((_positions select _i) select 0), "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorRed","GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-    };
-};
-
 _positions;

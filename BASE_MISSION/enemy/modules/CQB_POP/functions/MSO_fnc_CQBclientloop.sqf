@@ -1,14 +1,35 @@
     	private ["_debug","_idx","_loopcounter","_localEnemyCount","_pU"];
+		
+        _debug = _this select 0;
 
+        if (persistentDBHeader == 1) then {
+            waituntil {!(isnil "PDB_CQB_positionsloaded")};
+            sleep 5;
+        };
+        
         waituntil {!(isnil "CQBpositionsReg") && !(isnil "CQBpositionsStrat")};
-		CQBpositionsRegLocal = CQBpositionsReg;
+        CQBpositionsRegLocal = CQBpositionsReg;
 		CQBpositionsStratLocal = CQBpositionsStrat;
         CQBpositionsLocal = CQBpositionsRegLocal + CQBpositionsStratLocal;
 		{(_x select 0) setVariable ["reg", true, false]} foreach CQBpositionsRegLocal;
         {(_x select 0) setVariable ["strat", true, false]} foreach CQBpositionsStratLocal;
         CQBgroupsLocal = [];
         
-		_debug = _this select 0;
+        if (_debug) then {
+    		diag_log format["MSO-%1 CQB Population: Total positions found %2", time, count CQBpositionsLocal];
+    
+    		_i = 0;
+			for "_i" from 0 to ((count CQBpositionsRegLocal) - 1) do {
+         		_t = format["rp%1",_i];
+    			_m = [_t, position ((CQBpositionsRegLocal select _i) select 0), "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorRed"] call CBA_fnc_createMarker;
+    		};
+            
+            _i = 0;
+			for "_i" from 0 to ((count CQBpositionsStratLocal) - 1) do {
+         		_t = format["sp%1",_i];
+    			_m = [_t, position ((CQBpositionsStratLocal select _i) select 0), "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorGreen"] call CBA_fnc_createMarker;
+    		};
+		};
 		
 		while {true} do {
             	sleep 1;
