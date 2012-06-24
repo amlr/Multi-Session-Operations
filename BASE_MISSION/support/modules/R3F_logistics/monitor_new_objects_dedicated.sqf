@@ -22,7 +22,7 @@
 // Pending briefing late
 sleep 0.1;
 
-private ["_known_vehicles_list", "_vehicles_list", "_count_vehicles_list", "_i", "_object"];
+private ["_known_vehicles_list", "_vehicles_list", "_vehicles_list_count", "_i", "_object"];
 
 // Contain the list of vehicles (and objects) already initialized
 _known_vehicles_list = [];
@@ -31,12 +31,12 @@ while {true} do
 {
 	// Get all new vehicles of the card EXCEPT objects derived from "Static" is not recoverable by "vehicles"
 	_vehicles_list = vehicles - _known_vehicles_list;
-	_count_vehicles_list = count _vehicles_list;
+	_vehicles_list_count = count _vehicles_list;
 	
-	if (_count_vehicles_list > 0) then
+	if (_vehicles_list_count > 0) then
 	{
 		// It goes through all the vehicles in the game in 18 seconds
-		for [{_i = 0}, {_i < _count_vehicles_list}, {_i = _i + 1}] do
+		for [{_i = 0}, {_i < _vehicles_list_count}, {_i = _i + 1}] do
 		{
 			_object = _vehicles_list select _i;
 			
@@ -48,11 +48,10 @@ while {true} do
 			};
 			//#endif
 			
-			sleep (18/_count_vehicles_list);
+			// Objects have been initialized, it stores them for no longer reset
+			_known_vehicles_list set [count _known_vehicles_list,_object];
+			sleep (18/_vehicles_list_count);
 		};
-		
-		// Objects have been initialized, it stores them for no longer reset
-		_known_vehicles_list set [count _known_vehicles_list,_vehicles_list]
 	}
 	else
 	{
