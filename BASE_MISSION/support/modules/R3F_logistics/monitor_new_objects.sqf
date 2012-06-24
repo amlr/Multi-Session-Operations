@@ -15,23 +15,22 @@
 // Pending briefing late
 sleep 0.1;
 
-private ["_liste_objets_depl_heli_remorq_transp", "_list_known_vehicles", "_vehicles_list", "_count_vehicles_list", "_i", "_object"];
+private ["_liste_objets_depl_heli_remorq_transp", "_known_vehicles_list", "_vehicles_list", "_count_vehicles_list", "_i", "_object"];
 
 #ifdef R3F_LOG_enable
 // Union tables of object types used in a isKindOf
-_liste_objets_depl_heli_remorq_transp = R3F_LOG_CFG_objets_deplacables + R3F_LOG_CFG_objets_heliportables +
-	R3F_LOG_CFG_objets_remorquables + R3F_LOG_classes_objets_transportables;
+_liste_objets_depl_heli_remorq_transp = R3F_LOG_CFG_objets_deplacables + R3F_LOG_CFG_objets_heliportables +	R3F_LOG_CFG_objets_remorquables + R3F_LOG_classes_objets_transportables;
 #endif
 
 // Contain the list of vehicles (and objects) already initialized
-_list_known_vehicles = [];
+_known_vehicles_list = [];
 
 while {true} do
 {
 	if !(isNull player) then
 	{
 		// Recovery of all new vehicles of the card and new objects derived from "Static" (box of ammo, flag, ...) close to the player
-		_vehicles_list = (vehicles + nearestObjects [player, ["Static"], 80]) - _list_known_vehicles;
+		_vehicles_list = (vehicles + nearestObjects [player, ["Static"], 80]) - _known_vehicles_list;
 		_count_vehicles_list = count _vehicles_list;
 		
 		if (_count_vehicles_list > 0) then
@@ -97,7 +96,7 @@ while {true} do
 			};
 			
 			// Objects have been initialized, it stores them for no longer reset
-			_list_known_vehicles = _list_known_vehicles + _vehicles_list;
+			_known_vehicles_list set [count _known_vehicles_list,_vehicles_list]
 		}
 		else
 		{

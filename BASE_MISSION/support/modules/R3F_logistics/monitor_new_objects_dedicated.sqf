@@ -52,7 +52,7 @@ while {true} do
 		};
 		
 		// Objects have been initialized, it stores them for no longer reset
-		_known_vehicles_list = _known_vehicles_list + _vehicles_list;
+		_known_vehicles_list set [count _known_vehicles_list,_vehicles_list]
 	}
 	else
 	{
