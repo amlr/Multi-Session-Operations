@@ -302,9 +302,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 												_spawned = true;
                                         		_group = nil;
                                         		if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
-                                        		while{isNil "_group"} do {
-                                                	_group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
-                                        		};
+                                                
+                                                _group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
                                         		if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
                                         		(leader _group) setBehaviour "AWARE";
                                         		_group setSpeedMode "LIMITED";
@@ -320,11 +319,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         		if(_flag < ep_campprob && _type != "Infantry") then {
                                                 	[_group,_pos2,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
                                                 	//if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
-                                                    _grp2 = grpNull;
-                                                	while{count units _grp2 <= 2} do {
-                                                        {deleteVehicle _x} count units _grp2;
-                                                        _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
-                                                	};
+                                                    _grp2 = nil;
+                                                    _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
                                                 	if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _posGrp2, _grp2];};
                                                 	[_grp2] call BIN_fnc_taskDefend;
                                                 	ep_groups set [count ep_groups, _grp2];
@@ -363,7 +359,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             	} else {_breakouttimer = _breakouttimer + 3};
                                      		};
 
-                                    		if ((count _locunits < 1) && (_spawned)) then {
+                                    		if ((count _locunits < 1) && (_spawned)) exitwith {
                                             	if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         		if !(isnil "_group") then {
                                                 	ep_groups = ep_groups - [_group];
@@ -465,9 +461,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 								    		_spawned = true;
 											_group = nil;
                                         	if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
-                                        	while{isNil "_group"} do {
-                                                _group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
-                                        	};
+                                        	_group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
                                     		if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
 											(leader _group) setBehaviour "COMBAT";
 											_group setSpeedMode "LIMITED";
@@ -482,13 +476,11 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											if(_flag < ep_campprob && _type != "Infantry") then {
 												[_group,_pos2,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
                                                 //if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
-                                                _grp2 = grpNull;
-                                                while{count units _grp2 <= 2} do {
-                                                	{deleteVehicle _x} count units _grp2;
-                                                    _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
-                                                };
+                                                _grp2 = nil;
+                                                _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
                                             	if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _posGrp2, _grp2];};
-												[_grp2] call BIN_fnc_taskDefend;
+												
+                                                [_grp2] call BIN_fnc_taskDefend;
 												ep_groups set [count ep_groups, _grp2];
 											};
 											// Check to see if Enemy sets up AA defense
@@ -525,7 +517,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             	} else {_breakouttimer = _breakouttimer + 3};
                                      	};
 
-                                    	if ((count _locunits < 1) && (_spawned)) then {
+                                    	if ((count _locunits < 1) && (_spawned)) exitwith {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
@@ -635,10 +627,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											_spawned = true;
 											_group = nil;
                                         	if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
-                                        	while{isNil "_group"} do {
-                                                _group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
-                                        	};
-                                    		if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
+                                        	_group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
+                                        	if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
 											(leader _group) setBehaviour "COMBAT";
 											_group setSpeedMode "LIMITED";
 											_group setFormation "DIAMOND";
@@ -659,11 +649,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											if(_flag < ep_campprob && _type != "Infantry") then {
 												[_group,_pos2,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
                                                 //if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
-                                                _grp2 = grpNull;
-                                                while{count units _grp2 <= 2} do {
-                                                	{deleteVehicle _x} count units _grp2;
-                                                    _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
-                                                };
+                                                _grp2 = nil;
+                                                _grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
 												[_grp2] call BIN_fnc_taskDefend;
                                             	if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
 												ep_groups set [count ep_groups, _grp2];
@@ -705,7 +692,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             	} else {_breakouttimer = _breakouttimer + 3};
                                      	};
 
-                                    	if ((count _locunits < 1) && (_spawned)) then {
+                                    	if ((count _locunits < 1) && (_spawned)) exitwith {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];
@@ -810,10 +797,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											_spawned = true;
 											_group = nil;
                                         	if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
-                                        	while{isNil "_group"} do {
-                                        		_group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
-                                        	};
-                                    		if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
+                                        	_group = [_pos2, _grouparray select 0, _grouparray select 1] call BIS_fnc_spawnGroup;
+                                        	if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
 											(leader _group) setBehaviour "STEALTH";
 											_group setSpeedMode "LIMITED";
 											_group setFormation "DIAMOND";
@@ -827,11 +812,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											if(_flag < ep_campprob && _type != "Infantry") then {
 												[_group,_pos2,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
                                            		//if (isnil "_grp2Pos") then {_posGrp2 = _pos} else {_posGrp2 = _grp2Pos};
-                                            	_grp2 = grpNull;
-                                           		while{count units _grp2 <= 2} do {
-                                            		{deleteVehicle _x} count units _grp2;
-                                                	_grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
-                                            	};
+                                            	_grp2 = nil;
+                                           		_grp2 = [_pos, _grp2array select 0, _grp2array select 1] call BIS_fnc_spawnGroup;
 												[_grp2] call BIN_fnc_taskDefend;
                                             	if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
 												ep_groups set [count ep_groups, _grp2];
@@ -865,7 +847,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                             	} else {_breakouttimer = _breakouttimer + 3};
                                      	};
 
-                                    	if ((count _locunits < 1) && (_spawned)) then {
+                                    	if ((count _locunits < 1) && (_spawned)) exitwith {
                                             if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
                                         	if !(isnil "_group") then {
                                                 ep_groups = ep_groups - [_group];

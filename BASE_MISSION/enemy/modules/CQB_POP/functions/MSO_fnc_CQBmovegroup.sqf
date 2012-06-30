@@ -11,8 +11,6 @@ _despawn = _this select 4;
 _debug = debug_mso;
 _bldgpos = [];
 
-_house setVariable ["s", true, CQBaiBroadcast];
-
 _bldgpos = [_pos,50]  call CQB_findnearhousepos;
 if ((count _bldgpos) < 1) then {_bldgpos = [_pos,100]  call CQB_findnearhousepos};
 if ((count _bldgpos) < 1) exitwith {

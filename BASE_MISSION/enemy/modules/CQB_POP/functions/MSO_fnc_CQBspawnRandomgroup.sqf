@@ -7,6 +7,8 @@ _despawn = _this select 2;
 _debug = debug_mso;
 _grpPos = [_pos select 0,_pos select 1,-30];
 
+_house setVariable ["s", true, CQBaiBroadcast];
+
 sleep (random 1);
 
 _types = [0, MSO_FACTIONS,"Man"] call mso_core_fnc_findVehicleType;
@@ -18,6 +20,12 @@ for "_i" from 0 to (1 + floor(random 3)) do {
 
 _group = [_grpPos, EAST, _unittypes] call BIS_fnc_spawnGroup;
 _units = units _group;
+
+if (count _units < 1) exitwith {
+    if (_debug) then {diag_log format["MSO-%1 CQB Population: Group %2 deleted on creation - no units...", time, _group]};
+    deletegroup _group;
+    _house setVariable ["s", nil, CQBaiBroadcast];
+};
 
 CQBgroupsLocal set [count CQBgroupsLocal, _group];
 leader _group setvariable ["PM",_house,true];
