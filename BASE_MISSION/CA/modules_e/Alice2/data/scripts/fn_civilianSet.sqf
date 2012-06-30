@@ -29,6 +29,7 @@ if (typename _unit == typename "") then {
 		if (count _this > 1) then {position (_this select 1)} else {[1,1,1]};
 	};
 	_unit = _grp createUnit [_class, _pos, [], 0, "NONE"];
+	_unit setPosATL _pos;
 	//_unit allowdamage false;
 	_movein = true;
 };
