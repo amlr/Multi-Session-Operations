@@ -14,8 +14,13 @@ if (RMM_cas_lastTime + RMM_cas_frequency < time) then {
 			_nul = execVM "support\modules\rmm_cas\LDL_ac130\Actions\uav_action_map.sqf";
 		};
 	} else {
-	
-		_veh = ([[-1000,-1000,1000], 0, _selection, group player] call BIS_fnc_spawnVehicle) select 0;
+        
+        if (str(markerpos "CAS_spawn") == "[0,0,0]") then {
+            _veh = ([[-1000,-1000,1000], 0, _selection, group player] call BIS_fnc_spawnVehicle) select 0;
+        } else {
+			_veh = ([[(markerpos "CAS_spawn") select 0, (markerpos "CAS_spawn") select 1,1000], 0, _selection, group player] call BIS_fnc_spawnVehicle) select 0;
+        };
+        
 		[2,_veh,{_this flyinheight RMM_cas_flyinheight;}] call RMM_fnc_ExMP;
 		hint format ["%1 requested to %2 by %3", (call (RMM_cas_lines select 2)) select (lbCurSel 2), (call (RMM_cas_lines select 0)) select (lbCurSel 0), (call (RMM_cas_lines select 1)) select (lbCurSel 1)];
 		[2,_veh,{_this lockdriver true;}] call mso_core_fnc_ExMP;
