@@ -59,69 +59,73 @@ sleep 0.01;
 	_response = ["GetPlayer", format["[tmid=%1,tpid=%2]",_missionid,_puid]] call persistent_fnc_callDatabase;	
 	_dataRead = _response select 0;
 	
-	if(_dataRead select 2 == _puid) then {
-		
-		_seen = true;
-		
-		// Log Player details as returned from DB -----------------------------------------------------------------------------------------------------------------------------------
-		if (pdb_log_enabled) then {	
-			diag_log format["SERVER MSG: Welcome back, %1", _dataRead select 1];
-			diag_log format["SERVER MSG: Database player: %1 id: %2", _dataRead select 1, _dataRead select 0];
-			diag_log format["SERVER MSG: Database player: %1 puid: %2", _dataRead select 1, _dataRead select 2];
-			diag_log format["SERVER MSG: Database player: %1 name: %2", _dataRead select 1, _dataRead select 1];
-			diag_log format["SERVER MSG: Database player: %1 score: %2", _dataRead select 1, _dataRead select 4];
-			diag_log format["SERVER MSG: Database player: %1 mission id: %2", _dataRead select 1, _dataRead select 3];
-		};
-		
-		// For each client data object, load from database and set data on server and to be passed back to client
-		_i = 0;
-		{
-			private ["_type","_message","_typestr"];
-			
-			_typestr = _x;
+	if (count _dataRead > 0) then {
 
-			// Keep client updated on what is going on
-			_message = [_typestr,"S_",""] call CBA_fnc_replace; 
-			_message = tolower([_message,"_DATA",""] call CBA_fnc_replace);					
-			_serverData = format["Loading %1 data...",_message];
-			PDB_CLIENT_LOADERSTATUS = [_player,_serverData]; publicVariable "PDB_CLIENT_LOADERSTATUS";
+		if (_dataRead select 2 == _puid) then {
 			
-			// Get data model type
-			call compile format ["_type = %1",_typestr];
-			// Set stored procedure to be called to load data from db
-			call compile format["_procedure = %1_PROCEDURE",_typestr];
-			// Set id params for loading data from db
-			_params = format["[tmid=%1,tpid=%2]",_missionid,_puid];
-			// Load Data from DB
-			_response = [_procedure,_params] call persistent_fnc_callDatabase;
-			_dataArray = _response select 0;
-			// Set data on server and return array to client - does this need to be a fn_setdata?	
-			_d = 0;
+			_seen = true;
+			
+			// Log Player details as returned from DB -----------------------------------------------------------------------------------------------------------------------------------
+			if (pdb_log_enabled) then {	
+				diag_log format["SERVER MSG: Welcome back, %1", _dataRead select 1];
+				diag_log format["SERVER MSG: Database player: %1 id: %2", _dataRead select 1, _dataRead select 0];
+				diag_log format["SERVER MSG: Database player: %1 puid: %2", _dataRead select 1, _dataRead select 2];
+				diag_log format["SERVER MSG: Database player: %1 name: %2", _dataRead select 1, _dataRead select 1];
+				diag_log format["SERVER MSG: Database player: %1 score: %2", _dataRead select 1, _dataRead select 4];
+				diag_log format["SERVER MSG: Database player: %1 mission id: %2", _dataRead select 1, _dataRead select 3];
+			};
+			
+			// For each client data object, load from database and set data on server and to be passed back to client
+			_i = 0;
 			{
-				private "_data";
-				// Convert from string to SQF
-				_data = _x;
-				_thisdata = [_data, "read"] call persistent_fnc_convertFormat;
-				// Store in array to be passed to client
-				_dataRead set [_i, _thisdata];
-				// Set data on server
-				[_thisdata, _player] call (_type select _d);
+				private ["_type","_message","_typestr"];
+				
+				_typestr = _x;
+
+				// Keep client updated on what is going on
+				_message = [_typestr,"S_",""] call CBA_fnc_replace; 
+				_message = tolower([_message,"_DATA",""] call CBA_fnc_replace);					
+				_serverData = format["Loading %1 data...",_message];
+				PDB_CLIENT_LOADERSTATUS = [_player,_serverData]; publicVariable "PDB_CLIENT_LOADERSTATUS";
+				
+				// Get data model type
+				call compile format ["_type = %1",_typestr];
+				// Set stored procedure to be called to load data from db
+				call compile format["_procedure = %1_PROCEDURE",_typestr];
+				// Set id params for loading data from db
+				_params = format["[tmid=%1,tpid=%2]",_missionid,_puid];
+				// Load Data from DB
+				_response = [_procedure,_params] call persistent_fnc_callDatabase;
+				_dataArray = _response select 0;
+				// Set data on server and return array to client - does this need to be a fn_setdata?	
+				_d = 0;
+				{
+					private "_data";
+					// Convert from string to SQF
+					_data = _x;
+					_thisdata = [_data, "read"] call persistent_fnc_convertFormat;
+					// Store in array to be passed to client
+					_dataRead set [_i, _thisdata];
+					// Set data on server
+					[_thisdata, _player] call (_type select _d);
+				
+					if (pdb_log_enabled) then {	
+						diag_log format["SERVER MSG: Database %3: %1 - Data: %2", _dataRead select 1, _thisdata, _message];
+					};
+					// Next attribute
+					_d = _d + 1;
+					_i = _i + 1;
+				} foreach _dataArray;
+				
+			} foreach PDB_CLIENT_SET_DATA;
 			
-				if (pdb_log_enabled) then {	
-					diag_log format["SERVER MSG: Database %3: %1 - Data: %2", _dataRead select 1, _thisdata, _message];
-				};
-				// Next attribute
-				_d = _d + 1;
-				_i = _i + 1;
-			} foreach _dataArray;
-			
-		} foreach PDB_CLIENT_SET_DATA;
+			diag_log format ["DataRead = %1", _dataRead];
+			// Send data to client
+			PDB_PLAYER_HANDLER = _dataRead;
+			publicVariable "PDB_PLAYER_HANDLER";
+		};  // end if player in DB	
 		
-		diag_log format ["DataRead = %1", _dataRead];
-		// Send data to client
-		PDB_PLAYER_HANDLER = _dataRead;
-		publicVariable "PDB_PLAYER_HANDLER";
-	};  // end if player in DB
+	};
 	
 	if (!_seen) then {  // if new player initialize
 		

@@ -21,7 +21,8 @@ _response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 _missionArray = [];
 _missionArray = _response select 0;    // copy the returned row into array
 
-if (isNil "_missionArray") then {
+
+if ((isNil "_missionArray") || (count _missionArray == 0)) then {
 	// START mission name not found in database so create a new record
 	
 	if (pdb_log_enabled) then {
