@@ -65,6 +65,8 @@ for "_j" from 1 to _numIEDs do {
 			[_IED, typeOf _IED] execvm "enemy\modules\tup_ied\arm_ied.sqf";
 			_IED addeventhandler ["HandleDamage",{
 				deletevehicle ((_this select 0) getvariable "Trigger");
+				deletevehicle ((_this select 0) getvariable 'Det_Trigger');
+				deletevehicle ((_this select 0) getvariable 'Detect_Trigger');
 				if (_debug) then {
 					diag_log format ["MSO-%1 IED: %2 explodes due to damage by %3", time, (_this select 0), (_this select 3)];
 					[(_this select 0) getvariable "Marker"] call cba_fnc_deleteEntity;
