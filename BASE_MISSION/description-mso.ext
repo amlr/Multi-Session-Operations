@@ -279,6 +279,9 @@ class cfgFunctions {
 #ifdef ROY_PATROLOPS
 #include <enemy\modules\roy_patrolops\mps\dialog\mps_dialog.hpp>
 #endif
+#ifdef TUP_IED
+#include <enemy\modules\tup_ied\dialog.hpp>
+#endif
 #ifdef R3F_REVIVE
 	#include "support\modules\R3F_revive\dlg_attente_reanimation.h"
 #endif
