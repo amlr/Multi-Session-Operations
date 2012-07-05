@@ -13,6 +13,6 @@
 #define DEFAULT_ibr_drg_faction 1
 #define DEFAULT_ibr_unisol_faction 0
 #define DEFAULT_ibr_venator_faction 0
-#define DEFAULT_ibr_police_unit 1
+#define DEFAULT_ibr_police_unit 0
 #define DEFAULT_LIN_army 0
 #define DEFAULT_NLA 0
