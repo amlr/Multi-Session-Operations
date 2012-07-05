@@ -146,10 +146,12 @@ if (!ABORTTASK_PO && _cleared) then {
     deletegroup _HVTgrp;
 
     _idx = [ep_locations, _AO] call BIS_fnc_arrayFindDeep;
-    _idx = _idx select 0;
-    ep_locations set [_idx, ">REMOVE<"];
-    ep_locations = ep_locations - [">REMOVE<"];
-    
+    if (typename _idx == "ARRAY") then {
+    	_idx = _idx select 0;
+    	ep_locations set [_idx, ">REMOVE<"];
+   		ep_locations = ep_locations - [">REMOVE<"];
+    };
+
     mps_mission_status = 2;
 } else {
 	[format["TASK%1",_taskid],"failed"] call mps_tasks_upd;
