@@ -1243,7 +1243,7 @@ class Mission
 			vehicle="GuerillaCacheBox";
 			leader=1;
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_50";
 		};
 		class Item1
 		{
@@ -1254,7 +1254,7 @@ class Mission
 			vehicle="GuerillaCacheBox";
 			leader=1;
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_51";
 		};
 		class Item2
 		{
@@ -1423,7 +1423,7 @@ class Mission
 			side="EMPTY";
 			vehicle="PBX";
 			skill=0.60000002;
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_1";
 		};
 		class Item19
 		{
@@ -1432,7 +1432,7 @@ class Mission
 			side="EMPTY";
 			vehicle="PBX";
 			skill=0.60000002;
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_2";
 		};
 		class Item20
 		{
@@ -1442,7 +1442,7 @@ class Mission
 			side="EMPTY";
 			vehicle="GuerillaCacheBox";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_52";
 		};
 		class Item21
 		{
