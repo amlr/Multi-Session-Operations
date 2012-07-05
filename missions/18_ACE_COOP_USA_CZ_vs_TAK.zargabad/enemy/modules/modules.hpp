@@ -7,10 +7,8 @@
 
 // - To Test
 #define TUP_IED
-
 //#define WICT_ENEMYPOP
 //#define RYD_HAC
 #define ROY_PATROLOPS
-
-
+#define CQB_POP
 //#define BIS_WARFARE
