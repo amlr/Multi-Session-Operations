@@ -20,4 +20,4 @@
 // WIP
 //#define GC_PACK_COW
 //#define TN_LHDELEVATOR
-//#define ZKS_BUILD
+#define ZKS_BUILD
