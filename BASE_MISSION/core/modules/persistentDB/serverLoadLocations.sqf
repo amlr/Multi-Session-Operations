@@ -70,14 +70,9 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 
 	_vHousePositions = _locationData select 3;
 	_vHousePositions  = parsenumber _vHousePositions ;
-	
-    // Set location data	
+		
 	_vCleared = _locationData select 4;
-	if (_vCleared == "true") then {
-        _thislocation setvariable ["c", true, true];
-    } else {
-    	_thislocation setvariable ["c", nil, true];
-    };
+	if (_vCleared == "true") then { _vCleared = true; } else{ _vCleared = nil; };
 	
 	_vSuspended = _locationData select 5;
 	if (_vSuspended == "true") then { _vSuspended = true; } else{ _vSuspended = false; };
@@ -91,6 +86,9 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	
 	_vParentArray = _locationData select 9;
 	
+	// Set location data
+
+	_thislocation setvariable ["c", _vCleared, true];
 	//_thislocation setvariable ["s", _vSuspended, true];
 	_thislocation setvariable ["groupType", _vGroupType, true];
 	_thislocation setvariable ["groupStrength", _vGroupStrength, true];
@@ -101,7 +99,7 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 
 };
 
-// PV the location arrays and inform all
+// PV the location arrays
 Publicvariable "CQBpositionsStrat";
 Publicvariable "CQBpositionsReg";
 PDB_CQB_positionsloaded = true;
