@@ -3001,7 +3001,7 @@ class Mission
 			lock="UNLOCKED";
 			skill=0.60000002;
 			text="supportruck3";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_250"; 
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; 
 		};
 		class Item63
 		{
@@ -3015,7 +3015,7 @@ class Mission
 			lock="UNLOCKED";
 			skill=0.60000002;
 			text="supportruck2";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf""; "; text="mso_515";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf""; "; 
 		};
 		class Item64
 		{
@@ -3029,7 +3029,7 @@ class Mission
 			lock="UNLOCKED";
 			skill=0.60000002;
 			text="supportruck1";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf""; "; text="mso_516";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf""; "; 
 		};
 		class Item65
 		{
@@ -9505,7 +9505,7 @@ class Mission
 			leader=1;
 			lock="UNLOCKED";
 			skill=0.60000002;
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf""; "; text="mso_520"; text="mso_301";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf""; "; text="mso_520";
 		};
 	};
 	class Markers
