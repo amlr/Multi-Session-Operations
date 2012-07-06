@@ -2,7 +2,7 @@
 		
         _debug = _this select 0;
 
-        if (persistentDBHeader == 1) then {
+        if (pdb_locations_enabled) then {
             waituntil {!(isnil "PDB_CQB_positionsloaded")};
             sleep 5;
         };
