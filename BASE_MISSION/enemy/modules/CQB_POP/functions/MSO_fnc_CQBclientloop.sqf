@@ -2,8 +2,8 @@
 		
         _debug = _this select 0;
         
-        if (isnil "mpdb_locations_enabled") then {mpdb_locations_enabled = false};
-        if (mpdb_locations_enabled) then {
+        if (isnil "pdb_locations_enabled") then {pdb_locations_enabled = false};
+        if (pdb_locations_enabled) then {
             waituntil {!(isnil "PDB_CQB_positionsloaded")};
             sleep 5;
         };
