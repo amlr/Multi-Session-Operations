@@ -3112,7 +3112,7 @@ class Mission
 			side="EMPTY";
 			vehicle="C130J_US_EP1";
 			skill=0.2;
-			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf""; nul = [this] execVM ""support\modules\rmm_cas\LDL_ac130\Addon\ac130_init_AC130.sqf"";";
+			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";";
 		};
 	};
 	class Markers
