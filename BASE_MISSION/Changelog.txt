@@ -1,10 +1,11 @@
 Change Log:
 Thanks to:
-- MSO development team: Wolffy.au, Tupolov, Ryan, friznit, highhead, WobblyHeadedBob, zorrobyte, HateDread, kieran, Kolmain, and Rommel
+- MSO development team: Wolffy.au, Tupolov, highhead, friznit, WobblyHeadedBob, zorrobyte, HateDread, kieran, Ryan, Kolmain, and Rommel
+- PersistentDB dev "team" - JMan, Scott W, Firefly
 - Ryan, Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
 - Friznit, Tupolov, DaveP and Volunteer Commando Battalion (VCB)
 - Krause, Beta, Sandiford, JollyResq - United Operations (UO)
-- Kremator, SCAJolly, Katipo66, vengeance1, 16AA, VCB and AEF clans for testing
+- Kremator, SCAJolly, Katipo66, vengeance1, VRCRaptor, Dingbat, CebAlmighty, Jayc-astv, 16AA, VCB and AEF clans for testing
 - Alef and Sickboy for CBA conversion for A2Free
 - Xeno and Mikero for their Mission Builder Script
 - Spyder for Object Network Update (ONU), LoyalGuard for ARMA Electrical Grids (AEG), ArmaIIholic and Highhead for World In Conflict (WICT), LurchiDerLurch for AC130 CAS
