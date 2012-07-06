@@ -1,8 +1,9 @@
     	private ["_debug","_idx","_loopcounter","_localEnemyCount","_pU"];
 		
         _debug = _this select 0;
-
-        if (persistentDBHeader == 1) then {
+        
+        if (isnil "mpdb_locations_enabled") then {mpdb_locations_enabled = false};
+        if (mpdb_locations_enabled) then {
             waituntil {!(isnil "PDB_CQB_positionsloaded")};
             sleep 5;
         };
