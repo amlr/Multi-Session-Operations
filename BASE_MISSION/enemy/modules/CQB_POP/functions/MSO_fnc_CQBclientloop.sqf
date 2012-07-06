@@ -1,7 +1,7 @@
     	private ["_debug","_idx","_loopcounter","_localEnemyCount","_pU"];
 		
         _debug = _this select 0;
-
+        
         if (pdb_locations_enabled) then {
             waituntil {!(isnil "PDB_CQB_positionsloaded")};
             sleep 5;
