@@ -1,5 +1,28 @@
-//needs to be done Server-side just in case the client machine disconnects or crashes during the parameter defined delay.
-// Author: WobbleyheadedBob aka CptNoPants
+/* ----------------------------------------------------------------------------
+Function: MSO_fnc_createFOB
+
+Description:
+Serverside call to turn a mobile vehicle into a static FOB.
+Should to be done Server-side just in case the client machine disconnects or crashes during the parameter defined delay.
+
+Parameters:
+- A vehicle object to be turned into an FOB [Object]
+
+Returns:
+Nothing
+
+Examples:
+(begin example)
+// reassign objects to nearest cluster
+[_mhqVehicle]  call MSO_fnc_createFOB;
+(end)
+
+See Also:
+- <MSO_fnc_removeFOB>
+
+Author:
+WobbleyheadedBob aka CptNoPants
+---------------------------------------------------------------------------- */
 
 private ["_mhq","_locationHQ","_camo","_fobHQtype","_fobHQ","_vectorHQ","_directionHQ"];
 _mhq = _this select 0;
@@ -7,7 +30,7 @@ _locationHQ = position _mhq;
 _camo = _mhq getVariable "camo";
 _vectorHQ = vectorUp _mhq;
 _directionHQ = direction _mhq;
-_fobHQtype = [_mhq] call fn_getMHQType;
+_fobHQtype = [_mhq] call MSO_fnc_getMHQType;
 
 //Wait a while - Parameter Specified Setup Delay
 sleep deployment_Time;

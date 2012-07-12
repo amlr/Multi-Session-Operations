@@ -4,15 +4,12 @@
 // All Machines
 //--------------------------------------------------------------------------------------------------------------------------------
 // Functions to Deploy/Pack/Sign-in HQ's
-fn_playerSetSpawn = compile preprocessFileLineNumbers "support\modules\WHB_Multispawn\common\fn_playerSetSpawnpoint.sqf";
-fn_DeployHQ = compile preprocessFileLineNumbers "support\modules\WHB_Multispawn\common\fn_deployHQ.sqf";
-fn_undeployHQ = compile preprocessFileLineNumbers "support\modules\WHB_Multispawn\common\fn_undeployHQ.sqf";
+MSO_fnc_playerSetSpawn = compile preprocessFileLineNumbers "support\modules\WHB_Multispawn\common\fn_playerSetSpawnpoint.sqf";
+MSO_fnc_DeployHQ = compile preprocessFileLineNumbers "support\modules\WHB_Multispawn\common\fn_deployHQ.sqf";
+MSO_fnc_undeployHQ = compile preprocessFileLineNumbers "support\modules\WHB_Multispawn\common\fn_undeployHQ.sqf";
 
 // Functions to determine the HQ Structure/Vehicle type based on the MHQ Object supplied
-fn_getMHQType = compile preprocessFileLineNumbers "support\modules\WHB_Multispawn\common\fn_getMHQType.sqf";
-
-// Functions to determine the HQ Structure/Vehicle type based on the MHQ Object supplied
-fn_getMHQType = compile preprocessFileLineNumbers "support\modules\WHB_Multispawn\common\fn_getMHQType.sqf";
+MSO_fnc_getMHQType = compile preprocessFileLineNumbers "support\modules\WHB_Multispawn\common\fn_getMHQType.sqf";
 
 //Function to add actions to the HQ objects
 fn_addAction_HQ = compile preprocessFileLineNumbers "support\modules\WHB_Multispawn\common\fn_addAction_HQ.sqf";	

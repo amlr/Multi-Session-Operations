@@ -1,11 +1,26 @@
-/********************************************************************************************************
-Name: fn_DeployHQ 
-Parameters: MHQ Object
-Example: [mhqObject] call fn_deployHQ; 
-Return Value: Array of Error/Success Strings
-Description: Deploys the vehicle into a static structure that allows players to choose to spawn there when they die.
-Author: WobbleyheadedBob aka CptNoPants
-********************************************************************************************************/
+/* ----------------------------------------------------------------------------
+Function: MSO_fnc_DeployHQ
+
+Description:
+Deploys the vehicle into a static structure that allows players to choose to spawn there when they die.
+
+Parameters:
+- An MHQ object to be turned into an HQ [Object]
+
+Returns:
+- Array of Error/Success Strings
+
+Examples:
+(begin example)
+[mhqObject] call MSO_fnc_deployHQ; 
+(end)
+
+See Also:
+- <MSO_fnc_undeployHQ>
+
+Author:
+WobbleyheadedBob aka CptNoPants
+---------------------------------------------------------------------------- */
 
 // State No. 0 - Mobile/Undeployed
 // State No. 1 - Deployed

@@ -1,3 +1,28 @@
+/* ----------------------------------------------------------------------------
+Function: MSO_fnc_playerRespawn
+
+Description:
+Sets the HQ object as the player's respawn location.
+
+Parameters:
+- The player to be relocted to HQ [Player]
+
+Returns:
+- Nothing
+
+Examples:
+(begin example)
+[player] call MSO_fnc_playerRespawn; 
+(end)
+
+See Also:
+- <MSO_fnc_playerSetSpawnpoint>
+
+Author:
+WobbleyheadedBob aka CptNoPants
+---------------------------------------------------------------------------- */
+
+
 // When called it sets the player's postion to 'myRespawnPoint' (simples!)
 // Author: WobbleyheadedBob aka CptNoPants
 private ["_mySoldier","_respawnObject"];

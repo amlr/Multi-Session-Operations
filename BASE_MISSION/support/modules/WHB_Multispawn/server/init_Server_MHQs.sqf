@@ -7,7 +7,7 @@ _vehicles = _this select 0;
 PV_hqArray = [];
 
 {
-	_isMHQ = [_x] call fn_getMHQType;
+	_isMHQ = [_x] call MSO_fnc_getMHQType;
 	
 	if (_isMHQ != "non_mhq_vehicle") then 
 	{

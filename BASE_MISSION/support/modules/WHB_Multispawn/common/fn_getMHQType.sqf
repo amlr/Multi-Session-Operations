@@ -1,11 +1,27 @@
-/********************************************************************************************************
-Name: fn_getMHQType 
-Parameters: HQ Object 
-Example: [mhqObject] call fn_getMHQType; 
-Return Value: MHQ Object 
-Description: Determines the MHQ Vehicle type or FOB Building type  based on the HQ Object supplied.
-Author: WobbleyheadedBob aka CptNoPants
-********************************************************************************************************/
+/* ----------------------------------------------------------------------------
+Function: MSO_fnc_getMHQType 
+
+Description:
+Determines the MHQ Vehicle type or FOB Building type  based on the HQ Object supplied.
+
+Parameters:
+- HQ Object 
+
+Returns:
+- MHQ Object 
+
+Examples:
+(begin example)
+[mhqObject] call MSO_fnc_getMHQType;
+(end)
+
+See Also:
+- <MSO_fnc_deployHQ>
+- <MSO_fnc_undeployHQ>
+
+Author:
+WobbleyheadedBob aka CptNoPants
+---------------------------------------------------------------------------- */
 
 private ["_MHQtype","_mhq"];
 _mhq = _this select 0;

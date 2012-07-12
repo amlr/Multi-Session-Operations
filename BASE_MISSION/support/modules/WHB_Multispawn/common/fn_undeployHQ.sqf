@@ -1,11 +1,32 @@
-/********************************************************************************************************
-Name: fn_undeployHQ 
-Parameters: HQ Object
-Example: [hqObject] call fn_undeployHQ;
-Return Value: Array of Error/Success Strings
-Description: Packs the static structure up back into a mobile vehicle.
-Author: WobbleyheadedBob aka CptNoPants
-********************************************************************************************************/
+/* ----------------------------------------------------------------------------
+Function: MSO_fnc_undeployHQ
+
+Description:
+Packs the static structure up back into a mobile vehicle.
+
+Parameters:
+- An HQ object to be turned into an MHQ [Object]
+
+Returns:
+- Array of Error/Success Strings
+
+Examples:
+(begin example)
+[hqObject] call MSO_fnc_undeployHQ;
+(end)
+
+See Also:
+- <MSO_fnc_deployHQ>
+
+Author:
+WobbleyheadedBob aka CptNoPants
+---------------------------------------------------------------------------- */
+
+// State No. 0 - Mobile/Undeployed
+// State No. 1 - Deployed
+// State No. 2 - Deploying
+// State No. 3 - Undeploying/Packing up
+
 private ["_fobHQ","_returnMessage","_fobHQState"];
 
 _fobHQ = _this select 0;

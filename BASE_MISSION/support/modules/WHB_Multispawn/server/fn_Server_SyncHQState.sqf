@@ -1,5 +1,28 @@
-// Determine what actions to take based on changes to PV_server_syncHQState
-// Author: WobbleyheadedBob aka CptNoPants
+/* ----------------------------------------------------------------------------
+Function: MSO_fnc_server_syncHQState
+
+Description:
+Determines what actions to take based on changes to PV_server_syncHQState
+
+Parameters:
+- A state variable [Num]
+- A vehicle object to be turned into an FOB [Object]
+
+Returns:
+Nothing
+
+Examples:
+(begin example)
+[_mhqState, _mhqObject]  call MSO_fnc_server_syncHQState;
+(end)
+
+See Also:
+- <MSO_fnc_createFOB>
+- <MSO_fnc_removeFOB>
+
+Author:
+WobbleyheadedBob aka CptNoPants
+---------------------------------------------------------------------------- */
 
 private ["_mhqObject","_mhqState"];
 _mhqState = _this select 0;

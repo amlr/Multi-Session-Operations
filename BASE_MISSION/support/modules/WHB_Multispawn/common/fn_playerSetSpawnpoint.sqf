@@ -1,5 +1,32 @@
-// If the HQ is in the correct state, the HQ Object is tied to the player as their respawn point.
-// Author: WobbleyheadedBob aka CptNoPants
+/* ----------------------------------------------------------------------------
+Function: MSO_fnc_playerSetSpawnpoint
+
+Description:
+Sets the HQ object as the player's respawn location.
+
+Parameters:
+- None
+
+Returns:
+- Array of Error/Success Strings
+
+Examples:
+(begin example)
+[_fobHQ] call MSO_fnc_playerSetSpawnpoint; 
+(end)
+
+See Also:
+- <MSO_fnc_playerRespawn>
+
+Author:
+WobbleyheadedBob aka CptNoPants
+---------------------------------------------------------------------------- */
+
+// State No. 0 - Mobile/Undeployed
+// State No. 1 - Deployed
+// State No. 2 - Deploying
+// State No. 3 - Undeploying/Packing up
+
 private ["_fobHQ","_fobState","_returnMessage"];
 _fobHQ = _this select 0;
 _fobState = _fobHQ getVariable "MHQState";
