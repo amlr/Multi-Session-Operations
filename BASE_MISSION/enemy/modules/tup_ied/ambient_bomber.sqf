@@ -21,12 +21,20 @@ _debug = debug_mso;
 //		_grp = createGroup CIVILIAN;
 		_grp = createGroup EAST;
 		_pos = [_location, 0, _size - 10, 3, 0, 0, 0] call BIS_fnc_findSafePos;
-//		_skins = ["TK_CIV_Takistani01_EP1","TK_CIV_Takistani02_EP1","TK_CIV_Takistani03_EP1","TK_CIV_Takistani04_EP1","TK_CIV_Takistani05_EP1","TK_CIV_Takistani06_EP1","TK_CIV_Worker01_EP1","TK_CIV_Worker02_EP1"];
-		_skins = (BIS_alice_mainscope getvariable "ALICE_classes") call BIS_fnc_selectRandom;
-        if (isnil "_skins") then {
+
+		// Selecting classes from civis
+        _bomberfactions = (BIS_alice_mainscope getvariable "townsFaction");
+        _skins = [];
+        {
+    		_faction = _x select 2;
+     		if (_faction in _bomberfactions) then {_skins = _skins + [_x select 0]};
+		} foreach (BIS_alice_mainscope getvariable "Alice_Classes");
+        if (count _skins < 1) then {
           _skins = ["TK_CIV_Takistani01_EP1","TK_CIV_Takistani02_EP1","TK_CIV_Takistani03_EP1","TK_CIV_Takistani04_EP1","TK_CIV_Takistani05_EP1","TK_CIV_Takistani06_EP1","TK_CIV_Worker01_EP1","TK_CIV_Worker02_EP1"];
         };
-		_bomber = _grp createUnit [_skins select 0, _pos, [], _size, "NONE"];
+        
+        _skin = _skins call BIS_fnc_selectRandom;
+		_bomber = _grp createUnit [_skin, _pos, [], _size, "NONE"];
 		_bomber addweapon "EvMoney";
 		if (_debug) then {
 			diag_log format ["MSO-%1 Suicide Bomber: created at %2", time, _pos];
