@@ -8,7 +8,7 @@ if ((str(_base1) == "[0,0,0]") && (str(_base2) == "[0,0,0]")) then {_base1 = mar
 if (isnil "rmm_ep_safe_zone") then {rmm_ep_safe_zone = 1000};
 
 _positions = [];
-_cqb_spawn_intensity = 1 - (cqb_spawn / 10);
+_cqb_spawn_intensity = 1 - (cqb_spawn / 100);
 
 _BuildingTypeStrategic = [
 "Land_A_TVTower_Base",

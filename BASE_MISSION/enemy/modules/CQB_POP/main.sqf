@@ -1,4 +1,4 @@
-if (isnil "CQB_spawn") then {CQB_spawn = 1};
+if (isnil "CQB_spawn") then {CQB_spawn = 10};
 if (CQB_spawn == 0) exitwith {diag_log format["MSO-%1 CQB Population turned off! Exiting...", time]};
 
 if (isnil "CQBaicap") then {CQBaicap = 2};
