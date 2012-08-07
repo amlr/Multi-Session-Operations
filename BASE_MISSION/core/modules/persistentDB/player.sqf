@@ -27,22 +27,22 @@ G_PLAYER_DATA = [
 		{
 			case "erc":
 			{
-				diag_log ["player is standing"];
+				//diag_log ["player is standing"];
 				_thisstance = "Stand";
 			};
 			case "knl":
 			{
-				diag_log ["player is kneeling"];
+				//diag_log ["player is kneeling"];
 				_thisstance = "Crouch"; 
 			};
 			case "pne":
 			{
-				diag_log ["player is prone"];
+				//diag_log ["player is prone"];
 				_thisstance = "Lying";
 			};
 		}; _thisstance;},
 	{ (_this select 0) getVariable "playerSide";},
-	{	diag_log format["vehicle = %1", vehicle (_this select 0)];
+	{	//diag_log format["vehicle = %1", vehicle (_this select 0)];
 		if (vehicle (_this select 0) != (_this select 0)) then { 
 			str (vehicle (_this select 0));
 		};},

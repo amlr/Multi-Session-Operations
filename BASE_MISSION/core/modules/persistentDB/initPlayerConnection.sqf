@@ -119,7 +119,7 @@ sleep 0.01;
 				
 			} foreach PDB_CLIENT_SET_DATA;
 			
-			diag_log format ["DataRead = %1", _dataRead];
+			//diag_log format ["DataRead = %1", _dataRead];
 			// Send data to client
 			PDB_PLAYER_HANDLER = _dataRead;
 			publicVariable "PDB_PLAYER_HANDLER";

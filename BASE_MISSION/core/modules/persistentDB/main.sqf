@@ -43,7 +43,7 @@ if (isdedicated) then {
 	persistent_fnc_saveData = compile PP "core\modules\persistentDB\fn_saveData.sqf";
 	ENV_dedicated = true; publicVariable "ENV_dedicated"; 
 	onPlayerConnected {[_id, _name, _uid] call compile PP "core\modules\persistentDB\onConnected.sqf"}; 
-	onPlayerDisconnected { [_id, _name, _uid] call compile PP "core\modules\persistentDB\onDisconnected.sqf" }; 
+	onPlayerDisconnected {[_id, _name, _uid] call compile PP "core\modules\persistentDB\onDisconnected.sqf" }; 
 	
 	// Spawn auto-save process - server
 	[] spawn {

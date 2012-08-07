@@ -1,6 +1,6 @@
 // Load Vehicles
 
-private ["_missionid", "_procedureName", "_parameters", "_response", "_ObjectCountInDB", "_serverData", "_countInDB", "_z", "_thisID", "_objectData", "_vObject", "_tmp", "_thisObject", "_vPosition", "_vDir", "_vUp", "_vDam", "_vWeaponCargo"];
+private ["_missionid", "_procedureName", "_parameters", "_response", "_ObjectCountInDB", "_serverData", "_countInDB", "_z", "_i", "_m","_thisID", "_objectData", "_vObject", "_tmp", "_thisObject", "_vPosition", "_vDir", "_vUp", "_vDam", "_vWeaponCargo","_vMagazineCargo"];
 
 _missionid = _this select 0;
 
@@ -20,7 +20,7 @@ if (pdb_log_enabled) then {
 
 _ObjectCountInDB = _response select 0;    // copy the returned row into array
 
-diag_log ["CountobjectIDsByMission _objectCountInDB: ",  _objectCountInDB, typeName _objectCountInDB];
+diag_log format ["SERVER MSG: Loading %1 Objects from database.",   _objectCountInDB];
 
 _serverData = format["Getting objects from database..."];
 PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
@@ -38,10 +38,6 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	
 	_parameters = format["[tintid=%1,tmid=%2]", _thisID,_missionid];
 	
-	if (pdb_log_enabled) then {
-		diag_log format["SERVER MSG: SQL output: %1", _parameters];
-	};
-	
 	//	diag_log ("callExtension->Arma2NETMySQL: GetobjectByInitid");		
 	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 	//	diag_log ["callExtension->Arma2NETMySQL: GetobjectByInitid _response: ",  _response, typeName _response];
@@ -52,7 +48,7 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	
 	_vObject =_objectData select 1;
 	
-	//diag_log ["_vObject: ",  _vObject, typeName _vObject];
+	//diag_log ["ObjectData: ",  _ObjectData, typeName _ObjectData];
 	
 	// Convert string to Object
 
@@ -86,24 +82,36 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 		
 		//										diag_log ["_vDam: ",  _vDam, typeName _vDam];
 		
-		_vWeaponCargo = _objectData select 6;
-		_vWeaponCargo = [_vWeaponCargo, "|", ","] call CBA_fnc_replace; 
-		_vWeaponCargo = call compile _vWeaponCargo;	
+		if (pdb_objects_contents_enabled) then {
+			clearWeaponCargoGlobal _thisObject;
+			_vWeaponCargo = _objectData select 6;
+			_vWeaponCargo = [_vWeaponCargo, "|", ","] call CBA_fnc_replace; 
+			_vWeaponCargo = call compile _vWeaponCargo;	
+			
+			clearMagazineCargoGlobal _thisObject;
+			_vMagazineCargo = _objectData select 7;
+			_vMagazineCargo = [_vMagazineCargo, "|", ","] call CBA_fnc_replace; 
+			_vMagazineCargo = call compile _vMagazineCargo;	
+			//										diag_log ["_vWeaponCargo: ",  _vWeaponCargo, typeName _vWeaponCargo];
+		} else {
+			_vWeaponCargo = [];
+			_vMagazineCargo = [];
+		};
 		
-		
-		_vMagazineCargo = _objectData select 7;
-		_vMagazineCargo = [_vMagazineCargo, "|", ","] call CBA_fnc_replace; 
-		_vMagazineCargo = call compile _vMagazineCargo;	
-		//										diag_log ["_vWeaponCargo: ",  _vWeaponCargo, typeName _vWeaponCargo];
-		
-		// set the vehicles position
+		// set the objects position
 		_thisObject setPosATL _vPosition;
-		// set the vehicles direction
+		// set the objects direction
 		_thisObject setVectorDirAndUp [_vDir,_vUp];
-		// set the vehicles damage
+		// set the objects damage
 		_thisObject setDammage _vDam;
-		// set the vehicles WeaponCargo 
-		_thisObject addWeaponCargo _vWeaponCargo;
-		_thisObject addMagazineCargo _vMagazineCargo;
+		
+		// set the objects WeaponCargo 
+		for "_i" from 0 to (count (_vWeaponCargo select 0)-1) do {
+				_thisObject addWeaponCargoGlobal [(_vWeaponCargo select 0) select _i, (_vWeaponCargo select 1) select _i];
+		};
+		
+		for "_m" from 0 to ((count (_vMagazineCargo select 0)) -1) do {
+				_thisObject addMagazineCargoGlobal [(_vMagazineCargo select 0) select _m, (_vMagazineCargo select 1) select _m];
+		};
 
 };

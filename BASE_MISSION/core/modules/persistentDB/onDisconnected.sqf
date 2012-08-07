@@ -26,7 +26,7 @@
 // ====================================================================================
 // MAIN
 
-private ["_id", "_pname", "_puid", "_player", "_missionid", "_thisPlayerData", "_thisdata", "_thisWeaponData", "_thisACEData", "_params", "_parameters", "_i", "_procedureName", "_response", "_thisObject", "_landVehicles", "_landVehicleCount", "_missionLandVehicles", "_vDir", "_vUp", "_vDam", "_vPosition", "_vObject", "_vFuel", "_vLocked", "_vWeaponCargo", "_vEngine", "_result", "_thisObjectData", "_object", "_date"];
+private ["_id", "_pname", "_puid", "_player", "_missionid", "_thisPlayerData", "_thisdata", "_thisWeaponData", "_thisACEData", "_params", "_parameters", "_i", "_procedureName", "_response", "_thisObject", "_landVehicles", "_landVehicleCount", "_missionLandVehicles", "_vDir", "_vUp", "_vDam", "_vPosition", "_vObject", "_vFuel", "_vLocked", "_vWeaponCargo", "_vMagazineCargo","_vEngine", "_result", "_thisObjectData", "_object", "_date"];
 
 _id = _this select 0; 
 _pname = _this select 1; 
@@ -34,7 +34,9 @@ _puid  = _this select 2;
 
 _missionid = (MISSIONDATA select 1);
 
-saveOnQuit = {	
+if (pdb_log_enabled) then {
+	diag_log format["SERVER MSG: Player %1, is either leaving the server or auto-saving, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
+};
 	
 	if (_pname != "__SERVER__") then {
 
@@ -45,6 +47,7 @@ saveOnQuit = {
 				diag_log format["SERVER MSG: Loop. %1", getPlayerUID _x];
 			};	
 			
+
 			if (getPlayerUID _x == _puid) exitWith {
 				
 				if (pdb_log_enabled) then {		
@@ -130,16 +133,21 @@ saveOnQuit = {
 				_vUp = str(vectorUp _thisObject); //   setVectorDirAndUp
 				_vFuel = str(fuel _thisObject);  // setFuel
 				_vLocked = str(locked _thisObject); // Lock  || setVehicleLock ?
-				_vWeaponCargo = str(getWeaponCargo _thisObject); // addWeaponCargo 
 				_vEngine = str(isEngineOn _thisObject); // engineOn
-				_vMagazineCargo = str(getMagazineCargo _thisObject); // addMagazineCargo	
-				
+
+				if (pdb_objects_contents_enabled) then {
+					_vWeaponCargo = str(getWeaponCargo _thisObject); // addWeaponCargo 
+					_vMagazineCargo = str(getMagazineCargo _thisObject); // addMagazineCargo
+				} else {
+					_vWeaponCargo = "";
+					_vMagazineCargo = "";
+				};
 				_vPosition = [_vPosition, ",", "|"] call CBA_fnc_replace;
 				_vDir = [_vDir, ",", "|"] call CBA_fnc_replace;
 				_vUp = [_vUp, ",", "|"] call CBA_fnc_replace;
-				_vWeaponCargo = [_vWeaponCargo, ",", "|"] call CBA_fnc_replace; 	
+				_vWeaponCargo = [_vWeaponCargo, ",", "|"] call CBA_fnc_replace;
 				_vMagazineCargo = [_vMagazineCargo, ",", "|"] call CBA_fnc_replace; 		
-								
+			
 				_parameters = format["[tobj=%1,tpos=%2,tdir=%3,tup=%4,tdam=%5,tfue=%6,tlkd=%7,twcar=%8,teng=%9,twmag=%10,tmid=%11,tintid=%12]",_vObject, _vPosition, _vDir, _vUp, _vDam, _vFuel, _vLocked, _vWeaponCargo, _vEngine, _vMagazineCargo, _missionid, _landVehicleCount];
 				
 				if (pdb_log_enabled) then {
@@ -206,8 +214,15 @@ saveOnQuit = {
 				_vDam = str(getDammage _thisObject); // setDammage
 				_vDir = str(vectorDir _thisObject); // setVectorDirAndUp
 				_vUp = str(vectorUp _thisObject); //   setVectorDirAndUp
-				_vWeaponCargo = str(getWeaponCargo _thisObject); // addWeaponCargo 
-				_vMagazineCargo = str(getMagazineCargo _thisObject); // addMagazineCargo
+				
+				if (pdb_objects_contents_enabled) then {
+					_vWeaponCargo = str(getWeaponCargo _thisObject); // addWeaponCargo 
+					_vMagazineCargo = str(getMagazineCargo _thisObject); // addMagazineCargo
+				} else {
+					_vWeaponCargo = "";
+					_vMagazineCargo = "";
+				};
+				
 				//_vR3FTransportedBy = _thisObject getVariable "R3F_LOG_est_transporte_par";
 				//_vR3FMovedBy = _thisObject getVariable "R3F_LOG_est_deplace_par";
 		
@@ -224,7 +239,7 @@ saveOnQuit = {
 				};
 				
 				_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
-				
+
 				_objectCount =_objectCount+1;
 			};
 		} forEach allmissionobjects _objectType; 
@@ -317,15 +332,7 @@ saveOnQuit = {
 	exit;	
 			
 	};
-};
-// ====================================================================================
-// MAIN	
 
-if (pdb_log_enabled) then {
-	diag_log format["SERVER MSG: Player %1, is either leaving the server or auto-saving, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
-};
-
-call saveOnQuit;
 
 
 

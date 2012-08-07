@@ -58,6 +58,8 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 if (isnil"mpdb_landvehicles_enabled" || mpdb_landvehicles_enabled == 1) then { pdb_landvehicles_enabled = true;} else {pdb_landvehicles_enabled = false;};
 if (isnil"mpdb_objects_enabled" || mpdb_objects_enabled == 0) then { pdb_objects_enabled = false;} else {pdb_objects_enabled = true;};
 if (isnil"mpdb_locations_enabled" || mpdb_locations_enabled == 0) then {pdb_locations_enabled = false;} else {pdb_locations_enabled = true;};
+if (isnil"mpdb_objects_contents_enabled" || mpdb_objects_contents_enabled == 0) then {pdb_objects_contents_enabled = false;} else {pdb_objects_contents_enabled = true;};
+
 
 // To be completed
 

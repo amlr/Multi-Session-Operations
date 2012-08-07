@@ -31,13 +31,13 @@ if (pdb_persistentScores_enabled) then {
 		if (pdb_globalScores_enabled) then {
 			_player addScore _globalPlayerScore; // add the globalscore
 			if (pdb_log_enabled) then {
-				 	diag_log format["SERVER MSG: Adding score %1 to %2, playerObject, %3 puid, %4", _globalPlayerScore, _pname, _player, _puid];
+				 	diag_log format["SERVER MSG: Adding score %1 to %2, playerObject:%3, puid:%4", _globalPlayerScore, _pname, _player, _puid];
 			};
 		} else {
 			_thisscore = _score;
 			_player addScore _thisscore;
 			if (pdb_log_enabled) then {
-				  	diag_log format["SERVER MSG: Adding score %1 to %2, playerObject, %3 puid, %4",_thisscore, _pname, _player, _puid];
+				  	diag_log format["SERVER MSG: Adding score %1 to %2, playerObject:%3, puid:%4",_thisscore, _pname, _player, _puid];
 			};
 		};
 };
@@ -50,7 +50,7 @@ if (pdb_persistentScores_enabled) then {
 		PDB_ACTIVATEPLAYER = [_player,_pname,_seen]; 
 		publicVariable "PDB_ACTIVATEPLAYER";
 		diag_log ["PersistentDB: SERVER PV - PDB_ACTIVATEPLAYER: ",  PDB_ACTIVATEPLAYER];
-		diag_log["PersistentDB: UPDATESCORES, time: ", time];
+		//diag_log["PersistentDB: UPDATESCORES, time: ", time];
 		
 
 

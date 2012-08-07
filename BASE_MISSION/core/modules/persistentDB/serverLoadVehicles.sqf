@@ -1,6 +1,6 @@
 // Load Vehicles
 
-private ["_procedureName", "_parameters", "_missionid", "_response", "_landVehicleCountInDB", "_serverData", "_countInDB", "_z", "_thisID", "_landVehicleData", "_vObject", "_tmp", "_thisVehicle", "_vPosition", "_vDir", "_vUp", "_vDam", "_vFuel", "_vLocked", "_vWeaponCargo", "_vEngine"];
+private ["_procedureName", "_parameters", "_missionid", "_response", "_landVehicleCountInDB", "_serverData", "_countInDB", "_z", "_thisID", "_landVehicleData", "_vObject", "_tmp", "_thisVehicle", "_vPosition", "_vDir", "_vUp", "_vDam", "_vFuel", "_vLocked", "_vWeaponCargo", "_vMagazineCargo","_vEngine"];
 
 _missionid = _this select 0;
 
@@ -20,7 +20,7 @@ if (pdb_log_enabled) then {
 
 _landVehicleCountInDB = _response select 0;    // copy the returned row into array
 
-diag_log ["CountLandVehicleIDsByMission _landVehicleCountInDB: ",  _landVehicleCountInDB, typeName _landVehicleCountInDB];
+diag_log format ["SERVER MSG: Loading %1 Vehicles from database.",  _landVehicleCountInDB];
 
 _serverData = format["Getting land vehicles from database..."];
 PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
@@ -37,10 +37,6 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	_thisID = _z+1;
 	
 	_parameters = format["[tintid=%1,tmid=%2]", _thisID,_missionid];
-	
-	if (pdb_log_enabled) then {
-		diag_log format["SERVER MSG: SQL output: %1", _parameters];
-	};
 	
 	//	diag_log ("callExtension->Arma2NETMySQL: GetLandVehicleByInitid");		
 	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
@@ -98,21 +94,25 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 		if (_vLocked == "false") then { _vLocked = false; } else{ _vLocked = true; };
 		//										 diag_log ["_vLocked: ",  _vLocked, typeName _vLocked];
 		
-		
-		_vWeaponCargo = _landVehicleData select 8;
-		_vWeaponCargo = [_vWeaponCargo, "|", ","] call CBA_fnc_replace; 
-		_vWeaponCargo = call compile _vWeaponCargo;	
-		
-		//										diag_log ["_vWeaponCargo: ",  _vWeaponCargo, typeName _vWeaponCargo];
-		
 		_vEngine = _landVehicleData select 9;
 		if (_vEngine == "false") then { _vEngine = false; } else{ _vEngine = true; };
-		
 		//										diag_log ["_vEngine: ",  _vEngine, typeName _vEngine]
+
+		if (pdb_objects_contents_enabled) then {
+			clearWeaponCargoGlobal _thisVehicle;
+			_vWeaponCargo = _landVehicleData select 8;
+			_vWeaponCargo = [_vWeaponCargo, "|", ","] call CBA_fnc_replace; 
+			_vWeaponCargo = call compile _vWeaponCargo;	
 		
-		_vMagazineCargo = _objectData select 10;
-		_vMagazineCargo = [_vMagazineCargo, "|", ","] call CBA_fnc_replace; 
-		_vMagazineCargo = call compile _vMagazineCargo;	
+		//										diag_log ["_vWeaponCargo: ",  _vWeaponCargo, typeName _vWeaponCargo];
+			clearMagazineCargoGlobal _thisVehicle;
+			_vMagazineCargo = _objectData select 10;
+			_vMagazineCargo = [_vMagazineCargo, "|", ","] call CBA_fnc_replace; 
+			_vMagazineCargo = call compile _vMagazineCargo;	
+		} else {
+			_vWeaponCargo = [];
+			_vMagazineCargo = [];
+		};
 		
 		// set the vehicles position
 		_thisVehicle setPosATL _vPosition;
@@ -125,8 +125,12 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 		// set the vehicles lock 
 		_thisVehicle lock _vLocked;
 		// set the vehicles WeaponCargo 
-		_thisVehicle addWeaponCargo _vWeaponCargo;
-		_thisObject addMagazineCargo _vMagazineCargo;
+		for "_i" from 0 to (count (_vWeaponCargo select 0)-1) do {
+				_thisVehicle addWeaponCargoGlobal [(_vWeaponCargo select 0) select _i, (_vWeaponCargo select 1) select _i];
+		};
+		for "_m" from 0 to (count (_vMagazineCargo select 0)-1) do {
+				_thisVehicle addMagazineCargoGlobal [(_vMagazineCargo select 0) select _m, (_vMagazineCargo select 1) select _m];
+		};
 		// set the vehicles engine 
 		_thisVehicle engineOn _vEngine;
 

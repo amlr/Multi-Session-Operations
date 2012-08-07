@@ -19,8 +19,13 @@ PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS
 _procedureName = "GetMissionByName"; _parameters = format["[tna=%1]",pdb_fullmissionName];	
 _response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 _missionArray = [];
-_missionArray = _response select 0;    // copy the returned row into array
+if (count _response > 0) then {
+	_missionArray = _response select 0;
+} else {
+	_missionArray = [];
+};// copy the returned row into array
 
+//diag_log format ["missionarray = %1",_missionArray];
 
 if ((isNil "_missionArray") || (count _missionArray == 0)) then {
 	// START mission name not found in database so create a new record
@@ -34,7 +39,7 @@ if ((isNil "_missionArray") || (count _missionArray == 0)) then {
 	
 	// Set new mission details
 	_procedureName = "NewMission"; 
-	_parameters = format["[tna=%1,ttd=%2,tsc=%3,tgsc=%4,tlog=%5,twea=%6,tace=%7,tlv=%8,tobj=%9,tloc=%10]",pdb_fullmissionName,mpdb_date_enabled,mpdb_persistentScores_enabled,mpdb_globalScores_enabled,mpdb_log_enabled,mpdb_weapons_enabled,mpdb_ace_enabled,mpdb_landvehicles_enabled,mpdb_objects_enabled,mpdb_locations_enabled];		
+	_parameters = format["[tna=%1,ttd=%2,tsc=%3,tgsc=%4,tlog=%5,twea=%6,tace=%7,tlv=%8,tobj=%9,tloc=%10,tobc=%11]",pdb_fullmissionName,mpdb_date_enabled,mpdb_persistentScores_enabled,mpdb_globalScores_enabled,mpdb_log_enabled,mpdb_weapons_enabled,mpdb_ace_enabled,mpdb_landvehicles_enabled,mpdb_objects_enabled,mpdb_locations_enabled,mpdb_objects_contents_enabled];		
 	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 	
 	_serverData = format["Mission: %1 created an entry...", pdb_fullmissionName];
@@ -63,10 +68,12 @@ if (_missionArray select 1 == pdb_fullmissionName) then {  // START mission name
 	if (_missionArray select 9 == "1") then { pdb_landvehicles_enabled = true; } else { pdb_landvehicles_enabled = false; };  // returned enable persistent land vehicle data?
 	if (_missionArray select 10 == "1") then { pdb_objects_enabled = true; } else { pdb_objects_enabled = false; };  // returned enable persistent objects data?
 	if (_missionArray select 11 == "1") then { pdb_locations_enabled = true; } else { pdb_locations_enabled = false; };   // returned enable persistentlocations data?	
-	if (_missionArray select 12 == "1") then { pdb_tasks_enabled = true; } else { pdb_tasks_enabled = false; };  // returned enable persistent ship data?
-	if (_missionArray select 13 == "1") then { pdb_AAR_enabled = true; } else { pdb_AAR_enabled = false; };  // returned enable persistent building data?
-	if (_missionArray select 14 == "1") then { pdb_marker_enabled = true; } else { pdb_marker_enabled = false; };   // returned enable persistent marker data?
-	if (_missionArray select 15 == "1") then { pdb_bans_enabled = true; } else { pdb_bans_enabled = false; };  // returned enable player bans?	
+	if (_missionArray select 12 == "1") then { pdb_objects_contents_enabled = true; } else { pdb_objects_contents_enabled = false; };  // returned enable player bans?	
+	
+	if (_missionArray select 13 == "1") then { pdb_tasks_enabled = true; } else { pdb_tasks_enabled = false; };  // returned enable persistent ship data?
+	if (_missionArray select 14 == "1") then { pdb_AAR_enabled = true; } else { pdb_AAR_enabled = false; };  // returned enable persistent building data?
+	if (_missionArray select 15 == "1") then { pdb_marker_enabled = true; } else { pdb_marker_enabled = false; };   // returned enable persistent marker data?
+
 	
 	if (pdb_date_enabled) then {	
 		
@@ -75,7 +82,7 @@ if (_missionArray select 1 == pdb_fullmissionName) then {  // START mission name
 		if (typename _thisMissionDate == "ARRAY") then {
 			
 			if ((count _thisMissionDate) == 5) then {
-				diag_log["setdate:  _thisMissionDate: ", _thisMissionDate];
+				//diag_log["setdate:  _thisMissionDate: ", _thisMissionDate];
 				setdate _thisMissionDate;
 			};
 		

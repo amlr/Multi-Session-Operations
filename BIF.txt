@@ -1,0 +1,104 @@
+[CENTER][SIZE=4][B][URL="http://dev-heaven.net/projects/mso/files"]v4.4 released!!!![/URL][/B][/SIZE]
+Over 20 sample missions including: [B]Celle2[/B], Hazar-Kot, Eden, Tigeria, Qom Province, CLAfghan, Lingor, Tora Bora, Podagorsk, Cicada, Takistan, Chernarus, Zargabad, Celle and Utes
+A2CO, ACE, CWR missions [B]AVAILABLE![/B]
+COOP, TvT, CTI missions [B]AVAILABLE![/B]
+
+[B]MAJOR PERFORMANCE IMPROVEMENTS!
+Experimental Persistent Database implemented![/B][/CENTER]
+ 
+[CENTER][IMG]http://img15.imageshack.us/img15/420/msox.jpg[/IMG][/CENTER]
+ 
+[CENTER][B]Get the latest 4.4 Missions AND MSO Code Base [URL="http://dev-heaven.net/projects/mso/files"]here[/URL] [/B][/CENTER]
+ 
+[CENTER][B]Requires CBA[/B][/CENTER]
+ 
+[CENTER][B][URL="http://dev-heaven.net/projects/mso/documents"]Documentation[/URL][/B][/CENTER]
+ 
+[CENTER][B]You need [URL="https://dev-heaven.net/attachments/download/15365/Eliteness2.90.rar"]ELITENESS[/URL] to depbo these missions[/B][/CENTER]
+ 
+[B]Note:[/B] We will be regularly patching/fixing the code and missions as feedback comes in, so please check back [URL="http://dev-heaven.net/projects/mso/files"]here for any newer versions[/URL].
+ 
+[B]What's New for v4.4?[/B]
+Over 200 bug fixes or improvements (see Changelog.txt)
+
+[U]Core[/U]
+- Added PersistentDB! Now saves mission, player, object, vehicle and location data to external DB. Updated to support latest version of Arma2Net1.11.1 by Scott W and MySQLPlugIn by Firefly. Note: PDB currently does not support R3F cargo functionality, remove cargo before exiting mission. Objects that need to be persisted (i.e. those that are resupplied) should have a name added to them in the editor (or via text replacement in SQM) - this has been done only on COOP missions so far. Turn off NOMAD if you are going to use it, see MSO wiki for PersistentDB installation instructions ([url]https://dev-heaven.net/projects/mso/wiki/Wiki[/url]). PDB requires OA 1.60 Beta patch version with CallExtension feature.
+- DRN_WEATHER Updated to version 2
+- Array addition performance improvements
+- Updated default parameters for best performance
+
+[U]Support[/U]
+- Implemented custom CAS-spawn marker (default as is). Mission designer can place a marker named "CAS_spawn" on the pos he likes CAS to be spawned. Made CAS working on Clafghan (northern populated at least) this way.
+- Made WOB_Multispwn independent of CBA
+- R3F_logistics Translated to Frenglish
+- Check for ACE on initialization of RMM_Revive, R3F_Revive, RMM_Tyres
+- Excluded AC130 and UAV until we found a fix (client logics passed to server on disc)
+- R3F_LOGISTICS Added Wildcat
+- Added R3F_Revive Module (default off)
+
+[U]Enemy[/U]
+- IED Disarm feature added for TUP_IEDs (must be engineer class or carrying ACE Minedetector / EOD mod THOR III device)
+- Client side AI enemy population module "CQB" added! Major performance improvements across the board for MSO.
+- Added parameters for ZORA
+- Added Sniper Operations to PO2
+- Added Auto tasking for PO2
+- Added Dynamic Enemy Population to improve performance of En Pop module
+- Enemy now populate in map bunkers and fortifications
+- Added support for Lingor factions
+- Fixed PO2 issues
+- Improved ambient bombers
+- Added Nuclear Mission to PO2.
+
+[U]Ambience[/U]
+- Moved ambient civs to client side for major performance improvement
+- Added TPW houselights
+- Improved ALICE house effects
+- Changed ROE for ambient air
+- Numerous improvements to ambient civs for better immersion
+
+[U]Missions[/U]
+- mission.sqm: removed some lamp-logics and surrender module that wandered to server on disconnect
+- Added Celle 2
+- Updated Lingor
+- Updated CLAfghan
+- Updated Hazar Kot
+- Updated CWR2 on Everon
+
+[U]Other[/U]
+[SCRIPTS] Nuke can now be easily called locally by a missionmaker (and is executed globally)
+[SCRIPTS] Added clientside Radiation-Zone FX for nuke
+
+[B]Known Issues[/B]
+- PO2 tasks sometimes throw errors if there is no suitable position/building available
+- Terrorist Cells causing performance problems - suggest to avoid for now and just use CQB module for COIN.
+- Server Crashes with Ambient Emergency Services
+- PreNLOD error occuring when running PDB with CBA, ACE and ACRE - let us know if you see this
+- "player not found in playableunits" error when player disconnects, player data not saved occurs intermittently with latest beta patches
+
+[B]Feedback, issues, bugs[/B]
+Report any issues [URL="http://dev-heaven.net/projects/mso/issues/new"]here[/URL].
+ 
+[B]What Is MSO?[/B]
+Multi Session Operations is a modular mission framework. Essentially it is a collection of scripts that create a persistent, living scenario in which the player operates. Unlike regular missions that have pre-scripted objectives, MSO procedurally generates enemy forces that are unpredictable and (semi) random. Players have to think beyond the mere tactical level and build up the intelligence picture, carrying out recce patrols to identify enemy locations and conduct deliberate attacks to neutralise them. Everything is persistent, including equipment, ammo, vehicles and even player lives. MSO is designed specifically for Dedicated Server use. 
+ 
+[B]Recommended Settings / Peformance[/B]
+Due to the dynamic nature of MSO and its reliance on scripting to generate ambience and dynamic enemy, it can be resource intensive. The default settings are the recommended ones for most maps. If you have a large map with lots of locations (Chernarus) or a large number of players you will want to consider disabling or dialling down ambience or enemy.
+ 
+If you enable ALL the modules, please do not ask us why it performs so poorly. :)
+ 
+[B]Credits[/B]
+
+Thanks to:
+- MSO development team: Wolffy.au, Tupolov, highhead, friznit, WobblyHeadedBob, zorrobyte, HateDread, kieran, Ryan, Kolmain, and Rommel
+- PersistentDB dev "team" - JMan, Scott W, Firefly
+- Ryan, Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
+- Friznit, Tupolov, DaveP and Volunteer Commando Battalion (VCB)
+- Krause, Beta, Sandiford, JollyResq - United Operations (UO)
+- Kremator, SCAJolly, Katipo66, vengeance1, VRCRaptor, Dingbat, CebAlmighty, Jayc-astv, 16AA, VCB and AEF clans for testing
+- Alef and Sickboy for CBA conversion for A2Free
+- Xeno and Mikero for their Mission Builder Script
+- Spyder for Object Network Update (ONU), LoyalGuard for ARMA Electrical Grids (AEG), ArmaIIholic and Highhead for World In Conflict (WICT), LurchiDerLurch for AC130 CAS
+- Robalo, USMCWall, Muzzleflash, Wobbleyheadedbob, Hatedread, Zonekiller, VoW Widow, Swedge, Lonestar, SBSMac, Prymsuspec, zGuba, Fireball, Nou, Jaynus, Norrin for bits and pieces we got from you
+- CWR² team, IceBreakr, Shezan, Commander, Old Bear for making your mods and islands MSO friendly
+- Roy86 for Patrol Ops 2 Module
+- Enigma for Weather Module
