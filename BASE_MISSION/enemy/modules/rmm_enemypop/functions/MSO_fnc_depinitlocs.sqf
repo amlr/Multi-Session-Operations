@@ -123,37 +123,6 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
     };
 };
 
+diag_log format["MSO-%1 PDB EP Population: ended INIT...", time];
 diag_log format["MSO-%1 PDB EP Population: MSO-%1 Locations: %2, Camps: %3, AA-Sites: %4, Roadblocks: %5, Groups: %6", time,count DEP_Locs,{(typeName ((_x select 0) getvariable "DEP_Camp") == "STRING")} count DEP_Locs,{_x select 0 getvariable "DEP_AA"} count DEP_Locs,{_x select 0 getvariable "DEP_RB"} count DEP_Locs,({(typeName ((_x select 0) getvariable "DEP_GrpType") == "ARRAY")} count DEP_Locs) + ({(typeName ((_x select 0) getvariable "DEP_GrpType2") == "ARRAY")} count DEP_Locs)];
 
-{
-    
-    private ["_grpt","_grpt2","_capt","_AA","_RB"];
-    _pos = _x select 1;
-    _grpt = (_x select 0) getvariable "DEP_GrpType";
-    _grpt2 = (_x select 0) getvariable "DEP_GrpType2";
-    _capt = (_x select 0) getvariable "DEP_Camp";
-    _AA = (_x select 0) getvariable "DEP_AA";
-    _RB = (_x select 0) getvariable "DEP_RB";
-    ep_locations = [];
-
-    if !(isnil "_capt") then {
-        ep_locations set [count ep_locations,["Camp",_pos]];
-        if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 Camptype %2 at %3", time,_capt,_pos]};
-	};
-    if !(isnil "_AA") then {
-    	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 AAA at %2", time,_pos]};
-        ep_locations set [count ep_locations,["AA",_pos]];
-	};
-    if !(isnil "_RB") then {
-    	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 Roadblock at %2", time,_pos]};
-        ep_locations set [count ep_locations,["RB",_pos]];
-	};
-    
-    if (_debug) then {
-        private["_t","_m"];
-    	_t = format["ep%1",floor(random 10000)];
-    	_m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", str(_grpt select 1), "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-	};
-} foreach DEP_locs;
-
-diag_log format["MSO-%1 PDB EP Population: ended INIT...", time];

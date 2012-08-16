@@ -36,11 +36,14 @@ if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
-[] call MSO_fnc_depinitlocs;
+if(isNil "DEP_LOCS") then {
+        [] call MSO_fnc_depinitlocs;
+};
 
 {
     private ["_obj","_pos","_grpt","_grpt","_camp","_grpt2","_AA","_RB","_cleared"];
     
+    //Dataset
     //Using "DEP_locs"-array for quick access [[_obj,[_pos select 0,_pos select 1,_pos select 2]],[_obj,[_pos select 0,_pos select 1,_pos select 2]],...]
     _obj = _x select 0; // Placeholder Object (string), must be created on missionstart
     _pos = _x select 1; // Position Array (array)
@@ -51,5 +54,26 @@ if(isNil "CRB_LOCS") then {
 	_RB = _x select 0 getvariable "DEP_RB"; if (isnil "_RB") then {_RB = false}; // RB Flag (bool)
     _cleared = _x select 0 getvariable "c"; if (isnil "_cleared") then {_cleared = false}; // cleared position (bool)
     
+    //Fix for PO2
+    if (typename _camp == "STRING") then {
+        ep_locations set [count ep_locations,["Camp",_pos]];
+        if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 Camptype %2 at %3", time,_camp,_pos]};
+	};
+    if (_AA) then {
+    	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 AAA at %2", time,_pos]};
+        ep_locations set [count ep_locations,["AA",_pos]];
+	};
+    if (_RB) then {
+    	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 Roadblock at %2", time,_pos]};
+        ep_locations set [count ep_locations,["RB",_pos]];
+	};
+    
+    //Markers in Debug
+    if (_debug) then {
+        private["_t","_m"];
+    	_t = format["ep%1",floor(random 10000)];
+    	_m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", str(_grpt select 1), "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+	};    
+
     [_obj,_pos,_grpt,_camp,_grpt2,_AA,_RB,_cleared] spawn DEP_MainLoop;
-} foreach DEP_locs;
+} foreach DEP_LOCS;
