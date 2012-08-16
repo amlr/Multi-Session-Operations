@@ -31,9 +31,10 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
             
             	_placeholder setVariable ["DEP_Camp", _camp];
             	_placeholder setVariable ["DEP_GrpType2",_grptype2];
-        	};
-        	if (random 1 < 0.5) then {
-            	_placeholder setVariable ["DEP_AA", true];
+                
+        		if (random 1 < 0.5) then {
+            		_placeholder setVariable ["DEP_AA", true];
+        		};                
         	};
         
        		_placeholder setpos [_pos select 0, _pos select 1, -30];
@@ -56,9 +57,10 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
             
             	_placeholder setVariable ["DEP_Camp", _camp];
             	_placeholder setVariable ["DEP_GrpType2",_grptype2];
-        	};
-        	if (random 1 < 0.5) then {
-            	_placeholder setVariable ["DEP_AA", true];
+                
+        		if (random 1 < 0.5) then {
+            		_placeholder setVariable ["DEP_AA", true];
+        		};                
         	};
 
         	_placeholder setpos [_pos select 0, _pos select 1, -30];
@@ -81,14 +83,16 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
             
             	_placeholder setVariable ["DEP_Camp", _camp];
             	_placeholder setVariable ["DEP_GrpType2",_grptype2];
+                
+                if (random 1 < 0.5) then {
+            		_placeholder setVariable ["DEP_AA", true];
+        		};
         	};
-        	if (random 1 < 0.5) then {
-            	_placeholder setVariable ["DEP_AA", true];
-        	};
-			if (((random 1 < 0.5) && (count (_pos nearRoads 500) > 0)) ) then {
+            
+            if (((random 1 < 0.5) && (count (_pos nearRoads 500) > 0)) ) then {
         		_placeholder setVariable ["DEP_RB", true];
         	};
-        
+      
         	_placeholder setpos [_pos select 0, _pos select 1, -30];
         	DEP_LOCS set [count DEP_LOCS,[_placeholder,position _placeholder]];
     	};
@@ -115,11 +119,11 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         	DEP_LOCS set [count DEP_LOCS,[_placeholder,position _placeholder]];
     	};
 	} else {
-      	diag_log format["MSO-%1 PDB EP Population: Skipping unfitting location...", time];  
+      	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Skipping unfitting location...", time]};
     };
 };
 
-diag_log format["MSO-%1 Locations: %2, AA-Sites: %3, Roadblocks: %4, Groups: %5", time,count DEP_Locs,{_x select 0 getvariable "DEP_AA"} count DEP_Locs,{_x select 0 getvariable "DEP_RB"} count DEP_Locs,({(typeName ((_x select 0) getvariable "DEP_GrpType") == "ARRAY")} count DEP_Locs) + ({(typeName ((_x select 0) getvariable "DEP_GrpType2") == "ARRAY")} count DEP_Locs)];
+diag_log format["MSO-%1 PDB EP Population: MSO-%1 Locations: %2, Camps: %3, AA-Sites: %4, Roadblocks: %5, Groups: %6", time,count DEP_Locs,{(typeName ((_x select 0) getvariable "DEP_Camp") == "STRING")} count DEP_Locs,{_x select 0 getvariable "DEP_AA"} count DEP_Locs,{_x select 0 getvariable "DEP_RB"} count DEP_Locs,({(typeName ((_x select 0) getvariable "DEP_GrpType") == "ARRAY")} count DEP_Locs) + ({(typeName ((_x select 0) getvariable "DEP_GrpType2") == "ARRAY")} count DEP_Locs)];
 
 {
     
@@ -132,17 +136,16 @@ diag_log format["MSO-%1 Locations: %2, AA-Sites: %3, Roadblocks: %4, Groups: %5"
     _RB = (_x select 0) getvariable "DEP_RB";
     ep_locations = [];
 
-    diag_log format["MSO-%1 Position: %2", time,_pos];
     if !(isnil "_capt") then {
         ep_locations set [count ep_locations,["Camp",_pos]];
-        if (_debug) then {diag_log format["MSO-%1 Camptype %2 at %3", time,_capt,_pos]};
+        if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 Camptype %2 at %3", time,_capt,_pos]};
 	};
     if !(isnil "_AA") then {
-    	if (_debug) then {diag_log format["MSO-%1 AAA at %2", time,_pos]};
+    	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 AAA at %2", time,_pos]};
         ep_locations set [count ep_locations,["AA",_pos]];
 	};
     if !(isnil "_RB") then {
-    	if (_debug) then {diag_log format["MSO-%1 Roadblock at %2", time,_pos]};
+    	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 Roadblock at %2", time,_pos]};
         ep_locations set [count ep_locations,["RB",_pos]];
 	};
     

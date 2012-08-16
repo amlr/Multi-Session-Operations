@@ -44,12 +44,12 @@ if(isNil "CRB_LOCS") then {
     //Using "DEP_locs"-array for quick access [[_obj,[_pos select 0,_pos select 1,_pos select 2]],[_obj,[_pos select 0,_pos select 1,_pos select 2]],...]
     _obj = _x select 0; // Placeholder Object (string), must be created on missionstart
     _pos = _x select 1; // Position Array (array)
-	_grpt = _x select 0 getvariable "DEP_GrpType"; if (isnil "_grpt") then {_grpt = false}; //Type of Group (string)
+	_grpt = _x select 0 getvariable "DEP_GrpType"; if (isnil "_grpt") then {_grpt = false}; //Type of Group (array [side,grouptype])
 	_camp = _x select 0 getvariable "DEP_Camp"; if (isnil "_camp") then {_camp = false}; //Type of Camp (string)
-    _grpt2 = _x select 0 getvariable "DEP_GrpType2"; if (isnil "_grpt2") then {_grpt2 = false}; // Type of Campguards (string)
+    _grpt2 = _x select 0 getvariable "DEP_GrpType2"; if (isnil "_grpt2") then {_grpt2 = false}; // Type of Campguards (array [side,grouptype])
 	_AA = _x select 0 getvariable "DEP_AA"; if (isnil "_AA") then {_AA = false}; // AA Flag (bool)
-	_RB = _x select 0 getvariable "DEP_RB"; if (isnil "DEP_RB") then {_RB = false}; // RB Flag (bool)
-    _cleared = _x select 0 getvariable "c"; if (isnil "_cleared") then {_cleared = nil}; // cleared position (bool)
+	_RB = _x select 0 getvariable "DEP_RB"; if (isnil "_RB") then {_RB = false}; // RB Flag (bool)
+    _cleared = _x select 0 getvariable "c"; if (isnil "_cleared") then {_cleared = false}; // cleared position (bool)
     
-    [_pos,_grpt,_camp,_grpt2,_AA,_RB,_obj] spawn DEP_MainLoop;
+    [_obj,_pos,_grpt,_camp,_grpt2,_AA,_RB,_cleared] spawn DEP_MainLoop;
 } foreach DEP_locs;

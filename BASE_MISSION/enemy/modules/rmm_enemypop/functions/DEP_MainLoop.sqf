@@ -1,19 +1,21 @@
 
-private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_obj","_group","_grp2Pos","_grp2","_debug","_cleared","_spawned","_AAspawned","_locunits","_groupPos","_posGrp2","_breakouttimer","_idx"];
+private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj","_group","_grp2Pos","_grp2","_debug","_cleared","_spawned","_AAspawned","_locunits","_groupPos","_posGrp2","_breakouttimer","_idx"];
                                         
-	_pos = [(_this select 0) select 0,(_this select 0) select 1,0];
-	_grpt = _this select 1;
-	_camp = _this select 2; if !(typename _camp == "STRING") then {_camp = nil};
-    _grpt2 = _this select 3; if !(typename _grpt == "ARRAY") then {_grpt2 = nil};
-	_AA = _this select 4; if !(_AA) then {_AA = nil};
-	_RB = _this select 5; if !(_RB) then {_RB = nil};
-    _obj = _this select 6;
-                                        
+	_obj = _this select 0;
+    _pos = [(_this select 1) select 0,(_this select 1) select 1,0];
+	_grpt = _this select 2;
+	_camp = _this select 3; if !(typename _camp == "STRING") then {_camp = nil};
+    _grpt2 = _this select 4; if !(typename _grpt2 == "ARRAY") then {_grpt2 = nil};
+	_AA = _this select 5; if !(_AA) then {_AA = nil};
+	_RB = _this select 6; if !(_RB) then {_RB = nil};
+    _cleared = _this select 7;
+                                      
     _debug = debug_mso;
-    _cleared = false;
     _spawned = false;
     _AAspawned = false;
     _RBspawned = false;
+    
+    if (_debug) then {diag_log format["MSO-%1 PDB EP Population: _obj %2 | _pos %3 | _grpt %4 | _camp %5 | _grpt2 %6 | _AA %7 | _RB %8 | _cleared %9", time, _obj, _pos, _grpt, _camp, _grpt2, _AA, _RB, _cleared]};
                                         
    	waitUntil {sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
 
@@ -23,7 +25,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_obj","_group","_g
     
     if(!(isnil "_camp")) then {[_camp, floor(random 360), _pos] call f_builder;};
                                                                                                                         
-   	if (_debug) then {diag_log format ["Starting While loop %1", _pos];};
+   	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Starting While loop %2", time, _pos];};
 	while {!(_cleared)} do {
 		sleep 3; 
 		if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
@@ -32,7 +34,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_obj","_group","_g
         if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
                                                 
         	_group = [_pos2, _grpt select 0, _grpt select 1] call BIS_fnc_spawnGroup;
-            if (_debug) then {diag_log format ["Group created %1 (%2)", _pos, _group];};
+            if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Group created %2 (%3)", time, _pos, _group];};
             (leader _group) setBehaviour "AWARE";
             _group setSpeedMode "LIMITED";
             _group setFormation "STAG COLUMN";
@@ -46,7 +48,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_obj","_group","_g
 
             	_grp2 = nil;
                 _grp2 = [_pos, _grpt2 select 0, _grpt2 select 1] call BIS_fnc_spawnGroup;
-                if (_debug) then {diag_log format ["Sub Group created %1 (%2)", _pos, _grp2];};
+                if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Sub Group created %2 (%3)", time, _pos, _grp2];};
                 [_grp2] call BIN_fnc_taskDefend;
                 ep_groups set [count ep_groups, _grp2];
             };
@@ -59,7 +61,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_obj","_group","_g
             if (!(isnil "_RB") && !(_RBspawned)) then {
                 _RBspawned = true;
 				_RBpos = [_group, _pos] call compile preprocessfilelinenumbers "enemy\scripts\TUP_deployRoadBlock.sqf";
-                diag_log format["MSO-%1 Enemy Population - Attempted to Deploy Road Block near %2", time, _RBpos];
+                diag_log format["MSO-%1 PDB EP Population: Attempted to Deploy Road Block near %2", time, _RBpos];
             };
 		};
                                         
@@ -74,14 +76,14 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_obj","_group","_g
                                                 		while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
                                             			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             			deletegroup _group;
-                                                		if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];}; 
+                                                		if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - player out of range %2 (%3)", time, _pos, _group];}; 
                                         			};
                                         			if !(isnil "_grp2") then {
                                                 		ep_groups = ep_groups - [_grp2];
                                                 		while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
                                             			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             			deletegroup _grp2;
-                                                		if (_debug) then {diag_log format ["Deleting group - player out of range %1 (%2)", _pos, _group];};
+                                                		if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - player out of range %2 (%3)", time, _pos, _group];};
                                         			};
                                                     _breakouttimer = 0;
                                         			_spawned = false;
@@ -89,20 +91,20 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_obj","_group","_g
                                      		};
 
                                     		if ((count _locunits < 1) && (_spawned)) exitwith {
-                                            	if (_debug) then {diag_log format ["Position cleared - thread end... %1 (%2)", _pos, _group];};
+                                            	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Position cleared - thread end... %2 (%3)", time, _pos, _group];};
                                         		if !(isnil "_group") then {
                                                 	ep_groups = ep_groups - [_group];
                                                 	while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
                                             		{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
                                             		deletegroup _group;
-                                                	if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];}; 
+                                                	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - Position cleared %2 (%3)", time, _pos, _group];}; 
                                         		};
                                         		if !(isnil "_grp2") then {
                                                 	ep_groups = ep_groups - [_grp2];
                                                 	while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
                                             		{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
                                             		deletegroup _grp2;
-                                                	if (_debug) then {diag_log format ["Deleting group - Position cleared %1 (%2)", _pos, _group];};
+                                                	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - Position cleared %2 (%3)", time, _pos, _group];};
                                         		};
                                                 
                                         		_spawned = false;
