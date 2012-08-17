@@ -11,7 +11,8 @@ _house setVariable ["s", true, CQBaiBroadcast];
 
 sleep (random 1);
 
-_types = [0, MSO_FACTIONS,"Man"] call mso_core_fnc_findVehicleType;
+_fact = MSO_FACTIONS call BIS_fnc_selectRandom;
+_types = [0, [_fact],"Man"] call mso_core_fnc_findVehicleType;
 _unittypes = [];
 for "_i" from 0 to (1 + floor(random 3)) do {
     _unittype = _types call BIS_fnc_selectRandom;
