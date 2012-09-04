@@ -27,6 +27,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
 			_var = [_var, "/"] call CBA_fnc_split;
 			_grptemp =  (configFile >> "CfgGroups" >> (_var select 0) >> (_var select 1) >> (_var select 2) >> (_var select 3));
 		};
+		//diag_log format ["_grptemp = %1", _grptemp];
 		_grptemp;
 	};
     
@@ -47,6 +48,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
 		_spawned = true;
         _group = nil;
         if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
+            //diag_log format ["grpt = %1", _grpt];  
 			// quick convert side
 			if (typename (_grpt select 0) == "STRING") then {
 				_temp = _grpt select 0;

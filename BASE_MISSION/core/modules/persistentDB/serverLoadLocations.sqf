@@ -95,7 +95,7 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	if (count _vgtemp == 4) then {
 		_vGroupType = [[_vgtemp select 0, _vgtemp select 1],[_vgtemp select 2, _vgtemp select 3]];
 	};
-	diag_log format ["vGroupType %1",_vGroupType];
+	//diag_log format ["vGroupType %1",_vGroupType];
 	
 	_vGroupStrength = [_locationData select 7, "read"] call persistent_fnc_convertFormat;
 	
@@ -103,7 +103,7 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	_vType = "[" + _vType + "]";
 	_vType = call compile _vType;
 	
-	diag_log format ["type = %1",_vType];
+	//diag_log format ["type = %1",_vType];
 	
 	// Set location data
 	_thislocation setvariable ["c", _vCleared, true];

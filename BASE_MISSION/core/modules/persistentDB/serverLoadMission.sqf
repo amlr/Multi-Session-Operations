@@ -2,7 +2,7 @@
 
 // This is done only once for the __SERVER__ ...
 
-private ["_pname", "_serverData", "_procedureName", "_parameters", "_response", "_missionArray", "_thisMissionID", "_thisMissionName", "_thisMissionDate", "_missionid"];
+private ["_pname", "_serverData", "_procedureName", "_parameters", "_response", "_missionArray", "_thisMissionID", "_thisMissionName", "_thisMissionDate", "_missionid","_mda","_map","_svr"];
 
 if (isNil "MISSIONDATA") then { MISSIONDATA = [];};
 if (isNil "PDB_PLAYERS_CONNECTED") then { PDB_PLAYERS_CONNECTED = ["000000"];  PDB_PLAYER_IS_READY = []; publicVariable "PDB_PLAYERS_CONNECTED"; publicVariable "PDB_PLAYER_IS_READY"; };
@@ -38,8 +38,18 @@ if ((isNil "_missionArray") || (count _missionArray == 0)) then {
 	PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
 	
 	// Set new mission details
+	
+	// Set start date
+	_mda = "Arma2Net.Unmanaged" callExtension "DateTime ['utcnow',]";
+	
+	// Set map for misssion
+	_map = worldname;
+	
+	// Set server for mission
+	_svr = "Arma2Net.Unmanaged" callExtension "Server";
+	
 	_procedureName = "NewMission"; 
-	_parameters = format["[tna=%1,ttd=%2,tsc=%3,tgsc=%4,tlog=%5,twea=%6,tace=%7,tlv=%8,tobj=%9,tloc=%10,tobc=%11]",pdb_fullmissionName,mpdb_date_enabled,mpdb_persistentScores_enabled,mpdb_globalScores_enabled,mpdb_log_enabled,mpdb_weapons_enabled,mpdb_ace_enabled,mpdb_landvehicles_enabled,mpdb_objects_enabled,mpdb_locations_enabled,mpdb_objects_contents_enabled];		
+	_parameters = format["[tna=%1,ttd=%2,tsc=%3,tgsc=%4,tlog=%5,twea=%6,tace=%7,tlv=%8,tobj=%9,tloc=%10,tobc=%11,tmda=%12,tmap=%13,tsvr=%14]",pdb_fullmissionName,mpdb_date_enabled,mpdb_persistentScores_enabled,mpdb_globalScores_enabled,mpdb_log_enabled,mpdb_weapons_enabled,mpdb_ace_enabled,mpdb_landvehicles_enabled,mpdb_objects_enabled,mpdb_locations_enabled,mpdb_objects_contents_enabled,_mda,_map,_svr];		
 	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 	
 	_serverData = format["Mission: %1 created an entry...", pdb_fullmissionName];

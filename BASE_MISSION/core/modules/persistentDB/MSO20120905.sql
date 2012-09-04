@@ -40,7 +40,7 @@ CREATE TABLE `landvehicles` (
   `wmag` varchar(1000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10694 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10895 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `players` (
   KEY `missionid` (`mid`),
   KEY `puid` (`pid`),
   KEY `pname` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=398 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=400 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `objects` (
   `wmag` varchar(1000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=13529 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13835 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,9 +146,12 @@ CREATE TABLE `missions` (
   `bui` int(1) DEFAULT '0',
   `mar` int(1) DEFAULT '0',
   `ban` int(1) DEFAULT '0',
+  `mda` varchar(45) DEFAULT '',
+  `map` varchar(45) DEFAULT '',
+  `svr` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `missionName` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=118 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=120 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +176,7 @@ CREATE TABLE `locations` (
   `pa` varchar(45) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5335 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6273 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -509,9 +512,9 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `NewMission`(IN tna VARCHAR(255), IN ttd INT(1), IN tsc INT(1), IN tgsc INT(1), IN tlog INT(1), IN twea INT(1), IN tace INT(1), IN tlv INT(1), IN tobj INT(1), IN tloc INT(1), IN tobc INT(1))
+/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `NewMission`(IN tna VARCHAR(255), IN ttd INT(1), IN tsc INT(1), IN tgsc INT(1), IN tlog INT(1), IN twea INT(1), IN tace INT(1), IN tlv INT(1), IN tobj INT(1), IN tloc INT(1), IN tobc INT(1), IN tmda VARCHAR(45), IN tmap VARCHAR(45), IN tsvr VARCHAR(255))
 BEGIN
-  INSERT INTO missions (na,td,sc,gsc,log,wea,ace,lv,obj,loc,obc) values (tna,ttd,tsc,tgsc,tlog,twea,tace,tlv,tobj,tloc,tobc);
+  INSERT INTO missions (na,td,sc,gsc,log,wea,ace,lv,obj,loc,obc,mda,map,svr) values (tna,ttd,tsc,tgsc,tlog,twea,tace,tlv,tobj,tloc,tobc,tmda,tmap,tsvr);
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -661,4 +664,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-09-04 16:58:23
+-- Dump completed on 2012-09-05  0:38:09
