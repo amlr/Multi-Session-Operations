@@ -267,7 +267,7 @@ if (pdb_log_enabled) then {
 		_procedureName = "InsertLocations"; 
 				
 		// Set the locations arrays to use
-		_parentArrays = ["CQBPositionsReg","CQBPositionsStrat"];
+		_parentArrays = ["CQBPositionsReg","CQBPositionsStrat","DEP_LOCS"];
 		
 		// get Locations data
 		_locationCount = 1;
@@ -278,18 +278,16 @@ if (pdb_log_enabled) then {
 			call compile format ["_locations = %1", _parentArrayName];
 			{
 				_thisObject = _x select 0;
-					
+				_vHousePositions = str (_x select 1);		
+				
 				_vObject = str _thisObject;
-				_vPosition = str(getPosATL _thisObject); // setPosATL
-				_vHousePositions = str (_x select 1);
+				_vPosition = [getPosATL _thisObject, "write"] call persistent_fnc_convertFormat;
 				_vCleared = str (_thisObject getvariable "c");
 				_vSuspended = str (_thisObject getvariable "s");
-				_vGroupType = str (_thisObject getvariable "groupType");
-				_vGroupStrength = str (_thisObject getvariable "groupStrength");
-				_vType = _thisObject getvariable "type";
-				
-				_vPosition = [_vPosition, ",", "|"] call CBA_fnc_replace;
-				_vGroupStrength = 0;
+							
+				_vGroupType = [_thisObject getvariable "groupType", "write"] call persistent_fnc_convertFormat;
+				_vType = [_thisObject getvariable "type", "write"] call persistent_fnc_convertFormat;
+				_vGroupStrength = [1, "write"] call persistent_fnc_convertFormat;
 								
 				_parameters = format["[tobj=%1,tpos=%2,thpo=%3,tcle=%4,tsus=%5,tgrt=%6,tgrs=%7,ttyp=%8,tpa=%9,tmid=%10,tintid=%11]",_vObject, _vPosition, _vHousePositions, _vCleared, _vSuspended, _vGroupType, _vGroupStrength, _vType, _ParentArrayName, _missionid, _locationCount];
 				

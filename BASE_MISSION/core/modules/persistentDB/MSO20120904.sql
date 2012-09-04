@@ -40,7 +40,7 @@ CREATE TABLE `landvehicles` (
   `wmag` varchar(1000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=9153 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10694 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `objects` (
   `wmag` varchar(1000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=11183 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13529 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,13 +167,13 @@ CREATE TABLE `locations` (
   `hpo` int(11) DEFAULT '0',
   `cle` varchar(10) DEFAULT 'false',
   `sus` varchar(10) DEFAULT 'false',
-  `grt` varchar(45) DEFAULT '',
+  `grt` varchar(1000) DEFAULT '',
   `grs` int(11) DEFAULT '0',
-  `typ` varchar(45) DEFAULT '',
+  `typ` varchar(255) DEFAULT '',
   `pa` varchar(45) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=22280 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5335 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -452,7 +452,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `InsertLocations`(IN tobj VARCHAR(255), IN tpos VARCHAR(255), IN thpo INTEGER(11), IN tcle VARCHAR(10), IN tsus VARCHAR(10), IN tgrt VARCHAR(45), IN tgrs INTEGER(11), IN ttyp VARCHAR(45), IN tpa VARCHAR(45), IN tmid INTEGER(11), IN tintid INTEGER(11))
+/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `InsertLocations`(IN tobj VARCHAR(255), IN tpos VARCHAR(255), IN thpo INTEGER(11), IN tcle VARCHAR(10), IN tsus VARCHAR(10), IN tgrt VARCHAR(1000), IN tgrs INTEGER(11), IN ttyp VARCHAR(255), IN tpa VARCHAR(45), IN tmid INTEGER(11), IN tintid INTEGER(11))
 BEGIN
   INSERT INTO locations (obj,pos,hpo,cle,sus,grt,grs,typ,pa,mid,intid) values (tobj,tpos,thpo,tcle,tsus,tgrt,tgrs,ttyp,tpa,tmid,tintid);
 END */;;
@@ -661,4 +661,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-08-07 17:45:15
+-- Dump completed on 2012-09-04 16:58:23

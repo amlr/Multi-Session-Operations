@@ -30,8 +30,12 @@ _countInDB = parseNumber (_locationCountInDB select 0);
 
 // Wipe the current location parent arrays
 if (_countInDB > 0) then {
+	// CQB
 	CQBPositionsReg = [];
 	CQBPositionsStrat = [];
+	
+	// EN_POP
+	DEP_LOCS = [];
 };
 
 // START LOOP
@@ -54,9 +58,7 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	//	diag_log ["GetlocationByInitid _locationData: ",  _locationData, typeName _locationData];
 	
 	// Use position to find house
-	_vPosition =_locationData select 2;
-	_vPosition = [_vPosition, "|", ","] call CBA_fnc_replace; 
-	_vPosition = call compile _vPosition;
+	_vPosition =[_locationData select 2, "read"] call persistent_fnc_convertFormat;
 	
 	//										diag_log ["_vPosition: ",  _vPosition, typeName _vPosition];
 	
@@ -66,10 +68,15 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	//diag_log ["_vlocation: ",  _vlocation, typeName _vlocation];
 	
 	// Given object position, find the nearest house - which should provide us with the correct object (may/will need better solution in future! Hoping Wolffy's hashmap function will provide this)
-	_thislocation = nearestObject [_vPosition, "house"];
+	_vParentArray = _locationData select 9;
+		
+	if (_vParentArray != "DEP_LOCS") then {
+		_thislocation = nearestObject [_vPosition, "house"];
+	} else {
+		_thislocation = "Can_small" createvehicle _vPosition;
+	};
 
-	_vHousePositions = _locationData select 3;
-	_vHousePositions  = parsenumber _vHousePositions ;
+	_vHousePositions = [_locationData select 3, "read"] call persistent_fnc_convertFormat;
 		
 	_vCleared = _locationData select 4;
 	if (_vCleared == "true") then { _vCleared = true; } else{ _vCleared = nil; };
@@ -77,17 +84,28 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	_vSuspended = _locationData select 5;
 	if (_vSuspended == "true") then { _vSuspended = true; } else{ _vSuspended = false; };
 	
-	_vGroupType = _locationData select 6;
+	// Horrible work around to handle configs in grouptypes...
+	_vgt = [_locationData select 6, "[", ""] call CBA_fnc_replace; //remove brackets
+	_vgt = [_vgt, "]", ""] call CBA_fnc_replace; // remove brackets
+	_vgtemp = [_vgt, "|"] call CBA_fnc_split; // gives you an array of either 2 or 4 group elements
+	_vGroupType = [];
+	if (count _vgtemp == 2) then {
+		_vGroupType = [[_vgtemp select 0, _vgtemp select 1]];
+	};
+	if (count _vgtemp == 4) then {
+		_vGroupType = [[_vgtemp select 0, _vgtemp select 1],[_vgtemp select 2, _vgtemp select 3]];
+	};
+	diag_log format ["vGroupType %1",_vGroupType];
 	
-	_vGroupStrength = _locationData select 7;
-	_vGroupStrength = parsenumber _vGroupStrength;	
+	_vGroupStrength = [_locationData select 7, "read"] call persistent_fnc_convertFormat;
 	
-	_vType = _locationData select 8; // Patrol or Static or AA etc
+	_vType = [_locationData select 8, "|", ","] call CBA_fnc_replace;
+	_vType = "[" + _vType + "]";
+	_vType = call compile _vType;
 	
-	_vParentArray = _locationData select 9;
+	diag_log format ["type = %1",_vType];
 	
 	// Set location data
-
 	_thislocation setvariable ["c", _vCleared, true];
 	//_thislocation setvariable ["s", _vSuspended, true];
 	_thislocation setvariable ["groupType", _vGroupType, true];
@@ -102,5 +120,9 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 // PV the location arrays
 Publicvariable "CQBpositionsStrat";
 Publicvariable "CQBpositionsReg";
+
 PDB_CQB_positionsloaded = true;
+PDB_DEP_positionsloaded = true;
+
 Publicvariable "PDB_CQB_positionsloaded";
+Publicvariable "PDB_DEP_positionsloaded";

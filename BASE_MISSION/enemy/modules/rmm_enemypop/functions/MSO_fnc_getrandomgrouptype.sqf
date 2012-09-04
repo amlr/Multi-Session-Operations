@@ -122,6 +122,11 @@ for "_y" from 1 to _grpx - 1 do {
 		};	
 };
 
-_grp = _grps select floor(random count _grps);
+if (count _grps > 0) then {
+	_grp = _grps select floor(random count _grps);
+} else {
+	_grp = 2 + floor(random 8);
+};
+
 _grouptype = [_side, _grp];
 _grouptype;
