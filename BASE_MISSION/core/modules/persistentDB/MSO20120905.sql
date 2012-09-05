@@ -96,7 +96,7 @@ CREATE TABLE `players` (
   KEY `missionid` (`mid`),
   KEY `puid` (`pid`),
   KEY `pname` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=400 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=402 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,15 +143,15 @@ CREATE TABLE `missions` (
   `obj` int(1) DEFAULT '0',
   `loc` int(1) DEFAULT '0',
   `obc` int(1) DEFAULT '0',
-  `bui` int(1) DEFAULT '0',
   `mar` int(1) DEFAULT '0',
-  `ban` int(1) DEFAULT '0',
+  `tas` int(1) DEFAULT '0',
+  `aar` int(1) DEFAULT '0',
   `mda` varchar(45) DEFAULT '',
   `map` varchar(45) DEFAULT '',
   `svr` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `missionName` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=120 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=122 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,7 +176,28 @@ CREATE TABLE `locations` (
   `pa` varchar(45) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6273 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8091 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `markers`
+--
+
+DROP TABLE IF EXISTS `markers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `markers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mid` int(11) DEFAULT NULL,
+  `intid` int(11) DEFAULT NULL,
+  `nam` varchar(45) DEFAULT NULL,
+  `pos` varchar(45) DEFAULT NULL,
+  `typ` varchar(45) DEFAULT NULL,
+  `txt` varchar(255) DEFAULT NULL,
+  `side` varchar(45) DEFAULT NULL,
+  `col` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,6 +251,25 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `CountLocationIDsByMission`(IN tmid INTEGER(11))
 BEGIN
   SELECT COUNT(*) FROM locations WHERE mid=tmid;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `CountMarkerIDsByMission` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `CountMarkerIDsByMission`(IN tmid INTEGER(11))
+BEGIN
+  SELECT COUNT(*) FROM markers WHERE mid=tmid;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -325,6 +365,25 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `GetLocationByInitid`(IN tintid INTEGER(11), IN tmid INTEGER(11))
 BEGIN
   SELECT id,obj,pos,hpo,cle,sus,grt,grs,typ,pa FROM locations WHERE intid = tintid AND mid = tmid;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GetMarkerByInitid` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `GetMarkerByInitid`(IN tintid INTEGER(11), IN tmid INTEGER(11))
+BEGIN
+  SELECT id,nam,pos,typ,txt,side,col FROM markers WHERE intid = tintid AND mid = tmid;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -464,6 +523,25 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `InsertMarkers` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `InsertMarkers`(IN tnam VARCHAR(45), IN tpos VARCHAR(45), IN ttyp VARCHAR(45), IN ttxt VARCHAR(255), IN tside VARCHAR(45), IN tcol VARCHAR(45), IN tmid INTEGER(11), IN tintid INTEGER(11))
+BEGIN
+  INSERT INTO markers (nam,pos,typ,txt,side,col,mid,intid) values (tnam,tpos,ttyp,ttxt,tside,tcol,tmid,tintid);
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `InsertObjects` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -512,9 +590,9 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `NewMission`(IN tna VARCHAR(255), IN ttd INT(1), IN tsc INT(1), IN tgsc INT(1), IN tlog INT(1), IN twea INT(1), IN tace INT(1), IN tlv INT(1), IN tobj INT(1), IN tloc INT(1), IN tobc INT(1), IN tmda VARCHAR(45), IN tmap VARCHAR(45), IN tsvr VARCHAR(255))
+/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `NewMission`(IN tna VARCHAR(255), IN ttd INT(1), IN tsc INT(1), IN tgsc INT(1), IN tlog INT(1), IN twea INT(1), IN tace INT(1), IN tlv INT(1), IN tobj INT(1), IN tloc INT(1), IN tobc INT(1), IN tmar INT(1), IN tmda VARCHAR(45), IN tmap VARCHAR(45), IN tsvr VARCHAR(255))
 BEGIN
-  INSERT INTO missions (na,td,sc,gsc,log,wea,ace,lv,obj,loc,obc,mda,map,svr) values (tna,ttd,tsc,tgsc,tlog,twea,tace,tlv,tobj,tloc,tobc,tmda,tmap,tsvr);
+  INSERT INTO missions (na,td,sc,gsc,log,wea,ace,lv,obj,loc,obc,mar,mda,map,svr) values (tna,ttd,tsc,tgsc,tlog,twea,tace,tlv,tobj,tloc,tobc,tmar,tmda,tmap,tsvr);
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -553,6 +631,25 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `RemoveLocations`(IN tmid INTEGER(11))
 BEGIN
   DELETE FROM locations WHERE mid = tmid;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `RemoveMarkers` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `RemoveMarkers`(IN tmid INTEGER(11))
+BEGIN
+  DELETE FROM markers WHERE mid = tmid;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -664,4 +761,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-09-05  0:38:09
+-- Dump completed on 2012-09-05 18:44:44

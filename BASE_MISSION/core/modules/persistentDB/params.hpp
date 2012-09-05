@@ -22,6 +22,12 @@ class mpdb_date_enabled {
         texts[]= {"On","Off"}; 
         default = 1;
 };
+class mpdb_markers_enabled {
+        title = "        Persistent Markers"; 
+        values[]= {1,0}; 
+        texts[]= {"On","Off"}; 
+        default = 1;
+};
 class mpdb_weapons_enabled {
         title = "        Persistent Weapons"; 
         values[]= {1,0}; 
@@ -47,7 +53,7 @@ class mpdb_objects_contents_enabled {
         default = 0;
 };
 class mpdb_locations_enabled {
-        title = "        Persistent Locations (CQB)"; 
+        title = "        Persistent Locations"; 
         values[]= {1,0}; 
         texts[]= {"On","Off"}; 
         default = 0;

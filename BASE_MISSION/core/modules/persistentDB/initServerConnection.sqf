@@ -41,7 +41,13 @@ if (( MISSIONDATA_LOADED == "false") && (_pname == "__SERVER__")) then {
 	waitUntil {scriptDone script_missionload};
 	
 	_missionid = MISSIONDATA select 1;
+	
+	
 	// Load Map Markers
+	if (pdb_markers_enabled) then {	
+			[_missionid] execVM "core\modules\persistentDB\serverLoadMarkers.sqf";
+	};
+	
 	// Load Tasks
 	// Load Log Entries
 	

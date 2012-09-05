@@ -303,6 +303,52 @@ if (pdb_log_enabled) then {
 		} forEach _parentArrays;
 				
 	};
+	
+	if (pdb_markers_enabled) then {
+		
+		// START remove mission's current narker data		
+		
+		_procedureName = "RemoveMarkers"; 
+		_parameters = format["[tmid=%1]",_missionid];
+		
+		if (pdb_log_enabled) then {
+			diag_log format["SERVER MSG: SQL output: %1", _parameters];
+		};
+	
+		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
+		
+		// END remove mission's current marker data						
+		
+		// START save mission's marker data
+		_procedureName = "InsertMarkers"; 
+				
+		// get marker data
+		_markerCount = 1;
+		_markers = [];
+
+		{
+			_vName = _x select 0;	
+
+			_vPosition = [_x select 1, "write"] call persistent_fnc_convertFormat;
+			_vType = _x select 2;
+			_vText = _x select 3;
+						
+			_vSide = str (_x select 4);
+			_vColor = _x select 5;
+							
+			_parameters = format["[tnam=%1,tpos=%2,ttyp=%3,ttxt=%4,tside=%5,tcol=%6,tmid=%7,tintid=%8]",_vName, _vPosition, _vType, _vText, _vSide, _vColor, _missionid, _markerCount];
+			
+			if (pdb_log_enabled) then {
+				diag_log format["SERVER MSG: SQL output: %1", _parameters];
+			};
+
+			_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
+			
+			_markerCount = _markerCount+1;
+			
+		} forEach RMM_jipmarkers;
+				
+	};
 		
 	// START save the time and date
 	if (pdb_date_enabled) then {
