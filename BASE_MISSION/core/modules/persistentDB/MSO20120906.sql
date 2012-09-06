@@ -18,6 +18,84 @@ USE `arma`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `missions`
+--
+
+DROP TABLE IF EXISTS `missions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `missions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `na` varchar(255) NOT NULL DEFAULT '',
+  `td` int(1) DEFAULT '1',
+  `da` varchar(255) DEFAULT '',
+  `sc` int(1) DEFAULT '1',
+  `gsc` int(1) DEFAULT '1',
+  `log` int(1) DEFAULT '1',
+  `wea` int(1) DEFAULT '1',
+  `ace` int(1) DEFAULT '0',
+  `lv` int(1) DEFAULT '0',
+  `obj` int(1) DEFAULT '0',
+  `loc` int(1) DEFAULT '0',
+  `obc` int(1) DEFAULT '0',
+  `mar` int(1) DEFAULT '0',
+  `tas` int(1) DEFAULT '0',
+  `aar` int(1) DEFAULT '0',
+  `mda` varchar(45) DEFAULT '',
+  `map` varchar(45) DEFAULT '',
+  `svr` varchar(255) DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `missionName` (`na`)
+) ENGINE=MyISAM AUTO_INCREMENT=125 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `locations`
+--
+
+DROP TABLE IF EXISTS `locations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `locations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mid` int(11) DEFAULT NULL,
+  `intid` int(11) DEFAULT NULL,
+  `obj` varchar(255) DEFAULT '',
+  `pos` varchar(255) DEFAULT 'Null',
+  `hpo` int(11) DEFAULT '0',
+  `cle` varchar(10) DEFAULT 'false',
+  `sus` varchar(10) DEFAULT 'false',
+  `grt` varchar(1000) DEFAULT '',
+  `grs` int(11) DEFAULT '0',
+  `typ` varchar(255) DEFAULT '',
+  `pa` varchar(45) DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `mid` (`mid`)
+) ENGINE=InnoDB AUTO_INCREMENT=8673 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `markers`
+--
+
+DROP TABLE IF EXISTS `markers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `markers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mid` int(11) DEFAULT NULL,
+  `intid` int(11) DEFAULT NULL,
+  `nam` varchar(45) DEFAULT NULL,
+  `pos` varchar(45) DEFAULT NULL,
+  `typ` varchar(45) DEFAULT NULL,
+  `txt` varchar(255) DEFAULT NULL,
+  `side` varchar(45) DEFAULT NULL,
+  `col` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `landvehicles`
 --
 
@@ -40,7 +118,7 @@ CREATE TABLE `landvehicles` (
   `wmag` varchar(1000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10962 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11029 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,85 +197,7 @@ CREATE TABLE `objects` (
   `wmag` varchar(1000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=13937 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `missions`
---
-
-DROP TABLE IF EXISTS `missions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `missions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `na` varchar(255) NOT NULL DEFAULT '',
-  `td` int(1) DEFAULT '1',
-  `da` varchar(255) DEFAULT '',
-  `sc` int(1) DEFAULT '1',
-  `gsc` int(1) DEFAULT '1',
-  `log` int(1) DEFAULT '1',
-  `wea` int(1) DEFAULT '1',
-  `ace` int(1) DEFAULT '0',
-  `lv` int(1) DEFAULT '0',
-  `obj` int(1) DEFAULT '0',
-  `loc` int(1) DEFAULT '0',
-  `obc` int(1) DEFAULT '0',
-  `mar` int(1) DEFAULT '0',
-  `tas` int(1) DEFAULT '0',
-  `aar` int(1) DEFAULT '0',
-  `mda` varchar(45) DEFAULT '',
-  `map` varchar(45) DEFAULT '',
-  `svr` varchar(255) DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `missionName` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=125 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `locations`
---
-
-DROP TABLE IF EXISTS `locations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `locations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mid` int(11) DEFAULT NULL,
-  `intid` int(11) DEFAULT NULL,
-  `obj` varchar(255) DEFAULT '',
-  `pos` varchar(255) DEFAULT 'Null',
-  `hpo` int(11) DEFAULT '0',
-  `cle` varchar(10) DEFAULT 'false',
-  `sus` varchar(10) DEFAULT 'false',
-  `grt` varchar(1000) DEFAULT '',
-  `grs` int(11) DEFAULT '0',
-  `typ` varchar(255) DEFAULT '',
-  `pa` varchar(45) DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=8382 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `markers`
---
-
-DROP TABLE IF EXISTS `markers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `markers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mid` int(11) DEFAULT NULL,
-  `intid` int(11) DEFAULT NULL,
-  `nam` varchar(45) DEFAULT NULL,
-  `pos` varchar(45) DEFAULT NULL,
-  `typ` varchar(45) DEFAULT NULL,
-  `txt` varchar(255) DEFAULT NULL,
-  `side` varchar(45) DEFAULT NULL,
-  `col` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14039 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,6 +214,23 @@ CREATE TABLE `cms_permissions` (
   `permissionType` varchar(255) DEFAULT 'users',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `aar`
+--
+
+DROP TABLE IF EXISTS `aar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `aar` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mid` int(11) DEFAULT NULL,
+  `intid` int(11) DEFAULT NULL,
+  `sitrep` varchar(1000) DEFAULT NULL,
+  `typ` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -837,4 +854,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-09-06 12:48:14
+-- Dump completed on 2012-09-06 14:27:55
