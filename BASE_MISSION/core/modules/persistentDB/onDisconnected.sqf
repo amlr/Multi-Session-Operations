@@ -350,6 +350,47 @@ if (pdb_log_enabled) then {
 				
 	};
 		
+	// Save AAR data
+	if (pdb_AAR_enabled) then {
+		
+		// START remove mission's current AAR data		
+		
+		_procedureName = "RemoveAARs"; 
+		_parameters = format["[tmid=%1]",_missionid];
+		
+		if (pdb_log_enabled) then {
+			diag_log format["SERVER MSG: SQL output: %1", _parameters];
+		};
+	
+		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
+		
+		// END remove mission's current aar data						
+		
+		// START save mission's aar data
+		_procedureName = "InsertAARs"; 
+				
+		// get AAR data
+		_aarCount = 1;
+		_aars = [];
+
+		{
+			_vSitrep = [_x , "write"] call persistent_fnc_convertFormat;
+			_vType = "AAR";
+													
+			_parameters = format["[tsitrep=%1,ttyp=%2,tmid=%3,tintid=%4]",_vSitRep, _vType, _missionid, _aarCount];
+			
+			if (pdb_log_enabled) then {
+				diag_log format["SERVER MSG: SQL output: %1", _parameters];
+			};
+
+			_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
+			
+			_aarCount = _aarCount+1;
+			
+		} forEach RMM_aars;
+				
+	};
+	
 	// START save the time and date
 	if (pdb_date_enabled) then {
 		

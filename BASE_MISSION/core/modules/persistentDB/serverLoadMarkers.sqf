@@ -22,7 +22,7 @@ if (pdb_log_enabled) then {
 
 _MarkerCountInDB = _response select 0;    // copy the returned row into array
 
-diag_log format ["SERVER MSG: Loading %1 Markers from database.",   _objectCountInDB];
+diag_log format ["SERVER MSG: Loading %1 Markers from database.",   _markerCountInDB];
 
 _serverData = format["Getting Markers from database..."];
 PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";

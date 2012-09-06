@@ -13,7 +13,7 @@ player createDiaryRecord ["Diary", [
 		(if (_this select 7 != "") then {"Friendly WIA: %8<br/>"} else {""}) +
 		(if (_this select 8 != "") then {"Civilian WIA: %9<br/>"} else {""}) +
 		"<br/>" +
-		"Report: <br/>%10<br/>",
+		"<br/>%10<br/>",
 		call (RMM_aar_lines select 0) select (_this select 0),
 		call (RMM_aar_lines select 1) select (_this select 1),
 		call (RMM_aar_lines select 2) select (_this select 2),

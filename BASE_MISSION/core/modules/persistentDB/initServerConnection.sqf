@@ -49,7 +49,11 @@ if (( MISSIONDATA_LOADED == "false") && (_pname == "__SERVER__")) then {
 	};
 	
 	// Load Tasks
-	// Load Log Entries
+	
+	// Load AAR & Log
+	if (pdb_AAR_enabled) then {	
+			[_missionid] execVM "core\modules\persistentDB\serverLoadAAR.sqf";
+	};
 	
 	// Load Vehicles
 	if (pdb_landvehicles_enabled) then {	

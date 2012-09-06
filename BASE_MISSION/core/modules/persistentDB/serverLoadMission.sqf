@@ -49,7 +49,7 @@ if ((isNil "_missionArray") || (count _missionArray == 0)) then {
 	_svr = "Arma2Net.Unmanaged" callExtension "ServerName";
 	
 	_procedureName = "NewMission"; 
-	_parameters = format["[tna=%1,ttd=%2,tsc=%3,tgsc=%4,tlog=%5,twea=%6,tace=%7,tlv=%8,tobj=%9,tloc=%10,tobc=%11,tmar=%12,tmda=%13,tmap=%14,tsvr=%15]",pdb_fullmissionName,mpdb_date_enabled,mpdb_persistentScores_enabled,mpdb_globalScores_enabled,mpdb_log_enabled,mpdb_weapons_enabled,mpdb_ace_enabled,mpdb_landvehicles_enabled,mpdb_objects_enabled,mpdb_locations_enabled,mpdb_objects_contents_enabled,mpdb_markers_enabled,_mda,_map,_svr];		
+	_parameters = format["[tna=%1,ttd=%2,tsc=%3,tgsc=%4,tlog=%5,twea=%6,tace=%7,tlv=%8,tobj=%9,tloc=%10,tobc=%11,tmar=%12,ttas=%13,taar=%14,tmda=%15,tmap=%16,tsvr=%17]",pdb_fullmissionName,mpdb_date_enabled,mpdb_persistentScores_enabled,mpdb_globalScores_enabled,mpdb_log_enabled,mpdb_weapons_enabled,mpdb_ace_enabled,mpdb_landvehicles_enabled,mpdb_objects_enabled,mpdb_locations_enabled,mpdb_objects_contents_enabled,mpdb_markers_enabled,mpdb_tasks_enabled,mpdb_aar_enabled,_mda,_map,_svr];		
 	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 	
 	_serverData = format["Mission: %1 created an entry...", pdb_fullmissionName];
@@ -80,11 +80,8 @@ if (_missionArray select 1 == pdb_fullmissionName) then {  // START mission name
 	if (_missionArray select 11 == "1") then { pdb_locations_enabled = true; } else { pdb_locations_enabled = false; };   // returned enable persistent locations data?	
 	if (_missionArray select 12 == "1") then { pdb_objects_contents_enabled = true; } else { pdb_objects_contents_enabled = false; };  // returned enable vehicle/crate contents?	
 	if (_missionArray select 13 == "1") then { pdb_markers_enabled = true; } else { pdb_markers_enabled = false; };   // returned enable persistent marker data?
-	
 	if (_missionArray select 14 == "1") then { pdb_tasks_enabled = true; } else { pdb_tasks_enabled = false; };  // returned enable persistent task data?
 	if (_missionArray select 15 == "1") then { pdb_AAR_enabled = true; } else { pdb_AAR_enabled = false; };  // returned enable persistent AAR data?
-
-
 	
 	if (pdb_date_enabled) then {	
 		
