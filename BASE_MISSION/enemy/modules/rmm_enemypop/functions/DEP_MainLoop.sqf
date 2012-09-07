@@ -22,12 +22,16 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
         _grptemp = _this select 0;
 
 		if (typename _grptemp == "STRING") then {
+			// Check to see if its double bloody quotes
+			if (typename (call compile _grptemp) == "STRING") then {
+				_grptemp = call compile _grptemp;
+			};
 			_var = _grptemp;
 			_var = [_var, "bin\config.bin/CfgGroups/", ""] call CBA_fnc_replace;
 			_var = [_var, "/"] call CBA_fnc_split;
 			_grptemp =  (configFile >> "CfgGroups" >> (_var select 0) >> (_var select 1) >> (_var select 2) >> (_var select 3));
 		};
-		//diag_log format ["_grptemp = %1", _grptemp];
+		diag_log format ["_grptemp = %1", _grptemp];
 		_grptemp;
 	};
     

@@ -92,10 +92,10 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	_vgtemp = [_vgt, "|"] call CBA_fnc_split; // gives you an array of either 2 or 4 group elements
 	_vGroupType = [];
 	if (count _vgtemp == 2) then {
-		_vGroupType = [[_vgtemp select 0, _vgtemp select 1]];
+		_vGroupType = [[call compile (_vgtemp select 0), _vgtemp select 1]];
 	};
 	if (count _vgtemp == 4) then {
-		_vGroupType = [[_vgtemp select 0, _vgtemp select 1],[_vgtemp select 2, _vgtemp select 3]];
+		_vGroupType = [[call compile (_vgtemp select 0), _vgtemp select 1],[call compile (_vgtemp select 2), _vgtemp select 3]];
 	};
 	//diag_log format ["vGroupType %1",_vGroupType];
 	
