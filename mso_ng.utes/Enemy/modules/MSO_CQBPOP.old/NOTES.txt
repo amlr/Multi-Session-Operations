@@ -1,0 +1,16 @@
+*Model - no visual just reference data*
+- spawnDistance
+- factions
+- strategicTypes
+- houses (debug mark houses?)
+- groups
+
+*Controller - *
+- frequent check if group is dead or deleted
+- mark house as suspended (debug change marker)
+- mark house as cleared (debug delete marker)
+- mark house as active (debug create marker)
+- spawn group when in range
+
+
+*View - purely visual*

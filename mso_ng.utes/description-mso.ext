@@ -1,0 +1,86 @@
+/* ----------------------------------------------------------------------------
+File: description.ext
+
+Description:
+Top level description.ext for MSO
+
+Author:
+Wolffy.au
+---------------------------------------------------------------------------- */
+
+#include <core\modules\modules.hpp>
+#include <enemy\modules\modules.hpp>
+
+//http://community.bistudio.com/wiki/Description.ext#Respawn...
+respawn = 3;
+respawnDelay = 15;
+respawnDialog = false;
+
+onLoadIntroTime = true;
+onLoadMissionTime = true;
+
+aiKills = 0;
+briefing = 1;
+debriefing = 1;
+disabledAI = 1;
+
+class CfgSounds {
+};
+
+//http://community.bistudio.com/wiki/Arma_2:_Patch_v1.03.58899_Beta#How_to_add_multiple_parameters_to_your_MP_mission
+class Params {
+        class coreHeader {
+                title = "Core"; 
+                values[]= {0}; 
+                texts[]= {" "}; 
+                default = 0;
+        };
+#ifdef RMM_DEBUG
+	#include <core\modules\rmm_debug\params.hpp>
+#endif
+        class enemyHeader {
+                title = "Enemy"; 
+                values[]= {0}; 
+                texts[]= {" "}; 
+                default = 0;
+        };
+        #ifdef MSO_FACTIONS
+        #include <enemy\modules\MSO_FACTIONS\params.hpp>
+        #endif
+        #ifdef MSO_CQBPOP
+        #include <enemy\modules\MSO_CQBPOP\params.hpp>
+        #endif
+}; 
+
+class RscTitles
+{
+};
+
+//http://community.bistudio.com/wiki/Functions_Library
+class cfgFunctions {
+        class MSO {
+                #include <core\functions\functions.hpp>
+                #ifdef MSO_STRATEGIC
+                #include <core\modules\MSO_STRATEGIC\functions.hpp>
+                #endif
+                //#include <enemy\functions\functions.hpp>
+                #ifdef MSO_CQBPOP
+                #include <enemy\modules\MSO_CQBPOP\functions.hpp>
+                #endif                
+        };
+};
+
+//http://community.bistudio.com/wiki/PreProcessor_Commands
+#include <core\dialogs\c_ui.hpp>
+
+#ifdef RMM_DEBUG
+	#include <core\modules\rmm_debug\dialog.hpp>
+#endif
+
+// Add BAF and TK Flight groups
+class CfgGroups {
+};
+
+class CfgAmmo
+{
+};
