@@ -42,13 +42,15 @@ if (( MISSIONDATA_LOADED == "false") && (_pname == "__SERVER__")) then {
 	
 	_missionid = MISSIONDATA select 1;
 	
-	
 	// Load Map Markers
 	if (pdb_markers_enabled) then {	
 			[_missionid] execVM "core\modules\persistentDB\serverLoadMarkers.sqf";
 	};
 	
 	// Load Tasks
+	if (pdb_tasks_enabled) then {	
+			[_missionid] execVM "core\modules\persistentDB\serverLoadTasks.sqf";
+	};
 	
 	// Load AAR & Log
 	if (pdb_AAR_enabled) then {	

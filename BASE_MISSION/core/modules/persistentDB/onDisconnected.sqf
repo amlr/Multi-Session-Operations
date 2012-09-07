@@ -349,6 +349,50 @@ if (pdb_log_enabled) then {
 		} forEach RMM_jipmarkers;
 				
 	};
+	
+	// Save Task Data
+	if (pdb_tasks_enabled) then {
+		
+		// START remove mission's current task data		
+		
+		_procedureName = "Removetasks"; 
+		_parameters = format["[tmid=%1]",_missionid];
+		
+		if (pdb_log_enabled) then {
+			diag_log format["SERVER MSG: SQL output: %1", _parameters];
+		};
+	
+		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
+		
+		// END remove mission's current task data						
+		
+		// START save mission's task data
+		_procedureName = "Inserttasks"; 
+				
+		// get task data
+		_taskCount = 1;
+		_tasks = [];
+
+		{
+			_vName = _x select 0;	
+			_vDescr = [_x select 1, "write"] call persistent_fnc_convertFormat;
+			_vPosition = [_x select 2, "write"] call persistent_fnc_convertFormat;
+			_vState = _x select 3;
+			_vSide = str (_x select 4);
+							
+			_parameters = format["[tnam=%1,tdes=%2,tdest=%3,tsta=%4,tside=%5,tmid=%6,tintid=%7]",_vName, _vDescr, _vPosition, _vState, _vSide, _missionid, _taskCount];
+			
+			if (pdb_log_enabled) then {
+				diag_log format["SERVER MSG: SQL output: %1", _parameters];
+			};
+
+			_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
+			
+			_taskCount = _taskCount+1;
+			
+		} forEach RMM_tasks;
+				
+	};
 		
 	// Save AAR data
 	if (pdb_AAR_enabled) then {

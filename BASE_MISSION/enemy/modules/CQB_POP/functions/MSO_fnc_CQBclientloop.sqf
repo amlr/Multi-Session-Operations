@@ -2,11 +2,14 @@
 		
         _debug = _this select 0;
         
-        if (pdb_locations_enabled) then {
-            waituntil {!(isnil "PDB_CQB_positionsloaded")};
-            sleep 5;
-        };
-        
+		if (persistentDBHeader == 1) then {	
+			waitUntil{!isNil "MISSIONDATA_LOADED"};
+			if (pdb_locations_enabled) then {
+				waituntil {!(isnil "PDB_CQB_positionsloaded")};
+				sleep 5;
+			};
+		};
+		
         waituntil {!(isnil "CQBpositionsReg") && !(isnil "CQBpositionsStrat")};
         CQBpositionsRegLocal = CQBpositionsReg;
 		CQBpositionsStratLocal = CQBpositionsStrat;

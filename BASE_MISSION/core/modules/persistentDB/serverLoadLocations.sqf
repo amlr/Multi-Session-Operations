@@ -17,9 +17,11 @@ if (pdb_log_enabled) then {
 
 _LocationCountInDB = _response select 0;    // copy the returned row into array
 
-diag_log ["CountLocationIDsByMission _LocationCountInDB: ",  _locationCountInDB, typeName _locationCountInDB];
+// diag_log ["CountLocationIDsByMission _LocationCountInDB: ",  _locationCountInDB, typeName _locationCountInDB];
 
-_serverData = format["Getting locations from database..."];
+diag_log format ["SERVER MSG: Loading %1 Locations from database.",   _locationCountInDB];
+
+_serverData = format["Getting Locations from database..."];
 PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
 
 // now get the vehicledata per id

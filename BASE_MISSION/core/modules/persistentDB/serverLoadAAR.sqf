@@ -42,11 +42,11 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	
 	//	diag_log ("callExtension->Arma2NETMySQL: GetaarByInitid");		
 	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
-		diag_log ["callExtension->Arma2NETMySQL: GetaarByInitid _response: ",  _response, typeName _response];
+	//	diag_log ["callExtension->Arma2NETMySQL: GetaarByInitid _response: ",  _response, typeName _response];
 		
 	_aarData	= _response select 0;    // copy the returned row into array
 	
-		diag_log ["GetaarByInitid _aarData: ",  _aarData, typeName _aarData];
+	//	diag_log ["GetaarByInitid _aarData: ",  _aarData, typeName _aarData];
 	
 	_vAAR = [_aarData select 1, "read"] call persistent_fnc_convertFormat;
 	_vType = _aarData select 2;

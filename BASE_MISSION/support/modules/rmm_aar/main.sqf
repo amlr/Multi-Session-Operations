@@ -8,11 +8,17 @@ RMM_aar_lines = [
 
 [] spawn {
 
-	if (pdb_aar_enabled) then {
-		waitUntil{!isNil "RMM_aars"};
-		if (debug) then {
-			diag_log format["Loaded RMM AARs, %1, %2", RMM_aars, count RMM_aars];
+	if (persistentDBHeader == 1) then {
+		
+		waitUntil{MISSIONDATA_LOADED == "true"};
+		
+		if (pdb_aar_enabled) then {
+			waitUntil{!isNil "RMM_aars"};
+			if (debug) then {
+				diag_log format["Loaded RMM AARs, %1, %2", RMM_aars, count RMM_aars];
+			};
 		};
+	
 	};
 	
 	if (isnil "RMM_aars") then {

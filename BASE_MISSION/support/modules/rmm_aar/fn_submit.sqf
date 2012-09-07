@@ -1,5 +1,5 @@
 player createDiaryRecord ["Diary", [
-	format ["%1/%2 %3 - AAR %4", (date select 2),(date select 1),([daytime] call BIS_fnc_timeToString), call (RMM_aar_lines select 1) select (_this select 1)],
+	format ["%1/%2 %3 - AAR %4", (_this select 10),(_this select 11),(_this select 12), call (RMM_aar_lines select 1) select (_this select 1)],
 	format [
 		"Callsign: %1<br/>" +
 		"Category: %2<br/>" +

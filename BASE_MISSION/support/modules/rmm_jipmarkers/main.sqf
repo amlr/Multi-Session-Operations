@@ -32,10 +32,15 @@ RMM_jipmarkers_colors = [
 
 [] spawn {
 
-	if (pdb_markers_enabled) then {
-		waitUntil{!isNil "RMM_jipmarkers"};
-		if (debug) then {
-			diag_log format["Loaded RMM Jipmarkers, %1, %2", RMM_jipmarkers, count RMM_jipmarkers];
+	if (persistentDBHeader == 1) then {
+		
+		waitUntil{MISSIONDATA_LOADED == "true"};
+		
+		if (pdb_markers_enabled) then {
+			waitUntil{!isNil "RMM_jipmarkers"};
+			if (debug) then {
+				diag_log format["Loaded RMM Jipmarkers, %1, %2", RMM_jipmarkers, count RMM_jipmarkers];
+			};
 		};
 	};
 
