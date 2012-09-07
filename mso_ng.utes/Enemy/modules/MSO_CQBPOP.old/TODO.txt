@@ -1,0 +1,44 @@
+- unit spawning based on infantry groups
+
+i reviewed your NG and i must say its like some completely new code to me now :) probably it is much better but after 2,5 hours of review and testing i still dont understand some things. For example: Houseguardloop is called in MSO_fnc_CQBmovegroup -> but MSO_fnc_CQBmovegroup isnt even loaded on init anymore and was renamed also to fn_CQBmovegroup. How can it work?
+funny thing is it works (somehow, see my test report below)
+so thats what i found out during my test
+- At the moment its not working correctly, prolly thru some tbd refacturing and bugfixing
+- Groups are not deleted (also no log entries of deletion)
+- Units are not respawned, because of this i couldnt test clearing positions, suspending seems to work though. 
+After some teleporting around it was broken completely with no more units spawning / despawning / only standing around. This isnt happening in "original" code or at least not in this heavy state (+ there is a 2500mtrs delete-all-cqbunits failsafe i am missing here).
+
+- Not working on dedicated yet (some _logic error)
+- Garbage Collector ("what happens with units on server after player discs") not testable because of not working on dedicated
+
+- Need to suspend/clear buildings with no usable buildingpos (if count buildingpos == 0 it throws an error)
+- Maybe this function could be interesting: CBA_fnc_setVarNet (https://dev-heaven.net/docs/cba/files/network/fnc_setVarNet-sqf.html)
+- Local units and groups should be deleted and houses unspended if no players are near lets say 2000mtrs (failsafe to delete units that didnt despawn correctly)
+tbh: it looks like a much more professional code to me now, and it certainly will be a better quality of code
+i just dont get some things yet
+I describe a typical testcase of cqb maybe this helps (watch AI with bino):
+regularspawn:
+1. teleport 600mtrs near a red dot -> no units shall be spawned yet
+2. teleport 500mtrs near a red dot -> units shall be spawned and guard/patrol
+3. teleport 600mtrs away from red dot -> units shall stop patrolling and run to a house
+4. Wait about 20-30 seconds --> all units (INCL. GROUP) should have been deleted
+5. Repeat step 1. and 2.
+6. teleport 2500mtrs away from red dot
+7. Wait about 20 seconds --> all units (INCL. GROUP) should have been deleted
+
+the last one is the "radically-delete-all-cqbunits-and-group-if-players-are-far"-failsafe garbagecollector
+Repeat the same for strategicpos with green dots and...
+Ad. 1. 1000mtrs
+Ad. 2. 800mtrs
+Ad. 3. 1000mtrs
+this is the regular testcase without clearing the posistion
+clearing-testcase is easy: Kill all units of a group, wait some seconds and wait until bodies are deleted and see if position wont spawn again.
+
+You hwve to check it with binos :)
+But thats the core feature
+Move in -> spawn -> move away -> despawn, deletes units AND delete group
+-> move in again -> units shall respawn -> move away -> units shall despawn AND group deleted
+If moving back in before they get despawned (so they have not reached their _endpos, where they would get deleted) they go back on patrol or housedefence
+If you kill all units of a group and wait some seconds, bodies AND group shall be deleted and position shall be cleared!
+
+TODO - we should add more intelligence to positions ie if on roof, go prone, otherwise stand or crouch

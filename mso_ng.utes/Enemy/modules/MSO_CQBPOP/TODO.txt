@@ -1,0 +1,24 @@
+TODO
+- we should add more intelligence to positions ie if on roof, go prone, otherwise stand or crouch
+- unit spawning based on infantry groups
+
+- Not working on dedicated yet (some _logic error)
+- Garbage Collector ("what happens with units on server after player discs") not testable because of not working on dedicated
+- the last one is the "radically-delete-all-cqbunits-and-group-if-players-are-far"-failsafe garbagecollector
+
+- Maybe this function could be interesting: CBA_fnc_setVarNet (https://dev-heaven.net/docs/cba/files/network/fnc_setVarNet-sqf.html)
+- Local units and groups should be deleted and houses unspended if no players are near lets say 2000mtrs (failsafe to delete units that didnt despawn correctly)
+
+
+regularspawn:
+1. teleport 600mtrs near a red dot -> no units shall be spawned yet
+2. teleport 500mtrs near a red dot -> units shall be spawned and guard/patrol
+3. teleport 600mtrs away from red dot -> units shall stop patrolling and run to a house
+4. Wait about 20-30 seconds --> all units (INCL. GROUP) should have been deleted
+5. Repeat step 1. and 2.
+6. teleport 2500mtrs away from red dot
+7. Wait about 20 seconds --> all units (INCL. GROUP) should have been deleted
+
+clearing-testcase is easy: Kill all units of a group, wait some seconds and wait until bodies are deleted and see if position wont spawn again.
+
+If moving back in before they get despawned (so they have not reached their _endpos, where they would get deleted) they go back on patrol or housedefence

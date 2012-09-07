@@ -1,0 +1,2 @@
+#define MSO_FACTIONS
+#define MSO_CQBPOP
