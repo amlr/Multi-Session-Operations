@@ -7,7 +7,6 @@
 #define persistentDB
 #define RMM_SETTINGS
 #define RMM_WEATHER
-#define SPYDER_ONU
 #define RMM_GTK
 #define NOU_CACHE
 #define CEP_CACHE
