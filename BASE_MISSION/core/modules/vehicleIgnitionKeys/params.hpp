@@ -8,5 +8,5 @@ class CFG_VehicleIgnitionKeys {
         title = "        Enable Vehicle Ignition Keys";
         values[]= {0,1}; 
         texts[]= {"Off", "On"}; 
-        default = 1;
+        default = 0;
 };
