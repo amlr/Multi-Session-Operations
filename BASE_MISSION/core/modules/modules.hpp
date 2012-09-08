@@ -11,5 +11,6 @@
 #define RMM_GTK
 #define NOU_CACHE
 #define CEP_CACHE
+#define VEHICLEIGNITIONKEYS
 
 //#define RMM_OSOM

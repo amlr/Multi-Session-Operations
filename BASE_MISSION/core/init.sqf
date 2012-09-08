@@ -148,6 +148,11 @@ setTerrainGrid 25;
 execNow "core\modules\rmm_settings\main.sqf";	
 #endif
 
+#ifdef VEHICLEIGNITIONKEYS
+"Vehicle Ignition Keys" call mso_core_fnc_initStat;
+execNow "core\modules\vehicleIgnitionKeys\main.sqf";
+#endif
+
 #ifdef SPYDER_ONU
 "Spyder Object Network Updater" call mso_core_fnc_initStat;
 execNow "core\modules\spyder_onu\main.sqf";
