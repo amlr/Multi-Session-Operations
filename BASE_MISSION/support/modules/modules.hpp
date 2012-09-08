@@ -17,6 +17,7 @@
 #define WHB_MULTISPAWN
 #define ZKS_Build
 #define CREWINFO
+#define MGO_ATTACH
 
 // WIP
 //#define GC_PACK_COW

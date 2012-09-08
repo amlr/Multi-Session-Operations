@@ -119,6 +119,13 @@ if(isNil "EnableCrewinfo") then {enablecrewinfo = 1;};
 if (enablecrewinfo == 1) then {
 	"Crew Info" call mso_core_fnc_initStat;
 	fnc_crewInfo = compile preprocessfilelinenumbers "support\modules\crewinfo\main.sqf";
-	crewStatus = [] spawn fnc_crewInfo;  
-}
+	crewStatus = [] spawn fnc_crewInfo;
+};
+#endif
+
+#ifdef MGO_ATTACH
+if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
+"MGO Attach" call mso_core_fnc_initStat;
+execNow "support\modules\mgo\main\init.sqf";
+};
 #endif
