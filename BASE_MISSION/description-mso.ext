@@ -59,6 +59,9 @@ class coreHeader {
 #ifdef CRB_TIMESYNC
 	#include <core\modules\crb_timesync\params.hpp>
 #endif
+#ifdef VEHICLEIGNITIONKEYS
+	#include <core\modules\vehicleIgnitionKeys\params.hpp>
+#endif
 class ambientHeader {
         title = "Ambience"; 
         values[]= {0}; 
@@ -110,6 +113,9 @@ class supportHeader {
 #ifdef R3F_REVIVE
 	#include "support\modules\R3F_revive\params.hpp"
 #endif
+#ifdef CREWINFO
+	#include <support\modules\crewinfo\params.hpp>
+#endif
 class enemyHeader {
         title = "Enemy"; 
         values[]= {0}; 
@@ -156,6 +162,9 @@ class RscTitles
 {
 #ifdef R3F_LOGISTICS
 	#include <support\modules\R3F_logistics\desc_rsct_include.h>
+#endif
+#ifdef CREWINFO
+#include <support\modules\crewinfo\dialog.hpp>
 #endif
 };
 

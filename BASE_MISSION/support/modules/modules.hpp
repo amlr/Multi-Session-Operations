@@ -16,7 +16,9 @@
 #define RMM_TYRES
 #define WHB_MULTISPAWN
 #define ZKS_Build
+#define CREWINFO
 
 // WIP
 //#define GC_PACK_COW
 //#define TN_LHDELEVATOR
+
