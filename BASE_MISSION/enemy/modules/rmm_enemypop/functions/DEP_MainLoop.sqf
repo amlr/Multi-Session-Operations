@@ -31,7 +31,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
 			_var = [_var, "/"] call CBA_fnc_split;
 			_grptemp =  (configFile >> "CfgGroups" >> (_var select 0) >> (_var select 1) >> (_var select 2) >> (_var select 3));
 		};
-		diag_log format ["_grptemp = %1", _grptemp];
+		//diag_log format ["_grptemp = %1", _grptemp];
 		_grptemp;
 	};
     
