@@ -1,5 +1,5 @@
 class timeSync {
-        title = "CRB Time Sync Check";
+        title = "    CRB Time Sync Check";
         values[] = {0,1,2,3};
         texts[] = {"Monitor", "skipTime", "setDate","No sync"};
         default = 3;
