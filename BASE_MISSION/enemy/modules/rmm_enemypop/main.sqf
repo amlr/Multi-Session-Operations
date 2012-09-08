@@ -13,18 +13,20 @@ private ["_debug","_d","_camp","_flag"];
 if !(isServer) exitWith {};
 
 _debug = debug_mso;
-if(isnil "rmm_dynamic") then {rmm_dynamic = 0};
-if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 3;};
-if(isNil "rmm_ep_spawn_dist")then{rmm_ep_spawn_dist = 2000;};
-if(isNil "rmm_ep_safe_zone")then{rmm_ep_safe_zone = 2000;};
-if(isNil "rmm_ep_inf")then{rmm_ep_inf = 4;};
-if(isNil "rmm_ep_mot")then{rmm_ep_mot = 3;};
-if(isNil "rmm_ep_mec")then{rmm_ep_mec = 2;};
-if(isNil "rmm_ep_arm")then{rmm_ep_arm = 1;};
-if(isNil "rmm_ep_aa")then{rmm_ep_aa = 2;};
+if (isnil "rmm_dynamic") then {rmm_dynamic = 0};
+if (isNil "rmm_ep_intensity") then {rmm_ep_intensity = 3;};
+if (isNil "rmm_ep_spawn_dist") then {rmm_ep_spawn_dist = 2000;};
+if (isNil "rmm_ep_safe_zone") then {rmm_ep_safe_zone = 2000;};
+if (isNil "rmm_ep_inf") then {rmm_ep_inf = 4;};
+if (isNil "rmm_ep_mot") then {rmm_ep_mot = 3;};
+if (isNil "rmm_ep_mec") then {rmm_ep_mec = 2;};
+if (isNil "rmm_ep_arm") then {rmm_ep_arm = 1;};
+if (isNil "rmm_ep_aa") then {rmm_ep_aa = 2;};
+if (isNil "pdb_locations_enabled") then {pdb_locations_enabled = false;};
 
+
+if ((rmm_dynamic == 2) || (pdb_locations_enabled)) exitWith {call compile preprocessfilelinenumbers "enemy\modules\rmm_enemypop\main_pdb.sqf"};
 if (rmm_dynamic == 1) exitWith {call compile preprocessfilelinenumbers "enemy\modules\rmm_enemypop\main_dynamic.sqf"};
-if (rmm_dynamic == 2) exitWith {call compile preprocessfilelinenumbers "enemy\modules\rmm_enemypop\main_pdb.sqf"};
 if (rmm_ep_intensity == 0) exitWith{diag_log format ["MSO-%1 Enemy Populator Disabled - Exiting.",time];};
 
 ep_groups = [];
