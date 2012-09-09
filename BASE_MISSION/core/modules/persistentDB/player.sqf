@@ -71,7 +71,7 @@ G_PLAYER_DATA = [
 	{ (_this select 0) getVariable "pdeaths";},
 	{ ((_this select 0) getVariable "TimePlayed") + ( time - ((_this select 0) getVariable "connectTime") );},
 	{ (_this select 0) getVariable "LastConnected";},
-	{ "Arma2Net.Unmanaged" callExtension "DateTime ['utcnow',]";}
+	{ (_this select 0) getVariable "LastDisconnected";}
 //    {[group  (_this select 0), (leader  (_this select 0) ==  (_this select 0))];}
 ];
 		
@@ -154,7 +154,7 @@ S_PLAYER_DATA = [
 		
 	{ (_this select 1) setvariable ["pdeaths",(_this select 0),true];}, // Deaths	27
 	{ (_this select 1) setVariable ["TimePlayed", (_this select 0), true]; (_this select 1) setVariable ["connectTime", time, true];}, // Time Played	28
-   	{ _time = "Arma2Net.Unmanaged" callExtension "DateTime ['utcnow',]"; (_this select 1) setvariable ["LastConnected", _time ,true];},	
+	{ },	
 	{ (_this select 1) setvariable ["LastDisconnected",(_this select 0),true];}
 	
 	/*

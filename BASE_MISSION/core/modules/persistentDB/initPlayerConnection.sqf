@@ -48,6 +48,9 @@ sleep 0.01;
 	diag_log["PASS: _pname: ", _pname];
 	diag_log["PASS: _playerSide: ", _playerSide];
 	
+	// Set player connection time
+	_player setVariable ["LastConnected", "Arma2Net.Unmanaged" callExtension "DateTime ['utcnow',]", true];
+	
 	_missionid = (MISSIONDATA select 1);
 	
 	if (pdb_log_enabled) then {
@@ -154,7 +157,6 @@ sleep 0.01;
 		_player setVariable ["prank",rank _player, true];
 		_player setVariable ["TimePlayed", 0, true];
 		_player setVariable ["connectTime", time, true];
-		_player setVariable ["LastConnected", "Arma2Net.Unmanaged" callExtension "DateTime ['utcnow',]", true];
 		_player setVariable ["playerSide", (side _player), true];
 		
 		// get the player's spawn position

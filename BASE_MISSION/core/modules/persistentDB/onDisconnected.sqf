@@ -26,16 +26,25 @@
 // ====================================================================================
 // MAIN
 
-private ["_id", "_pname", "_puid", "_player", "_missionid", "_thisPlayerData", "_thisdata", "_thisWeaponData", "_thisACEData", "_params", "_parameters", "_i", "_procedureName", "_response", "_thisObject", "_landVehicles", "_landVehicleCount", "_missionLandVehicles", "_vDir", "_vUp", "_vDam", "_vPosition", "_vObject", "_vFuel", "_vLocked", "_vWeaponCargo", "_vMagazineCargo","_vEngine", "_result", "_thisObjectData", "_object", "_date"];
+private ["_disconnectflag","_id", "_pname", "_puid", "_player", "_missionid", "_thisPlayerData", "_thisdata", "_thisWeaponData", "_thisACEData", "_params", "_parameters", "_i", "_procedureName", "_response", "_thisObject", "_landVehicles", "_landVehicleCount", "_missionLandVehicles", "_vDir", "_vUp", "_vDam", "_vPosition", "_vObject", "_vFuel", "_vLocked", "_vWeaponCargo", "_vMagazineCargo","_vEngine", "_result", "_thisObjectData", "_object", "_date"];
 
 _id = _this select 0; 
 _pname = _this select 1; 
 _puid  = _this select 2; 
+if (count _this > 3) then {
+	_disconnectflag = _this select 3;
+} else {
+	_disconnectflag = false;
+};
 
 _missionid = (MISSIONDATA select 1);
 
 if (pdb_log_enabled) then {
-	diag_log format["SERVER MSG: Player %1, is either leaving the server or auto-saving, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
+	if (_disconnectflag) then {
+		diag_log format["SERVER MSG: Player %1, is leaving the server, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
+	} else {
+		diag_log format["SERVER MSG: Player %1, is auto-saving, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
+	};	
 };
 	
 	if (_pname != "__SERVER__") then {
@@ -60,7 +69,14 @@ if (pdb_log_enabled) then {
 		} forEach playableUnits; // Return a list of playable units (occupied by both AI or players) in a multiplayer game. 
 		
 		if !(isNull _player) then {	
-					
+			
+			// Set disconnect flag for player
+			if (_disconnectflag) then {
+				private "_time";
+				_time = "Arma2Net.Unmanaged" callExtension "DateTime ['utcnow',]";
+				_player setvariable ["LastDisconnected", _time, true];
+			};
+			
 			// for each persistence type get and save data
 			{
 				private ["_type","_typestring","_procedure"];
@@ -77,7 +93,7 @@ if (pdb_log_enabled) then {
 				// Save Data to DB
 				_response = [_thisClientData,_params,_procedure,_idparams] call persistent_fnc_saveData;
 			} foreach PDB_CLIENT_GET_DATA;
-	
+			
 		} else {
 			// player not found!
 			if (pdb_log_enabled) then {
