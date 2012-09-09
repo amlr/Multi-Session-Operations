@@ -92,11 +92,15 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	_vgtemp = [_vgt, "|"] call CBA_fnc_split; // gives you an array of either 2 or 4 group elements
 	_vGroupType = [];
 	if (count _vgtemp == 2) then {
+		if ((_vgtemp select 0) == "GUER") then {_vgtemp set [0,"resistance"];};
 		_vGroupType = [[call compile (_vgtemp select 0), _vgtemp select 1]];
 	};
 	if (count _vgtemp == 4) then {
+		if ((_vgtemp select 0) == "GUER") then {_vgtemp set [0,"resistance"];};
+		if ((_vgtemp select 2) == "GUER") then {_vgtemp set [2,"resistance"];};
 		_vGroupType = [[call compile (_vgtemp select 0), _vgtemp select 1],[call compile (_vgtemp select 2), _vgtemp select 3]];
 	};
+	//diag_log format ["_vgtemp %1",_vgtemp];
 	//diag_log format ["vGroupType %1",_vGroupType];
 	
 	_vGroupStrength = [_locationData select 7, "read"] call persistent_fnc_convertFormat;
