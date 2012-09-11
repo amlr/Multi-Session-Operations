@@ -16,6 +16,7 @@ Any - The new instance or the result of the selected function and parameters
 
 Attributes:
 Boolean - debug - Debug enabled
+Boolean - state - Save and restore state
 Array - groups - List of AI groups performing CQB
 Array - factions - specific factions used by CQB (defaults MSO_FACTIONS)
 Number - spawnDistance - distance when AI will spawn for buildings.
@@ -60,21 +61,18 @@ Author:
 Highhead
 Wolffy.au
 ---------------------------------------------------------------------------- */
-private ["_logic","_operation","_args","_default","_mtemplate"];
+private ["_logic","_operation","_args","_mtemplate"];
+
+#define PARENT_CLASS MSO_fnc_Base
+#define DEFAULT_SPAWNDISTANCE 800
 
 // Create a new instance
 if(isNil "_this") exitWith {
-	// Create a module object for settings and persistence
-	_logic = MSO_FNC_GROUP createUnit ["LOGIC", [0,0], [], 0, "NONE"];
+	// Create a module object from Base
+	_logic = call PARENT_CLASS;
 	
-	_logic setVariable ["class", "MSO_fnc_CQB",true];
-	
-	// Initialise default settings
-	_logic setVariable ["debug", false, true];
-	_logic setVariable ["groups", [], true];
-	_logic setVariable ["spawnDistance", 800, true];
-	_logic setVariable ["factions", [], true];
-	_logic setVariable ["houses", [], true];
+	_logic setVariable ["parent", PARENT_CLASS, true];
+	_logic setVariable ["class", MSO_fnc_CQB, true];
 	
 	_logic;
 };
@@ -87,33 +85,31 @@ _mtemplate = "MSO_CQB_%1";
 
 switch(_operation) do {
 	default {
-		format["%1 does not support %2 operation", _logic getVariable ["class", "unknown Class"], _operation] call MSO_fnc_logger;
+		[_logic, _operation, _args] call PARENT_CLASS;
 	};
 	case "destroy": {
-		[_logic, "active", false] call MSO_fnc_CQB;
 		{
 			[_logic,"delGroup",_x] call MSO_fnc_CQB;
 		} foreach ([_logic, "groups"] call MSO_fnc_CQB);
 		{
 			[_logic,"clearHouse",_x] call MSO_fnc_CQB;
 		} foreach ([_logic, "houses"] call MSO_fnc_CQB);
-		[_logic, "debug", false] call MSO_fnc_CQB;
-		deleteVehicle _logic;
-                _logic = nil;
+		
+		[_logic, _operation] call PARENT_CLASS;
 	};
 	case "debug": {
 		if(isNil "_args") exitWith {
 			_logic getVariable ["debug", false];
 		};
 		
-		ASSERT_TRUE(typeName _args == "BOOL",str _args);		
+		[_logic, _operation, _args] call PARENT_CLASS;
+		
 		if(
 			// xor check args is different to current debug setting
 			(_args || (_logic getVariable ["debug", false])) &&
 			{!(_args && (_logic getVariable ["debug", false]))}
 		) then {
 			private["_houses"];
-			_logic setVariable ["debug", _args, true];
 			
 			private["_activecount","_remaincount","_cqbai"];
 			_remaincount = count ([_logic, "houses"] call MSO_fnc_CQB);
@@ -124,15 +120,15 @@ switch(_operation) do {
 					_cqbai = _cqbai + count units _x;
 				};
 			} forEach ([_logic, "groups"] call MSO_fnc_CQB);
-			format["CQB Population: %1 remaing positions | %2 active positions | %3 local CQB AI...", _remaincount, _activecount, _cqbai] call MSO_fnc_logger;				
-			
-			_args;
+			format["CQB Population: %1 remaing positions | %2 active positions | %3 local CQB AI...", _remaincount, _activecount, _cqbai] call MSO_fnc_logger;
 		};
+		_args;
 	};
 	case "state": {
 		private["_state","_data"];
 		if(isNil "_args") then {
 			_state = [[],-1] call CBA_fnc_hashCreate;
+			
 			// Save state
 			{
 				[_state, _x, _logic getVariable _x] call CBA_fnc_hashSet;
@@ -152,7 +148,6 @@ switch(_operation) do {
 			_state;
 		} else {
 			// Restore state
-			ASSERT_TRUE(typeName _args == "ARRAY",str typeName _args);
 			_logic setVariable ["spawnDistance", [_args, "spawnDistance"] call CBA_fnc_hashGet, true];
 			_logic setVariable ["factions", [_args, "factions"] call CBA_fnc_hashGet, true];
 			
@@ -190,13 +185,13 @@ switch(_operation) do {
 	case "spawnDistance": {
 		if(isNil "_args") then {
 			// if no new distance was provided return spawn distance setting
-			_default = 500;
-			_args = _logic getVariable ["spawnDistance", _default];
+			_args = _logic getVariable ["spawnDistance", DEFAULT_SPAWNDISTANCE];
 			_logic setVariable ["spawnDistance", _args, true];
 		} else {
 			// if a new distance was provided set spawn distance settings
 			ASSERT_TRUE(typeName _args == "SCALAR",str typeName _args);			
-			if(_args != _logic getVariable "spawnDistance") then {
+			if(_args != _logic getVariable ["spawnDistance", DEFAULT_SPAWNDISTANCE]) then {
+
 				_logic setVariable ["spawnDistance", _args, true];
 			};
 		};
@@ -332,9 +327,9 @@ switch(_operation) do {
 	
 	case "active": {
 		private["_active"];
-		_active = _logic getVariable ["active", false];
 		if(isNil "_args") exitWith {
-			_active;
+			_logic getVariable ["active", false];
+
 		};
 		
 		// xor check args is different to current debug setting

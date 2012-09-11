@@ -1,5 +1,6 @@
 class Core {
 	file = "core\functions";
+	class Base {description = "Base class";};
 	class initialising {description = "Initialisation message logger";};
 	class logger {description = "Timestamped message logger to RPT";};
 	class createLink {description = "Used for debugging and drawing lines between two objects on the map";};

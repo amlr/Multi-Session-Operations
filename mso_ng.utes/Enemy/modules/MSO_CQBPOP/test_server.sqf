@@ -13,7 +13,7 @@ LOG("Testing CQB Server");
 ASSERT_DEFINED("MSO_fnc_CQB","");
 ASSERT_DEFINED("MSO_fnc_getEnterableHouses","");
 
-#define STAT(msg) sleep 3; ["TEST: "+msg] call MSO_fnc_logger; titleText [msg,"PLAIN"]
+#define STAT(msg) ["TEST: "+msg] call MSO_fnc_logger; titleText [msg,"PLAIN"]
 
 _err = format["Mission objects: %1", count allMissionObjects ""];
 STAT(_err);
@@ -23,6 +23,7 @@ _logic = call MSO_fnc_CQB;
 _err = "instantiate object";
 ASSERT_DEFINED("_logic",_err);
 ASSERT_TRUE(typeName _logic == "OBJECT", _err);
+STAT("Created CQB instance");
 
 STAT("Setup debug parameters");
 _logic setVariable ["debugColor","ColorRed",true];
@@ -61,22 +62,28 @@ _result = [_logic, "spawnDistance", 0] call MSO_fnc_CQB;
 _err = "set spawn distance";
 ASSERT_TRUE(typeName _result == "SCALAR", _err);
 
+_oldgroupcount = count allGroups;
+_oldunitcount = count allUnits;
+
 STAT("Activate CQB");
 [_logic, "active", true] call MSO_fnc_CQB;
+
+sleep 5;
 
 STAT("Check for no groups @ 0 spawn distance");
 _result = [_logic, "groups"] call MSO_fnc_CQB;
 _err = "check 0 groups";
 ASSERT_TRUE(typeName _result == "ARRAY", _err);
 ASSERT_TRUE(count _result == 0, _err);
-
-_oldgroupcount = count allGroups;
-_oldunitcount = count allUnits;
+ASSERT_TRUE(count AllGroups == _oldgroupcount, _err);
+ASSERT_TRUE(count allUnits == _oldunitcount, _err);
 
 STAT("Increase spawn distance for 1 building");
 [_logic, "spawnDistance", 10] call MSO_fnc_CQB;
 
 waitUntil{sleep 3; (count ([_logic, "groups"] call MSO_fnc_CQB) > 0)};
+
+sleep 5;
 
 STAT("Check for 1 new group");
 _result = [_logic, "groups"] call MSO_fnc_CQB;
@@ -118,6 +125,8 @@ STAT("Set spawn distance to zero (disable activity)");
 [_logic, "spawnDistance", 0] call MSO_fnc_CQB;
 
 waitUntil{sleep 3; (count ([_logic, "groups"] call MSO_fnc_CQB) == 0)};
+
+sleep 5;
 
 STAT("Check for no groups @ 0 spawn distance");
 _result = [_logic, "groups"] call MSO_fnc_CQB;
@@ -172,8 +181,8 @@ ASSERT_TRUE(_result2,_err);
 STAT("Destroy old instance");
 [_logic, "destroy"] call MSO_fnc_CQB;
 
-_err = format["Mission objects: %1", count allMissionObjects ""];
-STAT(_err);
+_err = format["Mission objects: %1", count allMissionObjects ""];
+STAT(_err);
 
 STAT("Create new instance");
 _logic = call MSO_fnc_CQB;
