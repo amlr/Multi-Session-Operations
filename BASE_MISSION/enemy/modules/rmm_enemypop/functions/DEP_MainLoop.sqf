@@ -31,7 +31,6 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
 			_var = [_var, "/"] call CBA_fnc_split;
 			_grptemp =  (configFile >> "CfgGroups" >> (_var select 0) >> (_var select 1) >> (_var select 2) >> (_var select 3));
 		};
-		//diag_log format ["_grptemp = %1", _grptemp];
 		_grptemp;
 	};
     
@@ -54,8 +53,12 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
         if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
             //diag_log format ["grpt = %1", _grpt];  
 			// quick convert side
+			if (str(_grpt select 0) == "GUER") then {
+				_grpt set [0,resistance];
+			};
 			if (typename (_grpt select 0) == "STRING") then {
 				_temp = _grpt select 0;
+				if (_temp == "GUER") then {_temp = "resistance";}; // thanks BIS... ugh.
 				_grpt set [0,call compile _temp]; 
 			};
         	_group = [_pos2, _grpt select 0, [_grpt select 1] call DEP_convert_group] call BIS_fnc_spawnGroup;
@@ -73,8 +76,12 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
 
             	_grp2 = nil;
 				// quick convert side
+				if (str(_grpt2 select 0) == "GUER") then {
+					_grpt2 set [0,resistance];
+				};
 				if (typename (_grpt2 select 0) == "STRING") then {
 					_temp = _grpt2 select 0;
+					if (_temp == "GUER") then {_temp = "resistance";}; // thanks BIS... ugh.
 					_grpt2 set [0,call compile _temp]; 
 				};
                 _grp2 = [_pos, _grpt2 select 0, [_grpt2 select 1] call DEP_convert_group] call BIS_fnc_spawnGroup;

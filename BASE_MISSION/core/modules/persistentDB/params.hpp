@@ -38,25 +38,25 @@ class mpdb_landvehicles_enabled {
         title = "        Persistent Vehicles"; 
         values[]= {1,0}; 
         texts[]= {"On","Off"}; 
-        default = 1;
+        default = 0;
 };
 class mpdb_objects_enabled {
         title = "        Persistent Objects"; 
         values[]= {1,0}; 
         texts[]= {"On","Off"}; 
-        default = 1;
+        default = 0;
 };
 class mpdb_objects_contents_enabled {
         title = "        Persistent Vehicle/Object Contents"; 
         values[]= {1,0}; 
         texts[]= {"On","Off"}; 
-        default = 1;
+        default = 0;
 };
 class mpdb_locations_enabled {
         title = "        Persistent Locations"; 
         values[]= {1,0}; 
         texts[]= {"On","Off"}; 
-        default = 1;
+        default = 0;
 };
 class mpdb_AAR_enabled {
         title = "        Persistent After Action Reports"; 
@@ -68,7 +68,7 @@ class mpdb_tasks_enabled {
         title = "        Persistent Tasks/Objectives"; 
         values[]= {1,0}; 
         texts[]= {"On","Off"}; 
-        default = 1;
+        default = 0;
 };
 class mpdb_persistentScores_enabled {
         title = "        Persistent Scores"; 
@@ -86,5 +86,5 @@ class mpdb_log_enabled {
         title = "        Enable Logging"; 
         values[]= {1,0}; 
         texts[]= {"On","Off"}; 
-        default = 0;
+        default = 1;
 };
