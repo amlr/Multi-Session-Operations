@@ -4,6 +4,23 @@ private ["_loc","_loctype","_pos","_placeholder","_grptype","_camp","_grptype2",
 _debug = debug_mso;
 diag_log format["MSO-%1 PDB EP Population: starting INIT...", time];
 
+	// Function to convert group into appropriate format (avoiding config > string issues)
+	// Set side
+	// Set group as [Side,Faction,GroupType,Group]
+	DEP_format_group = {
+		private ["_grptemp","_var"];
+		_grptemp = str ((_this select 0) select 1);
+		// Convert group type
+		_grptemp = [_grptemp, "bin\config.bin/CfgGroups/", ""] call CBA_fnc_replace;
+		_grptemp = [_grptemp, "/"] call CBA_fnc_split;
+		// Check for guerrilas...
+		if (_grptemp select 0 == "Guerrila") then {
+			_grptemp set [0,"resistance"];
+		};
+		// diag_log format ["_group initialised = %1", _grptemp];
+		_grptemp;
+	};
+
 DEP_LOCS = [];
 for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
     if (_i > ((count CRB_LOCS)-1)) exitwith {};
@@ -22,13 +39,14 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         
 			_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
 			_grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+			_grptype = [_grptype] call DEP_format_group;
     		_placeholder setVariable ["groupType",[_grptype]];
         
         	if (random 1 < ep_campprob) then {
             	_camp = [[] call mso_fnc_selectcamptype];
             	_pos = [_pos,200,0.15,5] call rmm_ep_getFlatArea;
             	_grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
-				
+				_grptype2 = [_grptype2] call DEP_format_group;
 				_placeholder setVariable ["type", _camp];
 				_placeholder setVariable ["groupType", [_grptype] + [_grptype2]];
                 
@@ -49,13 +67,14 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
 	
 			_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
      	   	_grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+			_grptype = [_grptype] call DEP_format_group;
     		_placeholder setVariable ["groupType",[_grptype]];
                         
         	if (random 1 < ep_campprob) then {
             	_camp = [[] call mso_fnc_selectcamptype];
             	_pos = [_pos,200,0.15,5] call rmm_ep_getFlatArea;
             	_grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
-				
+				_grptype2 = [_grptype2] call DEP_format_group;
             	_placeholder setVariable ["type", _camp];
 				_placeholder setVariable ["groupType", [_grptype] + [_grptype2]];
                 
@@ -75,6 +94,7 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         	
         	_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
         	_grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+			_grptype = [_grptype] call DEP_format_group;
     		_placeholder setVariable ["groupType",[_grptype]];
         
 			_AA = [];
@@ -83,7 +103,7 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
             	_camp = [[] call mso_fnc_selectcamptype];
             	_pos = [_pos,200,0.15,5] call rmm_ep_getFlatArea;
             	_grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
-				
+				_grptype2 = [_grptype2] call DEP_format_group;
 				_placeholder setVariable ["type", _camp];
 				_placeholder setVariable ["groupType", [_grptype] + [_grptype2]];
                 
@@ -109,13 +129,14 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         
         	_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
         	_grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+			_grptype = [_grptype] call DEP_format_group;
     		_placeholder setVariable ["groupType",[_grptype]];
         
         	if (random 1 < ep_campprob) then {
             	_camp = [[] call mso_fnc_selectcamptype];
             	_pos = [_pos,200,0.15,5] call rmm_ep_getFlatArea;
             	_grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
-				
+				_grptype2 = [_grptype2] call DEP_format_group;
 				_placeholder setVariable ["type", _camp];
 				_placeholder setVariable ["groupType", [_grptype] + [_grptype2]];
         	};

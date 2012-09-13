@@ -15,22 +15,15 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
     _AAspawned = false;
     _RBspawned = false;
 	
-	
-	// Function to convert group into appropriate format
+	// Function to convert group into appropriate format to spawn group
 	DEP_convert_group = {
 		private ["_grptemp","_var"];
-        _grptemp = _this select 0;
-
-		if (typename _grptemp == "STRING") then {
-			// Check to see if its double bloody quotes
-			if (typename (call compile _grptemp) == "STRING") then {
-				_grptemp = call compile _grptemp;
-			};
-			_var = _grptemp;
-			_var = [_var, "bin\config.bin/CfgGroups/", ""] call CBA_fnc_replace;
-			_var = [_var, "/"] call CBA_fnc_split;
-			_grptemp =  (configFile >> "CfgGroups" >> (_var select 0) >> (_var select 1) >> (_var select 2) >> (_var select 3));
+        _var = _this select 0;
+		if ((_var select 0) == "resistance") then {
+			_var set [0,"Guerrila"];
 		};
+		_grptemp =  (configFile >> "CfgGroups" >> (_var select 0) >> (_var select 1) >> (_var select 2) >> (_var select 3));
+		//diag_log format ["_grptemp created = %1", _grptemp];
 		_grptemp;
 	};
     
@@ -51,17 +44,8 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
 		_spawned = true;
         _group = nil;
         if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
-            //diag_log format ["grpt = %1", _grpt];  
-			// quick convert side
-			if (str(_grpt select 0) == "GUER") then {
-				_grpt set [0,resistance];
-			};
-			if (typename (_grpt select 0) == "STRING") then {
-				_temp = _grpt select 0;
-				if (_temp == "GUER") then {_temp = "resistance";}; // thanks BIS... ugh.
-				_grpt set [0,call compile _temp]; 
-			};
-        	_group = [_pos2, _grpt select 0, [_grpt select 1] call DEP_convert_group] call BIS_fnc_spawnGroup;
+            diag_log format ["grpt = %1", _grpt];  
+        	_group = [_pos2, call compile (_grpt select 0), [_grpt] call DEP_convert_group] call BIS_fnc_spawnGroup;
             if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Group created %2 (%3)", time, _pos, _group];};
             (leader _group) setBehaviour "AWARE";
             _group setSpeedMode "LIMITED";
@@ -75,16 +59,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
             	[_group,_pos2,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
 
             	_grp2 = nil;
-				// quick convert side
-				if (str(_grpt2 select 0) == "GUER") then {
-					_grpt2 set [0,resistance];
-				};
-				if (typename (_grpt2 select 0) == "STRING") then {
-					_temp = _grpt2 select 0;
-					if (_temp == "GUER") then {_temp = "resistance";}; // thanks BIS... ugh.
-					_grpt2 set [0,call compile _temp]; 
-				};
-                _grp2 = [_pos, _grpt2 select 0, [_grpt2 select 1] call DEP_convert_group] call BIS_fnc_spawnGroup;
+                _grp2 = [_pos, call compile (_grpt2 select 0), [_grpt2] call DEP_convert_group] call BIS_fnc_spawnGroup;
                 if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Sub Group created %2 (%3)", time, _pos, _grp2];};
                 [_grp2] call BIN_fnc_taskDefend;
                 ep_groups set [count ep_groups, _grp2];
