@@ -28,14 +28,20 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
 	};
     
     if (_debug) then {diag_log format["MSO-%1 PDB EP Population: _obj %2 | _pos %3 | _grpt %4 | _camp %5 | _grpt2 %6 | _AA %7 | _RB %8 | _cleared %9", time, _obj, _pos, _grpt, _camp, _grpt2, _AA, _RB, _cleared]};
-                                        
+
+    if(!(isnil "_camp")) then {
+        if (_camp in DEP_camptypes) then {
+            [_camp, floor(random 360), _pos] call mso_core_fnc_createCompositionE;
+        } else {
+            [_camp, floor(random 360), _pos] call mso_core_fnc_createComposition;
+        };
+    };                                                                                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                     
    	waitUntil {sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
 
    	_groupPos = nil;
    	_grp2Pos = nil;
    	_breakouttimer = 0;
-    
-    if(!(isnil "_camp")) then {[_camp, floor(random 360), _pos] call f_builder;};
                                                                                                                         
    	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Starting While loop %2", time, _pos];};
 	while {!(_cleared)} do {

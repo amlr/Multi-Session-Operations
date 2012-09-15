@@ -12,8 +12,6 @@ if (isnil "rmm_ep_getFlatArea") then {rmm_ep_getFlatArea = compile preprocessFil
 if (isnil "fPlayersInside") then {fPlayersInside = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\fPlayersInside.sqf"};
 diag_log format["MSO-%1 PDB EP Population: loaded functions...", time];
 
-f_builder = mso_core_fnc_createComposition;
-
 _debug = debug_mso;
 if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 3;};
 if(isNil "rmm_ep_spawn_dist")then{rmm_ep_spawn_dist = 2000;};
@@ -38,6 +36,39 @@ if(isNil "CRB_LOCS") then {
 
 // Initialize DEP_LOCS array
 DEP_LOCS = [];
+
+// Array of used CO compositions (Fix for Camp-type error)
+DEP_camptypes =
+[
+"bunkerMedium01",
+"bunkerMedium02",
+"bunkerMedium03",
+"bunkerMedium04",
+"bunkerSmall01",
+"guardpost4",
+"guardpost5",
+"guardpost6",
+"guardpost7",
+"guardpost8",
+"citybase01",
+"cityBase02",
+"cityBase03",
+"cityBase04",
+"MediumTentCamp_local",
+"SmallTentCamp2_local",
+"SmallTentCamp_local",
+"camp_militia1",
+"camp_militia2",
+"anti-air_tk1",
+"camp_tk1",
+"camp_tk2",
+"firebase_tk1",
+"heli_park_tk1",
+"mediumtentcamp2_tk",
+"mediumtentcamp3_tk",
+"mediumtentcamp_tk",
+"radar_site_tk1"
+];
 
 [] spawn {
 
