@@ -7,13 +7,15 @@ SCRIPT(test_cqb_server);
 
 private ["_result","_err","_logic","_nearesthouse","_oldgroupcount","_oldunitcount","_unittypes","_result2","_state"];
 
+if(!isServer) exitWith{};
+
 LOG("Testing CQB Server");
 
 // UNIT TESTS (initStrings.sqf - stringJoin)
 ASSERT_DEFINED("MSO_fnc_CQB","");
 ASSERT_DEFINED("MSO_fnc_getEnterableHouses","");
 
-#define STAT(msg) ["TEST: "+msg] call MSO_fnc_logger; titleText [msg,"PLAIN"]
+#define STAT(msg) sleep 3; ["TEST: "+msg] call MSO_fnc_logger; titleText [msg,"PLAIN"]
 
 _err = format["Mission objects: %1", count allMissionObjects ""];
 STAT(_err);
@@ -23,7 +25,6 @@ _logic = call MSO_fnc_CQB;
 _err = "instantiate object";
 ASSERT_DEFINED("_logic",_err);
 ASSERT_TRUE(typeName _logic == "OBJECT", _err);
-STAT("Created CQB instance");
 
 STAT("Setup debug parameters");
 _logic setVariable ["debugColor","ColorRed",true];
@@ -38,11 +39,11 @@ _result = [_logic, "houses", [player modelToWorld [0,-100,0], 50] call MSO_fnc_g
 _err = "set houses";
 ASSERT_TRUE(typeName _result == "ARRAY", _err);
 
-STAT("Add nearest building");
+STAT("Add nearest building to Player 1");
 // TODO - Need to test clear building with no usable buildingpos
-//_nearesthouse = nearestObject [player, "House"];
-waitUntil{!isNull cursorTarget};
-_nearesthouse = cursorTarget;
+_nearesthouse = ([(playableUnits select 0)modelToWorld [0,10,0], 10] call MSO_fnc_getEnterableHouses) select 0;
+//waitUntil{!isNull cursorTarget};
+//_nearesthouse = cursorTarget;
 _result = [_logic, "addHouse", _nearesthouse] call MSO_fnc_CQB;
 _err = "add house";
 ASSERT_TRUE(typeName _result == "ARRAY", _err);
@@ -255,5 +256,8 @@ STAT("Destroy old instance");
 
 _err = format["Mission objects: %1", count allMissionObjects ""];
 STAT(_err);
+
+endMission "END1";
+//forceEnd;
 
 nil;
