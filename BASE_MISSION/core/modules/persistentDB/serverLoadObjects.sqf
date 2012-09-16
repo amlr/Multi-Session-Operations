@@ -106,7 +106,7 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 		_thisObject setDammage _vDam;
 		
 		// set the objects WeaponCargo 
-		for "_i" from 0 to (count (_vWeaponCargo select 0)-1) do {
+		for "_i" from 0 to ((count (_vWeaponCargo select 0)) -1) do {
 				_thisObject addWeaponCargoGlobal [(_vWeaponCargo select 0) select _i, (_vWeaponCargo select 1) select _i];
 		};
 		

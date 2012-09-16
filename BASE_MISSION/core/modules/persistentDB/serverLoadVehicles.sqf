@@ -1,6 +1,6 @@
 // Load Vehicles
 
-private ["_procedureName", "_parameters", "_missionid", "_response", "_landVehicleCountInDB", "_serverData", "_countInDB", "_z", "_thisID", "_landVehicleData", "_vObject", "_tmp", "_thisVehicle", "_vPosition", "_vDir", "_vUp", "_vDam", "_vFuel", "_vLocked", "_vWeaponCargo", "_vMagazineCargo","_vEngine"];
+private ["_procedureName", "_parameters", "_missionid", "_response", "_landVehicleCountInDB", "_serverData", "_countInDB", "_z", "_thisID", "_landVehicleData", "_vObject", "_tmp", "_thisVehicle", "_vPosition", "_vDir", "_vUp", "_vDam", "_vFuel", "_vLocked", "_vWeaponCargo", "_vMagazineCargo","_vEngine","_m"];
 
 _missionid = _this select 0;
 
@@ -33,6 +33,8 @@ _countInDB = parseNumber (_landVehicleCountInDB select 0);
 
 // START LOOP
 for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
+	
+	private "_m";
 
 	_thisID = _z+1;
 	
@@ -103,12 +105,15 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 			_vWeaponCargo = _landVehicleData select 8;
 			_vWeaponCargo = [_vWeaponCargo, "|", ","] call CBA_fnc_replace; 
 			_vWeaponCargo = call compile _vWeaponCargo;	
-		
-		//										diag_log ["_vWeaponCargo: ",  _vWeaponCargo, typeName _vWeaponCargo];
+
+			//if (count (v_weaponcargo select 0) > 0) then { diag_log ["_vWeaponCargo: ",  _vWeaponCargo, typeName _vWeaponCargo];};
+
 			clearMagazineCargoGlobal _thisVehicle;
-			_vMagazineCargo = _objectData select 10;
+			_vMagazineCargo = _landVehicleData select 10;
 			_vMagazineCargo = [_vMagazineCargo, "|", ","] call CBA_fnc_replace; 
-			_vMagazineCargo = call compile _vMagazineCargo;	
+			_vMagazineCargo = call compile _vMagazineCargo;
+			
+			//if (count (v_MagazineCargo select 0) > 0) then { diag_log ["_vMagazineCargo: ",  _vMagazineCargo, typeName _vMagazineCargo];};
 		} else {
 			_vWeaponCargo = [];
 			_vMagazineCargo = [];
@@ -125,11 +130,13 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 		// set the vehicles lock 
 		_thisVehicle lock _vLocked;
 		// set the vehicles WeaponCargo 
-		for "_i" from 0 to (count (_vWeaponCargo select 0)-1) do {
+		for "_i" from 0 to ((count (_vWeaponCargo select 0)) -1) do {
 				_thisVehicle addWeaponCargoGlobal [(_vWeaponCargo select 0) select _i, (_vWeaponCargo select 1) select _i];
+				//diag_log format ["Adding Weapon %1 to vehicle %2", (_vWeaponCargo select 0) select _i, _thisVehicle];
 		};
-		for "_m" from 0 to (count (_vMagazineCargo select 0)-1) do {
-				_thisVehicle addMagazineCargoGlobal [(_vMagazineCargo select 0) select _m, (_vMagazineCargo select 1) select _m];
+		for "_i" from 0 to ((count (_vMagazineCargo select 0)) -1) do {
+				_thisVehicle addMagazineCargoGlobal [(_vMagazineCargo select 0) select _i, (_vMagazineCargo select 1) select _i];
+				//diag_log format ["Adding Magazine %1 to vehicle %2", (_vMagazineCargo select 0) select _i, _thisVehicle];
 		};
 		// set the vehicles engine 
 		_thisVehicle engineOn _vEngine;

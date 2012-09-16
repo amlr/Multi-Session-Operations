@@ -34,7 +34,22 @@ CREATE TABLE `tasks` (
   `sta` varchar(45) DEFAULT NULL,
   `side` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `group`
+--
+
+DROP TABLE IF EXISTS `group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `group` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `test` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,9 +80,10 @@ CREATE TABLE `missions` (
   `map` varchar(45) DEFAULT '',
   `svr` varchar(255) DEFAULT '',
   `addr` varchar(45) DEFAULT NULL,
+  `sloc` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `missionName` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=126 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=130 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +108,7 @@ CREATE TABLE `locations` (
   `pa` varchar(45) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=34873 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=65875 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,7 +129,7 @@ CREATE TABLE `markers` (
   `side` varchar(45) DEFAULT NULL,
   `col` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +155,7 @@ CREATE TABLE `landvehicles` (
   `wmag` varchar(1000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=16991 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23034 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +211,7 @@ CREATE TABLE `players` (
   KEY `missionid` (`mid`),
   KEY `puid` (`pid`),
   KEY `pname` (`na`)
-) ENGINE=MyISAM AUTO_INCREMENT=406 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=412 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,7 +234,7 @@ CREATE TABLE `objects` (
   `wmag` varchar(1000) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=23117 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37080 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +267,33 @@ CREATE TABLE `aar` (
   `sitrep` varchar(1000) DEFAULT NULL,
   `typ` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `FirstName` varchar(45) DEFAULT NULL,
+  `Surname` varchar(45) DEFAULT NULL,
+  `Codename` varchar(45) DEFAULT NULL,
+  `Picture` blob,
+  `email` varchar(45) DEFAULT NULL,
+  `dob` varchar(45) DEFAULT NULL,
+  `gender` varchar(45) DEFAULT NULL,
+  `height` varchar(45) DEFAULT NULL,
+  `weight` varchar(45) DEFAULT NULL,
+  `build` varchar(45) DEFAULT NULL,
+  `hair` varchar(45) DEFAULT NULL,
+  `eyes` varchar(45) DEFAULT NULL,
+  `race` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -742,9 +784,9 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `NewMission`(IN tna VARCHAR(255), IN ttd INT(1), IN tsc INT(1), IN tgsc INT(1), IN tlog INT(1), IN twea INT(1), IN tace INT(1), IN tlv INT(1), IN tobj INT(1), IN tloc INT(1), IN tobc INT(1), IN tmar INT(1), IN ttas INT(1), IN taar INT(1), IN tmda VARCHAR(45), IN tmap VARCHAR(45), IN tsvr VARCHAR(255), IN taddr VARCHAR(45))
+/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `NewMission`(IN tna VARCHAR(255), IN ttd INT(1), IN tsc INT(1), IN tgsc INT(1), IN tlog INT(1), IN twea INT(1), IN tace INT(1), IN tlv INT(1), IN tobj INT(1), IN tloc INT(1), IN tobc INT(1), IN tmar INT(1), IN ttas INT(1), IN taar INT(1), IN tmda VARCHAR(45), IN tmap VARCHAR(45), IN tsvr VARCHAR(255), IN taddr VARCHAR(45), IN tsloc VARCHAR(255))
 BEGIN
-  INSERT INTO missions (na,td,sc,gsc,log,wea,ace,lv,obj,loc,obc,mar,tas,aar,mda,map,svr,addr) values (tna,ttd,tsc,tgsc,tlog,twea,tace,tlv,tobj,tloc,tobc,tmar,ttas,taar,tmda,tmap,tsvr,taddr);
+  INSERT INTO missions (na,td,sc,gsc,log,wea,ace,lv,obj,loc,obc,mar,tas,aar,mda,map,svr,addr,sloc) values (tna,ttd,tsc,tgsc,tlog,twea,tace,tlv,tobj,tloc,tobc,tmar,ttas,taar,tmda,tmap,tsvr,taddr,tsloc);
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -951,4 +993,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-09-07 20:07:27
+-- Dump completed on 2012-09-16 17:56:45
