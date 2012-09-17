@@ -61,14 +61,14 @@ private ["_logic","_operation","_args"];
 
 // Create a new instance
 if(isNil "_this") exitWith {
-        // Create a module object for settings and persistence
-        ISNILS(sideLogic,createCenter sideLogic);
-        ISNILS(MSO_FNC_GROUP,createGroup sideLogic; publicVariable "MSO_FNC_GROUP";);
-        _logic = MSO_FNC_GROUP createUnit ["LOGIC", [0,0], [], 0, "NONE"];
-        
-        _logic setVariable ["class", MSO_fnc_Base, true];
-        
-        _logic;
+	// Create a module object for settings and persistence
+	ISNILS(sideLogic,createCenter sideLogic);
+	ISNILS(MSO_FNC_GROUP,createGroup sideLogic; publicVariable "MSO_FNC_GROUP";);
+	_logic = MSO_FNC_GROUP createUnit ["LOGIC", [0,0], [], 0, "NONE"];
+	
+	_logic setVariable ["class", MSO_fnc_Base];
+	
+	_logic;
 };
 
 PARAMS_1(_logic);
@@ -76,39 +76,11 @@ DEFAULT_PARAM(1,_operation,"");
 DEFAULT_PARAM(2,_args,nil);
 
 switch(_operation) do {
-        default {
-                format["%1 does not support %2 operation", _logic getVariable ["class", "unknown Class"], _operation] call MSO_fnc_logger;
-        };
-        
-        case "destroy": {
-                [_logic, "debug", false] call MSO_fnc_CQB;
-                deleteVehicle _logic;
-        };
-        
-        case "debug": {
-                if(isNil "_args") exitWith {
-                        _logic getVariable ["debug", false];
-                };
-                
-                ASSERT_TRUE(typeName _args == "BOOL",str _args);		
-                if(
-                        // xor check args is different to current debug setting
-                        (_args || (_logic getVariable ["debug", false])) &&
-                        {!(_args && (_logic getVariable ["debug", false]))}
-                ) then {
-                        _logic setVariable ["debug", _args, true];
-                };
-                _args;
-        };
-        
-        case "state": {
-                private["_state","_data"];
-                if(isNil "_args") then {
-                        _state = [[],-1] call CBA_fnc_hashCreate;
-                } else {
-                        // Restore state
-                        ASSERT_TRUE(_args call CBA_fnc_isHash,str typeName _args);
-                };		
-                _state;
-        };
+	default {
+		format["%1 does not support %2 operation", _logic getVariable ["class", "unknown Class"], _operation] call MSO_fnc_logger;
+	};
+	
+	case "destroy": {
+		deleteVehicle _logic;
+	};
 };

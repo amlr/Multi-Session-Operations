@@ -6,5 +6,3 @@ titleText ["", "BLACK IN"];
 
 //call compile preprocessfilelinenumbers "core\modules\mso_strategic\test.sqf";
 call compile preprocessfilelinenumbers "Enemy\modules\MSO_CQBPOP\test.sqf";
-
-forceEnd;

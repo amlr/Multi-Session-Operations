@@ -33,7 +33,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={4388.4395,27,3177.3843};
+					position[]={4387.0229,27,3175.7737};
 					azimut=135;
 					id=0;
 					side="WEST";
@@ -62,6 +62,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
+					init="this setCaptive true; removeAllWeapons this;";
 					description="Server";
 				};
 			};
