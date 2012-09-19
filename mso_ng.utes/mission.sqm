@@ -24,7 +24,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=2;
+		items=3;
 		class Item0
 		{
 			side="WEST";
@@ -67,49 +67,138 @@ class Mission
 				};
 			};
 		};
+		class Item2
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={3594.5054,18.983,3641.6997};
+					id=2;
+					side="CIV";
+					vehicle="Citizen1";
+					leader=1;
+					skill=0.60000002;
+					init="this addWeapon ""Binocular"";";
+				};
+			};
+		};
+	};
+	class Markers
+	{
+		items=10;
+		class Item0
+		{
+			position[]={2952.8511,39,4512.7617};
+			name="x";
+			text="Small Base - ";
+			type="mil_objective";
+			colorName="ColorRed";
+		};
+		class Item1
+		{
+			position[]={3269.446,4,4568.2295};
+			name="r_1";
+			text="Pier - Receive reinforcements";
+			type="mil_objective";
+			colorName="ColorGreen";
+		};
+		class Item2
+		{
+			position[]={4279.1104,28.527836,3196.6003};
+			name="r";
+			text="Factory - ";
+			type="mil_objective";
+			colorName="ColorGreen";
+		};
+		class Item3
+		{
+			position[]={3871.3672,28,3320.7629};
+			name="x_3";
+			text="Small Base - ";
+			type="mil_objective";
+			colorName="ColorRed";
+		};
+		class Item4
+		{
+			position[]={3569.5256,28.121769,3648.7708};
+			name="x_4";
+			text="Traffic Control - ";
+			type="mil_objective";
+			colorName="ColorRed";
+		};
+		class Item5
+		{
+			position[]={3204.6409,40.793999,4031.8706};
+			name="x_5";
+			text="Small Base - ";
+			type="mil_objective";
+			colorName="ColorRed";
+		};
+		class Item6
+		{
+			position[]={2535.1362,31.783171,3837.8127};
+			name="r_2";
+			text="Lighthouse - assist delivery";
+			type="mil_objective";
+			colorName="ColorGreen";
+		};
+		class Item7
+		{
+			position[]={4473.9053,44.789181,3350.9326};
+			name="r_3";
+			text="Lighthouse - assist delivery";
+			type="mil_objective";
+			colorName="ColorGreen";
+		};
+		class Item8
+		{
+			position[]={4514.335,1.0819843,3104.7363};
+			name="r_4";
+			text="Pier - Receive reinforcements";
+			type="mil_objective";
+			colorName="ColorGreen";
+		};
+		class Item9
+		{
+			position[]={3623.0515,0.33731371,4440.4424};
+			name="r_5";
+			text="Boatshed - Receive reinforcements";
+			type="mil_objective";
+			colorName="ColorGreen";
+		};
 	};
 	class Sensors
 	{
-		items=3;
+		items=2;
 		class Item0
 		{
-			position[]={3605.2734,18.715635,3674.2563};
+			position[]={3604.7349,18.727123,3671.4912};
 			a=0;
 			b=0;
 			activationBy="ALPHA";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
-			expActiv="FSMH setFSMVariable [""_debug"", true];";
+			text="Teleport";
+			expActiv="onMapSingleClick {player setPosATL _pos; onMapSingleClick {};};";
 			class Effects
 			{
 			};
 		};
 		class Item1
 		{
-			position[]={3615.459,19.175341,3674.7339};
-			a=0;
-			b=0;
-			activationBy="JULIET";
-			repeating=1;
-			interruptable=1;
-			age="UNKNOWN";
-			expActiv="call BIS_fnc_help;";
-			expDesactiv="call BIS_fnc_configViewer;";
-			class Effects
-			{
-			};
-		};
-		class Item2
-		{
-			position[]={3609.9717,18.941217,3674.2642};
+			position[]={3612.1423,18.998207,3671.2522};
 			a=0;
 			b=0;
 			activationBy="BRAVO";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
-			expActiv="FSMH setFSMVariable [""_abort"", true];";
+			text="Camera";
+			expActiv="player exec ""camera.sqs""";
 			class Effects
 			{
 			};
