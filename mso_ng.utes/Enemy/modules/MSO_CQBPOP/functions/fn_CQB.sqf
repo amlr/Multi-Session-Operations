@@ -71,8 +71,8 @@ if(isNil "_this") exitWith {
         // Create a module object from Base
         _logic = call SUPERCLASS;
         
-        _logic setVariable ["super", SUPERCLASS];
-        _logic setVariable ["class", MSO_fnc_CQB];
+        _logic setVariable ["super", SUPERCLASS, true];
+        _logic setVariable ["class", MSO_fnc_CQB, true];
         
         _logic;
 };
