@@ -10,6 +10,8 @@ if (isnil "MSO_fnc_getrandomgrouptype") then {MSO_fnc_getrandomgrouptype = compi
 if (isnil "mso_fnc_selectcamptype") then {MSO_fnc_selectcamptype = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\mso_fnc_selectcamptype.sqf"};
 if (isnil "rmm_ep_getFlatArea") then {rmm_ep_getFlatArea = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\rmm_ep_getFlatArea.sqf"};
 if (isnil "fPlayersInside") then {fPlayersInside = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\fPlayersInside.sqf"};
+if (isnil "DEP_convert_group") then {DEP_convert_group = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_convert_group.sqf"};
+
 diag_log format["MSO-%1 PDB EP Population: loaded functions...", time];
 
 _debug = debug_mso;
