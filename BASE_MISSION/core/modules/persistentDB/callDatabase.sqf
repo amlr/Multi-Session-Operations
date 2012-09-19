@@ -8,7 +8,7 @@ _parameters = _this select 1;
 
  // diag_log format["callExtension->Arma2NETMySQL: Len:%1 _parameters (%3): %2", [_parameters] call CBA_fnc_strLen, _parameters, typeName _parameters];
  
-if (([_parameters] call CBA_fnc_strLen) < 2047) then {
+if (([_parameters] call CBA_fnc_strLen) < 1900) then {
 	_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
 	_response = call compile _response;	
 } else{
