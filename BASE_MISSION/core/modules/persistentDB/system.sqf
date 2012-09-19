@@ -179,6 +179,17 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 // ====================================================================================
 //  PERSISTENT DB PUBLIC VARIABLE HANDLERS
 // ====================================================================================
+	"PDB_SAVE_PLAYER" addPublicVariableEventHandler { 
+		if (isServer && (persistentDBHeader == 1)) then {
+				private "_data";
+				_data = _this select 1;
+				diag_log ["PersistentDB: SERVER MSG - Saving Player Data, time: ", time];
+				[0, (_data select 0), (_data select 1)] call compile preprocessfilelinenumbers "core\modules\persistentDB\onDisconnected.sqf";
+		};
+	};
+	
+		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	"PDB_PLAYER_RUCK_UPDATE" addPublicVariableEventHandler { 
 			if (isServer) then {

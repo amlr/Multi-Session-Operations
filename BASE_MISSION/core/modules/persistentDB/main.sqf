@@ -78,6 +78,7 @@ if (isdedicated) then {
 			PDBLastSaveTimePlayer = time;
 		};
 	};
+	
 };
 
 if (isServer) then { 
@@ -125,6 +126,11 @@ if ((!isServer) || (!isdedicated)) then {
 		publicVariable "PDB_PLAYER_READY";
 		if  (ENV_dedicated) then { startLoadingScreen ["Client is loading persistent player data...", "PDB_loadingScreen"]; };
 		diag_log["PersistentDB: PLAYER READY"];
+		// Setup Player Menu Save
+		[] spawn {
+				waitUntil {!isNil "mso_interaction_key"};
+				["player", [mso_interaction_key], 4, ["core\modules\persistentDB\menuSavePlayer.sqf", "main"]] call CBA_ui_fnc_add;
+		};
 	};
 };
 // ====================================================================================
