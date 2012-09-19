@@ -15,19 +15,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
     _AAspawned = false;
     _RBspawned = false;
 	
-	// Function to convert group into appropriate format to spawn group
-	DEP_convert_group = {
-		private ["_grptemp","_var"];
-        _var = _this select 0;
-		if ((_var select 0) == "resistance") then {
-			_var set [0,"Guerrila"];
-		};
-		_grptemp =  (configFile >> "CfgGroups" >> (_var select 0) >> (_var select 1) >> (_var select 2) >> (_var select 3));
-		//diag_log format ["_grptemp created = %1", _grptemp];
-		_grptemp;
-	};
-    
-    if (_debug) then {diag_log format["MSO-%1 PDB EP Population: _obj %2 | _pos %3 | _grpt %4 | _camp %5 | _grpt2 %6 | _AA %7 | _RB %8 | _cleared %9", time, _obj, _pos, _grpt, _camp, _grpt2, _AA, _RB, _cleared]};
+	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: _obj %2 | _pos %3 | _grpt %4 | _camp %5 | _grpt2 %6 | _AA %7 | _RB %8 | _cleared %9", time, _obj, _pos, _grpt, _camp, _grpt2, _AA, _RB, _cleared]};
 
     if(!(isnil "_camp")) then {
         if (_camp in DEP_camptypes) then {
@@ -35,7 +23,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
         } else {
             [_camp, floor(random 360), _pos] call mso_core_fnc_createComposition;
         };
-    };                                                                                                                                         
+    };                                                                                                                                      
                                                                                                                                                                                                                                                                                                                                                                                                                      
    	waitUntil {sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
 
