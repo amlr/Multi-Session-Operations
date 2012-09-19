@@ -6,13 +6,13 @@ _databaseName = "arma";
 _procedureName = _this select 0;
 _parameters = _this select 1;
 
- // diag_log ["callExtension->Arma2NETMySQL: GetPlayer _parameters: ",  _parameters, typeName _parameters];
+ // diag_log format["callExtension->Arma2NETMySQL: Len:%1 _parameters (%3): %2", [_parameters] call CBA_fnc_strLen, _parameters, typeName _parameters];
  
-if (([_parameters] call CBA_fnc_strLen) < 4096) then {
+if (([_parameters] call CBA_fnc_strLen) < 2047) then {
 	_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
 	_response = call compile _response;	
 } else{
-	diag_log format["SERVER MSG: Output is greater than 4096 characters - NOT saving: %1", _parameters];
+	diag_log format["SERVER MSG: Output is greater than 4096 bytes - NOT saving: %1", _parameters];
 	_response = [];
 };
  
