@@ -39,7 +39,7 @@ S_ACE_DATA_PROCEDURE = "GetPlayerACE";
 
 S_ACE_DATA = [
 	{ 	(_this select 1) setVariable ["WOB", _this select 0, true];         
-		(_this select 1) addWeapon (_this select 0);
+		//(_this select 1) addWeapon (_this select 0);
         [(_this select 1), (_this select 0)] call ACE_fnc_PutWeaponOnBack;}, // ACE Weapon on Back
 
 	{}, // ACE Ruck
