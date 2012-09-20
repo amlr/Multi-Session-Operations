@@ -19,4 +19,4 @@ Author:
 Wolffy.au
 ---------------------------------------------------------------------------- */
 
-(({local _x} count allUnits) <= ceil(count allUnits / count ([] call BIS_fnc_listPlayers))) && (!isServer);
+(({local _x} count allUnits) <= ceil(count allUnits / count ([] call BIS_fnc_listPlayers)));

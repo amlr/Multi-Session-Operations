@@ -209,36 +209,31 @@ switch(_operation) do {
 	}; 
 	
 	case "houses": {
-		private["_houses"];
-		_houses = _logic getVariable ["houses", []];
-		
-		if(isNil "_args") then {
-			_args = _houses;
-		} else {
+		if(!isNil "_args") then {
+			if ([_logic, "debug"] call MSO_fnc_CQB) then {
+				{
+					deleteMarker format[_mtemplate, _x];
+				} forEach (_logic getVariable ["houses", []]);
+			};
+
 			if(isServer) then {
 				ASSERT_TRUE(typeName _args == "ARRAY",str typeName _args);
 				_logic setVariable ["houses", _args, true];
 			};
+
+			if ([_logic, "debug"] call MSO_fnc_CQB) then {
+				// mark all strategic and non-strategic houses
+				{
+					[format[_mtemplate, _x], getPosATL _x, "Icon", [1,1], "TYPE:", "Dot", "COLOR:", _logic getVariable ["debugColor","ColorGreen"], "TEXT:", _logic getVariable ["debugPrefix","CQB"]] call CBA_fnc_createMarker;
+					if (!isNil {_x getVariable "group"}) then {
+						// mark active houses
+						format[_mtemplate, _x] setMarkerType "Waypoint";
+					};
+				} forEach _args;
+			};
 		};
 		
-		if ([_logic, "debug"] call MSO_fnc_CQB) then {
-			{
-				deleteMarker format[_mtemplate, _x];
-			} forEach _houses;
-			
-			_houses = _args;
-			
-			// mark all strategic and non-strategic houses
-			{
-				[format[_mtemplate, _x], getPosATL _x, "Icon", [1,1], "TYPE:", "Dot", "COLOR:", _logic getVariable ["debugColor","ColorGreen"], "TEXT:", _logic getVariable ["debugPrefix","CQB"]] call CBA_fnc_createMarker;
-				if (!isNil {_x getVariable "group"}) then {
-					// mark active houses
-					format[_mtemplate, _x] setMarkerType "Waypoint";
-				};
-			} forEach _houses;
-		};
-		
-		_args;
+		_logic getVariable ["houses", []];
 	};
 	case "addHouse": {
 		if(!isNil "_args") then {
@@ -339,9 +334,7 @@ switch(_operation) do {
 				format["CQB Population: Group %1 deleted from %2...", _grp, owner leader _grp] call MSO_fnc_logger;
 			};
 			format[_mtemplate, _house] setMarkerType "Dot";
-			if(isServer) then {
-				deleteGroup _grp;
-			};
+			deleteGroup _grp;
 			
 			_logic getVariable ["groups", []];
 		};
@@ -400,7 +393,8 @@ switch(_operation) do {
 							// Check: if any players within spawn distance AND
 							if (
 								(isNil {_house getVariable "group"}) &&
-								{([getPosATL _house, _spawn] call MSO_fnc_anyPlayersInRange) != 0}
+								{([getPosATL _house, _spawn] call MSO_fnc_anyPlayersInRange) != 0} &&
+								{!isDedicated}
 							) then {
 								
 								// Action: spawn AI
