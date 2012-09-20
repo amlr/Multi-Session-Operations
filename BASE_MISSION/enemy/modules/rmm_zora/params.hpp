@@ -1,5 +1,5 @@
 class ZORAmaxgrps {
-        title = "    ZORA simultan groups"; 
+        title = "    Simultaneous ZORA groups"; 
         values[]= {0,3,5}; 
         texts[]= {"Off","3","5"};
         default = 3;

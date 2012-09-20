@@ -1,6 +1,6 @@
 #define CRB_CIVILIANS
 #define CRB_DOGS
-#define CRB_EMERGENCY
+//#define CRB_EMERGENCY
 #define CRB_SHEPHERDS
 #define RMM_CTP
 #define TUP_AIRTRAFFIC

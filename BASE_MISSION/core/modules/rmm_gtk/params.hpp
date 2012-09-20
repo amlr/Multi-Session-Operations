@@ -4,7 +4,7 @@ class gtk_cache_header {
 //	texts[]= {"Off","NOUJAY","CEP","OSOM"}; 
 	values[]= {0,1,2};
 	texts[]= {"Off","NOUJAY","CEP"}; 
-	default = 1; 
+	default = 0; 
 };
 class gtk_cache_distance {
 	title = "        Distance caching activates";
