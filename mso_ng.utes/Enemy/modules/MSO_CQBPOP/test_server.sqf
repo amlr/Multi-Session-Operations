@@ -16,7 +16,7 @@ ASSERT_DEFINED("MSO_fnc_getEnterableHouses","");
 //========================================
 // Start Defines
 
-#define STAT(msg) sleep 3; ["TEST: "+msg] call MSO_fnc_logger; titleText [msg,"PLAIN"]
+#define STAT(msg) sleep 1; ["TEST: "+msg] call MSO_fnc_logger; titleText [msg,"PLAIN"]
 
 #define MISSIONOBJECTCOUNT _err = format["Mission objects: %1", count allMissionObjects ""]; \
 STAT(_err);
@@ -86,7 +86,6 @@ STAT("Destroy old instance"); \
 [_logic, "destroy"] call MSO_fnc_CQB; \
 } else { \
 STAT("Reference old instance"); \
-waitUntil{isNil "TEST_LOGIC"}; \
 };
 
 //========================================
