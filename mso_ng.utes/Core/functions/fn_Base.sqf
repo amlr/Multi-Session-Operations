@@ -59,7 +59,7 @@ Wolffy.au
 ---------------------------------------------------------------------------- */
 private ["_logic","_operation","_args"];
 
-// Create a new instance
+// Constructor - create a new instance
 if(isNil "_this") exitWith {
 	// Create a module object for settings and persistence
 	ISNILS(sideLogic,createCenter sideLogic);
