@@ -13,7 +13,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 
 if (nomadTime == 43200) then {
 	// Setup UI option to Save Player State
-	["player", [mso_interaction_key], 4, ["core\modules\rmm_nomad\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+	["player", [mso_interaction_key], -9450, ["core\modules\rmm_nomad\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
 	["SPS","updatePlayerStateNow = true"] call mso_core_fnc_updateMenu;
 };
 

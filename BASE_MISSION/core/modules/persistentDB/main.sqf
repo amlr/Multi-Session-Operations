@@ -129,7 +129,7 @@ if ((!isServer) || (!isdedicated)) then {
 		// Setup Player Menu Save
 		[] spawn {
 				waitUntil {!isNil "mso_interaction_key"};
-				["player", [mso_interaction_key], 4, ["core\modules\persistentDB\menuSavePlayer.sqf", "main"]] call CBA_ui_fnc_add;
+				["player", [mso_interaction_key], -9500, ["core\modules\persistentDB\menuSavePlayer.sqf", "main"]] call CBA_ui_fnc_add;
 		};
 	};
 };

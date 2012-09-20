@@ -30,6 +30,6 @@ RMM_aar_lines = [
 		} foreach RMM_aars;
 	};
 
-	["player", [mso_interaction_key], 4, ["support\modules\rmm_aar\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+	["player", [mso_interaction_key], -9404, ["support\modules\rmm_aar\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
 	["AAR","if(call mso_fnc_hasRadio) then {createDialog ""RMM_ui_aar""}"] call mso_core_fnc_updateMenu;
 };

@@ -59,7 +59,7 @@ RMM_jipmarkers_colors = [
 		} foreach RMM_jipmarkers;
 	};
 
-	["player", [mso_interaction_key], 4, ["support\modules\rmm_jipmarkers\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+	["player", [mso_interaction_key], -9403, ["support\modules\rmm_jipmarkers\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
 
 	CRB_MAPCLICK = CRB_MAPCLICK + "if (!_shift && _alt) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
 	onMapSingleClick CRB_MAPCLICK;

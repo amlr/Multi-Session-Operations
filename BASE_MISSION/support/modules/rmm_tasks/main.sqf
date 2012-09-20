@@ -28,7 +28,7 @@ RMM_task_lines = ["none","created","assigned","succeeded","failed","canceled"];
 			} foreach RMM_tasks;
 	};
 
-	["player", [mso_interaction_key], 4, ["support\modules\rmm_tasks\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+	["player", [mso_interaction_key], -9402, ["support\modules\rmm_tasks\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
 
 	CRB_MAPCLICK = CRB_MAPCLICK + "if (_shift && _alt && ((getPlayerUID player) in MSO_R_Leader)) then {RMM_tasks_position = _pos; RMM_tasks_position set [2,0]; createDialog ""RMM_ui_tasks"";};";
 	onMapSingleClick CRB_MAPCLICK;

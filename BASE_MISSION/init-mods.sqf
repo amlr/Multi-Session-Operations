@@ -63,7 +63,7 @@ if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
                 [] spawn
                 {
                         waitUntil {!isNil "mso_interaction_key"};
-                        ["player", [mso_interaction_key], 4, ["scripts\callAcreSync.sqf", "main"]] call CBA_ui_fnc_add;
+                        ["player", [mso_interaction_key], -9399, ["scripts\callAcreSync.sqf", "main"]] call CBA_ui_fnc_add;
                 };
         };
         

@@ -78,7 +78,7 @@ if (!skipPO) then {
     ["patrol_ops"] spawn mps_mission_sequence;
     
     //Add Interaction Menu item
-    if !(isdedicated) then {["player", [mso_interaction_key], 4, ["enemy\modules\roy_patrolops\fn_menuDef_patrolops.sqf", "main"]] call CBA_ui_fnc_add;};
+    if !(isdedicated) then {["player", [mso_interaction_key], -9408, ["enemy\modules\roy_patrolops\fn_menuDef_patrolops.sqf", "main"]] call CBA_ui_fnc_add;};
 	
     //Switch on Comms Menu item
     OPERATIONS_MAINMENU set [1, ["Patrol Operations", [2], "#USER:PO_SUBMENU", -5, [["expression", ""]], "1", "1"]];
@@ -93,7 +93,7 @@ if (!skipAIR) then {
     ["air_ops"] spawn mps_mission_sequence;
     
     //Add Interaction Menu item
-    if !(isdedicated) then {["player", [mso_interaction_key], 4, ["enemy\modules\roy_patrolops\fn_menuDef_airops.sqf", "main"]] call CBA_ui_fnc_add};
+    if !(isdedicated) then {["player", [mso_interaction_key], -9407, ["enemy\modules\roy_patrolops\fn_menuDef_airops.sqf", "main"]] call CBA_ui_fnc_add};
 	
     //Switch on Comms Menu item
     OPERATIONS_MAINMENU set [2, ["Air Operations", [3], "#USER:AIROPS_SUBMENU", -5, [["expression", ""]], "1", "1"]];

@@ -32,5 +32,5 @@ if (isnil "RMM_cas_lastTime") then {
 	publicvariable "RMM_cas_lastTime";
 };
 
-["player", [mso_interaction_key], 4, ["support\modules\rmm_cas\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+["player", [mso_interaction_key], -9406, ["support\modules\rmm_cas\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
 ["CAS","if(call mso_fnc_hasRadio && ((getPlayerUID player) in MSO_R_Leader)) then {createDialog ""RMM_ui_cas""}"] call mso_core_fnc_updateMenu;
