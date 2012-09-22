@@ -16,24 +16,17 @@ ASSERT_DEFINED("MSO_fnc_getEnterableHouses","");
 //========================================
 // Start Defines
 
-#define STAT(msg) sleep 1; ["TEST: "+msg] call MSO_fnc_logger; titleText [msg,"PLAIN"]
+#define STAT(msg) sleep 1; \
+["TEST("+str player+": "+msg] call MSO_fnc_logger; \
+titleText [msg,"PLAIN"]
+
+#define STAT1(msg) CONT = false; \
+waitUntil{CONT}; \
+["TEST("+str player+": "+msg] call MSO_fnc_logger; \
+titleText [msg,"PLAIN"]
 
 #define MISSIONOBJECTCOUNT _err = format["Mission objects: %1", count allMissionObjects ""]; \
 STAT(_err);
-
-#define CREATEOBJECT if(isServer) then { \
-STAT("Create CQB instance"); \
-_logic = call MSO_fnc_CQB; \
-TEST_LOGIC = _logic; \
-publicVariable "TEST_LOGIC"; \
-} else { \
-STAT("Reference CQB instance"); \
-waitUntil{!isNil "TEST_LOGIC"}; \
-_logic = TEST_LOGIC; \
-}; \
-_err = "instantiate object"; \
-ASSERT_DEFINED("_logic",_err); \
-ASSERT_TRUE(typeName _logic == "OBJECT", _err);
 
 #define DEBUGON STAT("Setup debug parameters"); \
 _result = [_logic, "debug", true] call MSO_fnc_CQB; \
@@ -45,14 +38,14 @@ ASSERT_TRUE(_result, _err);
 _result = [_logic, "spawnDistance", 0] call MSO_fnc_CQB; \
 _err = "set spawn distance"; \
 ASSERT_TRUE(typeName _result == "SCALAR", _err); \
-STAT("Reference spawn distance to zero (disable activity)"); \
+STAT("Confirm spawn distance to zero (disable activity)"); \
 waitUntil{([_logic, "spawnDistance"] call MSO_fnc_CQB) == 0};
 
 #define SPAWN10DISTANCE STAT("Increase spawn distance for 1 building"); \
 _result = [_logic, "spawnDistance", 10] call MSO_fnc_CQB; \
 _err = "set spawn distance"; \
 ASSERT_TRUE(typeName _result == "SCALAR", _err); \
-STAT("Reference spawn distance for 1 building"); \
+STAT("Confirm spawn distance for 1 building"); \
 waitUntil{([_logic, "spawnDistance"] call MSO_fnc_CQB) == 10};
 
 #define CHECK0GROUPS STAT("Check for no groups"); \
@@ -81,61 +74,63 @@ ASSERT_TRUE(count _result > 0, _err); \
 _result2 = [_result, _unittypes] call BIS_fnc_areEqual; \
 ASSERT_TRUE(_result2,_err);
 
-#define DESTROYOBJECT if(isServer) then { \
-STAT("Destroy old instance"); \
-[_logic, "destroy"] call MSO_fnc_CQB; \
-} else { \
-STAT("Reference old instance"); \
-};
-
 //========================================
 
 MISSIONOBJECTCOUNT
 
 _logic = nil;
 
-CREATEOBJECT
+STAT("Create CQB instance");
+if(isServer) then {
+        _logic = call MSO_fnc_CQB;
+        TEST_LOGIC = _logic;
+        publicVariable "TEST_LOGIC";
+};
+STAT("Confirm new CQB instance");
+waitUntil{!isNil "TEST_LOGIC"};
+_logic = TEST_LOGIC;
+_err = "instantiate object";
+ASSERT_DEFINED("_logic",_err);
+ASSERT_TRUE(typeName _logic == "OBJECT", _err);
 
 _logic setVariable ["debugColor","ColorRed"];
 _logic setVariable ["debugPrefix","Testing"];
 DEBUGON
 
-if(isServer) then {
-        STAT("Find distant enterable houses");
-        // loc is for Utes Strelka
-        _result = [_logic, "houses", [[4345.0229,3232.7737], 50] call MSO_fnc_getEnterableHouses] call MSO_fnc_CQB;
-        _err = "set houses";
-        ASSERT_TRUE(typeName _result == "ARRAY", _err);
-} else {
-        STAT("Reference distant enterable houses");
-        waitUntil{count ([_logic, "houses"] call MSO_fnc_CQB) > 0};
-};
+STAT("Find distant enterable houses");
+// loc is for Utes Strelka
+_result = [_logic, "houses", [[4345.0229,3232.7737], 50] call MSO_fnc_getEnterableHouses] call MSO_fnc_CQB;
+_err = "set houses";
+ASSERT_TRUE(typeName _result == "ARRAY", _err);
+waitUntil{count ([_logic, "houses"] call MSO_fnc_CQB) > 0};
 
 _oldhousecount = count ([_logic, "houses"] call MSO_fnc_CQB);
 // loc is for Utes Strelka
 _nearesthouse = ([[4395.0229,3171.7737], 10] call MSO_fnc_getEnterableHouses) select 0;
 
 STAT("Add nearest building to Player 1");
-_result = [_logic, "addHouse", _nearesthouse] call MSO_fnc_CQB;
+[_logic, "addHouse", _nearesthouse] call MSO_fnc_CQB;
+_result = [_logic, "houses"] call MSO_fnc_CQB;
 _err = "add house";
 ASSERT_TRUE(typeName _result == "ARRAY", _err);
-STAT("Reference distant enterable houses");
+STAT("Confirm new distant enterable house");
 waitUntil{count ([_logic, "houses"] call MSO_fnc_CQB) == _oldhousecount + 1};
 
 _result = ([_logic, "houses"] call MSO_fnc_CQB) select 0;
 
 STAT("Remove a building");
-_result = [_logic, "clearHouse", _result] call MSO_fnc_CQB;
+[_logic, "clearHouse", _result] call MSO_fnc_CQB;
+_result = [_logic, "houses"] call MSO_fnc_CQB;
 _err = "remove house";
 ASSERT_TRUE(typeName _result == "ARRAY", _err);
-STAT("Reference remove a building");
+STAT("Confirm remove a building");
 waitUntil{count ([_logic, "houses"] call MSO_fnc_CQB) == _oldhousecount};
 
 STAT("Set factions");
 _result = [_logic, "factions", ["RU","INS"]] call MSO_fnc_CQB;
 _err = "set factions";
 ASSERT_TRUE(typeName _result == "ARRAY", _err);
-STAT("Reference set factions");
+STAT("Confirm set factions");
 waitUntil{count ([_logic, "factions"] call MSO_fnc_CQB) > 0};
 
 SPAWN0DISTANCE
@@ -200,11 +195,32 @@ CHECK0GROUPS
 
 CHECKUNITTYPES
 
-DESTROYOBJECT
+STAT("Sleeping before destroy");
+sleep 15;
+
+STAT("Destroy old instance");
+if(isServer) then {
+        [_logic, "destroy"] call MSO_fnc_CQB;
+        TEST_LOGIC = nil;
+        publicVariable "TEST_LOGIC";
+} else {
+        waitUntil{isNull TEST_LOGIC};
+};
 
 MISSIONOBJECTCOUNT
 
-CREATEOBJECT
+STAT("Create CQB instance");
+if(isServer) then {
+        _logic = call MSO_fnc_CQB;
+        TEST_LOGIC2 = _logic;
+        publicVariable "TEST_LOGIC2";
+};
+STAT("Confirm new CQB instance 2");
+waitUntil{!isNil "TEST_LOGIC2"};
+_logic = TEST_LOGIC2;
+_err = "instantiate object";
+ASSERT_DEFINED("_logic",_err);
+ASSERT_TRUE(typeName _logic == "OBJECT", _err);
 
 STAT("Activate new instance");
 [_logic, "active", true] call MSO_fnc_CQB;
@@ -213,13 +229,12 @@ _logic setVariable ["debugColor","ColorBlue"];
 _logic setVariable ["debugPrefix","Testing3"];
 DEBUGON
 
+STAT("Restore state on new instance");
 if(isServer) then {
-        STAT("Restore state on new instance");
         [_logic, "state", _state] call MSO_fnc_CQB;
-} else {
-        STAT("Reference restoration");
-        waitUntil{count ([_logic, "houses"] call MSO_fnc_CQB) > 0};
 };
+
+waitUntil{sleep 3; count ([_logic, "houses"] call MSO_fnc_CQB) > 0};
 
 STAT("Confirm restored state is still the same");
 _result = [_logic, "state"] call MSO_fnc_CQB;
@@ -254,11 +269,22 @@ ASSERT_TRUE(!(_nearesthouse in _result), _err);
 
 CHECK0GROUPS
 
-DESTROYOBJECT
+STAT("Sleeping before destroy");
+sleep 15;
+
+if(isServer) then {
+        STAT("Destroy old instance");
+        [_logic, "destroy"] call MSO_fnc_CQB;
+        TEST_LOGIC2 = nil;
+        publicVariable "TEST_LOGIC2";
+} else {
+        STAT("Confirm destroy instance 2");
+        waitUntil{isNull TEST_LOGIC2};
+};
 
 MISSIONOBJECTCOUNT
 
 endMission "END1";
-//forceEnd;
+forceEnd;
 
 nil;

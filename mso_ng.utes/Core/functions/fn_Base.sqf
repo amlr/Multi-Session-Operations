@@ -81,6 +81,7 @@ switch(_operation) do {
 	};
 	
 	case "destroy": {
+		_logic setDamage 1;
 		deleteVehicle _logic;
 	};
 };

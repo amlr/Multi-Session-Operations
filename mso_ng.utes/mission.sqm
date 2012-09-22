@@ -55,7 +55,7 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={4384.4072,27,3170.4539};
+					position[]={4386.3228,4.8363185,2324.9199};
 					id=1;
 					side="WEST";
 					vehicle="USMC_Soldier";
@@ -172,7 +172,7 @@ class Mission
 	};
 	class Sensors
 	{
-		items=2;
+		items=3;
 		class Item0
 		{
 			position[]={3604.7349,18.727123,3671.4912};
@@ -199,6 +199,21 @@ class Mission
 			age="UNKNOWN";
 			text="Camera";
 			expActiv="player exec ""camera.sqs""";
+			class Effects
+			{
+			};
+		};
+		class Item2
+		{
+			position[]={3604.8508,18.745514,3668.8057};
+			a=0;
+			b=0;
+			activationBy="JULIET";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Continue Test";
+			expActiv="CONT = true; publicVariable ""CONT"";";
 			class Effects
 			{
 			};
