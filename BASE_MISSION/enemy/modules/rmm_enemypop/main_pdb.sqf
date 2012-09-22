@@ -114,6 +114,22 @@ DEP_camptypes =
 			if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 Roadblock at %2", time,_pos]};
 			ep_locations set [count ep_locations,["RB",_pos]];
 		};
+       	if (_grpt select 2 == "Infantry") then {
+			if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 Infantry at %2", time,_pos]};
+			ep_locations set [count ep_locations,["Infantry",_pos]];
+		};
+        if (_grpt select 2 == "Motorized") then {
+			if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 Motorized at %2", time,_pos]};
+			ep_locations set [count ep_locations,["Motorized",_pos]];
+		};
+        if (_grpt select 2 == "Mechanized") then {
+			if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 Mechanized at %2", time,_pos]};
+			ep_locations set [count ep_locations,["Mechanized",_pos]];
+		};
+        if (_grpt select 2 == "Armored") then {
+			if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 Armored at %2", time,_pos]};
+			ep_locations set [count ep_locations,["Armored",_pos]];
+		};
 		
 		//Markers in Debug
 		if (_debug) then {

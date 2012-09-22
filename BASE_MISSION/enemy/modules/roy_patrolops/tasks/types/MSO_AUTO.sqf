@@ -24,9 +24,37 @@ _nearesttwn = _neartwns select 0;
 switch (_AOtype) do {
     
     case "Camp": {
+
+		_obj = "FoldTable" createVehicle _position;
+		_obj setdir 0;
+		_objSat = "SatPhone" createVehicle getPos _obj;
+		_objSat attachto [_obj,[0,0,0.6]];
+        
         _HVTgrp = creategroup EAST;
 		"RU_Functionary1" createUnit [_position, _HVTgrp];
         _HVT = leader _HVTgrp;
+        _HVT setformdir 0;
+		_HVT setpos [getpos _obj select 0,(getpos _obj select 1)-0.7,0];
+
+		_HVTgrp2 = creategroup EAST;
+		"RU_Functionary1" createUnit [getpos _obj, _HVTgrp2];
+		_HVT2 = leader _HVTgrp2;
+		_HVT2 setformdir 180;
+		_HVT2 setpos [getpos _obj select 0,(getpos _obj select 1)+0.7,0];
+
+		[_HVT,_HVT2] spawn {
+
+			_HVT = _this select 0;
+			_HVT2 = _this select 1;
+
+			while {alive _HVT} do {
+				_HVT playmove "ActsPercSnonWnonDnon_tableSupport_TalkA";
+				sleep 60;
+				_HVT2 playmove "ActsPercSnonWnonDnon_tableSupport_TalkB";
+				sleep 60;
+			};
+		};
+
         _chkdist = 200;
         
 		[
@@ -143,7 +171,10 @@ while {!(ABORTTASK_PO) && (_killtasktime < 3600) && !(_cleared)} do {
 if (!ABORTTASK_PO && _cleared) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	{deletevehicle _x} foreach _units;
+    {deletevehicle _x} foreach (units _HVTgrp);
+    {deletevehicle _x} foreach (units _HVTgrp2);
     deletegroup _HVTgrp;
+    deletegroup _HVTgrp2;
 
     _idx = [ep_locations, _AO] call BIS_fnc_arrayFindDeep;
     if (typename _idx == "ARRAY") then {
@@ -156,7 +187,9 @@ if (!ABORTTASK_PO && _cleared) then {
 } else {
 	[format["TASK%1",_taskid],"failed"] call mps_tasks_upd;
     {deletevehicle _x} foreach (units _HVTgrp);
+    {deletevehicle _x} foreach (units _HVTgrp2);
     deletegroup _HVTgrp;
+    deletegroup _HVTgrp2;
     
     _idx = [ep_locations, _AO] call BIS_fnc_arrayFindDeep;
     _idx = _idx select 0;
