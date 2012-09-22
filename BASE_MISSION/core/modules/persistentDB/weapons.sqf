@@ -22,7 +22,7 @@ S_WEAPON_DATA = [
 		} foreach ((weapons (_this select 1)) + (items (_this select 1)));
 		{
 			if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
-				// Catch any acre radios and store as base radio (do not store radio with ID) http://tracker.idi-systems.com/issues/2
+				// Catch any acre radios and restore as base radio (do not restore radio with ID) http://tracker.idi-systems.com/issues/2
 				private ["_ret"];
 				_ret = [_x] call acre_api_fnc_getBaseRadio;
 				if (typeName _ret == "STRING") then {
