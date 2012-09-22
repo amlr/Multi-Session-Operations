@@ -6,6 +6,9 @@ if (isdedicated) exitwith {};
 
 if(isNil "nomadHeader")then{nomadHeader = 1;};
 if(isNil "nomadTime")then{nomadTime = 60;};
+if(isNil "nomadRespawns")then{nomadRespawns = 999;};
+if(isNil "nomadReinforcements")then{nomadReinforcements = 1;};
+
 if (nomadHeader == 0) exitWith{};
 
 waituntil {not isnull player};
