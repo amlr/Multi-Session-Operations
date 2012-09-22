@@ -1,5 +1,5 @@
 if(count ep_locations < 1) exitWith{};
-diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK MSO_AUTO.sqf"];
+diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SNI_HVT.sqf"];
 
 private["_killtasktime","_AO","_location","_taskid","_position","_types","_unittypes","_unittype","_HVTgrp","_HVT","_cleared"];
 
