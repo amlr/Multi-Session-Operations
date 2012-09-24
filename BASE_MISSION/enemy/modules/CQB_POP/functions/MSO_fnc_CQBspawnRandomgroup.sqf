@@ -7,6 +7,8 @@ _despawn = _this select 2;
 _debug = debug_mso;
 _grpPos = [_pos select 0,_pos select 1,-30];
 
+if ({_pos distance _x < 100} count ([] call BIS_fnc_listPlayers) > 0) exitwith {diag_log format["MSO-%1 CQB Population: Players too near. Exiting...", time]};
+
 _house setVariable ["s", true, CQBaiBroadcast];
 
 sleep (random 1);
