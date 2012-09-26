@@ -123,8 +123,21 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				+name player+"</t><br/><br/>Your details have been retrieved from the database.<br/><br/>";
 				hintSilent parseText (initText);
 			
-				_pdbPrompt = createDialog "pdbTeleportPrompt";
-				noesckey = (findDisplay 1599) displayAddEventHandler ["KeyDown", "if ((_this select 1) == 1) then { true }"]; 
+				switch (mpdb_teleport_player) do {
+					case 2: {
+						_pdbPrompt = createDialog "pdbTeleportPrompt";
+						noesckey = (findDisplay 1599) displayAddEventHandler ["KeyDown", "if ((_this select 1) == 1) then { true }"]; 
+					};
+					case 1: {
+						[player,1] execVM "core\modules\persistentDB\teleportPlayer.sqf";
+					};
+					case 0: {
+						[player,0] execVM "core\modules\persistentDB\teleportPlayer.sqf";
+					};
+					default  {
+						[player,1] execVM "core\modules\persistentDB\teleportPlayer.sqf";
+					};
+				};
 			
 				// player sideChat format["Welcome back %1, your details have been retrieved from the database",  name player];
 				diag_log ["PersistentDB: Existing player: ",  (name player), typeName  (name player)]; 

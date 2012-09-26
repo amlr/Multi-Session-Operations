@@ -16,6 +16,12 @@ class mpdb_save_delay_player {
         texts[]= {"2 mins","5 mins","10 mins","30 mins","1 hour","Off"}; 
         default = 300;
 };
+class mpdb_teleport_player {
+        title = "        Teleport player to last saved position"; 
+        values[]= {2,1,0}; 
+        texts[]= {"Prompt Player","Auto","No"}; 
+        default = 2;
+};
 class mpdb_date_enabled {
         title = "        Persistent Date"; 
         values[]= {1,0}; 
