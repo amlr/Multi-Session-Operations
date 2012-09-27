@@ -50,8 +50,18 @@
 	//	hint "FNC_INITVEHICLEACTIONS";
 		 _vehicle = _this select 0; 
 	//	diag_log["_vehicle: ", _vehicle];
-		 _vehicle addeventhandler ["getin", { _this execVM "core\modules\vehicleIgnitionKeys\vehicleAddAction.sqf"; } ];
-		 _vehicle addeventhandler ["getout", { _this execVM "core\modules\vehicleIgnitionKeys\vehicleRemoveAction.sqf"; } ];
+	
+			if (typeOf _vehicle != "MMT_Civ" || 
+					typeOf _vehicle != "SearchLight" ||
+					typeOf _vehicle != "BAF_L2A1_Minitripod_D" ||
+					typeOf _vehicle != "M119" ||
+					typeOf _vehicle != "MtvrRefuel" ||
+					typeOf _vehicle != "BAF_L2A1_Tripod_D" ||
+					typeOf _vehicle != "Barrels") 
+			then {
+				 _vehicle addeventhandler ["getin", { _this execVM "core\modules\vehicleIgnitionKeys\vehicleAddAction.sqf"; } ];
+				 _vehicle addeventhandler ["getout", { _this execVM "core\modules\vehicleIgnitionKeys\vehicleRemoveAction.sqf"; } ];
+			};
 	};
 // ====================================================================================
 	FNC_VEHICLE_CODE =
@@ -129,8 +139,21 @@
 					{
 					_thisObject = _x;
 						if (vehiclevarname _thisObject != "") then {
-								 _thisObject addeventhandler ["getin", { _this execVM "core\modules\vehicleIgnitionKeys\vehicleAddAction.sqf"; } ];
-				 				 _thisObject addeventhandler ["getout", { _this execVM "core\modules\vehicleIgnitionKeys\vehicleRemoveAction.sqf"; } ];
+							/*
+								diag_log["_thisObject: ", _thisObject];
+								diag_log["typeOf _thisObject: ", typeOf _thisObject];
+							*/	
+								if (typeOf _thisObject != "MMT_Civ" || 
+										typeOf _thisObject != "SearchLight" ||
+										typeOf _thisObject != "BAF_L2A1_Minitripod_D" ||
+										typeOf _thisObject != "M119" ||
+										typeOf _thisObject != "MtvrRefuel" ||
+										typeOf _thisObject != "BAF_L2A1_Tripod_D" ||
+										typeOf _thisObject != "Barrels") 
+								then {
+									 _thisObject addeventhandler ["getin", { _this execVM "core\modules\vehicleIgnitionKeys\vehicleAddAction.sqf"; } ];
+					 				 _thisObject addeventhandler ["getout", { _this execVM "core\modules\vehicleIgnitionKeys\vehicleRemoveAction.sqf"; } ];
+				 				};
 						};
 					} forEach vehicles; 		
 			};
