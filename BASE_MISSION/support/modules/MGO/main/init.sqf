@@ -1,3 +1,4 @@
+if(isNil "MGO_Active") then {MGO_Active = 1;};
 if (MGO_Active == 0) exitwith {diag_log format["MSO-%1 MGO Attach turned off! Exiting...", time]};
 //#define DEBUG_MODE_FULL
 #include "script_component.hpp"
