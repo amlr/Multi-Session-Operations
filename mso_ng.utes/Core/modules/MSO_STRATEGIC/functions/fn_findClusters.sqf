@@ -42,13 +42,17 @@ _k = ceil(sqrt(count _obj_array / 2));
 // create the initial cluster centers
 _clusters = [_obj_array] call MSO_fnc_chooseInitialCenters;
 for "_i" from 0 to _k do {
-	[_clusters, _obj_array] call MSO_fnc_assignPointsToClusters;
-	{
-		private["_nodes"];
-		_nodes = _x getVariable "ClusterNodes";
-		if(count _nodes > 0) then {
-			_x setPos ([_nodes] call MSO_fnc_findClusterCenter);
-		};
-	} forEach _clusters;
+        [_clusters, _obj_array] call MSO_fnc_assignPointsToClusters;
+        {
+                private["_nodes"];
+                _nodes = _x getVariable "ClusterNodes";
+                if(count _nodes > 0) then {
+                        _x setPos ([_nodes] call MSO_fnc_findClusterCenter);
+                };
+                
+        } forEach _clusters;
+
+        _clusters = ([_clusters] call MSO_fnc_consolidateClusters) select 0;
 };
+
 _clusters;

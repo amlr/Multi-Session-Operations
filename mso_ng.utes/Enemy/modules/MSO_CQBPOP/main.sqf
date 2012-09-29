@@ -12,7 +12,7 @@ Wolffy.au
 private ["_debug","_logic","_spawnhouses","_result","_strategicTypes","_strategicHouses","_nonStrategicHouses"];
 
 // Single player setting
-if (isNil "CQB_spawn") then {CQB_spawn = 1};
+if (isNil "CQB_spawn") then {CQB_spawn = 0};
 // Exit if not enabled
 if (CQB_spawn == 0) exitWith {"CQB Population turned off! Exiting..." call MSO_fnc_logger;};
 

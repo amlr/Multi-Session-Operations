@@ -15,6 +15,9 @@ class Strategic {
 	class assignPointsToClusters {
 		description = "Assign cluster objects to nearest cluster centre";
 	};
+	class consolidateClusters {
+		description = "Merge cluster objects if they are within close proximity";
+	};
 	class findClusters {
 		description = "Returns a list of object clusters";
 	};

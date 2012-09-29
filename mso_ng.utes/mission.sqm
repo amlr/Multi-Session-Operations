@@ -43,7 +43,6 @@ class Mission
 					rank="SERGEANT";
 					skill=0.60000002;
 					init="this setCaptive true; ";
-					description="onMapSingleClick {player setPosATL _pos};";
 				};
 			};
 		};
@@ -72,102 +71,39 @@ class Mission
 			side="CIV";
 			class Vehicles
 			{
-				items=1;
+				items=3;
 				class Item0
 				{
 					position[]={3594.5054,18.983,3641.6997};
 					id=2;
 					side="CIV";
 					vehicle="Citizen1";
+					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
 					init="this addWeapon ""Binocular"";";
 				};
+				class Item1
+				{
+					position[]={3595.0659,18.990789,3640.9209};
+					id=4;
+					side="CIV";
+					vehicle="Citizen2";
+					player="PLAY CDG";
+					skill=0.60000002;
+					init="this addWeapon ""Binocular"";";
+				};
+				class Item2
+				{
+					position[]={3595.6418,18.983624,3641.6375};
+					id=3;
+					side="CIV";
+					vehicle="Citizen3";
+					player="PLAY CDG";
+					skill=0.60000002;
+					init="this addWeapon ""Binocular"";";
+				};
 			};
-		};
-	};
-	class Markers
-	{
-		items=10;
-		class Item0
-		{
-			position[]={2952.8511,39,4512.7617};
-			name="x";
-			text="Small Base - ";
-			type="mil_objective";
-			colorName="ColorRed";
-		};
-		class Item1
-		{
-			position[]={3269.446,4,4568.2295};
-			name="r_1";
-			text="Pier - Receive reinforcements";
-			type="mil_objective";
-			colorName="ColorGreen";
-		};
-		class Item2
-		{
-			position[]={4279.1104,28.527836,3196.6003};
-			name="r";
-			text="Factory - ";
-			type="mil_objective";
-			colorName="ColorGreen";
-		};
-		class Item3
-		{
-			position[]={3871.3672,28,3320.7629};
-			name="x_3";
-			text="Small Base - ";
-			type="mil_objective";
-			colorName="ColorRed";
-		};
-		class Item4
-		{
-			position[]={3569.5256,28.121769,3648.7708};
-			name="x_4";
-			text="Traffic Control - ";
-			type="mil_objective";
-			colorName="ColorRed";
-		};
-		class Item5
-		{
-			position[]={3204.6409,40.793999,4031.8706};
-			name="x_5";
-			text="Small Base - ";
-			type="mil_objective";
-			colorName="ColorRed";
-		};
-		class Item6
-		{
-			position[]={2535.1362,31.783171,3837.8127};
-			name="r_2";
-			text="Lighthouse - assist delivery";
-			type="mil_objective";
-			colorName="ColorGreen";
-		};
-		class Item7
-		{
-			position[]={4473.9053,44.789181,3350.9326};
-			name="r_3";
-			text="Lighthouse - assist delivery";
-			type="mil_objective";
-			colorName="ColorGreen";
-		};
-		class Item8
-		{
-			position[]={4514.335,1.0819843,3104.7363};
-			name="r_4";
-			text="Pier - Receive reinforcements";
-			type="mil_objective";
-			colorName="ColorGreen";
-		};
-		class Item9
-		{
-			position[]={3623.0515,0.33731371,4440.4424};
-			name="r_5";
-			text="Boatshed - Receive reinforcements";
-			type="mil_objective";
-			colorName="ColorGreen";
 		};
 	};
 	class Sensors
@@ -183,7 +119,7 @@ class Mission
 			interruptable=1;
 			age="UNKNOWN";
 			text="Teleport";
-			expActiv="onMapSingleClick {player setPosATL _pos; onMapSingleClick {};};";
+			expActiv="onMapSingleClick {{_x setPosATL _pos} forEach units player; onMapSingleClick {};};";
 			class Effects
 			{
 			};

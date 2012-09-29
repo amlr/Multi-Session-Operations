@@ -2,7 +2,9 @@
 - Use CBA ASSERTS to validate data before progressing
 - Ideally for every function, use ASSERTS to validate input parameters and ouput results
 - Use MSO_fnc_xxx for your function definitions
-- Use Functional Groups for your functions in your functions.hpp files (needs more definition)
-- Use Test scripts to automate testing
+- Integrate Test scripts to automate testing inherent to the development process
 - When bug fixing, modify the test script first to identify the bug, fix the bug, re-run test script
-- Utilise inheritence whereever possible from a parent class using (needs more explanation)
+- Utilise inheritence/reuse of existing code, whereever possible from a parent class using object orientation
+- Embrace CBA use of Macros
+- Embrace CBA use of function wrappers
+- Use Object Oriented SQF in preparation of the move to Java in A3
