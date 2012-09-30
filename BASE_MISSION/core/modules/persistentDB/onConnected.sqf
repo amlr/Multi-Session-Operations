@@ -3,7 +3,7 @@
  * playerConnected.sqf 
  *
  * Description:
- * Called from initPlayer.sqf
+ * Called from onConnected.sqf
  * Runs on server only
  * 
  * Created by [KH]Jman
@@ -16,14 +16,15 @@
 // ====================================================================================
 // MAIN
 
+
 _id = _this select 0; 
 _pname = _this select 1; 
 _puid  = _this select 2; 
 	
+
 if (( MISSIONDATA_LOADED == "false") && (_pname == "__SERVER__")) then {
 	[_id, _pname, _puid] execVM "core\modules\persistentDB\initServerConnection.sqf";
-} else {
 	[_id, _pname, _puid] execVM "core\modules\persistentDB\initPlayerConnection.sqf";
-}
-	
+};
+
 // ====================================================================================
