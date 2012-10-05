@@ -36,6 +36,9 @@ _puid  = _this select 2;
 
 if (( MISSIONDATA_LOADED == "false") && (_pname == "__SERVER__")) then {
 	
+
+	missionNameSpace setVariable ["server_initmissiondata", 1];
+	
 	// Load Mission
 	script_missionload = [] execVM "core\modules\persistentDB\serverLoadMission.sqf";
 	waitUntil {scriptDone script_missionload};
