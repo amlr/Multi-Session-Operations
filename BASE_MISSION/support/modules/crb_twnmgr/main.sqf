@@ -37,8 +37,10 @@ CRB_whichSideTrigger = {
         
 };
 
+
+
 CRB_updateDetectedMarker = {
-        private ["_name","_pos","_detector","_detected","_color","_detectorTxt"];
+        private ["_name","_pos","_detector","_detected","_color","_detectorTxt","_globalmsg"];
         _name = _this select 0;
         _pos = _this select 1;
         _detector = _this select 2;
@@ -49,16 +51,19 @@ CRB_updateDetectedMarker = {
 		};
         _detected = _this select 3;
         _color = _this select 4;
-
+ 
 	if(_detector == civilian) then {
-		format["""%1_mgr"" setMarkerColor ""%2""; [playerSide, ""HQ""] sideChat ""%3 HUMINT reports %4 movement at %1 (%5)"";", _name, _color, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
+		_globalmsg = format["%3 HUMINT reports %4 movement at %1 (%5)", _name, _detectorTxt, (_detector call CRB_whichSideText), (_detected call CRB_whichSideText), (mapGridPosition _pos)];
+		format["""%1_mgr"" setMarkerColor ""%2""; GLOBAL_MESSAGE = [%3, ""%4""]; publicVariable ""GLOBAL_MESSAGE"";", _name, _color, playerSide, _globalmsg];     
 	} else {
-                format["""%1_mgr"" setMarkerColor ""%2""; [%3, ""HQ""] sideChat ""%3 HUMINT reports %5 movement at %1 (%6)"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
-	};
+		_globalmsg = format["%2 HUMINT reports %4 movement at %1 (%5)", _name, _detectorTxt, (_detector call CRB_whichSideText), (_detected call CRB_whichSideText), (mapGridPosition _pos)];
+		format["""%1_mgr"" setMarkerColor ""%2""; GLOBAL_MESSAGE = [%3, ""%4""]; publicVariable ""GLOBAL_MESSAGE"";", _name, _color, _detectorTxt, _globalmsg];   
+
+	};		
 };
 
 CRB_updateSeizedMarker = {
-        private ["_name","_detector","_color","_detectorTxt"];
+        private ["_name","_detector","_color","_detectorTxt","_globalmsg"];
         _name = _this select 0;
         _detector = _this select 1;
         _detectorTxt = switch(_detector) do {
@@ -67,8 +72,9 @@ CRB_updateSeizedMarker = {
 			default {str _detector};
 		};
         _color = _this select 2;
-		
-	format["""%1_mgr"" setMarkerColor ""%2""; [%3, ""HQ""] sideChat ""SIGINT suggests %1 has been secured by %4 forces"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText];
+     	_globalmsg = format["SIGINT suggests %1 has been secured by %2 forces", _name, (_detector call CRB_whichSideText)];
+		format["""%1_mgr"" setMarkerColor ""%2""; GLOBAL_MESSAGE = [%3, ""%4""]; publicVariable ""GLOBAL_MESSAGE"";", _name, _color, _detectorTxt, _globalmsg];   
+
 };
 
 CRB_createDetectTrigger = {

@@ -18,6 +18,19 @@ waitUntil{!isNil "BIS_fnc_init"};
 mso_version = "4.4";
 diag_log format["MSO-%1 Version: %2", time, mso_version];
 
+
+    
+    FNC_GLOBAL_MESSAGE = {
+	   		 if (player != _player) exitWith { };
+			_side = _this select 0;
+			_msg = _this select 1;
+			if(isNil "twnmgr_broadcastMP")then{twnmgr_broadcastMP = 0;};
+			if (twnmgr_broadcastMP == 1) then { crossroad=[_side,"HQ"]; crossroad SideChat _msg; };
+    };
+    
+    "GLOBAL_MESSAGE" addPublicVariableEventHandler { (_this select 1) call FNC_GLOBAL_MESSAGE };
+    
+
 //Create the comms menu on all machines.
 [] call BIS_fnc_commsMenuCreate; 
 
