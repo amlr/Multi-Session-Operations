@@ -16,11 +16,11 @@ if (_playerSide == playerSide) then {
 	RMM_mytasks set [count RMM_mytasks, _task];
 	_task;
 };
-
+/*
 // Add a marker too
 _name = "mkr" + str(random time + 1);
 _mkr = createMarkerLocal [_name, [_destination select 0, (_destination select 1) + 5, 0]];
 _mkr setmarkertypeLocal ("mil_marker");
 _mkr setmarkertextLocal (_description select 1);
 _mkr setmarkercolorLocal ("colorRed");
-
+*/
