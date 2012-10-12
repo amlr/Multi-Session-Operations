@@ -12,7 +12,7 @@
 * 
 * */
 
-if(isNil "persistentDBHeader")then{persistentDBHeader = 1;};
+if(isNil "persistentDBHeader")then{persistentDBHeader = 0;};
 
 if(persistentDBHeader == 0) exitWith{diag_log format ["MSO-%1 Persistent DB Disabled - Exiting.",time];};
 	
