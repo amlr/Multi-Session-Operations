@@ -119,6 +119,10 @@ class supportHeader {
 #ifdef MGO_ATTACH
 #include "support\modules\mgo\main\script_params.hpp"
 #endif
+#ifdef PXS_SATCOM
+#include "support\modules\pxs_satcom_oa\params.hpp"
+#endif
+
 class enemyHeader {
         title = "Enemy"; 
         values[]= {0}; 
@@ -297,6 +301,10 @@ class cfgFunctions {
 #ifdef R3F_REVIVE
 	#include "support\modules\R3F_revive\dlg_attente_reanimation.h"
 #endif
+#ifdef PXS_SATCOM
+#include "support\modules\pxs_satcom_oa\init_interference.hpp"
+#endif
+
 
 // Extended Event Handlers
 #ifdef persistentDB

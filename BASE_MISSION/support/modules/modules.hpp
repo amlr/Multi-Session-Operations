@@ -18,6 +18,7 @@
 #define ZKS_Build
 #define CREWINFO
 #define MGO_ATTACH
+#define PXS_SATCOM
 
 // WIP
 //#define GC_PACK_COW
