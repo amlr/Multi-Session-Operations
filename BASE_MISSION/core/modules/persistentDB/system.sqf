@@ -201,6 +201,26 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		};
 	};
 	
+	"PDB_PLAYER_UPDATE_KILLS" addPublicVariableEventHandler { 
+		if (isServer && (persistentDBHeader == 1)) then {
+			_data = _this select 1;
+			_player = _data select 0; // Player guid
+			_weapon = _data select 1;
+			_distance = str (_data select 2);
+			_fac = str (_data select 3);
+			_kill = _data select 4;
+			_death = str (_data select 5);
+			_pos = [_data select 6, "write"] call persistent_fnc_convertFormat;
+			_date = [_data select 7, "write"] call persistent_fnc_convertFormat;
+			
+			_mid = (MISSIONDATA select 1); // Mission id
+	
+			// Write Kills data to DB
+			_sql = format ["Arma2NETMySQLCommand ['arma', 'INSERT INTO kills (mid,pid,wea,dist,fac,kil,dea,pos,da) values (%1,%2,'%3','%4','%5','%6','%7','%8','%9')']", _mid, _player, _weapon, _distance, _fac, _kill, _death, _pos, _date];
+			_result = "Arma2Net.Unmanaged" callExtension _sql;
+			
+		};
+	};
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

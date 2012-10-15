@@ -314,9 +314,21 @@ class cfgFunctions {
 	};
 	class Extended_Killed_Eventhandlers
 	{
+		class LANDVEHICLE
+		{
+			landvehicle_killed = "_this call persistent_fnc_unitKilled";
+		};
 		class MAN
 		{
 			man_killed = "_this call persistent_fnc_unitKilled";
+		};
+		class AIR
+		{
+			air_killed = "_this call persistent_fnc_unitKilled";
+		};
+		class SHIP
+		{
+			ship_killed = "_this call persistent_fnc_unitKilled";
 		};
 	};
 #endif
