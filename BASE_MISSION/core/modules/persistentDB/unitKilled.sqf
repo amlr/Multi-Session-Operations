@@ -48,9 +48,12 @@
 		//hintsilent format["Player Deaths: %1", _deaths];
 		_killed setVariable ["pdeaths", _deaths, true];
 		
-		// Send data to server to be written to DB
-		PDB_PLAYER_UPDATE_KILLS = [getplayeruid _killed, _killerweapon, _distance, _factionKiller, _killertype, true, _pos, _datetime];
-		publicVariableServer "PDB_PLAYER_UPDATE_KILLS";
+		if (pdb_killStats_enabled) then {
+			// Send data to server to be written to DB
+			PDB_PLAYER_UPDATE_KILLS = [getplayeruid _killed, _killerweapon, _distance, _factionKiller, _killertype, true, _pos, _datetime];
+			publicVariableServer "PDB_PLAYER_UPDATE_KILLS";
+		};
+
 	};
 	
 	if (isNull _killer) exitWith {}; // Unit was likely killed in a collision with something
@@ -81,9 +84,10 @@
 			_killer setVariable ["penemykills", _enemykills, true];
 		};
 		
-		// Send data to server to be written to DB
-		PDB_PLAYER_UPDATE_KILLS = [getplayeruid _killer, _killerweapon, _distance, _factionKilled, _killedtype, false, _pos, _datetime];
-		publicVariableServer "PDB_PLAYER_UPDATE_KILLS";
-		
+		if (pdb_killStats_enabled) then {
+			// Send data to server to be written to DB
+			PDB_PLAYER_UPDATE_KILLS = [getplayeruid _killer, _killerweapon, _distance, _factionKilled, _killedtype, false, _pos, _datetime];
+			publicVariableServer "PDB_PLAYER_UPDATE_KILLS";
+		};
 	};
 // ====================================================================================
