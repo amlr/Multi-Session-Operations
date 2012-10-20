@@ -1,0 +1,84 @@
+/*%FSM<COMPILE "C:\Program Files\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, Terrorist Cell">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Start",0,250,-37.234409,-125.559029,52.765591,-75.559044,0.000000,"Start"};
+item1[] = {"Choose_Spawn",3,4346,-38.129162,-64.873550,51.870838,-14.873545,0.000000,"Choose Spawn"};
+item2[] = {"_",2,250,-98.806953,141.726349,-8.806969,191.726349,0.000000,""};
+item3[] = {"__1",2,250,-89.371307,226.717102,0.628689,276.717102,0.000000,""};
+globals[] = {0.000000,0,0,0,0,640,480,2,9,6316128,1,-128.988235,82.280769,44.814636,-100.147003,924,634,1};
+window[] = {2,-1,-1,-1,-1,609,44,1004,58,3,942};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "Terrorist Cell";
+  class States
+  {
+    /*%FSM<STATE "Start">*/
+    class Start
+    {
+      name = "Start";
+      init = /*%FSM<STATEINIT""">*/"if(!isServer) exitWith{};" \n
+       "" \n
+       "_debug = true;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Choose_Spawn">*/
+    class Choose_Spawn
+    {
+      name = "Choose_Spawn";
+      init = /*%FSM<STATEINIT""">*/"// Identify all random spawn points" \n
+       "waitUntil{!isNil ""BIS_fnc_init""};" \n
+       "if(isNil ""CRB_LOCS"") then {" \n
+       "        CRB_LOCS = [] call CRB_fnc_initLocations;" \n
+       "};" \n
+       "" \n
+       "_spawnpoints = [];" \n
+       "{" \n
+       "	if(type _x == ""BorderCrossing"") then {" \n
+       "		_spawnpoints set [count _spawnpoints, position _x];" \n
+       "	};" \n
+       "} forEach CRB_LOCS;" \n
+       "" \n
+       "// Pick a spawn point" \n
+       "_spawn =  _spawnpoints call BIS_fnc_selectRandom;" \n
+       "" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "_">*/
+    class _
+    {
+      name = "_";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__1">*/
+    class __1
+    {
+      name = "__1";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Start";
+  finalStates[] =
+  {
+  };
+};
+/*%FSM</COMPILE>*/

@@ -1,0 +1,330 @@
+/*%FSM<COMPILE "D:\Dokumenti\GAME CONCEPTS\ArmA programming\WICT FSM original\scriptedFSM.cfg, infantryW">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Start",0,250,-159.021881,-486.022675,-69.021881,-436.022675,0.000000,"Start"};
+item1[] = {"server",4,218,-10.526901,-486.022675,79.473099,-436.022675,1.000000,"server"};
+item2[] = {"check_if_there_is",2,250,154.345428,-484.161804,244.345459,-434.161804,0.000000,"check if" \n "there is" \n "enemy base"};
+item3[] = {"no",4,218,283.355530,-589.462158,373.355530,-539.462158,1.000000,"no"};
+item4[] = {"yes",8,218,286.246185,-404.632874,376.246185,-354.632874,0.000000,"yes"};
+item5[] = {"move_and_SAD",2,250,460.599426,-603.657776,550.599365,-553.657715,0.000000,"move and SAD"};
+item6[] = {"capture_flag",2,4346,453.939819,-390.551056,543.939758,-340.550995,0.000000,"capture flag"};
+item7[] = {"_",8,218,594.320190,-498.940399,684.320190,-448.940399,0.000000,""};
+item8[] = {"patrol_or_guard",3,250,760.302429,-501.688690,850.302429,-451.688690,0.000000,"patrol or guard"};
+item9[] = {"patrol",4,218,849.096863,-597.142700,939.096680,-547.142700,1.000000,"patrol"};
+item10[] = {"guard",8,218,840.217468,-405.124725,930.217285,-355.124725,0.000000,"guard"};
+item11[] = {"_",2,250,965.639404,-599.362549,1055.638672,-549.362549,0.000000,""};
+item12[] = {"__1",2,250,962.309570,-405.124725,1052.308838,-355.124725,0.000000,""};
+item13[] = {"_",8,218,1065.532715,-503.908569,1155.532715,-453.908569,0.000000,""};
+item14[] = {"End",1,250,1224.252686,-506.128418,1314.252686,-456.128448,0.000000,"End"};
+item15[] = {"client",8,218,-7.129677,-601.382568,82.870323,-551.382568,0.000000,"client"};
+item16[] = {"End_1",1,250,49.724548,-678.993164,139.724579,-628.993164,0.000000,"End"};
+link0[] = {0,1};
+link1[] = {0,15};
+link2[] = {1,2};
+link3[] = {2,3};
+link4[] = {2,4};
+link5[] = {3,5};
+link6[] = {4,6};
+link7[] = {5,7};
+link8[] = {6,7};
+link9[] = {7,8};
+link10[] = {8,9};
+link11[] = {8,10};
+link12[] = {9,11};
+link13[] = {10,12};
+link14[] = {11,13};
+link15[] = {12,13};
+link16[] = {13,14};
+link17[] = {15,16};
+globals[] = {0.000000,0,0,0,0,640,480,1,25,6316128,1,179.143494,768.278015,-135.953201,-777.519836,809,881,1};
+window[] = {2,-1,-1,-1,-1,837,100,1360,100,3,827};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "infantryW";
+  class States
+  {
+    /*%FSM<STATE "Start">*/
+    class Start
+    {
+      name = "Start";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "server">*/
+        class server
+        {
+          priority = 1.000000;
+          to="check_if_there_is";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"isServer"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "client">*/
+        class client
+        {
+          priority = 0.000000;
+          to="End_1";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "check_if_there_is">*/
+    class check_if_there_is
+    {
+      name = "check_if_there_is";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "no">*/
+        class no
+        {
+          priority = 1.000000;
+          to="move_and_SAD";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(WICT_eb == ""none"")"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "yes">*/
+        class yes
+        {
+          priority = 0.000000;
+          to="capture_flag";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "move_and_SAD">*/
+    class move_and_SAD
+    {
+      name = "move_and_SAD";
+      init = /*%FSM<STATEINIT""">*/"_posOrig = WICT_playerPos;" \n
+       "" \n
+       "_Wg = group _target;" \n
+       "	" \n
+       "_angle = WICT_angleW;" \n
+       "	" \n
+       "_sd = (WICT_sd/100)*80;" \n
+       "" \n
+       "_safepos = position _target;" \n
+       "" \n
+       "_center_x = (_posOrig) select 0;" \n
+       "_center_y = (_posOrig) select 1;" \n
+       "_center_z = (_posOrig) select 2;" \n
+       "" \n
+       "if(isNil ""_center_z"")then{_center_z = 0;};" \n
+       "" \n
+       "_x1 = 0; _y1 = 0;" \n
+       "" \n
+       "_x1 = _x1 + _center_x - (sin _angle * _sd);" \n
+       "_y1 = _y1 + _center_y - (cos _angle * _sd);" \n
+       "	" \n
+       "	_movePos = [_x1, _y1, _center_z];" \n
+       "    if ( isNil ""_center_z"" ) then {" \n
+       "       _movePos = [_x1, _y1];" \n
+       "    };" \n
+       "" \n
+       "_movePos = [_movePos,0,50,10,0,60*(pi / 180),0,[],[_safepos]] call BIS_fnc_findSafePos;" \n
+       "" \n
+       "_wp1 = _Wg addwaypoint[_movePos,50];" \n
+       "	[_Wg,1] setWaypointBehaviour ""AWARE"";" \n
+       "	[_Wg,1] setWaypointSpeed ""NORMAL"";" \n
+       "	[_Wg,1] setWaypointType ""SAD"";" \n
+       "	[_Wg,1] setWaypointCombatMode ""RED"";" \n
+       "	[_Wg,1] setWaypointCompletionRadius 25;" \n
+       "	_Wg setCurrentWaypoint [_Wg,1];"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="patrol_or_guard";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "capture_flag">*/
+    class capture_flag
+    {
+      name = "capture_flag";
+      init = /*%FSM<STATEINIT""">*/"_posOrig = WICT_playerPos;" \n
+       "" \n
+       "_Wg = group _target;" \n
+       "	" \n
+       "_angle = WICT_angleW;" \n
+       "	" \n
+       "_sd = (WICT_sd/100)*80;" \n
+       "" \n
+       "_safepos = getMarkerPos WICT_eb;" \n
+       "" \n
+       "_center_x = (_posOrig) select 0;" \n
+       "_center_y = (_posOrig) select 1;" \n
+       "_center_z = (_posOrig) select 2;" \n
+       "" \n
+       "if(isNil ""_center_z"")then{_center_z = 0;};" \n
+       "" \n
+       "_x1 = 0; _y1 = 0;" \n
+       "" \n
+       "_x1 = _x1 + _center_x - (sin _angle * _sd);" \n
+       "_y1 = _y1 + _center_y - (cos _angle * _sd);" \n
+       "	" \n
+       "	_movePos = [_x1, _y1, _center_z];" \n
+       "    if ( isNil ""_center_z"" ) then {" \n
+       "       _movePos = [_x1, _y1];" \n
+       "    };" \n
+       "" \n
+       "_movePos = [_movePos,0,50,10,0,60*(pi / 180),0,[],[_safepos]] call BIS_fnc_findSafePos;" \n
+       "" \n
+       "_wp1 = _Wg addwaypoint[_movePos,25];" \n
+       "	[_Wg,1] setWaypointBehaviour ""AWARE"";" \n
+       "	[_Wg,1] setWaypointSpeed ""NORMAL"";" \n
+       "	[_Wg,1] setWaypointType ""MOVE"";" \n
+       "	[_Wg,1] setWaypointCombatMode ""YELLOW"";" \n
+       "	[_Wg,1] setWaypointCompletionRadius 25;" \n
+       "	_Wg setCurrentWaypoint [_Wg,1];" \n
+       "" \n
+       "_movePos = getMarkerPos WICT_eb;" \n
+       "" \n
+       "_wp2 = _Wg addwaypoint[_movePos,0];" \n
+       "	[_Wg,2] setWaypointBehaviour ""COMBAT"";" \n
+       "	[_Wg,2] setWaypointSpeed ""FULL"";" \n
+       "	[_Wg,2] setWaypointType ""MOVE"";" \n
+       "	[_Wg,2] setWaypointCombatMode ""RED"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="patrol_or_guard";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "patrol_or_guard">*/
+    class patrol_or_guard
+    {
+      name = "patrol_or_guard";
+      init = /*%FSM<STATEINIT""">*/"_behbase =  round (random 1);"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "patrol">*/
+        class patrol
+        {
+          priority = 1.000000;
+          to="_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_behbase == 1"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "guard">*/
+        class guard
+        {
+          priority = 0.000000;
+          to="__1";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "_">*/
+    class _
+    {
+      name = "_";
+      init = /*%FSM<STATEINIT""">*/"null = [_Wg,_movePos,100] execVM ""enemy\modules\WICT_enemypop\WICT\AI\BIN_taskPatrol.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__1">*/
+    class __1
+    {
+      name = "__1";
+      init = /*%FSM<STATEINIT""">*/"null = [_Wg,_movePos] execVM ""enemy\modules\WICT_enemypop\WICT\AI\BIN_taskDefend.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "End">*/
+    class End
+    {
+      name = "End";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "End_1">*/
+    class End_1
+    {
+      name = "End_1";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Start";
+  finalStates[] =
+  {
+    "End",
+    "End_1",
+  };
+};
+/*%FSM</COMPILE>*/

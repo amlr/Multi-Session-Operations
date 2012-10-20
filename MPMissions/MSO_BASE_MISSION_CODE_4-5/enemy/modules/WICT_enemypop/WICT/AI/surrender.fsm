@@ -1,0 +1,272 @@
+/*%FSM<COMPILE "D:\Dokumenti\GAME CONCEPTS\ArmA programming\WICT FSM original\scriptedFSM.cfg, Surrender">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Start",0,250,-38.665985,172.341751,51.334015,222.341736,0.000000,"Start"};
+item1[] = {"_",8,218,-39.125240,71.401207,53.449112,109.387558,0.000000,""};
+item2[] = {"Idle_",2,250,-36.826660,-8.703737,53.173355,41.296131,0.000000,"Idle" \n ""};
+item3[] = {"Pointed_at",4,218,-38.628609,-328.284607,51.371391,-278.284607,1.000000,"Pointed at"};
+item4[] = {"Raise_hands",2,250,-38.628597,-406.441986,51.371418,-356.441986,0.000000,"Raise hands"};
+item5[] = {"Not_pointed__any",4,218,-174.843231,-446.812012,-84.843239,-396.812012,0.000000,"Not pointed" \n " anymore"};
+item6[] = {"Sleep",2,250,-287.118103,-405.592438,-197.117981,-355.592438,0.000000,"Sleep"};
+item7[] = {"Check_sleep",4,218,-286.268494,-330.833221,-196.268524,-280.833221,0.000000,"Check sleep"};
+item8[] = {"under_fire",4,218,-39.193439,-535.512329,50.806541,-485.512054,1.000000,"under fire"};
+item9[] = {"Swear",2,250,-173.760071,-534.671143,-83.760056,-484.671143,0.000000,"Swear"};
+item10[] = {"not_alive",4,218,-286.635498,-622.661377,-196.635422,-572.661377,2.000000,"not alive"};
+item11[] = {"End__",1,250,99.685623,-623.797607,189.685608,-573.797607,0.000000,"End" \n "" \n ""};
+item12[] = {"not_alive",4,218,99.685532,-405.639832,189.685608,-355.639862,2.000000,"not alive"};
+item13[] = {"__1",8,218,-38.804264,-113.318176,51.195736,-63.318176,0.000000,""};
+item14[] = {"target_object_not",2,250,-36.944923,-212.792465,53.055092,-162.792465,0.000000,"target object" \n "not deleted"};
+item15[] = {"_",4,218,82.981956,-58.467888,172.981964,-8.467899,1.000000,""};
+item16[] = {"End",1,250,224.291138,-58.467964,314.291168,-8.467979,0.000000,"End"};
+link0[] = {0,1};
+link1[] = {1,2};
+link2[] = {2,13};
+link3[] = {2,15};
+link4[] = {3,4};
+link5[] = {4,5};
+link6[] = {4,8};
+link7[] = {4,12};
+link8[] = {5,6};
+link9[] = {6,7};
+link10[] = {6,10};
+link11[] = {7,2};
+link12[] = {8,9};
+link13[] = {9,5};
+link14[] = {9,10};
+link15[] = {10,11};
+link16[] = {12,11};
+link17[] = {13,14};
+link18[] = {14,3};
+link19[] = {14,12};
+link20[] = {15,16};
+globals[] = {0.000000,0,0,0,0,640,480,1,21,6316128,1,-685.475525,458.942871,168.269470,-650.765991,1231,881,1};
+window[] = {2,-1,-1,-1,-1,892,150,1410,150,3,1249};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "Surrender";
+  class States
+  {
+    /*%FSM<STATE "Start">*/
+    class Start
+    {
+      name = "Start";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="Idle_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Idle_">*/
+    class Idle_
+    {
+      name = "Idle_";
+      init = /*%FSM<STATEINIT""">*/"_target enableAI ""ANIM"";" \n
+       "_target playAction ""Stand"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 1.000000;
+          to="End";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"isNull _target "/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "__1">*/
+        class __1
+        {
+          priority = 0.000000;
+          to="target_object_not";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Raise_hands">*/
+    class Raise_hands
+    {
+      name = "Raise_hands";
+      init = /*%FSM<STATEINIT""">*/"_target globalChat ""Don't fire!"";" \n
+       "_target playAction ""Surrender"";" \n
+       "_target disableAI ""ANIM"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "not_alive">*/
+        class not_alive
+        {
+          priority = 2.000000;
+          to="End__";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"not alive _target"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "under_fire">*/
+        class under_fire
+        {
+          priority = 1.000000;
+          to="Swear";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"damage _target > 0"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Not_pointed__any">*/
+        class Not_pointed__any
+        {
+          priority = 0.000000;
+          to="Sleep";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"cursorTarget != _target"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Sleep">*/
+    class Sleep
+    {
+      name = "Sleep";
+      init = /*%FSM<STATEINIT""">*/"_time = time;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "not_alive">*/
+        class not_alive
+        {
+          priority = 2.000000;
+          to="End__";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"not alive _target"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Check_sleep">*/
+        class Check_sleep
+        {
+          priority = 0.000000;
+          to="Idle_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_time + 1 < time"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Swear">*/
+    class Swear
+    {
+      name = "Swear";
+      init = /*%FSM<STATEINIT""">*/"_target globalChat ""*censored!*"";" \n
+       "removeAllWeapons _target;" \n
+       "_target setCaptive true;" \n
+       "_target setUnitPos ""DOWN"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "not_alive">*/
+        class not_alive
+        {
+          priority = 2.000000;
+          to="End__";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"not alive _target"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Not_pointed__any">*/
+        class Not_pointed__any
+        {
+          priority = 0.000000;
+          to="Sleep";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"cursorTarget != _target"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "End__">*/
+    class End__
+    {
+      name = "End__";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "target_object_not">*/
+    class target_object_not
+    {
+      name = "target_object_not";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "not_alive">*/
+        class not_alive
+        {
+          priority = 2.000000;
+          to="End__";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"not alive _target"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Pointed_at">*/
+        class Pointed_at
+        {
+          priority = 1.000000;
+          to="Raise_hands";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"cursorTarget == _target"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "End">*/
+    class End
+    {
+      name = "End";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Start";
+  finalStates[] =
+  {
+    "End__",
+    "End",
+  };
+};
+/*%FSM</COMPILE>*/

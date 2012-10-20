@@ -88,7 +88,7 @@ class Mission
 	randomSeed=6553103;
 	class Intel
 	{
-		briefingName="MSO BAF/USMC vs RU/INS v4.3";
+		briefingName="MSO BAF/USMC vs RU/INS v4.5 Chernarus";
 		briefingDescription="An MSO Tead Development (A2CO)";
 		startWeather=0;
 		forecastWeather=0.30342692;
