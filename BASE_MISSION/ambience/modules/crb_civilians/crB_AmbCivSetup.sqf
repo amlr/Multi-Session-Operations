@@ -112,6 +112,14 @@ switch toLower(worldName) do {
                 BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];                
 		BIS_alice_mainscope setVariable ["civilianCount","round (1.5 * (sqrt %1))"]; 
         };
+	case "clafghan": {   
+                BIS_alice_mainscope setvariable ["trafficDistance",1200]; // default 500
+                BIS_alice_mainscope setvariable ["spawnDistance",800]; // default 400
+		BIS_alice_mainscope setvariable ["ALICE_townsize",800]; // default 266.667
+		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"]; // default round (4 * (sqrt %1))
+                // Add some rare english speaking civilians to the mix
+                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
+        };
 };
 
 // list of action categories from CfgCivilianActions 
