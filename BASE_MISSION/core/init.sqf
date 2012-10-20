@@ -15,7 +15,7 @@ if (isnil "BIS_functions_mainscope") then {
 
 waitUntil{!isNil "BIS_fnc_init"};
 
-mso_version = "4.4";
+mso_version = "4.5";
 diag_log format["MSO-%1 Version: %2", time, mso_version];
 
 
