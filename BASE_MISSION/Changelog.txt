@@ -1,6 +1,6 @@
 Change Log:
 Thanks to:
-- MSO development team: Wolffy.au, Tupolov, highhead, friznit, WobblyHeadedBob, zorrobyte, HateDread, kieran, Ryan, Kolmain, and Rommel
+- MSO development team: Wolffy.au, Tupolov, highhead, Jman, friznit, WobblyHeadedBob, zorrobyte, HateDread, kieran, Ryan, Kolmain, and Rommel
 - PersistentDB dev "team" - JMan, Scott W, Firefly
 - Ryan, Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
 - Friznit, Tupolov, DaveP and Volunteer Commando Battalion (VCB)
@@ -13,6 +13,80 @@ Thanks to:
 - CWR² team, IceBreakr, Shezan, Commander, Old Bear for making your mods and islands MSO friendly
 - Roy86 for Patrol Ops 2 Module
 - Enigma for Weather Module
+- PXS for Stacoms
+- Justin Alderman for MGO
+
+4.5 Changelog
+
+[RMM_ENEMYPOP] - Enabled Dynamic enemy pop for single player
+[ENEMY] CQB now uses FSMs for movements and also some further tweaks.
+[ENEMY] DEP, changed while loops to waituntil and for-loops (http://community.bistudio.com/wiki/Code_Optimisation#Loops)
+[ENEMY] Fix for "only few Roadblocks generated" with DEP and PDB
+[PDB] Added new SQL Dump (20120918)
+[PDB] Removed old SQL Dump (20120916)
+[SUPPORT] Delay for SATCOM-Start to avoid using it too often ("cheat")
+[PDB] Added param for Player Kill Stats
+[PDB] Added Player kills database and mechanism
+[CORE] Fixed (PDB): Player was invincible in Single-Player or Editor-preview
+[SUPPORT] New - PXS SATELLITE COMs
+[SUPPORT] Removed additional Task-Marker that was not remove-able anymore
+[CORE] - Added new global message function
+[crb_twnmgr] - HUMINT and SIGINT reports now broadcast to clients correctly
+[crb_twnmgr] - Added new param 'Broadcast Reports to sideChat'
+[CORE] - Fixed issue where 'NewMission' call was inserting 2 records into database
+[PDB] fixed issue #43440: https://dev-heaven.net/issues/43440
+[MGO] - Check and activate by default if in SP
+[CORE] - Thanks HH, additional locs on Clafghan
+[PDB] Added parameter to control Teleport to last saved position - now has option for Auto, Prompt or No
+[DEP] Fix for PDB and DEP compatibility with GUER
+[DEP] Fix for PDB and Guerilla compatibility.
+[MISSIONS] Provided MSO 4.5 RC candidate missions according to https://dev-heaven.net/issues/37932
+[ENEMY] CQB Check player distance instantly before spawn, to avoid too near spawnings
+[CORE] Excluded Respawn-Limit in NOMAD due to https://dev-heaven.net/issues/30191 and https://dev-heaven.net/issues/30191
+[ENEMY] Minor debug-line fix for Sniper Ops
+[ENEMY] Fixed PO2 Sniper Ops
+[ENEMY] PO2 now selects groups again in MSO-Autotasking
+[MISSION] Changed default params, undefined Tcells, WICT, Emergency Services, turned off caching by default
+[UI] - Updated all MSO menus to ensure items are below ACE menus. Reordered menus.
+[PDB] Added Save Player menu action to allow players to save state prior to disconnecting. This is a workaround until the OnPlayerDisconnected race condition is fixed by BIS
+[ENEMY] Removed ACE Overlap of PO2 (finally)
+[ENEMY] Moved DEP_convert_group function to regular DEP functions (needed for Sniperops fix)
+[PDB] lowered char-limit to 1900 have some buffer for extra bytes caused by ASCII chars
+[PDB] Fix for duplicate items on back
+[PDB] Fixed string length check - 4096 bytes or 2047 characters
+[PDB] Fixed vehicle contents, new schema, fixed object contents
+[ENEMY] Found and fixed a borked PO2 ACE function
+[ENEMY] Fix for camps in DEP
+[PDB] More fixes for DEP and PDB
+[PDB] Fixed Guerilla group spawn issue for DEP and PDB
+[PDB] Fixed incorrect LastConnected and LastDisconnected times, update default parameters
+[DEP] Removed debugging line
+[PDB] Updated default parameters, removed old SQL file
+[ENEMY] Added an Autoswitch-functionality in RMM_ENEMYPOP to correct main_pdb.sqf ("DEP") if PDB-locations are used
+[ENEMY] implemented a simple Blacklist for CQB (place markers with name "CQB_BL0" - "CQB_BL9")
+[CORE] Turned VehicleIgnitionKey feature to off by default in params
+[CORE] Corrected param-formatting in CRB_Timesync
+[SUPPORT] Adapted and implemented MGO Attach (Justin Alderman)
+[CORE] Removed Spyder_ONU (obsolete)
+[SUPPORT] Added Jmans Crew Info feature
+[CORE] Added Jmans Vehiclekeys feature
+[PDB] Fix for DEP_LOC
+[PDB] Added Tasks to PDB, fixed some param loading issues, cleaned up some logging and improved tasks functionality to allow state updates
+[PDB] Updated schema
+[PDB] Added persistent AARs to PDB. Requires updated ARMA2Net to v2.20, updated ARMA2NetMySQLPlugin, updated MSO Schema, updated Databases.txt format (see wiki)
+[PDB] Added support for storing JIP Markers (now named Team Markers) to PDB
+[PDB] Updated PDB, Schema AND ARMA2Net folder to support storing additional information to mission data
+[PDB] Cleaned up PDB/CQB code to reduce logging
+[PDB] Added PDB support for Dynamic Enemy Pop (DEP), ensure you select the correct parameters in PDB and EN POP to enable this functionality. UPDATED SCHEMA added to PDB folder
+[ENEMY] CQB groups now consist of the same faction
+[ENEMY] updated dyn pdb enemypop with ep_locations for backward-compatibility and PO2 MSO Autotasking
+[ENEMY] "New" Enpop - Roadblocks work now, Fixed wrong comments in Dataset and some minor bugs, changed Params display name
+[ENEMY] Recode of RMM_Enemypop to make it PDB compatible (Use mission param "Dynamic Enemypop" -> "PDB").
+[ENEMY] Added some strategic buildingtypes in CQB
+[ENEMY] CQB was off by default if default value was set to 0.5 (5%) in params
+[ENEMY] Fixed Bug in Suiciders, where all CIV factions were selected instead of only the ones used in mission
+[ENEMY] Fixed bug in dynamic rmm_enemypop where no MSO_FACTIONS were used (east factions instead)
+[WHB_Multispawn] - Added NaturalDoc-style comments and renamed relevant function calls
 
 4.4 Changelog
 
