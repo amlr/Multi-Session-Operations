@@ -52,8 +52,10 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
                 
         		if (random 1 < 0.5) then { // Add AA
 					_AA = [true];
-					_placeholder setVariable ["type", _camp + _AA];
-        		};                
+        		} else {
+                    _AA = [false]; 
+                };
+                _placeholder setVariable ["type", _camp + _AA];                
         	};
         
        		_placeholder setpos [_pos select 0, _pos select 1, -30];
@@ -78,9 +80,12 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
             	_placeholder setVariable ["type", _camp];
 				_placeholder setVariable ["groupType", [_grptype] + [_grptype2]];
                 
-        		if (random 1 < 0.5) then {
-					_placeholder setVariable ["type", _camp + [true]];
-        		};                
+        		if (random 1 < 0.5) then { // Add AA
+					_AA = [true];
+        		} else {
+                    _AA = [false]; 
+                };
+                _placeholder setVariable ["type", _camp + _AA];                     
         	};
 
         	_placeholder setpos [_pos select 0, _pos select 1, -30];
@@ -108,13 +113,15 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
 				_placeholder setVariable ["groupType", [_grptype] + [_grptype2]];
                 
 				
-				if (random 1 < 0.5) then {
+        		if (random 1 < 0.5) then { // Add AA
 					_AA = [true];
-					_placeholder setVariable ["type", _camp + _AA];
-        		};
+        		} else {
+                    _AA = [false]; 
+                };
+                _placeholder setVariable ["type", _camp + _AA];
         	};
             
-            if (((random 1 < 0.5) && (count (_pos nearRoads 500) > 0)) ) then {
+            if (((random 1 < 0.8) && (count (_pos nearRoads 500) > 0)) ) then {
 				_placeholder setVariable ["type", _camp + _AA + [true]];
         	};
       
