@@ -9,7 +9,6 @@ _group = _this select 2;
 _units = _this select 3;
 _despawn = _this select 4;
 _debug = debug_mso;
-_bldgpos = [];
 
 _bldgpos = [_pos,50]  call CQB_findnearhousepos;
 if ((count _bldgpos) < 1) then {_bldgpos = [_pos,100]  call CQB_findnearhousepos};

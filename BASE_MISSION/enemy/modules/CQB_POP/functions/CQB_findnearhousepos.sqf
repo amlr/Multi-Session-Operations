@@ -2,8 +2,10 @@ private ["_pos","_radius"];
 
 _pos = _this select 0;
 _radius = _this select 1;
+_bldgpos = [];
 
 _nearbldgs = nearestObjects [_pos, ["House"], _radius];
+
 {
 	private["_housepos", "_poscount","_i","_y"];
     _poscount = 0;

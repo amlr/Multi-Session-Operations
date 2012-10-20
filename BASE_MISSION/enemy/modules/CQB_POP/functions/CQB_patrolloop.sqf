@@ -18,8 +18,15 @@ sleep 2;
     
     if ((_near) && !(_patrol)) then {
         if (_debug) then {diag_log format["MSO-%1 CQB Population: Sending group %2 on patrol...", time, _group]};
-        [_group, _pos, 150] spawn BIN_fnc_taskPatrol;
-    	_patrol = true;
+        
+        
+        //[_group, _pos, 150] spawn BIN_fnc_taskPatrol;
+    	private["_fsm","_hdl"];
+        _fsm = "enemy\modules\CQB_POP\functions\TaskPatrol.fsm";
+        _hdl = [leader _group, 300, true, 30,false,_pos] execFSM _fsm;
+        {_x setVariable ["FSM", [_hdl,_fsm]]} foreach units _group;
+        
+        _patrol = true;
         _movehome = false;
     };
     
@@ -31,6 +38,11 @@ sleep 2;
 		_endpos = _bldgpos select floor(random count _bldgpos);
 
         {
+            _hdlOut = (_x getvariable "FSM") select 0;
+        	_hdlOut setFSMVariable ["_abort",true];
+            
+            _x setbehaviour "AWARE";
+            _x setspeedmode "FULL";
             _x domove _endpos;
 		} foreach units _group;
     };
