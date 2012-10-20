@@ -17,7 +17,7 @@
 #define WHB_MULTISPAWN
 #define ZKS_Build
 #define CREWINFO
-#define MGO_ATTACH
+#define MGO
 #define PXS_SATCOM_OA
 
 // WIP
