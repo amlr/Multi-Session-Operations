@@ -49,8 +49,7 @@ class Mission
 		"ace_sys_arty_computers",
 		"ace_sys_arty_m119",
 		"ace_sys_towing",
-		"CAAir",
-		"acex_c_weapon"
+		"CAAir"
 	};
 	addOnsAuto[]=
 	{
@@ -77,7 +76,6 @@ class Mission
 		"camisc_e",
 		"camisc3",
 		"CATracked_BAF",
-		"acex_c_weapon",
 		"CAAir_BAF",
 		"caweapons_e",
 		"CAWheeled_E",
@@ -1791,7 +1789,6 @@ class Mission
 			vehicle="US_WarfareBUAVterminal_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""core\modules\rmm_weather\addAction.sqf"";";
 		};
 		class Item26
 		{
@@ -2795,7 +2792,6 @@ class Mission
 			vehicle="US_WarfareBUAVterminal_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""core\modules\rmm_weather\addAction.sqf"";";
 		};
 		class Item120
 		{
