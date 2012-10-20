@@ -39,6 +39,7 @@ if(count _this > 5) then {_despawn = _this select 5;};
 _bldgpos = [];
 _i = 0;
 _nearbldgs = nearestObjects [_pos, ["Building"], _radius];
+
 {
 	private["_y"];
 	_y = _x buildingPos _i;

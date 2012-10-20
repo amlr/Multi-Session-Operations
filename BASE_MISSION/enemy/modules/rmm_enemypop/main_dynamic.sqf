@@ -296,7 +296,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         _breakouttimer = 0;
                                                                                                                         
                                         if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
-                                        while {!(_cleared)} do {
+                                        for "_y" from 0 to 1000000 do {
+        									if (_cleared) exitwith {};
                                         	sleep 3; 
                                         	if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
 												_spawned = true;
@@ -454,7 +455,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     _breakouttimer = 0;
                                               
 									if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
-                                    while {!(_cleared)} do {
+                                    for "_y" from 0 to 1000000 do {
+        								if (_cleared) exitwith {};
                                     	sleep 3; 
                                     	if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
                                         
@@ -621,7 +623,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     _breakouttimer = 0;
   
                                     if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
-                                    while {!(_cleared)} do {
+                                    for "_y" from 0 to 1000000 do {
+        							if (_cleared) exitwith {};
                                     	sleep 3; 
                                     	if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
 											_spawned = true;
@@ -791,7 +794,8 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     _breakouttimer = 0;                                    
                                                 
                                     if (_debug) then {diag_log format ["Starting While loop %1 (%2)", _pos, _type];};
-                                    while {!(_cleared)} do {
+                                    for "_y" from 0 to 1000000 do {
+        								if (_cleared) exitwith {};
                                     	sleep 3; 
                                     	if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
 											_spawned = true;

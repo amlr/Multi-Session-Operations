@@ -34,8 +34,8 @@
     		};
 		};
 		
-		while {true} do {
-            	sleep 1;
+		waituntil {
+            	sleep 2;
                 _activecount = 0;
                 _suspendedcount = 0;
                 _clearcount = 0;
@@ -75,14 +75,14 @@
 
                     if (((_x select 0) distance player < 800) && ((_x select 0) distance player > 100) && (((position player) select 2) < 5) && (({(local _x) && ((faction _x) in MSO_FACTIONS)} count allunits) < CQBaicap)) then {
                         
-                        if (((_x select 0) distance player < 500) && (_activenow <= 5) && _regular) then {
+                        if (((_x select 0) distance player < 500) && (_activenow <= 8) && _regular) then {
                         	if ((isnil "_suspend") && (isnil "_clear")) then {
                                 _activenow = _activenow + 1;
                     			[(_pos),(_x select 0),600] call MSO_fnc_CQBspawnRandomgroup;
                     		};
                         };                        
                         
-                        if (((_x select 0) distance player < 800) && (_activenow <= 5) && _strategic) then {
+                        if (((_x select 0) distance player < 800) && (_activenow <= 8) && _strategic) then {
                         	if ((isnil "_suspend") && (isnil "_clear")) then {
                                 _activenow = _activenow + 1;
                     			[(_pos),(_x select 0),1000] call MSO_fnc_CQBspawnRandomgroup;
@@ -103,4 +103,5 @@
                 diag_log format["MSO-%1 CQB Population: %2 total | %3 suspended |%4 cleared positions...", time, _activecount, _suspendedcount, _clearcount];
                 diag_log format["MSO-%1 CQB Population: Count %2 local AI in %4 CQB-groups (%3 total AI overall)...", time, {local _x} count allUnits, count allUnits, count CQBgroupsLocal];
             };
-		};
+			false;
+        };

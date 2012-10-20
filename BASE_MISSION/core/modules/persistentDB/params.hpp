@@ -76,6 +76,12 @@ class mpdb_tasks_enabled {
         texts[]= {"On","Off"}; 
         default = 1;
 };
+class mpdb_killStats_enabled {
+        title = "        Record Kill Stats"; 
+        values[]= {1,0}; 
+        texts[]= {"On","Off"}; 
+        default = 1;
+};
 class mpdb_persistentScores_enabled {
         title = "        Persistent Scores"; 
         values[]= {1,0}; 
