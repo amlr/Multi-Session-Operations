@@ -60,6 +60,9 @@ class RscTitles
 class cfgFunctions {
         class MSO {
                 #include <core\functions\functions.hpp>
+                #ifdef MSO_STORE
+                #include <core\modules\MSO_STORE\functions.hpp>
+                #endif
                 #ifdef MSO_STRATEGIC
                 #include <core\modules\MSO_STRATEGIC\functions.hpp>
                 #endif

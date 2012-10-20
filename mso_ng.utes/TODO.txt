@@ -1,0 +1,3 @@
+- Automated mine fields
+- Test if AI will grab weapons when unarmed
+- 
