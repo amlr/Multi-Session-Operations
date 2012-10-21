@@ -5,7 +5,7 @@ SCRIPT(test_data);
 
 // ----------------------------------------------------------------------------
 
-private ["_testConvert","_testRestore","_processData","_type","_original","_converted","_restored","_result","_err"];
+private ["_testConvert","_testRestore","_processData","_type","_original","_converted","_restored","_err","_result"];
 
 LOG("Testing data conversion to string");
 
@@ -72,8 +72,8 @@ sleep 5;
 
 MISSIONOBJECTCOUNT
 
-STAT("Test STRING");
 _type = "STRING";
+STAT("Test STRING");
 _original = "test string";
 _converted = [_type, _original] call _testConvert;
 _converted = _converted call _processData;
@@ -81,8 +81,8 @@ _restored = [_type, _converted] call _testRestore;
 _result = [_original, _restored] call BIS_fnc_areEqual;
 ASSERT_TRUE(_result,_original + " == " + _restored);
 
-STAT("Test TEXT");
 _type = "TEXT";
+STAT("Test TEXT");
 _original = text "test text string";
 _converted = [_type, _original] call _testConvert;
 _converted = _converted call _processData;
@@ -90,8 +90,8 @@ _restored = [_type, _converted] call _testRestore;
 _result = [_original, _restored] call BIS_fnc_areEqual;
 ASSERT_TRUE(_result,str _original + " == " + str _restored);
 
-STAT("Test BOOL (false)");
 _type = "BOOL";
+STAT("Test BOOL (false)");
 _original = false;
 _converted = [_type, _original] call _testConvert;
 _converted = _converted call _processData;
@@ -105,9 +105,9 @@ _converted = _converted call _processData;
 _restored = [_type, _converted] call _testRestore;
 ASSERT_TRUE(_restored,str _restored);
 
-STAT("Test SCALAR (large)");
 _type = "SCALAR";
-//_original = 12376898761.123546798; // this doesn't work atm
+STAT("Test SCALAR (large)");
+//_original = 12376898761.123546798; // this doesn't work atm
 _original = 12376900000;
 _converted = [_type, _original] call _testConvert;
 _converted = _converted call _processData;
@@ -124,16 +124,75 @@ _restored = [_type, _converted] call _testRestore;
 _result = [_original, _restored] call BIS_fnc_areEqual;
 ASSERT_TRUE(_result,str _original + " == " + str _restored);
 
-// test "ARRAY"
-// test "CODE"
-// test "CONFIG"
-// test "CONTROL"
-// test "DISPLAY"
-// test "GROUP"
+_type = "SIDE";
+STAT("Test SIDE (west)");
+_original = west;
+_converted = [_type, _original] call _testConvert;
+_converted = _converted call _processData;
+_restored = [_type, _converted] call _testRestore;
+_result = [_original, _restored] call BIS_fnc_areEqual;
+ASSERT_TRUE(_result,str _original + " == " + str _restored);
+
+STAT("Test SIDE (east)");
+_original = east;
+_converted = [_type, _original] call _testConvert;
+_converted = _converted call _processData;
+_restored = [_type, _converted] call _testRestore;
+_result = [_original, _restored] call BIS_fnc_areEqual;
+ASSERT_TRUE(_result,str _original + " == " + str _restored);
+
+STAT("Test SIDE (resistance)");
+_original = resistance;
+_converted = [_type, _original] call _testConvert;
+_converted = _converted call _processData;
+_restored = [_type, _converted] call _testRestore;
+_result = [_original, _restored] call BIS_fnc_areEqual;
+ASSERT_TRUE(_result,str _original + " == " + str _restored);
+
+STAT("Test SIDE (civilian)");
+_original = civilian;
+_converted = [_type, _original] call _testConvert;
+_converted = _converted call _processData;
+_restored = [_type, _converted] call _testRestore;
+_result = [_original, _restored] call BIS_fnc_areEqual;
+ASSERT_TRUE(_result,str _original + " == " + str _restored);
+
+STAT("Test SIDE (sideLogic)");
+_original = sideLogic;
+_converted = [_type, _original] call _testConvert;
+_converted = _converted call _processData;
+_restored = [_type, _converted] call _testRestore;
+_result = [_original, _restored] call BIS_fnc_areEqual;
+ASSERT_TRUE(_result,str _original + " == " + str _restored);
+
+_type = "ARRAY";
+STAT("Test ARRAY");
+_original = ["string", text "text", true, 123.456, resistance];
+_converted = [_type, _original] call _testConvert;
+_converted = _converted call _processData;
+_restored = [_type, _converted] call _testRestore;
+_result = [_original, _restored] call BIS_fnc_areEqual;
+ASSERT_TRUE(_result,str _original + " == " + str _restored);
+
+STAT("Test ARRAY (nested)");
+_original = [["string","string1"], [true, 123.456, resistance],[false, 456.123, west]];
+_converted = [_type, _original] call _testConvert;
+_converted = _converted call _processData;
+_restored = [_type, _converted] call _testRestore;
+_result = [_original, _restored] call BIS_fnc_areEqual;
+ASSERT_TRUE(_result,str _original + " == " + str _restored);
+
 // test "LOCATION"
 // test "OBJECT"
+
+// test "CONFIG"
+
+// test "GROUP"
+// test "CODE"
 // test "SCRIPT"
-// test "SIDE"
+
+// test "CONTROL"
+// test "DISPLAY"
 
 MISSIONOBJECTCOUNT
 

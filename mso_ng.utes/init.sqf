@@ -11,6 +11,6 @@ call compile preprocessfilelinenumbers "core\modules\MSO_STORE\tests\test.sqf";
 //call compile preprocessfilelinenumbers "find_stuff.sqf";
 //call compile preprocessfilelinenumbers "find_stuff_civ.sqf";
 
-endMission "END1";
-forceEnd;
+//endMission "END1";
+//forceEnd;
 

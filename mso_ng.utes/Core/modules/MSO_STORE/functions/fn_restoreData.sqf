@@ -1,10 +1,24 @@
 
-private ["_debug","_result", "_type", "_data"];
+private ["_debug","_result","_type","_data","_split"];
 _debug = false;
 
-_result = [_this, ":"] call CBA_fnc_split;
-_type = _result select 0;
-_data = _result select 1;
+_split = false;
+_type = [];
+_data = [];
+{
+        // find the ":" seperator
+        if(_x == 58 && !_split) then {
+                _split = true;
+        } else {
+                if(!_split) then {
+                        _type set [count _type, _x];
+                } else {
+                        _data set [count _data, _x];
+                };
+        };
+} foreach (toArray _this);
+_type = toString _type;
+_data = toString _data;
 
 if (_debug) then {
         //diag_log format["Running conversion function... on %1 type %2", _origvar, typeName _origvar];
@@ -18,13 +32,30 @@ switch(_type) do {
                 _result = text _data;
         };
         case "BOOL": {
-                private["_b"];
-                _b = if(parseNumber _data == 0) then {false} else {true};
-                _result = _b;
+                private["_tmp"];
+                _tmp = if(parseNumber _data == 0) then {false} else {true};
+                _result = _tmp;
         };
         case "SCALAR": {
                 _result = parseNumber _data;
-        };        
+        };
+        case "SIDE": {
+                _result = switch(_data) do {
+                        case "WEST": {west;};
+                        case "EAST": {east;};
+                        case "GUER": {resistance;};
+                        case "CIV": {civilian;};
+                        case "LOGIC": {sideLogic;};
+                };
+        };
+        case "ARRAY": {
+                private["_tmp"];
+                _tmp = call compile _data;
+                _result = [];
+                {
+                        _result set [count _result, _x call MSO_fnc_restoreData];
+                } forEach _tmp;
+        };
 };
 _result;
 
