@@ -9074,7 +9074,6 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_WeaponBox_BIS_US";
 			skill=0.60000002;
-			text="Kiste4";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_69";
 		};
 		class Item859
