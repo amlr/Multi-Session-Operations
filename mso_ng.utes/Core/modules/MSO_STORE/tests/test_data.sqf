@@ -5,7 +5,7 @@ SCRIPT(test_data);
 
 // ----------------------------------------------------------------------------
 
-private ["_testConvert","_testRestore","_processData","_type","_original","_converted","_restored","_err","_result"];
+private ["_testConvert","_testRestore","_processData","_type","_original","_converted","_restored","_err","_result"];
 
 LOG("Testing data conversion to string");
 
@@ -33,7 +33,7 @@ _testConvert = {
         ASSERT_TRUE(typeName _type == "STRING",_err);
         
         ASSERT_DEFINED("_input",_err);
-        ASSERT_TRUE(typeName _input == _type,_err);
+        ASSERT_TRUE(typeName _input == _type,typeName _input + " == " + _type);
         
         _result = _input call MSO_fnc_convertData;
         ASSERT_DEFINED("_result",_err);
@@ -182,8 +182,27 @@ _restored = [_type, _converted] call _testRestore;
 _result = [_original, _restored] call BIS_fnc_areEqual;
 ASSERT_TRUE(_result,str _original + " == " + str _restored);
 
+_type = "OBJECT";
+STAT("Test OBJECT (map object)");
+// loc is for Utes Strelka
+_original = ([[4395.0229,3171.7737], 10] call MSO_fnc_getEnterableHouses) select 0;
+_converted = [_type, _original] call _testConvert;
+_converted = _converted call _processData;
+_restored = [_type, _converted] call _testRestore;
+_result = [_original, _restored] call BIS_fnc_areEqual;
+ASSERT_TRUE(_result,str _original + " == " + str _restored);
+
+_type = "ARRAY";
+STAT("Test ARRAY (map objects)");
+// loc is for Utes Strelka
+_original = [[4345.0229,3232.7737], 50] call MSO_fnc_getEnterableHouses;
+_converted = [_type, _original] call _testConvert;
+_converted = _converted call _processData;
+_restored = [_type, _converted] call _testRestore;
+_result = [_original, _restored] call BIS_fnc_areEqual;
+ASSERT_TRUE(_result,str _original + " == " + str _restored);
+
 // test "LOCATION"
-// test "OBJECT"
 
 // test "CONFIG"
 
@@ -196,12 +215,4 @@ ASSERT_TRUE(_result,str _original + " == " + str _restored);
 
 MISSIONOBJECTCOUNT
 
-/*
-// find nearest house
-_house = (getPos player) nearestObject "House";
-_err = "no house found";
-ASSERT_DEFINED("_house",_err);
-ASSERT_TRUE(typeName _house == "OBJECT",_err);
-[str _house, getPosATL _house, "Icon", [1, 1],"TYPE:", "Dot"] call CBA_fnc_createMarker;
-*/
 nil;

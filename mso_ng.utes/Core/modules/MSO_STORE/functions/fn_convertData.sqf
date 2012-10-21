@@ -18,11 +18,25 @@ switch(typeName _this) do {
                 {
                         private["_v"];
                         _v = _x call MSO_fnc_convertData;
-                        if(typeName _x == "ARRAY") then {
-                                _v = [_v, """", """"""] call CBA_fnc_replace; 
+                        if(
+                                (typeName _x == "ARRAY") ||
+                                {typeName _x == "OBJECT"}
+                        ) then {
+                                _v = [_v, """", """"""] call CBA_fnc_replace;
                         };
                         _tmp set [count _tmp, _v];
                 } forEach _this;
+                _result = format["%1:%2",typeName _this, _tmp];
+        };
+        case "OBJECT": {
+                private["_tmp"];
+                _tmp = [] call CBA_fnc_hashCreate;
+                if(_this isKindOf "Building") then {
+                        [_tmp, "Category", "Building"] call CBA_fnc_hashSet;
+                };
+                [_tmp, "typeOf", typeOf _this] call CBA_fnc_hashSet;
+                [_tmp, "position", position _this] call CBA_fnc_hashSet;
+                [_tmp, "direction", direction _this] call CBA_fnc_hashSet;
                 _result = format["%1:%2",typeName _this, _tmp];
         };
         default {

@@ -5,6 +5,7 @@ _debug = false;
 _split = false;
 _type = [];
 _data = [];
+// Split the JSON type and data
 {
         // find the ":" seperator
         if(_x == 58 && !_split) then {
@@ -24,6 +25,8 @@ if (_debug) then {
         //diag_log format["Running conversion function... on %1 type %2", _origvar, typeName _origvar];
 };
 
+// Address each data type accordingly
+_result = nil;
 switch(_type) do {
         case "STRING": {
                 _result = _data;
@@ -50,11 +53,48 @@ switch(_type) do {
         };
         case "ARRAY": {
                 private["_tmp"];
+                _data = [_data, "any", "nil"] call CBA_fnc_replace;
                 _tmp = call compile _data;
                 _result = [];
                 {
                         _result set [count _result, _x call MSO_fnc_restoreData];
                 } forEach _tmp;
+        };
+        case "OBJECT": {
+                private["_tmp","_category","_type","_pos","_dir","_found"];
+                _data = [_data, "any", "nil"] call CBA_fnc_replace;
+                _tmp = call compile _data;
+                _category = [_tmp, "Category"] call CBA_fnc_hashGet;
+                _type = [_tmp, "typeOf"] call CBA_fnc_hashGet;
+                _pos = [_tmp, "position"] call CBA_fnc_hashGet;
+                _dir = [_tmp, "direction"] call CBA_fnc_hashGet;
+                _found = false;
+                
+                // Different OBJECT types have different requirements
+                switch(_category) do {
+                        case "Building": {
+                                // Try to find if the building  exists on the map already
+                                // and reference it
+                                private["_house"];
+                                _house = _pos nearestObject _type;
+                                
+                                if(
+                                        (typeOf _house == _type) &&
+                                        {str position _house == str _pos} &&
+                                        // TODO: need to convert to string due to loss in resolution
+                                        {str direction _house == str _dir}
+                                ) then {
+                                        _result = _house;
+                                        _found = true;
+                                };                                        
+                        };
+                };
+                // If OBJECT doesn't exist already, create it
+                if(!_found) then {
+                        _result = createVehicle [_type, _pos, [], 0, "NONE"];
+                        _result setPos _pos;
+                        _result setDir _dir;
+                };
         };
 };
 _result;
