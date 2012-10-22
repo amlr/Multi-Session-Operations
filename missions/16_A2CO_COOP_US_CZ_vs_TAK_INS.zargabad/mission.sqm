@@ -873,7 +873,6 @@ class Mission
 			side="EMPTY";
 			vehicle="US_WarfareBUAVterminal_Base_EP1";
 			skill=0.60000002;
-			init="0 = this execVM ""core\modules\rmm_weather\addAction.sqf"";";
 		};
 		class Item1
 		{

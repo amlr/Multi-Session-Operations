@@ -1767,7 +1767,6 @@ class Mission
 			vehicle="US_WarfareBUAVterminal_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""core\modules\rmm_weather\addAction.sqf"";";
 		};
 		class Item36
 		{
@@ -2991,7 +2990,6 @@ class Mission
 			vehicle="US_WarfareBUAVterminal_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""core\modules\rmm_weather\addAction.sqf"";";
 		};
 		class Item150
 		{

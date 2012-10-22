@@ -89,7 +89,7 @@ class Mission
 	randomSeed=4990239;
 	class Intel
 	{
-		briefingName="MSO ACE CLAfghan v4.5";
+		briefingName="32 ACE COOP USA vs. TAK INS 4.5 Clafghan";
 		resistanceWest=0;
 		resistanceEast=1;
 		startWeather=0.44999999;
@@ -1332,7 +1332,6 @@ class Mission
 			vehicle="US_WarfareBUAVterminal_Base_EP1";
 			leader=1;
 			skill=0.2;
-			init="0 = this execVM ""core\modules\rmm_weather\addAction.sqf"";";
 		};
 		class Item28
 		{
