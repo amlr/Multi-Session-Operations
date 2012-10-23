@@ -6,4 +6,13 @@ class Store {
 	class restoreData {
 		description = "Composes objects and data from a text string";
 	};
+	class sendToPlugIn {
+		description = "Sends data to an external plugin via arma2net";
+	};
+	class writeData {
+		description = "Writes data to a data source";
+	};
+	class readData {
+		description = "Reads data from a data source";
+	};
 };
