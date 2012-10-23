@@ -14,7 +14,7 @@ while {_location == mps_loc_last} do {
 mps_loc_last = _location;
 
 _markerpos = [(position _location) select 0,(position _location) select 1, 0];
-_position = [[(position _location) select 0,(position _location) select 1, 0],1000,0.1,2] call mps_getFlatArea;
+_position = [[(position _location) select 0,(position _location) select 1, 0],800,0.1,2] call mps_getFlatArea;
 
 _taskid = format["%1%2%3",round (_position select 0),round (_position select 1),(round random 999)];
 _b = (2 max (round (random (playersNumber (SIDE_A select 0) / 4)))) * MISSIONDIFF;
