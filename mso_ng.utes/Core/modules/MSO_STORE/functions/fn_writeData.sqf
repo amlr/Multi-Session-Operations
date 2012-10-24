@@ -28,7 +28,7 @@ private ["_debug","_response","_module","_params"];
 _debug = false;
 
 // Write data to a data source
-// Function is expecting the module name (preferably matching table name for db access) and the key/value pairs where the key would be the column id for a DB
+// Function is expecting the module name (preferably matching table name for db access) and the key/value pairs where the key would be the column id for a DB or the attribute to a JSON object
 // Values should be in string form (use the convertData function)
 // Call to external datasource uses an arma2net plugin call
 // For SQL this is an INSERT command followed by the column ids and values
@@ -70,10 +70,10 @@ switch(DATASOURCE) do {
 			private ["_pairs","_cmd","_json"];
 			
 			_pairs = "";
-			// Build the JSON command
+			// Build the JSON command (http://msostore.iriscouch.com)
 			_cmd = format ["SendJSON ['%1', '%2'", JSON_URL, _module];
 			{
-				_pairs = _pairs + (_x select 0) + ":" + (_x select 1) + ",";
+				_pairs = _pairs + (_x select 0) + ":" + (_x select 1) + ","; // each key/value needs to be wrapped in quotes, not sure how to do this
 			} foreach _params;
 			_json = _cmd + ", {" + _pairs + "}']";
 			

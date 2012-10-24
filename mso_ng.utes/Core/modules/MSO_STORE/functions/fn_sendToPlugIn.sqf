@@ -17,6 +17,9 @@ Examples:
 (begin example)
  ["ARMA2NetMySQLCommand ['arma','SELECT * FROM missions'] "] call MSO_fnc_sendToPlugIn
 (end)
+(begin example)
+ ["SendJSON ['http://msostore.iriscouch.com','missions','{'key':'value'}'] "] call MSO_fnc_sendToPlugIn
+(end)
 
 Author:
 Tupolov
