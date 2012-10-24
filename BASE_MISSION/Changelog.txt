@@ -18,6 +18,19 @@ Thanks to:
 
 4.5 Changelog
 
+
+[ENEMY] Fix for PO2 mission where target was out of targetzone
+[MISSIONS] Removed dependency in Missions without weathermodule
+[MISSIONS] - Fixed Tora Bora mission - moved helicopter off of rocks.
+[MISSIONS] Fixed HazarKot double text reference
+[CORE] Added JMan, Scott W and Firefly to credits in briefing.
+[AMBIENCE] Civi settings for Clafghan
+[SUPPORT] - Updated MGO define to match folder name
+[SUPPORT] - Updated PXS_SATCOM define to match folder
+[CORE] Updated Briefing and Credits
+[PDB] NEW SQL DUMP: Fixed PDB for different Arma Versions, updated SQL Dump for 4.5 (also auto-inc lowered)
+[PDB] Deleted old SQL dump
+[CORE] Updated init for 4.5
 [RMM_ENEMYPOP] - Enabled Dynamic enemy pop for single player
 [ENEMY] CQB now uses FSMs for movements and also some further tweaks.
 [ENEMY] DEP, changed while loops to waituntil and for-loops (http://community.bistudio.com/wiki/Code_Optimisation#Loops)
