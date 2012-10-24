@@ -130,7 +130,7 @@ execNow "support\modules\mgo\main\init.sqf";
 };
 #endif
 
-#ifdef PXS_SATCOM
+#ifdef PXS_SATCOM_OA
 "PXS SATCOMs" call mso_core_fnc_initStat;
 ["ON"] execVM "support\modules\pxs_satcom_oa\init_satellite.sqf";
 #endif

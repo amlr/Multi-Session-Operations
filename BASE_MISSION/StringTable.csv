@@ -13,6 +13,6 @@
 #include <enemy\modules\roy_patrolops\stringtable.csv>
 #endif
 
-#ifdef PXS_SATCOM
+#ifdef PXS_SATCOM_OA
 #include <support\modules\pxs_satcom_oa\stringtable.csv>
 #endif
