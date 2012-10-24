@@ -1,9 +1,48 @@
+#include <script_macros_core.hpp>
+SCRIPT(convertData);
+
+/* ----------------------------------------------------------------------------
+Function: MSO_fnc_convertData
+
+Description:
+Converts ARMA2 data types, map objects, and created vehicles into JSON type strings
+
+Parameters:
+Any - Any data type or object
+
+Returns:
+String - Returns JSON type string in the format "DATATYPE:VALUE"
+
+Examples:
+(begin example)
+// An array of different data types
+_result = [true, 123.456, resistance] call MSO_fnc_convertData
+// returns ARRAY:["BOOL:1","SCALAR:123.456","SIDE:GUER"]
+
+// An map placed house
+_result = _myhouse call MSO_fnc_convertData
+// returns OBJECT:["#CBA_HASH#",["Category","typeOf","position","direction"],["Building","Land_HouseV_1I4",[4396.92,3170.78,0.197453],211.415],any]
+(end)
+
+Author:
+Tupolov
+Wolffy.au
+Peer Reviewed:
+
+---------------------------------------------------------------------------- */
 private ["_result","_debug"];
 _debug = false;
 _result = nil;
 
+if(isNil "_this") exitWith {
+        if (_debug) then {
+                "ConvertData <null> type" call MSO_fnc_logger;
+        };
+        "nil";
+};
+
 if (_debug) then {
-        //diag_log format["Running conversion function... on %1 type %2", _origvar, typeName _origvar];
+        format["ConvertData %1:%2", typeName _this, _this] call MSO_fnc_logger;
 };
 
 switch(typeName _this) do {
@@ -44,46 +83,3 @@ switch(typeName _this) do {
         };
 };
 _result;
-/*	
-if (_action == "write") then {
-        
-        if (typename _origvar == "OBJECT") then {
-                _var = str(_origvar);
-        };
-        
-        if (typename _origvar == "ARRAY") then {
-                _var = str(_origvar);
-                // Check for nested array
-                if ([_var, "[["] call CBA_fnc_find != -1) then {
-                        _var = [_var, "[[", "["] call CBA_fnc_replace; 
-                        _var = [_var, "]]", "]"] call CBA_fnc_replace; 
-                        _var = [_var, ",", "|"] call CBA_fnc_replace; 
-                } else {
-                        _var = [_var, "[", ""] call CBA_fnc_replace; 
-                        _var = [_var, "]", ""] call CBA_fnc_replace; 
-                        _var = [_var, ",", "|"] call CBA_fnc_replace; 
-                };
-                if ([_var] call CBA_fnc_strLen < 2) then {_var = "";};
-        };
-        
-        if (typename _origvar == "SIDE") then {
-                _var = str(_origvar);
-        };
-        
-        if (typename _origvar == "BOOL") then {
-                _var = str(_origvar);
-                if (isNil _var) then {_var = "false";};
-        };
-        
-        if (typename _origvar == "SCALAR") then {
-                _var =  str(_origvar);
-                if ([_var,","] call CBA_fnc_find !=-1) then {
-                        _var = [_var,",","."] call CBA_fnc_replace;
-                };
-        };
-        
-        if (pdb_log_enabled) then {
-                //diag_log format["Converted %1 (%2) to %3 (%4) for DB", _origvar, typeName _origvar, _var, typeName _var];
-        };
-};
-*/

@@ -1,6 +1,30 @@
-private ["_result","_debug"];
+#include <script_macros_core.hpp>
+SCRIPT(writeData);
+
+/* ----------------------------------------------------------------------------
+Function: MSO_fnc_writeData
+
+Description:
+Communicates with an external source
+
+Parameters:
+String - Text to be sent to externel source
+
+Returns:
+String - Returns a response error
+
+Examples:
+(begin example)
+TODO
+(end)
+
+Author:
+Tupolov
+Peer Reviewed:
+Wolffy.au 24 Oct 2012
+---------------------------------------------------------------------------- */
+private ["_debug","_response","_module","_params"];
 _debug = false;
-_result = nil;
 
 // Write data to a data source
 // Function is expecting the module name (preferably matching table name for db access) and the key/value pairs where the key would be the column id for a DB
@@ -10,11 +34,10 @@ _result = nil;
 // Outgoing calls to callExtension have a check to ensure they do not exceed 16kb
 // Avoided using the format command as it has a 2kb limt
 
-_module = _this select 0;
-_params = _this select 1;
+PARAMS_2(_module,_params);
 
 if (_debug) then {
-    diag_log format["Writing Data: Len:%1 Params:(%3)  Type:%2", [_params] call CBA_fnc_strLen, _params, typeName _params];
+    format["WriteData - Len:%1 Params:(%3)  Type:%2", [_params] call CBA_fnc_strLen, _params, typeName _params] call MSO_fnc_logger;
 };
 
 // DATASOURCE = SQL|JSON|TEXT|MEMORY
@@ -39,7 +62,7 @@ switch(DATASOURCE) do {
 			_sql = [_sql, ",)", ")"] call CBA_fnc_replace;
 			
 			// Send the SQL command to the plugin
-			_response = [_sql] call MSO_STORE_fnc_sendToPlugIn;
+			_response = [_sql] call MSO_fnc_sendToPlugIn;
 		};
 		
 		case "JSON": {
@@ -57,7 +80,7 @@ switch(DATASOURCE) do {
 			_json = [_json, ",}", "}"] call CBA_fnc_replace;
 			
 			// Send JSON to plugin
-			_response = [_json] call MSO_STORE_fnc_sendToPlugIn;
+			_response = [_json] call MSO_fnc_sendToPlugIn;
 		}
 };
 

@@ -61,14 +61,14 @@ class cfgFunctions {
         class MSO {
                 #include <core\functions\functions.hpp>
                 #ifdef MSO_STORE
-                #include <core\modules\MSO_STORE\functions.hpp>
+                #include <core\modules\MSO_STORE\functions\functions.hpp>
                 #endif
                 #ifdef MSO_STRATEGIC
-                #include <core\modules\MSO_STRATEGIC\functions.hpp>
+                #include <core\modules\MSO_STRATEGIC\functions\functions.hpp>
                 #endif
                 //#include <enemy\functions\functions.hpp>
                 #ifdef MSO_CQBPOP
-                #include <enemy\modules\MSO_CQBPOP\functions.hpp>
+                #include <enemy\modules\MSO_CQBPOP\functions\functions.hpp>
                 #endif                
         };
 };

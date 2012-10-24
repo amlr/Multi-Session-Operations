@@ -12,7 +12,9 @@ class Store {
 	class writeData {
 		description = "Writes data to a data source";
 	};
+/*
 	class readData {
 		description = "Reads data from a data source";
 	};
+*/
 };

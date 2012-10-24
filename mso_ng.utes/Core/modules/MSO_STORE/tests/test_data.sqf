@@ -67,7 +67,7 @@ _processData = {
         ASSERT_TRUE(typeName _result == "STRING","Process Data error");
         _result;
 };
-
+/*
 sleep 5;
 
 MISSIONOBJECTCOUNT
@@ -124,6 +124,13 @@ _restored = [_type, _converted] call _testRestore;
 _result = [_original, _restored] call BIS_fnc_areEqual;
 ASSERT_TRUE(_result,str _original + " == " + str _restored);
 
+_type = "NIL";
+STAT("Test NIL");
+_converted = call MSO_fnc_convertData;
+_converted = _converted call _processData;
+_restored = _converted call MSO_fnc_restoreData;
+ASSERT_TRUE(isNil "_restored","Not is Nil");
+
 _type = "SIDE";
 STAT("Test SIDE (west)");
 _original = west;
@@ -173,7 +180,7 @@ _converted = _converted call _processData;
 _restored = [_type, _converted] call _testRestore;
 _result = [_original, _restored] call BIS_fnc_areEqual;
 ASSERT_TRUE(_result,str _original + " == " + str _restored);
-
+*/
 STAT("Test ARRAY (nested)");
 _original = [["string","string1"], [true, 123.456, resistance],[false, 456.123, west]];
 _converted = [_type, _original] call _testConvert;
@@ -201,8 +208,137 @@ _converted = _converted call _processData;
 _restored = [_type, _converted] call _testRestore;
 _result = [_original, _restored] call BIS_fnc_areEqual;
 ASSERT_TRUE(_result,str _original + " == " + str _restored);
+/*
+_type = "OBJECT";
+STAT("Test OBJECT (vehicle)");
+// loc is for Utes Strelka
+_original = createVehicle ["HMMWV_Armored", [4345.0229,3232.7737], [], 50, "NONE"];
+_original setDir (random 360);
+//vectorDir object / vectorUp object / object setVectorDirAndUp [[x, z, y],[x, y, z]]
+_original setVehicleVarName "X123";
+//addWeaponCargo / addWeaponCargoGlobal
+//addMagazineCargo / addMagazineCargoGlobal
+_original setAmmoCargo (random 1);
+_original setFuelCargo (random 1);
+_original setRepairCargo (random 1);
+
+_original setFuel (random 1);
+_original setDamage (random 1);
+//object setHit [part, damage]
+_original setVehicleInit "hint str this;";
+//vehicle setVehicleLock state
+//object setVehicleAmmo value
+//object setVehicleArmor value
+//object setVehicleId id
+*/
+/*
+vehiclevarname object / object setVehicleVarName name
+typeOf  object
+getPosATL object / object setPosATL [x,y,z]
+position object
+getDamage object
+vectorDir object / vectorUp object / object setVectorDirAndUp [[x, z, y],[x, y, z]]
+getWeaponCargo object / addWeaponCargo / addWeaponCargoGlobal
+getMagazineCargo object / addMagazineCargo / addMagazineCargoGlobal
+vehicle setAmmoCargo ammoCargo
+vehicle setFuel amount
+vehicle setFuelCargo amount
+object setHit [part, damage]
+vehicle setRepairCargo amount
+vehicle setVehicleInit statement
+vehicle setVehicleLock state
+object setVehicleAmmo value
+object setVehicleArmor value
+object setVehicleId id
+obj setDir heading
+*/
+/*
+_converted = [_type, _original] call _testConvert;
+_converted = _converted call _processData;
+_restored = [_type, _converted] call _testRestore;
+_result = [_original, _restored] call BIS_fnc_areEqual;
+ASSERT_TRUE(_result,str _original + " == " + str _restored);
+*/
+/*
+// Create empty vehicles
+_original = [
+        createVehicle ["MTVR", [4345.0229,3232.7737], [], 50, "NONE"],
+        createVehicle ["M1A1", [4345.0229,3232.7737], [], 50, "NONE"],
+        createVehicle ["MH60S", [4345.0229,3232.7737], [], 50, "NONE"]
+]
+*/
+
+/*
+person setCaptive captive
+unit setUnconscious set
+
+group setBehaviour behaviour
+group setCombatMode mode
+group setFormation formation
+group setGroupIcon properties
+group setGroupIconParams properties
+setGroupIconsSelectable bool
+setGroupIconsVisible array
+group setGroupid [nameFomat, nameParam1, ..]
+
+score  (_this select 0);
+{ (_this select 0) getVariable "head_hit";},
+{ (_this select 0) getVariable "body";},
+{ (_this select 0) getVariable "hands";},
+{ (_this select 0) getVariable "legs";},
+_animState = animationState _player;
+{ lifestate  (_this select 0);},
+// crouch or kneel
+if (vehicle (_this select 0) != (_this select 0)) then { 
+        _result = [str(vehicle (_this select 0)), "REMOTE", 0] call CBA_fnc_find;  // http://dev-heaven.net/docs/cba/files/strings/fnc_find-sqf.html
+        if ( _result == -1 ) then {
+                if (driver (vehicle (_this select 0)) == (_this select 0)) then { _pseat = "driver"; };
+                if (gunner (vehicle (_this select 0)) == (_this select 0)) then { _pseat = "gunner"; };
+                if (commander (vehicle (_this select 0)) == (_this select 0)) then { _pseat = "commander"; };
+        };
+};
+
+{rating  (_this select 0);},
+unit setRank rank
+unit setUnitRank rank
+unit setUnconscious set
+unit setUnitPos mode
+
+{ (_this select 0) getvariable "pviewdistance";},
+{ (_this select 0) getvariable "pterraindetail";},
+{ (_this select 0) getvariable "prank";},
+{ (_this select 0) getVariable "pshotsfired";},
+{ (_this select 0) getVariable "penemykills";},
+{ (_this select 0) getVariable "pcivkills";},
+{ (_this select 0) getVariable "pfriendlykills";},
+{ (_this select 0) getVariable "psuicides";},
+{ (_this select 0) getVariable "pdeaths";},
+{ ((_this select 0) getVariable "TimePlayed") + ( time - ((_this select 0) getVariable "connectTime") );},
+{ (_this select 0) getVariable "LastConnected";},
+{ (_this select 0) getVariable "LastDisconnected";}
+//    {[group  (_this select 0), (leader  (_this select 0) ==  (_this select 0))];}
+*/
 
 // test "LOCATION"
+/*
+createLocation [type, position, sizeX, sizeZ]
+location setImportance importance / importance location
+location setDirection direction / direction location
+location setName name / name location
+location setPosition position / getPos location / locationPosition location / position location
+location setRectangular rectangular / rectangular location
+location setSide side / side location
+location setSize [sizeX, sizeZ] / size location
+location setText text / text location
+location setType type / type location
+location setVariable [name, value] / location getVariable name
+attachedObject location / location attachObject object
+deleteLocation location / isNull location
+position in location
+nearestLocation [position, type]
+nearestLocations [position, [types], distance, <position to sort from>]
+nearestLocationWithDubbing position
+*/
 
 // test "CONFIG"
 

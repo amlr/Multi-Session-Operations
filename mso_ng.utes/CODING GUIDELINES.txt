@@ -8,3 +8,4 @@
 - Embrace CBA use of Macros
 - Embrace CBA use of function wrappers
 - Use Object Oriented SQF in preparation of the move to Java in A3
+- Peer review code and put in the NaturalDocs function header - "Peer review: Wolffy 24/10/12"

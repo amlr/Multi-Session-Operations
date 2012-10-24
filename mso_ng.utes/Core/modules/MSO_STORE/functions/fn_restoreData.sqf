@@ -1,6 +1,34 @@
+#include <script_macros_core.hpp>
+SCRIPT(restoreData);
+
+/* ----------------------------------------------------------------------------
+Function: MSO_fnc_restoreData
+
+Description:
+Converts JSON type strings back into ARMA2 data types, map objects, and created vehicles
+
+Parameters:
+String - Returns JSON type string in the format "DATATYPE:VALUE"
+
+Returns:
+Any - Any data type, a reference to a map placed object or creates a new object
+
+Examples:
+(begin example)
+// An array of different data types
+_result = "ARRAY:[""BOOL:1"",""SCALAR:123.456"",""SIDE:GUER""]" call MSO_fnc_restoreData
+// returns [true, 123.456, resistance]
+(end)
+
+Author:
+Tupolov
+Wolffy.au
+Peer Reviewed:
+
+---------------------------------------------------------------------------- */
 
 private ["_debug","_result","_type","_data","_split"];
-_debug = false;
+_debug = true;
 
 _split = false;
 _type = [];
@@ -22,8 +50,10 @@ _type = toString _type;
 _data = toString _data;
 
 if (_debug) then {
-        //diag_log format["Running conversion function... on %1 type %2", _origvar, typeName _origvar];
+        format["RestoreData %1:%2", _type, _data] call MSO_fnc_logger;
 };
+
+if(_type == "nil") exitWith {nil};
 
 // Address each data type accordingly
 _result = nil;
@@ -62,7 +92,7 @@ switch(_type) do {
         };
         case "OBJECT": {
                 private["_tmp","_category","_type","_pos","_dir","_found"];
-                _data = [_data, "any", "nil"] call CBA_fnc_replace;
+                _data = [_data, "any", "nil"] call CBA_fnc_replace;
                 _tmp = call compile _data;
                 _category = [_tmp, "Category"] call CBA_fnc_hashGet;
                 _type = [_tmp, "typeOf"] call CBA_fnc_hashGet;
