@@ -5,17 +5,18 @@ SCRIPT(writeData);
 Function: MSO_fnc_writeData
 
 Description:
-Communicates with an external source
+Writes data to an external datasource (SQL, JSON, Text File)
 
 Parameters:
-String - Text to be sent to externel source
+String - Module name 
+Array - Array of key/value string pairs
 
 Returns:
 String - Returns a response error
 
 Examples:
 (begin example)
-TODO
+	[ _module, [ [key,value],[key,value],[key,value] ] ] call MSO_fnc_writeData;
 (end)
 
 Author:

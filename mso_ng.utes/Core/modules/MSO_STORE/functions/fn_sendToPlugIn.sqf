@@ -5,17 +5,17 @@ SCRIPT(sendToPlugIn);
 Function: MSO_fnc_sendToPlugIn
 
 Description:
-Communicates with an external source
+Sends valid commands and data to arma2net plugins
 
 Parameters:
-String - Text to be sent to externel source
+String - Text to be sent to external source
 
 Returns:
 String - Returns a response error
 
 Examples:
 (begin example)
-TODO
+ ["ARMA2NetMySQLCommand ['arma','SELECT * FROM missions'] "] call MSO_fnc_sendToPlugIn
 (end)
 
 Author:
