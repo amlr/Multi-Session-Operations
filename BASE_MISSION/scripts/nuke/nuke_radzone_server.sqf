@@ -27,43 +27,15 @@ _ctm = 2;
 
 while {_cnt < _fallouttime} do {
 
-_array = _nuke_rad_pos nearObjects ["Man", (1000 + floor(random 500))];
+_array = _nuke_rad_pos nearentities ["Man", (1000 + floor(random 500))];
 {_x setdammage ((getdammage _x) + 0.03)} forEach _array;
 sleep 0.2;
 
-_array = _nuke_rad_pos nearObjects ["Tank", (500)];
+_array = _nuke_rad_pos nearentities [["Tank","Air","Ship","Car","Man"], (500)];
 {_x setdammage ((getdammage _x) + 0.01)} forEach _array;
 sleep 0.2;
 
-_array = _nuke_rad_pos nearObjects ["Air", (500)];
-{_x setdammage ((getdammage _x) + 0.01)} forEach _array;
-sleep 0.2;
-
-_array = _nuke_rad_pos nearObjects ["Ship", (500)];
-{_x setdammage ((getdammage _x) + 0.01)} forEach _array;
-sleep 0.2;
-
-_array = _nuke_rad_pos nearObjects ["Car", (500)];
-{_x setdammage ((getdammage _x) + 0.01)} forEach _array;
-sleep 0.2;
-
-_array = _nuke_rad_pos nearObjects ["Man", (500 + floor(random 200))];
-{_x setdammage ((getdammage _x) + 0.05)} forEach _array;
-sleep 0.2;
-
-_array = _nuke_rad_pos nearObjects ["Tank", (250)];
-{_x setdammage ((getdammage _x) + 0.05)} forEach _array;
-sleep 0.2;
-
-_array = _nuke_rad_pos nearObjects ["Air", (250)];
-{_x setdammage ((getdammage _x) + 0.05)} forEach _array;
-sleep 0.2;
-
-_array = _nuke_rad_pos nearObjects ["Ship", (250)];
-{_x setdammage ((getdammage _x) + 0.05)} forEach _array;
-sleep 0.2;
-
-_array = _nuke_rad_pos nearObjects ["Car", (250)];
+_array = _nuke_rad_pos nearentities [["Tank","Air","Ship","Car"], (250)];
 {_x setdammage ((getdammage _x) + 0.05)} forEach _array;
 sleep 0.2;
 

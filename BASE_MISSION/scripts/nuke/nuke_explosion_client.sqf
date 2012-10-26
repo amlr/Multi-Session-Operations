@@ -13,6 +13,14 @@ waituntil {!isnil "_nukepos"};
 "dynamicBlur" ppEffectAdjust [0.5];
 "dynamicBlur" ppEffectCommit 1;
 
+sleep 1;
+
+"colorCorrections" ppEffectEnable true;
+"colorCorrections" ppEffectAdjust [0.8, 15, 0, [0.5, 0.5, 0.5, 0], [0.0, 0.0, 0.6, 2],[0.3, 0.3, 0.3, 0.1]];"colorCorrections" ppEffectCommit 0.4;
+
+"dynamicBlur" ppEffectAdjust [1];
+"dynamicBlur" ppEffectCommit 3;
+
 0 setfog 0;
 0 setOvercast 0;
 
@@ -63,12 +71,6 @@ _light = "#lightpoint" createVehicleLocal [(_nukepos select 0),(_nukepos select 
 _light setLightAmbient[1500, 1200, 1000];
 _light setLightColor[1500, 1200, 1000];
 _light setLightBrightness 100000.0;
-
-"colorCorrections" ppEffectEnable true;
-"colorCorrections" ppEffectAdjust [0.8, 15, 0, [0.5, 0.5, 0.5, 0], [0.0, 0.0, 0.6, 2],[0.3, 0.3, 0.3, 0.1]];"colorCorrections" ppEffectCommit 0.4;
-
-"dynamicBlur" ppEffectAdjust [1];
-"dynamicBlur" ppEffectCommit 3;
 
 [_nukepos,40] execvm "scripts\nuke\nuke_sound_client.sqf";
 [_nukepos,40] execvm "scripts\nuke\nuke_shockwave_client.sqf";
