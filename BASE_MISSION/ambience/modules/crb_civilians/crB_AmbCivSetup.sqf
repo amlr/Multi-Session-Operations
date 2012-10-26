@@ -50,9 +50,9 @@ switch toLower(worldName) do {
                 BIS_alice_mainscope setVariable ["townsFaction",["cwr2_civ","CIV","CIV_RU"]];                
         };
         case "fallujah": {                
-                BIS_alice_mainscope setvariable ["trafficDistance",600];      
-                BIS_alice_mainscope setvariable ["spawnDistance",400];      
-		BIS_alice_mainscope setvariable ["ALICE_townsize",400];
+                BIS_alice_mainscope setvariable ["trafficDistance",800];      
+                BIS_alice_mainscope setvariable ["spawnDistance",600];      
+		BIS_alice_mainscope setvariable ["ALICE_townsize",600];
                 BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
 	};  
         case "mcn_hazarkot": {
