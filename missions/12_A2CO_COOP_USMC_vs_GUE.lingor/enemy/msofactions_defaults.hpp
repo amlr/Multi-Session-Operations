@@ -1,4 +1,4 @@
-#define DEFAULT_RU 1
+#define DEFAULT_RU 0
 #define DEFAULT_ACE_RU 0
 #define DEFAULT_INS 0
 #define DEFAULT_GUE 1
