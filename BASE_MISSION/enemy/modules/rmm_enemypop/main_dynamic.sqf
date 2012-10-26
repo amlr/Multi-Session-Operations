@@ -311,7 +311,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         		_group setFormation "STAG COLUMN";
                                                 
                                         		if(_flag >= ep_campprob || count units _group <= 2) then {
-                                                	[_group,_pos2,800,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                                	[_group,_pos2,500,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
                                         		};
                                         		if(_flag < ep_campprob && _type == "Infantry") then {
                                                 	leader _group setPos _pos;
@@ -469,7 +469,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 											_group setSpeedMode "LIMITED";
 											_group setFormation "DIAMOND";
 											if(_flag >= ep_campprob || count units _group <= 2) then {
-												[_group,_pos2,800,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [240,400,560]] call CBA_fnc_taskPatrol;
+												[_group,_pos2,500,4 + random 4, "MOVE", "COMBAT", "RED", "LIMITED", "DIAMOND", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [240,400,560]] call CBA_fnc_taskPatrol;
 											};
 											if(_flag < ep_campprob && _type == "Infantry") then {
 												leader _group setPos _pos;
