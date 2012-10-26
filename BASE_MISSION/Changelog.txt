@@ -18,7 +18,11 @@ Thanks to:
 
 4.5 Changelog
 
-
+[MISSIONS] Added optimized Fallujah (special settings in params.hpp like 2% CQB and 7% enpop)
+[AMBIENCE] widened Civi-Radius for case Fallujah in ambient civis
+[ENEMY] Lowered Patrolradius to be better compatible with PO2 MSO Autotasking
+[SCRIPTS] NUKE: made sure destruction effects work on all objects including trees, rocks and bushes. replaced nearestobjects by nearentities for performance. Fixed Clientside blinding FX when nuke goes off
+[CORE] Integrated JMANs Admin tools (default off)
 [ENEMY] Fix for PO2 mission where target was out of targetzone
 [MISSIONS] Removed dependency in Missions without weathermodule
 [MISSIONS] - Fixed Tora Bora mission - moved helicopter off of rocks.
