@@ -130,6 +130,11 @@ if(isNil "mprightsDisable") then {
 execNow "core\modules\rmm_debug\main.sqf";
 #endif
 
+#ifdef ADMINACTIONS
+"Admin Actions" call mso_core_fnc_initStat;
+[player] execVM "core\modules\adminActions\main.sqf";
+#endif
+
 #ifdef RMM_NOMAD
 "NOMAD" call mso_core_fnc_initStat;
 execNow "core\modules\rmm_nomad\main.sqf";

@@ -41,6 +41,9 @@ class coreHeader {
 #ifdef RMM_DEBUG
 	#include <core\modules\rmm_debug\params.hpp>
 #endif
+#ifdef ADMINACTIONS
+	#include <core\modules\adminActions\params.hpp>
+#endif
 #ifdef RMM_MP_RIGHTS
 	#include <core\modules\rmm_mp_rights\params.hpp>
 #endif

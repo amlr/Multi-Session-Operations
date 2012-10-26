@@ -11,5 +11,6 @@
 #define NOU_CACHE
 #define CEP_CACHE
 #define VEHICLEIGNITIONKEYS
+#define ADMINACTIONS
 
 //#define RMM_OSOM
