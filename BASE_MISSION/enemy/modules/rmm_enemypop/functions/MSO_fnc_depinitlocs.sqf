@@ -44,7 +44,7 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         
         	if (random 1 < ep_campprob) then {
             	_camp = [[] call mso_fnc_selectcamptype];
-            	_pos = [_pos,200,0.15,5] call rmm_ep_getFlatArea;
+            	_pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
             	_grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
 				_grptype2 = [_grptype2] call DEP_format_group;
 				_placeholder setVariable ["type", _camp];
@@ -74,7 +74,7 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
                         
         	if (random 1 < ep_campprob) then {
             	_camp = [[] call mso_fnc_selectcamptype];
-            	_pos = [_pos,200,0.15,5] call rmm_ep_getFlatArea;
+            	_pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
             	_grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
 				_grptype2 = [_grptype2] call DEP_format_group;
             	_placeholder setVariable ["type", _camp];
@@ -106,7 +106,7 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
 			
         	if (random 1 < ep_campprob) then {
             	_camp = [[] call mso_fnc_selectcamptype];
-            	_pos = [_pos,200,0.15,5] call rmm_ep_getFlatArea;
+            	_pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
             	_grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
 				_grptype2 = [_grptype2] call DEP_format_group;
 				_placeholder setVariable ["type", _camp];
@@ -141,7 +141,7 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         
         	if (random 1 < ep_campprob) then {
             	_camp = [[] call mso_fnc_selectcamptype];
-            	_pos = [_pos,200,0.15,5] call rmm_ep_getFlatArea;
+            	_pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
             	_grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
 				_grptype2 = [_grptype2] call DEP_format_group;
 				_placeholder setVariable ["type", _camp];

@@ -41,7 +41,7 @@ rmm_ep_getFlatArea = {
         for "_i" from 1 to 10000 do {
                 _pos = [(_position select 0) + _radius - random (2*_radius),(_position select 1) + _radius - random (2*_radius),0];
                 _pos = 	_pos isflatempty [
-                        20,				//--- Minimal distance from another object
+                        10,				//--- Minimal distance from another object
                         1,				//--- If 0, just check position. If >0, select new one
                         _maxgradient,			//--- Max gradient
                         _gradientarea,			//--- Gradient area
@@ -63,7 +63,7 @@ rmm_ep_getFlatArea = {
                 ) exitWith	{if (_debug) then {diag_log format["MSO-%1 RMM GETFLATAREA attempts: %3 - found pos: %2", time, _pos, _i];}
         };
 };
-if(count _pos == 0) then{_pos = [(_position select 0) + _radius - random (2*_radius),(_position select 1) + _radius - random (2*_radius),0];
+if(count _pos == 0) then{_pos = _position;
 if (_debug) then {diag_log format["MSO-%1 RMM GETFLATAREA defaulting to original pos after 10000 trys: %2", time, _pos]};
 };
 
@@ -265,7 +265,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         if (count _camp > 0) then {
                                                 _camp = _camp call BIS_fnc_selectRandom;
                                                 //_pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
-                                                _pos = [_pos,200,0.15,5] call rmm_ep_getFlatArea; 
+                                                _pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea; 
                                                 [_camp, [_pos, position _loc] call BIS_fnc_dirTo, _pos] call f_builder;
                                                 ep_locations set [count ep_locations,["Camp",_pos]];
                                                 if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
@@ -425,7 +425,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 									};
 									_camp = _camp call BIS_fnc_selectRandom;
 									//_pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
-									_pos = [_pos,500,0.15,5] call rmm_ep_getFlatArea;
+									_pos = [position _loc,500,0.15,5] call rmm_ep_getFlatArea;
 									[_camp, [_pos, position _loc] call BIS_fnc_dirTo, _pos] call f_builder;
                                     ep_locations set [count ep_locations,["Camp",_pos]];
 									if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
@@ -592,7 +592,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 									if (count _camp > 0) then {
 											_camp = _camp call BIS_fnc_selectRandom;
 											//_pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
-											_pos = [_pos,300,0.15,5] call rmm_ep_getFlatArea;
+											_pos = [position _loc,300,0.15,5] call rmm_ep_getFlatArea;
 											[_camp, [_pos, position _loc] call BIS_fnc_dirTo, _pos] call f_builder;
                                             ep_locations set [count ep_locations,["Camp",_pos]];
 											if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 
@@ -766,7 +766,7 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
 									if (count _camp > 0) then {
 											_camp = _camp call BIS_fnc_selectRandom;
 											//_pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
-											_pos = [_pos,500,0.15,5] call rmm_ep_getFlatArea;
+											_pos = [position _loc,500,0.15,5] call rmm_ep_getFlatArea;
 											[_camp, [_pos, position _loc] call BIS_fnc_dirTo, _pos] call f_builder;
                                             ep_locations set [count ep_locations,["Camp",_pos]];
 											if (_debug) then {diag_log format ["Camp created at %1 (%2)", _pos, _loc];}; 

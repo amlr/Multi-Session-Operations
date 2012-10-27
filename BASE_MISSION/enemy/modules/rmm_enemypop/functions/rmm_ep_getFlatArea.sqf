@@ -10,7 +10,7 @@
         for "_i" from 1 to 10000 do {
                 _pos = [(_position select 0) + _radius - random (2*_radius),(_position select 1) + _radius - random (2*_radius),0];
                 _pos = 	_pos isflatempty [
-                        20,				//--- Minimal distance from another object
+                        10,				//--- Minimal distance from another object
                         1,				//--- If 0, just check position. If >0, select new one
                         _maxgradient,			//--- Max gradient
                         _gradientarea,			//--- Gradient area
@@ -32,7 +32,7 @@
                 ) exitWith	{if (_debug) then {diag_log format["MSO-%1 RMM GETFLATAREA attempts: %3 - found pos: %2", time, _pos, _i];}
         };
 };
-if(count _pos == 0) then{_pos = [(_position select 0) + _radius - random (2*_radius),(_position select 1) + _radius - random (2*_radius),0];
+if(count _pos == 0) then{_pos = _position;
 if (_debug) then {diag_log format["MSO-%1 RMM GETFLATAREA defaulting to original pos after 10000 trys: %2", time, _pos]};
 };
 
