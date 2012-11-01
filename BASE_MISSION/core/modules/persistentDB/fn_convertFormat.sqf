@@ -33,16 +33,7 @@ if (_action == "write") then {
 
 	if (typename _origvar == "ARRAY") then {
 		_var = str(_origvar);
-		// Check for nested array
-		if ([_var, "[["] call CBA_fnc_find != -1) then {
-			_var = [_var, "[[", "["] call CBA_fnc_replace; 
-			_var = [_var, "]]", "]"] call CBA_fnc_replace; 
-			_var = [_var, ",", "|"] call CBA_fnc_replace; 
-		} else {
-			_var = [_var, "[", ""] call CBA_fnc_replace; 
-			_var = [_var, "]", ""] call CBA_fnc_replace; 
-			_var = [_var, ",", "|"] call CBA_fnc_replace; 
-		};
+		_var = [_var, ",", "|"] call CBA_fnc_replace; 
 		if ([_var] call CBA_fnc_strLen < 2) then {_var = "";};
 	};
 	
@@ -75,7 +66,7 @@ if (_action == "read") then {
 	
 	if ([_origvar, "|"] call CBA_fnc_find != -1) then {		// If string was array convert to array
 		_var = [_origvar, "|", ","] call CBA_fnc_replace;
-		_var = "[" + _var + "]";
+		//_var = "[" + _var + "]";
 		_var = call compile _var;
 	} else {
 		if ((parseNumber _origvar == 0) && ([_origvar] call CBA_fnc_strLen > 1)) then {	// Check to see if string was originally a string. This will not work properly if an attribute is a 1 character letter or if string is a set of numbers
