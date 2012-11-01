@@ -56,6 +56,7 @@ class Mission
 		"ace_c_men",
 		"ace_sys_repair",
 		"ace_main",
+		"ace_sys_playerhud",
 		"ace_sys_wounds",
 		"ace_sys_tracking",
 		"camisc_e_wf",
@@ -98,7 +99,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=16;
+		items=17;
 		class Item0
 		{
 			side="EAST";
@@ -479,7 +480,7 @@ class Mission
 					position[]={4763.1577,29.791859,6134.8145};
 					azimut=274;
 					special="NONE";
-					id=214;
+					id=215;
 					side="WEST";
 					vehicle="TOW_TriPod_US_EP1";
 					skill=0.46666664;
@@ -488,7 +489,7 @@ class Mission
 				{
 					position[]={4866.603,29.738966,6152.2383};
 					azimut=265;
-					id=215;
+					id=216;
 					side="WEST";
 					vehicle="US_Soldier_Officer_EP1";
 					leader=1;
@@ -499,7 +500,7 @@ class Mission
 				{
 					position[]={4869.2319,29.710945,6155.0293};
 					azimut=265;
-					id=216;
+					id=217;
 					side="WEST";
 					vehicle="US_Soldier_Medic_EP1";
 					skill=0.60000002;
@@ -593,7 +594,7 @@ class Mission
 				class Item8
 				{
 					position[]={4947.6333,29.426039,6097.5742};
-					id=197;
+					id=198;
 					side="WEST";
 					vehicle="US_Soldier_Medic_EP1";
 					player="PLAY CDG";
@@ -743,11 +744,11 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={5134.9063,28.218534,6159.9883};
+					position[]={5148.998,28.593058,6174.4063};
 					azimut=1.2798382;
 					id=188;
 					side="LOGIC";
-					vehicle="ACE_Wounds_Logic";
+					vehicle="ACE_SYS_PRespawn_Logic";
 					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;
@@ -762,11 +763,11 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={5148.9971,28.665043,6159.9883};
+					position[]={5134.9063,28.218534,6159.9883};
 					azimut=1.2798382;
 					id=189;
 					side="LOGIC";
-					vehicle="ACE_Wounds_EveryoneMedic";
+					vehicle="ACE_Wounds_Logic";
 					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;
@@ -781,11 +782,11 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={5148.1992,28.768253,6188.3477};
+					position[]={5148.9971,28.665043,6159.9883};
 					azimut=1.2798382;
 					id=190;
 					side="LOGIC";
-					vehicle="ACE_ForceGroupMarkersOff_Logic";
+					vehicle="ACE_Wounds_EveryoneMedic";
 					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;
@@ -794,78 +795,20 @@ class Mission
 		};
 		class Item14
 		{
-			side="WEST";
+			side="LOGIC";
 			class Vehicles
 			{
-				items=7;
+				items=1;
 				class Item0
 				{
-					position[]={4810.5039,29.784082,6131.1875};
-					id=202;
-					side="WEST";
-					vehicle="US_Soldier_Pilot_EP1";
-					player="PLAY CDG";
+					position[]={5148.1992,28.768253,6188.3477};
+					azimut=1.2798382;
+					id=191;
+					side="LOGIC";
+					vehicle="ACE_ForceGroupMarkersOff_Logic";
 					leader=1;
-					rank="LIEUTENANT";
-					skill=0.59999996;
-				};
-				class Item1
-				{
-					position[]={4813.5366,29.656212,6126.1675};
-					id=203;
-					side="WEST";
-					vehicle="US_Soldier_Pilot_EP1";
-					player="PLAY CDG";
-					rank="SERGEANT";
-					skill=0.46666664;
-				};
-				class Item2
-				{
-					position[]={4815.5366,29.656775,6126.1675};
-					id=204;
-					side="WEST";
-					vehicle="US_Soldier_Pilot_EP1";
-					player="PLAY CDG";
-					rank="CORPORAL";
-					skill=0.33333331;
-				};
-				class Item3
-				{
-					position[]={4817.5366,29.669456,6126.1675};
-					id=205;
-					side="WEST";
-					vehicle="US_Soldier_Pilot_EP1";
-					player="PLAY CDG";
-					rank="CORPORAL";
-					skill=0.33333331;
-				};
-				class Item4
-				{
-					position[]={4819.5366,29.675936,6126.1675};
-					id=206;
-					side="WEST";
-					vehicle="US_Soldier_Pilot_EP1";
-					player="PLAY CDG";
-					rank="CORPORAL";
-					skill=0.33333331;
-				};
-				class Item5
-				{
-					position[]={4821.5366,29.665569,6126.1675};
-					id=207;
-					side="WEST";
-					vehicle="US_Soldier_Pilot_EP1";
-					player="PLAY CDG";
-					skill=0.2;
-				};
-				class Item6
-				{
-					position[]={4823.2759,29.652744,6126.1851};
-					id=218;
-					side="WEST";
-					vehicle="US_Soldier_Engineer_EP1";
-					player="PLAY CDG";
-					skill=0.2;
+					lock="UNLOCKED";
+					skill=0.60000002;
 				};
 			};
 		};
@@ -877,8 +820,85 @@ class Mission
 				items=7;
 				class Item0
 				{
-					position[]={4956.6606,29.653322,6239.833};
+					position[]={4810.5039,29.784082,6131.1875};
+					id=203;
+					side="WEST";
+					vehicle="US_Soldier_Pilot_EP1";
+					player="PLAY CDG";
+					leader=1;
+					rank="LIEUTENANT";
+					skill=0.59999996;
+				};
+				class Item1
+				{
+					position[]={4813.5366,29.656212,6126.1675};
+					id=204;
+					side="WEST";
+					vehicle="US_Soldier_Pilot_EP1";
+					player="PLAY CDG";
+					rank="SERGEANT";
+					skill=0.46666664;
+				};
+				class Item2
+				{
+					position[]={4815.5366,29.656775,6126.1675};
+					id=205;
+					side="WEST";
+					vehicle="US_Soldier_Pilot_EP1";
+					player="PLAY CDG";
+					rank="CORPORAL";
+					skill=0.33333331;
+				};
+				class Item3
+				{
+					position[]={4817.5366,29.669456,6126.1675};
+					id=206;
+					side="WEST";
+					vehicle="US_Soldier_Pilot_EP1";
+					player="PLAY CDG";
+					rank="CORPORAL";
+					skill=0.33333331;
+				};
+				class Item4
+				{
+					position[]={4819.5366,29.675936,6126.1675};
+					id=207;
+					side="WEST";
+					vehicle="US_Soldier_Pilot_EP1";
+					player="PLAY CDG";
+					rank="CORPORAL";
+					skill=0.33333331;
+				};
+				class Item5
+				{
+					position[]={4821.5366,29.665569,6126.1675};
 					id=208;
+					side="WEST";
+					vehicle="US_Soldier_Pilot_EP1";
+					player="PLAY CDG";
+					skill=0.2;
+				};
+				class Item6
+				{
+					position[]={4823.2759,29.652744,6126.1851};
+					id=219;
+					side="WEST";
+					vehicle="US_Soldier_Engineer_EP1";
+					player="PLAY CDG";
+					skill=0.2;
+				};
+			};
+		};
+		class Item16
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=7;
+				class Item0
+				{
+					position[]={4956.6606,29.653322,6239.833};
+					id=209;
 					side="WEST";
 					vehicle="US_Soldier_Crew_EP1";
 					player="PLAY CDG";
@@ -889,7 +909,7 @@ class Mission
 				class Item1
 				{
 					position[]={4959.6934,29.678362,6234.813};
-					id=209;
+					id=210;
 					side="WEST";
 					vehicle="US_Soldier_Crew_EP1";
 					player="PLAY CDG";
@@ -899,7 +919,7 @@ class Mission
 				class Item2
 				{
 					position[]={4961.6934,29.679228,6234.813};
-					id=210;
+					id=211;
 					side="WEST";
 					vehicle="US_Soldier_Crew_EP1";
 					player="PLAY CDG";
@@ -909,7 +929,7 @@ class Mission
 				class Item3
 				{
 					position[]={4963.6934,29.679228,6234.813};
-					id=211;
+					id=212;
 					side="WEST";
 					vehicle="US_Soldier_Crew_EP1";
 					player="PLAY CDG";
@@ -919,7 +939,7 @@ class Mission
 				class Item4
 				{
 					position[]={4965.6934,29.66744,6234.813};
-					id=212;
+					id=213;
 					side="WEST";
 					vehicle="US_Soldier_Crew_EP1";
 					player="PLAY CDG";
@@ -929,7 +949,7 @@ class Mission
 				class Item5
 				{
 					position[]={4967.6934,29.597441,6234.813};
-					id=213;
+					id=214;
 					side="WEST";
 					vehicle="US_Soldier_Crew_EP1";
 					player="PLAY CDG";
@@ -938,7 +958,7 @@ class Mission
 				class Item6
 				{
 					position[]={4969.6914,29.588076,6234.8838};
-					id=217;
+					id=218;
 					side="WEST";
 					vehicle="US_Soldier_Engineer_EP1";
 					player="PLAY CDG";
@@ -991,8 +1011,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M2A3_EP1";
 			skill=0.60000002;
-			text="mso_1";
-			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_1";
 		};
 		class Item4
 		{
@@ -1011,8 +1030,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MH6J_EP1";
 			skill=0.60000002;
-			text="mso_2";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_2";
 		};
 		class Item6
 		{
@@ -1023,8 +1041,7 @@ class Mission
 			vehicle="HMMWV_M1151_M2_DES_EP1";
 			leader=1;
 			skill=0.33333331;
-			text="mso_3";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_3";
 		};
 		class Item7
 		{
@@ -1035,8 +1052,7 @@ class Mission
 			vehicle="HMMWV_M998A2_SOV_DES_EP1";
 			leader=1;
 			skill=0.33333331;
-			text="mso_4";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_4";
 		};
 		class Item8
 		{
@@ -1047,8 +1063,7 @@ class Mission
 			vehicle="HMMWV_M1151_M2_CZ_DES_EP1";
 			leader=1;
 			skill=0.33333331;
-			text="mso_5";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_5";
 		};
 		class Item9
 		{
@@ -1059,8 +1074,7 @@ class Mission
 			vehicle="LandRover_Special_CZ_EP1";
 			leader=1;
 			skill=0.33333331;
-			text="mso_6";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_6";
 		};
 		class Item10
 		{
@@ -1087,8 +1101,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_MTVRRefuel_DES_EP1";
 			skill=0.2;
-			text="mso_7";
-			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_7";
 		};
 		class Item13
 		{
@@ -1098,8 +1111,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USBasicBag";
 			skill=0.2;
-			text="mso_50";
-			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";"; text="mso_50";
 		};
 		class Item14
 		{
@@ -1109,8 +1121,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M2StaticMG_US_EP1";
 			skill=0.2;
-			text="mso_51";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_51";
 		};
 		class Item15
 		{
@@ -1120,8 +1131,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M2StaticMG_US_EP1";
 			skill=0.2;
-			text="mso_52";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_52";
 		};
 		class Item16
 		{
@@ -1131,8 +1141,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M252_US_EP1";
 			skill=0.2;
-			text="mso_53";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_53";
 		};
 		class Item17
 		{
@@ -1142,8 +1151,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M252_US_EP1";
 			skill=0.2;
-			text="mso_54";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_54";
 		};
 		class Item18
 		{
@@ -1153,8 +1161,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USBasicBag";
 			skill=0.2;
-			text="mso_55";
-			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";"; text="mso_55";
 		};
 		class Item19
 		{
@@ -1164,8 +1171,7 @@ class Mission
 			side="EMPTY";
 			vehicle="TK_ALICE_Pack_EP1";
 			skill=0.2;
-			text="mso_56";
-			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";"; text="mso_56";
 		};
 		class Item20
 		{
@@ -1175,8 +1181,7 @@ class Mission
 			side="EMPTY";
 			vehicle="TK_ALICE_Pack_EP1";
 			skill=0.2;
-			text="mso_57";
-			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";"; text="mso_57";
 		};
 		class Item21
 		{
@@ -1186,8 +1191,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USBasicBag";
 			skill=0.2;
-			text="mso_58";
-			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";"; text="mso_58";
 		};
 		class Item22
 		{
@@ -1197,8 +1201,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USBasicBag";
 			skill=0.2;
-			text="mso_59";
-			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";"; text="mso_59";
 		};
 		class Item23
 		{
@@ -1272,8 +1275,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MTVR_DES_EP1";
 			skill=0.2;
-			text="mso_8";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_8";
 		};
 		class Item31
 		{
@@ -1283,8 +1285,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			text="mso_60";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_60";
 		};
 		class Item32
 		{
@@ -1294,8 +1295,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			text="mso_61";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_61";
 		};
 		class Item33
 		{
@@ -1305,8 +1305,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			text="mso_62";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_62";
 		};
 		class Item34
 		{
@@ -1316,8 +1315,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			text="mso_63";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_63";
 		};
 		class Item35
 		{
@@ -1327,8 +1325,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			text="mso_64";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_64";
 		};
 		class Item36
 		{
@@ -1338,8 +1335,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			text="mso_65";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_65";
 		};
 		class Item37
 		{
@@ -1349,8 +1345,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			text="mso_66";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_66";
 		};
 		class Item38
 		{
@@ -1360,8 +1355,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Pneu";
 			skill=0.60000002;
-			text="mso_67";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_67";
 		};
 		class Item39
 		{
@@ -1371,8 +1365,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_long";
 			skill=0.2;
-			text="mso_68";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_68";
 		};
 		class Item40
 		{
@@ -1382,8 +1375,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_long";
 			skill=0.2;
-			text="mso_69";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_69";
 		};
 		class Item41
 		{
@@ -1393,8 +1385,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_long";
 			skill=0.2;
-			text="mso_70";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_70";
 		};
 		class Item42
 		{
@@ -1404,8 +1395,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_long";
 			skill=0.2;
-			text="mso_71";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_71";
 		};
 		class Item43
 		{
@@ -1415,8 +1405,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_corner";
 			skill=0.2;
-			text="mso_72";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_72";
 		};
 		class Item44
 		{
@@ -1426,8 +1415,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_corner";
 			skill=0.2;
-			text="mso_73";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_73";
 		};
 		class Item45
 		{
@@ -1437,8 +1425,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_corner";
 			skill=0.2;
-			text="mso_74";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_74";
 		};
 		class Item46
 		{
@@ -1448,8 +1435,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_corner";
 			skill=0.2;
-			text="mso_75";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_75";
 		};
 		class Item47
 		{
@@ -1459,8 +1445,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_round";
 			skill=0.2;
-			text="mso_76";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_76";
 		};
 		class Item48
 		{
@@ -1470,8 +1455,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_round";
 			skill=0.2;
-			text="mso_77";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_77";
 		};
 		class Item49
 		{
@@ -1481,8 +1465,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_round";
 			skill=0.2;
-			text="mso_78";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_78";
 		};
 		class Item50
 		{
@@ -1492,8 +1475,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_bagfence_round";
 			skill=0.2;
-			text="mso_79";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_79";
 		};
 		class Item51
 		{
@@ -1503,8 +1485,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_HBarrier5";
 			skill=0.2;
-			text="mso_80";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_80";
 		};
 		class Item52
 		{
@@ -1514,8 +1495,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_HBarrier5";
 			skill=0.2;
-			text="mso_81";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_81";
 		};
 		class Item53
 		{
@@ -1525,8 +1505,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_HBarrier_large";
 			skill=0.2;
-			text="mso_82";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_82";
 		};
 		class Item54
 		{
@@ -1536,8 +1515,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_HBarrier_large";
 			skill=0.2;
-			text="mso_83";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_83";
 		};
 		class Item55
 		{
@@ -1547,8 +1525,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Fort_RazorWire";
 			skill=0.2;
-			text="mso_84";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_84";
 		};
 		class Item56
 		{
@@ -1558,8 +1535,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Fort_RazorWire";
 			skill=0.2;
-			text="mso_85";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_85";
 		};
 		class Item57
 		{
@@ -1569,8 +1545,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Fort_RazorWire";
 			skill=0.2;
-			text="mso_86";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_86";
 		};
 		class Item58
 		{
@@ -1616,8 +1591,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Fort_RazorWire";
 			skill=0.2;
-			text="mso_87";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_87";
 		};
 		class Item63
 		{
@@ -1627,8 +1601,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			text="mso_88";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_88";
 		};
 		class Item64
 		{
@@ -1638,8 +1611,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			text="mso_89";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_89";
 		};
 		class Item65
 		{
@@ -1649,8 +1621,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			text="mso_90";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_90";
 		};
 		class Item66
 		{
@@ -1660,8 +1631,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			text="mso_91";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_91";
 		};
 		class Item67
 		{
@@ -1671,8 +1641,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			text="mso_92";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_92";
 		};
 		class Item68
 		{
@@ -1682,8 +1651,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			text="mso_93";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_93";
 		};
 		class Item69
 		{
@@ -1693,8 +1661,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			text="mso_94";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_94";
 		};
 		class Item70
 		{
@@ -1704,8 +1671,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Hedgehog_EP1";
 			skill=0.2;
-			text="mso_95";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_95";
 		};
 		class Item71
 		{
@@ -1715,8 +1681,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fortified_nest_small_EP1";
 			skill=0.2;
-			text="mso_96";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_96";
 		};
 		class Item72
 		{
@@ -1726,8 +1691,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fortified_nest_small_EP1";
 			skill=0.2;
-			text="mso_97";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_97";
 		};
 		class Item73
 		{
@@ -1737,8 +1701,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fort_artillery_nest_EP1";
 			skill=0.2;
-			text="mso_98";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_98";
 		};
 		class Item74
 		{
@@ -1748,8 +1711,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_fortified_nest_big_EP1";
 			skill=0.2;
-			text="mso_99";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_99";
 		};
 		class Item75
 		{
@@ -1759,8 +1721,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MASH_EP1";
 			skill=0.2;
-			text="mso_100";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_100";
 		};
 		class Item76
 		{
@@ -1770,8 +1731,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USBasicAmmunitionBox_EP1";
 			skill=0.2;
-			text="mso_101";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_101";
 		};
 		class Item77
 		{
@@ -1781,8 +1741,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USBasicWeapons_EP1";
 			skill=0.2;
-			text="mso_102";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_102";
 		};
 		class Item78
 		{
@@ -1792,8 +1751,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USLaunchers_EP1";
 			skill=0.2;
-			text="mso_103";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_103";
 		};
 		class Item79
 		{
@@ -1803,8 +1761,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_CamoNet_NATO_EP1";
 			skill=0.2;
-			text="mso_104";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_104";
 		};
 		class Item80
 		{
@@ -1814,8 +1771,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_CamoNetB_NATO_EP1";
 			skill=0.2;
-			text="mso_105";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_105";
 		};
 		class Item81
 		{
@@ -1825,8 +1781,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_CamoNetVar_NATO_EP1";
 			skill=0.2;
-			text="mso_106";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_106";
 		};
 		class Item82
 		{
@@ -1836,8 +1791,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USOrdnanceBox_EP1";
 			skill=0.2;
-			text="mso_107";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_107";
 		};
 		class Item83
 		{
@@ -1847,8 +1801,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USVehicleBox_EP1";
 			skill=0.2;
-			text="mso_108";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_108";
 		};
 		class Item84
 		{
@@ -1858,8 +1811,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USVehicleBox_EP1";
 			skill=0.2;
-			text="mso_109";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_109";
 		};
 		class Item85
 		{
@@ -1869,8 +1821,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M2StaticMG_US_EP1";
 			skill=0.2;
-			text="mso_110";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_110";
 		};
 		class Item86
 		{
@@ -1880,8 +1831,7 @@ class Mission
 			side="EMPTY";
 			vehicle="M119_US_EP1";
 			skill=0.2;
-			text="mso_111";
-			init="0 = [this, 86400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 86400] execVM ""support\scripts\resupply.sqf"";"; text="mso_111";
 		};
 		class Item87
 		{
@@ -1891,8 +1841,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ATV_US_EP1";
 			skill=0.2;
-			text="mso_9";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_9";
 		};
 		class Item88
 		{
@@ -1902,8 +1851,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ATV_US_EP1";
 			skill=0.2;
-			text="mso_10";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_10";
 		};
 		class Item89
 		{
@@ -1913,8 +1861,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ATV_US_EP1";
 			skill=0.2;
-			text="mso_11";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_11";
 		};
 		class Item90
 		{
@@ -1924,8 +1871,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ATV_US_EP1";
 			skill=0.2;
-			text="mso_12";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_12";
 		};
 		class Item91
 		{
@@ -1944,8 +1890,7 @@ class Mission
 			side="EMPTY";
 			vehicle="UH60M_EP1";
 			skill=0.2;
-			text="mso_13";
-			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_13";
 		};
 		class Item93
 		{
@@ -1955,8 +1900,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Misc_Cargo1E_EP1";
 			skill=0.2;
-			text="mso_112";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_112";
 		};
 		class Item94
 		{
@@ -2045,8 +1989,7 @@ class Mission
 			side="EMPTY";
 			vehicle="CZBasicWeapons_EP1";
 			skill=0.2;
-			text="mso_113";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_113";
 		};
 		class Item103
 		{
@@ -2056,8 +1999,7 @@ class Mission
 			side="EMPTY";
 			vehicle="USSpecialWeapons_EP1";
 			skill=0.2;
-			text="mso_114";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_114";
 		};
 		class Item104
 		{
@@ -2076,8 +2018,7 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_Misc_Cargo1E_EP1";
 			skill=0.2;
-			text="mso_115";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_115";
 		};
 		class Item106
 		{
@@ -2087,8 +2028,7 @@ class Mission
 			side="EMPTY";
 			vehicle="SearchLight_US_EP1";
 			skill=0.2;
-			text="mso_116";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_116";
 		};
 		class Item107
 		{
@@ -2098,8 +2038,7 @@ class Mission
 			side="EMPTY";
 			vehicle="SearchLight_US_EP1";
 			skill=0.2;
-			text="mso_117";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_117";
 		};
 		class Item108
 		{
@@ -2109,8 +2048,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MMT_USMC";
 			skill=0.2;
-			text="mso_14";
-			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";"; text="mso_14";
 		};
 		class Item109
 		{
@@ -2120,8 +2058,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MMT_USMC";
 			skill=0.2;
-			text="mso_15";
-			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";"; text="mso_15";
 		};
 		class Item110
 		{
@@ -2131,8 +2068,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MMT_USMC";
 			skill=0.2;
-			text="mso_16";
-			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";"; text="mso_16";
 		};
 		class Item111
 		{
@@ -2142,8 +2078,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MMT_USMC";
 			skill=0.2;
-			text="mso_17";
-			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";"; text="mso_17";
 		};
 		class Item112
 		{
@@ -2153,8 +2088,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_MTVRRepair_DES_EP1";
 			skill=0.2;
-			text="mso_18";
-			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_18";
 		};
 		class Item113
 		{
@@ -2164,8 +2098,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MTVR_DES_EP1";
 			skill=0.2;
-			text="mso_19";
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_19";
 		};
 		class Item114
 		{
@@ -2175,8 +2108,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_MTVRReammo_DES_EP1";
 			skill=0.2;
-			text="mso_20";
-			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_20";
 		};
 		class Item115
 		{
@@ -2230,8 +2162,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MMT_USMC";
 			skill=0.2;
-			text="mso_21";
-			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";"; text="mso_21";
 		};
 		class Item121
 		{
@@ -2241,8 +2172,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MMT_USMC";
 			skill=0.2;
-			text="mso_22";
-			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";"; text="mso_22";
 		};
 		class Item122
 		{
@@ -2252,8 +2182,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MMT_USMC";
 			skill=0.2;
-			text="mso_23";
-			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";"; text="mso_23";
 		};
 		class Item123
 		{
@@ -2263,8 +2192,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MMT_USMC";
 			skill=0.2;
-			text="mso_24";
-			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";"; text="mso_24";
 		};
 		class Item124
 		{
@@ -2274,8 +2202,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MMT_USMC";
 			skill=0.2;
-			text="mso_25";
-			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";"; text="mso_25";
 		};
 		class Item125
 		{
@@ -2285,8 +2212,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MMT_USMC";
 			skill=0.2;
-			text="mso_26";
-			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";"; text="mso_26";
 		};
 		class Item126
 		{
@@ -2296,8 +2222,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MMT_USMC";
 			skill=0.2;
-			text="mso_27";
-			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";"; text="mso_27";
 		};
 		class Item127
 		{
@@ -2307,8 +2232,7 @@ class Mission
 			side="EMPTY";
 			vehicle="MMT_USMC";
 			skill=0.2;
-			text="mso_28";
-			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 30, 30] execVM ""support\scripts\vehicle.sqf"";"; text="mso_28";
 		};
 		class Item128
 		{
@@ -2318,8 +2242,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_CSW_Box_M2";
 			skill=0.2;
-			text="mso_118";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_118";
 		};
 		class Item129
 		{
@@ -2491,8 +2414,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_CSW_Box_M2";
 			skill=0.2;
-			text="mso_119";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_119";
 		};
 		class Item148
 		{
@@ -2502,8 +2424,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_CSW_Box_M2";
 			skill=0.2;
-			text="mso_120";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_120";
 		};
 		class Item149
 		{
@@ -2513,102 +2434,93 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Tbox_762x51Belt";
 			skill=0.2;
-			text="mso_121";
-			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";"; text="mso_121";
 		};
 		class Item150
 		{
 			position[]={4958.6611,29.615927,6143.7461};
 			azimut=220.216;
-			id=191;
+			id=192;
 			side="EMPTY";
 			vehicle="CZ_VestPouch_EP1";
 			skill=0.2;
-			text="mso_122";
-			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";"; text="mso_122";
 		};
 		class Item151
 		{
 			position[]={4959.7876,29.607716,6143.4409};
 			azimut=158.78799;
-			id=192;
+			id=193;
 			side="EMPTY";
 			vehicle="CZ_VestPouch_EP1";
 			skill=0.2;
-			text="mso_123";
-			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";"; text="mso_123";
 		};
 		class Item152
 		{
 			position[]={4959.4766,29.617685,6142.7549};
 			azimut=179.2;
-			id=193;
+			id=194;
 			side="EMPTY";
 			vehicle="CZ_VestPouch_EP1";
 			skill=0.2;
-			text="mso_124";
-			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";"; text="mso_124";
 		};
 		class Item153
 		{
 			position[]={4958.8374,29.629614,6142.2012};
 			azimut=268.423;
-			id=194;
+			id=195;
 			side="EMPTY";
 			vehicle="CZ_Backpack_EP1";
 			skill=0.2;
-			text="mso_125";
-			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";"; text="mso_125";
 		};
 		class Item154
 		{
 			position[]={4957.8618,29.634726,6142.6655};
 			azimut=197.19;
-			id=195;
+			id=196;
 			side="EMPTY";
 			vehicle="CZ_Backpack_EP1";
 			skill=0.2;
-			text="mso_126";
-			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";"; text="mso_126";
 		};
 		class Item155
 		{
 			position[]={4957.6572,29.626919,6143.6509};
 			azimut=220.239;
-			id=196;
+			id=197;
 			side="EMPTY";
 			vehicle="CZ_Backpack_EP1";
 			skill=0.2;
-			text="mso_127";
-			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";";
+			init="0 = [this, 60] execVM ""support\scripts\resupply.sqf"";"; text="mso_127";
 		};
 		class Item156
 		{
 			position[]={4970.5483,37.519382,6262.1084};
 			azimut=389.55325;
-			id=198;
+			id=199;
 			side="EMPTY";
 			vehicle="M1129_MC_EP1";
 			skill=0.60000002;
-			text="mso_29";
-			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_29";
 		};
 		class Item157
 		{
 			position[]={4965.4849,37.566833,6255.0571};
 			azimut=299.81601;
-			id=199;
+			id=200;
 			side="EMPTY";
 			vehicle="M2A3_EP1";
 			skill=0.60000002;
-			text="mso_30";
-			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_30";
 		};
 		class Item158
 		{
 			position[]={4814.9888,29.871092,6179.5181};
 			azimut=270;
-			id=200;
+			id=201;
 			side="EMPTY";
 			vehicle="HeliH";
 			skill=0.2;
@@ -2617,12 +2529,11 @@ class Mission
 		{
 			position[]={4817.2119,29.892118,6179.4414};
 			azimut=270;
-			id=201;
+			id=202;
 			side="EMPTY";
 			vehicle="UH60M_EP1";
 			skill=0.2;
-			text="mso_31";
-			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";";
+			init="0 = [this, 86400, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_31";
 		};
 	};
 	class Markers
