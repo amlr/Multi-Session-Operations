@@ -23,11 +23,13 @@ diag_log format["MSO-%1 PDB EP Population: starting INIT...", time];
 
 DEP_LOCS = [];
 for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
-    if (_i > ((count CRB_LOCS)-1)) exitwith {};
+	private ["_loc","_loctype","_pos","_placeholder","_grptype","_camp","_grptype2","_d","_type"];
+	if (_i > ((count CRB_LOCS)-1)) exitwith {};
     
     _loc = CRB_LOCS select _i;
     _loctype = type _loc;
     _pos = position _loc;
+	_grptype = nil;
     if ((_pos distance getmarkerpos "ammo" > rmm_ep_safe_zone) && (_pos distance getmarkerpos "ammo_1" > rmm_ep_safe_zone)) then {
     
     	_loctype = type _loc;
@@ -38,7 +40,9 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         	_placeholder = "Can_small" createvehicle _pos;
         
 			_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
-			_grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+			while {isnil "_grptype"} do {
+            	_grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+			};
 			_grptype = [_grptype] call DEP_format_group;
     		_placeholder setVariable ["groupType",[_grptype]];
         
@@ -68,7 +72,9 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
       		_placeholder = "Can_small" createvehicle _pos;
 	
 			_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
-     	   	_grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+			while {isnil "_grptype"} do {
+            	_grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+			};
 			_grptype = [_grptype] call DEP_format_group;
     		_placeholder setVariable ["groupType",[_grptype]];
                         
@@ -98,7 +104,9 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         	_placeholder = "Can_small" createvehicle _pos;
         	
         	_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
-        	_grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+			while {isnil "_grptype"} do {
+            	_grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+			};
 			_grptype = [_grptype] call DEP_format_group;
     		_placeholder setVariable ["groupType",[_grptype]];
         
@@ -135,7 +143,9 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         	_placeholder = "Can_small" createvehicle _pos;
         
         	_type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
-        	_grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+			while {isnil "_grptype"} do {
+            	_grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+			};
 			_grptype = [_grptype] call DEP_format_group;
     		_placeholder setVariable ["groupType",[_grptype]];
         
