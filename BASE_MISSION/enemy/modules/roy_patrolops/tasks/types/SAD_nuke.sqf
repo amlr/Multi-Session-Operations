@@ -2,6 +2,8 @@ if(count mps_loc_towns < 1) exitWith {diag_log [diag_frameno, diag_ticktime, tim
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_nuke.sqf"];
 
 _debug = debug_mso;
+DISARM_NUKE = false;
+Publicvariable "DISARM_NUKE";
 
 _location01 = (mps_loc_towns call mps_getRandomElement);
 
@@ -56,14 +58,9 @@ if (_debug) then {diag_log format["MSO-%1 PO2 Task Nuke: Houses found total %2",
 
 _taskid = format["%1%2%3",round (_position01 select 0),round (_position01 select 1),(round random 999)];
 
-_cachetype = "Suitcase";
-if(mps_oa) then {_cachetype = "GuerillaCacheBox_EP1"};
 _bombtype = "SkeetMachine";
-_triggertype = "SatPhone";
 
-_cache = _cachetype createvehicle (_position01);
 _bomb = _bombtype createvehicle (_position02);
-_trigger = _triggertype createvehicle (_position03);
 
 _hideout = [];
 _Enemies = [];
@@ -75,45 +72,20 @@ _Enemies = [];
 		_house = _house select 0;
 		_hideout = (_house buildingPos _buildingpos);
 		if(count (_hideout - [0]) > 0) exitWith{};
-		_hideout = [(getPos _cache0 select 0) + _size - random (2*_size),(getPos _cache0 select 1) + _size - random (2*_size),0];
-	};
-	_cache setPos _hideout;
-    if (_debug) then {diag_log format["MSO-%1 PO2 Task Nuke: Cache set at %2", time, _hideout]};
-
-	for "_i" from 1 to 10000 do {
-		_house = _cachelocs call mps_getRandomElement;
-		_cachelocs = _cachelocs - [_house];
-		_buildingpos = round random (_house select 1);
-		_house = _house select 0;
-		_hideout = (_house buildingPos _buildingpos);
-		if(count (_hideout - [0]) > 0) exitWith{};
 		_hideout = [(getPos _cache1 select 0) + _size - random (2*_size),(getPos _cache1 select 1) + _size - random (2*_size),0];
 	};
 	_bomb setPos _hideout;
-    if (_debug) then {diag_log format["MSO-%1 PO2 Task Nuke: Bomb set at %2", time, _hideout]};
+	
+	[2,[_bomb],{
+           DISARMACTION = (_this select 0) addAction ["Disarm Nuclear Bomb", "enemy\modules\roy_patrolops\mps\action\rmm_disarm_nuke.sqf", "", 1, false, true, "", "(player distance _target < 2) && !(DISARM_NUKE)"];
+	}] call mso_core_fnc_ExMP;
 
-	for "_i" from 1 to 10000 do {
-		_house = _cachelocs call mps_getRandomElement;
-		_cachelocs = _cachelocs - [_house];
-		_buildingpos = round random (_house select 1);
-		_house = _house select 0;
-		_hideout = (_house buildingPos _buildingpos);
-		if(count (_hideout - [0]) > 0) exitWith{};
-		_hideout = [(getPos _cache2 select 0) + _size - random (2*_size),(getPos _cache2 select 1) + _size - random (2*_size),0];
-	};
-	_trigger setPos _hideout;
-    if (_debug) then {diag_log format["MSO-%1 PO2 Task Nuke: Trigger set at %2", time, _hideout]};
+	if (_debug) then {diag_log format["MSO-%1 PO2 Task Nuke: Bomb set at %2", time, _hideout]};
 
 if(_debug) then {
-	_marker = createMarkerLocal [format["Debug0%1",_taskid],position _cache];
-	_marker setMarkerTypeLocal "mil_dot";
-	_marker setMarkerColorLocal "ColorGreen"; sleep 1;
 	_marker = createMarkerLocal [format["Debug1%1",_taskid],position _bomb];
 	_marker setMarkerTypeLocal "mil_dot";
 	_marker setMarkerColorLocal "ColorGreen"; sleep 1;
-	_marker = createMarkerLocal [format["Debug2%1",_taskid],position _trigger];
-	_marker setMarkerTypeLocal "mil_dot";
-	_marker setMarkerColorLocal "ColorGreen";
 };
 
 _rmin = 0;
@@ -129,12 +101,6 @@ _position = _position01;
 _stance = ["patrol","hide"] call mps_getRandomElement;
 _grp = [_position,"INF",(5 + random 5),50,_stance ] call CREATE_OPFOR_SQUAD;
 if( _diffresult > 0.18 ) then { [_position] spawn CREATE_OPFOR_SNIPERS };
-if(random 1 > 0.5) then {
-		_car_type = (mps_opfor_car+mps_opfor_apc) call mps_getRandomElement;
-		_vehgrp = [_car_type,(SIDE_B select 0),_position,100] call mps_spawn_vehicle;
-		[_vehgrp,_position,"patrol"] spawn mps_patrol_init;
-        [_position] spawn CREATE_OPFOR_TOWER;
-};
 
 sleep 0.3;
 
@@ -142,12 +108,6 @@ _position = _position02;
 _stance = ["patrol","hide"] call mps_getRandomElement;
 _grp = [_position,"INF",(5 + random 5),50,_stance ] call CREATE_OPFOR_SQUAD;
 if( _diffresult > 0.18 ) then { [_position] spawn CREATE_OPFOR_SNIPERS };
-if(random 1 > 0.5) then {
-		_car_type = (mps_opfor_car+mps_opfor_apc) call mps_getRandomElement;
-		_vehgrp = [_car_type,(SIDE_B select 0),_position,100] call mps_spawn_vehicle;
-		[_vehgrp,_position,"patrol"] spawn mps_patrol_init;
-        [_position] spawn CREATE_OPFOR_TOWER;
-};
 
 sleep 0.3;
 
@@ -155,18 +115,12 @@ _position = _position03;
 _stance = ["patrol","hide"] call mps_getRandomElement;
 _grp = [_position,"INF",(5 + random 5),50,_stance ] call CREATE_OPFOR_SQUAD;
 if( _diffresult > 0.18 ) then { [_position] spawn CREATE_OPFOR_SNIPERS };
-if(random 1 > 0.5) then {
-		_car_type = (mps_opfor_car+mps_opfor_apc) call mps_getRandomElement;
-		_vehgrp = [_car_type,(SIDE_B select 0),_position,100] call mps_spawn_vehicle;
-		[_vehgrp,_position,"patrol"] spawn mps_patrol_init;
-        [_position] spawn CREATE_OPFOR_TOWER;
-};
 
 sleep 0.3;
 
 [format["TASK%1",_taskid],
 	"Nuclear Threat!",
-	format["We just received HUMINT of a nuclear threat! We know of 3 towns where Insurgents could hide a nuclear bomb and need to search the following areas: %1, %2 or %3. We also know about two suitcases, at least one of them should be the trigger! Destroy them so we get time to defuse the bomb!", text _location01, text _location02, text _location03],
+	format["We just received HUMINT of a nuclear threat! We know of 3 towns where Insurgents could hide a nuclear bomb and need to search the following areas: %1, %2 or %3. If you find the bomb in time disarm it as quickly as you possible. Afterwards, return to base for decontamination immediatly!", text _location01, text _location02, text _location03],
 	true,
 	[format["MARK%1",_taskid],(_position01),"hd_objective","ColorRedAlpha"," Target"],
 	"created",
@@ -176,7 +130,7 @@ sleep 0.3;
 bombalive = true;
 _nuketime = 0;
 While {!ABORTTASK_PO AND bombalive AND (_nuketime < 1800)} do {
-    									if (damage _trigger < 1 AND damage _bomb < 1) then {bombalive = true} else {bombalive = false};
+    									if (damage _bomb < 1 AND (!DISARM_NUKE)) then {bombalive = true} else {bombalive = false};
     									sleep (10);
                                         _nuketime = _nuketime + 10;
                                         if (_debug) then {diag_log format["MSO-%1 PO2 Task Nuke: waiting until timeout! Time: %2...", time, _nuketime]};
