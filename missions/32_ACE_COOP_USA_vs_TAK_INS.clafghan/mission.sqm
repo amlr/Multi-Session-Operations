@@ -57,7 +57,6 @@ class Mission
 		"cacharacters2",
 		"ace_main",
 		"ace_sys_wounds",
-		"ace_sys_playerhud",
 		"camisc_e_wf",
 		"casigns_e",
 		"ca_baf",
@@ -1029,23 +1028,14 @@ class Mission
 			side="LOGIC";
 			class Vehicles
 			{
-				items=2;
+				items=1;
 				class Item0
 				{
-					position[]={14201.451,801.13342,8528.9639};
+					position[]={14214.143,798.71252,8529.2344};
 					id=304;
 					side="LOGIC";
-					vehicle="ACE_SYS_PRespawn_Logic";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-				class Item1
-				{
-					position[]={14214.143,798.71252,8529.2344};
-					id=305;
-					side="LOGIC";
 					vehicle="ACE_Wounds_EveryoneMedic";
+					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
