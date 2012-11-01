@@ -288,9 +288,11 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         ep_locations set [count ep_locations,[_type,_pos]];
                                         
                                         waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
-                                        
-                                        _grouparray = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
-                                        _grp2array = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+										
+										while {isnil "_grouparray"} do {
+                                        	_grouparray = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+										};
+										_grp2array = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
                                         _groupPos = nil;
                                         _grp2Pos = nil;
                                         _breakouttimer = 0;
@@ -448,7 +450,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                      
                                     waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
                                     
-                                    _grouparray = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+									while {isnil "_grouparray"} do {
+                                        _grouparray = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+									};
                                     _grp2array = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
                                     _groupPos = nil;
                                     _grp2Pos = nil;
@@ -616,7 +620,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                     
                                     waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
  
-                                    _grouparray = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+									while {isnil "_grouparray"} do {
+                                        _grouparray = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+									};
                                     _grp2array = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
                                     _groupPos = nil;
                                     _grp2Pos = nil;
@@ -787,7 +793,9 @@ for "_i" from 0 to ((count CRB_LOCS) -1) step rmm_ep_intensity do {
                                         
                                     waitUntil{sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
                                      
-                                    _grouparray = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+									while {isnil "_grouparray"} do {
+                                        _grouparray = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+									};
                                     _grp2array = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
                                     _groupPos = nil;
                                     _grp2Pos = nil;
