@@ -20,6 +20,25 @@ if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
+fAddVehicle = {
+	private ["_type","_startposi","_startroads","_dire","_grop","_veh","_pos"];
+	_startposi = _this select 0;
+	_dire = _this select 1;
+	_grop = _this select 2;
+	_startroads = _startposi nearRoads 200;
+	_pos = position ((_startroads) call BIS_fnc_selectRandom);
+	if (count _this > 3) then {
+		_type = ([0, MSO_FACTIONS, _this select 3] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
+	} else {
+		_type = ([0, MSO_FACTIONS, "LandVehicle"] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
+	};
+	if (debug_mso) then {
+		diag_log format["Spawning %1", _type];
+	};
+    _veh = [_pos, _dire, _type, _grop] call BIS_fnc_spawnVehicle;
+	_veh;
+};
+
 _strategic = ["StrongPoint","CityCenter","FlatAreaCity","Airport","NameCity","NameCityCapital","NameVillage","BorderCrossing"];
 _convoyLocs = [];
 
@@ -56,12 +75,13 @@ if (count _convoyLocs == 0) exitwith {
 };
 
 // Set the number of convoys
-_numconvoys = crb_convoy_intensity * ceil(random(3));
+_numconvoys = crb_convoy_intensity;
 
 if (_numconvoys > count _convoyLocs) then {
 	_numconvoys = count _convoyLocs;
 };
 
+if (isNil "rmm_ep_safe_zone") then {rmm_ep_safe_zone = 2000;};
 
 for "_j" from 1 to _numconvoys do {
 	
@@ -75,8 +95,15 @@ for "_j" from 1 to _numconvoys do {
                 
 				while{crb_convoy_intensity > 0} do {
                         CRBPROFILERSTART("CRB Convoys")
+						private ["_swag","_leader","_dir","_startroad"];
+						// Select a start position outside of player safe zone and not near base
+						while { 
+							_startroad = ((_convoyLocs call BIS_fnc_selectRandom) nearRoads 300) call BIS_fnc_selectRandom; 
+							((position _startroad distance getmarkerpos "ammo" < rmm_ep_safe_zone) && 
+							(position _startroad  distance getmarkerpos "ammo_1" < rmm_ep_safe_zone))
+						} do {};
                         
-						_startpos = position (((_convoyLocs call BIS_fnc_selectRandom) nearRoads 300) call BIS_fnc_selectRandom); 
+						_startpos =  position _startroad; 
                         _destpos = position (((_convoyLocs call BIS_fnc_selectRandom) nearRoads 300) call BIS_fnc_selectRandom); 
                         _endpos = position (((_convoyLocs call BIS_fnc_selectRandom) nearRoads 300) call BIS_fnc_selectRandom); 
 						
@@ -98,46 +125,59 @@ for "_j" from 1 to _numconvoys do {
                                 _facs = MSO_FACTIONS;
                                 _grp = [_startpos, _front, _facs] call mso_core_fnc_randomGroup;
                         };
-                        diag_log format["MSO-%1 Convoy: #%2 %3 %4 %5 %6 units:%7", time, _j, _startpos, _destpos, _endpos, _front, count (units _grp)];
-                        
+                                                
+						// Set direction so pointing towards destination
+						_dir = getdir _startroad;
+						
+						_leader = leader _grp;
+						_leader setdir _dir;
+						_grp setFormation "FILE";
+						
+						// Give the leader some swag
+						_swag = ["EvMoney","EvMap","EvPhoto","revolver_gold_EP1","kostey_map_case"];
+						{
+							if (random 1 > 0.5) then {_leader addweapon _x;};	
+						} foreach _swag;
+						
                         switch(_front) do {
                                 case "Motorized": {
                                         for "_i" from 0 to (1 + floor(random 2)) do {
-                                                _type = ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
-                                                if(_type isKindOf "Air") then {_startpos set [2, 500];};
-                                                [[_startpos, 20] call CBA_fnc_randPos, 0, _type, _grp] call BIS_fnc_spawnVehicle;
+										private "_veh";
+											_veh = [_startpos, _dir, _grp] call fAddVehicle;
                                         };
                                 };
                                 case "Mechanized": {
                                         for "_i" from 0 to (1 + floor(random 2)) do {
-                                                _type = ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
-                                                if(_type isKindOf "Air") then {_startpos set [2, 500];};
-                                                [[_startpos, 20] call CBA_fnc_randPos, 0, _type, _grp] call BIS_fnc_spawnVehicle;
+											private "_veh";
+											_veh = [_startpos, _dir, _grp] call fAddVehicle;
                                         };
-										// Add another vehicle
-                                        if(random 1 > 0.5) then {[[_startpos, 10] call CBA_fnc_randPos, 0, ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom, _grp] call BIS_fnc_spawnVehicle;};
+	                                    if(random 1 > 0.66) then {
+											private "_veh";
+											_veh = [_startpos, _dir, _grp] call fAddVehicle;
+										};
                                 };
                                 case "Armored": {
                                         for "_i" from 0 to (1 + floor(random 2)) do {
-                                                _type = ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
-                                                if(_type isKindOf "Air") then {_startpos set [2, 500];};
-                                                [[_startpos, 20] call CBA_fnc_randPos, 0, _type, _grp] call BIS_fnc_spawnVehicle;
+											private "_veh";
+											_veh = [_startpos, _dir, _grp] call fAddVehicle;
                                         };
-                                        _type = ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
-                                        if(_type isKindOf "Air") then {_startpos set [2, 500];};
-										// Add another random vehicle
-                                        [[_startpos, 20] call CBA_fnc_randPos, 0, ([0, MSO_FACTIONS] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom, _grp] call BIS_fnc_spawnVehicle;
+                                        if(random 1 > 0.33) then {
+											private "_veh";
+											_veh = [_startpos, _dir, _grp] call fAddVehicle;
+										};
                                 };
                         };
                         
 						// Add some trucks!
-						if(random 1 > 0.4) then {
+						if(random 1 > 0.25) then {
 							for "_i" from 0 to (1 + ceil(random 3)) do {
-								_type = ([0, MSO_FACTIONS,"Truck"] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
-								[[_startpos, 20] call CBA_fnc_randPos, 0, _type, _grp] call BIS_fnc_spawnVehicle;
+								private "_veh";
+								_veh = [_startpos, _dir, _grp, "Truck"] call fAddVehicle;
 							};
 						};
 						
+						diag_log format["MSO-%1 Convoy: #%2 %3 %4 %5 %6 units:%7", time, _j, _startpos, _destpos, _endpos, _front, count (units _grp)];
+												
 						_starttime = time;
 						
                         {_x setSkill 0.2;} forEach units _grp;
