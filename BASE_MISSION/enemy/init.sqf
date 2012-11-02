@@ -88,11 +88,6 @@ if(count MSO_FACTIONS == 0) then {
         MSO_FACTIONS = MSO_FACTIONS + ["RU"];
 };
 
-#ifdef CRB_CONVOYS
-"Convoys" call mso_core_fnc_initStat;
-execNow "enemy\modules\crb_convoys\main.sqf";
-#endif
-
 #ifdef RMM_ZORA
 "ZORA" call mso_core_fnc_initStat;
 execNow "enemy\modules\rmm_zora\main.sqf";
@@ -131,6 +126,11 @@ execNow "enemy\modules\ryd_hac\main.sqf";
 #ifdef BIS_WARFARE
 "BIS Warfare" call mso_core_fnc_initStat;
 execNow "enemy\modules\bis_warfare\main.sqf";
+#endif
+
+#ifdef CRB_CONVOYS
+"Convoys" call mso_core_fnc_initStat;
+execNow "enemy\modules\crb_convoys\main.sqf";
 #endif
 
 #ifdef ROY_PATROLOPS

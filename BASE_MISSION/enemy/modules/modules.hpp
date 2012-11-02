@@ -5,9 +5,9 @@
 #define ROY_PATROLOPS
 #define RMM_ZORA
 #define TUP_IED
+#define CRB_CONVOYS
 
 // - To Test
-//#define CRB_CONVOYS
 //#define WICT_ENEMYPOP
 //#define RYD_HAC
 //#define CRB_TERRORISTS
