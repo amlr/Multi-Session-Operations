@@ -30,6 +30,8 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
     _loctype = type _loc;
     _pos = position _loc;
 	_grptype = nil;
+	_AA = false;
+	
     if ((_pos distance getmarkerpos "ammo" > rmm_ep_safe_zone) && (_pos distance getmarkerpos "ammo_1" > rmm_ep_safe_zone)) then {
     
     	_loctype = type _loc;
@@ -47,19 +49,16 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
     		_placeholder setVariable ["groupType",[_grptype]];
         
         	if (random 1 < ep_campprob) then {
-            	_camp = [[] call mso_fnc_selectcamptype];
+				_camp = [] call mso_fnc_selectcamptype;
             	_pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
             	_grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
 				_grptype2 = [_grptype2] call DEP_format_group;
-				_placeholder setVariable ["type", _camp];
 				_placeholder setVariable ["groupType", [_grptype] + [_grptype2]];
                 
         		if (random 1 < 0.5) then { // Add AA
-					_AA = [true];
-        		} else {
-                    _AA = [false]; 
-                };
-                _placeholder setVariable ["type", _camp + _AA];                
+					_AA = true;
+				};
+                _placeholder setVariable ["type", [_camp,_AA,false]];                
         	};
         
        		_placeholder setpos [_pos select 0, _pos select 1, -30];
@@ -79,19 +78,16 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
     		_placeholder setVariable ["groupType",[_grptype]];
                         
         	if (random 1 < ep_campprob) then {
-            	_camp = [[] call mso_fnc_selectcamptype];
+            	_camp = [] call mso_fnc_selectcamptype;
             	_pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
             	_grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
 				_grptype2 = [_grptype2] call DEP_format_group;
-            	_placeholder setVariable ["type", _camp];
 				_placeholder setVariable ["groupType", [_grptype] + [_grptype2]];
                 
         		if (random 1 < 0.5) then { // Add AA
-					_AA = [true];
-        		} else {
-                    _AA = [false]; 
-                };
-                _placeholder setVariable ["type", _camp + _AA];                     
+					_AA = true;
+				};
+                _placeholder setVariable ["type", [_camp,_AA,false]];                      
         	};
 
         	_placeholder setpos [_pos select 0, _pos select 1, -30];
@@ -109,29 +105,24 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
 			};
 			_grptype = [_grptype] call DEP_format_group;
     		_placeholder setVariable ["groupType",[_grptype]];
-        
-			_AA = [];
 			
         	if (random 1 < ep_campprob) then {
-            	_camp = [[] call mso_fnc_selectcamptype];
+				_camp = [] call mso_fnc_selectcamptype;
             	_pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
             	_grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
 				_grptype2 = [_grptype2] call DEP_format_group;
-				_placeholder setVariable ["type", _camp];
 				_placeholder setVariable ["groupType", [_grptype] + [_grptype2]];
                 
-				
         		if (random 1 < 0.5) then { // Add AA
-					_AA = [true];
-        		} else {
-                    _AA = [false]; 
-                };
-                _placeholder setVariable ["type", _camp + _AA];
+					_AA = true;
+        		};
         	};
             
             if (((random 1 < 0.8) && (count (_pos nearRoads 500) > 0)) ) then {
-				_placeholder setVariable ["type", _camp + _AA + [true]];
-        	};
+				_placeholder setVariable ["type", [_camp,_AA,true]];  
+        	} else {
+				_placeholder setVariable ["type", [_camp,_AA,false]]; 
+			};
       
         	_placeholder setpos [_pos select 0, _pos select 1, -30];
         	DEP_LOCS set [count DEP_LOCS,[_placeholder,0]];
@@ -150,17 +141,18 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
     		_placeholder setVariable ["groupType",[_grptype]];
         
         	if (random 1 < ep_campprob) then {
-            	_camp = [[] call mso_fnc_selectcamptype];
+				_camp = [] call mso_fnc_selectcamptype;
             	_pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
             	_grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
 				_grptype2 = [_grptype2] call DEP_format_group;
-				_placeholder setVariable ["type", _camp];
+				_placeholder setVariable ["type", [_camp,_AA,false]];
 				_placeholder setVariable ["groupType", [_grptype] + [_grptype2]];
         	};
 
         	_placeholder setpos [_pos select 0, _pos select 1, -30];
         	DEP_LOCS set [count DEP_LOCS,[_placeholder,0]];
     	};
+		//diag_log format["type = %1", _placeholder getvariable "type"];
 	} else {
       	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Skipping unfitting location...", time]};
     };

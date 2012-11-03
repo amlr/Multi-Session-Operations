@@ -93,10 +93,9 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	_vGroupStrength = [_locationData select 7, "read"] call persistent_fnc_convertFormat;
 	
 	_vType = [_locationData select 8, "|", ","] call CBA_fnc_replace;
-	_vType = "[" + _vType + "]";
 	_vType = call compile _vType;
 	
-	//diag_log format ["type = %1",_vType];
+	diag_log format ["type = %1",_vType];
 	
 	// Set location data
 	_thislocation setvariable ["c", _vCleared, true];
