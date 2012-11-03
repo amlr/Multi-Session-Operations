@@ -302,7 +302,9 @@ if (pdb_log_enabled) then {
 				_vSuspended = str (_thisObject getvariable "s");
 							
 				_vGroupType = [_thisObject getvariable "groupType", "write"] call persistent_fnc_convertFormat;
+				
 				_vType = [_thisObject getvariable "type", "write"] call persistent_fnc_convertFormat;
+				//diag_log format["vType = %1",_vType];
 				_vGroupStrength = [1, "write"] call persistent_fnc_convertFormat;
 								
 				_parameters = format["[tobj=%1,tpos=%2,thpo=%3,tcle=%4,tsus=%5,tgrt=%6,tgrs=%7,ttyp=%8,tpa=%9,tmid=%10,tintid=%11]",_vObject, _vPosition, _vHousePositions, _vCleared, _vSuspended, _vGroupType, _vGroupStrength, _vType, _ParentArrayName, _missionid, _locationCount];
