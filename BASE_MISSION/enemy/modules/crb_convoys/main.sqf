@@ -52,12 +52,14 @@ _convoyLocs = [];
 // Add suitable CQB and DEP LOCS
 if (isnil "CQB_spawn") then {CQB_spawn = 10};
 if (CQB_spawn > 0) then {
-	waituntil {!(isnil "CQBPositionsStrat")};
-	{
-			if(count ((position _x) nearRoads 300) > 3) then {
-					_convoyLocs set [count _convoyLocs, position _x];
+	waituntil {!(isnil "CQBpositionsStrat")};
+	if (count CQBpositionsStrat > 0) then {
+		{
+			if(count ((position (_x select 0)) nearRoads 300) > 3) then {
+					_convoyLocs set [count _convoyLocs, position (_x select 0)];
 			};
-	} forEach CQBPositionsStrat;
+		} forEach CQBpositionsStrat;
+	};
 };
 
 if (isnil "rmm_dynamic") then {rmm_dynamic = 1};
@@ -170,7 +172,7 @@ for "_j" from 1 to _numconvoys do {
                         
 						// Add some trucks!
 						if(random 1 > 0.25) then {
-							for "_i" from 0 to (1 + ceil(random 3)) do {
+							for "_i" from 0 to (1 + ceil(random 2)) do {
 								private "_veh";
 								_veh = [_startpos, _dir, _grp, "Truck"] call fAddVehicle;
 							};
