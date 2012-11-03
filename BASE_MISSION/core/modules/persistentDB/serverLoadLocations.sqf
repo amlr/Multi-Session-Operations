@@ -95,7 +95,7 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	_vType = [_locationData select 8, "|", ","] call CBA_fnc_replace;
 	_vType = call compile _vType;
 	
-	diag_log format ["type = %1",_vType];
+	//diag_log format ["type = %1",_vType];
 	
 	// Set location data
 	_thislocation setvariable ["c", _vCleared, true];
