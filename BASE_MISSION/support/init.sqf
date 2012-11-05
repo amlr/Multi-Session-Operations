@@ -123,7 +123,7 @@ if (enablecrewinfo == 1) then {
 };
 #endif
 
-#ifdef MGO_ATTACH
+#ifdef MGO
 if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 "MGO Attach" call mso_core_fnc_initStat;
 execNow "support\modules\mgo\main\init.sqf";
