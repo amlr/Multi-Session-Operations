@@ -5,6 +5,7 @@
 #define ROY_PATROLOPS
 #define RMM_ZORA
 #define TUP_IED
+#define CRB_CONVOYS
 
 // - To Test
 //#define CRB_CONVOYS

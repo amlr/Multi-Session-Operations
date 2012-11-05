@@ -60,7 +60,10 @@ CRB_MAPCLICK = "";
 };
 
 mso_menuname = "Multi-Session Operations";
-mso_interaction_key = [221,[false,false,false]];
+
+if (isnil "mso_interaction_key") then {
+	mso_interaction_key = [221,[false,false,false]];
+};
 
 mso_fnc_hasRadio = {
         // Thanks Sickboy

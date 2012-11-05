@@ -7,7 +7,7 @@
 #define TUP_IED
 
 // - To Test
-//#define CRB_CONVOYS
+#define CRB_CONVOYS
 //#define WICT_ENEMYPOP
 //#define RYD_HAC
 //#define CRB_TERRORISTS
