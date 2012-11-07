@@ -37,12 +37,12 @@ if (random 1 > 0.5) then {
 
 while{!ABORTTASK_AIR && {alive _x && side _x == (SIDE_A select 0) && isPlayer _x} count nearestObjects[_defendpos,["Air"],1000] == 0 } do { sleep 5 };
 PAPABEAR sideChat format ["%1 this is PAPA BEAR. You are now on station, you have 30 minutes of playtime. Good luck.", group player];
-_time = time + 3600;
+_timer = time + 3600;
 
 _enemyforce = [];
 _b = 2 max (({alive _x && side _x == (SIDE_A select 0) && isPlayer _x} count nearestObjects[_defendpos,["Air"],2000]) * MISSIONDIFF);
 
-while {time < _time && !ABORTTASK_AIR && ({(alive _x) && (side _x == (SIDE_A select 0)) && (isPlayer _x)} count nearestObjects[_defendpos,["Air"],10000] > 0)} do {
+while {time < _timer && !ABORTTASK_AIR && ({(alive _x) && (side _x == (SIDE_A select 0)) && (isPlayer _x)} count nearestObjects[_defendpos,["Air"],10000] > 0)} do {
 	sleep (random 30)+30;
 
 	_grp = [_spawnpos,"Air"] call mso_core_fnc_randomGroup;
@@ -52,12 +52,12 @@ while {time < _time && !ABORTTASK_AIR && ({(alive _x) && (side _x == (SIDE_A sel
 	} foreach units _grp;
 	_enemyforce = _enemyforce + (units _grp);
 	PAPABEAR sideChat format ["%1 this is PAPA BEAR. Bogeys inbound at 2km. Looks like a flight of %2. Angels 1. Watch your six.", group player, typeof vehicle leader _grp];
-	while{!ABORTTASK_AIR && ({(alive _x) && (side _x == (SIDE_A select 0)) && (isPlayer _x)} count nearestObjects[_defendpos,["Air"],10000] > 0) && (time < _time) && ({alive _x} count _enemyforce > 0)} do {
+	while{!ABORTTASK_AIR && ({(alive _x) && (side _x == (SIDE_A select 0)) && (isPlayer _x)} count nearestObjects[_defendpos,["Air"],10000] > 0) && (time < _timer) && ({alive _x} count _enemyforce > 0)} do {
 		sleep 30; 
 	};
 };
 
-if(!ABORTTASK_AIR && {alive _x} count _enemyforce < 1 && _time < time ) then {
+if(!ABORTTASK_AIR && {alive _x} count _enemyforce < 1 && _timer < time ) then {
 	PAPABEAR sideChat format ["%1 this is PAPA BEAR. Combat Air Patrol is complete, RTB.", group player];
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;

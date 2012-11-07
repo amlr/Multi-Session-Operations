@@ -72,9 +72,9 @@ if (pdb_log_enabled) then {
 			
 			// Set disconnect flag for player
 			if (_disconnectflag) then {
-				private "_time";
-				_time = "Arma2Net.Unmanaged" callExtension "DateTime ['utcnow',]";
-				_player setvariable ["LastDisconnected", _time, true];
+				private "_timenow";
+				_timenow = "Arma2Net.Unmanaged" callExtension "DateTime ['utcnow',]";
+				_player setvariable ["LastDisconnected", _timenow, true];
 			};
 			
 			// for each persistence type get and save data
