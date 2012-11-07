@@ -1,122 +1,113 @@
-
-private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj","_group","_grp2Pos","_grp2","_debug","_cleared","_spawned","_AAspawned","_locunits","_groupPos","_posGrp2","_breakouttimer","_idx","_var","_temp"];
+private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj","_group","_grp2Pos","_grp2","_debug","_cleared","_spawned","_AAspawned","_locunits","_groupPos","_posGrp2","_breakouttimer","_idx","_var","_temp","_suspended"];
                                         
 	_obj = _this select 0;
     _pos = _this select 1;
 	_grpt = _this select 2;
 	_camp = _this select 3; if !(typename _camp == "STRING") then {_camp = nil};
     _grpt2 = _this select 4; if !(typename _grpt2 == "ARRAY") then {_grpt2 = nil};
-	_AA = _this select 5; if !(_AA) then {_AA = nil};
-	_RB = _this select 6; if !(_RB) then {_RB = nil};
-    _cleared = _this select 7;
-                                      
-    _debug = debug_mso;
+    _cleared = (_this select 0) getvariable "c";
+	if (count (_obj getvariable "type") > 2) then {
+		_RB = (_obj getvariable "type") select 2;
+	};
+	if (isnil "_RB") then {_RB = false}; // RB Flag (bool)
     _spawned = false;
-    _AAspawned = false;
-    _RBspawned = false;
+  	_breakouttimer = 0;
+	_suspended = true;                               
+    _debug = debug_mso;
 	
-	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: _obj %2 | _pos %3 | _grpt %4 | _camp %5 | _grpt2 %6 | _AA %7 | _RB %8 | _cleared %9", time, _obj, _pos, _grpt, _camp, _grpt2, _AA, _RB, _cleared]};
-
-    if(!(isnil "_camp")) then {
-        if (_camp in DEP_camptypes) then {
-            [_camp, floor(random 360), _pos] call mso_core_fnc_createCompositionE;
-        } else {
-            [_camp, floor(random 360), _pos] call mso_core_fnc_createComposition;
-        };
-    };                                                                                                                                      
-                                                                                                                                                                                                                                                                                                                                                                                                                     
-   	waitUntil {sleep 3; ([_pos, rmm_ep_spawn_dist] call fPlayersInside)};
-
-   	_groupPos = nil;
-   	_grp2Pos = nil;
-   	_breakouttimer = 0;
-                                                                                                                        
-   	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Starting While loop %2", time, _pos];};
+	if (_debug) then {
+		diag_log format["MSO-%1 PDB EP Population: Starting Waituntil-Loop: _obj %2 | _pos %3 | _grpt %4 | _camp %5 | _grpt2 %6 | _AA %7 | _RB %8 | _cleared %9", time, _obj, _pos, _grpt, _camp, _grpt2, _AA, _RB, _cleared];
+	};                                                                                                           
 	waituntil {
-        if (_cleared) exitwith {};
+        if (_cleared) exitwith {diag_log format["MSO-%1 PDB EP Population: Failsafe on cleared location %2 triggered...",time, _pos];true};
 		sleep 3; 
 		if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
-		_spawned = true;
-        _group = nil;
-        if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
-            diag_log format ["grpt = %1", _grpt];  
-        	_group = [_pos2, call compile (_grpt select 0), [_grpt] call DEP_convert_group] call BIS_fnc_spawnGroup;
-            if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Group created %2 (%3)", time, _pos, _group];};
-            (leader _group) setBehaviour "AWARE";
-            _group setSpeedMode "LIMITED";
-            _group setFormation "STAG COLUMN";
-            ep_groups set [count ep_groups, _group];
-                                                
-            if ((isnil "_camp") || count units _group <= 2) then {
-            	[_group,_pos2,500,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-            };
-            if(!(isnil "_camp")) then {
-            	[_group,_pos2,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+			_spawned = true;
+			
+			//check for groups position, spawn them and let em patrol
+			_groupPos = _obj getvariable "groupPos";
+	        if (isnil "_groupPos") then {_pos2 = [_pos, 0, 50, 10, 0, 5, 0] call bis_fnc_findSafePos;} else {_pos2 = _groupPos};
+			_group = [_pos2, call compile (_grpt select 0), [_grpt] call DEP_convert_group] call BIS_fnc_spawnGroup;
+	        (leader _group) setBehaviour "AWARE";
+	        _group setSpeedMode "LIMITED";
+	        _group setFormation "STAG COLUMN";
+	        if (_debug) then {diag_log format["MSO-%1 PDB EP Population: %3 group created %2 (%4)", time, _pos, _grpt, _group];};
+	        ep_groups set [count ep_groups, _group];
+	                                            
+	        if ((isnil "_camp") || count units _group <= 2) then {
+	        	[_group,_pos,500,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+	        };
+			
+			//spawn camp guards
+	        if(!(isnil "_camp")) then {
+	        	[_group,_pos,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+	
+	            _grp2 = [_pos, call compile (_grpt2 select 0), [_grpt2] call DEP_convert_group] call BIS_fnc_spawnGroup;
+	            [_grp2] call BIN_fnc_taskDefend;
+	            if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Guards created %2 (%3)", time, _pos, _grp2];};
+	            ep_groups set [count ep_groups, _grp2];
+	        };
 
-            	_grp2 = nil;
-                _grp2 = [_pos, call compile (_grpt2 select 0), [_grpt2] call DEP_convert_group] call BIS_fnc_spawnGroup;
-                if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Sub Group created %2 (%3)", time, _pos, _grp2];};
-                [_grp2] call BIN_fnc_taskDefend;
-                ep_groups set [count ep_groups, _grp2];
-            };
-                                                
-            if (!(isnil "_AA") && !(_AAspawned)) then {
-            	_AAspawned = true;
-            	[_pos, "static", 1 + random 1] execVM "enemy\scripts\TUP_spawnAA.sqf";
-            };
-            
-            if (!(isnil "_RB") && !(_RBspawned)) then {
-                _RBspawned = true;
-				_RBpos = [_group, _pos] call compile preprocessfilelinenumbers "enemy\scripts\TUP_deployRoadBlock.sqf";
-                diag_log format["MSO-%1 PDB EP Population: Attempted to Deploy Road Block near %2", time, _RBpos];
-            };
+			//spawn RB once (and only once)
+	        if (_RB) then {
+				if !(_obj getvariable "RBspawned") then {
+					_obj setvariable ["RBspawned",true];
+					_RBpos = [_group, _pos] call compile preprocessfilelinenumbers "enemy\scripts\TUP_deployRoadBlock.sqf";
+	                diag_log format["MSO-%1 PDB EP Population: Attempted to Deploy Road Block near %2", time, _RBpos];
+				};
+	        };
 		};
                                         
-                                     		_locunits = [];
-                                     		if (count (units _group) > 0) then {{_locunits set [count _locunits, _x]} foreach units _group; if !(str(position (leader _group)) == "[0,0,0]") then {_groupPos = position (leader _group)}};
-                                     		if (count (units _grp2) > 0) then {{_locunits set [count _locunits, _x]} foreach units _grp2; if !(str(position (leader _grp2)) == "[0,0,0]") then {_grp2Pos = position (leader _grp2)}};
-                                        
-                                    		if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
-                                        		if (_breakouttimer > 20) then {
-                                                	if !(isnil "_group") then {
-                                                		ep_groups = ep_groups - [_group];
-                                                		while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
-                                            			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
-                                            			deletegroup _group;
-                                                		if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - player out of range %2 (%3)", time, _pos, _group];}; 
-                                        			};
-                                        			if !(isnil "_grp2") then {
-                                                		ep_groups = ep_groups - [_grp2];
-                                                		while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
-                                            			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
-                                            			deletegroup _grp2;
-                                                		if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - player out of range %2 (%3)", time, _pos, _group];};
-                                        			};
-                                                    _breakouttimer = 0;
-                                        			_spawned = false;
-                                            	} else {_breakouttimer = _breakouttimer + 3};
-                                     		};
+		//store groups data
+ 		_locunits = [];
+ 		if (count (units _group) > 0) then {{_locunits set [count _locunits, _x]} foreach units _group; if !(str(position (leader _group)) == "[0,0,0]") then {_groupPos = position (leader _group); _obj setvariable ["groupPos",_groupPos]}};
+ 		if (count (units _grp2) > 0) then {{_locunits set [count _locunits, _x]} foreach units _grp2; if !(str(position (leader _grp2)) == "[0,0,0]") then {_grp2Pos = position (leader _grp2); _obj setvariable ["grp2Pos",_grp2Pos]}};
+    	
+		//check for players proximity as the group moves around and delete if players are out of range for more than 20 seconds.
+		if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
+    		if (_breakouttimer > 20) exitwith {
+            	if !(isnil "_group") then {
+            		ep_groups = ep_groups - [_group];
+            		while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
+        			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
+        			deletegroup _group;
+            		if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - player out of range %2 (%3)", time, _pos, _group];}; 
+    			};
+    			if !(isnil "_grp2") then {
+            		ep_groups = ep_groups - [_grp2];
+            		while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
+        			{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
+        			deletegroup _grp2;
+            		if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting Guards - player out of range %2 (%3)", time, _pos, _grp2];};
+    			};
+                _breakouttimer = 0;
+				_obj setvariable ["s",nil]; _suspended = false;
+				true;
+        	};
+			_breakouttimer = _breakouttimer + 3;
+ 		};
 
-                                    		if ((count _locunits < 1) && (_spawned)) exitwith {
-                                            	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Position cleared - thread end... %2 (%3)", time, _pos, _group];};
-                                        		if !(isnil "_group") then {
-                                                	ep_groups = ep_groups - [_group];
-                                                	while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
-                                            		{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
-                                            		deletegroup _group;
-                                                	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - Position cleared %2 (%3)", time, _pos, _group];}; 
-                                        		};
-                                        		if !(isnil "_grp2") then {
-                                                	ep_groups = ep_groups - [_grp2];
-                                                	while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
-                                            		{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
-                                            		deletegroup _grp2;
-                                                	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - Position cleared %2 (%3)", time, _pos, _group];};
-                                        		};
-                                                
-                                        		_spawned = false;
-                                        		_cleared = true;
-                                                _obj setvariable ["c",true];
-                                        	};
-		false;
+		//check if groups got killed and exit the loop, the location is cleared then
+		if ((count _locunits < 1) && (_spawned)) exitwith {
+    		if !(isnil "_group") then {
+            	ep_groups = ep_groups - [_group];
+            	while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
+        		{deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
+        		deletegroup _group;
+            	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - Position cleared %2 (%3)", time, _pos, _group];}; 
+    		};
+    		if !(isnil "_grp2") then {
+            	ep_groups = ep_groups - [_grp2];
+            	while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
+        		{deletevehicle (vehicle _x); deletevehicle _x} foreach units _grp2;
+        		deletegroup _grp2;
+            	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - Position cleared %2 (%3)", time, _pos, _grp2];};
+    		};
+            
+            _obj setvariable ["c",true];
+			_obj setvariable ["s",nil]; _suspended = false;
+			true;
+    	};
+		!(_suspended);
     };
+if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Ending Waituntil loop %2 - Thread end...", time, _pos];};

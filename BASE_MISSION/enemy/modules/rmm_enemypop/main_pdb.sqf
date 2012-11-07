@@ -11,6 +11,8 @@ if (isnil "mso_fnc_selectcamptype") then {MSO_fnc_selectcamptype = compile prepr
 if (isnil "rmm_ep_getFlatArea") then {rmm_ep_getFlatArea = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\rmm_ep_getFlatArea.sqf"};
 if (isnil "fPlayersInside") then {fPlayersInside = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\fPlayersInside.sqf"};
 if (isnil "DEP_convert_group") then {DEP_convert_group = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_convert_group.sqf"};
+if (isnil "DEP_Triggerloop") then {DEP_Triggerloop = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_Triggerloop.sqf"};
+
 
 diag_log format["MSO-%1 PDB EP Population: loaded functions...", time];
 
@@ -86,7 +88,7 @@ DEP_camptypes =
 	};
 			
 	{
-		private ["_obj","_pos","_grpt","_grpt","_camp","_grpt2","_AA","_RB","_cleared"];
+		private ["_obj","_pos","_grpt","_grpt","_camp","_grpt2","_AA","_RB"];
 		
 		//Dataset
 		//Using "DEP_locs"-array for quick access [[_obj,[_pos select 0,_pos select 1,_pos select 2]],[_obj,[_pos select 0,_pos select 1,_pos select 2]],...]
@@ -97,9 +99,9 @@ DEP_camptypes =
 		_grpt2 = ((_x select 0) getvariable "groupType") select 1; if (isnil "_grpt2") then {_grpt2 = false}; // Type of Campguards (array [side,grouptype])
 		_AA = ((_x select 0) getvariable "type") select 1; if (isnil "_AA") then {_AA = false}; // AA Flag (bool)
 		if (count ((_x select 0) getvariable "type") > 2) then {
-			_RB = ((_x select 0) getvariable "type") select 2; if (isnil "_RB") then {_RB = false}; // RB Flag (bool)
+			_RB = ((_x select 0) getvariable "type") select 2;
 		};
-		_cleared = _x select 0 getvariable "c"; if (isnil "_cleared") then {_cleared = false}; // cleared position (bool)
+		if (isnil "_RB") then {_RB = false}; // RB Flag (bool)
 		
 		//Fix for PO2
 		if (typename _camp == "STRING") then {
@@ -135,9 +137,25 @@ DEP_camptypes =
 		if (_debug) then {
 			private["_t","_m"];
 			_t = format["ep%1",floor(random 10000)];
-			_m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", str(_grpt select 1), "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
-		};    
+			_m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", str(_grpt select 2), "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+		};
 
-		[_obj,_pos,_grpt,_camp,_grpt2,_AA,_RB,_cleared] spawn DEP_MainLoop;
+    	if (typename _camp == "STRING") then {
+        	if (_camp in DEP_camptypes) then {
+            	[_camp, floor(random 360), _pos] call mso_core_fnc_createCompositionE;
+        	} else {
+            	[_camp, floor(random 360), _pos] call mso_core_fnc_createComposition;
+        };
+
+        if (_AA) then {
+            	[_pos, "static", 1 + random 1] execVM "enemy\scripts\TUP_spawnAA.sqf";
+        };
+            
+        if (_RB) then {
+				_obj setvariable ["RBspawned",false];
+        };
+    };   
 	} foreach DEP_LOCS;
+
+	[] spawn DEP_Triggerloop;
 };
