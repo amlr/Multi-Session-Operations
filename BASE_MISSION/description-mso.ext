@@ -231,6 +231,9 @@ class cfgFunctions {
 #ifdef RMM_LOGISTICS
 	#include <support\modules\rmm_logistics\functions.hpp>
 #endif
+#ifdef TUP_LOGISTICS
+	#include <support\modules\tup_logistics\functions.hpp>
+#endif
 #ifdef RMM_NOTEBOOK
 	#include <support\modules\rmm_notebook\functions.hpp>
 #endif
@@ -284,6 +287,9 @@ class cfgFunctions {
 #endif
 #ifdef RMM_LOGISTICS
 	#include <support\modules\rmm_logistics\dialog.hpp>
+#endif
+#ifdef TUP_LOGISTICS
+	#include <support\modules\tup_logistics\dialog.hpp>
 #endif
 #ifdef RMM_NOTEBOOK
 	#include <support\modules\rmm_notebook\dialog.hpp>

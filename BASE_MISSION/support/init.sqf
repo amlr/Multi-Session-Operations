@@ -64,6 +64,11 @@ execNow "support\modules\rmm_jipmarkers\main.sqf";
 execNow "support\modules\rmm_logistics\main.sqf";
 #endif
 
+#ifdef TUP_LOGISTICS
+"Logistics Requests" call mso_core_fnc_initStat;
+execNow "support\modules\tup_logistics\main.sqf";
+#endif
+
 #ifdef R3F_LOGISTICS
 "R3F Logistics" call mso_core_fnc_initStat;
 execNow "support\modules\R3F_logistics\init.sqf";
