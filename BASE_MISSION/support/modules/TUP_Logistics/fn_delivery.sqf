@@ -38,12 +38,12 @@ DoDrop = {
 			if ((daytime < 17) && (daytime > 7)) then {
 				_markertype = "SmokeShellBlue";
 			} else {
-				_markertype = "IR_Strobe_Marker";
+				_markertype = "NVG_TargetC";
 			};
 
 			_Marker =  _markertype createVehicle position _obj;
-			_Marker setPos (getPos _obj);
-			_Marker attachTo [_obj,[0,0,0]];
+			_Marker setPosATL (getPosATL _obj);
+			_Marker attachTo [_obj,[0,0,1]];
 			
 			_obj attachTo [_Parachute,[0,0,-1.5]];
 			
