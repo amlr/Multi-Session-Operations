@@ -154,6 +154,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		_aceWounds = [];
 		
 		_aceWounds = [
+				(_player getVariable ["ace_w_overall",0]),
 				([_player] call ace_sys_wounds_fnc_getDamage),
 				([_player,0] call ace_sys_wounds_fnc_getHit),
 				([_player,1] call ace_sys_wounds_fnc_getHit),

@@ -23,7 +23,13 @@ _menus = [
 		["main", mso_menuname, _menuRsc],
 		[
 			["Save Player",
-				{ PDB_SAVE_PLAYER = [name player, getplayeruid player]; PublicVariableServer "PDB_SAVE_PLAYER";}
+				{ 
+					if (pdb_ace_enabled) then { // workaround for ACE wounds 
+						[player,"Player is being saved."] call PDB_FNC_ACE_WOUNDS;
+					};
+					PDB_SAVE_PLAYER = [name player, getplayeruid player]; 
+					PublicVariableServer "PDB_SAVE_PLAYER";
+				}
 			]
 		]
 	]

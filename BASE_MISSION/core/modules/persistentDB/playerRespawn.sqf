@@ -26,4 +26,7 @@
 		_player setVariable ["hands", 0, true];
 		_player setVariable ["legs", 0, true];
 		
+		if (pdb_ace_enabled) then {
+				[player,"Player is being respawned."] call PDB_FNC_ACE_WOUNDS;
+		};
 // ====================================================================================
