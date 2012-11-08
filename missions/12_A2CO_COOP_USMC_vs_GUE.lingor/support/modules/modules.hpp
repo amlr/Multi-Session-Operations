@@ -19,6 +19,7 @@
 #define CREWINFO
 //#define MGO
 #define PXS_SATCOM_OA
+#define TUP_LOGISTICS
 
 // WIP
 //#define GC_PACK_COW
