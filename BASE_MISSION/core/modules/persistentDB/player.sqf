@@ -95,33 +95,18 @@ S_PLAYER_DATA = [
 		
 	{(_this select 1) setVariable ["pPosition", (_this select 0), true];}, // Pos	 5
 	
-	{	if (pdb_ace_enabled) then {
-			[(_this select 1),(_this select 0)] call ace_sys_wounds_fnc_addDamage;
-		};
-		(_this select 1) setdamage (_this select 0);}, // Damage 6
+	{(_this select 1) setdamage (_this select 0);}, // Damage 6
 		
-	{	if (pdb_ace_enabled) then {
-			[(_this select 1),0,(_this select 0)] call ace_sys_wounds_fnc_setHit;  
-		};
-		(_this select 1) setHit ["head_hit", (_this select 0)];
+	{	(_this select 1) setHit ["head_hit", (_this select 0)];
 		(_this select 1) setVariable ["head_hit", (_this select 0), true];}, // 	Head 7
 		
-	{	if (pdb_ace_enabled) then {
-			[(_this select 1),1,(_this select 0)] call ace_sys_wounds_fnc_setHit;  
-		};
-		(_this select 1) setHit ["body", (_this select 0)];
+	{	(_this select 1) setHit ["body", (_this select 0)];
 		(_this select 1) setVariable ["body", (_this select 0), true];}, // Body	8
 	
-	{	if (pdb_ace_enabled) then {
-			[(_this select 1),2,(_this select 0)] call ace_sys_wounds_fnc_setHit;  
-		};
-		(_this select 1) setHit ["hands", (_this select 0)];
+	{	(_this select 1) setHit ["hands", (_this select 0)];
 		(_this select 1) setVariable ["hands", (_this select 0), true];}, //Hands 9
 	
-	{	if (pdb_ace_enabled) then {
-			[(_this select 1),3,(_this select 0)] call ace_sys_wounds_fnc_setHit;  
-		};
-		(_this select 1) setHit ["legs", (_this select 0)];
+	{	(_this select 1) setHit ["legs", (_this select 0)];
 		(_this select 1) setVariable ["legs", (_this select 0), true];}, 	// Legs	10
 	
 	{(_this select 1) setdir (_this select 0); (_this select 1) setVariable ["pDirection", (_this select 0), true];},	// Dir	11

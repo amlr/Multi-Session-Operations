@@ -122,7 +122,7 @@ if ((!isServer) || (!isdedicated)) then {
 		if  (ENV_dedicated) then { startLoadingScreen ["Server is loading persistent mission data please standby...", "PDB_loadingScreen"]; };
 		waituntil { (MISSIONDATA_LOADED == "true") };
 		PDB_PLAYER_READY = [getPlayerUID player, player, name player, playerside];
-		publicVariable "PDB_PLAYER_READY";
+		publicVariableServer "PDB_PLAYER_READY";
 		if  (ENV_dedicated) then { startLoadingScreen ["Client is loading persistent player data...", "PDB_loadingScreen"]; };
 		diag_log["PersistentDB CLIENT: PLAYER READY"];
 		// Setup Player Menu Save

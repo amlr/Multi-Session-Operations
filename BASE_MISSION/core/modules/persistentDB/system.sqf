@@ -82,7 +82,6 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		   if (pdb_ace_enabled) then {				
 			// set the ace ruck variables now so that they can be saved to the DB even if the 'ace_sys_ruck_changed' has not been fired before the player decides to exit.
 				["ace_sys_ruck_changed", {call PDB_FNC_PLAYER_RUCK}] call CBA_fnc_addEventhandler;
-				 player addweapon "ace_map";
 				 
 				 _ruck = [player] call ACE_fnc_FindRuck;
 				 player setVariable ["RUCK", _ruck, true];
@@ -100,6 +99,10 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 					if (_lengthThiswob > 0) then {
 						 player setVariable ["WOB", _thiswob, true];
 					};
+					
+			// Handle ACE Wounds also
+				["ace_sys_wounds_hdeh", {call PDB_FNC_ACE_WOUNDS}] call CBA_fnc_addEventhandler;
+				
 			};
 				 
 			diag_log["PersistentDB: PLAYER READY: ", name player];
@@ -144,7 +147,49 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 			};
 		};	
 // ====================================================================================
+	PDB_FNC_ACE_WOUNDS = {
+		diag_log format ["PDB_FNC_ACE_WOUNDS = %1",_this];
+		_player = player;
+		
+		_aceWounds = [];
+		
+		_aceWounds = [
+				([_player] call ace_sys_wounds_fnc_getDamage),
+				([_player,0] call ace_sys_wounds_fnc_getHit),
+				([_player,1] call ace_sys_wounds_fnc_getHit),
+				([_player,2] call ace_sys_wounds_fnc_getHit),
+				([_player,3] call ace_sys_wounds_fnc_getHit),
+				(_player getVariable ["ace_w_state",0]),
+				(_player getVariable ["ace_sys_wounds_uncon",false]),
+				(_player getVariable "ace_w_bleed"),
+				(_player getVariable "ace_w_bleed_add"),
+				(_player getVariable "ace_w_pain"),
+				(_player getVariable "ace_w_pain_add"),
+				(_player getVariable "ace_w_epi"),
+				(_player getVariable "ace_w_nextuncon"),
+				(_player getVariable "ace_w_unconlen"),
+				(_player getVariable "ace_w_stab"),
+				(_player getVariable "ace_w_revive"),
+				(_player getVariable "ace_w_wakeup")
+			];
+			
+		PDB_ACE_WOUNDS_UPDATE = [player, _aceWounds];
+		
+		publicVariableServer "PDB_ACE_WOUNDS_UPDATE";
+	};
+	
+	"PDB_ACE_WOUNDS_UPDATE" addPublicVariableEventHandler { 
+			if (isServer) then {
+				_data = _this select 1;
+				_player = _data select 0;
+				_thisWounds = _data select 1;
+				
+				_player setVariable ["ACE_WOUNDS", _thisWounds, true];
+			};
+	};
 
+// ====================================================================================
+	
 	PDB_FNC_PLAYER_RUCK = {
 		// [_amount,_type,_class]
 		_amount = _this select 0;	 //_amount - int, negative or positive count
@@ -185,7 +230,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 			 player setVariable ["RUCK", _ruck, true];
 
 		PDB_PLAYER_RUCK_UPDATE = [player, _amount, _type,_class, _thisRuckPuid,_WeaponsList,_MagazinesList,_wob];
-	   publicVariable "PDB_PLAYER_RUCK_UPDATE";
+	   publicVariableServer "PDB_PLAYER_RUCK_UPDATE";
 	  // diag_log["PersistentDB: PDB_PLAYER_RUCK_UPDATE"];
 	};
 
@@ -224,7 +269,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 	};
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	
 	"PDB_PLAYER_RUCK_UPDATE" addPublicVariableEventHandler { 
 			if (isServer) then {
 				_data = _this select 1;
