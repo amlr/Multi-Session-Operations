@@ -32,9 +32,6 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 		if !(isDedicated) then {
 			mso_interaction_key = ace_sys_interaction_key_self;
 		};
-        mso_fnc_hasRadio = {
-                if(player call ACE_fnc_hasRadio) then {true;} else {hint "You require a radio.";false;};
-        };
 };
 
 // ACRE Config and sync

@@ -66,6 +66,9 @@ if (isnil "mso_interaction_key") then {
 };
 
 mso_fnc_hasRadio = {
+    if (isClass(configFile>>"CfgPatches">>"ace_main") then {
+        if (player call ACE_fnc_hasRadio) then {true;} else {hint "You require a radio.";false;};
+    } else {
         // Thanks Sickboy
         private ["_hasRadio"];
         _hasRadio = false; 
@@ -73,8 +76,8 @@ mso_fnc_hasRadio = {
                 if (getText(configFile >> "CfgWeapons" >> _x >> "simulation") == "ItemRadio") exitWith { _hasRadio = true };
         } forEach (weapons player);
         if(_hasRadio) then {true} else {hint "You require a radio.";false;};
+    };
 };
-
 
 "Mission Parameters" call mso_core_fnc_initStat;
 if (!isNil "paramsArray") then {
