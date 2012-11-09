@@ -83,7 +83,7 @@ CREATE TABLE `missions` (
   `sloc` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `missionName` (`na`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=147 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +105,7 @@ CREATE TABLE `kills` (
   `pos` varchar(45) DEFAULT NULL,
   `da` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `locations` (
   `pa` varchar(45) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=194463 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,6 +166,7 @@ CREATE TABLE `landvehicles` (
   `mid` int(11) DEFAULT NULL,
   `intid` int(11) DEFAULT NULL,
   `obj` varchar(255) DEFAULT '',
+  `typ` varchar(100) DEFAULT '',
   `pos` varchar(255) DEFAULT 'Null',
   `dir` varchar(255) DEFAULT 'Null',
   `up` varchar(255) DEFAULT 'Null',
@@ -175,9 +176,9 @@ CREATE TABLE `landvehicles` (
   `wcar` varchar(4096) DEFAULT '',
   `eng` varchar(5) DEFAULT 'false',
   `wmag` varchar(4096) DEFAULT '',
-  PRIMARY KEY (`id`,`dam`),
+  PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49770 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,7 +235,7 @@ CREATE TABLE `players` (
   KEY `missionid` (`mid`),
   KEY `puid` (`pid`),
   KEY `pname` (`na`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=438 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,6 +250,7 @@ CREATE TABLE `objects` (
   `mid` int(11) DEFAULT NULL,
   `intid` int(11) DEFAULT NULL,
   `obj` varchar(255) DEFAULT '',
+  `typ` varchar(100) DEFAULT NULL,
   `pos` varchar(255) DEFAULT 'Null',
   `dir` varchar(255) DEFAULT 'Null',
   `up` varchar(255) DEFAULT 'Null',
@@ -257,7 +259,7 @@ CREATE TABLE `objects` (
   `wmag` varchar(4096) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `mid` (`mid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=111194 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -505,7 +507,7 @@ DELIMITER ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `GetLandVehicleByInitid`(IN tintid INTEGER(11), IN tmid INTEGER(11))
 BEGIN
-  SELECT id,obj,pos,dir,up,dam,fue,lkd,wcar,eng,wmag FROM landvehicles WHERE intid = tintid AND mid = tmid;
+  SELECT id,obj,typ,pos,dir,up,dam,fue,lkd,wcar,eng,wmag FROM landvehicles WHERE intid = tintid AND mid = tmid;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -581,7 +583,7 @@ DELIMITER ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `GetObjectByInitid`(IN tintid INTEGER(11), IN tmid INTEGER(11))
 BEGIN
-  SELECT id,obj,pos,dir,up,dam,wcar,wmag FROM objects WHERE intid = tintid AND mid = tmid;
+  SELECT id,obj,typ,pos,dir,up,dam,wcar,wmag FROM objects WHERE intid = tintid AND mid = tmid;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -693,9 +695,9 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `InsertLandVehicles`(IN tobj VARCHAR(255), IN tpos VARCHAR(255), IN tdir VARCHAR(255), IN tup VARCHAR(255), IN tdam FLOAT, IN tfue FLOAT, IN tlkd VARCHAR(5), IN twcar VARCHAR(1000), IN teng VARCHAR(5), IN twmag VARCHAR(1000), IN tmid INTEGER(11), IN tintid INTEGER(11))
+/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `InsertLandVehicles`(IN tobj VARCHAR(255), IN ttyp VARCHAR(100), IN tpos VARCHAR(255), IN tdir VARCHAR(255), IN tup VARCHAR(255), IN tdam FLOAT, IN tfue FLOAT, IN tlkd VARCHAR(5), IN twcar VARCHAR(1000), IN teng VARCHAR(5), IN twmag VARCHAR(1000), IN tmid INTEGER(11), IN tintid INTEGER(11))
 BEGIN
-  INSERT INTO landvehicles (obj,pos,dir,up,dam,fue,lkd,wcar,eng,wmag,mid,intid) values (tobj,tpos,tdir,tup,tdam,tfue,tlkd,twcar,teng,twmag,tmid,tintid);
+  INSERT INTO landvehicles (obj,typ,pos,dir,up,dam,fue,lkd,wcar,eng,wmag,mid,intid) values (tobj,ttyp,tpos,tdir,tup,tdam,tfue,tlkd,twcar,teng,twmag,tmid,tintid);
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -750,9 +752,9 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `InsertObjects`(IN tobj VARCHAR(255), IN tpos VARCHAR(255), IN tdir VARCHAR(255), IN tup VARCHAR(255), IN tdam INTEGER(1), IN twcar VARCHAR(1000), IN twmag VARCHAR(1000), IN tmid INTEGER(11), IN tintid INTEGER(11))
+/*!50003 CREATE*/ /*!50020 DEFINER=`arma`@`localhost`*/ /*!50003 PROCEDURE `InsertObjects`(IN tobj VARCHAR(255), IN ttyp VARCHAR(100), IN tpos VARCHAR(255), IN tdir VARCHAR(255), IN tup VARCHAR(255), IN tdam INTEGER(1), IN twcar VARCHAR(1000), IN twmag VARCHAR(1000), IN tmid INTEGER(11), IN tintid INTEGER(11))
 BEGIN
-  INSERT INTO objects (obj,pos,dir,up,dam,wcar,wmag,mid,intid) values (tobj,tpos,tdir,tup,tdam,twcar,twmag,tmid,tintid);
+  INSERT INTO objects (obj,typ,pos,dir,up,dam,wcar,wmag,mid,intid) values (tobj,ttyp,tpos,tdir,tup,tdam,twcar,twmag,tmid,tintid);
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1016,4 +1018,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-11-08 18:54:24
+-- Dump completed on 2012-11-09  0:46:48

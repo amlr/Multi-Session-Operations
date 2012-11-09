@@ -34,6 +34,8 @@ _countInDB = parseNumber (_objectCountInDB select 0);
 // START LOOP
 for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 
+	private ["_vType","_tmp","_thisObject"];
+	
 	_thisID = _z+1;
 	
 	_parameters = format["[tintid=%1,tmid=%2]", _thisID,_missionid];
@@ -47,49 +49,59 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	//	diag_log ["GetobjectByInitid _objectData: ",  _objectData, typeName _objectData];
 	
 	_vObject =_objectData select 1;
-	
 	//diag_log ["ObjectData: ",  _ObjectData, typeName _ObjectData];
+	
+	_vType = _objectData select 2;
+	//diag_log ["_vType: ",  _vType, typeName _vType];
+	
+	_vPosition =_objectData select 3;
+	_vPosition = [_vPosition, "|", ","] call CBA_fnc_replace; 
+	_vPosition = call compile _vPosition;
+	
+	//										diag_log ["_vPosition: ",  _vPosition, typeName _vPosition];
 	
 	// Convert string to Object
 
-		private "_tmp";
 		call compile format ["_tmp = %1",_vObject];
-		_thisObject = _tmp;
+				
+		//diag_log ["_tmp: ",  _tmp, typeName _tmp];
+		
+		// Check to see if object is already on map
+		if (!isNil "_tmp") then{
+			_thisObject = _tmp;			
+		} else {
+			_thisObject = createVehicle [_vType, _vPosition, [], 0, "NONE"];
+			_thisObject setvariable ["pdb_save_name", _vObject, true];
+		};
 
 		//_serverData = format["Loading Object: %1...", _thisObject];
 		//PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
 		
-		_vPosition =_objectData select 2;
-		_vPosition = [_vPosition, "|", ","] call CBA_fnc_replace; 
-		_vPosition = call compile _vPosition;
-		
-		//										diag_log ["_vPosition: ",  _vPosition, typeName _vPosition];
-		
-		_vDir = _objectData select 3;
+		_vDir = _objectData select 4;
 		_vDir = [_vDir, "|", ","] call CBA_fnc_replace;
 		_vDir = call compile _vDir;
 		
 		//										diag_log ["_vDir: ",  _vDir, typeName _vDir];
 		
-		_vUp = _objectData select 4;
+		_vUp = _objectData select 5;
 		_vUp = [_vUp, "|", ","] call CBA_fnc_replace;
 		_vUp = call compile _vUp;
 		
 		//											diag_log ["_vUp: ",  _vUp, typeName _vUp];
 		
-		_vDam = _objectData select 5;
+		_vDam = _objectData select 6;
 		_vDam = parseNumber _vDam;
 		
 		//										diag_log ["_vDam: ",  _vDam, typeName _vDam];
 		
 		if (pdb_objects_contents_enabled) then {
 			clearWeaponCargoGlobal _thisObject;
-			_vWeaponCargo = _objectData select 6;
+			_vWeaponCargo = _objectData select 7;
 			_vWeaponCargo = [_vWeaponCargo, "|", ","] call CBA_fnc_replace; 
 			_vWeaponCargo = call compile _vWeaponCargo;	
 			
 			clearMagazineCargoGlobal _thisObject;
-			_vMagazineCargo = _objectData select 7;
+			_vMagazineCargo = _objectData select 8;
 			_vMagazineCargo = [_vMagazineCargo, "|", ","] call CBA_fnc_replace; 
 			_vMagazineCargo = call compile _vMagazineCargo;	
 			//										diag_log ["_vWeaponCargo: ",  _vWeaponCargo, typeName _vWeaponCargo];

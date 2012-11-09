@@ -7,7 +7,6 @@ _request = _this select 1;
 
 diag_log format["MSO-%1 Tup_Logistics: Starting delivery of %2 to %3", time, _request, _pos];
 
-
 // Function to para drop object from vehicle
 DoDrop = {
 		private ["_Object","_Transporter","_num"];
@@ -67,10 +66,10 @@ DoDrop = {
 				//// Enable R3F
 				_obj setVariable ["R3F_LOG_disabled", false];
 				
+				// Enable PDB saving 
 				_id = 1000 + ceil(random(9000));
-				_name = format["mso_%1",_id];
-				_obj setvehiclevarname _name;
-				_obj call compile format ["%1=_This ; PublicVariable ""%1""",_name];
+				_name = format["mso_log_%1",_id];
+				_obj setVariable ["pdb_save_name", _name, true];
 				
 				//diag_log format["%1 position = %2", typeof _obj, getposATL _obj];
 				
@@ -148,13 +147,13 @@ if (count _request == 2) then {
 					
 					_wp = _grp addwaypoint [_airport, 0];
 					_wp setWaypointType "GETOUT";
+					_wp setWaypointStatements ["true", "{deletevehicle _x} foreach crew (vehicle this); deletegroup group (vehicle this);"];
 					
 					deletevehicle _placeholder;
 					
 					_id = 1000 + ceil(random(9000));
-					_name = format["mso_%1",_id];
-					_v setvehiclevarname _name;
-					_v call Compile Format ["%1=_This ; PublicVariable ""%1""",_name];
+					_name = format["mso_log_%1",_id];
+					_v setVariable ["pdb_save_name", _name, true];
 				};
         };
 		default {

@@ -26,7 +26,7 @@
 // ====================================================================================
 // MAIN
 
-private ["_disconnectflag","_id", "_pname", "_puid", "_player", "_missionid", "_thisPlayerData", "_thisdata", "_thisWeaponData", "_thisACEData", "_params", "_parameters", "_i", "_procedureName", "_response", "_thisObject", "_landVehicles", "_landVehicleCount", "_missionLandVehicles", "_vDir", "_vUp", "_vDam", "_vPosition", "_vObject", "_vFuel", "_vLocked", "_vWeaponCargo", "_vMagazineCargo","_vEngine", "_result", "_thisObjectData", "_object", "_date"];
+private ["_disconnectflag","_id", "_allobjectTypes","_pname", "_puid", "_player", "_missionid", "_thisPlayerData", "_thisdata", "_thisWeaponData", "_thisACEData", "_params", "_parameters", "_i", "_procedureName", "_response", "_thisObject", "_landVehicles", "_landVehicleCount", "_missionLandVehicles", "_vDir", "_vUp", "_vDam", "_vPosition", "_vObject", "_vFuel", "_vLocked", "_vWeaponCargo", "_vMagazineCargo","_vEngine", "_result", "_thisObjectData", "_object", "_date"];
 
 _id = _this select 0; 
 _pname = _this select 1; 
@@ -112,6 +112,7 @@ if (pdb_log_enabled) then {
 		
 		// START remove mission's current LandVehicles data				
 		
+		
 		_procedureName = "RemoveLandVehicles"; 
 		_parameters = format["[tmid=%1]",_missionid];
 		
@@ -132,6 +133,8 @@ if (pdb_log_enabled) then {
 		_landVehicleCount = 1;
 		_missionLandVehicles = "";
 		{
+			private "_psn";
+			
 			_thisObject = _x;
 							
 			_vDir = [0,0,0];
@@ -139,10 +142,19 @@ if (pdb_log_enabled) then {
 			_vDam = 0;
 			_vPosition = [];
 			
-			if (vehiclevarname _thisObject != "") then {
+			_psn = _thisObject getvariable "pdb_save_name";
+			
+			//diag_log format ["Name: %1, getvar: %2", vehiclevarname _thisObject, _psn];
+			
+			if ((vehiclevarname _thisObject != "") || (!isNil "_psn")) then {
 
-				_vObject = vehiclevarname _thisObject;
+				if (vehiclevarname _thisObject != "") then {
+					_vObject = vehiclevarname _thisObject;
+				} else {
+					_vObject = _thisObject getvariable "pdb_save_name";
+				};
 
+				_vType = typeOf _thisObject; // Object Type (for creating objects)
 				_vPosition = str(getPosATL _thisObject); // setPosATL
 				_vDam = str(getDammage _thisObject); // setDammage
 				_vDir = str(vectorDir _thisObject); // setVectorDirAndUp
@@ -164,7 +176,7 @@ if (pdb_log_enabled) then {
 				_vWeaponCargo = [_vWeaponCargo, ",", "|"] call CBA_fnc_replace;
 				_vMagazineCargo = [_vMagazineCargo, ",", "|"] call CBA_fnc_replace; 		
 			
-				_parameters = format["[tobj=%1,tpos=%2,tdir=%3,tup=%4,tdam=%5,tfue=%6,tlkd=%7,twcar=%8,teng=%9,twmag=%10,tmid=%11,tintid=%12]",_vObject, _vPosition, _vDir, _vUp, _vDam, _vFuel, _vLocked, _vWeaponCargo, _vEngine, _vMagazineCargo, _missionid, _landVehicleCount];
+				_parameters = format["[tobj=%1,ttyp=%2,tpos=%3,tdir=%4,tup=%5,tdam=%6,tfue=%7,tlkd=%8,twcar=%9,teng=%10,twmag=%11,tmid=%12,tintid=%13]",_vObject, _vType, _vPosition, _vDir, _vUp, _vDam, _vFuel, _vLocked, _vWeaponCargo, _vEngine, _vMagazineCargo, _missionid, _landVehicleCount];
 				
 				if (pdb_log_enabled) then {
 					diag_log format["SERVER MSG: SQL output: %1", _parameters];
@@ -203,7 +215,7 @@ if (pdb_log_enabled) then {
 		_procedureName = "InsertObjects"; 
 		
 		// Set list of objects to look for (based on R3F)
-		_objectType = "static";
+		_allobjectTypes = allmissionobjects "static";
 		
 		// get Object data
 		_thisObject = objNull;
@@ -211,21 +223,28 @@ if (pdb_log_enabled) then {
 		_objectCount = 1;
 		_missionObjects = "";
 		{
-
+			private "_psn";
+			
 			_thisObject = _x;
+			
+			_psn = _thisObject getvariable "pdb_save_name";
+			
 			// Check to see if object should be persisted (i.e. a var name has been set)
-			if (vehiclevarname _thisObject != "") then {
+			if ((vehiclevarname _thisObject != "") || (!isNil "_psn")) then {
+
+				if (vehiclevarname _thisObject != "") then {
+					_vObject = vehiclevarname _thisObject;
+				} else {
+					_vObject = _thisObject getvariable "pdb_save_name";
+				};
+
+				_vType = typeOf _thisObject; // Object Type (for creating objects)
 
 				_vDir = [0,0,0];
 				_vUp = [0,0,0];
 				_vDam = 0;
 				_vPosition = [];
 				
-				_vObject = vehiclevarname _thisObject;
-				//if ([_vObject,"p3d"] call CBA_fnc_find != -1) then {
-					// object has been created since mission start and does not have varname - store class instead
-				//	_vObject = typeof _thisObject;
-				//};
 				_vPosition = str(getPosATL _thisObject); // setPosATL
 				_vDam = str(getDammage _thisObject); // setDammage
 				_vDir = str(vectorDir _thisObject); // setVectorDirAndUp
@@ -248,7 +267,7 @@ if (pdb_log_enabled) then {
 				_vWeaponCargo = [_vWeaponCargo, ",", "|"] call CBA_fnc_replace; 	
 				_vMagazineCargo = [_vMagazineCargo, ",", "|"] call CBA_fnc_replace; 			
 						
-				_parameters = format["[tobj=%1,tpos=%2,tdir=%3,tup=%4,tdam=%5,twcar=%6,twmag=%7,tmid=%8,tintid=%9]",_vObject, _vPosition, _vDir, _vUp, _vDam, _vWeaponCargo, _vMagazineCargo, _missionid,_ObjectCount];
+				_parameters = format["[tobj=%1,ttyp=%2,tpos=%3,tdir=%4,tup=%5,tdam=%6,twcar=%7,twmag=%8,tmid=%9,tintid=%10]",_vObject, _vType, _vPosition, _vDir, _vUp, _vDam, _vWeaponCargo, _vMagazineCargo, _missionid,_ObjectCount];
 				
 				if (pdb_log_enabled) then {
 					diag_log format["SERVER MSG: SQL output: %1", _parameters];
@@ -258,7 +277,7 @@ if (pdb_log_enabled) then {
 
 				_objectCount =_objectCount+1;
 			};
-		} forEach allmissionobjects _objectType; 
+		} forEach _allobjectTypes; 
 		
 		// END save mission's Object data			
 		
