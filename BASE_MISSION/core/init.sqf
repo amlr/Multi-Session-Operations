@@ -66,7 +66,7 @@ if (isnil "mso_interaction_key") then {
 };
 
 mso_fnc_hasRadio = {
-    if (isClass(configFile>>"CfgPatches">>"ace_main") then {
+    if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
         if (player call ACE_fnc_hasRadio) then {true;} else {hint "You require a radio.";false;};
     } else {
         // Thanks Sickboy
