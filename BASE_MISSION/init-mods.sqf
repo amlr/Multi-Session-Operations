@@ -25,7 +25,7 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
         ace_sys_wounds_all_medics = true;  //everyone is a medic
         ace_sys_wounds_ai_movement_bloodloss = true; 
         ace_sys_wounds_player_movement_bloodloss = true;
-        ace_sys_wounds_auto_assist = true;  //non-medic AI help unconscious units in own group
+        ace_sys_wounds_auto_assist = false;  //non-medic AI help unconscious units in own group
         ace_sys_wounds_auto_assist_any = false; //non-medic AI help unconscious units in other group
         ace_sys_wounds_no_medical_vehicles = false;  //medical vehicles can be used for full heal
         
