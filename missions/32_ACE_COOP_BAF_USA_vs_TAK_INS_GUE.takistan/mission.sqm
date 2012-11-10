@@ -49,7 +49,9 @@ class Mission
 		"ace_sys_arty_computers",
 		"ace_sys_arty_m119",
 		"ace_sys_towing",
-		"CAAir"
+		"CAAir",
+		"ace_sys_huntir",
+		"ace_sys_weapons"
 	};
 	addOnsAuto[]=
 	{
@@ -96,6 +98,8 @@ class Mission
 		"ace_sys_arty_computers",
 		"ace_sys_arty_m119",
 		"ace_sys_towing",
+		"ace_sys_huntir",
+		"ace_sys_weapons",
 		"takistan"
 	};
 	randomSeed=10170483;
@@ -104,10 +108,10 @@ class Mission
 		briefingName="MSO 32 ACE COOP BAF USA VS TAK INS GUE 4.5";
 		resistanceWest=0;
 		resistanceEast=1;
-		startWeather=0.28730154;
-		startFog=0.1723077;
-		forecastWeather=0.79957312;
-		forecastFog=0.2343726;
+		startWeather=0;
+		startFog=0.054397825;
+		forecastWeather=0;
+		forecastFog=0.02795523;
 		year=2011;
 		month=1;
 		day=27;
@@ -1524,7 +1528,7 @@ class Mission
 	};
 	class Vehicles
 	{
-		items=285;
+		items=292;
 		class Item0
 		{
 			position[]={2644.5039,196.3615,5126.9658};
@@ -1781,7 +1785,7 @@ class Mission
 		};
 		class Item25
 		{
-			position[]={2643.0259,197.7859,5083.144};
+			position[]={2641.5659,197.88937,5082.2461};
 			azimut=-31.022301;
 			id=34;
 			side="EMPTY";
@@ -2154,7 +2158,7 @@ class Mission
 		};
 		class Item59
 		{
-			position[]={2639.29,197.5222,5091.1699};
+			position[]={2638.4333,197.44101,5093.5288};
 			azimut=243.4921;
 			id=89;
 			side="EMPTY";
@@ -2165,7 +2169,7 @@ class Mission
 		};
 		class Item60
 		{
-			position[]={2640.666,197.616,5088.0708};
+			position[]={2639.8093,197.53702,5090.4297};
 			azimut=243.4921;
 			id=90;
 			side="EMPTY";
@@ -2176,7 +2180,7 @@ class Mission
 		};
 		class Item61
 		{
-			position[]={2636.7109,197.68311,5090.0459};
+			position[]={2635.8542,197.60831,5092.4048};
 			azimut=243.4926;
 			id=91;
 			side="EMPTY";
@@ -2220,7 +2224,7 @@ class Mission
 		};
 		class Item65
 		{
-			position[]={2638.1851,197.7708,5086.981};
+			position[]={2637.3284,197.68938,5089.3398};
 			azimut=243.4921;
 			id=95;
 			side="EMPTY";
@@ -2297,7 +2301,7 @@ class Mission
 		};
 		class Item72
 		{
-			position[]={2627.76,197.6631,5099.167};
+			position[]={2627.0488,197.61888,5100.8516};
 			azimut=331.02499;
 			id=109;
 			side="EMPTY";
@@ -2306,7 +2310,7 @@ class Mission
 		};
 		class Item73
 		{
-			position[]={2628.6421,197.6851,5097.7979};
+			position[]={2627.9309,197.63947,5099.4824};
 			azimut=331.02499;
 			id=110;
 			side="EMPTY";
@@ -2531,7 +2535,7 @@ class Mission
 		};
 		class Item94
 		{
-			position[]={2641.4771,197.3815,5092.123};
+			position[]={2640.6204,197.30008,5094.4819};
 			azimut=243.492;
 			id=132;
 			side="EMPTY";
@@ -2542,7 +2546,7 @@ class Mission
 		};
 		class Item95
 		{
-			position[]={2642.8701,197.4752,5089.1182};
+			position[]={2642.0134,197.39142,5091.4771};
 			azimut=243.492;
 			id=133;
 			side="EMPTY";
@@ -2797,7 +2801,7 @@ class Mission
 		};
 		class Item120
 		{
-			position[]={5170.9629,145.3779,6039.9741};
+			position[]={5135.1841,145.40175,6055.1499};
 			azimut=-17.325399;
 			id=163;
 			side="EMPTY";
@@ -3991,7 +3995,7 @@ class Mission
 		};
 		class Item230
 		{
-			position[]={2644.5149,197.19321,5093.4531};
+			position[]={2643.6582,197.1239,5095.812};
 			azimut=62.789829;
 			id=306;
 			side="EMPTY";
@@ -4002,7 +4006,7 @@ class Mission
 		};
 		class Item231
 		{
-			position[]={2643.365,197.2621,5092.8628};
+			position[]={2642.0776,197.20917,5095.0645};
 			azimut=62.789829;
 			id=307;
 			side="EMPTY";
@@ -4057,8 +4061,8 @@ class Mission
 		};
 		class Item236
 		{
-			position[]={2647.1211,197.2251,5091.1709};
-			azimut=61.608631;
+			position[]={2649.6641,197.4305,5085.3672};
+			azimut=154.99805;
 			id=312;
 			side="EMPTY";
 			vehicle="ACE_RopeBox";
@@ -4068,8 +4072,8 @@ class Mission
 		};
 		class Item237
 		{
-			position[]={2645.0039,197.3483,5090.0308};
-			azimut=61.608631;
+			position[]={2646.6118,197.60329,5084.0332};
+			azimut=154.7558;
 			id=313;
 			side="EMPTY";
 			vehicle="ACE_RuckBox_West";
@@ -4101,7 +4105,7 @@ class Mission
 		};
 		class Item240
 		{
-			position[]={2645.853,197.1293,5094.188};
+			position[]={2644.9963,197.0607,5096.5469};
 			azimut=62.789829;
 			id=316;
 			side="EMPTY";
@@ -4592,6 +4596,73 @@ class Mission
 			skill=0.2;
 			text="mso_1013_1_1";
 		};
+		class Item285
+		{
+			position[]={2644.8408,197.20467,5092.9956};
+			azimut=64.410698;
+			id=363;
+			side="EMPTY";
+			vehicle="ACE_HuntIRBox";
+			skill=0.60000002;
+			text="MSO_4000";
+		};
+		class Item286
+		{
+			position[]={2643.3845,197.29442,5092.2144};
+			azimut=64.410698;
+			id=364;
+			side="EMPTY";
+			vehicle="ACE_ItemsBox";
+			skill=0.60000002;
+			text="mso_3000";
+		};
+		class Item287
+		{
+			position[]={2646.5024,197.3681,5088.6606};
+			azimut=64.410698;
+			id=365;
+			side="EMPTY";
+			vehicle="ace_sys_weapons_magicbox";
+			skill=0.60000002;
+		};
+		class Item288
+		{
+			position[]={2680.2834,197.53664,5108.5928};
+			azimut=64.410698;
+			id=366;
+			side="EMPTY";
+			vehicle="ACE_USVehicleBox_EP1";
+			skill=0.60000002;
+		};
+		class Item289
+		{
+			position[]={5170.1128,145.38475,6042.1113};
+			azimut=76.523926;
+			id=367;
+			side="EMPTY";
+			vehicle="ACE_HuntIRBox";
+			skill=0.60000002;
+			text="MSO_4000_1";
+		};
+		class Item290
+		{
+			position[]={5168.5269,145.38329,6041.6533};
+			azimut=76.523926;
+			id=368;
+			side="EMPTY";
+			vehicle="ACE_ItemsBox";
+			skill=0.60000002;
+			text="mso_3000_1";
+		};
+		class Item291
+		{
+			position[]={5170.4087,145.37157,6037.9932};
+			azimut=76.523926;
+			id=369;
+			side="EMPTY";
+			vehicle="ace_sys_weapons_magicbox";
+			skill=0.60000002;
+		};
 	};
 	class Markers
 	{
@@ -4683,7 +4754,7 @@ class Mission
 		};
 		class Item11
 		{
-			position[]={2640.8679,197.5553,5089.167};
+			position[]={2640.0112,197.4754,5091.5259};
 			name="ammo";
 			text="Ammunition";
 			type="hd_dot";
@@ -4782,7 +4853,7 @@ class Mission
 		};
 		class Item25
 		{
-			position[]={2627.3101,197.66969,5099.4961};
+			position[]={2626.5989,197.62592,5101.1807};
 			name="heli";
 			text="Helipad";
 			type="hd_dot";
@@ -4807,7 +4878,7 @@ class Mission
 		items=2;
 		class Item0
 		{
-			position[]={2632.969,197.0947,5105.689};
+			position[]={2632.2578,197.05301,5107.3735};
 			a=100;
 			b=100;
 			activationBy="WEST";
