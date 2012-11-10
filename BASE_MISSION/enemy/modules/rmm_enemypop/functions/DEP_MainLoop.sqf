@@ -14,13 +14,12 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
   	_breakouttimer = 0;
 	_suspended = true;                               
     _debug = debug_mso;
-	
+
 	if (_debug) then {
 		diag_log format["MSO-%1 PDB EP Population: Starting Waituntil-Loop: _obj %2 | _pos %3 | _grpt %4 | _camp %5 | _grpt2 %6 | _AA %7 | _RB %8 | _cleared %9", time, _obj, _pos, _grpt, _camp, _grpt2, _AA, _RB, _cleared];
 	};                                                                                                           
 	waituntil {
         if (_cleared) exitwith {diag_log format["MSO-%1 PDB EP Population: Failsafe on cleared location %2 triggered...",time, _pos];true};
-		sleep 3; 
 		if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (!_spawned)) then {
 			_spawned = true;
 			
@@ -108,6 +107,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
 			_obj setvariable ["s",nil]; _suspended = false;
 			true;
     	};
+		sleep (2 + (random 1));
 		!(_suspended);
     };
 if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Ending Waituntil loop %2 - Thread end...", time, _pos];};

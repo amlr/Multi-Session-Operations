@@ -15,7 +15,7 @@ waituntil {
 			_cleared = (_x select 0) getvariable "c"; // cleared position (bool)
 	        _suspended = (_x select 0) getvariable "s";
 	        
-	       if (([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (isnil "_suspended") && (isnil "_cleared")) then {
+	       if ((isnil "_suspended") && (isnil "_cleared") && {([_pos, rmm_ep_spawn_dist] call fPlayersInside)}) then {
 	           
 	           [_obj,_pos,_grpt,_camp,_grpt2,_AA,_RB] spawn DEP_MainLoop;
 	           _obj setvariable ["s",true];
