@@ -8,24 +8,16 @@ class Mission
 		"ca_missions_garbagecollector",
 		"ca_modules_clouds",
 		"ca_modules_e_weather",
-		"ca_modules_marta",
 		"BI_SRRS",
 		"cba_main",
 		"CACharacters_BAF",
-		"casigns_e",
-		"ca_baf",
 		"CAWheeled_W_BAF",
 		"CATracked_W_BAF",
 		"CAWheeled2_MTVR",
 		"CAWeapons_M252_81mm_Mortar",
-		"castructures_e_misc_misc_interier",
 		"camisc3",
-		"camisc_e",
 		"caweapons_ammoboxes",
 		"caweapons",
-		"CAWheeled2_MMT",
-		"CAAir_BAF",
-		"caweapons_e",
 		"caair_baf_ch_47f",
 		"CAWheeled2_TowingTractor",
 		"CAAir_E_UH60M",
@@ -38,7 +30,6 @@ class Mission
 		"warfarebuildings",
 		"cabuildings2_misc_cargo",
 		"CAA10",
-		"caweapons_e_ammoboxes",
 		"CAAir2_UH1Y",
 		"CA_AH64D",
 		"CAWheeled",
@@ -59,13 +50,13 @@ class Mission
 		"ca_modules_functions",
 		"ca_missions_garbagecollector",
 		"cba_main",
-		"ace_sys_repair",
-		"ace_sys_tracking",
-		"ace_sys_playerhud",
-		"ace_main",
-		"ace_sys_wounds",
 		"ca_modules_e_weather",
 		"ca_modules_clouds",
+		"ace_sys_wounds",
+		"ace_sys_playerhud",
+		"ace_main",
+		"ace_sys_repair",
+		"ace_sys_tracking",
 		"warfarebuildings",
 		"caweapons_ammoboxes",
 		"CAMisc",
@@ -92,16 +83,16 @@ class Mission
 	};
 	class Groups
 	{
-		items=5;
+		items=14;
 		class Item0
 		{
 			side="WEST";
 			class Vehicles
 			{
-				items=1;
+				items=8;
 				class Item0
 				{
-					position[]={10344.529,6.9923773,1931.0297};
+					position[]={10326.796,6.7931671,1931.9928};
 					id=11;
 					side="WEST";
 					vehicle="BAF_Soldier_TL_MTP";
@@ -110,6 +101,77 @@ class Mission
 					rank="SERGEANT";
 					skill=0.46666664;
 					description="BAF Team Leader";
+					synchronizations[]={11};
+				};
+				class Item1
+				{
+					position[]={10323.941,6.5421534,1929.0289};
+					azimut=-14.3189;
+					id=72;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item2
+				{
+					position[]={10325.827,6.5573392,1929.0957};
+					azimut=-14.3189;
+					id=73;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item3
+				{
+					position[]={10327.848,6.5640154,1929.298};
+					azimut=-14.3189;
+					id=74;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item4
+				{
+					position[]={10330.071,6.5905309,1929.298};
+					azimut=-14.3189;
+					id=75;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item5
+				{
+					position[]={10332.025,6.6251612,1929.4326};
+					azimut=-14.3189;
+					id=76;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item6
+				{
+					position[]={10334.315,6.6367736,1929.4326};
+					azimut=-14.3189;
+					id=77;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item7
+				{
+					position[]={10335.527,6.6387234,1929.299};
+					azimut=-14.3189;
+					id=78;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
 				};
 			};
 		};
@@ -137,7 +199,7 @@ class Mission
 			side="LOGIC";
 			class Vehicles
 			{
-				items=12;
+				items=6;
 				class Item0
 				{
 					position[]={10260.154,7.6710176,1996.8032};
@@ -171,66 +233,6 @@ class Mission
 				};
 				class Item3
 				{
-					position[]={10302.311,6.3458047,1997.8038};
-					azimut=1.2798382;
-					id=43;
-					side="LOGIC";
-					vehicle="ace_sys_repair_tyres";
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-				class Item4
-				{
-					position[]={10316.633,6.2361202,1998.3575};
-					azimut=1.2798382;
-					id=48;
-					side="LOGIC";
-					vehicle="ACE_ForceGroupMarkersOff_Logic";
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-				class Item5
-				{
-					position[]={10317.432,7.0428367,1984.4161};
-					azimut=1.2798382;
-					id=45;
-					side="LOGIC";
-					vehicle="ACE_SYS_PRespawn_Logic";
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-				class Item6
-				{
-					position[]={10302.48,7.2637625,1983.9015};
-					azimut=1.2798382;
-					id=44;
-					side="LOGIC";
-					vehicle="ACE_Required_Logic";
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-				class Item7
-				{
-					position[]={10317.432,8.0189638,1969.9982};
-					azimut=1.2798382;
-					id=47;
-					side="LOGIC";
-					vehicle="ACE_Wounds_EveryoneMedic";
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-				class Item8
-				{
-					position[]={10303.34,7.8547144,1969.9982};
-					azimut=1.2798382;
-					id=46;
-					side="LOGIC";
-					vehicle="ACE_Wounds_Logic";
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-				class Item9
-				{
 					presenceCondition="!isDedicated";
 					position[]={10257.836,7.5101643,1975.0126};
 					azimut=0.84216332;
@@ -240,7 +242,7 @@ class Mission
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
-				class Item10
+				class Item4
 				{
 					presenceCondition="!isDedicated";
 					position[]={10272.06,7.534997,1974.8651};
@@ -251,7 +253,7 @@ class Mission
 					lock="UNLOCKED";
 					skill=0.60000002;
 				};
-				class Item11
+				class Item5
 				{
 					presenceCondition="!isDedicated";
 					position[]={10285.227,7.6774735,1974.9071};
@@ -302,6 +304,393 @@ class Mission
 				};
 			};
 		};
+		class Item5
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=8;
+				class Item0
+				{
+					position[]={10298.097,6.9979696,1937.3149};
+					id=79;
+					side="WEST";
+					vehicle="BAF_Soldier_TL_MTP";
+					player="PLAY CDG";
+					leader=1;
+					rank="SERGEANT";
+					skill=0.46666664;
+					description="BAF Team Leader";
+					synchronizations[]={79};
+				};
+				class Item1
+				{
+					position[]={10295.242,6.6700344,1934.3511};
+					azimut=-14.3189;
+					id=80;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item2
+				{
+					position[]={10297.128,6.7452826,1934.4178};
+					azimut=-14.3189;
+					id=81;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item3
+				{
+					position[]={10299.148,6.8107352,1934.6201};
+					azimut=-14.3189;
+					id=82;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item4
+				{
+					position[]={10301.372,6.8632293,1934.6201};
+					azimut=-14.3189;
+					id=83;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item5
+				{
+					position[]={10303.326,6.9204893,1934.7548};
+					azimut=-14.3189;
+					id=84;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item6
+				{
+					position[]={10305.616,6.9728384,1934.7548};
+					azimut=-14.3189;
+					id=85;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item7
+				{
+					position[]={10306.828,6.9959106,1934.6211};
+					azimut=-14.3189;
+					id=86;
+					side="WEST";
+					vehicle="BAF_Soldier_MTP";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item6
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=8;
+				class Item0
+				{
+					position[]={10301.87,7.6819401,1947.9576};
+					id=87;
+					side="WEST";
+					vehicle="USMC_Soldier_SL";
+					player="PLAY CDG";
+					leader=1;
+					rank="SERGEANT";
+					skill=0.46666664;
+					description="BAF Team Leader";
+					synchronizations[]={87};
+				};
+				class Item1
+				{
+					position[]={10299.016,7.5235152,1944.9938};
+					azimut=-14.3189;
+					id=88;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item2
+				{
+					position[]={10300.901,7.5842614,1945.0605};
+					azimut=-14.3189;
+					id=89;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item3
+				{
+					position[]={10302.922,7.6437321,1945.2628};
+					azimut=-14.3189;
+					id=90;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item4
+				{
+					position[]={10305.146,7.6808257,1945.2628};
+					azimut=-14.3189;
+					id=91;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item5
+				{
+					position[]={10307.1,7.7338653,1945.3975};
+					azimut=-14.3189;
+					id=92;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item6
+				{
+					position[]={10309.39,7.7927976,1945.3975};
+					azimut=-14.3189;
+					id=93;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item7
+				{
+					position[]={10310.602,7.8228936,1945.2638};
+					azimut=-14.3189;
+					id=94;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item7
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=8;
+				class Item0
+				{
+					position[]={10282.468,7.3233232,1946.6121};
+					id=95;
+					side="WEST";
+					vehicle="USMC_Soldier_SL";
+					player="PLAY CDG";
+					leader=1;
+					rank="SERGEANT";
+					skill=0.46666664;
+					description="BAF Team Leader";
+					synchronizations[]={95};
+				};
+				class Item1
+				{
+					position[]={10279.613,7.0100079,1943.6482};
+					azimut=-14.3189;
+					id=96;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item2
+				{
+					position[]={10281.499,7.0630655,1943.715};
+					azimut=-14.3189;
+					id=97;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item3
+				{
+					position[]={10283.52,7.1335578,1943.9172};
+					azimut=-14.3189;
+					id=98;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item4
+				{
+					position[]={10285.743,7.1914377,1943.9172};
+					azimut=-14.3189;
+					id=99;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item5
+				{
+					position[]={10287.697,7.2531543,1944.0519};
+					azimut=-14.3189;
+					id=100;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item6
+				{
+					position[]={10289.987,7.2907376,1944.0519};
+					azimut=-14.3189;
+					id=101;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+				class Item7
+				{
+					position[]={10291.671,7.3490691,1944.256};
+					azimut=-14.3189;
+					id=102;
+					side="WEST";
+					vehicle="USMC_Soldier";
+					player="PLAY CDG";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item8
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={10303.34,7.8547144,1969.9982};
+					azimut=1.2798382;
+					id=46;
+					side="LOGIC";
+					vehicle="ACE_Wounds_Logic";
+					leader=1;
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item9
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={10317.432,8.0189638,1969.9982};
+					azimut=1.2798382;
+					id=47;
+					side="LOGIC";
+					vehicle="ACE_Wounds_EveryoneMedic";
+					leader=1;
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item10
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={10317.432,7.0428367,1984.4161};
+					azimut=1.2798382;
+					id=45;
+					side="LOGIC";
+					vehicle="ACE_SYS_PRespawn_Logic";
+					leader=1;
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item11
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={10302.48,7.2637625,1983.9015};
+					azimut=1.2798382;
+					id=44;
+					side="LOGIC";
+					vehicle="ACE_Required_Logic";
+					leader=1;
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item12
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={10302.311,6.3458047,1997.8038};
+					azimut=1.2798382;
+					id=43;
+					side="LOGIC";
+					vehicle="ace_sys_repair_tyres";
+					leader=1;
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item13
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={10316.633,6.2361202,1998.3575};
+					azimut=1.2798382;
+					id=48;
+					side="LOGIC";
+					vehicle="ACE_ForceGroupMarkersOff_Logic";
+					leader=1;
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+			};
+		};
 	};
 	class Vehicles
 	{
@@ -335,7 +724,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_50";
+			text="mso_50";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item3
 		{
@@ -345,7 +735,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_51";
+			text="mso_51";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item4
 		{
@@ -355,7 +746,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_52";
+			text="mso_52";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item5
 		{
@@ -365,7 +757,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_53";
+			text="mso_53";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item6
 		{
@@ -375,7 +768,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_54";
+			text="mso_54";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item7
 		{
@@ -385,7 +779,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_55";
+			text="mso_55";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item8
 		{
@@ -395,7 +790,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_56";
+			text="mso_56";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item9
 		{
@@ -405,7 +801,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_57";
+			text="mso_57";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item10
 		{
@@ -415,7 +812,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_58";
+			text="mso_58";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item11
 		{
@@ -425,7 +823,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HD";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_59";
+			text="mso_59";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item12
 		{
@@ -435,7 +834,8 @@ class Mission
 			side="EMPTY";
 			vehicle="USVehicleBox";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_60";
+			text="mso_60";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item13
 		{
@@ -445,7 +845,8 @@ class Mission
 			side="EMPTY";
 			vehicle="USVehicleBox";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_61";
+			text="mso_61";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item14
 		{
@@ -455,7 +856,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HD";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_62";
+			text="mso_62";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item15
 		{
@@ -465,7 +867,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HD";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_63";
+			text="mso_63";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item16
 		{
@@ -475,7 +878,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HD";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_64";
+			text="mso_64";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item17
 		{
@@ -485,7 +889,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HD";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_65";
+			text="mso_65";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item18
 		{
@@ -495,7 +900,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HD";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_66";
+			text="mso_66";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item19
 		{
@@ -505,7 +911,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HD";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_67";
+			text="mso_67";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item20
 		{
@@ -515,7 +922,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HD";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_68";
+			text="mso_68";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item21
 		{
@@ -525,7 +933,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HD";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_69";
+			text="mso_69";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item22
 		{
@@ -535,7 +944,8 @@ class Mission
 			side="EMPTY";
 			vehicle="Barrels";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_70";
+			text="mso_70";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item23
 		{
@@ -545,7 +955,8 @@ class Mission
 			side="EMPTY";
 			vehicle="Barrels";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_71";
+			text="mso_71";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item24
 		{
@@ -555,7 +966,8 @@ class Mission
 			side="EMPTY";
 			vehicle="Barrels";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_72";
+			text="mso_72";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item25
 		{
@@ -565,7 +977,8 @@ class Mission
 			side="EMPTY";
 			vehicle="Barrels";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_73";
+			text="mso_73";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item26
 		{
@@ -584,7 +997,8 @@ class Mission
 			side="EMPTY";
 			vehicle="UH1Y";
 			skill=0.2;
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_1";
+			text="mso_1";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
 		};
 		class Item28
 		{
@@ -594,7 +1008,8 @@ class Mission
 			side="EMPTY";
 			vehicle="USSpecialWeaponsBox";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_74";
+			text="mso_74";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item29
 		{
@@ -604,7 +1019,8 @@ class Mission
 			side="EMPTY";
 			vehicle="USLaunchersBox";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_75";
+			text="mso_75";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item30
 		{
@@ -614,7 +1030,8 @@ class Mission
 			side="EMPTY";
 			vehicle="USOrdnanceBox";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_76";
+			text="mso_76";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item31
 		{
@@ -624,7 +1041,8 @@ class Mission
 			side="EMPTY";
 			vehicle="USBasicAmmunitionBox";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_77";
+			text="mso_77";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item32
 		{
@@ -634,7 +1052,8 @@ class Mission
 			side="EMPTY";
 			vehicle="USBasicWeaponsBox";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_78";
+			text="mso_78";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item33
 		{
@@ -644,7 +1063,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ATV_US_EP1";
 			skill=0.2;
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_2";
+			text="mso_2";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
 		};
 		class Item34
 		{
@@ -654,7 +1074,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ATV_US_EP1";
 			skill=0.2;
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_3";
+			text="mso_3";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
 		};
 		class Item35
 		{
@@ -664,7 +1085,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ATV_US_EP1";
 			skill=0.2;
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_4";
+			text="mso_4";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
 		};
 		class Item36
 		{
@@ -674,7 +1096,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ATV_US_EP1";
 			skill=0.2;
-			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";"; text="mso_5";
+			text="mso_5";
+			init="0 = [this, 43200, 9999999] execVM ""support\scripts\vehicle.sqf"";";
 		};
 		class Item37
 		{
@@ -720,7 +1143,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HDAPC";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_79";
+			text="mso_79";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item42
 		{
@@ -730,7 +1154,8 @@ class Mission
 			side="EMPTY";
 			vehicle="USVehicleBox";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_80";
+			text="mso_80";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item43
 		{
@@ -740,7 +1165,8 @@ class Mission
 			side="EMPTY";
 			vehicle="USVehicleBox";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_81";
+			text="mso_81";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item44
 		{
@@ -750,7 +1176,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HDAPC";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_82";
+			text="mso_82";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item45
 		{
@@ -760,7 +1187,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HDAPC";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_83";
+			text="mso_83";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item46
 		{
@@ -770,7 +1198,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HDAPC";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_84";
+			text="mso_84";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item47
 		{
@@ -780,7 +1209,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HDAPC";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_85";
+			text="mso_85";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item48
 		{
@@ -790,7 +1220,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HDAPC";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_86";
+			text="mso_86";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item49
 		{
@@ -800,7 +1231,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HDAPC";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_87";
+			text="mso_87";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item50
 		{
@@ -810,7 +1242,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HDAPC";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_88";
+			text="mso_88";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item51
 		{
@@ -820,7 +1253,8 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HDAPC";
 			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_89";
+			text="mso_89";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item52
 		{
@@ -830,7 +1264,8 @@ class Mission
 			side="EMPTY";
 			vehicle="Barrels";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_90";
+			text="mso_90";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item53
 		{
@@ -840,7 +1275,8 @@ class Mission
 			side="EMPTY";
 			vehicle="Barrels";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_91";
+			text="mso_91";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item54
 		{
@@ -850,7 +1286,8 @@ class Mission
 			side="EMPTY";
 			vehicle="Barrels";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_92";
+			text="mso_92";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item55
 		{
@@ -860,7 +1297,8 @@ class Mission
 			side="EMPTY";
 			vehicle="Barrels";
 			skill=0.2;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";"; text="mso_93";
+			text="mso_93";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 	};
 	class Markers
