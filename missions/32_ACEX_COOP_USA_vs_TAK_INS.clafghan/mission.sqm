@@ -2963,7 +2963,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_WeaponBox_Launchers_BIS_BAF";
 			skill=0.2;
-			text="mso_91_1";
+			text="mso_3000_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item183
@@ -2974,7 +2974,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_MagazineBox_Launchers_BIS_BAF";
 			skill=0.2;
-			text="mso_92_1";
+			text="mso_4050_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item184
@@ -2985,7 +2985,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_OrdnanceBox_BIS_BAF";
 			skill=0.2;
-			text="mso_93_1";
+			text="mso_3800_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item185
@@ -2996,7 +2996,6 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_WeaponBox_BIS_BAF";
 			skill=0.2;
-			text="mso_101";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item186
@@ -3007,7 +3006,6 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_MagazineBox_BIS_BAF";
 			skill=0.2;
-			text="mso_102";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item187
@@ -3073,7 +3071,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_WeaponBox_Launchers_BIS_US";
 			skill=0.2;
-			text="mso_91_1";
+			text="mso_3914_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item193
@@ -3106,7 +3104,6 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_WeaponBox_BIS_US";
 			skill=0.2;
-			text="mso_101_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item196
@@ -3117,7 +3114,6 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_MagazineBox_BIS_US";
 			skill=0.2;
-			text="mso_102_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item197
