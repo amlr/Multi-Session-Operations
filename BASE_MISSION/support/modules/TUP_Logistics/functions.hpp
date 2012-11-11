@@ -5,5 +5,7 @@ class logistics {
 		class onload {};
 		class delivery {};
 		class findNonVehicleType {};
+		class doDrop {};
+		class bundleDelivery {};
 	};
 };

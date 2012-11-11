@@ -1,4 +1,4 @@
-private "_i";
+private ["_i","_name","_logisticType"];
 _i = 0;
 
 tup_logistics_order = [];
@@ -9,6 +9,11 @@ tup_logistics_order = [];
 	} foreach (call _x);
 	_i = _i + 1;
 } foreach TUP_logistics_lines;
+
+
+{
+	lbAdd [11,_x];
+} foreach TUP_logistics_delivery;
 
 _logisticType = [tup_logistics_air,tup_logistics_land,tup_logistics_crate,tup_logistics_static,tup_logistics_defence];
 _i = 5;

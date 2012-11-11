@@ -13,12 +13,18 @@ if (isdedicated) exitwith {};
 
 // Set lines of data
 TUP_logistics_lines = [
-	{["0","1","2","3","4","5","6","7","8","9"]},
-	{["0","1","2","3","4","5","6","7","8","9"]},
+	{["0","1","2"]},
+	{["0","1","2","3","4"]},
 	{["0","1","2","3","4","5","6","7","8","9"]},
 	{["0","1","2","3","4","5","6","7","8","9"]},
 	{["0","1","2","3","4","5","6","7","8","9"]}
 ];
+
+TUP_logistics_delivery = [
+	"Para Drop (any weight)"
+];
+
+// to add 	"Road Convoy",	"Guided Para Drop (max. 350lbs)" and "Airlift"
 
 tup_logistics_air = [0, faction player,"Air"] call mso_core_fnc_findVehicleType;
 //diag_log format["Air = %1",tup_logistics_air];
