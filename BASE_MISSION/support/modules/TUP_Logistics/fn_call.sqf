@@ -26,7 +26,7 @@ onMapSingleClick {
 };
 
 
-logText = "<br/>Multi-Session Operations<br/><br/><t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'>Logistics Request</t><br/><br/>Click on Map to choose delivery location. Aircraft require a runway or helipad within 500m.<br/><br/>";
+logText = "<br/>Multi-Session Operations<br/><br/><t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'>Logistics Request</t><br/><br/>Click on Map to choose delivery location. Helicopters and MV22 require a helipad within 500m. Other aircraft will land at nearest runway.<br/><br/>";
 hint parseText (logText);
 openmap true;
 
