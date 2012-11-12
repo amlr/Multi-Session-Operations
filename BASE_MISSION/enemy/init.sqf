@@ -82,6 +82,15 @@ if(isNil "faction_NLA") then {faction_NLA = DEFAULT_NLA;};
 if(faction_NLA == 1) then {
         MSO_FACTIONS = MSO_FACTIONS + ["NLA"];
 };
+if(isNil "faction_MOL_army") then {faction_MOL_army = DEFAULT_MOL_army;};
+if(faction_MOL_army == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["MOL_army"];
+};
+if(isNil "faction_ibr_rebel_faction") then {faction_ibr_rebel_faction = DEFAULT_ibr_rebel_faction;};
+if(faction_ibr_rebel_faction == 1) then {
+        MSO_FACTIONS = MSO_FACTIONS + ["ibr_rebel_faction"];
+};
+
 
 if(count MSO_FACTIONS == 0) then {
         

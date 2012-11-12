@@ -114,4 +114,15 @@ class faction_NLA {
         texts[]= {"false","true"}; 
         default = DEFAULT_NLA;
 };
-
+class faction_MOL_army {
+        title = "        Enable Molation Army"; 
+        values[]= {0,1}; 
+        texts[]= {"false","true"}; 
+        default = DEFAULT_MOL_army;
+};
+class faction_ibr_rebel_faction {
+        title = "        Enable Dualan Rebels"; 
+        values[]= {0,1}; 
+        texts[]= {"false","true"}; 
+        default = DEFAULT_ibr_rebel_faction;
+};
