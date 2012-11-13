@@ -16,3 +16,5 @@
 #define DEFAULT_ibr_police_unit 0
 #define DEFAULT_LIN_army 0
 #define DEFAULT_NLA 0
+#define DEFAULT_MOL_army 0
+#define DEFAULT_ibr_rebel_faction 0

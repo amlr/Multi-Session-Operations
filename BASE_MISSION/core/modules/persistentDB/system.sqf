@@ -103,6 +103,9 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 			// Handle ACE Wounds also
 				["ace_sys_wounds_hdeh", {call PDB_FNC_ACE_WOUNDS}] call CBA_fnc_addEventhandler;
 				
+				// Update player in case they are not wounded or respawned before saving.
+				[player,"Player is having wounds initialized."] call PDB_FNC_ACE_WOUNDS;
+				
 			};
 				 
 			diag_log["PersistentDB: PLAYER READY: ", name player];
@@ -162,16 +165,16 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				([_player,3] call ace_sys_wounds_fnc_getHit),
 				(_player getVariable ["ace_w_state",0]),
 				(_player getVariable ["ace_sys_wounds_uncon",false]),
-				(_player getVariable "ace_w_bleed"),
-				(_player getVariable "ace_w_bleed_add"),
-				(_player getVariable "ace_w_pain"),
-				(_player getVariable "ace_w_pain_add"),
-				(_player getVariable "ace_w_epi"),
-				(_player getVariable "ace_w_nextuncon"),
-				(_player getVariable "ace_w_unconlen"),
-				(_player getVariable "ace_w_stab"),
-				(_player getVariable "ace_w_revive"),
-				(_player getVariable "ace_w_wakeup")
+				(_player getVariable ["ace_w_bleed",0]),
+				(_player getVariable ["ace_w_bleed_add",0]),
+				(_player getVariable ["ace_w_pain",0]),
+				(_player getVariable ["ace_w_pain_add",0]),
+				(_player getVariable ["ace_w_epi",0]),
+				(_player getVariable ["ace_w_nextuncon",-1]),
+				(_player getVariable ["ace_w_unconlen",-1]),
+				(_player getVariable ["ace_w_stab",1]),
+				(_player getVariable ["ace_w_revive",-1]),
+				(_player getVariable ["ace_w_wakeup",0])
 			];
 			
 		PDB_ACE_WOUNDS_UPDATE = [player, _aceWounds];
