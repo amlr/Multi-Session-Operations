@@ -21,5 +21,6 @@ class mso_core {
 		class profiler {};
 		class initLocations {};
 		class createLocations {};
+		class sendHint {};
 	};
 };
