@@ -32,7 +32,7 @@ if (_debug) then {
 _trg = createTrigger["EmptyDetector", getposATL _IED]; 
 _trg setTriggerArea[_proximity,_proximity,0,false];
 _trg setTriggerActivation["WEST","PRESENT",false];
-_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL  vehicle _x) select 2 < 8) && !(_x hasWeapon 'ACE_MineDetector_US') && !(_x hasWeapon 'SR5_THOR3') && !(_x hasWeapon 'SR5_THOR3_MAR') && !(_x hasWeapon 'SR5_THOR3_ACU') && (getText (configFile >> 'cfgVehicles' >> typeof _x >> 'displayName') != 'Engineer') && ([vehicleVarName _x,'EOD'] call CBA_fnc_find == -1)} count ([] call BIS_fnc_listPlayers) > 0)", format["_bomb = nearestObject [getposATL (thisTrigger), '%1']; deletevehicle (_bomb getvariable 'Detect_Trigger'); deletevehicle (_bomb getvariable 'Det_Trigger'); boom = '%2' createVehicle getposATL _bomb; deletevehicle _bomb;",_type,_shell], ""]; 
+_trg setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL  vehicle _x) select 2 < 8) && !(_x hasWeapon 'SR5_THOR3') && !(_x hasWeapon 'SR5_THOR3_MAR') && !(_x hasWeapon 'SR5_THOR3_ACU') && (getText (configFile >> 'cfgVehicles' >> typeof _x >> 'displayName') != 'Engineer') && ([vehicleVarName _x,'EOD'] call CBA_fnc_find == -1)} count ([] call BIS_fnc_listPlayers) > 0)", format["_bomb = nearestObject [getposATL (thisTrigger), '%1']; deletevehicle (_bomb getvariable 'Detect_Trigger'); deletevehicle (_bomb getvariable 'Det_Trigger'); boom = '%2' createVehicle getposATL _bomb; deletevehicle _bomb;",_type,_shell], ""]; 
 
 _IED setvariable ["Trigger", _trg, true];
 
@@ -45,7 +45,7 @@ if !(typeof _IED == _type) then {
 _trg1 = createTrigger["EmptyDetector", getposATL _IED]; 
 _trg1 setTriggerArea[_proximity+5,_proximity+5,0,false];
 _trg1 setTriggerActivation["WEST","PRESENT",true];
-_trg1 setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL  vehicle _x) select 2 < 8) && ((_x hasWeapon 'ACE_MineDetector_US') || (_x hasWeapon 'SR5_THOR3') || (_x hasWeapon 'SR5_THOR3_MAR') || (_x hasWeapon 'SR5_THOR3_ACU') || (getText (configFile >> 'cfgVehicles' >> typeof _x >> 'displayName') == 'Engineer') || ([vehicleVarName _x,'EOD'] call CBA_fnc_find != -1))} count ([] call BIS_fnc_listPlayers) > 0)", format["_bomb = nearestObject [getposATL (thisTrigger), '%1']; [_bomb, %2, thislist] execvm 'enemy\modules\tup_ied\fn_detectIED.sqf';", _type, _proximity], ""]; 
+_trg1 setTriggerStatements["this && ({(vehicle _x in thisList) && ((getposATL  vehicle _x) select 2 < 8) && ((currentWeapon _x in ['ACE_Minedetector_US','ACE_VMH3','ACE_VMM3']) || (_x hasWeapon 'SR5_THOR3') || (_x hasWeapon 'SR5_THOR3_MAR') || (_x hasWeapon 'SR5_THOR3_ACU') || (getText (configFile >> 'cfgVehicles' >> typeof _x >> 'displayName') == 'Engineer') || ([vehicleVarName _x,'EOD'] call CBA_fnc_find != -1))} count ([] call BIS_fnc_listPlayers) > 0)", format["_bomb = nearestObject [getposATL (thisTrigger), '%1']; [_bomb, %2, thislist] execvm 'enemy\modules\tup_ied\fn_detectIED.sqf';", _type, _proximity], ""]; 
 
 _IED setvariable ["Detect_Trigger", _trg1, true];
 
@@ -54,7 +54,7 @@ if !(typeof _IED == _type) then {
 	_trg1 attachTo [_IED,[0,0,-0.5]];
 };
 
-// Create Disarm Detonation Trigger - if Engineer or person with ACE_Minedetector or THOR III step on IED
+// Create Disarm Detonation Trigger - if Engineer or person with THOR III step on IED
 _trg2 = createTrigger["EmptyDetector", getposATL _IED]; 
 _trg2 setTriggerArea[2,2,0,false];
 _trg2 setTriggerActivation["WEST","PRESENT",false];
