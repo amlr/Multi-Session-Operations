@@ -88,11 +88,12 @@ class Mission
 	randomSeed=9773591;
 	class Intel
 	{
-		briefingName="MSO USA/CZ vs TK_GUE v4.20";
+		briefingName="MSO USA/CZ vs TK_GUE v4.5";
 		briefingDescription="An MSO Team Development (A2CO)";
 		resistanceWest=0;
 		resistanceEast=1;
 		startWeather=0.25;
+		startFog=0.023538023;
 		forecastWeather=0;
 		year=2009;
 		day=29;
@@ -1786,34 +1787,31 @@ class Mission
 		class Item76
 		{
 			position[]={4959.3325,29.551275,6149.436};
-			azimut=178.68475;
+			azimut=178.685;
 			id=111;
 			side="EMPTY";
 			vehicle="USBasicAmmunitionBox_EP1";
 			skill=0.2;
-			text="mso_101";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item77
 		{
 			position[]={4962.7236,29.588921,6149.3628};
-			azimut=178.68475;
+			azimut=178.685;
 			id=112;
 			side="EMPTY";
 			vehicle="USBasicWeapons_EP1";
 			skill=0.2;
-			text="mso_102";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item78
 		{
 			position[]={4959.248,29.564423,6146.6226};
-			azimut=178.68475;
+			azimut=178.685;
 			id=113;
 			side="EMPTY";
 			vehicle="USLaunchers_EP1";
 			skill=0.2;
-			text="mso_103";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item79
@@ -1852,12 +1850,11 @@ class Mission
 		class Item82
 		{
 			position[]={4962.6538,29.583273,6146.6533};
-			azimut=178.68475;
+			azimut=178.685;
 			id=117;
 			side="EMPTY";
 			vehicle="USOrdnanceBox_EP1";
 			skill=0.2;
-			text="mso_107";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item83
@@ -2066,18 +2063,16 @@ class Mission
 			side="EMPTY";
 			vehicle="CZBasicWeapons_EP1";
 			skill=0.2;
-			text="mso_113";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item103
 		{
 			position[]={4962.8433,29.549923,6152.2593};
-			azimut=178.68475;
+			azimut=178.685;
 			id=139;
 			side="EMPTY";
 			vehicle="USSpecialWeapons_EP1";
 			skill=0.2;
-			text="mso_114";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item104
@@ -2334,31 +2329,32 @@ class Mission
 		class Item128
 		{
 			position[]={4925.2915,34.704891,6254.2891};
-			azimut=208.57838;
+			azimut=208.578;
 			id=164;
 			side="EMPTY";
 			vehicle="ACE_CSW_Box_M2";
 			skill=0.2;
-			text="mso_118";
 			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item129
 		{
 			position[]={4924.5137,35.006695,6257.7808};
-			azimut=298.74573;
+			azimut=298.746;
 			id=165;
 			side="EMPTY";
 			vehicle="ACE_CSW_Box_M252";
 			skill=0.2;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item130
 		{
 			position[]={4926.6382,34.69186,6256.6382};
-			azimut=298.74573;
+			azimut=298.746;
 			id=166;
 			side="EMPTY";
 			vehicle="ACE_CSW_Box_M252";
 			skill=0.2;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item131
 		{
@@ -2471,70 +2467,71 @@ class Mission
 		class Item143
 		{
 			position[]={4965.2329,29.530846,6150.7598};
-			azimut=90.504616;
+			azimut=90.504601;
 			id=179;
 			side="EMPTY";
 			vehicle="ACE_KnicklichtBox";
 			skill=0.2;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item144
 		{
 			position[]={4967.0518,29.563328,6150.7969};
-			azimut=90.504616;
+			azimut=90.504601;
 			id=180;
 			side="EMPTY";
 			vehicle="ACE_HuntIRBox";
 			skill=0.2;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item145
 		{
 			position[]={4967.0029,29.530401,6147.9082};
-			azimut=90.504616;
+			azimut=90.504601;
 			id=181;
 			side="EMPTY";
 			vehicle="ACE_BandageBoxWest";
 			skill=0.2;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item146
 		{
 			position[]={4965.144,29.567888,6147.8462};
-			azimut=90.504616;
+			azimut=90.504601;
 			id=182;
 			side="EMPTY";
 			vehicle="ACE_RuckBox";
 			skill=0.2;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item147
 		{
 			position[]={4923.1123,35.03133,6255.5186};
-			azimut=208.57838;
+			azimut=208.578;
 			id=183;
 			side="EMPTY";
 			vehicle="ACE_CSW_Box_M2";
 			skill=0.2;
-			text="mso_119";
 			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item148
 		{
 			position[]={4924.4785,34.702248,6252.6973};
-			azimut=208.57838;
+			azimut=208.578;
 			id=184;
 			side="EMPTY";
 			vehicle="ACE_CSW_Box_M2";
 			skill=0.2;
-			text="mso_120";
 			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item149
 		{
 			position[]={4922.2529,35.043663,6254.0859};
-			azimut=208.57838;
+			azimut=208.578;
 			id=185;
 			side="EMPTY";
 			vehicle="ACE_Tbox_762x51Belt";
 			skill=0.2;
-			text="mso_121";
 			init="0 = [this, 28800] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item150
@@ -2648,20 +2645,22 @@ class Mission
 		class Item160
 		{
 			position[]={4971.5039,29.503773,6152.0493};
-			azimut=86.900528;
+			azimut=86.900497;
 			id=220;
 			side="EMPTY";
 			vehicle="ace_sys_weapons_magicbox";
 			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item161
 		{
 			position[]={4971.8389,29.483305,6147.1616};
-			azimut=86.900528;
+			azimut=86.900497;
 			id=221;
 			side="EMPTY";
 			vehicle="ace_sys_weapons_magicbox";
 			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 	};
 	class Markers
