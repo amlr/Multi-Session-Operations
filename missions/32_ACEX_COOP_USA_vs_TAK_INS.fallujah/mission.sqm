@@ -1800,23 +1800,21 @@ class Mission
 		class Item69
 		{
 			position[]={5699.563,7,9861.6416};
-			azimut=229.64989;
+			azimut=229.64999;
 			id=79;
 			side="EMPTY";
 			vehicle="BAF_VehicleBox";
 			skill=0.2;
-			text="mso_96";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item70
 		{
 			position[]={5701.1704,7,9862.9072};
-			azimut=229.65041;
+			azimut=229.64999;
 			id=80;
 			side="EMPTY";
 			vehicle="BAF_VehicleBox";
 			skill=0.2;
-			text="mso_97";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item71
@@ -2802,23 +2800,21 @@ class Mission
 		class Item162
 		{
 			position[]={5701.7192,7,9859.0322};
-			azimut=590.99078;
+			azimut=590.99103;
 			id=189;
 			side="EMPTY";
 			vehicle="USVehicleBox_EP1";
 			skill=0.2;
-			text="mso_161";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item163
 		{
 			position[]={5703.3193,7,9860.3906};
-			azimut=590.99078;
+			azimut=590.99103;
 			id=190;
 			side="EMPTY";
 			vehicle="USVehicleBox_EP1";
 			skill=0.2;
-			text="mso_162";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item164
@@ -3327,6 +3323,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_MagazineBox_BIS_US";
 			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item211
 		{
@@ -3335,6 +3332,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_MagazineBox_Launchers_BIS_US";
 			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item212
 		{
@@ -3343,6 +3341,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_WeaponBox_Launchers_BIS_US";
 			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item213
 		{
@@ -3351,6 +3350,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_OrdnanceBox_BIS_US";
 			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item214
 		{
@@ -3359,6 +3359,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_WeaponBox_BIS_US";
 			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item215
 		{
@@ -3375,6 +3376,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_MagazineBox_USMC";
 			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item217
 		{
@@ -3383,6 +3385,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_MagazineBox_Launchers_USMC";
 			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item218
 		{
@@ -3391,6 +3394,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_WeaponBox_Launchers_USMC";
 			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item219
 		{
@@ -3399,6 +3403,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_OrdnanceBox_USMC";
 			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item220
 		{
@@ -3407,6 +3412,7 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_WeaponBox_USMC";
 			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 	};
 	class Markers
