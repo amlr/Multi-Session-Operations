@@ -81,9 +81,9 @@ class Mission
 		"CAWheeled_E_stryker",
 		"acex_c_weapon",
 		"ace_sys_knicklicht",
-		"ace_sys_fastroping",
 		"ace_sys_ruck",
 		"ace_c_weapon",
+		"ace_sys_fastroping",
 		"clafghan"
 	};
 	randomSeed=4990239;
@@ -997,7 +997,7 @@ class Mission
 				class Item0
 				{
 					position[]={14171.738,808.4259,8530.0508};
-					id=302;
+					id=301;
 					side="LOGIC";
 					vehicle="ACE_Required_Logic";
 					leader=1;
@@ -1015,7 +1015,7 @@ class Mission
 				class Item0
 				{
 					position[]={14186.956,804.59045,8529.6885};
-					id=303;
+					id=302;
 					side="LOGIC";
 					vehicle="ACE_Wounds_Logic";
 					leader=1;
@@ -1033,7 +1033,7 @@ class Mission
 				class Item0
 				{
 					position[]={14201.451,801.13342,8528.9639};
-					id=304;
+					id=303;
 					side="LOGIC";
 					vehicle="ACE_SYS_PRespawn_Logic";
 					leader=1;
@@ -1043,7 +1043,7 @@ class Mission
 				class Item1
 				{
 					position[]={14214.143,798.71252,8529.2344};
-					id=305;
+					id=304;
 					side="LOGIC";
 					vehicle="ACE_Wounds_EveryoneMedic";
 					lock="UNLOCKED";
@@ -1054,7 +1054,7 @@ class Mission
 	};
 	class Vehicles
 	{
-		items=247;
+		items=246;
 		class Item0
 		{
 			position[]={14222.189,813.90894,8393.9893};
@@ -2958,40 +2958,37 @@ class Mission
 		class Item182
 		{
 			position[]={14205.753,814.98157,8313.9199};
-			azimut=180.32208;
+			azimut=180.32201;
 			id=237;
 			side="EMPTY";
 			vehicle="ACE_WeaponBox_Launchers_BIS_BAF";
 			skill=0.2;
-			text="mso_3000_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item183
 		{
 			position[]={14203.657,817.97809,8316.8867};
-			azimut=180.32208;
+			azimut=180.32201;
 			id=238;
 			side="EMPTY";
 			vehicle="ACE_MagazineBox_Launchers_BIS_BAF";
 			skill=0.2;
-			text="mso_4050_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item184
 		{
-			position[]={14205.826,814.97351,8312.9014};
-			azimut=180.32309;
+			position[]={14205.91,814.97015,8312.4834};
+			azimut=180.323;
 			id=239;
 			side="EMPTY";
 			vehicle="ACE_OrdnanceBox_BIS_BAF";
 			skill=0.2;
-			text="mso_3800_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item185
 		{
 			position[]={14203.702,814.98932,8314.8936};
-			azimut=180.32208;
+			azimut=180.32201;
 			id=240;
 			side="EMPTY";
 			vehicle="ACE_WeaponBox_BIS_BAF";
@@ -3001,7 +2998,7 @@ class Mission
 		class Item186
 		{
 			position[]={14205.663,818.32202,8316.877};
-			azimut=180.32208;
+			azimut=180.32201;
 			id=241;
 			side="EMPTY";
 			vehicle="ACE_MagazineBox_BIS_BAF";
@@ -3016,7 +3013,6 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_BandageBoxWest";
 			skill=0.60000002;
-			text="mso_192";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item188
@@ -3027,213 +3023,205 @@ class Mission
 			side="EMPTY";
 			vehicle="ACE_KnicklichtBox";
 			skill=0.60000002;
-			text="mso_193";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item189
 		{
-			position[]={14205.645,817.97809,8317.8887};
-			azimut=-1.5612304;
+			position[]={14213.283,813.815,8386.9668};
+			azimut=-1.5612299;
 			id=244;
 			side="EMPTY";
-			vehicle="ACE_RopeBox";
+			vehicle="ACE_RuckBox_West";
 			skill=0.60000002;
-			text="mso_198";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item190
 		{
-			position[]={14203.623,817.97809,8317.8789};
-			azimut=-1.5612304;
+			position[]={14205.704,817.97809,8315.9229};
+			azimut=-0.380032;
 			id=245;
 			side="EMPTY";
-			vehicle="ACE_RuckBox_West";
+			vehicle="ACE_Tbox_US";
 			skill=0.60000002;
-			text="mso_199";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item191
 		{
-			position[]={14205.704,817.97809,8315.9229};
-			azimut=-0.380032;
+			position[]={14203.858,818.87378,8309.6416};
+			azimut=178.334;
 			id=246;
 			side="EMPTY";
-			vehicle="ACE_Tbox_US";
-			skill=0.60000002;
-			text="mso_202";
+			vehicle="ACE_WeaponBox_Launchers_BIS_US";
+			skill=0.2;
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item192
 		{
-			position[]={14203.858,818.87378,8309.6416};
-			azimut=178.33368;
+			position[]={14205.948,817.36615,8308.623};
+			azimut=178.334;
 			id=247;
 			side="EMPTY";
-			vehicle="ACE_WeaponBox_Launchers_BIS_US";
+			vehicle="ACE_MagazineBox_Launchers_BIS_US";
 			skill=0.2;
-			text="mso_3914_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item193
 		{
-			position[]={14205.948,817.36615,8308.623};
-			azimut=178.33368;
+			position[]={14203.896,817.36615,8308.5732};
+			azimut=178.33501;
 			id=248;
 			side="EMPTY";
-			vehicle="ACE_MagazineBox_Launchers_BIS_US";
+			vehicle="ACE_OrdnanceBox_BIS_US";
 			skill=0.2;
-			text="mso_92_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item194
 		{
-			position[]={14203.896,817.36615,8308.5732};
-			azimut=178.33466;
-			id=249;
-			side="EMPTY";
-			vehicle="ACE_OrdnanceBox_BIS_US";
-			skill=0.2;
-			text="mso_93_1";
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
-		};
-		class Item195
-		{
 			position[]={14203.838,814.70929,8310.7061};
-			azimut=178.33368;
-			id=250;
+			azimut=178.334;
+			id=249;
 			side="EMPTY";
 			vehicle="ACE_WeaponBox_BIS_US";
 			skill=0.2;
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
-		class Item196
+		class Item195
 		{
 			position[]={14205.88,814.1239,8309.7354};
-			azimut=178.33368;
-			id=251;
+			azimut=178.334;
+			id=250;
 			side="EMPTY";
 			vehicle="ACE_MagazineBox_BIS_US";
 			skill=0.2;
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
-		class Item197
+		class Item196
 		{
 			position[]={14203.768,814.97333,8312.8174};
-			azimut=-2.3687119;
-			id=252;
+			azimut=-2.36871;
+			id=251;
 			side="EMPTY";
 			vehicle="ACE_BandageBoxWest";
 			skill=0.60000002;
-			text="mso_192_1";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
+		};
+		class Item197
+		{
+			position[]={14203.782,816.38586,8311.7598};
+			azimut=-2.36871;
+			id=252;
+			side="EMPTY";
+			vehicle="ACE_KnicklichtBox";
+			skill=0.60000002;
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item198
 		{
-			position[]={14203.782,816.38586,8311.7598};
-			azimut=-2.3687119;
+			position[]={14213.222,813.815,8388.9775};
+			azimut=-3.5499201;
 			id=253;
 			side="EMPTY";
-			vehicle="ACE_KnicklichtBox";
+			vehicle="ACE_RopeBox";
 			skill=0.60000002;
-			text="mso_193_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item199
 		{
-			position[]={14205.8,814.98083,8311.8594};
-			azimut=-3.5499177;
+			position[]={14205.832,814.63733,8310.8125};
+			azimut=-3.5499201;
 			id=254;
 			side="EMPTY";
-			vehicle="ACE_RopeBox";
+			vehicle="ACE_RuckBox_West";
 			skill=0.60000002;
-			text="mso_198_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item200
 		{
-			position[]={14205.832,814.63733,8310.8125};
-			azimut=-3.5499177;
+			position[]={14203.738,814.9812,8313.875};
+			azimut=-2.36871;
 			id=255;
 			side="EMPTY";
-			vehicle="ACE_RuckBox_West";
+			vehicle="ACE_Tbox_US";
 			skill=0.60000002;
-			text="mso_199_1";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item201
 		{
-			position[]={14203.738,814.9812,8313.875};
-			azimut=-2.3687119;
+			position[]={14204.063,813.815,8388.915};
+			azimut=359.97501;
 			id=256;
 			side="EMPTY";
 			vehicle="ACE_Tbox_US";
-			skill=0.60000002;
-			text="mso_202_1";
+			skill=0.2;
+			text="mso_1025";
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item202
 		{
-			position[]={14204.063,813.815,8388.915};
+			position[]={14207.186,813.815,8388.915};
 			azimut=359.97501;
 			id=257;
 			side="EMPTY";
 			vehicle="ACE_Tbox_US";
 			skill=0.2;
-			text="mso_1025";
+			text="mso_1026";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item203
 		{
-			position[]={14207.186,813.815,8388.915};
+			position[]={14204.063,813.815,8386.8574};
 			azimut=359.97501;
 			id=258;
 			side="EMPTY";
 			vehicle="ACE_Tbox_US";
 			skill=0.2;
-			text="mso_1026";
+			text="mso_1027";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item204
 		{
-			position[]={14204.063,813.815,8386.8574};
+			position[]={14206.957,813.815,8386.8574};
 			azimut=359.97501;
 			id=259;
 			side="EMPTY";
 			vehicle="ACE_Tbox_US";
 			skill=0.2;
-			text="mso_1027";
+			text="mso_1028";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item205
 		{
-			position[]={14206.957,813.815,8386.8574};
+			position[]={14210.194,813.815,8388.8721};
 			azimut=359.97501;
 			id=260;
 			side="EMPTY";
-			vehicle="ACE_Tbox_US";
+			vehicle="ACE_RopeBox";
 			skill=0.2;
-			text="mso_1028";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item206
 		{
-			position[]={14210.194,813.815,8388.8721};
+			position[]={14210.278,813.815,8386.9492};
 			azimut=359.97501;
 			id=261;
 			side="EMPTY";
 			vehicle="ACE_RopeBox";
 			skill=0.2;
-			text="mso_1029";
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item207
 		{
-			position[]={14210.278,813.815,8386.9492};
-			azimut=359.97501;
+			position[]={14158.335,813.91528,8355.6035};
+			azimut=95.616501;
 			id=262;
 			side="EMPTY";
-			vehicle="ACE_RopeBox";
-			skill=0.2;
-			text="mso_1030";
+			vehicle="ACE_Spare_Tyre";
+			skill=0.60000002;
+			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item208
 		{
-			position[]={14158.335,813.91528,8355.6035};
+			position[]={14159.217,813.86212,8355.916};
 			azimut=95.616501;
 			id=263;
 			side="EMPTY";
@@ -3243,7 +3231,7 @@ class Mission
 		};
 		class Item209
 		{
-			position[]={14159.217,813.86212,8355.916};
+			position[]={14160.093,813.815,8356.1758};
 			azimut=95.616501;
 			id=264;
 			side="EMPTY";
@@ -3253,7 +3241,7 @@ class Mission
 		};
 		class Item210
 		{
-			position[]={14160.093,813.815,8356.1758};
+			position[]={14160.845,813.815,8356.5127};
 			azimut=95.616501;
 			id=265;
 			side="EMPTY";
@@ -3263,7 +3251,7 @@ class Mission
 		};
 		class Item211
 		{
-			position[]={14160.845,813.815,8356.5127};
+			position[]={14157.146,813.98694,8356.1484};
 			azimut=95.616501;
 			id=266;
 			side="EMPTY";
@@ -3273,7 +3261,7 @@ class Mission
 		};
 		class Item212
 		{
-			position[]={14157.146,813.98694,8356.1484};
+			position[]={14157.946,813.93872,8356.4053};
 			azimut=95.616501;
 			id=267;
 			side="EMPTY";
@@ -3283,7 +3271,7 @@ class Mission
 		};
 		class Item213
 		{
-			position[]={14157.946,813.93872,8356.4053};
+			position[]={14158.828,813.88562,8356.7178};
 			azimut=95.616501;
 			id=268;
 			side="EMPTY";
@@ -3293,7 +3281,7 @@ class Mission
 		};
 		class Item214
 		{
-			position[]={14158.828,813.88562,8356.7178};
+			position[]={14159.704,813.83282,8356.9775};
 			azimut=95.616501;
 			id=269;
 			side="EMPTY";
@@ -3303,7 +3291,7 @@ class Mission
 		};
 		class Item215
 		{
-			position[]={14159.704,813.83282,8356.9775};
+			position[]={14160.456,813.815,8357.3145};
 			azimut=95.616501;
 			id=270;
 			side="EMPTY";
@@ -3313,17 +3301,17 @@ class Mission
 		};
 		class Item216
 		{
-			position[]={14160.456,813.815,8357.3145};
+			position[]={14156.966,813.99774,8356.9492};
 			azimut=95.616501;
 			id=271;
 			side="EMPTY";
-			vehicle="ACE_Spare_Tyre";
+			vehicle="ACE_Spare_Tyre_HD";
 			skill=0.60000002;
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item217
 		{
-			position[]={14156.966,813.99774,8356.9492};
+			position[]={14158.568,813.90125,8357.4404};
 			azimut=95.616501;
 			id=272;
 			side="EMPTY";
@@ -3333,7 +3321,7 @@ class Mission
 		};
 		class Item218
 		{
-			position[]={14158.568,813.90125,8357.4404};
+			position[]={14157.74,813.95111,8357.1826};
 			azimut=95.616501;
 			id=273;
 			side="EMPTY";
@@ -3343,7 +3331,7 @@ class Mission
 		};
 		class Item219
 		{
-			position[]={14157.74,813.95111,8357.1826};
+			position[]={14159.551,813.84204,8357.7246};
 			azimut=95.616501;
 			id=274;
 			side="EMPTY";
@@ -3353,7 +3341,7 @@ class Mission
 		};
 		class Item220
 		{
-			position[]={14159.551,813.84204,8357.7246};
+			position[]={14160.302,813.815,8357.9834};
 			azimut=95.616501;
 			id=275;
 			side="EMPTY";
@@ -3363,7 +3351,7 @@ class Mission
 		};
 		class Item221
 		{
-			position[]={14160.302,813.815,8357.9834};
+			position[]={14156.784,814.00873,8357.7246};
 			azimut=95.616501;
 			id=276;
 			side="EMPTY";
@@ -3373,7 +3361,7 @@ class Mission
 		};
 		class Item222
 		{
-			position[]={14156.784,814.00873,8357.7246};
+			position[]={14157.662,813.95581,8357.9844};
 			azimut=95.616501;
 			id=277;
 			side="EMPTY";
@@ -3383,7 +3371,7 @@ class Mission
 		};
 		class Item223
 		{
-			position[]={14157.662,813.95581,8357.9844};
+			position[]={14158.517,813.90436,8358.3193};
 			azimut=95.616501;
 			id=278;
 			side="EMPTY";
@@ -3393,7 +3381,7 @@ class Mission
 		};
 		class Item224
 		{
-			position[]={14158.517,813.90436,8358.3193};
+			position[]={14159.371,813.85284,8358.5791};
 			azimut=95.616501;
 			id=279;
 			side="EMPTY";
@@ -3403,7 +3391,7 @@ class Mission
 		};
 		class Item225
 		{
-			position[]={14159.371,813.85284,8358.5791};
+			position[]={14160.12,813.815,8358.8379};
 			azimut=95.616501;
 			id=280;
 			side="EMPTY";
@@ -3413,17 +3401,17 @@ class Mission
 		};
 		class Item226
 		{
-			position[]={14160.12,813.815,8358.8379};
-			azimut=95.616501;
+			position[]={14209.373,813.815,8392.375};
+			azimut=112.5877;
 			id=281;
 			side="EMPTY";
-			vehicle="ACE_Spare_Tyre_HD";
+			vehicle="ACE_Spare_Tyre";
 			skill=0.60000002;
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item227
 		{
-			position[]={14209.373,813.815,8392.375};
+			position[]={14210.214,813.815,8392.3877};
 			azimut=112.5877;
 			id=282;
 			side="EMPTY";
@@ -3433,7 +3421,7 @@ class Mission
 		};
 		class Item228
 		{
-			position[]={14210.214,813.815,8392.3877};
+			position[]={14211.149,813.815,8392.4287};
 			azimut=112.5877;
 			id=283;
 			side="EMPTY";
@@ -3443,7 +3431,7 @@ class Mission
 		};
 		class Item229
 		{
-			position[]={14211.149,813.815,8392.4287};
+			position[]={14212.063,813.815,8392.4199};
 			azimut=112.5877;
 			id=284;
 			side="EMPTY";
@@ -3453,7 +3441,7 @@ class Mission
 		};
 		class Item230
 		{
-			position[]={14212.063,813.815,8392.4199};
+			position[]={14212.881,813.815,8392.5244};
 			azimut=112.5877;
 			id=285;
 			side="EMPTY";
@@ -3463,7 +3451,7 @@ class Mission
 		};
 		class Item231
 		{
-			position[]={14212.881,813.815,8392.5244};
+			position[]={14209.235,813.815,8393.2559};
 			azimut=112.5877;
 			id=286;
 			side="EMPTY";
@@ -3473,7 +3461,7 @@ class Mission
 		};
 		class Item232
 		{
-			position[]={14209.235,813.815,8393.2559};
+			position[]={14210.077,813.815,8393.2676};
 			azimut=112.5877;
 			id=287;
 			side="EMPTY";
@@ -3483,7 +3471,7 @@ class Mission
 		};
 		class Item233
 		{
-			position[]={14210.077,813.815,8393.2676};
+			position[]={14211.013,813.815,8393.3096};
 			azimut=112.5877;
 			id=288;
 			side="EMPTY";
@@ -3493,7 +3481,7 @@ class Mission
 		};
 		class Item234
 		{
-			position[]={14211.013,813.815,8393.3096};
+			position[]={14211.925,813.815,8393.3027};
 			azimut=112.5877;
 			id=289;
 			side="EMPTY";
@@ -3503,7 +3491,7 @@ class Mission
 		};
 		class Item235
 		{
-			position[]={14211.925,813.815,8393.3027};
+			position[]={14212.742,813.815,8393.4043};
 			azimut=112.5877;
 			id=290;
 			side="EMPTY";
@@ -3513,17 +3501,17 @@ class Mission
 		};
 		class Item236
 		{
-			position[]={14212.742,813.815,8393.4043};
+			position[]={14209.298,813.815,8394.0752};
 			azimut=112.5877;
 			id=291;
 			side="EMPTY";
-			vehicle="ACE_Spare_Tyre";
+			vehicle="ACE_Spare_Tyre_HD";
 			skill=0.60000002;
 			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
 		};
 		class Item237
 		{
-			position[]={14209.298,813.815,8394.0752};
+			position[]={14210.976,813.815,8394.0762};
 			azimut=112.5877;
 			id=292;
 			side="EMPTY";
@@ -3533,7 +3521,7 @@ class Mission
 		};
 		class Item238
 		{
-			position[]={14210.976,813.815,8394.0762};
+			position[]={14210.106,813.815,8394.0713};
 			azimut=112.5877;
 			id=293;
 			side="EMPTY";
@@ -3543,7 +3531,7 @@ class Mission
 		};
 		class Item239
 		{
-			position[]={14210.106,813.815,8394.0713};
+			position[]={14211.997,813.815,8394.0605};
 			azimut=112.5877;
 			id=294;
 			side="EMPTY";
@@ -3553,7 +3541,7 @@ class Mission
 		};
 		class Item240
 		{
-			position[]={14211.997,813.815,8394.0605};
+			position[]={14212.79,813.815,8394.0898};
 			azimut=112.5877;
 			id=295;
 			side="EMPTY";
@@ -3563,7 +3551,7 @@ class Mission
 		};
 		class Item241
 		{
-			position[]={14212.79,813.815,8394.0898};
+			position[]={14209.35,813.815,8394.8682};
 			azimut=112.5877;
 			id=296;
 			side="EMPTY";
@@ -3573,7 +3561,7 @@ class Mission
 		};
 		class Item242
 		{
-			position[]={14209.35,813.815,8394.8682};
+			position[]={14210.265,813.815,8394.8604};
 			azimut=112.5877;
 			id=297;
 			side="EMPTY";
@@ -3583,7 +3571,7 @@ class Mission
 		};
 		class Item243
 		{
-			position[]={14210.265,813.815,8394.8604};
+			position[]={14211.181,813.815,8394.9307};
 			azimut=112.5877;
 			id=298;
 			side="EMPTY";
@@ -3593,7 +3581,7 @@ class Mission
 		};
 		class Item244
 		{
-			position[]={14211.181,813.815,8394.9307};
+			position[]={14212.073,813.815,8394.9297};
 			azimut=112.5877;
 			id=299;
 			side="EMPTY";
@@ -3603,19 +3591,9 @@ class Mission
 		};
 		class Item245
 		{
-			position[]={14212.073,813.815,8394.9297};
-			azimut=112.5877;
-			id=300;
-			side="EMPTY";
-			vehicle="ACE_Spare_Tyre_HD";
-			skill=0.60000002;
-			init="0 = [this, 14400] execVM ""support\scripts\resupply.sqf"";";
-		};
-		class Item246
-		{
 			position[]={14212.866,813.815,8394.96};
 			azimut=112.5877;
-			id=301;
+			id=300;
 			side="EMPTY";
 			vehicle="ACE_Spare_Tyre_HD";
 			skill=0.60000002;
