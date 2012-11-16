@@ -1,4 +1,6 @@
-private ["_debug","_request","_pos","_delivery","_prefDel","_player"];
+#include "\x\cba\addons\main\script_macros_mission.hpp"
+
+private ["_debug","_delivery","_startpos","_grp","_convoyArray","_leadVeh","_leadVehType","_wp"];
 
 // Run server side
 // Receives requests from players
@@ -6,53 +8,57 @@ private ["_debug","_request","_pos","_delivery","_prefDel","_player"];
 // Common types are bundled and delivered by the same vehicle
 // Aircraft are always delivered to runways and helipads
 // Vehicles can be delivered by para drop, airlift (sling) or convoy
+// Tanks cannot be airlifted
+// Defence supplies cannot be delivered via convoy.
 // If delivery not selected Vehicles are delivered via convoy
 // Crates & StaticWeapons can be delivered via any method
 // If no delivery set they are delivered via guided para drop, if more than 4 crates, then airlift crates in container, if airlift not available, 5 crates in a vehicle
 // Defense supplies - paradrop, airlift
-// 
 
 _debug = debug_mso;
 
-_pos = _this select 0;
-_request = _this select 1;
-_prefDel = _this select 2;
-_player = _this select 3;
+PARAMS_4(_destpos,_order,_prefDel,_player);
 
-//make sure pos is at ground level
-_pos = [_pos select 0, _pos select 1, 0];
-
-diag_log format["MSO-%1 Tup_Logistics: Starting delivery of %2 to %3", time, _request, _pos];
-
-SpawnVehicle = {
-    private ["_type","_crew","_pos","_dir","_startpos","_veh","_spawnDistance"];
-    _type = _this select 0;
-    _pos = _this select 1;
-    
-    _crew = creategroup WEST;
-    
-    _dir = random 360;
-    _spawnDistance = 6000 + (random 1000);
-    
-    _startpos = [(_pos select 0) + (sin _dir)*_spawnDistance, (_pos select 1) + (cos _dir)*_spawnDistance, 800];
-    
-    _veh = ([_startpos, ceil(random 360), _type, _crew] call BIS_fnc_spawnVehicle) select 0;
-    _veh FlyInHeight 350; 
-    if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: Spawning %2 at %3m from position", time, typeof _veh, _pos distance _veh];};
-    _veh;
+if (count _this > 4) then {
+	_startpos = _this select 4;
 };
 
+//make sure pos is at ground level
+_destpos = [(_destpos select 0), (_destpos select 1), 0];
 
-// Turn request into set of deliveries
-_delivery = [_request] call logistics_fnc_bundleDelivery;
+// If no delivery method set, set it to paradrop
+if (_prefDel == -1) then {
+	_prefDel = 0;
+};
+
+if (_prefDel == 2) then { // If convoy establish protection vehicle
+	_grp = creategroup (side _player);
+	_leadVehType = ([0, faction _player,"Car"] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
+	_leadVeh = ([_startpos, 0, _leadVehType, _grp] call BIS_fnc_spawnVehicle) select 0;
+	_leadVeh forceSpeed 8;
+	[_leadVeh, _startpos] spawn {
+		private ["_leadVeh","_pos"];
+		_leadVeh = _this select 0;
+		_pos = _this select 1;
+		waitUntil {sleep 120; !(_leadVeh call CBA_fnc_isAlive) || (damage _leadVeh > 0.6) || (_leadVeh distance _pos < 60)};
+		deleteVehicle _leadVeh;
+	};
+};
+
+_convoyArray = [];
+
+diag_log format["MSO-%1 Tup_Logistics: Starting delivery of %2 to %3 from %4", time, _order, _destpos, _startpos];
+
+// Turn order into set of deliveries
+_delivery = [_order] call logistics_fnc_bundleDelivery;
 
 // For each delivery, provision the items
 {
-    private ["_num","_object","_airport","_i"];
+    private ["_object","_request","_convoy"];
     // Check for Aircraft, Vehicle, Crates, Static, Support
     _request = _x;
-    _airport = _pos;
     _object = _x select 0;
+	_convoy = [];
     
     if (_debug) then {
         diag_log format["MSO-%1 Tup_Logistics: Delivering the following: %2", time, _request];
@@ -62,107 +68,45 @@ _delivery = [_request] call logistics_fnc_bundleDelivery;
     {
         case ((_object iskindof "Plane") || (_object iskindof "Helicopter")): 
         {
-            // Aircraft and Helicopters are always delivered to helipads or runways
-            
-            private ["_placeholder","_wp","_v","_grp","_name","_id","_msgObject"];
-            _msgObject = getText(configFile >> 'CfgVehicles' >> _object >> 'displayname');
-			
-            // Find nearest helipad
-            if ((_object iskindof "Helicopter") || (_object == "MV22")) then 
-            {
-                _placeholder = "Can_small" createvehicle _pos;
-                _airport = position (([["HeliH","HeliHRescue","HeliHCivil"], [_placeholder], 500, _debug,"ColorBlack","heliport"] call mso_core_fnc_findObjectsByType) call BIS_fnc_selectRandom);
-				deletevehicle _placeholder;
-            };
-			if (_debug) then {
-				diag_log format["MSO-%1 Tup_Logistics: Airport/Helipad: %2", time, _airport];
-			};
-			
-            if (!isNil "_airport") then 
-            {
-                _v = [_object,_pos] call spawnvehicle;
-                _grp = group _v;
-                _wp = _grp addwaypoint [_pos, 0];
-                _wp setWaypointBehaviour "CARELESS";
-                _wp setWaypointStatements ["true", "if((vehicle this iskindof ""Plane"") && !(typeof (vehicle this)== 'MV22'))then{vehicle this action [""Land"", vehicle this]};"];
-                _wp setWaypointCompletionRadius 1000;
-                
-                _wp = _grp addwaypoint [_airport, 0];
-                _wp setWaypointType "GETOUT";
-                _wp setWaypointTimeout [15,30,60];
-                _wp setWaypointStatements ["true", "{deletevehicle _x} foreach crew (vehicle this); deletegroup group (vehicle this);"];
-                
-                _id = 1000 + ceil(random(9000));
-                _name = format["mso_log_%1",_id];
-                _v setVariable ["pdb_save_name", _name, true];	
-				[-1, {PAPABEAR sideChat _this}, format ["%1 this is PAPA BEAR. %2 is on its way to %3 and will land at the nearest helipad or runway.", group _player, _msgObject, _airport]] call CBA_fnc_globalExecute;
-				
-				//Check to see if killed or landed
-				_v addEventHandler ["killed", 
-											{
-												[-1, {PAPABEAR sideChat _this}, 
-													format ["%1 this is PAPA BEAR. We regret to inform you the %2 you ordered has been destroyed.", group (_this select 0), getText(configFile >> 'CfgVehicles' >> typeof (_this select 0) >> 'displayname')]] call CBA_fnc_globalExecute;
-											}
-										];
-				_v addEventHandler ["LandedStopped", 
-											{
-												[-1, {PAPABEAR sideChat _this}, 
-													format ["%1 this is PAPA BEAR. The %2 you ordered has landed at %3", group (_this select 0), getText(configFile >> 'CfgVehicles' >> typeof (_this select 0) >> 'displayname'), position (_this select 0)]] call CBA_fnc_globalExecute; 
-													(_this select 0) removeAllEventHandlers "LandedStopped";
-											}
-										];
-				
-            } else {
-                // Tell group that order cannot be delivered due to no local airport/helipad           
-				[-1, {PAPABEAR sideChat _this}, format ["%1 this is PAPA BEAR. %2 delivery aborted as there is no runway or helipad within 500m of delivery location.", group _player, _msgObject]] call CBA_fnc_globalExecute;
-            };	
+            [_object, _destpos, _player] call logistics_fnc_deliverAircraft;
+        };
+		case (((_object iskindof "Car") || (_object iskindof "Tank") || (_object iskindof "Motorcycle")) && (_prefDel < 2)): 
+        {
+            [_request, _destpos, _player, _prefDel] call logistics_fnc_createAirDelivery;
         };
         default {
-            // Para drop initially
-            // idea though would be to have selection of Paradrop, airlift, convoy
-            
-            // Create vehicles for delivery
-            private ["_wp","_v","_grp"];
-            _v = ["C130J",_pos] call SpawnVehicle;
-            _grp = group _v;
-            _wp = _grp addwaypoint [_pos, 50];
-            _wp setWaypointBehaviour "CARELESS";
-            _wp setWaypointCompletionRadius 10;
-            
-            [_v,_request,_pos, _player] spawn {
-                private ["_v","_request","_grp","_pos","_wp","_player"];
-                _v = _this select 0;
-                _request = _this select 1;
-                _pos = _this select 2;
-                _grp = group _v;
-				_player = _this select 3;
-                
-                if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: Aircraft is on its way.", time];};
-                
-                waitUntil {sleep 5; (_v distance _pos < 2000) || !(_grp call CBA_fnc_isAlive)};
-                _veh FlyInHeight (150 + (random 100)); 
-				if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: Aircraft is 2km away.", time];};
-                waitUntil {sleep 1; (_v distance _pos < 500) || !(_grp call CBA_fnc_isAlive)};
-                if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: Aircraft is 500m away.", time];};
-                if (_grp call CBA_fnc_isAlive) then {
-					if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: calling dodrop", time];};
-                    [_request, _v] call logistics_fnc_DoDrop;
-					[-1, {PAPABEAR sideChat _this}, format ["%1 this is PAPA BEAR. %2 items were dropped near position %3. Over.", group _player, count _request, position _v]] call CBA_fnc_globalExecute;
-                } else {
-					_msgObject = getText(configFile >> 'CfgVehicles' >> typeof _v >> 'displayname');
-					[-1, {PAPABEAR sideChat _this}, format ["%1 this is PAPA BEAR. %2 carrying %3 items has disappeared off our radar, likely shotdown or crashed. Over.", group _player, _msgObject, count _request]] call CBA_fnc_globalExecute;
-                };
-                
-                _wp = _grp addwaypoint [[0,0,0], 50];
-                _wp setWaypointBehaviour "CARELESS";
-                _wp setWaypointCompletionRadius 10;
-                sleep (30 + (random 100));
-                
-                deleteVehicle _v;
-                deletegroup _grp;
-            };
+			// For non-aircraft/vehicles, deliver based on preferred delivery method
+			switch (true) do
+			{
+				case (_prefDel < 2) : // Paradrop or Airlift
+				{
+					[_request, _destpos, _player, _prefDel] call logistics_fnc_createAirDelivery;
+				};
+				case (_prefDel == 2) : // Convoy
+				{
+					_convoy = [_request, _destpos, _player, _startpos] call logistics_fnc_createConvoy;
+					_convoyArray = _convoyArray + _convoy;
+				};
+				case (_prefDel == 3) : // GPS guided paradrop
+				{
+					// Nothing yet [_request, _pos, _player] call logistics_fnc_createGPSParaDrop;
+				};
+			};
         };
     };
 } foreach _delivery;
 
+if (_prefDel == 2) then { // If road convoy get all vehicles moving together with protection vehicle
 
+	_convoyArray join _grp;
+	if (_debug) then {
+		diag_log format["Sending %1 (%2) on its way... to %3", _grp, units _grp, _destpos];
+	};
+	_wp = _grp addwaypoint [_destpos, 0];
+	_wp setWaypointBehaviour "SAFE";
+	_wp setWaypointFormation "FILE";
+	_wp setWaypointCompletionRadius 30;
+	_wp setWaypointCombatMode "BLUE";
+    [-1, {PAPABEAR sideChat _this}, format ["%1 this is PAPA BEAR. Your resupply convoy has entered the AO at %2 and is %3km away.", group _player, mapgridposition (leader _grp), round(((leader _grp) distance _destpos)/1000)]] call CBA_fnc_globalExecute;
+
+};

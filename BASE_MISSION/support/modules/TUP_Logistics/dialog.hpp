@@ -23,7 +23,7 @@ class TUP_ui_logistics {
 			y = 0.72 * safezoneH + safezoneY;
 			w = 0.0322266 * safezoneW;
 			h = 0.0275 * safezoneH;
-			action = "if (count tup_logistics_order > 0) then {0 call logistics_fnc_call}; closeDialog 0;";
+			action = "0 call logistics_fnc_validateOrder;";
 		};
 		class LogFormCancelButton: CUI_Button
 		{
@@ -255,5 +255,16 @@ class TUP_ui_logistics {
 			w = 0.15586 * safezoneW;
 			h = 0.0275 * safezoneH;
 		};
+		class LogFormReplenDem: CUI_Button
+		{
+			idc = 1007;
+			text = "Order Replen";
+			x = 0.616 * safezoneW + safezoneX;
+			y = 0.67875 * safezoneH + safezoneY;
+			w = 0.0773437 * safezoneW;
+			h = 0.0275 * safezoneH;
+			action = "if (count tup_logistics_replendem > 0) then {{lbAdd [10, format['%1 x %2', _x select 0, getText(configFile >> 'CfgVehicles' >> _x select 1 >> 'displayname')]]; tup_logistics_order set [count tup_logistics_order, _x];} foreach tup_logistics_replendem;};";
+		};
 	};
 };
+

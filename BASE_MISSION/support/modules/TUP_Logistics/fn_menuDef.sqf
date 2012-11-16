@@ -22,7 +22,7 @@ _menus = [
 	[
 		["main", mso_menuname, _menuRsc],
 		[
-			["Logistics Request",
+			["Logistics Demand",
 				{ if(call mso_fnc_hasRadio && ((getPlayerUID player) in MSO_R_Leader)) then { createDialog "TUP_ui_logistics" } }
 			]
 		]

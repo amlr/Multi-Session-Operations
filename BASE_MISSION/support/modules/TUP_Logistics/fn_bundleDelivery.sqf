@@ -1,5 +1,5 @@
 // Create Delivery
-private ["_debug","_request","_pos","_num","_object","_delivery","_staticw","_reammob","_static","_other","_vehs"];
+private ["_request","_num","_object","_delivery","_wepsammo","_static","_other","_vehs","_array"];
 
 _request = _this select 0;
 
@@ -13,8 +13,7 @@ if (typeName (_request select 0) != "ARRAY") then {
 // Go through Request and bundle orders together (i.e. put all crates in 1 vehicle, put all static weapons in another, deliver defence supplies based on size)
 _delivery = [];
 _vehs = [];
-_staticw = [];
-_reammob = [];
+_wepsammo = [];
 _static = [];
 _other = [];
 
@@ -40,18 +39,11 @@ _other = [];
 			};
 		}; 
 		 
-		case (_object iskindof "StaticWeapon") : 
+		case ((_object iskindof "StaticWeapon") || (_object iskindof "ReammoBox")): 
         {
 			for "_i" from 1 to _num do 
             {
-				_staticw set [count _staticw, _object];
-			};
-		};
-		case (_object iskindof "ReammoBox") : 
-        {
-			for "_i" from 1 to _num do 
-            {
-				_reammob set [count _reammob, _object];
+				_wepsammo set [count _wepsammo, _object];
 			};
 		};
 		case ((_object iskindof "Static") && !(_object iskindof "ReammoBox")) : 
@@ -73,7 +65,7 @@ _other = [];
 
 
 // Create delivery set
-_array = [_vehs,_staticw,_reammob,_static,_other];
+_array = [_vehs,_wepsammo,_static,_other];
 {
 	if  (count _x > 0) then {
 		_delivery set [count _delivery, _x];
