@@ -1,8 +1,8 @@
 [CENTER][SIZE=4][B][URL="http://dev-heaven.net/projects/mso/files"]!! MULTISESSION OPERATIONS v4.5 released !![/URL][/B][/SIZE]
 
-[CENTER][IMG]http://img15.imageshack.us/img15/420/msox.jpg[/IMG][/CENTER]
+[CENTER][IMG]http://img15.imageshack.us/img15/420/msox.jpg[/IMG]
 
-[CENTER]
+
 [B]Full Database Persistence provided...[/B]
 
 - PLAYER STATE incl. gear and damage
@@ -13,23 +13,26 @@
 - TEAM MARKERS
 - TASKS
 - AFTER ACTION REPORTS
-- ADVANCED KILL STATs[/B][/CENTER]
+- ADVANCED KILL STATs
+- LOGISTICS[/B][/CENTER]
 
 [B]Introducing...[/B]
 
-- Jmans VEHICLEKEYS, CREWINFO, ADMINTOOLS
-- MGO ATTACH
-- PXS SATCOMs
-- AMBIENT CONVOYS
+- VEHICLE KEYS
 - TUP LOGISTICS
+- ADMIN TOOLS
+- PXS SATCOMs
+- MGO ATTACH
+- AMBIENT CONVOYS
+- CREW INFO
 - TAVIANA and ESBEKISTAN missions
 
 [B]Fixed...[/B]
 - over 140 bug fixes and improvements (see Changelog.txt)
 [/CENTER]
  
-[CENTER][B]Get the latest 4.5 Missions AND MSO Code Base [URL="http://dev-heaven.net/projects/mso/files"]here[/URL] [/B][/CENTER]
-[CENTER][B]Requires CBA[/B][/CENTER]
+[CENTER][B][URL="http://dev-heaven.net/projects/mso/files"]Get the latest 4.5 Missions AND MSO Code Base here[/URL] [/B]
+[B]Requires CBA[/B][/CENTER]
  
 [CENTER][B][URL="http://dev-heaven.net/projects/mso/documents"]Documentation[/URL][/B][/CENTER]
  
@@ -41,7 +44,7 @@
 - Thanks to Jman we have 2 new features that will allow you to view peeps in your vehicle and even lock it
 - Full persistence provided with PDB
 - Better menu layout sorting
-- Added custom locations for CLAfghan
+- Added custom locations for CLAfghan and Esbekistan
 - Admin tools
 - lockable vehicles
 - Bug fixes
@@ -49,8 +52,8 @@
 [U]Support[/U]
 - MGO Attach allows you to put on your favorite scope if near an ammo crate (ACE)
 - PXS SATCOMs provides uplink to satellite images (SATVIEW)
-- CREWINFO provides better overview of the vehicle you are in
 - TUP Logistics brings you resupplies to the battlefield
+- CREWINFO provides better overview of the vehicle you are in
 - Bug fixes again...
 
 [U]Enemy[/U]
@@ -61,25 +64,29 @@
 - and again some dirty bugs fixed on the fly...
 
 [U]Missions[/U]
-- Example missions include Takistan, Zargabad, Chernarus, Utes, Taviana, Esbekistan, Clafghan, Lingor, Qom Province, Hazar Kot, Celle2, Tigerinanne, Tora Bora, Podagorsk, Cicada, Eden.
+- Example missions (Vanilla, ACE & ACEX) include: Takistan, Zargabad, Chernarus, Utes, Taviana, Esbekistan, Clafghan, Lingor, Qom Province, Hazar Kot, Celle2, Tigerinanne, Tora Bora, Podagorsk, Eden.
+ 
+[B]What Is MSO?[/B]
+Multi Session Operations is a modular mission framework giving you a unique free-roaming gameplay experience in a populated dangerous environment. Essentially it is a collection of scripts that create a persistent, living scenario in which the player operates. Unlike regular missions that have pre-scripted objectives, MSO procedurally generates dynamic enemy forces that are unpredictable and (semi) random. Players have to think beyond the mere tactical level and build up the intelligence picture, carrying out recce patrols to identify enemy locations and conduct deliberate attacks to neutralise them. Everything is persistent, including equipment, ammo, vehicles and even player lives. MSO is designed specifically for Dedicated Server use, but you can also run it Singleplayer or as Host.
+ 
+[B]Recommended Settings / Performance / Startup[/B]
+Due to the dynamic nature of MSO and its reliance on scripting to generate ambience and dynamic enemy, it can be resource intensive. The default settings are the recommended ones for most maps. If you have a large map with lots of locations (Chernarus) or a large number of players you will want to consider disabling or dialling down ambience or enemy.
+If you enable ALL the modules, please do not ask us why it performs so poorly. :)
+
+Recommended startup procedure and server environment:
+- For a stable gameplay experience it is highly recommended to allow only clients that use same addons and patch as server!
+- On MSO startup wait on briefingscreen until initalization has passed  "Completed" state (MAP -> MSO -> INITIALISATION), this can take a few minutes!
+- Try to avoid startups with more than 20 players at once, better startup alone, and let players join in when init is complete!
 
 [B]Feedback, issues, bugs[/B]
 Please check on dev heaven for an existing bug and report any issues [URL="http://dev-heaven.net/projects/mso/issues/new"]here[/URL].
- 
+
 [B]Note:[/B] This is probably our last official release for the common MSO framework 3.x - 4.x, because we are working on a project that we internally call "MSO Next Generation". Without telling too many stories, our team is moving towards new shores and we are eager to provide you with a prototype in the upcoming months!
- 
-[B]What Is MSO?[/B]
-Multi Session Operations is a modular mission framework. Essentially it is a collection of scripts that create a persistent, living scenario in which the player operates. Unlike regular missions that have pre-scripted objectives, MSO procedurally generates enemy forces that are unpredictable and (semi) random. Players have to think beyond the mere tactical level and build up the intelligence picture, carrying out recce patrols to identify enemy locations and conduct deliberate attacks to neutralise them. Everything is persistent, including equipment, ammo, vehicles and even player lives. MSO is designed specifically for Dedicated Server use. 
- 
-[B]Recommended Settings / Performance[/B]
-Due to the dynamic nature of MSO and its reliance on scripting to generate ambience and dynamic enemy, it can be resource intensive. The default settings are the recommended ones for most maps. If you have a large map with lots of locations (Chernarus) or a large number of players you will want to consider disabling or dialling down ambience or enemy.
- 
-If you enable ALL the modules, please do not ask us why it performs so poorly. :)
- 
+
 [B]Credits[/B]
 
 Thanks to:
-- MSO development team: Wolffy.au, Tupolov, highhead, Jman, friznit, WobblyHeadedBob, zorrobyte, HateDread, kieran, Ryan, Kolmain
+- MSO development team: Wolffy.au, Tupolov, Highhead, Jman, friznit, WobblyHeadedBob, zorrobyte, HateDread, kieran, Ryan, Kolmain
 - PersistentDB dev "team" - JMan, Scott W, Firefly
 - Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
 - Ryan (Rye) and Snakedoctor from the Praetorian Guard (PRAETOR)
