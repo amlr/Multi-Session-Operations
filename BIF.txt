@@ -5,7 +5,7 @@
 [CENTER]
 [B]Full Database Persistence provided...[/B]
 
-- PLAYER STATE incl. gear
+- PLAYER STATE incl. gear and damage
 - VEHICLES
 - OBJECTS
 - ENEMY LOCATIONS
@@ -20,9 +20,11 @@
 - Jmans VEHICLEKEYS, CREWINFO, ADMINTOOLS
 - MGO ATTACH
 - PXS SATCOMs
+- AMBIENT CONVOYS
+- TUP LOGISTICS
 
 [B]Fixed...[/B]
-- over 80 bug fixes and improvements (see Changelog.txt)
+- over 140 bug fixes and improvements (see Changelog.txt)
 [/CENTER]
  
 [CENTER][B]Get the latest 4.5 Missions AND MSO Code Base [URL="http://dev-heaven.net/projects/mso/files"]here[/URL] [/B][/CENTER]
@@ -47,12 +49,14 @@
 - MGO Attach allows you to put on your favorite scope if near an ammo crate (ACE)
 - PXS SATCOMs provides uplink to satellite images (SATVIEW)
 - CREWINFO provides better overview of the vehicle you are in
+- TUP Logistics brings you resupplies to the battlefield
 - Bugfixes again...
 
 [U]Enemy[/U]
 - Complete Recode of Dynamic Enemypop for PDB
 - Changed AI movement to FSM to clear up scheduled environment and increase performance
 - Optimized EnPop modules to run smoother
+- Ambient convoys
 - and again some dirty bugs fixed on the fly...
 
 [U]Missions[/U]
@@ -61,7 +65,7 @@
 [B]Feedback, issues, bugs[/B]
 Please check on dev heaven for an existing bug and report any issues [URL="http://dev-heaven.net/projects/mso/issues/new"]here[/URL].
  
-[B]Note:[/B] This is probably our last official release for the common MSO framework 3.x - 4.x, because we are working on a project that we internally call "MSO Next Generation". Without telling to many stories, our team is moving towards new shores and we are eager to provide you with a prototype in the upcoming months!
+[B]Note:[/B] This is probably our last official release for the common MSO framework 3.x - 4.x, because we are working on a project that we internally call "MSO Next Generation". Without telling too many stories, our team is moving towards new shores and we are eager to provide you with a prototype in the upcoming months!
  
 [B]What Is MSO?[/B]
 Multi Session Operations is a modular mission framework. Essentially it is a collection of scripts that create a persistent, living scenario in which the player operates. Unlike regular missions that have pre-scripted objectives, MSO procedurally generates enemy forces that are unpredictable and (semi) random. Players have to think beyond the mere tactical level and build up the intelligence picture, carrying out recce patrols to identify enemy locations and conduct deliberate attacks to neutralise them. Everything is persistent, including equipment, ammo, vehicles and even player lives. MSO is designed specifically for Dedicated Server use. 
@@ -79,7 +83,7 @@ Thanks to:
 - Ryan, Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
 - Friznit, Tupolov, DaveP and Volunteer Commando Battalion (VCB)
 - Krause, Beta, Sandiford, JollyResq - United Operations (UO)
-- Fogu, VRCRaptor, Kremator, SCAJolly, Katipo66, vengeance1, Dingbat, CebAlmighty, Jayc-astv, 16AA, VCB and AEF clans for testing
+- Fogu, VRCRaptor, Bl1P, Dikkeduif, Kremator, SCAJolly, Katipo66, vengeance1, Dingbat, CebAlmighty, Jayc-astv, 16AA, VCB and AEF clans for testing
 - Alef and Sickboy for CBA conversion for A2Free
 - Xeno and Mikero for their Mission Builder Script
 - Spyder for Object Network Update (ONU), LoyalGuard for ARMA Electrical Grids (AEG), ArmaIIholic and Highhead for World In Conflict (WICT), LurchiDerLurch for AC130 CAS
