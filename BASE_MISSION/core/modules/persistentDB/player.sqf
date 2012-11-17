@@ -10,7 +10,14 @@ G_PLAYER_DATA = [
 		_loadedPlayerScore =  (_this select 0) getVariable "loadedPlayerScore"; 
         _globalPlayerScore =  (_this select 0) getVariable "globalPlayerScore";
 		_otherScores = _globalPlayerScore -_loadedPlayerScore; 
-		(score  (_this select 0)) - _otherScores;	   
+		_score = (score  (_this select 0)) - _otherScores;	
+		if (debug_mso) then{
+			diag_log format["Saving Score: %1", _score];
+		};
+		if (typeName _score != "SCALAR") then{
+			_score = 0;
+		};
+		_score;
 	  } else {
 		score  (_this select 0);
 	  }; },
@@ -95,19 +102,19 @@ S_PLAYER_DATA = [
 		
 	{(_this select 1) setVariable ["pPosition", (_this select 0), true];}, // Pos	 5
 	
-	{(_this select 1) setdamage (_this select 0);}, // Damage 6
+	{if (typeName (_this select 0) == "SCALAR") then {(_this select 1) setdamage (_this select 0);};}, // Damage 6
 		
-	{	(_this select 1) setHit ["head_hit", (_this select 0)];
-		(_this select 1) setVariable ["head_hit", (_this select 0), true];}, // 	Head 7
+	{if (typeName (_this select 0) == "SCALAR") then {	(_this select 1) setHit ["head_hit", (_this select 0)];
+		(_this select 1) setVariable ["head_hit", (_this select 0), true];};}, // 	Head 7
 		
-	{	(_this select 1) setHit ["body", (_this select 0)];
-		(_this select 1) setVariable ["body", (_this select 0), true];}, // Body	8
+	{if (typeName (_this select 0) == "SCALAR") then {	(_this select 1) setHit ["body", (_this select 0)];
+		(_this select 1) setVariable ["body", (_this select 0), true];};}, // Body	8
 	
-	{	(_this select 1) setHit ["hands", (_this select 0)];
-		(_this select 1) setVariable ["hands", (_this select 0), true];}, //Hands 9
+	{if (typeName (_this select 0) == "SCALAR") then {	(_this select 1) setHit ["hands", (_this select 0)];
+		(_this select 1) setVariable ["hands", (_this select 0), true];};}, //Hands 9
 	
-	{	(_this select 1) setHit ["legs", (_this select 0)];
-		(_this select 1) setVariable ["legs", (_this select 0), true];}, 	// Legs	10
+	{if (typeName (_this select 0) == "SCALAR") then {	(_this select 1) setHit ["legs", (_this select 0)];
+		(_this select 1) setVariable ["legs", (_this select 0), true];};}, 	// Legs	10
 	
 	{(_this select 1) setdir (_this select 0); (_this select 1) setVariable ["pDirection", (_this select 0), true];},	// Dir	11
 	{(_this select 1) setVariable ["pStance", (_this select 0), true];}, //Stance 	12
