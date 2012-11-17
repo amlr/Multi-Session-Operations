@@ -22,6 +22,7 @@
 - PXS SATCOMs
 - AMBIENT CONVOYS
 - TUP LOGISTICS
+- TAVIANA and ESBEKISTAN missions
 
 [B]Fixed...[/B]
 - over 140 bug fixes and improvements (see Changelog.txt)
@@ -41,16 +42,16 @@
 - Full persistence provided with PDB
 - Better menu layout sorting
 - Added custom locations for CLAfghan
-- Admintools
+- Admin tools
 - lockable vehicles
-- Bugfixes
+- Bug fixes
 
 [U]Support[/U]
 - MGO Attach allows you to put on your favorite scope if near an ammo crate (ACE)
 - PXS SATCOMs provides uplink to satellite images (SATVIEW)
 - CREWINFO provides better overview of the vehicle you are in
 - TUP Logistics brings you resupplies to the battlefield
-- Bugfixes again...
+- Bug fixes again...
 
 [U]Enemy[/U]
 - Complete Recode of Dynamic Enemypop for PDB
@@ -60,7 +61,7 @@
 - and again some dirty bugs fixed on the fly...
 
 [U]Missions[/U]
-- Example missions include Takistan, Zargabad, Chernarus, Utes, Clafghan, Lingor, Qom Province, Hazar Kot, Celle2, Tigerinanne, Tora Bora, Podagorsk, Cicada, Eden.
+- Example missions include Takistan, Zargabad, Chernarus, Utes, Taviana, Esbekistan, Clafghan, Lingor, Qom Province, Hazar Kot, Celle2, Tigerinanne, Tora Bora, Podagorsk, Cicada, Eden.
 
 [B]Feedback, issues, bugs[/B]
 Please check on dev heaven for an existing bug and report any issues [URL="http://dev-heaven.net/projects/mso/issues/new"]here[/URL].
@@ -70,7 +71,7 @@ Please check on dev heaven for an existing bug and report any issues [URL="http:
 [B]What Is MSO?[/B]
 Multi Session Operations is a modular mission framework. Essentially it is a collection of scripts that create a persistent, living scenario in which the player operates. Unlike regular missions that have pre-scripted objectives, MSO procedurally generates enemy forces that are unpredictable and (semi) random. Players have to think beyond the mere tactical level and build up the intelligence picture, carrying out recce patrols to identify enemy locations and conduct deliberate attacks to neutralise them. Everything is persistent, including equipment, ammo, vehicles and even player lives. MSO is designed specifically for Dedicated Server use. 
  
-[B]Recommended Settings / Peformance[/B]
+[B]Recommended Settings / Performance[/B]
 Due to the dynamic nature of MSO and its reliance on scripting to generate ambience and dynamic enemy, it can be resource intensive. The default settings are the recommended ones for most maps. If you have a large map with lots of locations (Chernarus) or a large number of players you will want to consider disabling or dialling down ambience or enemy.
  
 If you enable ALL the modules, please do not ask us why it performs so poorly. :)
@@ -80,8 +81,9 @@ If you enable ALL the modules, please do not ask us why it performs so poorly. :
 Thanks to:
 - MSO development team: Wolffy.au, Tupolov, highhead, Jman, friznit, WobblyHeadedBob, zorrobyte, HateDread, kieran, Ryan, Kolmain
 - PersistentDB dev "team" - JMan, Scott W, Firefly
-- Ryan, Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
-- Friznit, Tupolov, DaveP and Volunteer Commando Battalion (VCB)
+- Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
+- Ryan (Rye) and Snakedoctor from the Praetorian Guard (PRAETOR)
+- Friznit, Tupolov, DaveP, Gunny and Volunteer Commando Battalion (VCB)
 - Krause, Beta, Sandiford, JollyResq - United Operations (UO)
 - Fogu, VRCRaptor, Bl1P, Dikkeduif, Kremator, SCAJolly, Katipo66, vengeance1, Dingbat, CebAlmighty, Jayc-astv, 16AA, VCB and AEF clans for testing
 - Alef and Sickboy for CBA conversion for A2Free
