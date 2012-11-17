@@ -5,7 +5,7 @@ Thanks to:
 - Ryan, Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
 - Friznit, Tupolov, DaveP and Volunteer Commando Battalion (VCB)
 - Krause, Beta, Sandiford, JollyResq - United Operations (UO)
-- Kremator, SCAJolly, Katipo66, vengeance1, VRCRaptor, Dingbat, CebAlmighty, Jayc-astv, 16AA, VCB and AEF clans for testing
+- Bl1P, DikkeDuif, Brady, Kremator, SCAJolly, Katipo66, vengeance1, VRCRaptor, Dingbat, CebAlmighty, Jayc-astv, 16AA, VCB and AEF clans for testing
 - Alef and Sickboy for CBA conversion for A2Free
 - Xeno and Mikero for their Mission Builder Script
 - Spyder for Object Network Update (ONU), LoyalGuard for ARMA Electrical Grids (AEG), ArmaIIholic and Highhead for World In Conflict (WICT), LurchiDerLurch for AC130 CAS
@@ -18,6 +18,59 @@ Thanks to:
 
 4.5 Changelog
 
+[MISSIONS] Unpersistet ACE crates to avoid PDB errors (and resupplied some missing ones)
+[MISSIONS] Added some missing resupplies (fallujah)
+[MISSIONS] Unpersistet some ACE crates to avoid PDB errors (clafghan)
+[MISSIONS] Unpersistet ACE crates in Zargabad mission to avoid PDB error (and made them resupplying)
+[MISSIONS] Changed BAF units to USMC and UN and set correct faction (for ACE UN/USMC vs. INS)
+[SUPPORT] Added Airlift and convoy to the logistics module, also the ability to order a Replen Dem (defined in logistics.hpp). Added the ability to define (in logistics.hpp) the items that a group can order. Can no longer paradrop tanks, or deliver defense supplies via convoy.
+[ENEMY] - Updated TUP_IED to support detection of IEDs by new ACE mine detectors
+[CORE] Added function that provides a basis for sending nicely formatted hints to players
+[CORE] Fixed: critical bug if onplayerdisconnect failed and player wasnt saved to DB yet (stuck on PDB screen / kill armaoa.exe in taskmanager)
+[CORE] Fixed JIP errors in rpt if player wasnt hurt, killed or respawned yet when saved to PDB (happened with ACE wounds).
+[MISSIONS] Updated all msofactions_defaults.hpp for duala-factions, removed unneeded msofactions.hpp also
+[ENEMY] - Added Isla Duala factions MOL_army and ibr_rebel_faction
+[SUPPORT] Updated Tup_logistics help to clarify where helicopters, MV22 and planes will land
+[SUPPORT] Updated and improved Tup_logistics, still only supports paradrop, but tidier and better interface/comms.
+[MISSIONS] Clafghan, some names where uses twice, also unpersistet some unsavable ACE Crates (threw error in RPT)
+[CORE] Several fixes in SQL dump
+[MISSIONS] placed missing ACE Magic box (zargabad)
+[MISSIONS] Placed missing ACE items crate and Magic box
+[MISSIONS] Fixed Chernarus UN vs. INS version - only had 1 playerslot! Also renamed for correct addons usage (ACE)
+[MISSIONS] Removed 18 slots Zargabad-mission (was actually only a copy of the 32 slots one)
+[MISSIONS] Renamed Clafghan mission for correct addons (ACEX)
+[ENEMY] Implemented Lazy Evaluation in DEP_PDB, changed sleep timing a bit
+[ENEMY] Implemented Lazy Evaluation in CQB (clientloop)
+[CORE] Fixed duplicate of mso_fnc_hasRadio
+[CORE] changed init-mods.sqf ACE Auto-AI healing to prevent masspile of civis healing you at base
+[SUPPORT] Updated Tup_Logistics so that fewer aircraft are used to deliver items.
+[PDB] Added support for Tup_logistics and script created items to be stored with PDB
+[PDB] - Fixed ACE Wounds respawn and heal issues with PDB
+[PDB] Removed Auto Increment counter from Schema
+[PDB] - Fixed support ACE Wounds, new schema provided also
+[MISSIONS] Updated Missions for TUP_Logistics and set DEP_PDB as default in params
+[ENEMY] Optimized DEP_PDB (one ring for all) and made it default (works also with non PDB)
+[SUPPORT] Excluded "UAV" in params text
+[SUPPORT] - Paradrop supplies at night now come with IR strobe markers
+[SUPPORT] - Added experimental paradrop resupply module fo' shizzle
+[CORE] - Removed the use of _time reserved variable.
+[SUPPORT] - Fixed incorrect reference to MGO
+[MISSIONS] Enabled CRB_Convoys again in missions modules.hpp
+[CORE] Fixed issue with lost/mixed up menu items due to mso-key beeing overwritten to late by init-mods.sqf
+[PDB] Fix for DEP LOCs, camps now spawn on restart
+[ENEMY] Updated Enemy Convoys to move between strategic CQB positions
+[ENEMY] - Updated and improved new Enemy Convoy module. Lowered number of concurrent convoys.
+[ENEMY] Updated and revamped enemy convoy. Now ambient enemy convoys roam around strategic locations. Off by default.
+[PDB] - Changed stored format for arrays, no longer remove [] from string.
+Revert "[MISSIONS] - Removed ACE Respawn module from missions to avoid duplicate ruck contents etc"
+[ENEMY] Fixed SAD_Nuke with a disarm-functionality
+[ENEMY] Applied fix for steep camps (if rmm_findflateara failed) in static enpop
+[ENEMY] Fallback to other MSO_factions if no appropriate group config was found (DEP and DEP_PDB). Fixed camps were sometimes not guarded by a second group (on the fly)
+[MISSIONS] Updated and fixed Hazar Kot mission
+[CORE] - Applied Apache License v2.0
+[ENEMY] Fixed: camps were placed at a random pos, if rmm_flatarea failed. Set to original pos. Also lowered mindistance to give more chances to find a flatposition.
+[MISSIONS] Added Adminactions to missions module.hpp
+[MISSIONS] Updated Lingor MSO (vanilla)
 [MISSIONS] Added optimized Fallujah (special settings in params.hpp like 2% CQB and 7% enpop)
 [AMBIENCE] widened Civi-Radius for case Fallujah in ambient civis
 [ENEMY] Lowered Patrolradius to be better compatible with PO2 MSO Autotasking
