@@ -135,10 +135,10 @@ for "_i" from 0 to (_num-1) do
 			
 		// If its a vehicle being delivered, get the crew out and delete them
 		if (typeof _v != "WarfareSupplyTruck_USMC") then {
-			_wp = _tmpgrp addwaypoint [_pos, 20];
+			_wp = group _v addwaypoint [_pos, 20];
 			_wp setWaypointType "GETOUT";
 			_wp setWaypointTimeout [15,30,60];
-			_wp setWaypointStatements ["true", "{_x action ['getOut', vehicle this]} foreach crew (vehicle this);{deletevehicle _x} foreach crew (vehicle this);"];
+			_wp setWaypointStatements ["true", "{deletevehicle _x} foreach crew (vehicle this);"];
 		};
 		
 		if ((_v call CBA_fnc_isAlive) && (damage _v < 0.7)) then {
@@ -152,14 +152,14 @@ for "_i" from 0 to (_num-1) do
 			
 			sleep 900;
 			
-			_wp = _tmpgrp addwaypoint [[0,0,0], 50];
+			_wp = group _v addwaypoint [[0,0,0], 50];
 			_wp setWaypointBehaviour "CARELESS";
 			_wp setWaypointCompletionRadius 10;
 
 			sleep 120;
 			
 			deleteVehicle _v;
-			deletegroup _tmpgrp;
+			deletegroup group _v;
 			
 		};
 	};

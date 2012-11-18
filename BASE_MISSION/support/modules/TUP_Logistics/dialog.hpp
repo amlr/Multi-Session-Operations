@@ -29,19 +29,27 @@ class TUP_ui_logistics {
 		{
 			idc = 1601;
 			text = "Cancel";
-			x = 0.313086 * safezoneW + safezoneX;
+			x = 0.306641 * safezoneW + safezoneX;
 			y = 0.72 * safezoneH + safezoneY;
 			w = 0.0386719 * safezoneW;
 			h = 0.0275 * safezoneH;
 			action = "closeDialog 0;";
 		};
+		class LogFormOrderCapacity: CUI_Caption
+		{
+			idc = 2001;
+			text = "Order Capacity: ";
+			x = 0.616 * safezoneW + safezoneX;
+			y = 0.67875 * safezoneH + safezoneY;
+			w = 0.0773437 * safezoneW;
+			h = 0.0275 * safezoneH;
+		};
 		class LogFormOrderBox: CUI_List
 		{
 			idc = 10;
-			text = "Current Order";
 			x = 0.306641 * safezoneW + safezoneX;
 			y = 0.48625 * safezoneH + safezoneY;
-			w = 0.386719 * safezoneW;
+			w = 0.13 * safezoneW;
 			h = 0.22 * safezoneH;
 		};
 		class LogFormAirVehDrop: CUI_Combo
@@ -132,7 +140,7 @@ class TUP_ui_logistics {
 			y = 0.2525 * safezoneH + safezoneY;
 			w = 0.0322266 * safezoneW;
 			h = 0.0275 * safezoneH;
-			action = "if ((lbCurSel 0 > 0) && (lbCurSel 5 > -1)) then {lbAdd [10, format['%1 x %2', lbCurSel 0, getText(configFile >> 'CfgVehicles' >> tup_logistics_air select (lbCurSel 5) >> 'displayname')]];tup_logistics_order set [ count tup_logistics_order, [lbCurSel 0, tup_logistics_air select (lbCurSel 5)]];};";
+			action = "[0,5,'air'] call logistics_fnc_formAddItem;";
 		};
 		class LogFormLandAdd: CUI_Button
 		{
@@ -142,7 +150,7 @@ class TUP_ui_logistics {
 			y = 0.29375 * safezoneH + safezoneY;
 			w = 0.0322266 * safezoneW;
 			h = 0.0275 * safezoneH;
-			action = "if ((lbCurSel 1 > 0) && (lbCurSel 6 > -1)) then {lbAdd [10, format['%1 x %2', lbCurSel 1, getText(configFile >> 'CfgVehicles' >> tup_logistics_land select (lbCurSel 6) >> 'displayname')]];tup_logistics_order set [ count tup_logistics_order, [lbCurSel 1, tup_logistics_land select (lbCurSel 6)]];};";
+			action = "[1,6,'land'] call logistics_fnc_formAddItem;";
 		};
 		class LogFormCrateAdd: CUI_Button
 		{
@@ -152,7 +160,7 @@ class TUP_ui_logistics {
 			y = 0.335 * safezoneH + safezoneY;
 			w = 0.0322266 * safezoneW;
 			h = 0.0275 * safezoneH;
-			action = "if ((lbCurSel 2 > 0) && (lbCurSel 7 > -1)) then {lbAdd [10, format['%1 x %2', lbCurSel 2, getText(configFile >> 'CfgVehicles' >> tup_logistics_crate select (lbCurSel 7) >> 'displayname')]];	tup_logistics_order set [ count tup_logistics_order, [lbCurSel 2, tup_logistics_crate select (lbCurSel 7)]];};";
+			action = "[2,7,'crate'] call logistics_fnc_formAddItem;";
 		};
 		class LogFormStaticAdd: CUI_Button
 		{
@@ -162,7 +170,7 @@ class TUP_ui_logistics {
 			y = 0.37625 * safezoneH + safezoneY;
 			w = 0.0322266 * safezoneW;
 			h = 0.0275 * safezoneH;
-			action = "if ((lbCurSel 3 > 0) && (lbCurSel 8 > -1)) then {lbAdd [10, format['%1 x %2', lbCurSel 3, getText(configFile >> 'CfgVehicles' >> tup_logistics_static select (lbCurSel 8) >> 'displayname')]];tup_logistics_order set [ count tup_logistics_order, [lbCurSel 3, tup_logistics_static select (lbCurSel 8)]];};";
+			action = "[3,8,'static'] call logistics_fnc_formAddItem;";
 		};
 		class LogFormDefSupAdd: CUI_Button
 		{
@@ -172,17 +180,17 @@ class TUP_ui_logistics {
 			y = 0.4175 * safezoneH + safezoneY;
 			w = 0.0322266 * safezoneW;
 			h = 0.0275 * safezoneH;
-			action = "if ((lbCurSel 4 > 0) && (lbCurSel 9 > -1)) then {lbAdd [10, format['%1 x %2', lbCurSel 4,getText(configFile >> 'CfgVehicles' >> tup_logistics_defence select (lbCurSel 9) >> 'displayname')]];tup_logistics_order set [ count tup_logistics_order, [lbCurSel 4, tup_logistics_defence select (lbCurSel 9)]];};";
+			action = "[4,9,'defence'] call logistics_fnc_formAddItem;";
 		};
 		class LogFormRemoveSel: CUI_Button
 		{
 			idc = 1607;
 			text = "Remove Selected";
-			x = 0.448438 * safezoneW + safezoneX;
+			x = 0.38 * safezoneW + safezoneX;
 			y = 0.72 * safezoneH + safezoneY;
-			w = 0.122461 * safezoneW;
+			w = 0.0773437 * safezoneW;
 			h = 0.0275 * safezoneH;
-			action = "lbDelete [10, lbCurSel 10]; tup_logistics_order set [lbCurSel 10, -1]; tup_logistics_order = tup_logistics_order - [-1];";
+			action = "0 call logistics_fnc_formRemoveItem;";
 		};
 		class LogFormAirText: CUI_Caption
 		{
@@ -252,18 +260,18 @@ class TUP_ui_logistics {
 			idc = 11;
 			x = 0.51000 * safezoneW + safezoneX;
 			y = 0.45875 * safezoneH + safezoneY;
-			w = 0.15586 * safezoneW;
+			w = 0.13 * safezoneW;
 			h = 0.0275 * safezoneH;
 		};
 		class LogFormReplenDem: CUI_Button
 		{
 			idc = 1007;
 			text = "Order Replen";
-			x = 0.616 * safezoneW + safezoneX;
-			y = 0.67875 * safezoneH + safezoneY;
+			x = 0.51 * safezoneW + safezoneX;
+			y = 0.72 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.0275 * safezoneH;
-			action = "if (count tup_logistics_replendem > 0) then {{lbAdd [10, format['%1 x %2', _x select 0, getText(configFile >> 'CfgVehicles' >> _x select 1 >> 'displayname')]]; tup_logistics_order set [count tup_logistics_order, _x];} foreach tup_logistics_replendem;};";
+			action = "0 call logistics_fnc_formAddReplen;";
 		};
 	};
 };

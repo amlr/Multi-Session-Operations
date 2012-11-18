@@ -14,5 +14,9 @@ class logistics {
 		class addItemsR3F {};
 		class spawnVehicle {};
 		class validateOrder {};
+		class formAddItem {};
+		class formRemoveItem {};
+		class formAddReplen {};
+		class getCost;
 	};
 };

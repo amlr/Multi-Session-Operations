@@ -40,8 +40,9 @@ if (_prefDel == 2) then { // If convoy establish protection vehicle
 		private ["_leadVeh","_pos"];
 		_leadVeh = _this select 0;
 		_pos = _this select 1;
-		waitUntil {sleep 120; !(_leadVeh call CBA_fnc_isAlive) || (damage _leadVeh > 0.6) || (_leadVeh distance _pos < 60)};
+		waitUntil {sleep 120; !(_leadVeh call CBA_fnc_isAlive) || (damage _leadVeh > 0.6) || (_leadVeh distance _pos < 100)};
 		deleteVehicle _leadVeh;
+		deletegroup group _leadVeh;
 	};
 };
 

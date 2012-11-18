@@ -8,10 +8,18 @@
 //tup_logistics_static = ["M2StaticMG"];
 
 //////////////////////////////////////////
-// Set maximum cost allowed per 24 hours (currently not working)
-// tup_logistics_orderlimit = 2000000;
+// Set maximum cost allowed per session (default in mission set to 5,000,000 - aircraft are around 400k each)
+// tup_logistics_orderlimit = 1000000;
 
-//////////////////////////////////////////////
+///////////////////////////////////////////////
 // Replen Dem
 // Add items to the standard Replen Dem order
 tup_logistics_replendem = [[1,"USBasicWeaponsBox"],[1,"USLaunchersBox"],[1,"USBasicAmmunitionBox"]];
+
+///////////////////////////////////////////////
+// Delay in delivery in seconds
+//tup_logistics_delay = 3600;
+
+///////////////////////////////////////////////
+// Order Frequency in hours
+//tup_logistics_frequency = 12;

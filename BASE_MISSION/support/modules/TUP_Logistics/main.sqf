@@ -81,10 +81,20 @@ TUP_logistics_delivery = [
 	"Road Convoy"
 ];
 
-// to add 	"Guided Para Drop (max. 350lbs)" and "Airlift"
+// to add 	"Guided Para Drop (max. 350lbs)"
+
+if (isNil "tup_logistics_frequency") then {
+	tup_logistics_frequency = 12;
+};
+
+if (isNil "tup_logistics_orderlimit") then {
+	tup_logistics_orderlimit = 5000000;
+};
+
+tup_logistics_curorderlimit = tup_logistics_orderlimit;
+//tup_logistics_nextorder = date;
 
 // Define logistics - defaults if not set in logistics.hpp
-
 if (isNil "tup_logistics_air") then {
 	tup_logistics_air = [0, faction player,"Air"] call mso_core_fnc_findVehicleType;
 	//diag_log format["Air = %1",tup_logistics_air];
@@ -101,6 +111,7 @@ if (isNil "tup_logistics_land") then {
 
 if (isNil "tup_logistics_crate") then {
 	tup_logistics_crate = ["Default","ReammoBox"] call logistics_fnc_findNonVehicleType;
+	tup_logistics_crate = tup_logistics_crate + ["Barrels"]; // Adding fuel barrels to resupply
 	//diag_log format["Crate = %1",tup_logistics_crate];
 };
 

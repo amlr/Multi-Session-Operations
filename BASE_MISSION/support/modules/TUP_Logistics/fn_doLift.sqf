@@ -66,7 +66,7 @@ If ((typeof _obj == "Misc_Cargo1B_military") || (typeof _obj in tup_logistics_co
 _timer = time;
 _wait = 90;
 //// Wait until ground reached
-waitUntil {sleep 0.5; (!(_grp call CBA_fnc_isAlive)  || (damage _Transporter > 0.6) || ((getPosATL _obj select 2) < 15) && (_Transporter distance _droppos < 175)) || (time > _timer + _wait) };
+waitUntil {sleep 0.5; (!(_grp call CBA_fnc_isAlive)  || (damage _Transporter > 0.6) || ((getPosATL _obj select 2) < 10) && (_Transporter distance _droppos < 175)) || (time > _timer + _wait) };
 deletevehicle _placeholder;
 
 _Transporter setVariable ["R3F_LOG_heliporte", objNull, true];
