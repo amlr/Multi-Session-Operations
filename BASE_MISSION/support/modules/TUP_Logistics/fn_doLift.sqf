@@ -54,7 +54,7 @@ If ((typeof _obj == "Misc_Cargo1B_military") || (typeof _obj in tup_logistics_co
 } else {
     private ["_id","_name"];
 	//// Enable R3F
-	_obj setVariable ["R3F_LOG_disabled", false];
+	_obj setVariable ["R3F_LOG_disabled", false, true];
 	
 	// Enable PDB saving 
 	_id = 1000 + ceil(random(9000));

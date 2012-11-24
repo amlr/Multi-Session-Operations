@@ -1,4 +1,4 @@
-if (isdedicated) then {
+if (isserver) then {
 	"TUP_LOGISTICS_REQUEST" addPublicVariableEventHandler { 
 			if (debug_mso) then {
 				diag_log format["MSO-%1 Tup_Logistics: Receiving %2 position %3", time, (_this select 1) select 1, (_this select 1) select 0];
@@ -62,7 +62,7 @@ if (isNil "tup_logistics_defence") then {
 
 tup_logistics_container = ["Misc_cargo_cont_net1","Misc_cargo_cont_net2","Misc_cargo_cont_net3"];
 
-if (isdedicated) exitwith {};
+if (isserver) exitwith {};
 
 //if (!(getPlayerUID player) in MSO_R_Leader)) exitwith {};
 
@@ -78,10 +78,9 @@ TUP_logistics_lines = [
 TUP_logistics_delivery = [
 	"Para Drop (any weight)",
 	"Airlift",
-	"Road Convoy"
+	"Road Convoy",
+	"GPS Guided Para Drop"
 ];
-
-// to add 	"Guided Para Drop (max. 350lbs)"
 
 if (isNil "tup_logistics_frequency") then {
 	tup_logistics_frequency = 12;

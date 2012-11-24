@@ -6,6 +6,7 @@ class logistics {
 		class delivery {};
 		class findNonVehicleType {};
 		class doDrop {};
+		class doGPSDrop {};
 		class doLift {};
 		class bundleDelivery {};
 		class deliverAircraft {};
@@ -17,6 +18,6 @@ class logistics {
 		class formAddItem {};
 		class formRemoveItem {};
 		class formAddReplen {};
-		class getCost;
+		class getCost;	
 	};
 };

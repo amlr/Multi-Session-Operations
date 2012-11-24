@@ -90,7 +90,7 @@ _delivery = [_order] call logistics_fnc_bundleDelivery;
 				};
 				case (_prefDel == 3) : // GPS guided paradrop
 				{
-					// Nothing yet [_request, _pos, _player] call logistics_fnc_createGPSParaDrop;
+					[_request, _destpos, _player, _prefDel] call logistics_fnc_createAirDelivery;
 				};
 			};
         };

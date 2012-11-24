@@ -38,10 +38,16 @@ numOfDeliveryVehicles = {
 		
 _num = [_request,_prefDel] call numOfDeliveryVehicles;
 
-if (_prefDel == 0) then {
-	_type = "C130J";
-} else {
-	_type = "CH_47F_EP1";
+switch (_prefDel) do {
+	case 0 : {
+		_type = "C130J";
+	};
+	case 1 : {
+		_type = "CH_47F_EP1";
+	};
+	case 3 : {
+		_type = "C130J";
+	};
 };
 
 // Create Vehicles and deliver goods
@@ -91,6 +97,11 @@ for "_i" from 0 to (_num-1) do
 		_object = ObjNull;
 	};
 	
+	if (_prefDel == 3) then { // Setup GPS paradrop
+		_object =  createVehicle ["Misc_cargo_cont_net1",[0,0,0],[],0,"CAN_COLLIDE"];
+		 _v FlyInHeight 600;
+	};
+	
 	[_v,_itemArray,_pos, _player, _prefDel,_object] spawn {
 		private ["_grp","_wp","_msgObject","_v","_request","_pos","_player","_prefDel","_object"];
 		_v = _this select 0;
@@ -110,19 +121,31 @@ for "_i" from 0 to (_num-1) do
         waitUntil {sleep 20; !(_grp call CBA_fnc_isAlive) || (damage _v > 0.6) || (_v distance _pos < 2000)};
 		if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: Aircraft is 2km away.", time];};
 		
-		_v FlyInHeight (150 + (random 100)); 
+		if (_prefDel != 3) then { // Flyin low for paradrop and airlift, for gps guided drop stay high
+			_v FlyInHeight (150 + (random 100)); 
+		} else {
+			_v FlyInHeight (450 + (random 100)); 
+		};
 		
-        waitUntil {sleep 5; !(_grp call CBA_fnc_isAlive) || (damage _v > 0.6) || (_v distance _pos < 500)};
-		if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: Aircraft is 500m away.", time];};
+        waitUntil {sleep 5; !(_grp call CBA_fnc_isAlive) || (damage _v > 0.6) || (_v distance _pos < 600)};
+		if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: Aircraft is 600m away.", time];};
 		
 		if ((_grp call CBA_fnc_isAlive) && (damage _v < 0.7)) then {
-			if (_prefDel == 0) then { 	// Para Drop
-				if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: calling dodrop", time];};
-				[_request, _v] call logistics_fnc_DoDrop;
-			} else { 					// Airlift
-				if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: calling dolift", time];};
-				[_request, _v, _pos, _object] call logistics_fnc_DoLift;
+			switch (_prefDel) do {
+				case 0 : {
+					if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: calling dodrop", time];};
+					[_request, _v] call logistics_fnc_DoDrop;
+				};
+				case 1 : {
+					if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: calling dolift", time];};
+					[_request, _v, _pos, _object] call logistics_fnc_DoLift;
+				};
+				case 3 : {
+					if (debug_mso) then {diag_log format["MSO-%1 Tup_Logistics: calling doGPSdrop", time];};
+					[_request, _v,_pos, _object] call logistics_fnc_DoGPSDrop;
+				};
 			};
+
 			[-1, {PAPABEAR sideChat _this}, format ["%1 this is PAPA BEAR. %2 items were delivered near position %3. Over.", group _player, count _request, position _v]] call CBA_fnc_globalExecute;
 		} else {
 			_msgObject = getText(configFile >> 'CfgVehicles' >> typeof _v >> 'displayname');
