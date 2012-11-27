@@ -253,7 +253,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		"PDB_PLAYER_UPDATE_KILLS" addPublicVariableEventHandler { 
 			if (isServer && (persistentDBHeader == 1)) then {
 				_data = _this select 1;
-				_player = _data select 0; // Player guid
+				_player = str(_data select 0); // Player guid
 				_weapon = _data select 1;
 				_distance = str (_data select 2);
 				_fac = str (_data select 3);
