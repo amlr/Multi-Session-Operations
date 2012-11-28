@@ -2,21 +2,21 @@
 SCRIPT(writeData);
 
 /* ----------------------------------------------------------------------------
-Function: MSO_fnc_writeData
+Function: MSO_fnc_readData
 
 Description:
-Writes data to an external datasource (SQL, JSON, Text File)
+Reads data from an external datasource (SQL, JSON, Text File)
 
 Parameters:
 String - Module name 
-Array - Array of key/value string pairs
+Array - Array of key/value unique identifiers
 
 Returns:
 String - Returns a response error
 
 Examples:
 (begin example)
-	[ _module, [ [key,value],[key,value],[key,value] ] ] call MSO_fnc_writeData;
+	[ _module, [ [key,value],[key,value],[key,value] ] ] call MSO_fnc_readData;
 (end)
 
 Author:
@@ -27,18 +27,18 @@ Wolffy.au 24 Oct 2012
 private ["_debug","_response","_module","_params"];
 _debug = false;
 
-// Write data to a data source
-// Function is expecting the module name (preferably matching table name for db access) and the key/value pairs where the key would be the column id for a DB or the attribute to a JSON object
+// Read data from a data source
+// Function is expecting the module name (preferably matching table name for db access) and the key/value pairs where the key would be the column id for a DB or the attribute to a JSON object that identify the data required
 // Values should be in string form (use the convertData function)
 // Call to external datasource uses an arma2net plugin call
-// For SQL this is an INSERT command followed by the column ids and values
+// For SQL this is a SELECT command followed by the filters
 // Outgoing calls to callExtension have a check to ensure they do not exceed 16kb
 // Avoided using the format command as it has a 2kb limt
 
 PARAMS_2(_module,_params);
 
 if (_debug) then {
-    format["WriteData - Len:%1 Params:(%3)  Type:%2", [_params] call CBA_fnc_strLen, _params, typeName _params] call MSO_fnc_logger;
+    format["ReadData - Len:%1 Params:(%3)  Type:%2", [_params] call CBA_fnc_strLen, _params, typeName _params] call MSO_fnc_logger;
 };
 
 // DATASOURCE = SQL|JSON|TEXT|MEMORY
@@ -46,21 +46,19 @@ if (_debug) then {
 
 switch(DATASOURCE) do {
         case "SQL": {
-			private ["_keys","_values","_cmd","_sql"];
+			private ["_uid","_cmd","_sql"];
 			
-			_keys = "";
-			_values = "";
-			
+			_uid = "";
+
 			// Build the SQL command
-			_cmd = format ["Arma2NETMySQLCommand ['%1', 'INSERT INTO %2", SQL_DATABASE_NAME, _module];
+			_cmd = format ["Arma2NETMySQLCommand ['%1', 'SELECT * FROM %2 WHERE ", SQL_DATABASE_NAME, _module];
 			{
-				_keys = _keys + (_x select 0) + ",";
-				_values = _values + (_x select 1) + ",";
+				_uid = _uid + (_x select 0) + "=" + (_x select 1) + " AND ";
 			} foreach _params;
-			_sql = _cmd + " (" + _keys + ") values (" + _values + ")']";
+			_sql = _cmd + _uid + "']";
 
 			// Get rid of any ,) in the string
-			_sql = [_sql, ",)", ")"] call CBA_fnc_replace;
+			_sql = [_sql, "AND ']", "']"] call CBA_fnc_replace;
 			
 			// Send the SQL command to the plugin
 			_response = [_sql] call MSO_fnc_sendToPlugIn;
@@ -71,7 +69,7 @@ switch(DATASOURCE) do {
 		
 			_pairs = "";
 			// Build the JSON command (http://msostore.iriscouch.com)
-			_cmd = format ["SendJSON ['%1', 'POST', '%2'", JSON_URL, _module];
+			_cmd = format ["GetJSON ['%1', '%2'", JSON_URL, _module];
 			{
 				_pairs = _pairs + "'" + (_x select 0) + "'" + ":" + "'" + (_x select 1) + "'" + ","; // each key/value needs to be wrapped in quotes, not sure how to do this
 			} foreach _params;
