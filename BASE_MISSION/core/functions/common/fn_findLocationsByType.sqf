@@ -19,7 +19,7 @@ _dest = [];
 {
 		if (type _x in _types) then 
 		{
-				_dest = _dest + [_x];
+				_dest set [count _dest, _x];
 				// Mark the dest
 				if (_debug) then 
 				{

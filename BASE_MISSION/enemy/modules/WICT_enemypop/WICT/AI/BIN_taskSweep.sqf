@@ -131,14 +131,14 @@ if (isServer) then
 				_i = 0;
 				_y = _x buildingPos _i;
 				while {format["%1", _y] != "[0,0,0]"} do {
-					_bldgpos = _bldgpos + [_y];
+					_bldgpos set [count _bldgpos, _y];
 					_i = _i + 1;
 					_y = _x buildingPos _i;
 				};
 			} forEach _bldgs;
 			
 			if(count _bldgpos != 0) then {_wp_pos = _bldgpos call BIS_fnc_selectRandom;};
-			_wp_array = _wp_array + [_wp_pos];
+			_wp_array set [count _wp_array, _wp_pos];
 
 			sleep 0.5;
 	};

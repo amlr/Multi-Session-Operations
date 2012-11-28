@@ -2,11 +2,15 @@ if(count mps_loc_hills < 1) exitWith{};
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_tower.sqf"];
 
-private["_location","_position","_taskid","_tower"];
+private["_location","_position","_taskid","_tower","_guards"];
 
-while { _location = (mps_loc_hills call mps_getRandomElement); _location == mps_loc_last } do {
+_location = (mps_loc_hills call mps_getRandomElement);
+
+while {_location == mps_loc_last} do {
+    _location = (mps_loc_hills call mps_getRandomElement);
 	sleep 0.1;
 };
+
 mps_loc_last = _location;
 
 _position = [(position _location) select 0,(position _location) select 1, 0];
@@ -17,6 +21,14 @@ _troops = [];
 
 _tower = "Land_Vysilac_FM" createVehicle _position;
 [_tower] spawn mps_object_c4only;
+
+_guards = nil;
+
+while {isNil "_guards"} do {
+     _guards = [_position, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
+};
+[_guards] call BIN_fnc_taskDefend;
+_troops = _troops + (units _guards);
 
 _grp = [_position,"INS",(3 + random 3),50] call CREATE_OPFOR_SQUAD;
 (_grp addWaypoint [_position,20]) setWaypointType "HOLD";
@@ -37,17 +49,17 @@ for "_i" from 1 to _b do {
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
 [format["TASK%1",_taskid],
-	format["Destroy Comms Tower near %1", text _location],
-	format["Enemy have deployed a communications tower near %1. Disable their transmission ability to hinder their co-ordination.", text _location],
+	format["Destroy Comms Tower %1", text _location],
+	format["Enemy have deployed a communications tower. Disable their transmission ability to hinder their co-ordination.", text _location],
 	true,
 	[format["MARK%1",_taskid],(_position),"hd_objective","ColorRedAlpha"," Tower"],
 	"created",
 	_position
 ] call mps_tasks_add;
 
-while {!ABORTTASK && {damage _x < 1} count nearestObjects[_position,["Land_Vysilac_FM"],80] > 0 } do { sleep 5 };
+while {!ABORTTASK_PO && {damage _x < 1} count nearestObjects[_position,["Land_Vysilac_FM"],80] > 0 } do { sleep 5 };
 
-if(!ABORTTASK) then {
+if(!ABORTTASK_PO) then {
 [format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 mps_mission_status = 2;
 } else {

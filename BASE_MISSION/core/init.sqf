@@ -4,40 +4,41 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
+private ["_uid"];
+
+//All client should have the Functions Manager initialized, to be sure.
+if (isnil "BIS_functions_mainscope") then {
+        createCenter sideLogic;
+        BIS_functions_mainscope = (createGroup sideLogic) createUnit ["FunctionsManager", [0,0,0], [], 0, "NONE"];
+	BIS_fnc_locations = compile preprocessFileLineNumbers "CA\modules\functions\systems\fn_locations.sqf";
+};
+
+waitUntil{!isNil "BIS_fnc_init"};
+
+mso_version = "4.5";
+diag_log format["MSO-%1 Version: %2", time, mso_version];
+
+
+    
+    FNC_GLOBAL_MESSAGE = {
+	   		 if (player != _player) exitWith { };
+			_side = _this select 0;
+			_msg = _this select 1;
+			if(isNil "twnmgr_broadcastMP")then{twnmgr_broadcastMP = 0;};
+			if (twnmgr_broadcastMP == 1) then { crossroad=[_side,"HQ"]; crossroad SideChat _msg; };
+    };
+    
+    "GLOBAL_MESSAGE" addPublicVariableEventHandler { (_this select 1) call FNC_GLOBAL_MESSAGE };
+    
+
 //Create the comms menu on all machines.
 [] call BIS_fnc_commsMenuCreate; 
 
 // Add briefing for MSO
-_nul = [] execVM "core\scripts\briefing.sqf";
+execNow  "core\scripts\briefing.sqf";
 
 //http://community.bistudio.com/wiki/enableSaving
 enableSaving [false, false];
-
-MSO_Loop_Funcs = [];
-MSO_useCBA = false;
-
-// Thanks to Nou for this code
-[] spawn {
-        if(!MSO_useCBA) then {
-                if(!isDedicated) then {
-                        waitUntil { player == player && alive player };
-                };
-                waitUntil {
-		        private ["_f","_delta"];
-                        {
-                                if((count _x) > 0) then {
-                                        _f = _x select 0;
-                                        _delta = _x select 1;
-                                        if(diag_tickTime >= _delta) then {
-                                                [(_f select 2), _forEachIndex] call (_f select 0);
-                                                _x set[1, diag_tickTime + (_f select 1)];
-                                        };
-                                };
-                        } forEach MSO_Loop_Funcs;
-                        false;
-                };
-        };
-};
 
 CRB_MAPCLICK = "";
 
@@ -59,38 +60,46 @@ CRB_MAPCLICK = "";
 };
 
 mso_menuname = "Multi-Session Operations";
-mso_interaction_key = if (!isNil "ace_sys_interaction_key_self") then {
-        ace_sys_interaction_key_self
-} else {
-        [221,[false,false,false]]
+
+if (isnil "mso_interaction_key") then {
+	mso_interaction_key = [221,[false,false,false]];
 };
 
-mso_fnc_hasRadio = if (!isNil "ACE_fnc_hasRadio") then {
-        {if(player call ACE_fnc_hasRadio) then {true} else {hint "You require a radio.";false;};}
-} else {
+mso_fnc_hasRadio = {
+    if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
+        if (player call ACE_fnc_hasRadio) then {true;} else {hint "You require a radio.";false;};
+    } else {
+        // Thanks Sickboy
+        private ["_hasRadio"];
+        _hasRadio = false; 
         {
-		// Thanks Sickboy
-		_hasRadio = false; 
-		{
-			if (getText(configFile >> "CfgWeapons" >> _x >> "simulation") == "ItemRadio") exitWith { _hasRadio = true };
-		} forEach (weapons player);
-		if(_hasRadio) then {true} else {hint "You require a radio.";false;};
-	}
-};
-
-"Custom Locations(" + worldName + ")" call mso_core_fnc_initStat;
-waitUntil{!isNil "BIS_fnc_init"};
-if(isNil "CRB_LOCS") then {
-        CRB_LOCS = [] call mso_core_fnc_initLocations;
+                if (getText(configFile >> "CfgWeapons" >> _x >> "simulation") == "ItemRadio") exitWith { _hasRadio = true };
+        } forEach (weapons player);
+        if(_hasRadio) then {true} else {hint "You require a radio.";false;};
+    };
 };
 
 "Mission Parameters" call mso_core_fnc_initStat;
 if (!isNil "paramsArray") then {
-	diag_log format["MSO-%1 Mission Parameters", time];
+        diag_log format["MSO-%1 Mission Parameters", time];
         for "_i" from 0 to ((count paramsArray)-1) do {
                 missionNamespace setVariable [configName ((missionConfigFile/"Params") select _i),paramsArray select _i];
-		diag_log format["MSO-%1    %2 = %3", time, configName ((missionConfigFile/"Params") select _i), paramsArray select _i];
+                diag_log format["MSO-%1    %2 = %3", time, configName ((missionConfigFile/"Params") select _i), paramsArray select _i];
         };
+};
+
+if(isNil "debug_mso_setting") then {debug_mso_setting = 0;};
+if(debug_mso_setting == 0) then {debug_mso = false; debug_mso_loc = false;};
+if(debug_mso_setting == 1) then {debug_mso = true; debug_mso_loc = false;};
+if(debug_mso_setting == 2) then {debug_mso = true; debug_mso_loc = true;};
+publicvariable "debug_mso";
+publicvariable "debug_mso_loc";
+
+"Custom Locations(" + worldName + ")" call mso_core_fnc_initStat;
+
+if (isServer) then {
+	["CityCenter",[],debug_mso_loc] call BIS_fnc_locations;
+        CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
 "Player" call mso_core_fnc_initStat;
@@ -127,9 +136,19 @@ if(isNil "mprightsDisable") then {
 execNow "core\modules\rmm_debug\main.sqf";
 #endif
 
+#ifdef ADMINACTIONS
+"Admin Actions" call mso_core_fnc_initStat;
+[player] execVM "core\modules\adminActions\main.sqf";
+#endif
+
 #ifdef RMM_NOMAD
 "NOMAD" call mso_core_fnc_initStat;
 execNow "core\modules\rmm_nomad\main.sqf";
+#endif
+
+#ifdef persistentDB
+"Persistent DB" call mso_core_fnc_initStat;
+execNow "core\modules\persistentDB\main.sqf";
 #endif
 
 #ifdef RMM_GTK
@@ -137,26 +156,25 @@ execNow "core\modules\rmm_nomad\main.sqf";
 execNow "core\modules\rmm_gtk\main.sqf";
 #endif
 
-"Weather" call mso_core_fnc_initStat;
-#ifdef RMM_WEATHER
-execNow "core\modules\rmm_weather\main.sqf";
+#ifdef CRB_TIMESYNC
+"Time Sync" call mso_core_fnc_initStat;
+execNow "core\modules\crb_timesync\main.sqf";
 #endif
 #ifdef DRN_WEATHER
-execNow "core\modules\DRN_weather\CommonLib.sqf";
-[10, 60, 10, 60, true] execNow "core\modules\DRN_weather\DynamicWeatherEffects.sqf";
+"DRN Weather" call mso_core_fnc_initStat;
+[-1, -1, -1, [-1, -1], debug_mso] execNow "core\modules\DRN_weather\DynamicWeatherEffects.sqf";
 #endif
 
+setViewDistance 2500;
+setTerrainGrid 25;
 #ifdef RMM_SETTINGS
 "View Distance Settings" call mso_core_fnc_initStat;
 execNow "core\modules\rmm_settings\main.sqf";	
-#else
-if(isDedicated) then {
-	setViewDistance 5000;
-	setTerrainGrid 25;
-} else {
-	setViewDistance 2500;
-	setTerrainGrid 50;
-};
+#endif
+
+#ifdef VEHICLEIGNITIONKEYS
+"Vehicle Ignition Keys" call mso_core_fnc_initStat;
+execNow "core\modules\vehicleIgnitionKeys\main.sqf";
 #endif
 
 #ifdef SPYDER_ONU
@@ -167,10 +185,10 @@ execNow "core\modules\spyder_onu\main.sqf";
 "Remove Destroyed Objects" call mso_core_fnc_initStat;
 //--- Is Garbage collector running?
 if (isnil "BIS_GC") then {
-	BIS_GC = (group BIS_functions_mainscope) createUnit ["GarbageCollector", position BIS_functions_mainscope, [], 0, "NONE"];
+        BIS_GC = (group BIS_functions_mainscope) createUnit ["GarbageCollector", position BIS_functions_mainscope, [], 0, "NONE"];
 };
 if (isnil "BIS_GC_trashItFunc") then {
-	BIS_GC_trashItFunc = compile preprocessFileLineNumbers "ca\modules\garbage_collector\data\scripts\trashIt.sqf";
+        BIS_GC_trashItFunc = compile preprocessFileLineNumbers "ca\modules\garbage_collector\data\scripts\trashIt.sqf";
 };
 waitUntil{!isNil "BIS_GC"};
 BIS_GC setVariable ["auto", true];

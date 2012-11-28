@@ -1,0 +1,104 @@
+[CENTER][SIZE=4][B][URL="http://dev-heaven.net/projects/mso/files"]!! MULTISESSION OPERATIONS v4.5 released !![/URL][/B][/SIZE]
+
+[CENTER][IMG]http://img15.imageshack.us/img15/420/msox.jpg[/IMG]
+
+
+[B]Full Database Persistence provided...[/B]
+
+- PLAYER STATE incl. gear and damage
+- VEHICLES
+- OBJECTS
+- ENEMY LOCATIONS
+- CQB COIN Module
+- TEAM MARKERS
+- TASKS
+- AFTER ACTION REPORTS
+- ADVANCED KILL STATs
+- LOGISTICS[/B][/CENTER]
+
+[B]Introducing...[/B]
+
+- VEHICLE KEYS
+- TUP LOGISTICS
+- ADMIN TOOLS
+- PXS SATCOMs
+- MGO ATTACH
+- AMBIENT CONVOYS
+- CREW INFO
+- TAVIANA and ESBEKISTAN missions
+
+[B]Fixed...[/B]
+- over 140 bug fixes and improvements (see Changelog.txt)
+[/CENTER]
+ 
+[CENTER][B][URL="http://dev-heaven.net/projects/mso/files"]Get the latest 4.5 Missions AND MSO Code Base here[/URL] [/B]
+[B]Requires CBA[/B][/CENTER]
+ 
+[CENTER][B][URL="http://dev-heaven.net/projects/mso/documents"]Documentation[/URL][/B][/CENTER]
+ 
+[CENTER][B]You need [URL="https://dev-heaven.net/attachments/download/15365/Eliteness2.90.rar"]ELITENESS[/URL] to depbo these missions[/B][/CENTER]
+
+[B]What's New for v4.5?[/B]
+
+[U]Core[/U]
+- Thanks to Jman we have 2 new features that will allow you to view peeps in your vehicle and even lock it
+- Full persistence provided with PDB
+- Better menu layout sorting
+- Added custom locations for CLAfghan and Esbekistan
+- Admin tools
+- lockable vehicles
+- Bug fixes
+
+[U]Support[/U]
+- MGO Attach allows you to put on your favorite scope if near an ammo crate (ACE)
+- PXS SATCOMs provides uplink to satellite images (SATVIEW)
+- TUP Logistics brings you resupplies to the battlefield
+- CREWINFO provides better overview of the vehicle you are in
+- Bug fixes again...
+
+[U]Enemy[/U]
+- Complete Recode of Dynamic Enemypop for PDB
+- Changed AI movement to FSM to clear up scheduled environment and increase performance
+- Optimized EnPop modules to run smoother
+- Ambient convoys
+- and again some dirty bugs fixed on the fly...
+
+[U]Missions[/U]
+- Example missions (Vanilla, ACE & ACEX) include: Takistan, Zargabad, Chernarus, Utes, Taviana, Esbekistan, Clafghan, Lingor, Qom Province, Hazar Kot, Celle2, Tigerinanne, Tora Bora, Podagorsk, Eden.
+ 
+[B]What Is MSO?[/B]
+Multi Session Operations is a modular mission framework giving you a unique free-roaming gameplay experience in a populated dangerous environment. Essentially it is a collection of scripts that create a persistent, living scenario in which the player operates. Unlike regular missions that have pre-scripted objectives, MSO procedurally generates dynamic enemy forces that are unpredictable and (semi) random. Players have to think beyond the mere tactical level and build up the intelligence picture, carrying out recce patrols to identify enemy locations and conduct deliberate attacks to neutralise them. Everything is persistent, including equipment, ammo, vehicles and even player lives. MSO is designed specifically for Dedicated Server use, but you can also run it Singleplayer or as Host.
+ 
+[B]Recommended Settings / Performance / Startup[/B]
+Due to the dynamic nature of MSO and its reliance on scripting to generate ambience and dynamic enemy, it can be resource intensive. The default settings are the recommended ones for most maps. If you have a large map with lots of locations (Chernarus) or a large number of players you will want to consider disabling or dialling down ambience or enemy.
+If you enable ALL the modules, please do not ask us why it performs so poorly. :)
+
+Recommended startup procedure and server environment:
+- For a stable gameplay experience it is highly recommended to allow only clients that use same addons and patch as server!
+- On MSO startup wait on briefingscreen until initalization has passed  "Completed" state (MAP -> MSO -> INITIALISATION), this can take a few minutes!
+- Try to avoid startups with more than 20 players at once, better startup alone, and let players join in when init is complete!
+
+[B]Feedback, issues, bugs[/B]
+Please check on dev heaven for an existing bug and report any issues [URL="http://dev-heaven.net/projects/mso/issues/new"]here[/URL].
+
+[B]Note:[/B] This is probably our last official release for the common MSO framework 3.x - 4.x, because we are working on a project that we internally call "MSO Next Generation". Without telling too many stories, our team is moving towards new shores and we are eager to provide you with a prototype in the upcoming months!
+
+[B]Credits[/B]
+
+Thanks to:
+- MSO development team: Wolffy.au, Tupolov, Highhead, Jman, friznit, WobblyHeadedBob, zorrobyte, HateDread, kieran, Ryan, Kolmain
+- PersistentDB dev "team" - JMan, Scott W, Firefly
+- Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
+- Ryan (Rye) and Snakedoctor from the Praetorian Guard (PRAETOR)
+- Friznit, Tupolov, DaveP, Gunny and Volunteer Commando Battalion (VCB)
+- Krause, Beta, Sandiford, JollyResq - United Operations (UO)
+- Fogu, VRCRaptor, Bl1P, Dikkeduif, Kremator, SCAJolly, Katipo66, vengeance1, Dingbat, CebAlmighty, Jayc-astv, 16AA, VCB and AEF clans for testing
+- Alef and Sickboy for CBA conversion for A2Free
+- Xeno and Mikero for their Mission Builder Script
+- Spyder for Object Network Update (ONU), LoyalGuard for ARMA Electrical Grids (AEG), ArmaIIholic and Highhead for World In Conflict (WICT), LurchiDerLurch for AC130 CAS
+- Robalo, USMCWall, Muzzleflash, Wobbleyheadedbob, Hatedread, Zonekiller, VoW Widow, Swedge, Lonestar, SBSMac, Prymsuspec, zGuba, Fireball, Nou, Jaynus, Norrin for bits and pieces we got from you
+- CWR² team, IceBreakr, Shezan, Commander, Old Bear for making your mods and islands MSO friendly
+- Roy86 for Patrol Ops 2 Module
+- Enigma for Weather Module
+- PXS for Satcoms
+- Justin Alderman for MGO Attach

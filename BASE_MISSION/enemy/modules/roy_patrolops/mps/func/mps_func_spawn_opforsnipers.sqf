@@ -13,13 +13,13 @@ _sniperlist = [];
 
 {
 	_camouflage = getnumber (configfile >> "CfgVehicles" >> _x >> "camouflage");
-	if(_camouflage < 1) then{_snipers = _snipers + [_x]};
+	if(_camouflage < 1) then{_snipers set [count _snipers, _x]};
 } foreach _allunits;
 if(count _snipers == 0) exitWith{};
 
 _heights = nearestLocations [_position,["Mount"],500];
 
-_helih = "HeliHEmpty" createVehicleLocal _position;
+_helih = "Can_small" createVehicleLocal _position;
 _locationheight = (getposASL _helih) select 2;
 {
 	_helih setpos position _x;
@@ -36,7 +36,7 @@ _locationheight = (getposASL _helih) select 2;
 			while{count units _this > 0} do {sleep 60};
 			deletegroup _this;
 		};
-		_sniperlist = _sniperlist + [_sniper];
+		_sniperlist set [count _sniperlist, _sniper];
 	};
 } foreach _heights;
 

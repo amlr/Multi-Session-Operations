@@ -6,7 +6,7 @@ if !(isServer) exitWith {diag_log "Ambient IED Not running on server!";};
 _location = _this select 0;
 _size = _this select 1;
 
-_debug = false;
+_debug = debug_mso;
 _numIEDs = round ((_size / 50) * (tup_ied_threat / 100));
 
 // Check for Enemy in vicinty - if so double IED count
@@ -22,11 +22,6 @@ _posloc = [];
 _posloc = [_location, true, true, true, _size] call tup_ied_fnc_placeIED;
 if (_debug) then {
 	diag_log format ["MSO-%1 IED: Found %2 spots for IEDs",time, count _posloc];
-	{
-		//Mark IED position
-		_t = format["spot_r%1", random 10000];
-		_spotm = [_t, _x, "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorBlack", "GLOBAL"] call CBA_fnc_createMarker;
-	} foreach _posloc;
 };
 
 for "_j" from 1 to _numIEDs do {
@@ -43,6 +38,9 @@ for "_j" from 1 to _numIEDs do {
 	// Check no other IEDs nearby
 	_near = nearestObjects [_IEDpos, ["Land_IED_v1_PMC","Land_IED_v2_PMC","Land_IED_v3_PMC","Land_IED_v4_PMC","Land_Misc_Rubble_EP1","Land_Misc_Garb_Heap_EP1","Garbage_container","Misc_TyreHeapEP1","Misc_TyreHeap","Garbage_can","Land_bags_EP1"], 10];
 	if (count _near > 0) exitWith {diag_log format ["MSO-%1 IED: exiting as other IEDs found %2",time,_near];}; //Exit if other IEDs are found
+	
+	// Check not placed near a player
+	if ({(getpos _x distance _IEDpos) < 75} count ([] call BIS_fnc_listPlayers) > 0) exitWith {diag_log format ["MSO-%1 IED: exiting as placement too close to player.",time];}; //Exit if position is too close to a player
 	
 	// Choose EOD or TUP_IED (50/50 chance)
 	private "_choice";
@@ -67,8 +65,11 @@ for "_j" from 1 to _numIEDs do {
 			[_IED, typeOf _IED] execvm "enemy\modules\tup_ied\arm_ied.sqf";
 			_IED addeventhandler ["HandleDamage",{
 				deletevehicle ((_this select 0) getvariable "Trigger");
+				deletevehicle ((_this select 0) getvariable 'Det_Trigger');
+				deletevehicle ((_this select 0) getvariable 'Detect_Trigger');
 				if (_debug) then {
 					diag_log format ["MSO-%1 IED: %2 explodes due to damage by %3", time, (_this select 0), (_this select 3)];
+					[(_this select 0) getvariable "Marker"] call cba_fnc_deleteEntity;
 				};
 				"Sh_82_HE" createVehicle getposATL (_this select 0);
 				deletevehicle (_this select 0);

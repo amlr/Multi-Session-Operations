@@ -1,9 +1,3 @@
-class SupportHeader {
-        title = "Support"; 
-        values[]= {0}; 
-        texts[]= {" "}; 
-        default = 0;
-};
 class RMM_cas_frequency {
         title = "    CAS Availability"; 
         values[]= {120,1800,3600,10800}; 
@@ -11,7 +5,7 @@ class RMM_cas_frequency {
         default = 3600;
 };
 class RMM_cas_available {
-        title = "    Gunship/UAV Available per Team Leader"; 
+        title = "    Gunship available per Team Leader"; 
         values[]= {0,3,6,12,999}; 
         texts[]= {"None","3","6","12","Unlimited"}; 
         default = 3;

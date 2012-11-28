@@ -129,7 +129,7 @@ publicVariable "mps_civilian_intel";
 ] call mps_tasks_add;
 
 cachesalive = true;
-While {!ABORTTASK AND cachesalive} do {
+While {!ABORTTASK_PO AND cachesalive} do {
     									if (damage _cache0 < 1 || damage _cache1 < 1 || damage _cache2 < 1) then {cachesalive = true} else {cachesalive = false};
     									sleep (10);
                                         };

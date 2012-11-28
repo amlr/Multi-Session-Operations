@@ -32,10 +32,19 @@ to do: Current issue if road ahead bends.
 
 private ["_grp","_pos","_roadpos","_vehicle","_vehtype","_blockers","_roads","_fac","_debug"];
 
-_debug = false;
+if(isNil "rmm_ep_spawn_dist")then{rmm_ep_spawn_dist = 2000;};
+
+_debug = debug_mso;
 
 _grp = _this select 0;
 _pos = _this select 1;
+
+fPlayersInside = {
+        private["_pos","_dist"];
+        _pos = _this select 0;
+        _dist = _this select 1;
+        ({_pos distance _x < _dist} count ([] call BIS_fnc_listPlayers) > 0);
+};
 
 _fac = faction leader _grp;
 if (_fac == "BIS_TK_CIV" || _fac == "BIS_CIV_special") then {_fac = "BIS_TK_INS";};
@@ -48,7 +57,10 @@ while {_roadpos = _roads call BIS_fnc_selectRandom; _roads = _roads - [_roadpos]
 	if (count _roads == 1) exitWith {_roadpos = _roads select 0};
 };
 if (_debug) then {
+	private "_id";
+	_id = floor (random 1000);
 	diag_log format["Position of Road Block is %1", getpos _roadpos];
+	[format["roadblock_%1", _id], _roadpos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", "RoadBlock",  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
 };
 
 // Define [ Gate, Blocks, Barriers, Guides, Nest, Wire, Weapon] for each faction
@@ -152,7 +164,17 @@ _vehicle = _vehtype createVehicle (_roadpos modelToWorld [0,-13,0]);
 _vehicle setDir getdir _roadpos;
 
 // Spawn group and get them to defend
-_blockers = [getpos _roadpos, "infantry", _fac] call mso_core_fnc_randomGroup;
-_blockers addVehicle _vehicle;
-sleep 1;
-[_blockers, getpos _roadpos] execVM "enemy\scripts\BIN_taskDefend.sqf";
+[_vehicle, _roadpos, _fac] spawn {
+	private["_roadpos","_fac","_vehicle"];
+	_roadpos = _this select 0;
+	_vehicle = _this select 1;
+	_fac = _this select 2;
+	waitUntil{sleep 10; ([_roadpos, rmm_ep_spawn_dist] call fPlayersInside)};
+	// Spawn group and get them to defend
+	_blockers = [getpos _roadpos, "infantry", _fac] call mso_core_fnc_randomGroup;
+	_blockers addVehicle _vehicle;
+	sleep 1;
+	[_blockers, getpos _roadpos] execVM "enemy\scripts\BIN_taskDefend.sqf";
+};
+_roadposition = [getpos _roadpos select 0, getpos _roadpos select 1, 0];
+_roadposition;

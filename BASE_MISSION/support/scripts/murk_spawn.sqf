@@ -86,16 +86,16 @@ if (_vehicle) then {
 		if (!(_vcl in _unitsInGroupAdd) AND (typeOf _vcl != "")) then {
 			_crew = crew _vcl;
 			_unitCrewTemp = [];
-			{ _unitCrewTemp = _unitCrewTemp + [typeOf _x]; } forEach _crew;
-			_unitCrew = _unitCrew + [_unitCrewTemp];
-			_unitTypeArray = _unitTypeArray + [typeOf _vcl]; 
-			_unitPosArray = _unitPosArray + [getPos _vcl];
-			_unitSkillArray = _unitSkillArray + [skill _vcl];
-			_unitNameArray = _unitNameArray + [vehiclevarName _vcl];
-			_unitRankArray = _unitRankArray + [rank _vcl];
-			_unitsInGroupAdd = _unitsInGroupAdd + [_vcl];
-			_unitMagArray = _unitMagArray + [magazines _vcl];
-			_unitWeaponArray = _unitWeaponArray + [weapons _vcl];
+			{ _unitCrewTemp set [count _unitCrewTemp, typeOf _x]; } forEach _crew;
+			_unitCrew set [count _unitCrew, _unitCrewTemp];
+			_unitTypeArray set [count _unitTypeArray, typeOf _vcl]; 
+			_unitPosArray set [count _unitPosArray, getPos _vcl];
+			_unitSkillArray set [count _unitSkillArray, skill _vcl];
+			_unitNameArray set [count _unitNameArray, vehiclevarName _vcl];
+			_unitRankArray set [count _unitRankArray, rank _vcl];
+			_unitsInGroupAdd set [count _unitsInGroupAdd, _vcl];
+			_unitMagArray set [count _unitMagArray, magazines _vcl];
+			_unitWeaponArray set [count _unitWeaponArray, weapons _vcl];
 			{ // Delete the crew and vehicle
 				deleteVehicle _x;
 			} forEach _crew;
@@ -107,13 +107,13 @@ if (_vehicle) then {
 // Save the infantry types, etc
 else { 
 	{
-		_unitTypeArray = _unitTypeArray + [typeOf _x]; 
-		_unitPosArray = _unitPosArray + [getPos _x];
-		_unitSkillArray = _unitSkillArray + [skill _x];
-		_unitNameArray = _unitNameArray + [vehiclevarName _x];
-		_unitRankArray = _unitRankArray + [rank _x];
-		_unitMagArray = _unitMagArray + [magazines _x];
-		_unitWeaponArray = _unitWeaponArray + [weapons _x];
+		_unitTypeArray set [count _unitTypeArray, typeOf _x]; 
+		_unitPosArray set [count _unitPosArray, getPos _x];
+		_unitSkillArray set [count _unitSkillArray, skill _x];
+		_unitNameArray set [count _unitNameArray, vehiclevarName _x];
+		_unitRankArray set [count _unitRankArray, rank _x];
+		_unitMagArray set [count _unitMagArray, magazines _x];
+		_unitWeaponArray set [count _unitWeaponArray, weapons _x];
 		deleteVehicle _x;
 		sleep 0.01; // Same as with vehicles
 	} forEach _unitsInGroup;
@@ -156,10 +156,10 @@ _fnc_returnVehicleTurrets = {
 			//Make sure the entry was found.
 			if (!(isNil "_hasGunner")) then {
 				if (_hasGunner == 1) then {
-					_turrets = _turrets + [_turretIndex];		
+					_turrets set [count _turrets, _turretIndex];		
 					//Include sub-turrets, if present.
-					if (isClass (_subEntry >> "Turrets")) then { _turrets = _turrets + [[_subEntry >> "Turrets"] call _fnc_returnVehicleTurrets]; } 
-					else { _turrets = _turrets + [[]]; };
+					if (isClass (_subEntry >> "Turrets")) then { _turrets set [count _turrets, [_subEntry >> "Turrets"] call _fnc_returnVehicleTurrets]; } 
+					else { _turrets set [count _turrets, []]; };
 				};
 			};
 			_turretIndex = _turretIndex + 1;
@@ -233,7 +233,7 @@ _fnc_spawnUnit = {
 	      	_crew = [];
 
 	      	// Create the entire crew
-	      	{ _unit = _newGroup createUnit [_x,(_unitPosArray select _loop), [], 0, "NONE"]; _crew = _crew + [_unit]; } forEach (_unitCrew select _loop);
+	      	{ _unit = _newGroup createUnit [_x,(_unitPosArray select _loop), [], 0, "NONE"]; _crew set [count _crew, _unit]; } forEach (_unitCrew select _loop);
 	      	
 	      	// We assume that all vehicles have a driver, the first one of the crew
 	      	(_crew select 0) moveInDriver _spawnUnit; _currentCrewMember = 1;

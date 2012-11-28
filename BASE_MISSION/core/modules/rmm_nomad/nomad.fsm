@@ -117,7 +117,7 @@ class FSM
        "_maxLives = _dayspassed * (nomadRespawns / nomadReinforcements);" \n
        "" \n
        "_deaths = _ndata select 0;" \n
-       "if (_deaths >= _maxLives) then {_disconnect = true;};" \n
+       "if (_deaths >= _maxLives && nomadRespawns != 999) then {_disconnect = true;};" \n
        "" \n
        "_livesAccumulated = _maxLives - _deaths;" \n
        "_hrsPerLife = (nomadReinforcements / nomadRespawns) * 24;" \n
@@ -201,7 +201,7 @@ class FSM
        "player addeventhandler [""killed"",compile format [""" \n
        "	if (not isnil '%1') then {" \n
        "		missionnamespace setvariable ['%1',[((missionnamespace getvariable '%1') select 0) + 1]];" \n
-       "		publicvariable '%1';" \n
+       "		updatePlayerStateNow = true;" \n
        "	};" \n
        """,_string]];" \n
        "" \n

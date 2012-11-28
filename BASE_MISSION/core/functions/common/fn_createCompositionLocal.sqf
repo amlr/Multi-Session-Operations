@@ -58,7 +58,7 @@ for "_i" from 0 to ((count _objs) - 1) do
 		private ["_z"];
 		if ((count _relPos) > 2) then {_z = _relPos select 2} else {_z = 0};
 		_newPos = [_posX + (_newRelPos select 0), _posY + (_newRelPos select 1), _z];
-		if (_type isKindOf "LandVehicle") then {
+//		if (_type isKindOf "LandVehicle") then {
 			if (isServer) then {
 				_newObj = _type createVehicle _newPos;
 				_newObj setDir (_azi + _azimuth);
@@ -68,14 +68,14 @@ for "_i" from 0 to ((count _objs) - 1) do
 				if (!isNil "_damage") then {_newObj setDamage _damage};
 				_newObjs set [count _newObjs, _newObj];
 			};
-		} else {
+/*		} else {
 			_newObj = _type createVehicleLocal _newPos;
 			_newObj setDir (_azi + _azimuth);
 			_newObj setPos _newPos;
 			if (!isNil "_fuel") then {_newObj setFuel _fuel};
 			if (!isNil "_damage") then {_newObj setDamage _damage};
 			_newObjs set [count _newObjs, _newObj];
-		};
+		};*/
 };
 CRBPROFILERSTOP
 

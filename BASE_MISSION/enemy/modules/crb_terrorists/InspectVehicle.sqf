@@ -10,7 +10,7 @@ private ["_terrorist","_debug","_vehicle","_grp","_fate","_pos","_trg","_targets
 
 if(!isServer) exitWith{};
 
-_debug = false;
+_debug = debug_mso;
 	
 // Get the terrorist vehicle
 _pos = getpos (_this select 0);

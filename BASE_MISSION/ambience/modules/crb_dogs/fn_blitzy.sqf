@@ -58,7 +58,7 @@ if (isServer) then {
                         
                         {
                                 if ((side _dog)getFriend (side _x) < 0.6) then {
-                                        _alive_humans = _alive_humans + [_x];
+                                        _alive_humans set [count _alive_humans, _x];
                                         _dog knowsabout _x;
                                 }
                         }forEach _near_humans;

@@ -16,5 +16,5 @@ if (not isnil "RMM_aar") then {
 	};
 };
 while {dialog} do {
-	RMM_aar = [lbCurSel 0,lbCurSel 1,lbCurSel 2,ctrlText 3,ctrlText 4,ctrlText 5,ctrlText 6,ctrlText 7,ctrlText 8,ctrlText 9];
+	RMM_aar = [lbCurSel 0,lbCurSel 1,lbCurSel 2,ctrlText 3,ctrlText 4,ctrlText 5,ctrlText 6,ctrlText 7,ctrlText 8,ctrlText 9,(date select 2),(date select 1),([daytime] call BIS_fnc_timeToString)];
 };

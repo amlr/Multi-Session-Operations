@@ -22,7 +22,7 @@ _menus = [
 	[
 		["main", mso_menuname, _menuRsc],
 		[
-			["JIP Markers",
+			["Team Markers",
 				{ if(call mso_fnc_hasRadio) then { call jipmarkers_fnc_click } },
 				"", "", "", -1,	1, visibleMap]
 		]

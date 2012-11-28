@@ -6,6 +6,9 @@ if (isdedicated) exitwith {};
 
 if(isNil "nomadHeader")then{nomadHeader = 1;};
 if(isNil "nomadTime")then{nomadTime = 60;};
+if(isNil "nomadRespawns")then{nomadRespawns = 999;};
+if(isNil "nomadReinforcements")then{nomadReinforcements = 1;};
+
 if (nomadHeader == 0) exitWith{};
 
 waituntil {not isnull player};
@@ -13,7 +16,7 @@ waituntil {!isMultiplayer || getplayeruid player != ""};
 
 if (nomadTime == 43200) then {
 	// Setup UI option to Save Player State
-	["player", [mso_interaction_key], 4, ["core\modules\rmm_nomad\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+	["player", [mso_interaction_key], -9450, ["core\modules\rmm_nomad\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
 	["SPS","updatePlayerStateNow = true"] call mso_core_fnc_updateMenu;
 };
 
@@ -50,12 +53,7 @@ _s_nomad = [
         },
         {
                 {player removemagazine _x;} foreach (magazines player);
-				// Wait until CBA release fix publicly
-                if(!isNil "CBA_fnc_AddMagazineVerified" && !isClass(configFile>>"CfgPatches">>"ace_main")) then {
-                        {[player, _x, 1] call CBA_fnc_AddMagazineVerified;} foreach _this;
-                } else {
-                        {player addmagazine _x;} foreach _this;
-                };
+		{player addmagazine _x;} foreach _this;
         },
         {
                 {player removeweapon _x;} foreach ((weapons player) + (items player));

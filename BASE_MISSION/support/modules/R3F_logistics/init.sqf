@@ -24,28 +24,36 @@
  *     - permettre des appels conditionnels optimisés (ex : seulement pour des slots particuliers)
  *     - l'execVM est mieux connu et compris par l'éditeur de mission
  *     - l'init client de l'arty devient bloquant : il attend une PUBVAR du serveur (le point d'attache)
- */
+ *
+* New thread to ensure backward compatibility (v1.0 to v1.2).  
+* These versions advocated a # include execVM rather than to call this script.  
+* From the v1.3 performance by taking advantage execVM for three reasons:  
+*	- Allow conditional appeals optimized (eg only for private slots)  
+*	- The execVM is better known and understood by the mission editor  
+*	- Init the client becomes the arty blocking: it expects a PUBVAR server (the base)
+*/
+ 
 [] call
 {
 	#include "config.sqf"
 	#include "R3F_ARTY_disable_enable.sqf"
 	#include "R3F_LOG_disable_enable.sqf"
 	
-	// Chargement du fichier de langage
+	// Loading the language file
 	call compile preprocessFile format ["support\modules\R3F_logistics\%1_strings_lang.sqf", R3F_ARTY_AND_LOG_CFG_langage];
 	
 	if (isServer) then
 	{
-		// Service offert par le serveur : orienter un objet (car setDir est à argument local)
+		// Provided by the server: a direct object (as setDir argument is local)
 		R3F_ARTY_AND_LOG_FNCT_PUBVAR_setDir =
 		{
-			private ["_objet", "_direction"];
-			_objet = _this select 1 select 0;
+			private ["_object", "_direction"];
+			_object = _this select 1 select 0;
 			_direction = _this select 1 select 1;
 			
-			// Orienter l'objet et broadcaster l'effet
-			_objet setDir _direction;
-			_objet setPos (getPos _objet);
+			// Direct the broadcaster object and effect
+			_object setDir _direction;
+			_object setPos (getPos _object);
 		};
 		"R3F_ARTY_AND_LOG_PUBVAR_setDir" addPublicVariableEventHandler R3F_ARTY_AND_LOG_FNCT_PUBVAR_setDir;
 	};
@@ -59,18 +67,18 @@
 		#include "R3F_LOG\init.sqf"
 		R3F_LOG_active = true;
 	#else
-		// Pour les actions du PC d'arti
-		R3F_LOG_joueur_deplace_objet = objNull;
+		// For the actions of PC arti
+		R3F_LOG_joueur_deplace_object = objNull;
 	#endif
 	
-	// Auto-détection permanente des objets sur le jeu
+	// Auto-detection of permanent objects on the game
 	if !(isServer && isDedicated) then
 	{
-		execVM "support\modules\R3F_logistics\surveiller_nouveaux_objets.sqf";
+		execVM "support\modules\R3F_logistics\monitor_new_objects.sqf";
 	}
-	// Version allégée pour le serveur dédié
+	// Light version for the dedicated server
 	else
 	{
-		execVM "support\modules\R3F_logistics\surveiller_nouveaux_objets_dedie.sqf";
+		execVM "support\modules\R3F_logistics\monitor_new_objects_dedicated.sqf";
 	};
 };

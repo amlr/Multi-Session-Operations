@@ -44,6 +44,7 @@ _spawnpos set [2,0];
 switch _type do{
 	case "INF": {_allunits = mps_opfor_inf};
 	case "INS": {_allunits = mps_opfor_ins};
+	case "AA": {_allunits = mps_opfor_aa + mps_opfor_inf};
 	case "TARGET" : {_allunits = mps_opfor_leader};
 	default {_allunits = mps_opfor_inf};
 };

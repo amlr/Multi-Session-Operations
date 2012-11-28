@@ -1,16 +1,19 @@
 private["_stage"];
-_stage = _this;
+_stage = format["Initialising: %1", _this];
+player createDiaryRecord ["msoPage", ["Initialisation", 
+	_stage
+]]; 
+titleText [_stage, "BLACK FADED"];
 
-if (isServer && isNil "CRB_INIT_STATUS") then {
-        CRB_INIT_STATUS = [];
-        publicVariable "CRB_INIT_STATUS";
+if ((!isServer) || (!isdedicated)) then {
+	if  (_this == "Completed") then {
+		player setVariable ["mso_initcomplete", 1, false];
+	};
 };
-waitUntil{!isNil "CRB_INIT_STATUS"};
 
-if (isServer) then {
-        CRB_INIT_STATUS = CRB_INIT_STATUS + [_stage];
-        publicVariable "CRB_INIT_STATUS";
+if ((isServer) || (isdedicated)) then {
+	if  (_this == "Completed") then {
+		missionNameSpace setVariable ["server_initcomplete", 1];
+		[] execVM "core\modules\persistentDB\lobby_onConnected.sqf"; 
+	};
 };
-
-waitUntil{_stage in CRB_INIT_STATUS};
-player sideChat format["Initialising: %1", _stage];

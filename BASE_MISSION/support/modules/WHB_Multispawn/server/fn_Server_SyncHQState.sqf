@@ -1,36 +1,73 @@
-// Determines what action to call based on the State passed in by a client
-// Simple and slightly redundant but I've done it this way as I will be adding 
-// more actions to the MHQ at a later date and this simplifies the code a little...
-// Author: WobbleyheadedBob aka CptNoPants
+/* ----------------------------------------------------------------------------
+Function: MSO_fnc_server_syncHQState
 
-private ["_hqObject","_hqState"];
-_hqState = _this select 0;
-_hqObject = _this select 1;
+Description:
+Determines what actions to take based on changes to PV_server_syncHQState
 
-// Event No. 0 - Reset
-// Event No. 1 - Deploy
-// Event No. 2- Undeploy
+Parameters:
+- A state variable [Num]
+- A vehicle object to be turned into an FOB [Object]
 
-switch (_hqState) do
+Returns:
+Nothing
+
+Examples:
+(begin example)
+[_mhqState, _mhqObject]  call MSO_fnc_server_syncHQState;
+(end)
+
+See Also:
+- <MSO_fnc_createFOB>
+- <MSO_fnc_removeFOB>
+
+Author:
+WobbleyheadedBob aka CptNoPants
+---------------------------------------------------------------------------- */
+
+private ["_mhqObject","_mhqState"];
+_mhqState = _this select 0;
+_mhqObject = _this select 1;
+
+switch (_mhqState) do
 {
-//-------------------------------------------------------------------------------------------------
-	case 0: // Reset
+	case 0: // State No. 0 - Mobile/Undeployed
 	{
-		//Do nothing, we're just resetting the state, don't think I actually need to do this... :P
+		PV_server_syncHQState = [99, ""];
+		PV_client_syncHQState = [0, ""];
+		publicVariable "PV_client_syncHQState";
 	};
-//-------------------------------------------------------------------------------------------------
-	case 1: // Deploy
+	//-------------------------------------------------------------------------------------------------
+	case 1: // State No. 1 - Deployed
 	{
-		[_hqObject] call fn_deployHQ;
+		PV_server_syncHQState = [99, ""];
+		PV_client_syncHQState = [1, ""];
+		publicVariable "PV_client_syncHQState";
 	};
-//-------------------------------------------------------------------------------------------------
-	case 2: // Undeploy
+	//-------------------------------------------------------------------------------------------------
+	case 2: // State No. 2 - Deploying
 	{
-		[_hqObject] call fn_undeployHQ;
+		PV_server_syncHQState = [99, ""];
+		[_mhqObject] spawn 
+				{
+					private ["_mhq"];
+					_mhq = _this select 0;
+					[_mhq] call fn_createFOB;
+				};
 	};
-//-------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------
+	case 3: // State No. 3 - Undeploying/Packing up
+	{
+		PV_server_syncHQState = [99, ""];
+		[_mhqObject] spawn
+			{
+				private ["_fobHQ"];
+				_fobHQ = _this select 0;
+				[_fobHQ] call fn_removeFOB;
+			};
+	};
+	//-------------------------------------------------------------------------------------------------
 	Default 
 	{
-		//Do nothing but... wtf state did you enter???
+		PV_server_syncHQState = [99, ""];
 	};
 };

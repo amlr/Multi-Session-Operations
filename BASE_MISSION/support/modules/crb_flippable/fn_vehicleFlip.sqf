@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////
 // Function file for Armed Assault
-// Created by: (AEF)Wolffy.au [CTB]
+// Created by: (AEF)Wolffy.au
 // Created: 20100412
 // Contact: http://creobellum.org
 // Purpose: Flip rolled vehicle upright

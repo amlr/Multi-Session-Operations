@@ -15,7 +15,7 @@ _class = cnstrct_preview getvariable "cnstrct_type";
 			_object = createvehicle [_class,_position,[],0,"NONE"];
 			_object setdir _direction;
 			_object setpos _position;
-			cnstrct_buildings = cnstrct_buildings + [_object];
+			cnstrct_buildings set [count cnstrct_buildings, _object];
 			publicvariable "cnstrct_buildings";
 		};
 		deletevehicle cnstrct_preview;

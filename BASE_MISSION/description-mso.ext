@@ -21,9 +21,6 @@ class CfgSounds {
 #ifdef TUP_IED
 	#include <enemy\modules\tup_ied\CfgSounds.hpp>
 #endif
-#ifdef RMM_CAS
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\CfgSounds.hpp>
-#endif
 #ifdef ROY_PATROLOPS
 #include <enemy\modules\roy_patrolops\mps\dialog\mps_sounds.sqf>
 #endif
@@ -35,8 +32,17 @@ class Params {
 // BIS Warfare Params must go first
 	#include <enemy\modules\BIS_Warfare\params.hpp>
 #endif
+class coreHeader {
+        title = "Core"; 
+        values[]= {0}; 
+        texts[]= {" "}; 
+        default = 0;
+};
 #ifdef RMM_DEBUG
 	#include <core\modules\rmm_debug\params.hpp>
+#endif
+#ifdef ADMINACTIONS
+	#include <core\modules\adminActions\params.hpp>
 #endif
 #ifdef RMM_MP_RIGHTS
 	#include <core\modules\rmm_mp_rights\params.hpp>
@@ -44,15 +50,27 @@ class Params {
 #ifdef RMM_NOMAD
 	#include <core\modules\rmm_nomad\params.hpp>
 #endif
+#ifdef persistentDB
+	#include <core\modules\persistentDB\params.hpp>
+#endif
 #ifdef RMM_GTK
 	#include <core\modules\rmm_gtk\params.hpp>
 #endif
 #ifdef RMM_SETTINGS
 	#include <core\modules\rmm_settings\params.hpp>
 #endif
-#ifdef RMM_WEATHER
-	#include <core\modules\rmm_weather\params.hpp>
+#ifdef CRB_TIMESYNC
+	#include <core\modules\crb_timesync\params.hpp>
 #endif
+#ifdef VEHICLEIGNITIONKEYS
+	#include <core\modules\vehicleIgnitionKeys\params.hpp>
+#endif
+class ambientHeader {
+        title = "Ambience"; 
+        values[]= {0}; 
+        texts[]= {" "}; 
+        default = 0;
+};
 #ifdef CRB_CIVILIANS
 	#include <ambience\modules\crb_civilians\params.hpp>
 #endif
@@ -64,15 +82,6 @@ class Params {
 #endif
 #ifdef CRB_SHEPHERDS
 	#include <ambience\modules\crb_shepherds\params.hpp>
-#endif
-#ifdef CRB_CROWS
-	#include <ambience\modules\crb_crows\params.hpp>
-#endif
-#ifdef CRB_FLIES
-	#include <ambience\modules\crb_flies\params.hpp>
-#endif
-#ifdef CRB_SANDSTORM
-	#include <ambience\modules\crb_sandstorm\params.hpp>
 #endif
 #ifdef CRB_DESTROYCITY
 	#include <ambience\modules\crb_destroyCity\params.hpp>
@@ -86,6 +95,12 @@ class Params {
 #ifdef AEG
 	#include <ambience\modules\AEG\params.hpp>
 #endif
+class supportHeader {
+        title = "Support"; 
+        values[]= {0}; 
+        texts[]= {" "}; 
+        default = 0;
+};
 #ifdef RMM_CAS
 	#include <support\modules\rmm_cas\params.hpp>
 #endif
@@ -98,6 +113,25 @@ class Params {
 #ifdef WHB_MULTISPAWN
 	#include <support\modules\WHB_Multispawn\params.hpp>
 #endif
+#ifdef R3F_REVIVE
+	#include "support\modules\R3F_revive\params.hpp"
+#endif
+#ifdef CREWINFO
+	#include <support\modules\crewinfo\params.hpp>
+#endif
+#ifdef MGO
+#include "support\modules\mgo\main\script_params.hpp"
+#endif
+#ifdef PXS_SATCOM_OA
+#include "support\modules\pxs_satcom_oa\params.hpp"
+#endif
+
+class enemyHeader {
+        title = "Enemy"; 
+        values[]= {0}; 
+        texts[]= {" "}; 
+        default = 0;
+};
 #ifdef RMM_ENEMYPOP
 	#include <enemy\modules\rmm_enemypop\params.hpp>
 #endif
@@ -112,6 +146,12 @@ class Params {
 #endif
 #ifdef CRB_TERRORISTS
 	#include <enemy\modules\crb_terrorists\params.hpp>
+#endif
+#ifdef CQB_POP
+	#include <enemy\modules\CQB_POP\params.hpp>
+#endif
+#ifdef RMM_ZORA
+	#include <enemy\modules\RMM_ZORA\params.hpp>
 #endif
 #ifdef MSOFACTIONS
 	#include <enemy\msofactions.hpp>
@@ -128,18 +168,13 @@ class Params {
 	#include <support\modules\R3F_logistics\desc_include.h>
 #endif
 
-#ifdef RMM_CAS
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\uiDefines.hpp>
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\define.hpp>
-#endif
-
 class RscTitles
 {
 #ifdef R3F_LOGISTICS
 	#include <support\modules\R3F_logistics\desc_rsct_include.h>
 #endif
-#ifdef RMM_CAS
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\RscTitles.hpp>
+#ifdef CREWINFO
+#include <support\modules\crewinfo\dialog.hpp>
 #endif
 };
 
@@ -190,8 +225,14 @@ class cfgFunctions {
 #ifdef RMM_LOGBOOK
 	#include <support\modules\rmm_logbook\functions.hpp>
 #endif
+#ifdef RMM_RECRUITMENT
+	#include <support\modules\rmm_recruitment\functions.hpp>
+#endif
 #ifdef RMM_LOGISTICS
 	#include <support\modules\rmm_logistics\functions.hpp>
+#endif
+#ifdef TUP_LOGISTICS
+	#include <support\modules\tup_logistics\functions.hpp>
 #endif
 #ifdef RMM_NOTEBOOK
 	#include <support\modules\rmm_notebook\functions.hpp>
@@ -199,6 +240,7 @@ class cfgFunctions {
 #ifdef RMM_REVIVE
 	#include <support\modules\rmm_revive\functions.hpp>
 #endif
+
 #ifdef RMM_TASKS
 	#include <support\modules\rmm_tasks\functions.hpp>
 #endif
@@ -222,6 +264,9 @@ class cfgFunctions {
 #ifdef RMM_SETTINGS
 	#include <core\modules\rmm_settings\dialog.hpp>
 #endif
+#ifdef persistentDB
+	#include <core\modules\persistentDB\dialog.hpp>
+#endif
 #ifdef AEG
 	#include "ambience\modules\AEG\Dialogs\AEG_Dialogs.hpp"
 #endif
@@ -230,10 +275,6 @@ class cfgFunctions {
 #endif
 #ifdef RMM_CAS
 	#include <support\modules\rmm_cas\dialog.hpp>
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogParent.hpp>
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogAC130.hpp>
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogUAV.hpp>
-	#include <support\modules\rmm_cas\LDL_ac130\Includes\dialogMap.hpp>
 #endif
 #ifdef RMM_CASEVAC
 	#include <support\modules\rmm_casevac\dialog.hpp>
@@ -247,18 +288,14 @@ class cfgFunctions {
 #ifdef RMM_LOGISTICS
 	#include <support\modules\rmm_logistics\dialog.hpp>
 #endif
+#ifdef TUP_LOGISTICS
+	#include <support\modules\tup_logistics\dialog.hpp>
+#endif
 #ifdef RMM_NOTEBOOK
 	#include <support\modules\rmm_notebook\dialog.hpp>
 #endif
 #ifdef RMM_RECRUITMENT
-	#include <support\modules\rmm_recruitment\dialog_baf.hpp>
-	#include <support\modules\rmm_recruitment\dialog_us.hpp>
-	#include <support\modules\rmm_recruitment\dialog_ru.hpp>
-	#include <support\modules\rmm_recruitment\dialog_usmc.hpp>
-	#include <support\modules\rmm_recruitment\dialog_cz.hpp>
-	#include <support\modules\rmm_recruitment\dialog_gue.hpp>
-	#include <support\modules\rmm_recruitment\dialog_aaw.hpp>
-	#include <support\modules\rmm_recruitment\dialog_cwr2_us.hpp>
+	#include <support\modules\rmm_recruitment\dialog.hpp>
 	#include <support\modules\rmm_recruitment\TeamStatusDialog\TeamStatusDialog.hpp>
 #endif
 #ifdef RMM_TASKS
@@ -266,6 +303,43 @@ class cfgFunctions {
 #endif
 #ifdef ROY_PATROLOPS
 #include <enemy\modules\roy_patrolops\mps\dialog\mps_dialog.hpp>
+#endif
+#ifdef TUP_IED
+#include <enemy\modules\tup_ied\dialog.hpp>
+#endif
+#ifdef R3F_REVIVE
+	#include "support\modules\R3F_revive\dlg_attente_reanimation.h"
+#endif
+#ifdef PXS_SATCOM_OA
+#include "support\modules\pxs_satcom_oa\init_interference.hpp"
+#endif
+
+
+// Extended Event Handlers
+#ifdef persistentDB
+	class Extended_PreInit_Eventhandlers
+	{
+		unit_killed_preinit = "persistent_fnc_unitKilled = compile preprocessFile 'core\modules\persistentDB\unitKilled.sqf'" ;
+	};
+	class Extended_Killed_Eventhandlers
+	{
+		class LANDVEHICLE
+		{
+			landvehicle_killed = "_this call persistent_fnc_unitKilled";
+		};
+		class MAN
+		{
+			man_killed = "_this call persistent_fnc_unitKilled";
+		};
+		class AIR
+		{
+			air_killed = "_this call persistent_fnc_unitKilled";
+		};
+		class SHIP
+		{
+			ship_killed = "_this call persistent_fnc_unitKilled";
+		};
+	};
 #endif
 
 // Add BAF and TK Flight groups

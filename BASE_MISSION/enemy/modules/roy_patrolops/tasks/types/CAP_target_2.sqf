@@ -4,7 +4,9 @@ diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK CAP_target_2.sqf"];
 
 private["_location","_position","_taskid","_grp","_stance ","_b"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
+_location = (mps_loc_towns call mps_getRandomElement);
+while {_location == mps_loc_last } do {
+    _location = (mps_loc_towns call mps_getRandomElement);
 	sleep 0.1;
 };
 mps_loc_last = _location;
@@ -58,7 +60,7 @@ objective_intel_KILLED = {
 			_ev = (["EvMap","EvMoscow","EvPhoto"] call mps_getRandomElement) createvehicle _pos;
 			_ev setPosATL _pos;
 			_ev spawn {
-				while{!ABORTTASK && alive CAPT2_target && {isPlayer _x && side _x == (SIDE_A select 0)} count nearestObjects[position _this,["All"],3] == 0} do {sleep 2};
+				while{!ABORTTASK_PO && alive CAPT2_target && {isPlayer _x && side _x == (SIDE_A select 0)} count nearestObjects[position _this,["All"],3] == 0} do {sleep 2};
 				if(!alive CAPT2_target) exitWith {deleteVehicle _this};
 				deleteVehicle _this;
 				mission_sidechat = "Gained new intel about the targets possible location."; publicVariable "mission_sidechat"; player sideChat mission_sidechat;
@@ -70,7 +72,7 @@ objective_intel_KILLED = {
 				_marker setMarkerType "hd_unknown";
 				_marker setMarkerSize [0.75,0.75];
 				_marker setMarkerText format["%1m",_markeraccuracy];
-				objective_marker = objective_marker + [_markername]; publicVariable "objective_marker";
+				objective_marker set [count objective_marker, _markername]; publicVariable "objective_marker";
 			};
 		}];
 	};
@@ -96,7 +98,7 @@ for "_i" from 1 to 2 do {
 } forEach (nearestLocations [_position,["Name","NameLocal","NameVillage","NameCity","NameCityCapital"],3000]);
 
 [] spawn {
-	While{!ABORTTASK && alive CAPT2_target} do {
+	While{!ABORTTASK_PO && alive CAPT2_target} do {
 		{
 			_xmarkerposition = getMarkerPos _x;
 			_xmarkercolor = getMarkerColor _x;
@@ -109,7 +111,7 @@ for "_i" from 1 to 2 do {
 			_xmarker setMarkerSize [0.75,0.75];
 			_xmarker setMarkerColor _xmarkercolor;
 			_xmarker setMarkerText _xmarkertext;
-			objective_marker = objective_marker + [_xmarker];
+			objective_marker set [count objective_marker, _xmarker];
 		} forEach objective_marker;
 		sleep 30;
 	};
@@ -148,11 +150,11 @@ publicVariable "mps_civilian_intel";
 
 {_x spawn objective_intel_KILLED;} foreach _enemies;
 
-while {!ABORTTASK && alive CAPT2_target && CAPT2_target distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 10 } do { sleep 5 };
+while {!ABORTTASK_PO && alive CAPT2_target && CAPT2_target distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 10 } do { sleep 5 };
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
-if(!ABORTTASK && _random_scenario > 0 && alive CAPT2_target) then {
+if(!ABORTTASK_PO && _random_scenario > 0 && alive CAPT2_target) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

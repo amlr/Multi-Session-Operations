@@ -41,9 +41,6 @@ class Params {
 #ifdef RMM_SETTINGS
 	#include <core\modules\rmm_settings\params.hpp>
 #endif
-#ifdef RMM_WEATHER
-	#include <core\modules\rmm_weather\params.hpp>
-#endif
 #ifdef CRB_CIVILIANS
 	#include <ambience\modules\crb_civilians\params.hpp>
 #endif

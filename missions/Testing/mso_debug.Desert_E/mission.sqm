@@ -23,7 +23,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=1;
+		items=2;
 		class Item0
 		{
 			side="CIV";
@@ -37,6 +37,24 @@ class Mission
 					side="CIV";
 					vehicle="CIV_EuroMan01_EP1";
 					player="PLAYER COMMANDER";
+					leader=1;
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item1
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={1389.088,71.213486,1470.0558};
+					id=1;
+					side="CIV";
+					vehicle="CIV_EuroMan01_EP1";
+					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
 				};

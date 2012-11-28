@@ -4,11 +4,11 @@ waituntil {not isnull player};
 ////////////////////////////////////////////////////////////
 // Respawn Handling
 ////////////////////////////////////////////////////////////
-/*
+
 player switchmove "";
 player setskill 0;
 {player disableAI _x} foreach ["move","anim","target","autotarget"];
-*/
+player setVariable ["BIS_noCoreConversations", true];
 
 player addRating -(rating player);
 

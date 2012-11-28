@@ -80,6 +80,8 @@ CRB_fnc_createShepherd = {
 			"cwr2_Civilian8"
                 ];
         };
+
+	if (count _shepherdClasses < 1) then {_shepherdClasses = _shepherdClasses + ["TK_CIV_Takistani01_EP1"]};
         
         _shepherdClass = _shepherdClasses call BIS_fnc_selectRandom;
         _shepherd = (createGroup civilian) createUnit [_shepherdClass, _pos, [], _dist, "NONE"];
@@ -147,7 +149,7 @@ CRB_fnc_shepherdAttack = {
 		if(typeOf _x == "Pastor" || typeOf _x == "Fin") then {  
 			_x setspeedmode "FULL";
 			_x domove position _target;
-			_dogs = _dogs + [_x];
+			_dogs set [count _dogs, _x];
 		}
 	} forEach units _shepherd;
 
@@ -255,12 +257,12 @@ if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
-_types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
+_types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","NameVillage","NameLocal","ViewPoint","Hill"];
 _shepherds = [];
 {
         // find a spawn area
         if(type _x in _types) then {
-                if (random 1 > 0.8) then {
+                if (random 1 > 0.9) then {
                         _name = format["shepherd_%1", floor(random 10000)];
                         if(crb_shepherds_debug) then {
                                 diag_log format["MSO-%1 shepherds: start %2", time, _name];

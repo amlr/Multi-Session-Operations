@@ -20,7 +20,7 @@ class RMM_ui_casevac { // by Rommel
 			idc = 0;
 			y = CUI_Row_Y(1);
 			w = CUI_Box_W;
-			onLBSelChanged = "_this call casevac_fnc_help";
+			onMouseButtonClick = "_this call casevac_fnc_help";
 		};
 		class Lb1 : Lb0 {idc = 1;y = CUI_Row_Y(2);};
 		class Lb2 : Lb0 {idc = 2;y = CUI_Row_Y(3);};

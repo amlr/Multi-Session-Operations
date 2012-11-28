@@ -4,7 +4,9 @@ diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK CAP_vehicle.sqf"];
 
 private["_location","_position","_taskid","_object","_type"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
+_location = (mps_loc_towns call mps_getRandomElement);
+while {_location == mps_loc_last } do {
+    _location = (mps_loc_towns call mps_getRandomElement);
 	sleep 0.1;
 };
 mps_loc_last = _location;
@@ -14,7 +16,7 @@ _position = [_position,250,0.1,2] call mps_getFlatArea;
 
 _taskid = format["%1%2%3",round (_position select 0),round (_position select 1),(round random 999)];
 
-_vehicles = (mps_opfor_apc+mps_opfor_armor+mps_opfor_atkh);
+_vehicles = (mps_opfor_apc+mps_opfor_armor);
 _object = (_vehicles) select (random ((count _vehicles) - 1)) createVehicle _position;
 _vehtype = getText (configFile >> "CfgVehicles" >> typeof _object >> "displayName");
 
@@ -64,12 +66,12 @@ publicVariable "mps_civilian_intel";
 	_position
 ] call mps_tasks_add;
 
-while {!ABORTTASK && alive _object && _object distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 10 || alive _object && (position _object) select 2 > 3 } do { sleep 5 };
+while {!ABORTTASK_PO && alive _object && _object distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 100} do { sleep 5 };
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
 
-if(!ABORTTASK && alive _object) then {
+if(!ABORTTASK_PO && alive _object) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

@@ -4,9 +4,13 @@ diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_convoy_2.sqf"];
 
 private["_location","_position","_taskid","_object","_grp"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
-	sleep 0.1;
+_location = (mps_loc_towns call mps_getRandomElement);
+
+while {_location == mps_loc_last} do {
+	_location = (mps_loc_towns call mps_getRandomElement); 
+    sleep 0.1;
 };
+
 mps_loc_last = _location;
 
 _position = [(position _location) select 0,(position _location) select 1, 0];
@@ -63,7 +67,7 @@ deleteGroup _armorgroup;
 	_position
 ] call mps_tasks_add;
 
-While{!ABORTTASK && canMove _truck || canMove _armor || canMove _apc } do { sleep 5 };
+While{!ABORTTASK_PO && canMove _truck || canMove _armor || canMove _apc } do { sleep 5 };
 
 if(!canMove _truck && !canMove _armor && !canMove _apc) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;

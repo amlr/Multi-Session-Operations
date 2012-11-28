@@ -8,10 +8,6 @@ civilian setFriend [west, 1];
 civilian setFriend [east, 1];
 civilian setFriend [resistance, 1];
 
-#ifdef CRB_CROWS
-"Crows" call mso_core_fnc_initStat;
-execNow "ambience\modules\crb_crows\main.sqf";
-#endif
 #ifdef CRB_DESTROYCITY
 "Destroy City" call mso_core_fnc_initStat;
 [] execNow "ambience\modules\crb_destroyCity\main.sqf";
@@ -19,14 +15,6 @@ execNow "ambience\modules\crb_crows\main.sqf";
 #ifdef CRB_DOGS
 "Dogs" call mso_core_fnc_initStat;
 [east] execNow "ambience\modules\crb_dogs\main.sqf";
-#endif
-#ifdef CRB_FLIES
-"Flies" call mso_core_fnc_initStat;
-execNow "ambience\modules\crb_flies\main.sqf";
-#endif
-#ifdef CRB_SANDSTORM
-"Sandstorms" call mso_core_fnc_initStat;
-execNow "ambience\modules\crb_sandstorm\main.sqf";
 #endif
 #ifdef RMM_CTP
 "Call To Prayer" call mso_core_fnc_initStat;

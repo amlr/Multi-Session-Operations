@@ -7,7 +7,7 @@ if(!isServer) exitWith{};
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK CRB_convoy.sqf"];
 private["_taskid","_grp","_debug","_strategic","_spawnpoints","_convoydest","_numconvoys"];
 
-_debug = false;
+_debug = debug_mso;
 if(isNil "crb_convoy_intensity")then{crb_convoy_intensity = 1;};
 crb_convoy_intensity = switch(crb_convoy_intensity) do {
 	case 0: {
@@ -33,14 +33,14 @@ _convoydest = [];
 {
         private["_t","_m"];
         if(type _x == "BorderCrossing") then {
-                _spawnpoints = _spawnpoints + [position _x];
+                _spawnpoints set [count _spawnpoints, position _x];
                 if (_debug) then {
                         _t = format["convoy_s%1", floor(random 10000)];
                         _m = [_t, position _x, "Icon", [1,1], "TYPE:", "Destroy", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
                 };
         };
         if(type _x in _strategic) then {
-                _convoydest = _convoydest + [position _x];
+                _convoydest set [count _convoydest, position _x];
                 if (_debug) then {
                         _t = format["convoy_d%1", floor(random 10000)];
                         _m = [_t, position _x, "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorOrange", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
@@ -113,7 +113,6 @@ for "_j" from 1 to _numconvoys do {
                                 };
                         };
                         
-                        {_x setSkill 0.2;} forEach units _grp;
                         
                         _wp = _grp addwaypoint [_startpos, 0];
                         _wp setWaypointFormation "FILE";
@@ -160,6 +159,13 @@ for "_j" from 1 to _numconvoys do {
                         
                         _t = format["e%1",_cid];
                         [_t, _endpos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "End", "COLOR:", "ColorRed", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                        
+                        {
+                        	_x setSkill 0.9;
+                        	_x setVariable ["CEP_disableCache", true, true];
+                        } forEach units _grp;
+                        
+                        _grp setVariable ["rmm_gtk_exclude", true];
                         
                         //KIERANS ADDITION - task addition
                         
@@ -227,13 +233,16 @@ for "_j" from 1 to _numconvoys do {
                         
                         //END KIERANS ADDITION	   
                        
-                        while {(!ABORTTASK) && (_grp call CBA_fnc_isAlive)} do {
+                        while {(!ABORTTASK_PO) && (_grp call CBA_fnc_isAlive)} do {
                             sleep 5;
+                            {
+                        		if (vehicle _x == _x) then {deletevehicle _x};
+                            } foreach units _grp;
                         };
                         
                         //alert the players
                         
-                        if(!ABORTTASK && !(_grp call CBA_fnc_isAlive)) then {
+                        if(!ABORTTASK_PO && !(_grp call CBA_fnc_isAlive)) then {
 						[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 						mps_mission_status = 2;
 						}else{
@@ -259,8 +268,8 @@ for "_j" from 1 to _numconvoys do {
 
 diag_log format["MSO-%1 Convoys # %2", time, _numconvoys];
 
-while {!ABORTTASK && !stopscript} do {
-    diag_log [diag_frameno, diag_ticktime, time, "waiting..."];
+while {!ABORTTASK_PO && !stopscript} do {
+    if (_debug) then {diag_log [diag_frameno, diag_ticktime, time, "waiting..."]};
     sleep 5;
 };
 

@@ -1,12 +1,11 @@
 //////////////////////////////////////////////////////////////////
 // Function file for Armed Assault
-// Created by: (AEF)Wolffy.au [CTB]
+// Created by: (AEF)Wolffy.au
 // Created: 20110315
 // Modified: 20110925
 // Contact: http://dev-heaven.net/projects/mip
 // Purpose: Setup amibent civilian vehicles module
 ///////////////////////////////////////////////////////////////////
-if(!isServer) exitWith{};
 
 waitUntil{!isNil "BIS_fnc_init"};
 waitUntil{!isNil "BIS_silvie_mainscope"};
@@ -44,6 +43,9 @@ switch toLower(worldName) do {
         case "fallujah": {
                 BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 0.5)"];
         };
+        case "mcn_hazarkot": {
+                BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 1.5)"];
+        };
         case "isladuala": {
                 BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 2.0)"];
         };
@@ -76,21 +78,18 @@ BIS_silvie_mainscope setVariable ["vehicleInit",{
         if (random 1>0.6) then {
                 _this lock true;
         } else {
-
 		// zGuba: enabled random damage and fuel
 		_this setFuel 0.5 + ((random 1)^3 - (random 1)^3)/2;
-//                _this setFuel (random 1);
 		_this setDamage (random 0.5)^2;	// Up to 25% worn out
-//                _this setDamage (random 0.5);
         };
-
+#ifdef TUP_IED
 		// 10% (set in params) chance its a VB-IED (radio controlled if EOD) - never a bike
 		if (isNil "tup_vbied_threat")then{tup_vbied_threat = 5;};
 		If ((random 100 < tup_vbied_threat) && (tup_vbied_threat > 0) && !(_this iskindOf  "Motorcycle")) then {
 			_this lock true;
 			[_this,true] execvM "enemy\modules\tup_ied\vbied.sqf";
 		};
-		
+#endif
         _this addEventHandler ["Engine", {
                 if(_this select 1) then {
                         driver (_this select 0) addRating -400;
@@ -102,7 +101,7 @@ BIS_silvie_mainscope setVariable ["vehicleInit",{
         {
                 _this setHit [_x,(random 0.75)^3];
         } forEach _zgb_hitparts_car;	// Up to 42,1875% worn out
-}, true];
+}];
 
 // when creating car around building, if there is some road closer than this value, vehicle will be attached to this road instead of to building. 
 // BIS_silvie_mainscope setVariable ["roadDistance",25]; 

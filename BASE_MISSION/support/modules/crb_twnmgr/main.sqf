@@ -1,6 +1,6 @@
 private ["_locs"];
 if(isNil "TownManager")then{TownManager = 1;};
-if (TownManager == 0) exitWith{};
+if (TownManager == 0 || !isServer) exitWith{};
 
 if (isNil "bis_functions_mainscope") exitWith{};
 
@@ -37,8 +37,10 @@ CRB_whichSideTrigger = {
         
 };
 
+
+
 CRB_updateDetectedMarker = {
-        private ["_name","_pos","_detector","_detected","_color","_detectorTxt"];
+        private ["_name","_pos","_detector","_detected","_color","_detectorTxt","_globalmsg"];
         _name = _this select 0;
         _pos = _this select 1;
         _detector = _this select 2;
@@ -49,16 +51,19 @@ CRB_updateDetectedMarker = {
 		};
         _detected = _this select 3;
         _color = _this select 4;
-
+ 
 	if(_detector == civilian) then {
-		format["""%1_mgr"" setMarkerColorLocal ""%2""; [playerSide, ""HQ""] sideChat ""%3 HUMINT reports %4 movement at %1 (%5)"";", _name, _color, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
+		_globalmsg = format["%3 HUMINT reports %4 movement at %1 (%5)", _name, _detectorTxt, (_detector call CRB_whichSideText), (_detected call CRB_whichSideText), (mapGridPosition _pos)];
+		format["""%1_mgr"" setMarkerColor ""%2""; GLOBAL_MESSAGE = [%3, ""%4""]; publicVariable ""GLOBAL_MESSAGE"";", _name, _color, playerSide, _globalmsg];     
 	} else {
-                format["""%1_mgr"" setMarkerColorLocal ""%2""; [%3, ""HQ""] sideChat ""%3 HUMINT reports %5 movement at %1 (%6)"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText, _detected call CRB_whichSideText, mapGridPosition _pos];
-	};
+		_globalmsg = format["%2 HUMINT reports %4 movement at %1 (%5)", _name, _detectorTxt, (_detector call CRB_whichSideText), (_detected call CRB_whichSideText), (mapGridPosition _pos)];
+		format["""%1_mgr"" setMarkerColor ""%2""; GLOBAL_MESSAGE = [%3, ""%4""]; publicVariable ""GLOBAL_MESSAGE"";", _name, _color, _detectorTxt, _globalmsg];   
+
+	};		
 };
 
 CRB_updateSeizedMarker = {
-        private ["_name","_detector","_color","_detectorTxt"];
+        private ["_name","_detector","_color","_detectorTxt","_globalmsg"];
         _name = _this select 0;
         _detector = _this select 1;
         _detectorTxt = switch(_detector) do {
@@ -67,8 +72,9 @@ CRB_updateSeizedMarker = {
 			default {str _detector};
 		};
         _color = _this select 2;
-		
-	format["""%1_mgr"" setMarkerColorLocal ""%2""; [%3, ""HQ""] sideChat ""SIGINT suggests %1 has been secured by %4 forces"";", _name, _color, _detectorTxt, _detector call CRB_whichSideText];
+     	_globalmsg = format["SIGINT suggests %1 has been secured by %2 forces", _name, (_detector call CRB_whichSideText)];
+		format["""%1_mgr"" setMarkerColor ""%2""; GLOBAL_MESSAGE = [%3, ""%4""]; publicVariable ""GLOBAL_MESSAGE"";", _name, _color, _detectorTxt, _globalmsg];   
+
 };
 
 CRB_createDetectTrigger = {
@@ -144,24 +150,17 @@ CRB_createSeizedTrigger = {
 {
         private ["_size","_name", "_pos","_trg","_type","_loc","_colour"];
         _pos = position _x;
-	_name = _x getVariable "name";
-	_size = 250;
-		
+        _name = _x getVariable "name";
+		if !(isnil "bis_alice_mainscope") then {
+            _size = _x getVariable ["ALICE_townsize", bis_alice_mainscope getVariable "ALICE_townsize"];	
+        } else {
+            _size = 250; // so it doesnt need alice to be running anymore
+		};
+        
 	// Get location object nearest each CityCenter (City Centers typically don't have text friendly names)
         _loc = (nearestLocations [_pos, ["NameCityCapital","NameCity","NameVillage","Airport","Strategic","VegetationVineyard","NameLocal"], _size]) select 0;
-/*
-        if(!isNil "_loc") then {
-                // Get the town size and town name
-                _size = (size _loc) select 0;
-		if (isNil "_size") then {
-			_size = 250;
-		};
-                if (_size < 250) then {
-			_size = _x getVariable ["ALICE_townsize", bis_alice_mainscope getVariable "ALICE_townsize"];	// needs alice to be running
-		};
-                _name = text _loc;
-        };
-*/	
+        if(!isNil {text _loc}) then {_name = text _loc;};
+
         if(twnmgr_status == 1) then {
                 _type = "ELLIPSE";
         } else {
@@ -178,7 +177,7 @@ CRB_createSeizedTrigger = {
 	//		case east: {_colour = "ColorRed";};
 	//	};
         //};
-        [format["%1_mgr", _name], _pos, _type, [_size, _size], "COLOR:", _colour, "BRUSH:", "Cross"] call CBA_fnc_createMarker;
+        [format["%1_mgr", _name], _pos, _type, [_size, _size], "COLOR:", _colour, "BRUSH:", "Cross", "PERSIST"] call CBA_fnc_createMarker;
 		
 		if (twnmgr_detected == 1) then {
 			//////////////////////////////////////////

@@ -6,8 +6,9 @@
 // =========================================================================================================
 
 // DeBuggint MPS
-	mps_debug = false;
-
+	if (isnil "debug_mso") then {debug_mso = false};
+	if (debug_mso) then {mps_debug = true} else {mps_debug = false};
+	
 // Declare a mission name and credits
 	mps_mission_name = "Patrol Ops 2";
 	mps_credits = "Patrol Ops 2 By [OCB]EightySix";
@@ -38,13 +39,16 @@
 			case 2: {
 				"RU";
 			};
-			case 3: {
+            case 3: {
+				"GUE";
+			};
+			case 4: {
 				"cwr2_ru";
 			};
-            case 4: {
+            case 5: {
 				"cwr2_fia";
 			};
-            case 5: {
+            case 6: {
 				"tigerianne";
 			};
 	};
@@ -54,8 +58,14 @@
 			case 0: {
 				"BIS_TK_INS";
 			};
-			case 1: {
+            case 1: {
+				"BIS_TK_GUE";
+			};
+			case 2: {
 				"INS";
+			};
+            case 3: {
+				"GUE";
 			};
 	};
         
@@ -111,7 +121,7 @@
 	mps_spawn_vehicle 		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_spawn_vehicle.sqf");
 	mps_object_offset		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_object_offset.sqf");
 	mps_mission_sequence		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_mission_sequence.sqf");
-	mps_replace_with_ace		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_replace_with_ace.sqf");
+    mps_replace_with_ace		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_replace_with_ace.sqf");
 	CREATE_OPFOR_SQUAD		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_spawn_opforsquad.sqf");
 	CREATE_OPFOR_ARMY		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_spawn_opforarmy.sqf");
 	CREATE_OPFOR_STATIC		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_spawn_opforstatic.sqf");

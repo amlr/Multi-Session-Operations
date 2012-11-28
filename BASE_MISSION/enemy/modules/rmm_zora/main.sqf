@@ -1,6 +1,9 @@
 #include <crbprofiler.hpp>
 
-if (not isserver) exitwith {};
+if (isnil "ZORAmaxgrps") then {ZORAmaxgrps = 3};
+if (isnil "ZORAmindist") then {ZORAmindist = 750};
+
+if (!(isserver) or (ZORAmaxgrps == 0)) exitwith {diag_log format["MSO-%1 ZORA exiting...", time];};
 
 private ["_logicZora"];
 _logicZora = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
@@ -21,8 +24,8 @@ BIS_Zora_Mainscope setVariable ["debug",false];
 BIS_Zora_Mainscope setvariable ["bordersize",10000];
 BIS_Zora_Mainscope setvariable ["factionlist",MSO_FACTIONS];
 BIS_Zora_Mainscope setvariable ["search_radius",300];
-BIS_Zora_Mainscope setvariable ["maxgroups",2];
-BIS_Zora_Mainscope setvariable ["mindist",1000];
+BIS_Zora_Mainscope setvariable ["maxgroups",ZORAmaxgrps];
+BIS_Zora_Mainscope setvariable ["mindist",ZORAmindist];
 BIS_Zora_Mainscope setvariable ["maxdist", 2000];
 
 [] spawn {

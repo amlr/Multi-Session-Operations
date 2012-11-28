@@ -7,7 +7,7 @@ _locations = nearestLocations [ [0,0] ,["Name","NameLocal","NameVillage","NameCi
 _patrollocations = [];
 
 {	if(position _x distance getMarkerPos format["respawn_%1",(SIDE_A select 0)] > 2000) then {
-		_patrollocations = _patrollocations + [_x];
+		_patrollocations set [count _patrollocations, _x];
 	};
 } foreach _locations;
 

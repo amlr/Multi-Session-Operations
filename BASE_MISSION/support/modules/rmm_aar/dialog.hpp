@@ -41,21 +41,22 @@ class RMM_ui_aar { // by Rommel
 			y = CUI_Row_Y(3);
 			text = "KIA:";
 		};
-		class TF1 : CUI_Edit {idc = 3; x = CUI_Box_X(2 * 1/4); w = CUI_Box_W * 1/2; y = CUI_Row_Y(3);};
-		class TF2 : TF1 {idc = 4; x = CUI_Box_X(2 * 2/4);};
-		class TF3 : TF1 {idc = 5; x = CUI_Box_X(2 * 3/4);};
+		class TF1 : CUI_Edit {idc = 3; x = CUI_Box_X(2 * 1/4); w = CUI_Box_W * 1/2; y = CUI_Row_Y(3);text = "0";};
+		class TF2 : TF1 {idc = 4; x = CUI_Box_X(2 * 2/4);text = "0";};
+		class TF3 : TF1 {idc = 5; x = CUI_Box_X(2 * 3/4);text = "0";};
 		class LblKIA : CUI_Text {
 			y = CUI_Row_Y(4);
 			text = "WIA:";
 		};
-		class TF4 : TF1 {idc = 6; x = CUI_Box_X(2 * 1/4); y = CUI_Row_Y(4);};
-		class TF5 : TF4 {idc = 7; x = CUI_Box_X(2 * 2/4);};
-		class TF6 : TF4 {idc = 8; x = CUI_Box_X(2 * 3/4);};
+		class TF4 : TF1 {idc = 6; x = CUI_Box_X(2 * 1/4); y = CUI_Row_Y(4);text = "0";};
+		class TF5 : TF4 {idc = 7; x = CUI_Box_X(2 * 2/4);text = "0";};
+		class TF6 : TF4 {idc = 8; x = CUI_Box_X(2 * 3/4);text = "0";};
 		class Report : CUI_Edit {
 			idc = 9;
 			y = CUI_Row_Y(5);
 			h = CUI_Row_DY(5,20);
 			w = CUI_Box_W * 2 - CUI_Row_H;
+			text = "Report: ";
 		};
 		class Time : CUI_Button {
 			text = "T";

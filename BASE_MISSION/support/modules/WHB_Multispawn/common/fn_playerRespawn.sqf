@@ -1,17 +1,45 @@
+/* ----------------------------------------------------------------------------
+Function: MSO_fnc_playerRespawn
+
+Description:
+Sets the HQ object as the player's respawn location.
+
+Parameters:
+- The player to be relocted to HQ [Player]
+
+Returns:
+- Nothing
+
+Examples:
+(begin example)
+[player] call MSO_fnc_playerRespawn; 
+(end)
+
+See Also:
+- <MSO_fnc_playerSetSpawnpoint>
+
+Author:
+WobbleyheadedBob aka CptNoPants
+---------------------------------------------------------------------------- */
+
+
 // When called it sets the player's postion to 'myRespawnPoint' (simples!)
 // Author: WobbleyheadedBob aka CptNoPants
-private ["_mySoldier"];
+private ["_mySoldier","_respawnObject"];
 _mySoldier = _this select 0;
+_respawnObject = _mySoldier getVariable "playerRespawnPoint";
 
-//player sideChat format ["Debug : Respawn script Fired!"];
-
-//Need to add a condition here in case the player isn't using CBA???
-_mySoldier setPos ([myRespawnPoint, 10] call CBA_fnc_randPos);
-//_mySoldier setDir direction (nearestObject [_mySoldier, "LandVehicle"]);
-
-//Usage: Add this to a  trigger at the respawn_west
-//Condition: (vehicle player) in thislist 
-//On Act: [player] call fn_multiSpawn;
-
-// This can probably be simplified with: http://forums.bistudio.com/showthread.php?t=117028
-// player addEventhandler ["respawn", {player call fn_playerRespawn}];
+//Check if the player has sign-in somewhere
+if (isNil "_respawnObject") then {
+	_mySoldier setPos ([myRespawnPoint, 1, 25, 1, 0, 5, 0] call bis_fnc_findSafePos); // he hasn't
+} else {
+	//Check if the HQ he signed in at is still 'alive'
+	if (alive _respawnObject) then {
+        _positioner = ([position _respawnObject, 1, 25, 1, 0, 5, 0] call bis_fnc_findSafePos);
+		_mySoldier setPos _positioner;
+	} else { 
+		player sideChat "FOB no longer available, you have spawned back at base.";
+		myRespawnPoint = (markerPos format["respawn_%1", faction player]);
+		_mySoldier setPos ([myRespawnPoint, 1, 25, 1, 0, 5, 0] call bis_fnc_findSafePos);
+	};
+};

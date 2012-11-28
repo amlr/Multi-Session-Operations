@@ -122,7 +122,7 @@ class FSM
            "			//_i = _i + 1;" \n
            "			};" \n
            "" \n
-           "	_arraytmp = _arraytmp + [_nearest];" \n
+           "	_arraytmp set [count _arraytmp, _nearest];" \n
            "	_veharray =_veharray - [_nearest];" \n
            "" \n
            "//_i = 0;" \n
@@ -177,7 +177,7 @@ class FSM
        "[(_veharray select _id)] orderGetIn true;" \n
        "_timecalled = time;" \n
        "" \n
-       "_assigned = _assigned + [[(_veharray select _id),_timecalled]];" \n
+       "_assigned set [count _assigned, [(_veharray select _id),_timecalled]];" \n
        "_veharray set [_id, -1];_veharray = _veharray - [-1];" \n
        "" \n
        "_id = 1000;" \n
@@ -261,7 +261,7 @@ class FSM
        "(_veharray select _ig) addEventHandler [""killed"", {(_this select 0) setpos getPos (_this select 0);unassignVehicle (_this select 0);}];" \n
        "" \n
        "_timecalled = time;" \n
-       "_assigned = _assigned + [[(_veharray select _ig),_timecalled]];" \n
+       "_assigned set [count _assigned, [(_veharray select _ig),_timecalled]];" \n
        "" \n
        "_veharray set [_ig, -1];_veharray = _veharray - [-1];" \n
        "_ig = 1000;" \n
@@ -345,7 +345,7 @@ class FSM
        "" \n
        "(_veharray select _in) setBehaviour ""CARELESS"";" \n
        "_timecalled = time;" \n
-       "_assigned = _assigned + [[(_veharray select _in),_timecalled]];" \n
+       "_assigned set [count _assigned, [(_veharray select _in),_timecalled]];" \n
        "" \n
        "_in = _in + 1;" \n
        "" \n
@@ -441,7 +441,7 @@ class FSM
        "(_veharray select _ic) addEventHandler [""killed"", {(_this select 0) setpos getPos (_this select 0);unassignVehicle (_this select 0);}];" \n
        "" \n
        "_timecalled = time;" \n
-       "_assigned = _assigned + [[(_veharray select _ic),_timecalled]];" \n
+       "_assigned set [count _assigned, [(_veharray select _ic),_timecalled]];" \n
        "" \n
        "_veharray set [_ic, -1];_veharray = _veharray - [-1];" \n
        "_ic = 1000;" \n

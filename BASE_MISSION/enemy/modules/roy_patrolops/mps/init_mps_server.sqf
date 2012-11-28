@@ -1,6 +1,6 @@
 if(!isServer) exitWith {};
 
- _rtp = position HQ;
+ _rtp = [(markerpos "respawn_west" select 0), (markerpos "respawn_west" select 1),0];
  _rtp = [_rtp,2,50,2,0,2,0] call BIS_fnc_findSafePos;
 
 return_point_west = createmarkerlocal ["return_point_west",[(_rtp select 0),(_rtp select 1)]];

@@ -51,7 +51,7 @@ _fnc_returnVehicleTurrets = {
 			//Make sure the entry was found.
 			if (!(isNil "_hasGunner")) then {
 				if (_hasGunner == 1) then {
-					_turrets = _turrets + [_turretIndex];		
+					_turrets set [count _turrets, _turretIndex];		
 					//Include sub-turrets, if present.
 					if (isClass (_subEntry >> "Turrets")) then { _turrets = _turrets + [[_subEntry >> "Turrets"] call _fnc_returnVehicleTurrets]; } 
 					else { _turrets = _turrets + [[]]; };

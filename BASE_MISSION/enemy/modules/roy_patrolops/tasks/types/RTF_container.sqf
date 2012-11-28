@@ -4,7 +4,9 @@ diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK RTF_container.sqf"];
 
 private["_location","_position","_taskid","_cont1","_cont2"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
+_location = (mps_loc_towns call mps_getRandomElement);
+while {_location == mps_loc_last } do {
+    _location = (mps_loc_towns call mps_getRandomElement);
 	sleep 0.1;
 };
 mps_loc_last = _location;
@@ -28,9 +30,9 @@ _grp = [_position,"INS",(5 + random 5),50,"patrol" ] call CREATE_OPFOR_SQUAD;
 	_position
 ] call mps_tasks_add;
 
-while {!ABORTTASK && damage _cont1 < 1 && damage _cont2 < 1 && count nearestObjects[_position,["Land_Misc_Cargo1E_EP1","Misc_Cargo1B_military"],30] < 2 } do { sleep 5 };
+while {!ABORTTASK_PO && damage _cont1 < 1 && damage _cont2 < 1 && count nearestObjects[_position,["Land_Misc_Cargo1E_EP1","Misc_Cargo1B_military"],30] < 2 } do { sleep 5 };
 
-if(damage _cont1 >= 1 || damage _cont2 >= 1 || ABORTTASK) then {
+if(damage _cont1 >= 1 || damage _cont2 >= 1 || ABORTTASK_PO) then {
 	[format["TASK%1",_taskid],"failed"] call mps_tasks_upd;
 	mps_mission_status = 3;
 }else{

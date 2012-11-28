@@ -22,7 +22,7 @@ class RMM_ui_settings {
 		class VDSlider : CUI_Slider {
 			idc = 2;
 			y = CUI_Box_Row(0,2.5);
-			onSliderPosChanged = "setviewdistance round(_this select 1); ctrlSetText [1,format['%1/%2 m', viewdistance, settings_maxvd]];";
+			onSliderPosChanged = "setviewdistance round(_this select 1); ctrlSetText [1,format['%1/%2 m', viewdistance, settings_maxvd]]; player setvariable ['pviewdistance', viewdistance, true];";
 		};
 		class TDText : CUI_Text {
 			y = CUI_Box_Row(0,4);
@@ -36,7 +36,7 @@ class RMM_ui_settings {
 		class TDSlider : CUI_Slider {
 			idc = 4;
 			y = CUI_Box_Row(0,5.5);
-			onSliderPosChanged = "_this spawn {private ""_terraindetail""; _terraindetail = round(_this select 1); terraindetail = _terraindetail;  ctrlSetText [3,format['%1/%2', terraindetail, 5]]; sleep 3/4; if (terraindetail == _terraindetail) then {setterraingrid ([50, 25, 12.5, 6.25, 3.125] select (terrainDetail - 1));}};";
+			onSliderPosChanged = "_this spawn {private ""_terraindetail""; _terraindetail = round(_this select 1); terraindetail = _terraindetail;  ctrlSetText [3,format['%1/%2', terraindetail, 5]]; sleep 3/4; if (terraindetail == _terraindetail) then {setterraingrid ([50, 25, 12.5, 6.25, 3.125] select (terrainDetail - 1));}}; player setvariable ['pterraindetail', terraindetail, true];";
 		};
 	};
 };

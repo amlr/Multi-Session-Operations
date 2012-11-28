@@ -5,7 +5,7 @@ if (!isServer) exitWith{};
 
 private ["_soldier", "_rangeMin", "_rangeMax","_debug"];
 _soldier = _this select 0;
-_debug = false;
+_debug = debug_mso;
 
 if ((getPos _soldier) select 2 > 5) exitWith {};
 
@@ -66,8 +66,8 @@ _IED setDir (random 360);
 if (_debug) then {
 	diag_log format ["MSO-%1 EOD IED: arming IED at %2 of %3",time, position _IED, typeOf _IED];
 	//Mark IED position
-	_t = format["ied_r%1", random 10000];
-	_tcrm = [_t, position _IED, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Dot", "COLOR:", "ColorBlue", "GLOBAL"] call CBA_fnc_createMarker;
+	_t = format["ied_r%1", floor (random 1000)];
+	_tcrm = [_t, position _IED, "Icon", [1,1], "TEXT:", "EOD_IED", "TYPE:", "Dot", "COLOR:", "ColorBlue", "GLOBAL"] call CBA_fnc_createMarker;
 	_IED setvariable ["Marker", _tcrm];
 };
 

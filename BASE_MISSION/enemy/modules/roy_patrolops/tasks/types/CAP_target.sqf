@@ -4,7 +4,9 @@ diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK CAP_target.sqf"];
 
 private["_location","_position","_taskid","_object","_grp","_stance ","_b"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
+_location = (mps_loc_towns call mps_getRandomElement);
+while {_location == mps_loc_last } do {
+    _location = (mps_loc_towns call mps_getRandomElement);
 	sleep 0.1;
 };
 mps_loc_last = _location;
@@ -74,12 +76,12 @@ publicVariable "mps_civilian_intel";
 	_position
 ] call mps_tasks_add;
 
-while {!ABORTTASK && alive _object && _object distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 10 } do { sleep 5 };
+while {!ABORTTASK_PO && alive _object && _object distance (getMarkerPos format["return_point_%1",(SIDE_A select 0)]) > 10 } do { sleep 5 };
 
 mps_civilian_intel = [];
 publicVariable "mps_civilian_intel";
 
-if(!ABORTTASK && alive _object) then {
+if(!ABORTTASK_PO && alive _object) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{
@@ -93,6 +95,6 @@ deleteVehicle _object;
 deleteGroup _grp;
 
 [_troops,_position] spawn {
-	while{!ABORTTASK && {isPlayer _x} count nearestObjects[(_this select 1),["Man","LandVehicle","Plane"],1500] > 0} do { sleep 10 };
+	while{!ABORTTASK_PO && {isPlayer _x} count nearestObjects[(_this select 1),["Man","LandVehicle","Plane"],1500] > 0} do { sleep 10 };
 	{ _x setDamage 1}forEach (_this select 0);
 };

@@ -11,7 +11,7 @@ class RMM_ui_jipmarkers { // by Rommel
 			w = CUI_Box_W;
 		};
 		class Caption : CUI_Caption {
-			text = "JIP Markers";
+			text = "Team Markers";
 			y = CUI_Row_Y(0);
 			h = CUI_Row_DY(0,1);
 			w = CUI_Box_W;

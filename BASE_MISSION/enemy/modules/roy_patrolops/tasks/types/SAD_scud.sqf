@@ -2,11 +2,15 @@ if(count mps_loc_towns < 1) exitWith{};
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_scud.sqf"];
 
-private["_location","_position","_taskid","_object","_vehtype","_target1"];
+private["_location","_position","_taskid","_object","_vehtype","_target1","_guards"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
-	sleep 0.1;
+_location = (mps_loc_towns call mps_getRandomElement);
+
+while {_location == mps_loc_last} do {
+	_location = (mps_loc_towns call mps_getRandomElement); 
+    sleep 0.1;
 };
+
 mps_loc_last = _location;
 
 _markerpos = [(position _location) select 0,(position _location) select 1, 0];
@@ -27,6 +31,15 @@ _vehtype = getText (configFile >> "CfgVehicles" >> typeof _target1  >> "displayN
 
 
 _troops = [];
+
+_guards = nil;
+
+while {isNil "_guards"} do {
+     _guards = [_position, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
+};
+[_guards] call BIN_fnc_taskDefend;
+_troops = _troops + (units _guards);
+
 _b = (2 max (round (random (playersNumber (SIDE_A select 0) / 3)))) * MISSIONDIFF;
 for "_i" from 1 to _b do {
 	_grp = [_position,"INF",(5 + random 5),50,"patrol"] call CREATE_OPFOR_SQUAD;
@@ -69,7 +82,7 @@ publicVariable "mps_civilian_intel";
 scudcount = 0;
 fired = false;
 
-While {!ABORTTASK && {damage _x < 1} count [_target1,_target2] > 0 && scudcount < 600} do { 
+While {!ABORTTASK_PO && {damage _x < 1} count [_target1,_target2] > 0 && scudcount < 600} do { 
 	scudcount = scudcount + 1;
 	sleep 1;
 	if(damage _target1 < 1) then {

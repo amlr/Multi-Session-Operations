@@ -17,7 +17,7 @@ BIS_fnc_FA_MPFix_initUnit = {
 		//remove dead old units
 		BIS_FA_MPFixArray = BIS_FA_MPFixArray - [objnull];
 		{if (not alive _x) then {BIS_FA_MPFixArray = BIS_FA_MPFixArray - [_x]}} foreach BIS_FA_MPFixArray;
-		BIS_FA_MPFixArray = BIS_FA_MPFixArray + [_unit]; //add new unit
+		BIS_FA_MPFixArray set [count BIS_FA_MPFixArray, _unit]; //add new unit
 		publicvariable "BIS_FA_MPFixArray";
 	};
 	if (local _unit) then {

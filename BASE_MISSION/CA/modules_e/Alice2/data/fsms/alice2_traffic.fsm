@@ -62,7 +62,7 @@ class FSM
        "_grp = grpnull;" \n
        "if (isnil {_twn getvariable ""ALICE_group""}) then {" \n
        "	_grp = creategroup civilian;" \n
-       "	_twn setvariable [""ALICE_group"",_grp];" \n
+       "	_twn setvariable [""ALICE_group"",_grp,true];" \n
        "};" \n
        "" \n
        "_neighbors = _twn getvariable ""neighbors"";" \n
@@ -150,18 +150,20 @@ class FSM
        "_car = createvehicle [_classVehicle,position _twnPos,[],0,""none""];" \n
        "_car setdir direction _twnPos;" \n
        "_grp = _twn getvariable ""ALICE_group"";" \n
+       "if (isNil ""_grp"") then {" \n
+       "	_grp = creategroup civilian;" \n
+       "	_twn setvariable [""ALICE_group"",_grp,true];" \n
+       "};" \n
        "_driver = _grp createunit [_classMan,position _car,[],0,""none""];" \n
        "//--- Custom init" \n
        "_globalInit = _logic getvariable ""ALICE_civilianinit"";" \n
        "_localInit = _twn getvariable ""ALICE_civilianinit"";" \n
        "if !(isnil ""_globalInit"") then {{_driver call _x} foreach _globalInit};" \n
        "if !(isnil ""_localInit"") then {{_driver call _x} foreach _localInit};" \n
-       "_driver setSkill 0.5;" \n
-       "{_driver disableAI _x} count [""AUTOTARGET"",""TARGET""];" \n
-       "_driver allowFleeing 0;" \n
        "_driver assignasdriver _car;" \n
        "_driver setbehaviour ""SAFE"";" \n
        "_driver moveindriver _car;" \n
+       "_driver setSkill (0.2 + random 0.8);" \n
        "" \n
        "_cargo = getNumber(configFile >> ""CfgVehicles"" >> _classVehicle >> ""transportSoldier"");" \n
        "for ""_i"" from 1 to floor(random _cargo) do {" \n
@@ -358,7 +360,7 @@ class FSM
           to="Arrived";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
           condition=/*%FSM<CONDITION""">*/"_players = [] call BIS_fnc_listPlayers;" \n
-           "unitready _driver || {(position _car) distance _x < _spawnDistance * 1.2} count _players == 0"/*%FSM</CONDITION""">*/;
+           "unitready _driver || {(position _car) distance _x < _spawnDistance * 1.1} count _players == 0"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/

@@ -7,10 +7,14 @@ private["_location","_position","_taskid","_positionS","_locationE","_positionE"
 _killtasktime = 0;
 
 // regular task inits
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
+_location = (mps_loc_towns call mps_getRandomElement);
+while {_location == mps_loc_last } do {
+    _location = (mps_loc_towns call mps_getRandomElement);
 	sleep 0.1;
 };
+
 mps_loc_last = _location;
+
 while { _locationE = (mps_loc_towns call mps_getRandomElement); _locationE == mps_loc_last } do {
 	sleep 0.1;
 };
@@ -52,9 +56,11 @@ _SuicideBomberType = ["TK_CIV_Takistani03_EP1","TK_CIV_Takistani04_EP1","TK_CIV_
                     
 // start the spawning and moving                    
                     SuicideBomberG = CreateGroup East;
-					SuicideBomberV = createVehicle [_carType, [(_positionS select 0), (_positionS select 1), 0], [], 180, "FLY"];
+                    SuicideBomberV = createVehicle [_carType, [(_positionS select 0), (_positionS select 1), 0], [], 180, "FLY"];
 					SuicideBomberD = SuicideBomberG createUnit [_SuicideBomberType, [(_positionS select 0)+5, (_positionS select 1), 0], [], 180, "CAN_COLLIDE"];
 					SuicideBomberC1 = SuicideBomberG createUnit ["TK_INS_Soldier_EP1", [(_positionS select 0)+3, (_positionS select 1), 0], [], 180, "CAN_COLLIDE"];
+                    SuicideBomberG setVariable ["rmm_gtk_exclude", true];
+                    
 					SuicideBomberD assignasDriver SuicideBomberV;
                     SuicideBomberD moveInDriver SuicideBomberV;
 					SuicideBomberC1 moveInCargo SuicideBomberV;
@@ -66,7 +72,7 @@ _SuicideBomberType = ["TK_CIV_Takistani03_EP1","TK_CIV_Takistani04_EP1","TK_CIV_
 					SuicideBomberG move _positionE;
 
 //now waiting for some conditions to be met and else move 'em along, just check not too often					                    
-while {	!ABORTTASK and
+while {	!ABORTTASK_PO and
 		(_killtasktime < 1800) and
         (alive SuicideBomberD) and
         (damage SuicideBomberV < 0.3) and
@@ -81,7 +87,7 @@ while {	!ABORTTASK and
 
 //after one condition has been met instantly check whats going finishing the task
 
-if (!ABORTTASK && (!(alive SuicideBomberD)) and (damage SuicideBomberV < 0.4)) then {
+if (!ABORTTASK_PO && (!(alive SuicideBomberD)) and (damage SuicideBomberV < 0.4)) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	{deletevehicle _x} foreach units SuicideBomberG;
     deletevehicle SuicideBomberV;

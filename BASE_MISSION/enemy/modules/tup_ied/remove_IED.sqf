@@ -24,9 +24,13 @@ for "_j" from 0 to ((count _ieds) -1) do {
 		// delete trigger too if non-eod IED
 		if (!(isClass(configFile>>"CfgPatches">>"reezo_eod")) || ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 0))) then {
 			deletevehicle (_IED getvariable "Trigger");
+			deletevehicle (_IED getvariable "Det_Trigger");
+			deletevehicle (_IED getvariable "Detect_Trigger");
 		};
 		deletevehicle _IED;
-		
+		if (debug_mso) then { 
+			[_IED getvariable "Marker"] call cba_fnc_deleteEntity;
+		};
 	} else {
 		_nodel = _nodel + 1;
 	};

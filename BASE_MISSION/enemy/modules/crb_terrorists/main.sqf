@@ -12,7 +12,9 @@
 private ["_spawnpoints","_debug","_numcells"];
 if(!isServer) exitWith{};
 
-_debug = false;
+_debug = debug_mso;
+
+if(isNil "rmm_ep_safe_zone")then{rmm_ep_safe_zone = 2000;};
 
 if(isNil "crb_tc_intensity")then{crb_tc_intensity = 1;};
 crb_tc_intensity = switch(crb_tc_intensity) do {
@@ -337,9 +339,9 @@ CRB_fnc_InitClassLists = {
                 _faction = _x select 2;
                 _woman = _x select 3;
                 if (_faction in (BIS_alice_mainscope getVariable "townsFaction")) then {
-                        CRB_classListFaction = CRB_classListFaction + [_class];
+                        CRB_classListFaction set [count CRB_classListFaction, _class];
                         if (_woman == 0) then {
-                                CRB_classlistMen = CRB_classlistMen + [_class];
+                                CRB_classlistMen set [count CRB_classlistMen, _class];
                         };
                 };
         } foreach _classlist;
@@ -442,7 +444,7 @@ CRB_fnc_SplitCell = {
         _split = (ceil(random (_count / 2))) max 2;
         
         _newcell  = createGroup east;
-        _newcell setVariable ["CEP_disableCache", true, true];
+        _newcell setVariable ["rmm_gtk_exclude", true, true];
         for "_i" from 0 to _split do {
                 [(units _grp - [_terrorlead]) call BIS_fnc_selectRandom] joinSilent _newcell;
         };
@@ -490,7 +492,7 @@ CRB_fnc_SplitCell = {
         waitUntil{!isNil "bis_alice_mainscope"};
         {
                 if(_pos distance _x < (BIS_alice_mainscope getvariable "trafficDistance")) then {
-                        _newtwn = _newtwn + [_x];
+                        _newtwn set [count _newtwn, _x];
                 };
         } forEach (bis_alice_mainscope getvariable "townlist");
         
@@ -528,7 +530,7 @@ CRB_fnc_SpawnNewCell = {
         _terrorlead setBehaviour "ALERT";
         _terrorlead setSpeedMode "FULL";
         _terrorlead allowFleeing 0;
-        (group _terrorlead) setVariable ["CEP_disableCache", true, true];
+        (group _terrorlead) setVariable ["rmm_gtk_exclude", true, true];
         _maxgroupsize = 6 + floor(random 10);
         
         _ammo = [_spawn] call CRB_fnc_SpawnRandomAmmo;
@@ -635,14 +637,14 @@ if(isNil "CRB_LOCS") then {
 _spawnpoints = [];
 {
         if(type _x == "BorderCrossing") then {
-                _spawnpoints = _spawnpoints + [position _x];
+                _spawnpoints set [count _spawnpoints, position _x];
         };
 } forEach CRB_LOCS;
 
 private ["_tmplocs"];
 _tmplocs = bis_functions_mainscope getvariable "locations";
 {
-	_spawnpoints = _spawnpoints + [position _x];
+	_spawnpoints set [count _spawnpoints, position _x];
 } forEach _tmplocs;
 
 waitUntil{!isNil "bis_alice_mainscope"};
@@ -669,6 +671,9 @@ for "_i" from 1 to _numcells do {
                 
                 // Pick a spawn point
                 _spawn =  _spawnpoints call BIS_fnc_selectRandom;
+                while {
+                (([_spawn, rmm_ep_safe_zone] call fPlayersInside) or (_spawn distance getmarkerpos "ammo" < rmm_ep_safe_zone) or (_spawn distance getmarkerpos "ammo_1" < rmm_ep_safe_zone)) 
+                } do {_spawn = _spawnpoints call BIS_fnc_selectRandom; sleep 0.1};
                 
                 //DEBUG:player setPos _spawn;
                 //DEBUG:sleep 15;
@@ -676,7 +681,7 @@ for "_i" from 1 to _numcells do {
                 // Create terrorist leader and vehicle
                 _classMan = CRB_classlistMen call BIS_fnc_selectRandom;
                 _grp  = createGroup east;
-                _grp setVariable ["CEP_disableCache", true, true];
+                _grp setVariable ["rmm_gtk_exclude", true, true];
                 _terrorlead = (createGroup civilian) createUnit [_classMan, _spawn, [], 0, "NONE"];
                 [_terrorlead] joinSilent _grp;
                 
@@ -694,7 +699,7 @@ for "_i" from 1 to _numcells do {
                         _classMan  = CRB_classlistMen call BIS_fnc_selectRandom;
                         _terrorunit = (createGroup civilian) createUnit [_classMan, _spawn, [], 0, "NONE"];
                         [_terrorunit] joinSilent _grp;
-                        _terrorcrgo = _terrorcrgo + [_terrorunit];
+                        _terrorcrgo set [count _terrorcrgo, _terrorunit];
                 };
                 
                 [_terrorlead, _vehicle, _twn, _debug] call CRB_fnc_SpawnNewCell;

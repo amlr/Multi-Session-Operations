@@ -488,7 +488,7 @@ class FSM
        "	_buildingpos = _buildingpos - 1;" \n
        "" \n
        "	for ""_i"" from 2 to _buildingpos do {" \n
-       "		_fortpositions = _fortpositions + [_house buildingpos _i];" \n
+       "		_fortpositions set [count _fortpositions, _house buildingpos _i];" \n
        "	};" \n
        "};" \n
        "" \n

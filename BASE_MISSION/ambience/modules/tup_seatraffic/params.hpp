@@ -1,7 +1,13 @@
+class tup_seatraffic_factions {
+        title = "    Enable Ambient Sea Factions"; 
+        values[]= {0,1,2}; 
+        texts[]= {"All Factions","Civilian Only","None"}; 
+        default = 1;
+};
 class tup_seatraffic_amount {
         title = "    Enable Ambient Sea Traffic"; 
-        values[]= {0,1,2}; 
-        texts[]= {"Full","Reduced","Off"}; 
+        values[]= {0,1}; 
+        texts[]= {"Full","Reduced"}; 
         default = 1;
 };
 class tup_seatraffic_ROE {

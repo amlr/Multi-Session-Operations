@@ -2,13 +2,17 @@ if(count mps_loc_towns < 1) exitWith{};
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAR_pilot.sqf"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
-	sleep 0.1;
+_location = (mps_loc_towns call mps_getRandomElement);
+
+while {_location == mps_loc_last} do {
+	_location = (mps_loc_towns call mps_getRandomElement); 
+    sleep 0.1;
 };
+
 mps_loc_last = _location;
 
 _position = [(position _location) select 0,(position _location) select 1, 0];
-_position = [_position,1500,0.1,2] call mps_getFlatArea;
+_position = [_position,1500,0.2,3] call mps_getFlatArea;
 
 _taskid = format["%1%2%3",round (_position select 0),round (_position select 1),(round random 999)];
 
@@ -37,6 +41,8 @@ _taskid = format["%1%2%3",round (_position select 0),round (_position select 1),
 
 	(_pilotgrp addWaypoint [position _pilot1,0]) setWaypointType "HOLD";
 
+diag_log format ["SAR_pilot.sqf debug. TaskID: %1, Position: %2",_taskid,_position];
+
 [format["TASK%1",_taskid],
 	"URGENT! Rescue Pilot, Destroy Wreckage",
 	"A reconnaissance chopper has been shot down after doing surveillance of possible insurgent weapons factories. Search the area, rescue the pilot and use C4 to destroy the wreckage to prevent it falling into enemy hands.<br /> - The pilots may have evacuated to a nearby building for shelter until he can be rescued.",
@@ -48,16 +54,16 @@ _taskid = format["%1%2%3",round (_position select 0),round (_position select 1),
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
-While{!ABORTTASK && _pilot1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] > 15 && alive _pilot1 } do {sleep 1};
+While{!ABORTTASK_PO && _pilot1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] > 100 && alive _pilot1 } do {sleep 1};
 
-if(!ABORTTASK && alive _pilot1 && damage _crashchopper >= 1 ) then {
+if(!ABORTTASK_PO && alive _pilot1 && !alive _crashchopper) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{
 	[format["TASK%1",_taskid],"failed"] call mps_tasks_upd;
 	mps_mission_status = 3;
 };
-_pilot1 action ["eject",vehicle _object];
-sleep 1;
-deleteVehicle _pilot1;
-deleteGroup _pilotgrp;
+
+	sleep 5;
+    deletevehicle _pilot1;
+	deleteGroup _pilotgrp;

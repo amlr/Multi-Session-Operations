@@ -24,13 +24,13 @@ private["_position","_locations","_location","_radius","_sidea","_sideb"];
 				position _x distance getMarkerPos "respawn_west" > 3000 &&
 				position _x distance getMarkerPos "respawn_east" > 3000
 			) then {
-				_locations = _locations + [_x];
+				_locations set [count _locations, _x];
 			};
 		} foreach _nlocations;
 	};
 
 	_location = _locations select (random ( (count _locations) - 1) );
 
-	mps_used_locations = mps_used_locations + [_location];
+	mps_used_locations set [count mps_used_locations, _location];
 
 _location;

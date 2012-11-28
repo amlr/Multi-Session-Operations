@@ -11,11 +11,17 @@
 #define R3F_LOGISTICS
 #define RMM_RECRUITMENT
 #define RMM_REVIVE
+#define R3F_REVIVE
 #define RMM_TASKS
 #define RMM_TYRES
 #define WHB_MULTISPAWN
-
+#define ZKS_Build
+#define CREWINFO
+#define MGO
+#define PXS_SATCOM_OA
+#define TUP_LOGISTICS
 
 // WIP
 //#define GC_PACK_COW
 //#define TN_LHDELEVATOR
+

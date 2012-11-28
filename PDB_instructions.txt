@@ -1,0 +1,27 @@
+h1. PersistentDB setup for MSO 4.5
+
+---- REQUIRED INSTALLATIONS ----
+# Install MySQL 5.5 - user: root pwd: enter a suitable password (including Workbench if possible), check installation path (!)
+# Install .NET 4.0 Client Profile and Reboot
+# Install .NET Framework 4.0 Full
+# Install MS Visual C++ Redistributable
+# Install mysql-connector-net-6.5.4
+# Install MySQL Workbench if you haven yet (if in doubt, just accept all default settings)
+
+---- SETTING UP PDB ----
+# Download and copy @Arma2Net folder to ArmA2(OA) Root directory (see attached zip file)
+https://dev-heaven.net/attachments/19401/@Arma2NET.7z
+# Check that MYSQL Server is running and *import SQL dump using MySQL Workbench*
+get MSO[date].sql from mission folder \core\modules\persistentDB\ or below in attachments https://dev-heaven.net/attachments/19400/MSO20121110.sql)
+# In MySQL Workbench > Manage Security > Setup a user called arma (set password) and *give it dba permissions*, ensure user can only connect from localhost.
+# Update Server launch shortcut and add @Arma2NET to mod line
+# Copy Databases.txt (from Arma2netMysql folder) to (C:\Users\%USERNAME%\AppData\Local\Arma2MySQL -> create if not there) folder
+*open the file, delete the #*, change username to arma and change password (last two entries on line)
+# Launch the server shortcut, start up a mission with PDB and make sure it is switched to "ON" on params.
+
+---- DEBUGGING ----
+# Install baretail log monitor
+# In baretail open the server rpt and the arma2net log file (C:\Users\%USERNAME%\AppData\Local\Arma2NET) - will indicate if MySQLPlugIn has been successfully loaded.
+# Once in game, in baretail open the mysqlplugin log (C:\Users\%USERNAME%\AppData\Local\Arma2MySQL\logs\[date].log - will indicate if SQL calls have been successful.
+
+*NOTE: Make sure in your locale regional settings the decimal seperator (maybe a comma ,) is set to dot (.)!*

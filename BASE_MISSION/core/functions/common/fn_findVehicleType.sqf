@@ -35,10 +35,10 @@ for "_y" from 1 to _grpx - 1 do {
                                                                 if(_fx == _fac) then {
                                                                         if (!isnil "_type") then {
                                                                                 if (_cx isKindOf _type) then {
-                                                                                        _allvehs = _allvehs + [_cx]; 
+                                                                                        _allvehs set [count _allvehs, _cx];
                                                                                 };
                                                                         } else {
-                                                                                _allvehs = _allvehs + [_cx]; 
+                                                                                _allvehs set [count _allvehs, _cx];
                                                                         };
                                                                 };
                                                         };
@@ -46,10 +46,10 @@ for "_y" from 1 to _grpx - 1 do {
                                                                 if(_fx in _fac) then {
                                                                         if (!isnil "_type") then {
                                                                                 if (_cx isKindOf _type) then {
-                                                                                        _allvehs = _allvehs + [_cx]; 
+                                                                                        _allvehs set [count _allvehs, _cx];
                                                                                 };
                                                                         } else {
-                                                                                _allvehs = _allvehs + [_cx]; 
+                                                                                _allvehs set [count _allvehs, _cx];
                                                                         };
                                                                 };
                                                         };

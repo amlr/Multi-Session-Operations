@@ -448,8 +448,8 @@ TSD9_GetVehicleType = {
 		// add available vehicle armaments: weapons and ammo (if no ammo or depleted, it won't show)
 		_weapons = [_vehicle, true] call TSD9_GetGear;
 		if (count _weapons > 0) then {
-			_result = _result + [["--------------------", "", ""]];
-			{_result = _result + [_x]} forEach _weapons;
+			_result set [count _result, ["--------------------", "", ""]];
+			{_result set [count _result,_x]} forEach _weapons;
 		};
 	} else {
 		//_value = "";
@@ -581,15 +581,15 @@ TSD9_GetGear = {
 				// place secondary weapon at top of weapon list
 				_gear = [["w", _x] call _fn_GetGearArray] + _gear;
 			} else {
-				_gear = _gear + [["w", _x] call _fn_GetGearArray];
+				_gear set [count _gear, ["w", _x] call _fn_GetGearArray];
 			};
 		} forEach _weapons;
 
-		if (count _weapons > 0) then {_gear = _gear + [["--------------------"+"            ", "", ""]];};
+		if (count _weapons > 0) then {_gear set [count _gear, ["--------------------"+"            ", "", ""]];};
 
 		_magazines = magazines _player;
 		{ 
-			_gear = _gear + [["m", _x] call _fn_GetGearArray];
+			_gear set [count _gear, ["m", _x] call _fn_GetGearArray];
 		} forEach _magazines;
 	};
 
@@ -804,7 +804,7 @@ TSD9_GetGroupVehicleClassComposition = {
 			};
 
 			if (not (_currentVehicleClass in _vehicleClasses)) then {
-				_vehicleClasses = _vehicleClasses + [_currentVehicleClass];
+				_vehicleClasses set [count _vehicleClasses, _currentVehicleClass];
 				_sameClass = false;
 			};
 		} forEach units _group;
@@ -1358,7 +1358,7 @@ TSD9_GetAllGroupsFromUnits = {
 	_AllGroups = [];
 	{
 		_group = group _x;
-		if ((!(_group in _AllGroups)) && (_group != grpNull)) then {_AllGroups = _AllGroups + [_group]};
+		if ((!(_group in _AllGroups)) && (_group != grpNull)) then {_AllGroups set [count _AllGroups, _group]};
 	} forEach _AllUnits;
 	_AllGroups;
 };
@@ -1377,7 +1377,7 @@ TSD9_SortGroupsArray = {
 				//if (_GroupStr (object) in _GroupArray) then 
 				_Group = _x;
 				if (_GroupStr == format["%1", _Group]) then {
-					_Result = _Result + [_Group];
+					_Result set [count _Result, _Group];
 					_GroupArray = _GroupArray - [_Group];
 				};
 			} forEach _GroupArray;

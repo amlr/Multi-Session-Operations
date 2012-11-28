@@ -101,7 +101,7 @@ class FSM
        "" \n
        "			if ((gettext(_anim >> ""source"") == ""user"") && !(configName(_anim) in _notactions)) then " \n
        "			{" \n
-       "			_myanimation = _myanimation + [[configName(_anim),(getnumber(_anim >> ""initPhase""))]];" \n
+       "			_myanimation set [count _myanimation, [configName(_anim),(getnumber(_anim >> ""initPhase""))]];" \n
        "			};" \n
        "		};" \n
        "	};" \n
@@ -131,7 +131,7 @@ class FSM
        "" \n
        "" \n
        "if (_isaction == 1) then {" \n
-       "_mytype = _mytype + [_type];" \n
+       "_mytype set [count _mytype, _type];" \n
        "_initcode = _initcode + ""this addAction ["" + str(_nameon) + "", """"FSM\Vehicle\action.sqf"""",[this getVariable """"myanimation"""",0,0],0,false,false,"""""""","" + str(_conditionon) + ""];"";" \n
        "_initcode = _initcode + ""this addAction ["" + str(_nameoff) + "", """"FSM\Vehicle\action.sqf"""",[this getVariable """"myanimation"""",1,0],0,false,false,"""""""","" + str(_conditionoff) + ""];"";" \n
        "};" \n

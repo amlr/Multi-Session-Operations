@@ -1,0 +1,319 @@
+version=11;
+class Mission
+{
+	addOns[]=
+	{
+		"chernarus",
+		"ca_modules_functions",
+		"ca_missions_garbagecollector",
+		"cacharacters2"
+	};
+	addOnsAuto[]=
+	{
+		"cacharacters2",
+		"ca_modules_functions",
+		"ca_missions_garbagecollector",
+		"chernarus"
+	};
+	randomSeed=10611063;
+	class Intel
+	{
+		startWeather=0.25;
+		forecastWeather=0.25;
+		year=2008;
+		month=10;
+		day=11;
+		hour=9;
+		minute=20;
+	};
+	class Groups
+	{
+		items=8;
+		class Item0
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={4154.4072,352.26984,8952.8311};
+					id=0;
+					side="CIV";
+					vehicle="Citizen1";
+					player="PLAYER COMMANDER";
+					leader=1;
+					skill=0.60000002;
+					init="this addWeapon ""Binocular"";";
+				};
+			};
+		};
+		class Item1
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={4154.0049,352.26984,8952.7627};
+					id=1;
+					side="CIV";
+					vehicle="Citizen2";
+					player="PLAY CDG";
+					leader=1;
+					skill=0.60000002;
+					init="this addWeapon ""Binocular"";";
+				};
+			};
+		};
+		class Item2
+		{
+			side="LOGIC";
+			class Vehicles
+			{
+				items=2;
+				class Item0
+				{
+					position[]={4147.0605,324.60904,8977.7588};
+					id=2;
+					side="LOGIC";
+					vehicle="FunctionsManager";
+					leader=1;
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+				class Item1
+				{
+					position[]={4158.623,324.62784,8977.9834};
+					id=3;
+					side="LOGIC";
+					vehicle="GarbageCollector";
+					lock="UNLOCKED";
+					skill=0.60000002;
+				};
+			};
+		};
+		class Item3
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={4153.3257,324.01245,8951.6309};
+					id=4;
+					side="CIV";
+					vehicle="Assistant";
+					player="PLAY CDG";
+					leader=1;
+					skill=0.60000002;
+					init="this addWeapon ""Binocular"";";
+				};
+			};
+		};
+		class Item4
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={4154.061,324.01282,8951.5752};
+					id=5;
+					side="CIV";
+					vehicle="Citizen3";
+					player="PLAY CDG";
+					leader=1;
+					skill=0.60000002;
+					init="this addWeapon ""Binocular"";";
+				};
+			};
+		};
+		class Item5
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={4154.9668,324.01321,8951.5186};
+					id=6;
+					side="CIV";
+					vehicle="Citizen4";
+					player="PLAY CDG";
+					leader=1;
+					skill=0.60000002;
+					init="this addWeapon ""Binocular"";";
+				};
+			};
+		};
+		class Item6
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={4155.7593,324.00967,8951.7441};
+					id=7;
+					side="CIV";
+					vehicle="Doctor";
+					player="PLAY CDG";
+					leader=1;
+					skill=0.60000002;
+					init="this addWeapon ""Binocular"";";
+				};
+			};
+		};
+		class Item7
+		{
+			side="CIV";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={4156.4385,324.00427,8952.2822};
+					id=8;
+					side="CIV";
+					vehicle="Functionary1";
+					player="PLAY CDG";
+					leader=1;
+					skill=0.60000002;
+					init="this addWeapon ""Binocular"";";
+				};
+			};
+		};
+	};
+	class Markers
+	{
+		items=2;
+		class Item0
+		{
+			position[]={6771.2861,374.0668,9735.3008};
+			name="area";
+			markerType="RECTANGLE";
+			type="Empty";
+			fillName="Border";
+			a=6000;
+			b=6000;
+			drawBorder=1;
+		};
+		class Item1
+		{
+			position[]={4438.8975,313.83243,8313.707};
+			name="ai_area";
+			markerType="RECTANGLE";
+			type="Empty";
+			fillName="Border";
+			a=1000;
+			b=1000;
+			drawBorder=1;
+		};
+	};
+	class Sensors
+	{
+		items=2;
+		class Item0
+		{
+			position[]={4171.3086,324.69351,8979.1689};
+			a=0;
+			b=0;
+			activationBy="BRAVO";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Create 10 AI Groups";
+			expActiv="0 = execVM ""Test\SpawnCivGroup10.sqf"";";
+			class Effects
+			{
+			};
+		};
+		class Item1
+		{
+			position[]={4169.0146,324.70761,8979.042};
+			a=0;
+			b=0;
+			activationBy="ALPHA";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			text="Create AI Group";
+			expActiv="0 = execVM ""Test\SpawnCivGroup.sqf"";";
+			class Effects
+			{
+			};
+		};
+	};
+};
+class Intro
+{
+	addOns[]=
+	{
+		"chernarus"
+	};
+	addOnsAuto[]=
+	{
+		"chernarus"
+	};
+	randomSeed=16012834;
+	class Intel
+	{
+		startWeather=0.25;
+		forecastWeather=0.25;
+		year=2008;
+		month=10;
+		day=11;
+		hour=9;
+		minute=20;
+	};
+};
+class OutroWin
+{
+	addOns[]=
+	{
+		"chernarus"
+	};
+	addOnsAuto[]=
+	{
+		"chernarus"
+	};
+	randomSeed=2588478;
+	class Intel
+	{
+		startWeather=0.25;
+		forecastWeather=0.25;
+		year=2008;
+		month=10;
+		day=11;
+		hour=9;
+		minute=20;
+	};
+};
+class OutroLoose
+{
+	addOns[]=
+	{
+		"chernarus"
+	};
+	addOnsAuto[]=
+	{
+		"chernarus"
+	};
+	randomSeed=15274248;
+	class Intel
+	{
+		startWeather=0.25;
+		forecastWeather=0.25;
+		year=2008;
+		month=10;
+		day=11;
+		hour=9;
+		minute=20;
+	};
+};

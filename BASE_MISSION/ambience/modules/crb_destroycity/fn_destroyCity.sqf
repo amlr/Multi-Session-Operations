@@ -17,7 +17,7 @@ scriptName "fn_destroyCity.sqf";
 //if (!isserver) exitwith {debuglog "Log: [Functions] ERROR: 'BIS_fnc_destroyCity' cannot run on client.";};
 
 private ["_center","_areaSize","_seed","_blacklist","_fire","_debug","_buildings","_pos","_posX","_posY","_posTotal","_seedLocal","_marker","_centre","_size"];
-_debug = false;
+_debug = debug_mso;
 _center = _this select 0;
 _areaSize = if (count _this > 1) then {_this select 1} else {1000};
 _seed = if (count _this > 2) then {_this select 2} else {1138};

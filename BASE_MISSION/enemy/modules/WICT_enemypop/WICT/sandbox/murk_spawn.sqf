@@ -132,7 +132,7 @@ for [{_i=0}, {_i < _countWaypoints}, {_i=_i+1}] do
 	
 	_waypointsEntry = _waypointsEntry + [_wPos] + [_wHPos] + [_wBih] + [_wCM] + [_wCR] + [_wDes] + [_wForm] + [_wScr] + [_wShw] + [_wSp] + [_wSt] + [_wTo] + [_wTy];
 
-	_waypointsArray = _waypointsArray + [_waypointsEntry];
+	_waypointsArray set [count _waypointsArray, _waypointsEntry];
 };
 
 //diag_log format ["Waypoints' array : %1",_waypointsArray];
@@ -145,7 +145,7 @@ _gatherData = [];
 
 _gatherData = _gatherData + [_unitArray] + [_side] + [_waypointsArray] + [_trigger] + [_spawntype] + [_spawnlives] + [_spawndelay] + [_initString] + [_bodyRemove];
 
-Mission_capture = Mission_capture + [_gatherData];
+Mission_capture set [count Mission_capture, _gatherData];
 
 
 // -----------------  Functions  -------------------- //
@@ -182,7 +182,7 @@ _fnc_returnVehicleTurrets = {
 			//Make sure the entry was found.
 			if (!(isNil "_hasGunner")) then {
 				if (_hasGunner == 1) then {
-					_turrets = _turrets + [_turretIndex];		
+					_turrets set [count _turrets, _turretIndex];		
 					//Include sub-turrets, if present.
 					if (isClass (_subEntry >> "Turrets")) then { _turrets = _turrets + [[_subEntry >> "Turrets"] call _fnc_returnVehicleTurrets]; } 
 					else { _turrets = _turrets + [[]]; };

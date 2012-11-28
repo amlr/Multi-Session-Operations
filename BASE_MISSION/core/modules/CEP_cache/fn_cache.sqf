@@ -28,6 +28,10 @@ _cep_typearray = [];
         };
 } forEach units _this;
 
+if (debug_mso) then {
+	diag_log format["MSO-%1 CEP Cached: %2 of group:%3 leader:%4", time, _count, _this, typeof leader _this];
+};
+		
 _this setVariable ["CEP_Array", _cep_typearray];
 
 if(_count > 0) then {

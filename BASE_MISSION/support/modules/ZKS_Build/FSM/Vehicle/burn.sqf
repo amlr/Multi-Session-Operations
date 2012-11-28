@@ -5,7 +5,7 @@ _ai = _this select 0;
 
 if (_ai in burning) exitwith {}; 
 
-burning = burning + [_ai];
+burning set [count burning, _ai];
 
 _fire = position _ai;
 

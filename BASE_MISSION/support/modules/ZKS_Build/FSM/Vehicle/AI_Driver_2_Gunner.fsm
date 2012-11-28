@@ -111,7 +111,7 @@ class FSM
            "if !(isnull _target) then {(Gunner _veh) doTarget _target;(Gunner _veh) doFire _target};" \n
            "" \n
            "" \n
-           "{if ((_x select 3) > 10000) then {_targets = _targets + [(_x select 4)]}} foreach ((gunner _veh) nearTargets 200);" \n
+           "{if ((_x select 3) > 10000) then {_targets set [count _targets, (_x select 4)]}} foreach ((gunner _veh) nearTargets 200);" \n
            "" \n
            "//hint str(_targets);" \n
            "" \n
@@ -148,7 +148,7 @@ class FSM
        "" \n
        "_targets = [];" \n
        "" \n
-       "{if (((_x select 3) > 10000) && !(isnil ""(_x select 3)"")) then {_targets = _targets + [(_x select 4)]}} foreach ((gunner _veh) nearTargets 200);" \n
+       "{if (((_x select 3) > 10000) && !(isnil ""(_x select 3)"")) then {_targets set [count _targets, (_x select 4)]}} foreach ((gunner _veh) nearTargets 200);" \n
        "" \n
        "_i = 0;" \n
        "}; " \n

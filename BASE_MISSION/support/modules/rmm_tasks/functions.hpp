@@ -7,5 +7,7 @@ class tasks {
                 class taskadd {};
                 class taskhint {};
                 class taskupdate {};
+				class onload {};
+				class updatenearest {};
         };
 };

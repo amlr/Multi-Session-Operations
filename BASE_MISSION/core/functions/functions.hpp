@@ -19,12 +19,8 @@ class mso_core {
 		class getFactions {};
 		class spawnCrew {};
 		class profiler {};
-		class addLoopHandler {};
-		class removeLoopHandler {};
-	};
-	class server {
-		file = "core\functions\server";
 		class initLocations {};
 		class createLocations {};
+		class sendHint {};
 	};
 };

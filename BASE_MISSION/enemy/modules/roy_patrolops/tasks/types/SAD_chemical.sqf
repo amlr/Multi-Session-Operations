@@ -4,10 +4,15 @@ diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_chemical.sqf"];
 
 private["_location","_position","_taskid","_object","_grp","_stance ","_b","_camptype","_troops"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
-	sleep 0.1;
+_location = (mps_loc_towns call mps_getRandomElement);
+
+while {_location == mps_loc_last} do {
+	_location = (mps_loc_towns call mps_getRandomElement); 
+    sleep 0.1;
 };
+
 mps_loc_last = _location;
+
 _markerpos = [(position _location) select 0,(position _location) select 1, 0];
 _position = [[(position _location) select 0,(position _location) select 1, 0],1000,0.1,2] call mps_getFlatArea;
 _taskid = format["%1%2%3",round (_position select 0),round (_position select 1),(round random 999)];
@@ -59,7 +64,7 @@ publicVariable "mps_civilian_intel";
 	_markerpos
 ] call mps_tasks_add;
 
-while {!ABORTTASK && damage _building < 1 } do { sleep 5 };
+while {!ABORTTASK_PO && damage _building < 1 } do { sleep 5 };
 
 _dirn = "NORTH"; if( _position select 1 < _markerpos select 1) then {_dirn = "SOUTH"};
 _dire = "EAST"; if( _position select 0 < _markerpos select 0) then {_dire = "WEST"};
@@ -67,7 +72,7 @@ _distintel = _position distance _markerpos;
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
-if(!ABORTTASK) then {
+if(!ABORTTASK_PO) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

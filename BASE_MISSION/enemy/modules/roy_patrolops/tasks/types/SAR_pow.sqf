@@ -2,10 +2,15 @@ if(count mps_loc_towns < 1) exitWith{};
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAR_pow.sqf"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
-	sleep 0.1;
+_location = (mps_loc_towns call mps_getRandomElement);
+
+while {_location == mps_loc_last} do {
+	_location = (mps_loc_towns call mps_getRandomElement); 
+    sleep 0.1;
 };
+
 mps_loc_last = _location;
+
 
 _position = [(position _location) select 0,(position _location) select 1, 0];
 _houses = [_position,200] call mps_getEnterableHouses;
@@ -62,9 +67,9 @@ mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 	_position
 ] call mps_tasks_add;
 
-While{!ABORTTASK && _pow1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] > 15 && alive _pow1 } do {sleep 1};
+While{!ABORTTASK_PO && _pow1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] > 100 && alive _pow1 } do {sleep 1};
 
-if( (alive _pow1) and (_pow1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] < 15)) then {
+if( (alive _pow1) and (_pow1 distance getMarkerPos format["return_point_%1",(SIDE_A select 0)] < 120)) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

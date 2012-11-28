@@ -28,7 +28,7 @@ if (isServer) then
 		
 		if (_doExecute) then
 		{
-			WICT_exe_list = WICT_exe_list + [_exeScript];
+			WICT_exe_list set [count WICT_exe_list, _exeScript];
 			
 			//Copy/paste all parameters you specified
 			if (count _this > 3) then 
@@ -70,7 +70,7 @@ if (isServer) then
 		if (_doExecute) then
 		{
 			_tsk_entry = [_tsk_title,"a"];
-			WICT_tasks_list = WICT_tasks_list + [_tsk_entry];
+			WICT_tasks_list set [count WICT_tasks_list, _tsk_entry];
 			
 			//diag_log WICT_tasks_list;
 			publicVariable "WICT_tasks_list";

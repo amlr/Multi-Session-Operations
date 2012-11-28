@@ -2,14 +2,19 @@ if(count mps_loc_towns < 1) exitWith{PAPABEAR sideChat format ["%1 this is PAPA 
 
 diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_camp.sqf"];
 
-private["_location","_position","_taskid","_object","_grp","_stance ","_b","_camptype","_troops"];
+private["_location","_position","_taskid","_object","_grp","_stance ","_b","_camptype","_troops","_guards"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
-	sleep 0.1;
+_location = (mps_loc_towns call mps_getRandomElement);
+
+while {_location == mps_loc_last} do {
+	_location = (mps_loc_towns call mps_getRandomElement); 
+    sleep 0.1;
 };
+
 mps_loc_last = _location;
+
 _markerpos = [(position _location) select 0,(position _location) select 1, 0];
-_position = [[(position _location) select 0,(position _location) select 1, 0],1000,0.1,2] call mps_getFlatArea;
+_position = [[(position _location) select 0,(position _location) select 1, 0],800,0.1,2] call mps_getFlatArea;
 _taskid = format["%1%2%3",round (_position select 0),round (_position select 1),(round random 999)];
 _b = (2 max (round (random (playersNumber (SIDE_A select 0) / 4)))) * MISSIONDIFF;
 _troops = [];
@@ -19,6 +24,14 @@ _camptype = "Camp1_RU";
 if(mps_oa) then {_camptype = "Camp1_TK_EP1";};
 
 _newComp = [_position,random 360,_camptype] call BIS_fnc_dyno;
+
+_guards = nil;
+
+while {isNil "_guards"} do {
+     _guards = [_position, "Infantry", MSO_FACTIONS] call mso_core_fnc_randomGroup;
+};
+[_guards] call BIN_fnc_taskDefend;
+_troops = _troops + (units _guards);
 
 for "_i" from 1 to _b do {
 	_grp = [_position,"INS",(5 + random 5),50,"patrol"] call CREATE_OPFOR_SQUAD;
@@ -61,11 +74,11 @@ publicVariable "mps_civilian_intel";
 	_markerpos
 ] call mps_tasks_add;
 
-while {!ABORTTASK && {alive _x} count _troops > 2 } do { sleep 5 };
+while {!ABORTTASK_PO && {alive _x} count _troops > 2 } do { sleep 5 };
 
 mps_civilian_intel = []; publicVariable "mps_civilian_intel";
 
-if(!ABORTTASK) then {
+if(!ABORTTASK_PO) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{

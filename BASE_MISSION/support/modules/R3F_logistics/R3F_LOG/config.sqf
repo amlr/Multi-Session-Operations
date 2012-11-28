@@ -15,7 +15,7 @@
 
 /*
  * There are two ways to manage new objects with the logistics system. The first is to add these objects in the
- * folowing appropriate lists. The second is to create a new external file in the /addons_config/ directory,
+ * following appropriate lists. The second is to create a new external file in the /addons_config/ directory,
  * according to the same scheme as the existing ones, and to add a #include at the end of this current file.
  * 
  * Deux moyens existent pour gérer de nouveaux objets avec le système logistique. Le premier consiste à ajouter
@@ -147,7 +147,8 @@ R3F_LOG_CFG_transporteurs =
 	// e.g. : ["MyTransporterClassName1", itsCapacity], ["MyTransporterClassName2", itsCapacity]
 	["BAF_Jackal2_BASE_D", 15],
 	["CH_47F_EP1", 50],
-	
+	["AW159_Lynx_BAF", 15],
+
 	["AAW_CH47", 50],
 	["AAW_s70bh_mg",25],
 	["AAW_s70",25],
@@ -502,6 +503,7 @@ R3F_LOG_CFG_objets_remorquables = R3F_LOG_CFG_objets_remorquables +
 R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
 [
 	"CH47_base_EP1",
+	"AW159_Lynx_BAF",
 	"Mi17_base",
 	"Mi24_Base",
 	"UH1H_base",
@@ -578,6 +580,7 @@ R3F_LOG_CFG_objets_heliportables = R3F_LOG_CFG_objets_heliportables +
 R3F_LOG_CFG_transporteurs = R3F_LOG_CFG_transporteurs +
 [
 	["CH47_base_EP1", 120],
+	["AW159_Lynx_BAF", 35],
 	["AH6_Base_EP1", 25],
 	["Mi17_base", 60],
 	["Mi24_Base", 50],

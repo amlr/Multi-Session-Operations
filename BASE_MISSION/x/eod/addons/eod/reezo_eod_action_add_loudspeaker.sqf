@@ -3,9 +3,9 @@
 
 private ["_soldier","_range","_probability","_interval","_reezo_eod_action_loudspeaker"];
 _soldier = _this select 0;
-if !(local _soldier) exitWith {
+/* if !(local _soldier) exitWith {
 	//player globalChat "SOLDIER NOT LOCAL, EXITING";
-};
+};*/
 _range = _this select 1;
 _probability = _this select 2;
 _interval = _this select 3;

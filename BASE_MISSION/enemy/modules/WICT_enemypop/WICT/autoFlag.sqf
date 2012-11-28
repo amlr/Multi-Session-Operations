@@ -35,9 +35,9 @@ for "_i" from 0 to WICT_flagLoopLimit do
 	_marker = _x;
 	
 	/* Puts the flag in a appropriate list according to the color in editor */
-		if (getMarkerColor _marker == "ColorBlue") then {WICT_wbl = WICT_wbl + [_marker];};
-		if (getMarkerColor _marker == "ColorRed") then {WICT_ebl = WICT_ebl + [_marker];};
-		if (getMarkerColor _marker == "ColorBlack") then {WICT_nbl = WICT_nbl + [_marker];};
+		if (getMarkerColor _marker == "ColorBlue") then {WICT_wbl set [count WICT_wbl, _marker];};
+		if (getMarkerColor _marker == "ColorRed") then {WICT_ebl set [count WICT_ebl, _marker];};
+		if (getMarkerColor _marker == "ColorBlack") then {WICT_nbl set [count WICT_nbl, _marker];};
 	
 	/* Creates necessary triggers */
 	

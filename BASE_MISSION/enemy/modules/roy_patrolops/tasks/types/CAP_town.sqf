@@ -4,7 +4,9 @@ diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK CAP_town.sqf"];
 
 private["_location","_position","_taskid","_rmin","_rmax","_rplayers","_ra","_rb","_diffresult"];
 
-while { _location = (mps_loc_towns call mps_getRandomElement); _location == mps_loc_last } do {
+_location = (mps_loc_towns call mps_getRandomElement);
+while {_location == mps_loc_last } do {
+    _location = (mps_loc_towns call mps_getRandomElement);
 	sleep 0.1;
 };
 mps_loc_last = _location;
@@ -47,9 +49,9 @@ if( _diffresult > 0.24 ) then {
 	[_position] spawn CREATE_OPFOR_TOWER;
 };
 
-while{!ABORTTASK && {alive _x && side _x == (SIDE_B select 0)} count nearestObjects[_position,["MAN","LandVehicle","Air"],300] > 3 } do { sleep 5 };
+while{!ABORTTASK_PO && {alive _x && side _x == (SIDE_B select 0)} count nearestObjects[_position,["MAN","LandVehicle","Air"],300] > 3 } do { sleep 5 };
 
-if(!ABORTTASK) then {
+if(!ABORTTASK_PO) then {
 	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
 	mps_mission_status = 2;
 }else{
