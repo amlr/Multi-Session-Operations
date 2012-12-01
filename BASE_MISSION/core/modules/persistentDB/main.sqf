@@ -95,6 +95,9 @@ persistent_fnc_playerHeal = compile PP "core\modules\persistentDB\playerHeal.sqf
 persistent_fnc_playerRespawn = compile PP "core\modules\persistentDB\playerRespawn.sqf";
 persistent_fnc_playerFired = compile PP "core\modules\persistentDB\playerFired.sqf";
 
+//Add manual persistence action for Admins (aka "Magicwand")
+player addAction ["Persist cursor", "core\modules\persistentDB\magicwand.sqf", nil, 6, True, True, "", "serverCommandAvailable '#kick'"];
+
 if (!isdedicated) then { VAR_DEFAULT(ENV_dedicated, false); };
 // ====================================================================================
 // PDB STARTUP
