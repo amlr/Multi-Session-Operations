@@ -1,0 +1,5 @@
+joblist =[
+
+	["p:\cwr2\Missions\campaigns\cwr2_resistance"]
+
+];

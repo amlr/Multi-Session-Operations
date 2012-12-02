@@ -1,0 +1,4 @@
+joblist =[
+	["P:\CWR2\Missions\sp\CWR2_OriginalMissionsSP"],
+	["P:\CWR2\Missions\sp\cwr2_ExtraMissionsSP"]
+];

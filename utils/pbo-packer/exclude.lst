@@ -1,0 +1,40 @@
+;;;; Files created during binarization
+; Dependency files and log files
+*.dep
+*.log
+
+;;;; Temporary or working files - should be handled earlies,
+;;;; but to be sure we exclude them here as well
+; Backup files
+*.bak
+; Avoid including any source, doc or temp files
+*\Source\*
+*\Temp\*
+*\Doc\*
+Source\*.*
+Temp\*.*
+Doc\*.* 
+
+;;;; Theo's excludes
+*.tga
+*.wav
+*.old
+
+;;;; Due to modular packing it might happen that .pbo are inside the temp folder that is packed,
+;;;; but those are ofcourse then a bit waste of space
+*.pbo
+
+; VSS specific files
+*.scc
+
+; mission editor temporary files
+*.biedi
+
+; helper p3ds for referencing textures and materials aren't needed in pbo
+*tga2paa.p3d
+*Helper.p3d
+
+
+;history folders
+history\*.*
+*\history\*
