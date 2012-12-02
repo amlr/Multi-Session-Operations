@@ -96,7 +96,10 @@ persistent_fnc_playerRespawn = compile PP "core\modules\persistentDB\playerRespa
 persistent_fnc_playerFired = compile PP "core\modules\persistentDB\playerFired.sqf";
 
 //Add manual persistence action for Admins (aka "Magicwand")
-player addAction ["Persist cursor", "core\modules\persistentDB\magicwand.sqf", nil, 6, True, True, "", "serverCommandAvailable '#kick'"];
+PersistActionLocal = {
+    _id = player addAction ["Persist cursor", "core\modules\persistentDB\magicwand.sqf", nil, 6, True, True, "", "serverCommandAvailable '#kick'"];
+};
+[] call PersistActionLocal;
 
 if (!isdedicated) then { VAR_DEFAULT(ENV_dedicated, false); };
 // ====================================================================================
@@ -113,7 +116,7 @@ if ((!isServer) || (!isdedicated)) then {
 		player setVariable ["BIS_noCoreConversations", true];
 		player addeventhandler ["Dammaged", { _this call persistent_fnc_playerDamage; } ];
 		player addeventhandler ["animChanged", { _this call persistent_fnc_playerHeal; } ];
-		player addeventhandler ["Respawn", { _this call persistent_fnc_playerRespawn; } ];
+		player addeventhandler ["Respawn", { _this call persistent_fnc_playerRespawn; _this call PersistActionLocal} ];
 		player addeventhandler ["Fired", { _this call persistent_fnc_playerFired; } ];
 		player allowdamage false;
 		processInitCommands;
