@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project name="Arma2">
+	<Package name="ACME">
+		<Container name="acme_version">
+			<Key ID="STR_ACME_REQUIRED">
+				<English>(ACME) Require ACME</English>
+				<Italian>(ACME) Require ACME</Italian>
+				<German>(ACME) Benötigt ACME</German>
+				<Spanish>(ACME) Require AMCE</Spanish>
+				<Czech>(ACME) Vyžaduje ACME</Czech>
+				<Russian>(ACME) Необходимость ACME</Russian>
+				<Polish>(ACME) Wymagaj ACME</Polish>
+				<French>(ACME) Necessite ACME</French>
+				<Hungarian>(ACME) ACME igénylés</Hungarian>
+			</Key>
+			<Key ID="STR_ACME_LOGIC">
+				<English>(ACME) Logic (No simulation)</English>
+				<Italian>(ACME) Logic (No simulation)</Italian>
+				<German>(ACME) Logik (Keine Simulation)</German>
+				<Spanish>(ACME) Logic (No simulation)</Spanish>
+				<Czech>(ACME) Logika (Bez simulací)</Czech>
+				<Russian>(ACME) Логика (Без симуляции)</Russian>
+				<Polish>(ACME) Logika (brak symulacji)</Polish>
+				<French>(ACME) Logic (No simulation)</French>
+				<Hungarian>(ACME) Logic (No simulation)</Hungarian>
+			</Key>
+			<Key ID="STR_ACME_VERSION_WARNING">
+				<English>Warning!</English>
+				<Italian>Attenzione!</Italian>
+				<German>Warnung!</German>
+				<Russian>Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ!</Russian>
+				<Spanish>Atencion!</Spanish>
+				<Polish>Uwaga!</Polish>
+				<French>Attention!</French>
+				<Czech>VarovÃ¡nÃ­!</Czech>
+				<Hungarian>Figyelem!</Hungarian>
+			</Key>
+			<Key ID="STR_ACME_VERSION_DETECT">
+				<English>ACME has detected a version mismatch between client and server!</English>
+				<Italian>La versione di ACME sul server non coincide con quella del client!</Italian>
+				<German>ACME hat einen Versionsunterschied zwischen Client und Server festgestellt!</German>
+				<Russian>Ð’Ð°ÑˆÐ° Ð²ÐµÑ€ÑÐ¸Ñ ÐÐ¡Ð• Ð½Ðµ ÑÐ¾Ð²Ð¿Ð°Ð´Ð°ÐµÑ‚ Ñ Ð²ÐµÑ€ÑÐ¸ÐµÐ¹ ÑÐµÑ€Ð²ÐµÑ€Ð°!</Russian>
+				<Spanish>Su version de ACME no corresponde a la del server!</Spanish>
+				<Polish>NiezgodnoÅ›Ä‡ wersji ACME klienta i serwera!</Polish>
+				<French>ACME a detectÃ© une version differente entre le serveur et le client!</French>
+				<Czech>VaÅ¡i verze ACME nesouhlasÃ­ s verzÃ­ na serveru!</Czech>
+				<Hungarian>ACME verziÃ³kÃ¼lÃ¶nbsÃ©g van a szerver Ã©s a kliens kÃ¶zÃ¶tt!</Hungarian>
+			</Key>
+			<Key ID="STR_ACME_VERSION_UPDATE">
+				<English>Please get the latest ACME version</English>
+				<Italian>Si prega di installare l'ultima versione di ACME</Italian>
+				<German>Bitte aktuellste ACME Version benutzen</German>
+				<Russian>ÐŸÐ¾Ð¶Ð°Ð»ÑƒÐ¹ÑÑ‚Ð° ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ðµ Ð¿Ð¾ÑÐ»ÐµÐ´Ð½ÑŽÑŽ Ð²ÐµÑ€ÑÐ¸ÑŽ ÐÐ¡Ð•</Russian>
+				<Spanish>Por favor instale la ultima version de ACME</Spanish>
+				<Polish>ProszÄ™ pobraÄ‡ najnowszÄ… wersjÄ™ ACME</Polish>
+				<French>Veuillez mettre Ã  jour votre version d'ACME</French>
+				<Czech>ProsÃ­m, stÃ¡hnÄ›te si nejnovÄ›jsÃ­ verzi ACME</Czech>
+				<Hungarian>KÃ©rlek, szerezd be a legfrissebb ACME verziÃ³t.</Hungarian>
+			</Key>
+			<Key ID="STR_ACME_VERSION_ERROR">
+				<English>Error</English>
+				<Italian>Errore</Italian>
+				<German>Fehler</German>
+				<Russian>ÐžÑˆÐ¸Ð±ÐºÐ°</Russian>
+				<Spanish>Error</Spanish>
+				<Polish>BÅ‚Ä…d</Polish>
+				<French>Erreur</French>
+				<Czech>Chyba</Czech>
+				<Hungarian>Hiba</Hungarian>
+			</Key>
+		</Container>
+		<Container name="ACME_SYS_BI_ANIMALS">
+			<Key ID="STR_ACME_BI_ANIMALS">
+				<English>(ACME) Animals</English>
+				<Italian>(ACME) Animals</Italian>
+				<German>(ACME) Animals</German>
+				<Russian>(ACME) Animals</Russian>
+				<Spanish>(ACME) Animals</Spanish>
+				<Polish>(ACME) Animals</Polish>
+				<French>(ACME) Animals</French>
+				<Czech>(ACME) Animals</Czech>
+				<Hungarian>(ACME) Animals</Hungarian>
+			</Key>
+		</Container>
+	</Package>
+</Project>
