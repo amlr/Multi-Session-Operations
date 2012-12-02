@@ -21,7 +21,7 @@ if (!isDedicated) then {
 PREP(fired);
 
 // Handling units killed (for recording player kills/deaths)
-PRERP(unitKilled);
+PREP(unitKilled);
 
 // Handling map co-ordinates in a standard way
 acme_fnc_mapCoord = COMPILE_FILE(fnc_mapCoord);
