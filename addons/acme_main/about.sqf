@@ -12,7 +12,7 @@ private ["_pcredits", "_pkeynam", "_shift", "_ctrl", "_alt", "_keys", "_key", "_
 
 _pcredits = [
 "",
-"<t align='center' color='#CC1100'>Advanced Co-op Mission Environment 2</t>",
+"<t align='center' color='#CC1100'>Advanced Co-op Mission Environment</t>",
 "<t align='center' color='#566D7E'>http://dev-heaven.net/projects/acme</t>",
 "",
 __cr_managers,

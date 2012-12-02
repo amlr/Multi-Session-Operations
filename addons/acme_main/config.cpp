@@ -396,17 +396,17 @@ class CfgVehicles
   class Logic;
  class ACME_Logic: Logic
  {
-  displayname = "(ACME) Logic (No simulation)";
+  displayname = "$STR_ACME_LOGIC";
  };
  class ACME_Required_Logic: ACME_Logic
  {
-  displayName = "(ACME) Require ACME";
+  displayName = "$STR_ACME_REQUIRED";
   vehicleClass = "Modules";
  };
  class ACME_BI_Animals_Logic: ACME_Logic
  {
   scope = 1;
-  displayName = "(ACME) Animals";
+  displayName = "$STR_ACME_BI_ANIMALS";
   icon = "\x\acme\addons\main\data\icon\icon_Animals_ca.paa";
   vehicleClass = "Modules";
   class Eventhandlers
