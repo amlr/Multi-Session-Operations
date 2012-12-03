@@ -23,8 +23,8 @@ _menus = [
 		["main", mso_menuname, _menuRsc],
 		[
 			["Debug Console",
-				{ createDialog "RMM_ui_debug" },
-				"", "", "", -1,	1, (getPlayerUID player) in MSO_R_Admin]
+				{createDialog "RMM_ui_debug"},
+				"", "", "", -1,	1, ((servercommandavailable '#kick') && ((getPlayerUID player) in MSO_R_Admin))]
 		]
 	]
 ];

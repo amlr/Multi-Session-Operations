@@ -1,7 +1,7 @@
 private ["_t","_pm"];
 if (!isdedicated) then {
         ["player", [mso_interaction_key], -9401, ["core\modules\rmm_debug\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
-        ["Debug","if((getPlayerUID player) in MSO_R_Admin) then {createDialog ""RMM_ui_debug""};"] call mso_core_fnc_updateMenu;
+        ["Debug","if ((servercommandavailable '#kick') && ((getPlayerUID player) in MSO_R_Admin)) then {createDialog 'RMM_ui_debug'} else {player sidechat 'You need to be logged in as administrator!'}"] call mso_core_fnc_updateMenu;
 };
 
 if (debug_mso) then {
