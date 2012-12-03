@@ -12,8 +12,8 @@ private ["_pcredits", "_pkeynam", "_shift", "_ctrl", "_alt", "_keys", "_key", "_
 
 _pcredits = [
 "",
-"<t align='center' color='#CC1100'>Advanced Co-op Mission Environment</t>",
-"<t align='center' color='#566D7E'>http://dev-heaven.net/projects/acme</t>",
+"<img size='10' align='center' image='\x\acme\addons\main\data\logo_ACMEA3_ca.paa'/>",
+"<t align='center' color='#566D7E'>http://dev-heaven.net/projects/mso</t>",
 "",
 __cr_managers,
 "",
@@ -22,7 +22,7 @@ __cr_devs,
 __cr_testers,
 "",
 "For a full list of acknowledgements, please visit our Wiki:",
-"<t color='#566D7E'>http://acme.dev-heaven.net</t>"
+"<t color='#566D7E'>http://dev-heaven.net/projects/mso/wiki</t>"
 ];
 
 _pkeynam = { //local function

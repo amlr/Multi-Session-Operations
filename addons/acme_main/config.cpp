@@ -9,7 +9,7 @@ class CfgPatches
   requiredVersion = 1.62;
   requiredAddons[] = {"CBA_XEH","CBA_OA_XEH","CBA_MAIN","CBA_OA_MAIN","CA_Modules","CAFonts"};
   author[] = {"ACME Team - Wolffy.au, Tupolov, HighHead, Rommel, JMan, Friznit"};
-  authorUrl = "http://acme.dev-heaven.net";
+  authorUrl = "https://dev-heaven.net/projects/mso";
   versionDesc = "A.C.M.E.";
   versionAct = "['MAIN',_this] execVM '\x\acme\addons\main\about.sqf';";
   version = "1.0.0.0";
@@ -28,7 +28,7 @@ class CfgMods
   hideName = "true";
   actionName = "Website";
   action = "http://acme.dev-heaven.net";
-  description = "Bugtracker: http://dev-heaven.net/projects/acme<br/>Documentation: http://acme.dev-heaven.net";
+  description = "Bugtracker: http://dev-heaven.net/projects/mso<br/>Documentation: http://dev-heaven.net/projects/mso/documents";
  };
 };
 class CfgSettings 
@@ -132,10 +132,10 @@ class RscDisplayMain: RscStandardDisplay
   {
    idc = 1106;
    colorText[] = {1,1,1,"0.6+0.4"};
-   x = "(SafeZoneW + SafeZoneX) - (0.1568627*1.5 + 0.04)";
+   x = "(SafeZoneW + SafeZoneX) - (0.1568627*2 + 0.04)";
    y = "SafeZoneY + 0.00";
-   w = "0.1568627*1.5";
-   h = "0.2091503*1.5";
+   w = "0.1568627*2";
+   h = "0.2091503*2";
    text = "\x\acme\addons\Main\data\logo_ACMEA3_ca.paa";
   };
  };
@@ -282,7 +282,7 @@ class ACME_VERSION_MISMATCH
   size = 0.027;
   colorText[] = {1,1,1,1};
   sizeEx = 0.027;
-  text = "http://dev-heaven.net/projects/activity/ACME";
+  text = "https://dev-heaven.net/projects/mso/activity";
   class Attributes{};
  };
 };
