@@ -86,6 +86,7 @@ class CfgSounds
 class RscStandardDisplay;
 class RscText;
 class RscPicture;
+class RscPictureKeepAspect;
 class RscActiveText;
 class RscStructuredText;
 class RscEdit;
@@ -95,6 +96,50 @@ class RscButton;
 class RscLine;
 class CA_Title;
 class RscControlsGroup;
+
+class RscDisplayStart: RscStandardDisplay
+{
+ class controls
+ {
+  class LoadingPic: RscPictureKeepAspect
+  {
+   idc = 501;
+   w = 0;
+   h = 0;
+   text = "";
+   colortext[] = {1,1,1,0};
+  };
+  delete ACE_LoadingPic;
+  class ACME_LoadingPic: RscPictureKeepAspect
+  {
+   idc = 105;
+   x = "SafezoneX";
+   y = "SafezoneY+SafezoneH*0.075";
+   w = "SafezoneW";
+   h = "SafezoneH*0.85";
+   text = "\x\acme\addons\Main\data\ls_ACME_bg_ca.paa";
+   colortext[] = {1,1,1,1};
+  };
+ };
+};
+class RscDisplayMain: RscStandardDisplay
+{
+ class controlsBackground
+ {
+  delete CA_ARMA2;
+  delete ACE_CA_ARMA2;
+  class ACME_CA_ARMA2: RscPicture
+  {
+   idc = 1106;
+   colorText[] = {1,1,1,"0.6+0.4"};
+   x = "(SafeZoneW + SafeZoneX) - (0.1568627*1.5 + 0.04)";
+   y = "SafeZoneY + 0.00";
+   w = "0.1568627*1.5";
+   h = "0.2091503*1.5";
+   text = "\x\acme\addons\Main\data\logo_ACMEA3_ca.paa";
+  };
+ };
+};
 
 class ACME_ABOUT_CTRL: RscActiveText
 {
