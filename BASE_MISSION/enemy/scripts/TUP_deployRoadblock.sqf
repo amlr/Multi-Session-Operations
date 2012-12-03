@@ -174,7 +174,7 @@ _vehicle setDir getdir _roadpos;
 	_blockers = [getpos _roadpos, "infantry", _fac] call mso_core_fnc_randomGroup;
 	_blockers addVehicle _vehicle;
 	sleep 1;
-	[_blockers, getpos _roadpos] execVM "enemy\scripts\BIN_taskDefend.sqf";
+	[_blockers, getpos _roadpos] call CBA_fnc_taskDefend;
 };
 _roadposition = [getpos _roadpos select 0, getpos _roadpos select 1, 0];
 _roadposition;

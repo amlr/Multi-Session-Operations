@@ -86,7 +86,7 @@ for "_i" from 1 to _number do {
 	};
 	(_veh select 2) setSpeedMode "LIMITED";
     (_veh select 2) setFormation "DIAMOND";
-	[(_veh select 2)] call BIN_fnc_taskDefend;
+	[(_veh select 2)] call CBA_fnc_taskDefend;
 };
 
 _id = floor (random 1000);

@@ -42,7 +42,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
 	        	[_group,_pos,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
 	
 	            _grp2 = [_pos, call compile (_grpt2 select 0), [_grpt2] call DEP_convert_group] call BIS_fnc_spawnGroup;
-	            [_grp2] call BIN_fnc_taskDefend;
+	            [_grp2] call CBA_fnc_taskDefend;
 	            if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Guards created %2 (%3)", time, _pos, _grp2];};
 	            ep_groups set [count ep_groups, _grp2];
 	        };
