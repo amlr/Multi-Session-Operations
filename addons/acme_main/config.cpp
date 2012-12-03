@@ -128,15 +128,15 @@ class RscDisplayMain: RscStandardDisplay
  {
   delete CA_ARMA2;
   delete ACE_CA_ARMA2;
-  class ACME_CA_ARMA2: RscPicture
+  class ACME_CA_ARMA2: RscPictureKeepAspect
   {
    idc = 1106;
    colorText[] = {1,1,1,"0.6+0.4"};
-   x = "(SafeZoneW + SafeZoneX) - (0.1568627*2 + 0.04)";
-   y = "SafeZoneY + 0.00";
-   w = "0.1568627*2";
-   h = "0.2091503*2";
-   text = "\x\acme\addons\Main\data\logo_ACMEA3_ca.paa";
+   x = "(SafeZoneW + SafeZoneX) - (0.1568627*2.1 + 0.04)";
+   y = "SafeZoneY + 0.04";
+	w = "0.1568627*2.2";
+	h = "0.2091503*1.2";
+   text = "\x\acme\addons\Main\data\logo_ACMEA3_crop_ca.paa";
   };
  };
 };

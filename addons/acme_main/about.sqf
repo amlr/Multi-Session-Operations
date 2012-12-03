@@ -12,7 +12,7 @@ private ["_pcredits", "_pkeynam", "_shift", "_ctrl", "_alt", "_keys", "_key", "_
 
 _pcredits = [
 "",
-"<img size='10' align='center' image='\x\acme\addons\main\data\logo_ACMEA3_ca.paa'/>",
+"<img size='6' align='center' image='\x\acme\addons\main\data\logo_ACMEA3_crop_ca.paa'/>",
 "<t align='center' color='#566D7E'>http://dev-heaven.net/projects/mso</t>",
 "",
 __cr_managers,
