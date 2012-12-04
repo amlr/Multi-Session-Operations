@@ -34,7 +34,7 @@ Generic MSO code is found in here as well.
 | Contact details |
 #=================#
 
-Page:	http://dev-heaven.net/projects/show/ACME
+Page:	http://dev-heaven.net/projects/mso
 
 
 
@@ -51,6 +51,6 @@ Page:	http://dev-heaven.net/projects/show/ACME
 //  of this distribution removed or modified without express written consent   //
 //  of the developer. For further licensing details please refer to the        //
 //  End User License Agreement provided within this PBO file.                  //
-//  Any questions or comments, please contact contact@acmemod.net               //
-//                                                                             //
+//  Any questions or comments, please contact:             					   //
+//                    https://dev-heaven.net/projects/mso                      //
 /////////////////////////////////////////////////////////////////////////////////

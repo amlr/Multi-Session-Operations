@@ -11,7 +11,7 @@
 
 
 #define ACME_TAG A.C.M.E.
-//text = QUOTE(A.C.M.E. Developer Version VERSION);
+text = QUOTE(A.C.M.E. Developer Version VERSION);
 //text = QUOTE(A.C.M.E. Alpha VERSION);
 //text = QUOTE(A.C.M.E. ReleaseCandidate VERSION);
 //text = QUOTE(A.C.M.E. Final VERSION);
