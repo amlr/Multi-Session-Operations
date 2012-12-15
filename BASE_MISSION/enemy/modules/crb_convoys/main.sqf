@@ -228,7 +228,7 @@ for "_j" from 1 to _numconvoys do {
 						if (_debug) then {
 							diag_log format["MSO-%1 Convoy: %3 deleting %2", time, _grp, _j];
 						};
-						{ deleteVehicle _x } forEach units _grp;
+						{deleteVehicle (vehicle _x); deleteVehicle _x;} forEach units _grp;
 						deletegroup _grp;
 
                         _sleep = if(_debug) then {30;} else {random 300;};
