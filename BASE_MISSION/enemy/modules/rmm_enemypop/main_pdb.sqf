@@ -4,6 +4,9 @@ diag_log format["MSO-%1 PDB EP Population: starting to load functions...", time]
 if (isnil "BIN_fnc_taskDefend") then {BIN_fnc_taskDefend = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskDefend.sqf"};
 if (isnil "BIN_fnc_taskPatrol") then {BIN_fnc_taskPatrol = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskPatrol.sqf"};
 if (isnil "BIN_fnc_taskSweep") then {BIN_fnc_taskSweep = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskSweep.sqf"};
+if (isnil "HH_fnc_taskDefend") then {HH_fnc_taskDefend = compile preprocessFileLineNumbers "enemy\scripts\HH_taskDefend.sqf"};
+if (isnil "TUP_fnc_deployRoadblock") then {TUP_fnc_deployRoadblock = compile preprocessFileLineNumbers "enemy\scripts\TUP_deployRoadBlock.sqf"};
+if (isnil "TUP_fnc_deployAA") then {TUP_fnc_deployAA = compile preprocessFileLineNumbers "enemy\scripts\TUP_spawnAA.sqf"};
 if (isnil "MSO_fnc_depinitlocs") then {MSO_fnc_depinitlocs = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\MSO_fnc_depinitlocs.sqf"};
 if (isnil "DEP_MainLoop") then {DEP_MainLoop = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_MainLoop.sqf"};
 if (isnil "MSO_fnc_getrandomgrouptype") then {MSO_fnc_getrandomgrouptype = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\MSO_fnc_getrandomgrouptype.sqf"};
@@ -148,7 +151,7 @@ DEP_camptypes =
         };
 
         if (_AA) then {
-            	[_pos, "static", 1 + random 1] execVM "enemy\scripts\TUP_spawnAA.sqf";
+            	[_pos, "static", 1 + random 1] call TUP_fnc_deployAA;
         };
             
         if (_RB) then {

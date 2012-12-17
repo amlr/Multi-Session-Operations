@@ -162,6 +162,7 @@ if !(_list select 7 == "") then {
 _vehtype = ([2, _fac, "Car"] call mso_core_fnc_findVehicleType) call BIS_fnc_selectRandom;
 _vehicle = _vehtype createVehicle (_roadpos modelToWorld [0,-13,0]);
 _vehicle setDir getdir _roadpos;
+_vehicle setposATL (getposATL _vehicle);
 
 // Spawn group and get them to defend
 [_vehicle, _roadpos, _fac] spawn {
@@ -174,7 +175,7 @@ _vehicle setDir getdir _roadpos;
 	_blockers = [getpos _roadpos, "infantry", _fac] call mso_core_fnc_randomGroup;
 	_blockers addVehicle _vehicle;
 	sleep 1;
-	[_blockers, getpos _roadpos] call CBA_fnc_taskDefend;
+	[_blockers, getpos _roadpos] call HH_fnc_taskDefend;
 };
 _roadposition = [getpos _roadpos select 0, getpos _roadpos select 1, 0];
 _roadposition;

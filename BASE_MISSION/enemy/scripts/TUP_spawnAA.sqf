@@ -80,7 +80,9 @@ if (count _aa == 0) exitWith {diag_log format ["MSO-%1 Enemy Population - Did no
 // Create vehicle
 _choice = _aa call BIS_fnc_selectRandom;
 for "_i" from 1 to _number do {
-	_veh = [[_pos, 0, 20, 5, 0, 1, 0] call bis_fnc_findSafePos, random 360, _choice, EAST] call BIS_fnc_spawnVehicle;
+    _altpos =  [_pos, 20] call CBA_fnc_randPos;
+    _safepos = [_pos,0,20,5,0,1,0,[],[_altpos]] call BIS_fnc_findSafePos;
+	_veh = [_safepos, random 360, _choice, EAST] call BIS_fnc_spawnVehicle;
 	if (_debug) then {
 		diag_log format["MSO-%1 Enemy Population - deploying AA asset %2 at %3", time, _choice, position (_veh select 0)];
 	};
