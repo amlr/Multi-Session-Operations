@@ -2,7 +2,7 @@
 private ["_loc","_loctype","_pos","_placeholder","_grptype","_camp","_grptype2","_d","_type"];
 
 _debug = debug_mso;
-diag_log format["MSO-%1 PDB EP Population: starting INIT...", time];
+diag_log format["MSO-%1 PDB EP Population: Starting INIT...", time];
 
 	// Function to convert group into appropriate format (avoiding config > string issues)
 	// Set side
@@ -21,23 +21,62 @@ diag_log format["MSO-%1 PDB EP Population: starting INIT...", time];
 		_grptemp;
 	};
 
-DEP_LOCS = [];
-for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
-	private ["_loc","_loctype","_pos","_placeholder","_grptype","_camp","_grptype2","_d","_type"];
-	if (_i > ((count CRB_LOCS)-1)) exitwith {};
+//Select Active locations
+_DEP_loctypes = ["Hill","Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart","FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown","ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
+_CRB_locs_tmp = CRB_LOCS;
+_DEP_locs_tmp = [];
+_timenow = time;
+
+diag_log format["MSO-%1 PDB EP Population: Start collecting locs...!", time];
+while {count _DEP_locs_tmp < DEP_ACTIVE_LOCS} do {
+    private ["_continue"];
+
+    _loc = _CRB_locs_tmp call BIS_fnc_selectRandom;
+    _posLoc = position _loc;
     
-    _loc = CRB_LOCS select _i;
+    //check if location is too near to an other selected location
+    _continue = true;
+    if (count _DEP_locs_tmp > 0) then {
+	    {
+            _dist = _posLoc distance (position _x);
+	        if (_dist < DEP_DENSITY) exitwith {_continue = false};
+	    } foreach _DEP_locs_tmp;
+    };
+    
+    //if minimum-distance fits, check for some other params and if ok then collect location
+	if (
+    	(_continue) &&
+        {(_posLoc distance getmarkerpos "ammo" > rmm_ep_safe_zone)} &&
+        {(_posLoc distance getmarkerpos "ammo_1" > rmm_ep_safe_zone)} &&
+        {(type _loc) in _DEP_loctypes}
+    ) then {
+	    _DEP_locs_tmp set [count _DEP_locs_tmp, _loc];
+	    _CRB_locs_tmp = _CRB_locs_tmp - [_loc];
+        if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Location %1 at %2 selected...", time,_loc,_posLoc]};
+    };
+    
+    //Failsafe exit
+    _timeactual = time;
+    if ((_timeactual - _timenow) > 180) exitwith {diag_log format["MSO-%1 PDB EP Population: Collection didnt finish in a timely manner!", time]};
+};
+_CRB_locs_tmp = nil;
+_DEP_loctypes = nil;
+diag_log format["MSO-%1 PDB EP Population: Collected %2 locations...!", time, count _DEP_locs_tmp];
+
+DEP_LOCS = [];
+for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
+	private ["_loc","_loctype","_pos","_placeholder","_grptype","_camp","_grptype2","_d","_type"];
+    
+    _loc = _DEP_locs_tmp select _i;
     _loctype = type _loc;
     _pos = position _loc;
 	_grptype = nil;
 	_AA = false;
 	
-    if ((_pos distance getmarkerpos "ammo" > rmm_ep_safe_zone) && (_pos distance getmarkerpos "ammo_1" > rmm_ep_safe_zone)) then {
-    
     	_loctype = type _loc;
     	_pos = position _loc;
 
-    	if ((_loctype == "Hill") && (random 1 > 0.33)) then {
+    	if ((_loctype == "Hill")) then {
         	_pos = [position _loc, 0, 30, 1, 0, 5, 0] call bis_fnc_findSafePos;
         	_placeholder = "Can_small" createvehicle _pos;
         
@@ -65,7 +104,7 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         	DEP_LOCS set [count DEP_LOCS,[_placeholder,0]];
     	};
     
-    	if ((_loctype in ["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"]) && (random 1 > 0.5)) then {
+    	if ((_loctype in ["Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart"])) then {
         	_d = 500;
       	  	_pos = [position _loc, 0,_d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
       		_placeholder = "Can_small" createvehicle _pos;
@@ -94,7 +133,7 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         	DEP_LOCS set [count DEP_LOCS,[_placeholder,0]];
     	};
     
-    	if ((_loctype in ["FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown"]) && (random 1 > 0.6)) then {
+    	if ((_loctype in ["FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown"])) then {
         	_d = 300;
         	_pos = [position _loc, 0,_d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
         	_placeholder = "Can_small" createvehicle _pos;
@@ -128,7 +167,7 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         	DEP_LOCS set [count DEP_LOCS,[_placeholder,0]];
     	};
     
-    	if ((_loctype in ["ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"]) && (random 1 > 0.75))then {
+    	if ((_loctype in ["ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"])) then {
         	_d = 200;
         	_pos = [position _loc, 0,_d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
         	_placeholder = "Can_small" createvehicle _pos;
@@ -152,12 +191,6 @@ for "_i" from 0 to ((count CRB_LOCS)-1) step rmm_ep_intensity do {
         	_placeholder setpos [_pos select 0, _pos select 1, -30];
         	DEP_LOCS set [count DEP_LOCS,[_placeholder,0]];
     	};
-		//diag_log format["type = %1", _placeholder getvariable "type"];
-	} else {
-      	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Skipping unfitting location...", time]};
-    };
 };
 
-diag_log format["MSO-%1 PDB EP Population: ended INIT...", time];
-diag_log format["MSO-%1 PDB EP Population: DEP Locations - %2", time,count DEP_LOCS];
-
+diag_log format["MSO-%1 PDB EP Population: Endet INIT! Finalized DEP Locations: %2", time,count DEP_LOCS];

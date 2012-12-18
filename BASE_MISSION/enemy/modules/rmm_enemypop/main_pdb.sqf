@@ -105,6 +105,7 @@ DEP_camptypes =
 			_RB = ((_x select 0) getvariable "type") select 2;
 		};
 		if (isnil "_RB") then {_RB = false}; // RB Flag (bool)
+		_debug = debug_mso;
 		
 		//Fix for PO2
 		if (typename _camp == "STRING") then {
@@ -139,7 +140,7 @@ DEP_camptypes =
 		//Markers in Debug
 		if (_debug) then {
 			private["_t","_m"];
-			_t = format["ep%1",floor(random 10000)];
+			_t = format["DEP%1",floor(random 100000)];
 			_m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", str(_grpt select 2), "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
 		};
 
@@ -161,4 +162,5 @@ DEP_camptypes =
 	} foreach DEP_LOCS;
 
 	[] spawn DEP_Triggerloop;
+	DEP_INIT_FINISHED = true; publicvariable "DEP_INIT_FINISHED";
 };

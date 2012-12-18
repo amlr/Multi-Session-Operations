@@ -22,6 +22,8 @@ if (isNil "rmm_ep_mot") then {rmm_ep_mot = 3;};
 if (isNil "rmm_ep_mec") then {rmm_ep_mec = 2;};
 if (isNil "rmm_ep_arm") then {rmm_ep_arm = 1;};
 if (isNil "rmm_ep_aa") then {rmm_ep_aa = 2;};
+if (isNil "DEP_ACTIVE_LOCS") then {DEP_ACTIVE_LOCS = 40;};
+if (isNil "DEP_DENSITY") then {DEP_DENSITY = 1000;};
 if (isNil "pdb_locations_enabled") then {pdb_locations_enabled = false;};
 
 
