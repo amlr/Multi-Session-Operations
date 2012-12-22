@@ -32,6 +32,54 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 		if !(isDedicated) then {
 			mso_interaction_key = ace_sys_interaction_key_self;
 		};
+        
+        // ACE Jerry can and tyre cleanup workaround
+        if (isserver) then {
+            
+            //Checking for Jerrycans and Tyres existing on missionstart (editor placed objects)
+            AllowedSupplyObjects = [];
+                { 
+                
+                	if (typeof _x in ["ACE_JerryCan_15", "ACE_JerryCan_5","ACE_JerryCan","ACE_Spare_Tyre","ACE_Spare_Tyre_HD"]) then {
+                        AllowedSupplyObjects set [count AllowedSupplyObjects, _x];
+                    };
+                } foreach allmissionobjects "";
+            
+            //Define cleanup Procedure
+            ACE_object_cleanup = {
+                
+                //Checking cargo of existing vehicles
+                _allowedobjects = AllowedSupplyObjects;
+                {
+                    if (alive _x) then {
+	                    _tempCargo = _x call ACE_fnc_listCargo;
+	                    _allowedobjects = _allowedobjects + _tempCargo;
+                    };
+                } foreach allmissionobjects "LandVehicle";
+                
+                //Delete all other jerrycans and tyres
+                { 
+                
+                	if ((typeof _x in ["ACE_JerryCan_15", "ACE_JerryCan_5","ACE_JerryCan","ACE_Spare_Tyre","ACE_Spare_Tyre_HD"]) && {!(_x in _allowedobjects)}) then {
+                        diag_log format["Cleaning abandoned ACE object %1", _x];
+                        deletevehicle vehicle _x; deletevehicle _x;
+                    };
+                } foreach allmissionobjects "";
+            };
+            
+            //Spawning Cleanuploop that deletes every half an hour IF totalcount of abandoned tyres/jerrycans is over 150
+            [] spawn {
+            	while {true} do {
+                    sleep 1800; 
+                    _objectCount = {typeof _x in ["ACE_JerryCan_15", "ACE_JerryCan_5","ACE_JerryCan","ACE_Spare_Tyre","ACE_Spare_Tyre_HD"]} count allmissionobjects "";
+                	if (_objectCount > 150) then {
+                        [] call ACE_object_cleanup;
+                    } else {
+                        diag_log format["Not cleaning - ACE jerrycans and tyres are %1 below 150",_objectCount];
+                    };
+                };
+            };
+        };
 };
 
 // ACRE Config and sync
