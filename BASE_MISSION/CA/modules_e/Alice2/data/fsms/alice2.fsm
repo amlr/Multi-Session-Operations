@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "C:\BIS\fsmeditor\scriptedFSM.cfg, ALICE 2">*/
+/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, ALICE 2">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"ALICE_2",0,250,-75.000000,-275.000000,25.000000,-225.000000,0.000000,"ALICE 2"};
@@ -16,8 +16,8 @@ link4[] = {3,6};
 link5[] = {4,5};
 link6[] = {5,6};
 link7[] = {6,1};
-globals[] = {25.000000,1,0,0,16777215,640,480,1,8,6316128,1,-335.309540,341.370117,-29.107285,-475.985321,610,899,1};
-window[] = {2,-1,-1,-1,-1,754,-1256,4,24,3,627};
+globals[] = {25.000000,1,0,0,16777215,640,480,1,8,6316128,1,-159.584564,165.645096,295.731445,-205.072067,389,599,1};
+window[] = {0,-1,-1,-1,-1,972,242,1502,242,1,406};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -28,7 +28,6 @@ class FSM
     class ALICE_2
     {
       name = "ALICE_2";
-      itemno = 0;
       init = /*%FSM<STATEINIT""">*/"_logic = _this;" \n
        "_spawnDisMinMain = _logic getvariable ""spawnDistance"";" \n
        "//_spawnDisMaxMain = _spawnDisMin * 1.2;" \n
@@ -50,7 +49,6 @@ class FSM
         /*%FSM<LINK "Wait">*/
         class Wait
         {
-          itemno = 2;
           priority = 0.000000;
           to="Reset";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
@@ -65,7 +63,6 @@ class FSM
     class Loop
     {
       name = "Loop";
-      itemno = 1;
       init = /*%FSM<STATEINIT""">*/"_timeNow = time;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -73,7 +70,6 @@ class FSM
         /*%FSM<LINK "Loop">*/
         class Loop
         {
-          itemno = 4;
           priority = 1.000000;
           to="Town";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
@@ -84,7 +80,6 @@ class FSM
         /*%FSM<LINK "Wait">*/
         class Wait
         {
-          itemno = 2;
           priority = 0.000000;
           to="Reset";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
@@ -99,7 +94,6 @@ class FSM
     class Reset
     {
       name = "Reset";
-      itemno = 3;
       init = /*%FSM<STATEINIT""">*/"_n = 0;" \n
        "_delay = 1;" \n
        "" \n
@@ -110,7 +104,6 @@ class FSM
         /*%FSM<LINK "True">*/
         class True
         {
-          itemno = 6;
           priority = 0.000000;
           to="Loop";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
@@ -125,7 +118,6 @@ class FSM
     class Town
     {
       name = "Town";
-      itemno = 5;
       init = /*%FSM<STATEINIT""">*/"_town = _alltowns select _n;" \n
        "_name = _town getvariable ""name"";" \n
        "" \n
@@ -164,16 +156,23 @@ class FSM
        "	textLogFormat [""Log: [ALICE 2]: %1 depopulated."",_name];" \n
        "" \n
        "	_grp = _town getvariable ""ALICE_group"";" \n
-       "	{" \n
-       "		_id = _x getvariable ""ALICE_id"";" \n
+       "	_units = units _grp;" \n
+       "" \n
+       "	for ""_i"" from 0 to ((count _units) - 1) do {" \n
+       "" \n
+       "		_unit = _units select _i;" \n
+       "		_id = _unit getvariable ""ALICE_id"";" \n
        "		if (_debug && !isNil ""_id"") then {" \n
        "			deletemarker format [""BIS_alice_civ_%1"",_id];" \n
        "			deletemarker format [""BIS_alice_civ_%1_w"",_id];" \n
-       "			deletemarker str driver _x;" \n
+       "			deletemarker str driver _unit;" \n
        "		};" \n
-       "		deletevehicle vehicle _x;" \n
-       "		deletevehicle _x;" \n
-       "	} foreach units _grp;" \n
+       "" \n
+       "		if ({(position _unit) distance _x < 100} count ([] call BIS_fnc_listPlayers) < 1) then {" \n
+       "			deletevehicle vehicle _unit;" \n
+       "			deletevehicle _unit;" \n
+       "		};" \n
+       "	};" \n
        "};" \n
        "" \n
        "////////////////////////////////////////////////////////////////////////////////////////////////" \n
@@ -229,7 +228,6 @@ class FSM
         /*%FSM<LINK "True">*/
         class True
         {
-          itemno = 6;
           priority = 0.000000;
           to="Loop";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
