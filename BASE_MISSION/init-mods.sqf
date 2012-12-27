@@ -196,8 +196,36 @@ if ((isClass(configFile>>"CfgPatches">>"reezo_eod")) && (tup_ied_eod == 1)) then
         };
 };
 
-// Civilian Interaction Module Configuration
+// Advanced Interaction Module Configuration
+//Init AIM
+if (isClass(configFile>>"CfgPatches">>"gbl_advanced_interaction")) then {
+	_AIMinit = [] execVM "\gbl_advanced_interaction\scripts\init_interaction.sqf";
+};
 
+//Init Rations and Water
+if (isClass(configFile>>"CfgPatches">>"gbl_field_rations")) then {
+    
+    _AIMFRinit = [] execVM "\gbl_field_rations\scripts\Init_FRM.sqf";
+
+    // Add Fieldrations box near current ammo boxes - GBL_UK_rationsbox
+    if (isServer) then {
+        private ["_rationsmarkers"];
+        _rationsmarkers = ["ammo","ammo_1"];
+        {
+                private ["_pos","_newpos"];
+                if !(str (markerPos _x) == "[0,0,0]") then {
+                        _pos = markerPos _x;
+                        if (count nearestObjects [_pos, ["GBL_ItemsCrate"], 10] == 0) then {
+                                _newpos = [_pos, 0, 10, 2, 0, 0, 0] call BIS_fnc_findSafePos;
+                                "GBL_ItemsCrate" createVehicle _newpos;
+                                diag_log format ["Creating GBL itemsbox at %1", _newpos];
+                        };
+                };
+        } foreach _rationsmarkers;
+    };
+};
+
+// Civilian Interaction Module Configuration
 if (isClass(configFile>>"CfgPatches">>"nielsen_cim")) then {
         
         if (isServer) then {

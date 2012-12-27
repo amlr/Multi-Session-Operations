@@ -137,6 +137,10 @@ _add = [_twn,"ALICE_population",[_unit]] call bis_fnc_variablespaceadd;
 _unit addeventhandler ["hit",{_this call BIS_ALICE2_fnc_civilianHit}];
 _unit addeventhandler ["killed",{_this call BIS_ALICE2_fnc_civilianKilled}];
 
+if (isClass(configFile>>"CfgPatches">>"gbl_advanced_interaction")) then {
+	_unit addMPeventhandler ["MPkilled",{(_this select 1) call gbl_fnc_civKilled;}];
+};
+
 //--- Custom init
 _globalInit = _logic getvariable "ALICE_civilianinit";
 _localInit = _twn getvariable "ALICE_civilianinit";
