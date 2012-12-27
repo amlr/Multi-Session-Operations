@@ -6,7 +6,8 @@ if(destroyCityIntensity > 0) then {
         ((markerPos "respawn_guerrila_1") nearObjects ["House", 50]) +
         ((markerPos "respawn_guerrila_2") nearObjects ["House", 50]) +
         ((markerPos "respawn_guerrila_3") nearObjects ["House", 50]) +
-        ((markerPos "respawn_west") nearObjects ["House", 50]) ;        
+        ((markerPos "respawn_west") nearObjects ["House", 50]) +
+        ((markerPos "respawn_east") nearObjects ["House", 50]);       
 
         waitUntil{!isNil "bis_functions_mainscope"};
         waitUntil{typeName (bis_functions_mainscope getVariable "locations") == "ARRAY"};

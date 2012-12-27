@@ -14,6 +14,27 @@ _house setVariable ["s", true, CQBaiBroadcast];
 sleep (random 1);
 
 _fact = MSO_FACTIONS call BIS_fnc_selectRandom;
+
+_sidex = getNumber(configFile >> "CfgFactionClasses" >> _fact >> "side");
+_side = nil;
+switch(_sidex) do {
+        case 0: {
+                _side = east;
+        };
+        case 1: {
+                _side = west;
+        };
+        case 2: {
+                _side = resistance;
+        };
+        case 3: {
+                _side = civilian;
+        };
+		default {
+				_side = east;
+        };
+};
+
 _types = [0, [_fact],"Man"] call mso_core_fnc_findVehicleType;
 _unittypes = [];
 for "_i" from 0 to (1 + floor(random 3)) do {
@@ -21,7 +42,7 @@ for "_i" from 0 to (1 + floor(random 3)) do {
 	_unittypes set [count _unittypes, _unittype];
 };
 
-_group = [_grpPos, EAST, _unittypes] call BIS_fnc_spawnGroup;
+_group = [_grpPos, _side, _unittypes] call BIS_fnc_spawnGroup;
 _units = units _group;
 
 if (count _units < 1) exitwith {
