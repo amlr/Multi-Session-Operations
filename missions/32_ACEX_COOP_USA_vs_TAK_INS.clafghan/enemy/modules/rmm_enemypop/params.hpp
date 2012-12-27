@@ -10,6 +10,18 @@ class rmm_ep_intensity {
         texts[]= {"Disabled","10%","20%","33%","50%","100%"}; 
         default = 2;
 };
+class DEP_ACTIVE_LOCS {
+        title = "    Enemy Active Locations"; 
+        values[]= {0,20,40,60,80,100}; 
+        texts[]= {"Disabled","20","40","60","80","100"}; 
+        default = 60;
+};
+class DEP_DENSITY {
+        title = "    Enemy Density";
+        values[]= {0,500,1000,2000}; 
+        texts[]= {"Disabled","High","Medium","low"}; 
+        default = 1000;
+};
 class rmm_ep_spawn_dist {
         title = "    Enemy Spawn Distance"; 
         values[]= {500,1000,2000,4000,8000,20000}; 

@@ -2,13 +2,25 @@ class rmm_dynamic {
         title = "    Dynamic Enemy Populator";
         values[]= {0,1,2}; 
         texts[]= {"Static (no PDB)","Dynamic (no PDB)","Dynamic (PDB compatible)"}; 
-        default = 1;
+        default = 2;
 };
 class rmm_ep_intensity {
         title = "    Enemy Intensity"; 
         values[]= {0,10,5,3,2,1}; 
         texts[]= {"Disabled","10%","20%","33%","50%","100%"}; 
         default = 3;
+};
+class DEP_ACTIVE_LOCS {
+        title = "    Enemy Active Locations"; 
+        values[]= {0,20,40,60,80,100}; 
+        texts[]= {"Disabled","20","40","60","80","100"}; 
+        default = 40;
+};
+class DEP_DENSITY {
+        title = "    Enemy Density";
+        values[]= {0,500,1000,2000}; 
+        texts[]= {"Disabled","High","Medium","low"}; 
+        default = 500;
 };
 class rmm_ep_spawn_dist {
         title = "    Enemy Spawn Distance"; 

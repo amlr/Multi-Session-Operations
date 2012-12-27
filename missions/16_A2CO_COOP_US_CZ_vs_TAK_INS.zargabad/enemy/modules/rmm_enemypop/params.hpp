@@ -10,6 +10,18 @@ class rmm_ep_intensity {
         texts[]= {"Disabled","10%","20%","33%","50%","100%"}; 
         default = 3;
 };
+class DEP_ACTIVE_LOCS {
+        title = "    Enemy Active Locations"; 
+        values[]= {0,20,40,60,80,100}; 
+        texts[]= {"Disabled","20","40","60","80","100"}; 
+        default = 40;
+};
+class DEP_DENSITY {
+        title = "    Enemy Density";
+        values[]= {0,500,1000,2000}; 
+        texts[]= {"Disabled","High","Medium","low"}; 
+        default = 500;
+};
 class rmm_ep_spawn_dist {
         title = "    Enemy Spawn Distance"; 
         values[]= {500,1000,2000,4000,8000,20000}; 
@@ -26,25 +38,25 @@ class rmm_ep_inf {
         title = "    Enemy Infantry Units"; 
         values[]= {0,9,8,7,6,5,4,3,2,1}; 
         texts[]= {"Disabled","90%","80%","70%","60%","50%","40%","30%","20%","10%"}; 
-        default = 8;
+        default = 4;
 };
 class rmm_ep_mot {
         title = "    Enemy Motorized Units"; 
         values[]= {0,9,8,7,6,5,4,3,2,1}; 
         texts[]= {"Disabled","90%","80%","70%","60%","50%","40%","30%","20%","10%"}; 
-        default = 2;
+        default = 3;
 };
 class rmm_ep_mec {
         title = "    Enemy Mechanized Units"; 
         values[]= {0,9,8,7,6,5,4,3,2,1}; 
         texts[]= {"Disabled","90%","80%","70%","60%","50%","40%","30%","20%","10%"}; 
-        default = 0;
+        default = 2;
 };
 class rmm_ep_arm {
         title = "    Enemy Armoured Units"; 
         values[]= {0,9,8,7,6,5,4,3,2,1}; 
         texts[]= {"Disabled","90%","80%","70%","60%","50%","40%","30%","20%","10%"}; 
-        default = 0;
+        default = 1;
 };
 class rmm_ep_aa {
         title = "    Enemy Anti-Air Units"; 
