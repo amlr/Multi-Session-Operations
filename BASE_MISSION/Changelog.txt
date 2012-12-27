@@ -1,11 +1,12 @@
 Change Log:
 Thanks to:
-- MSO development team: Wolffy.au, Tupolov, highhead, Jman, friznit, WobblyHeadedBob, zorrobyte, HateDread, kieran, Ryan, Kolmain, and Rommel
+- MSO development team: Wolffy.au, Tupolov, Highhead, Jman, friznit, WobblyHeadedBob, zorrobyte, HateDread, kieran, Ryan, Kolmain
 - PersistentDB dev "team" - JMan, Scott W, Firefly
-- Ryan, Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
-- Friznit, Tupolov, DaveP and Volunteer Commando Battalion (VCB)
+- Antipop, Rommel, Militant, Scarecrow and Australian Armed Forces (AAF)
+- Ryan (Rye) and Snakedoctor from the Praetorian Guard (PRAETOR)
+- Friznit, Tupolov, DaveP, Gunny and Volunteer Commando Battalion (VCB)
 - Krause, Beta, Sandiford, JollyResq - United Operations (UO)
-- Bl1P, DikkeDuif, Brady, Kremator, SCAJolly, Katipo66, vengeance1, VRCRaptor, Dingbat, CebAlmighty, Jayc-astv, 16AA, VCB and AEF clans for testing
+- Fogu, VRCRaptor, Bl1P, Dikkeduif, Kremator, SCAJolly, Katipo66, vengeance1, Dingbat, CebAlmighty, Jayc-astv, 16AA, VCB and AEF clans for testing
 - Alef and Sickboy for CBA conversion for A2Free
 - Xeno and Mikero for their Mission Builder Script
 - Spyder for Object Network Update (ONU), LoyalGuard for ARMA Electrical Grids (AEG), ArmaIIholic and Highhead for World In Conflict (WICT), LurchiDerLurch for AC130 CAS
@@ -13,10 +14,12 @@ Thanks to:
 - CWR² team, IceBreakr, Shezan, Commander, Old Bear for making your mods and islands MSO friendly
 - Roy86 for Patrol Ops 2 Module
 - Enigma for Weather Module
-- PXS for Stacoms
-- Justin Alderman for MGO
+- PXS for Satcoms
+- DevilDogGamer for his MSO videos and ongoing support!
+- Military Gaming Development Team for MGO Attach
+- Glowball for AIM support
 
-4.5 Changelog
+4.55 Changelog
 
 [AMBIENCE] Further improvements and compatibility with GBL Advanced Interaction Module
 [CORE] Made MSO compatible with playing as EAST/OPFOR (you need markers named: ammo, ammo_1, respawn_east and respawn_%faction% eg. respawn_RU)
