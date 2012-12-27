@@ -18,6 +18,28 @@ Thanks to:
 
 4.5 Changelog
 
+[AMBIENCE] Further improvements and compatibility with GBL Advanced Interaction Module
+[CORE] Made MSO compatible with playing as EAST/OPFOR (you need markers named: ammo, ammo_1, respawn_east and respawn_%faction% eg. respawn_RU)
+[AMBIENCE] Fixed: Civilians were deleted without proximitycheck - fixes: player got killed, if he took a civilian outside of town in a car. Ensures compatibility with civilian interactions (f.e. AIM: Arresting Civilians)
+[CORE] IMPORTANT: Garbage Collector of ACE Jerrycans and tyres (temporary workaround?). Ensures less load overall and decreasing performance over long term sessions.
+[ENEMY] DEP Better dispersion of enemy, new style of collecting locations (gives more and better enemy placements), select in params
+[ENEMY] IMPORTANT! Wrote our own taskdefend-function (HH_fnc_taskdefend) for better immersion than CBA_fnc_taskdefend but with better performance = less red chain/desync!
+[ENEMY] IMPORTANT! Made sure TUP_Roadblocks and TUP_AA are not re-compiled everytime they are called (also to ensure better perf. and less red chain/desync)!
+[ENEMY] IMPORTANT! Improved DEP Enpop so that killing a group makes you clear this group (and not spawn whole group again). Easier to clear camps now!
+[ENEMY] Fixed: guards deleted static weapons of camps when despawning.
+[ENEMY] Fixed: Tup_Roadblocks Vehicles were hovering in air, when spawned on a down/uphill road
+[ENEMY] Fixed: AA sometimes hovering in Air over Airfield (or [0,0,0] or mapcenterpos or "startpos") when BIS_fnc_safepos failed
+[ENEMY] Set DEP as default in SP or editormode
+[ENEMY] Fixed ambient convoys didnt clean up vehicles (only units)
+[CORE] Debug-Console Admin check now also working in SP/editor-mode
+[ENEMY] Changed BIN_fnc_taskdefend to CBA_fnc_taskdefend to reduce desync (too many instances at same time caused desync (red-chain))
+[CORE] Locked Admin-Console for non-admins
+[CORE] PDB Persist-action was lost after respawn
+[CORE] Added Frizzlers magicwand (for admins only)
+[PDB] Fixed: PID format issue for kills database
+[CORE] Disabled caching for single player
+[SUPPORT] Added GPS Para Drop to Tup_Logistics.
+[SUPPORT] Added limit to Tup_Logistics orders on a per session basis. Improved interface and convoy clean up.
 [MISSIONS] Unpersistet ACE crates to avoid PDB errors (and resupplied some missing ones)
 [MISSIONS] Added some missing resupplies (fallujah)
 [MISSIONS] Unpersistet some ACE crates to avoid PDB errors (clafghan)
