@@ -10,8 +10,7 @@
 - REDUCES RED CHAIN/DESYNC
 - PERF IMPROVEMENTS ON LONG TERM SESSIONS
 - MINIMIZES SCRIPT LAG
-- BETTER ENEMY CREATION & DISPERSION
-- COMPATIBILITY WITH GBL AIM
+- COMPATIBILITY WITH GBL AIM (Adv. Interaction Module)
 - MANUAL PERSIST (PDB)
 - GPS GUIDED LOGISTICS-DROP
 
@@ -82,7 +81,10 @@
  
 [B]What Is MSO?[/B]
 Multi Session Operations is a modular mission framework giving you a unique free-roaming gameplay experience in a populated dangerous environment. Essentially it is a collection of scripts that create a persistent, living scenario in which the player operates. Unlike regular missions that have pre-scripted objectives, MSO procedurally generates dynamic enemy forces that are unpredictable and (semi) random. Players have to think beyond the mere tactical level and build up the intelligence picture, carrying out recce patrols to identify enemy locations and conduct deliberate attacks to neutralise them. Everything is persistent, including equipment, ammo, vehicles and even player lives. MSO is designed specifically for Dedicated Server use, but you can also run it Singleplayer or as Host.
- 
+
+[CENTER]Many thanks to DevilDogGamer!
+[video=youtube;O8sQfZ2p6Dg]http://www.youtube.com/watch?v=O8sQfZ2p6Dg[/video][/CENTER]
+
 [B]Recommended Settings / Performance / Startup[/B]
 Due to the dynamic nature of MSO and its reliance on scripting to generate ambience and dynamic enemy, it can be resource intensive. The default settings are the recommended ones for most maps. If you have a large map with lots of locations (Chernarus) or a large number of players you will want to consider disabling or dialling down ambience or enemy.
 If you enable ALL the modules, please do not ask us why it performs so poorly. :)
