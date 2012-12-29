@@ -11,7 +11,18 @@ switch (CQBaicap) do {
     case 5: {CQB_AUTO = true; CQBaiBroadcast = false};
 	default {CQBaicap = 15; CQBaiBroadcast = false};
 };
+if (isnil "CQBlocality") then {CQBlocality = 1};
+switch (CQBlocality) do {
+    case 0: {CQB_HC_active = false; CQBclientside = false};
+    case 1: {CQB_HC_active = false; CQBclientside = true};
+	case 2: {CQB_HC_active = true; CQBclientside = true; CQB_HCid = MSO_HC1};
+	case 3: {CQB_HC_active = true; CQBclientside = true; CQB_HCid = MSO_HC2};
+	default {CQB_HC_active = false; CQBclientside = true};
+};
 if (isnil "CQBmaxgrps") then {CQBmaxgrps = 50};
+if (isnil "CQBspawnrange") then {CQBspawnrange = 500};
+if (isnil "CRB_LOC_DIST") then {CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8};
+
 _debug = debug_mso;
 
 diag_log format["MSO-%1 CQB Population: starting to load functions...", time];
@@ -23,6 +34,7 @@ if (isnil "CQB_findnearhousepos") then {CQB_findnearhousepos = compile preproces
 if (isnil "CQB_setposgroup") then {CQB_setposgroup = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_setposgroup.sqf"};
 if (isnil "CQB_houseguardloop") then {CQB_houseguardloop = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_houseguardloop.sqf"};
 if (isnil "CQB_patrolloop") then {CQB_patrolloop = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_patrolloop.sqf"};
+if (isnil "CQB_PlayersGroundCheck") then {CQB_PlayersGroundCheck = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_PlayersGroundCheck.sqf"};
 if (isnil "MSO_fnc_CQBspawnRandomgroup") then {MSO_fnc_CQBspawnRandomgroup = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBspawnRandomgroup.sqf"};
 if (isnil "MSO_fnc_CQBmovegroup") then {MSO_fnc_CQBmovegroup = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBmovegroup.sqf"};
 if (isnil "MSO_fnc_getEnterableHouses") then {MSO_fnc_getEnterableHouses = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_getEnterableHouses.sqf"};
@@ -33,18 +45,44 @@ if (isnil "getGridPos") then {getGridPos = compile preprocessFileLineNumbers "en
 if (isnil "CQB_GCS") then {CQB_GCS = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_GCS.sqf"};
 diag_log format["MSO-%1 CQB Population: loaded functions...", time];
 
-if (isServer) then {
-_center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
-_spawnhouses = [_center,CRB_LOC_DIST] call MSO_fnc_getEnterableHouses;
-CQBpositionsStrat = [_spawnhouses] call MSO_fnc_CQBgetSpawnposStrategic;
-CQBpositionsReg = [_spawnhouses] call MSO_fnc_CQBgetSpawnposRegular;
+if (CQB_HC_active) then {
 
-Publicvariable "CQBpositionsStrat";
-Publicvariable "CQBpositionsReg";
+	if (isDedicated) exitwith {[] spawn CQB_GCS; diag_log format ["MSO-%1 CQB Populator exiting on server (HC active - GCS activated)... - HC is active!",time]};
+	if !(player == CQB_HCid) exitwith {diag_log format ["MSO-%1 CQB Populator running on client - Exiting...",time]};
 
-[] spawn CQB_GCS;
-};
-
-if !(isDedicated) then {
+	_center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
+	_spawnhouses = [_center,CRB_LOC_DIST] call MSO_fnc_getEnterableHouses;
+	CQBpositionsStrat = [_spawnhouses] call MSO_fnc_CQBgetSpawnposStrategic;
+	CQBpositionsReg = [_spawnhouses] call MSO_fnc_CQBgetSpawnposRegular;
+	
+	Publicvariable "CQBpositionsStrat";
+	Publicvariable "CQBpositionsReg";
+	
 	[_debug] spawn MSO_fnc_CQBclientloop;
+
+} else {
+
+	if (isServer) then {
+		_center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
+		_spawnhouses = [_center,CRB_LOC_DIST] call MSO_fnc_getEnterableHouses;
+		CQBpositionsStrat = [_spawnhouses] call MSO_fnc_CQBgetSpawnposStrategic;
+		CQBpositionsReg = [_spawnhouses] call MSO_fnc_CQBgetSpawnposRegular;
+		
+		Publicvariable "CQBpositionsStrat";
+		Publicvariable "CQBpositionsReg";
+		
+		[] spawn CQB_GCS;
+	};
+
+	//Locality Check
+	if (CQBclientside) then {
+		if !(isDedicated) then {
+			[_debug] spawn MSO_fnc_CQBclientloop;
+		};
+	} else {
+		if (isServer) then {
+			[_debug] spawn MSO_fnc_CQBclientloop;
+		};
+	};
 };
+

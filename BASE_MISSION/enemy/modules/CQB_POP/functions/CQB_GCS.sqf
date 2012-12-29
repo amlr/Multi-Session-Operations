@@ -22,7 +22,6 @@ while {true} do {
             {
                 _x setvariable ["identified",nil];
                 _x setvariable ["PM",nil];
-                _x setdamage 1;
             	deletevehicle _x;
         	} foreach units _x;
             deletegroup _x;

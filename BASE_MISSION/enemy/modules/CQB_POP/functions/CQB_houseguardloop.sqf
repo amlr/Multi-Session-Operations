@@ -53,11 +53,10 @@ sleep 2;
 	if (_movehome) then {
 		{
 			if (_x distance _endpos < 4) then {
-        	    _x setdamage 1;
        			deletevehicle _x;
       		};
     	} foreach units _group;
     };
-if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["c", true, true]; _cleared = true};
+if ((count (units _group) == 0) && (_patrol)) then {_house setvariable ["c", true, CQBclientside]; _cleared = true};
 if ((count (units _group) == 0) && (_movehome)) then {_suspended = true};
 };

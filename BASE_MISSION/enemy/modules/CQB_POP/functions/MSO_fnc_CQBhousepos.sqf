@@ -22,7 +22,7 @@
 // 	wait time 600 sec between positions
 // 0 = [this, 50, true, 600] execVM "scripts\crb_scripts\crB_HousePos.sqf";
 //////////////////////////////////////////////////////////////////
-//if (!isServer) exitwith {};
+
 private["_obj","_radius","_patrol","_maxwait","_pos","_bldgpos","_i","_nearbldgs"];
 _obj = _this select 0;
 _radius = 10;

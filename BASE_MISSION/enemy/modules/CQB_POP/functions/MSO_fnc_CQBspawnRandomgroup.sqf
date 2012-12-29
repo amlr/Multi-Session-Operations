@@ -52,7 +52,7 @@ if (count _units < 1) exitwith {
 };
 
 CQBgroupsLocal set [count CQBgroupsLocal, _group];
-leader _group setvariable ["PM",_house,true];
+leader _group setvariable ["PM",_house,CQBclientside];
 if (_debug) then {diag_log format["MSO-%1 CQB Population: Created group name %2 with %3 units...", time, _group, count units _group];};
 
 [_pos, _house, _group, _units, _despawn] spawn MSO_fnc_CQBmovegroup;

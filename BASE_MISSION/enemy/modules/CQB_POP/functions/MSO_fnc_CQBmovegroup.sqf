@@ -1,5 +1,3 @@
-if (isDedicated) exitwith {};
-
 private ["_bldgpos","_nearbldgs","_unittype","_spawnpos","_endpos","_unit","_leader","_group","_count","_units","_cleared","_suspended","_patrol","_movehome","_near","_houseguards"];
 waitUntil {!isNil "bis_fnc_init"};
 
@@ -13,11 +11,11 @@ _debug = debug_mso;
 _bldgpos = [_pos,50]  call CQB_findnearhousepos;
 if ((count _bldgpos) < 1) then {_bldgpos = [_pos,100]  call CQB_findnearhousepos};
 if ((count _bldgpos) < 1) exitwith {
-    {_x setdamage 1; deletevehicle _x;} foreach _units;
+    {deletevehicle _x} foreach _units;
     waituntil {count (units _group) == 0};
 	if (_debug) then {diag_log format["MSO-%1 CQB Population: Group %2 deleted - script end...", time, _group];};
 	deletegroup _group;
-    _house setvariable ["c",true,true];
+    _house setvariable ["c",true,CQBclientside];
 	_house setvariable ["s",nil, CQBaiBroadcast];
 };
 
@@ -35,7 +33,6 @@ if (_houseguards) then {
 };
 
 {
-      _x setdamage 1;
       deletevehicle _x;
 } foreach _units;
        
