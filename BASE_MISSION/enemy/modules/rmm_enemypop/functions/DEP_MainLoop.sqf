@@ -111,7 +111,7 @@ private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_RBspawned","_obj"
             	if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - Position cleared %2 (%3)", time, _pos, _grp2];};
     		};
             
-            _obj setvariable ["c",true];
+            _obj setvariable ["c",true,DEP_clientside];
 			_obj setvariable ["s",nil]; _suspended = false;
 			true;
     	};

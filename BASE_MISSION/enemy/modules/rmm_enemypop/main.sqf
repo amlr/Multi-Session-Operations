@@ -7,10 +7,7 @@
 //#squint filter Unknown variable mso_core_fnc_createComposition
 //#squint filter Unknown variable mso_core_fnc_createCompositionE
 //#squint filter Careful - string searches using 'in' are case-sensitive
-
-
 private ["_debug","_d","_camp","_flag"];
-if !(isServer) exitWith {};
 
 _debug = debug_mso;
 if (isnil "rmm_dynamic") then {rmm_dynamic = 2};
@@ -26,10 +23,19 @@ if (isNil "DEP_ACTIVE_LOCS") then {DEP_ACTIVE_LOCS = 40;};
 if (isNil "DEP_DENSITY") then {DEP_DENSITY = 1000;};
 if (isNil "pdb_locations_enabled") then {pdb_locations_enabled = false;};
 
+if (isnil "rmm_locality") then {rmm_locality = 0};
+switch (rmm_locality) do {
+    case 0: {RMM_HC_active = false; DEP_clientside = false};
+    case 1: {RMM_HC_active = true; DEP_clientside = true; RMM_HCid = MSO_HC1};
+    case 2: {RMM_HC_active = true; DEP_clientside = true; RMM_HCid = MSO_HC2};
+	default {RMM_HC_active = false; DEP_clientside = false};
+};
 
 if ((rmm_dynamic == 2) || (pdb_locations_enabled)) exitWith {call compile preprocessfilelinenumbers "enemy\modules\rmm_enemypop\main_pdb.sqf"};
 if (rmm_dynamic == 1) exitWith {call compile preprocessfilelinenumbers "enemy\modules\rmm_enemypop\main_dynamic.sqf"};
 if (rmm_ep_intensity == 0) exitWith{diag_log format ["MSO-%1 Enemy Populator Disabled - Exiting.",time];};
+
+if !(isServer) exitWith {};
 
 ep_groups = [];
 ep_total = 0;

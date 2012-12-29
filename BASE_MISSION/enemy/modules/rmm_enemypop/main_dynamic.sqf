@@ -10,7 +10,7 @@
 
 
 private ["_debug","_d","_camp","_flag"];
-if(!isServer) exitWith{};
+if !(isServer) exitWith {};
 
 _debug = debug_mso;
 if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 3;};

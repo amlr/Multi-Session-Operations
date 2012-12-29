@@ -4,6 +4,12 @@ class rmm_dynamic {
         texts[]= {"Static (no PDB)","Dynamic (no PDB)","Dynamic (PDB compatible)"}; 
         default = 2;
 };
+class rmm_locality {
+        title = "    Enemy Populator Locality";
+        values[]= {0,1,2}; 
+        texts[]= {"Server","Headless Client 1","Headless Client 2"}; 
+        default = 0;
+};
 class rmm_ep_intensity {
         title = "    Enemy Intensity"; 
         values[]= {0,10,5,3,2,1}; 

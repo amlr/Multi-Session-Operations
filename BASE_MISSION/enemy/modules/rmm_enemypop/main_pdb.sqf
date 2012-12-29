@@ -1,4 +1,12 @@
-if !(isserver) exitwith {diag_log format ["MSO-%1 Enemy Populator running on client - Exiting.",time];};
+if (RMM_HC_active) then {
+	if (isDedicated) then {KillServ = true};
+	if (!(isDedicated) && {player == RMM_HCid}) then {KillClient = false} else {KillClient = true};
+} else {
+	if (isServer) then {KillServ = false} else {KillClient = true};
+};
+
+if (isDedicated && {KillServ}) exitWith {KillServ = false; diag_log format ["MSO-%1 Killing DEP init on server - Exiting...",time]};
+if (!(isServer) && {KillClient}) exitWith {KillClient = false; diag_log format ["MSO-%1 Killing DEP init on Client - Exiting...",time]};
 
 diag_log format["MSO-%1 PDB EP Population: starting to load functions...", time];
 if (isnil "BIN_fnc_taskDefend") then {BIN_fnc_taskDefend = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskDefend.sqf"};
@@ -15,8 +23,6 @@ if (isnil "rmm_ep_getFlatArea") then {rmm_ep_getFlatArea = compile preprocessFil
 if (isnil "fPlayersInside") then {fPlayersInside = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\fPlayersInside.sqf"};
 if (isnil "DEP_convert_group") then {DEP_convert_group = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_convert_group.sqf"};
 if (isnil "DEP_Triggerloop") then {DEP_Triggerloop = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_Triggerloop.sqf"};
-
-
 diag_log format["MSO-%1 PDB EP Population: loaded functions...", time];
 
 _debug = debug_mso;
@@ -37,9 +43,6 @@ ep_total = 0;
 ep_campprob = 0.25;
 
 waitUntil{!isNil "BIS_fnc_init"};
-if(isNil "CRB_LOCS") then {
-        CRB_LOCS = [] call mso_core_fnc_initLocations;
-};
 
 // Initialize DEP_LOCS array
 DEP_LOCS = [];
@@ -160,6 +163,7 @@ DEP_camptypes =
         };
     };   
 	} foreach DEP_LOCS;
+	PublicVariableServer "ep_locations";
 
 	[] spawn DEP_Triggerloop;
 	DEP_INIT_FINISHED = true; publicvariable "DEP_INIT_FINISHED";
