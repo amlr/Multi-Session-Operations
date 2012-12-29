@@ -112,6 +112,7 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 // PV the location arrays
 Publicvariable "CQBpositionsStrat";
 Publicvariable "CQBpositionsReg";
+Publicvariable "DEP_LOCS";
 
 PDB_CQB_positionsloaded = true;
 PDB_DEP_positionsloaded = true;
