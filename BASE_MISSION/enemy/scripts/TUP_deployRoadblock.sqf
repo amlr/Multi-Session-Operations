@@ -172,7 +172,8 @@ _vehicle setposATL (getposATL _vehicle);
 	_fac = _this select 2;
 	waitUntil{sleep 10; ([_roadpos, rmm_ep_spawn_dist] call fPlayersInside)};
 	// Spawn group and get them to defend
-	_blockers = [getpos _roadpos, "infantry", _fac] call mso_core_fnc_randomGroup;
+    _blockersG = ["Infantry", _fac] call mso_core_fnc_getrandgrouptype;
+    _blockers = [getpos _roadpos, (_blockersG select 0), (_blockersG select 1)] call BIS_fnc_spawnGroup;
 	_blockers addVehicle _vehicle;
 	sleep 1;
 	[_blockers, getpos _roadpos] call HH_fnc_taskDefend;
