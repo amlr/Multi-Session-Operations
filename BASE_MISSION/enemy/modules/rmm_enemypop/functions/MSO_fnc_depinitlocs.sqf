@@ -78,6 +78,7 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
     _pos = position _loc;
 	_grptype = nil;
 	_AA = false;
+    _camp = false;
 	
     	_loctype = type _loc;
     	_pos = position _loc;
