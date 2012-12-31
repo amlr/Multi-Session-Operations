@@ -1,4 +1,3 @@
-if(!isServer) exitWith{};
 private ["_pos","_side","_type","_i","_group","_unit","_leader","_unittype","_newpos"];
 
 _pos = _this select 0;

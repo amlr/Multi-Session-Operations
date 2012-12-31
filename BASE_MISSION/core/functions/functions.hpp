@@ -22,5 +22,6 @@ class mso_core {
 		class initLocations {};
 		class createLocations {};
 		class sendHint {};
+		class getrandgrouptype {};
 	};
 };

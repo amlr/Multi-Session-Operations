@@ -14,7 +14,6 @@
 //   OR	multiple factions = USMC,RU,INS,GUE,etc e.g. ["RU","INS"]
 ///////////////////////////////////////////////////////////////////
 private ["_pos","_type","_fac","_facs","_sidex","_side","_grpx","_grps","_grp","_fx","_facx","_s","_spawnGrp","_wp","_nonConfigs"];
-if(!isServer) exitWith{};
 
 CRBPROFILERSTART("mso_core_fnc_randomGroup")
 
