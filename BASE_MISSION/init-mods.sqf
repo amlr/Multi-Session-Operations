@@ -36,15 +36,16 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
         // ACE Jerry can and tyre cleanup workaround
         if (isserver) then {
             
-            //Checking for Jerrycans and Tyres existing on missionstart (editor placed objects)
+            //Checking for Jerrycans and Tyres existing on missionstart (editor placed objects), Defining mess-objects
+            ACE_MESS = ["ACE_JerryCan_15", "ACE_JerryCan_5","ACE_JerryCan","ACE_Spare_Tyre","ACE_Spare_Tyre_HD","ACE_WoundingLitter_Morphine","ACE_ACE_WoundingLitterMedkit","ACE_WoundingLitter_Traumabandage","ACE_Blooddrop_1","ACE_Blooddrop_2","ACE_Spare_Tyre_HDAPC"];
             AllowedSupplyObjects = [];
                 { 
                 
-                	if (typeof _x in ["ACE_JerryCan_15", "ACE_JerryCan_5","ACE_JerryCan","ACE_Spare_Tyre","ACE_Spare_Tyre_HD"]) then {
+                	if (typeof _x in ACE_MESS) then {
                         AllowedSupplyObjects set [count AllowedSupplyObjects, _x];
                     };
                 } foreach allmissionobjects "";
-            
+
             //Define cleanup Procedure
             ACE_object_cleanup = {
                 
@@ -60,7 +61,7 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
                 //Delete all other jerrycans and tyres
                 { 
                 
-                	if ((typeof _x in ["ACE_JerryCan_15", "ACE_JerryCan_5","ACE_JerryCan","ACE_Spare_Tyre","ACE_Spare_Tyre_HD"]) && {!(_x in _allowedobjects)}) then {
+                	if ((typeof _x in ACE_MESS) && {!(_x in _allowedobjects)}) then {
                         diag_log format["Cleaning abandoned ACE object %1", _x];
                         deletevehicle vehicle _x; deletevehicle _x;
                     };
@@ -70,12 +71,12 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
             //Spawning Cleanuploop that deletes every half an hour IF totalcount of abandoned tyres/jerrycans is over 150
             [] spawn {
             	while {true} do {
-                    sleep 1800; 
-                    _objectCount = {typeof _x in ["ACE_JerryCan_15", "ACE_JerryCan_5","ACE_JerryCan","ACE_Spare_Tyre","ACE_Spare_Tyre_HD"]} count allmissionobjects "";
-                	if (_objectCount > 150) then {
+                    sleep (900 + (random 60));
+                    _objectCount = {typeof _x in ACE_MESS} count allmissionobjects "";
+                	if (_objectCount > 100) then {
                         [] call ACE_object_cleanup;
                     } else {
-                        diag_log format["Not cleaning - ACE jerrycans and tyres are %1 below 150",_objectCount];
+                        diag_log format["Not cleaning - Abandoned ACE objects are %1 - below 100",_objectCount];
                     };
                 };
             };
