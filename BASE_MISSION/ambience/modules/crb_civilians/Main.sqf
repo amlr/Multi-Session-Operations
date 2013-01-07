@@ -16,6 +16,9 @@ if(isServer && isNil "CRB_LOCS") then {
 if (ambientCivs == 1) then {
 	if(isNil "BIS_alice_mainscope") then {
 		BIS_alice_mainscope = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
+        if !(isServer) then {
+        	BIS_alice_mainscope setVariable ["AliceLogic",true,true];
+        };
 	};
 	if(_debug) then {
 		BIS_alice_mainscope setVariable ["debug", true];
@@ -49,6 +52,22 @@ if(isServer) then {
                 private ["_ok"];
                 _ok = [_logicAni] execVM "CA\Modules\Animals\Data\scripts\init.sqf";
         };
+        
+        if (isDedicated && ambientCivs == 1) then {
+			[] spawn {
+	        	while {true} do {
+                    sleep (900 + (random 60));
+		            {
+		                if (local _x && {_x getvariable "AliceLogic"}) then {
+                            diag_log format["Cleaning abandoned ALICE Logic %1 from Server",_x];
+                            _ALICE_logic_group = group _x;
+		                    deletevehicle _x;
+                            deletegroup _ALICE_logic_group;
+		                };
+		            } foreach allmissionobjects "LOGIC";
+               };
+            };
+       };
 };
 
 switch(toLower(worldName)) do {
