@@ -43,10 +43,10 @@ if (pdb_log_enabled) then {
 	if (_disconnectflag) then {
 		diag_log format["SERVER MSG: Player %1, is leaving the server, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
 	} else {
-		diag_log format["SERVER MSG: Player %1, is auto-saving, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
+			diag_log format["SERVER MSG: Player %1, is auto-saving, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
 	};	
 };
-	
+
 	if (_pname != "__SERVER__") then {
 
 		_player = objNull;
@@ -69,31 +69,31 @@ if (pdb_log_enabled) then {
 		} forEach playableUnits; // Return a list of playable units (occupied by both AI or players) in a multiplayer game. 
 		
 		if !(isNull _player) then {	
-			
-			// Set disconnect flag for player
-			if (_disconnectflag) then {
-				private "_timenow";
-				_timenow = "Arma2Net.Unmanaged" callExtension "DateTime ['utcnow',]";
-				_player setvariable ["LastDisconnected", _timenow, true];
+			if (str _player in ["MSO_HC1","MSO_HC2"]) then {} else {
+				// Set disconnect flag for player
+				if (_disconnectflag) then {
+					private "_timenow";
+					_timenow = "Arma2Net.Unmanaged" callExtension "DateTime ['utcnow',]";
+					_player setvariable ["LastDisconnected", _timenow, true];
+				};
+				
+				// for each persistence type get and save data
+				{
+					private ["_type","_typestring","_procedure"];
+					// Get data for object from client
+					_typestring = _x;
+					call compile format ["_type = %1",_typestring];
+					_thisClientData = [_player, _type] call persistent_fnc_getData;
+					// Set stored procedure to be called
+					call compile format["_procedure = %1_PROCEDURE",_typestring];
+					// Set parameters to be passed to stored procedure
+					call compile format["_params = %1_PARAMS",_typestring];
+					// Set id params for client get data call
+					_idparams = format["tpid=%1,tna=%2,tmid=%3", _puid, _pname, _missionid];
+					// Save Data to DB
+					_response = [_thisClientData,_params,_procedure,_idparams] call persistent_fnc_saveData;
+				} foreach PDB_CLIENT_GET_DATA;
 			};
-			
-			// for each persistence type get and save data
-			{
-				private ["_type","_typestring","_procedure"];
-				// Get data for object from client
-				_typestring = _x;
-				call compile format ["_type = %1",_typestring];
-				_thisClientData = [_player, _type] call persistent_fnc_getData;
-				// Set stored procedure to be called
-				call compile format["_procedure = %1_PROCEDURE",_typestring];
-				// Set parameters to be passed to stored procedure
-				call compile format["_params = %1_PARAMS",_typestring];
-				// Set id params for client get data call
-				_idparams = format["tpid=%1,tna=%2,tmid=%3", _puid, _pname, _missionid];
-				// Save Data to DB
-				_response = [_thisClientData,_params,_procedure,_idparams] call persistent_fnc_saveData;
-			} foreach PDB_CLIENT_GET_DATA;
-			
 		} else {
 			// player not found!
 			if (pdb_log_enabled) then {
@@ -101,7 +101,9 @@ if (pdb_log_enabled) then {
 			};
 		};
 		
-	} else {
+	}; 
+	
+	 if (_pname == "__SERVER__") then {
 		
 	// __SERVER__ : 
 	// This is a bit of a mess right now
@@ -496,8 +498,5 @@ if (pdb_log_enabled) then {
 	exit;	
 			
 	};
-
-
-
-
+	
 // ====================================================================================

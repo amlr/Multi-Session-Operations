@@ -95,7 +95,7 @@ if(debug_mso_setting == 2) then {debug_mso = true; debug_mso_loc = true;};
 publicvariable "debug_mso";
 publicvariable "debug_mso_loc";
 
-"Custom Locations(" + worldName + ")" call mso_core_fnc_initStat;
+"Custom Locations (" + worldName + ")" call mso_core_fnc_initStat;
 
 if (isServer) then {
 	["CityCenter",[],debug_mso_loc] call BIS_fnc_locations;
@@ -147,8 +147,11 @@ execNow "core\modules\rmm_nomad\main.sqf";
 #endif
 
 #ifdef persistentDB
-"Persistent DB" call mso_core_fnc_initStat;
-execNow "core\modules\persistentDB\main.sqf";
+if (str player in ["MSO_HC1","MSO_HC2"]) then {} else{
+	diag_log["PersistentDB: call mso_core_fnc_initStat"];
+	"Persistent DB" call mso_core_fnc_initStat;
+	execNow "core\modules\persistentDB\main.sqf";
+};
 #endif
 
 #ifdef RMM_GTK

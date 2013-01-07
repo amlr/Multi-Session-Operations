@@ -1,6 +1,6 @@
 /* 
 * Filename:
-* init.sqf 
+* main.sqf 
 *
 * Description:
 * Runs on server and client
@@ -49,6 +49,7 @@ if (isdedicated) then {
 	persistent_fnc_callDatabase = compile PP "core\modules\persistentDB\callDatabase.sqf"; 
 	persistent_fnc_getData = compile PP "core\modules\persistentDB\fn_getData.sqf";
 	persistent_fnc_saveData = compile PP "core\modules\persistentDB\fn_saveData.sqf";
+	persistent_fnc_getScore = compile PP "core\modules\persistentDB\fn_getScore.sqf";
 	ENV_dedicated = true; publicVariable "ENV_dedicated"; 
 	onPlayerConnected {[_id, _name, _uid] call compile PP "core\modules\persistentDB\onConnected.sqf"}; 
 	onPlayerDisconnected {[_id, _name, _uid, true] call compile PP "core\modules\persistentDB\onDisconnected.sqf" }; 

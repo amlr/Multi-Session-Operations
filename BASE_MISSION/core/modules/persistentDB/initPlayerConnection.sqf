@@ -33,15 +33,14 @@ sleep 0.01;
 // ====================================================================================	
 "PDB_PLAYER_READY" addPublicVariableEventHandler { 
 	
-	private ["_data", "_puid", "_player", "_pname", "_playerSide", "_seen", "_missionid", "_response", "_dataRead", "_i", "_serverData", "_procedure", "_params", "_dataArray", "_d", "_thisdata", "_pposition", "_pside", "_procedureName", "_parameters", "_globalPlayerScore", "_thisPlayerGlobalscore", "_thisPSCount", "_r", "_thisPSArray", "_thisPScore"];
+	private ["_data", "_puid", "_player", "_pname", "_playerSide", "_missionid", "_response", "_dataRead", "_i", "_serverData", "_procedure", "_params", "_dataArray", "_d", "_thisdata", "_pposition", "_pside", "_procedureName", "_parameters"];
 
 	_data = _this select 1;
 	_puid = _data select 0;
 	_player = _data select 1;
 	_pname = _data select 2; 
 	_playerSide = _data select 3;
-	
-	_seen = false;  // leave this. boolean for player exists in db
+
 	
 	diag_log["PASS: _player: ", _player];
 	diag_log["PASS: _puid: ", _puid];
@@ -58,15 +57,14 @@ sleep 0.01;
 		diag_log format["SERVER MSG: Player connected %1, puid %2", _pname, _puid];
 	};
 	
+
 	// If Player found in DB then read in data else initialise player
 	_response = ["GetPlayer", format["[tmid=%1,tpid=%2]",_missionid,_puid]] call persistent_fnc_callDatabase;	
 	_dataRead = _response select 0;
 	
 	if (count _dataRead > 0) then {
-
+		
 		if (_dataRead select 2 == _puid) then {
-			
-			_seen = true;
 			
 			// Log Player details as returned from DB -----------------------------------------------------------------------------------------------------------------------------------
 			if (pdb_log_enabled) then {	
@@ -126,11 +124,12 @@ sleep 0.01;
 			// Send data to client
 			PDB_PLAYER_HANDLER = _dataRead;
 			publicVariable "PDB_PLAYER_HANDLER";
+			[_player, _pname, _puid, true] call persistent_fnc_getScore;
 		};  // end if player in DB	
 		
-	};
+	} else { // if new player initialize
 	
-	if (!_seen) then {  // if new player initialize
+
 		
 		_serverData = format["Creating player entry in database..."];
 		PDB_CLIENT_LOADERSTATUS = [_player,_serverData]; publicVariable "PDB_CLIENT_LOADERSTATUS";
@@ -166,41 +165,9 @@ sleep 0.01;
 		
 		_procedureName = "InsertPlayer"; _parameters = format["[tpid=%1,tna=%2,tmid=%3,tsid=%4,tpos=%5]",_puid,_pname,_missionid,_pside,_pposition];
 		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
-		
+		 [_player, _pname, _puid, false] call persistent_fnc_getScore;
 	}; // end  if new player
-	
-	// Update scores
-	_globalPlayerScore = 0;	
-	if (pdb_globalScores_enabled) then {
-		
-		_serverData = format["Loading player global score..."];
-		PDB_CLIENT_LOADERSTATUS = [_player,_serverData]; publicVariable "PDB_CLIENT_LOADERSTATUS";
-		
-		_procedureName = "GetGlobalScoreByPlayer"; _parameters = format["[tpid=%1]",_puid];
-		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
-		
-		_thisPlayerGlobalscore = _response;
-		_thisPSCount = count _thisPlayerGlobalscore;	
-		
-		for [{_r=0},{_r < _thisPSCount},{_r=_r+1}] do 	// START loop through all records
-		{
-			_thisPSArray = _thisPlayerGlobalscore select _r ;    // copy the returned row into array
-			_thisPScore = _thisPSArray select 0;     //  returned pscore
-			_thisPScore = parseNumber _thisPScore;
-			_globalPlayerScore = _globalPlayerScore + _thisPScore;
-		};
-		
-		_player setVariable ["globalPlayerScore", _globalPlayerScore, true];  
-		
-	};
-	
-	if (pdb_date_enabled) then {
-		MISSIONDATE = date;
-		publicvariable "MISSIONDATE";
-	};
-	
-	[_player, _pname, _puid, score _player, _globalPlayerScore, _seen] execVM "core\modules\persistentDB\updateScore.sqf";
-	
+
 };  // END addPublicVariableEventHandler
 
 
