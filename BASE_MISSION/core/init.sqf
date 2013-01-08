@@ -147,7 +147,13 @@ execNow "core\modules\rmm_nomad\main.sqf";
 #endif
 
 #ifdef persistentDB
-if (str player in ["MSO_HC1","MSO_HC2"]) then {} else{
+if (str player in ["MSO_HC1","MSO_HC2"]) then {
+	if (persistentDBHeader == 1) then {	
+			diag_log format["MSO-%1 Headless Client: %2, waiting for mission data...", time, player];
+			waitUntil{!isNil "MISSIONDATA_LOADED"};
+			sleep 5;
+	};
+}else{
 	diag_log["PersistentDB: call mso_core_fnc_initStat"];
 	"Persistent DB" call mso_core_fnc_initStat;
 	execNow "core\modules\persistentDB\main.sqf";
