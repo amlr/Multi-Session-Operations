@@ -67,7 +67,7 @@ _processData = {
         ASSERT_TRUE(typeName _result == "STRING","Process Data error");
         _result;
 };
-/*
+
 sleep 5;
 
 MISSIONOBJECTCOUNT
@@ -180,7 +180,8 @@ _converted = _converted call _processData;
 _restored = [_type, _converted] call _testRestore;
 _result = [_original, _restored] call BIS_fnc_areEqual;
 ASSERT_TRUE(_result,str _original + " == " + str _restored);
-*/
+
+_type = "ARRAY";
 STAT("Test ARRAY (nested)");
 _original = [["string","string1"], [true, 123.456, resistance],[false, 456.123, west]];
 _converted = [_type, _original] call _testConvert;

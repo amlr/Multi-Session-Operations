@@ -15,13 +15,21 @@ String - Returns JSON type string in the format "DATATYPE:VALUE"
 
 Examples:
 (begin example)
+// A string data type
+_result = "This is a test" call MSO_fnc_convertData
+// returns string "STRING:This is a test"
+
+// A numerical data type
+_result = 123.456 call MSO_fnc_convertData
+// returns string "SCALAR:123.456"
+
 // An array of different data types
 _result = [true, 123.456, resistance] call MSO_fnc_convertData
-// returns ARRAY:["BOOL:1","SCALAR:123.456","SIDE:GUER"]
+// returns string "ARRAY:[""BOOL:1"",""SCALAR:123.456"",""SIDE:GUER""]"
 
 // An map placed house
 _result = _myhouse call MSO_fnc_convertData
-// returns OBJECT:["#CBA_HASH#",["Category","typeOf","position","direction"],["Building","Land_HouseV_1I4",[4396.92,3170.78,0.197453],211.415],any]
+// returns string "OBJECT:[""#CBA_HASH#"",[""Category"",""typeOf"",""position"",""direction""],[""Building"",""Land_HouseV_1I4"",[4396.92,3170.78,0.197453],211.415],any]"
 (end)
 
 Author:
