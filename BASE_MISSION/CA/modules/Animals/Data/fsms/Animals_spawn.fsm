@@ -146,8 +146,10 @@ class FSM
        "" \n
        "" \n
        "	if (_type == ""GoatGroup"") then {" \n
+       "                  _goatColors = [""goat"",""goat01_ep1"",""goat02_ep1""];" \n
+       "                  _goatColorSelected =  (_goatColors select floor(random(count _goatColors)));" \n
        "" \n
-       "			_agent = createAgent [""Goat"", _Pos, [], 0, ""FORM""];" \n
+       "			_agent = createAgent [_goatColorSelected, _Pos, [], 0, ""FORM""];" \n
        "     			" \n
        "" \n
        "                 _FixedPos = [getpos _agent, 10, _SheepSpawnRadius, 1, 0, 50, 0] call BIS_fnc_findSafePos;" \n

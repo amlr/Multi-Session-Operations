@@ -37,6 +37,9 @@ switch toLower(worldName) do {
         case "chernarus": {
                 BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 1.0)"];
         };
+        case "esbekistan": {
+                BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 1.5)"];
+        };
         case "eden": {
                 BIS_silvie_mainscope setvariable ["vehicleCount","round ((sqrt %1) * 0.75)"];
         };
