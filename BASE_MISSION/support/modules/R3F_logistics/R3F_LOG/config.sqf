@@ -77,7 +77,8 @@ R3F_LOG_CFG_heliporteurs =
 	// e.g. : "MyLifterVehicleClassName1", "MyLifterVehicleClassName2"
 	"BAF_Merlin_HC3_D",
 	"CH_47F_EP1",
-	"AAW_CH47"
+	"AAW_CH47",
+	"kyo_MH47E_base"
 ];
 
 /**
@@ -145,6 +146,9 @@ R3F_LOG_CFG_objets_heliportables =
 R3F_LOG_CFG_transporteurs =
 [
 	// e.g. : ["MyTransporterClassName1", itsCapacity], ["MyTransporterClassName2", itsCapacity]
+	["kyo_MH47E_base", 50],
+	
+	
 	["BAF_Jackal2_BASE_D", 15],
 	["CH_47F_EP1", 50],
 	["AW159_Lynx_BAF", 15],
@@ -305,6 +309,8 @@ R3F_LOG_CFG_objets_transportables =
 	["Misc_cargo_cont_small2", 20],
 	["Misc_cargo_cont_tiny", 15],
 	
+	["Concrete_Wall_EP1", 10],
+	
 	["ACamp", 1.5],
 	["Camp", 8],
 	["CampEast", 8],
@@ -384,6 +390,8 @@ R3F_LOG_CFG_objets_deplacables =
 	"aawWpnsBox_F88_1",
 	"aawWpnsBox_LMG",
 	"aawWpnsBox_AA_D",
+	
+	"Concrete_Wall_EP1",
 	
 	
 	"RubberBoat",
@@ -509,7 +517,8 @@ R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
 	"UH1H_base",
 	"UH1_Base",
 	"UH60_Base",
-	"MV22"
+	"MV22",
+	"kyo_MH47E_base"
 ];
 
 

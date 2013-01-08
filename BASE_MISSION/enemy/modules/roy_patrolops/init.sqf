@@ -33,7 +33,7 @@ if(isNil "paramsArray") then {
 if(AMBAIRPARTOLS > 0) then {mps_ambient_air = true};
 
 //define Ranks that are allowed to sign in and abort operations
-PO_Ranks = ["CORPORAL","SERGEANT","LIEUTENANT"];
+PO_Ranks = ["CORPORAL","SERGEANT","LIEUTENANT","CAPTAIN"];
 
 [] execVM PO_Path + "mps\init_mps.sqf";
 
