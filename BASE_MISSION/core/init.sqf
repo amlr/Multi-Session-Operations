@@ -4,7 +4,7 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
-private ["_uid"];
+private ["_uid","_hc"];
 
 //All client should have the Functions Manager initialized, to be sure.
 if (isnil "BIS_functions_mainscope") then {
@@ -19,7 +19,14 @@ mso_version = "4.55";
 diag_log format["MSO-%1 Version: %2", time, mso_version];
 
 
-    
+// Headless client check
+isHC = false;
+ if !(Isdedicated) then {
+  _hc = ppEffectCreate ["filmGrain", 2005];
+  if (_hc == -1) then { isHC = true; } else { isHC = false; };
+ };
+ 
+     
     FNC_GLOBAL_MESSAGE = {
 	   		 if (player != _player) exitWith { };
 			_side = _this select 0;
