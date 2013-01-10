@@ -69,7 +69,6 @@ if (pdb_log_enabled) then {
 		} forEach playableUnits; // Return a list of playable units (occupied by both AI or players) in a multiplayer game. 
 		
 		if !(isNull _player) then {	
-			if (str _player in ["MSO_HC1","MSO_HC2"]) then {} else {
 				// Set disconnect flag for player
 				if (_disconnectflag) then {
 					private "_timenow";
@@ -93,7 +92,7 @@ if (pdb_log_enabled) then {
 					// Save Data to DB
 					_response = [_thisClientData,_params,_procedure,_idparams] call persistent_fnc_saveData;
 				} foreach PDB_CLIENT_GET_DATA;
-			};
+		
 		} else {
 			// player not found!
 			if (pdb_log_enabled) then {

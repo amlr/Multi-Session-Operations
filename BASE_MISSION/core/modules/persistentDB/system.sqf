@@ -193,6 +193,24 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 	};
 
 // ====================================================================================
+
+		PDB_FNC_PLAYER_INTIALISED = {
+			diag_log format ["PDB_FNC_PLAYER_INTIALISED = %1",_this];
+			_player = player;
+			
+			PDB_FNC_PLAYER_IS_INTIALISED = [player];
+			publicVariableServer "PDB_FNC_PLAYER_IS_INTIALISED";
+		};
+	
+		"PDB_FNC_PLAYER_IS_INTIALISED" addPublicVariableEventHandler { 
+			if (isServer) then {
+				_data = _this select 1;
+				_player = _data select 0;
+				_player setVariable ["player_intialised", 1, false];
+				diag_log format ["PDB_FNC_PLAYER_INTIALISED = %1", _player];
+			};
+	};
+// ====================================================================================
 	
 	PDB_FNC_PLAYER_RUCK = {
 		// [_amount,_type,_class]

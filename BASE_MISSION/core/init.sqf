@@ -23,8 +23,11 @@ diag_log format["MSO-%1 Version: %2", time, mso_version];
 isHC = false;
  if !(Isdedicated) then {
   _hc = ppEffectCreate ["filmGrain", 2005];
-  if (_hc == -1) then { isHC = true; } else { isHC = false; };
+  if (_hc == -1) then { isHC = true; player setvariable ["isHC", 1, true]; } else { isHC = false; player setvariable ["isHC", 0, true]; };
  };
+ 
+// reset player intialised variable
+if (isnil {player getvariable "player_intialised"}) then {player setvariable ["player_intialised", 0, false]};
  
      
     FNC_GLOBAL_MESSAGE = {
@@ -154,14 +157,13 @@ execNow "core\modules\rmm_nomad\main.sqf";
 #endif
 
 #ifdef persistentDB
-if (str player in ["MSO_HC1","MSO_HC2"]) then {
+if (isHC) then {
 	if (persistentDBHeader == 1) then {	
 			diag_log format["MSO-%1 Headless Client: %2, waiting for mission data...", time, player];
 			waitUntil{!isNil "MISSIONDATA_LOADED"};
 			sleep 5;
 	};
 }else{
-	diag_log["PersistentDB: call mso_core_fnc_initStat"];
 	"Persistent DB" call mso_core_fnc_initStat;
 	execNow "core\modules\persistentDB\main.sqf";
 };

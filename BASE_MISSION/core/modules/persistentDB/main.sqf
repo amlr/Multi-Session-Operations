@@ -80,9 +80,12 @@ if (isdedicated) then {
 				(time > (PDBLastSaveTimePlayer + mpdb_save_delay_player))
 			};
 			{
-				diag_log["PersistentDB: SERVER MSG - Saving Player Data, time: ", time];
-				[0, name _x, getplayeruid _x] call compile PP "core\modules\persistentDB\onDisconnected.sqf";
-				sleep 5;
+				if (_x getVariable "player_intialised" == 1 &&  _x getVariable "isHC" == 0) then {
+					diag_log format["PersistentDB: SERVER MSG - Auto Saving Player Data for %1, time: %2, playerobject: %3",  name _x, time, _x];
+					[0, name _x, getplayeruid _x] call compile PP "core\modules\persistentDB\onDisconnected.sqf";
+					sleep 5;
+				} else { diag_log format["PersistentDB: SERVER MSG - Player has not initialised yet. Skipping Auto Saving Player Data for: %1, time: %2, playerobject: %3",  name _x, time, _x];};
+			  if (_x getVariable "isHC" == 1) then { diag_log format["PersistentDB: SERVER MSG - Player is a headless client. Skipping Auto Saving Player Data for: %1, time: %2, playerobject: %3",  name _x, time, _x];};
 			} foreach playableunits;
 			PDBLastSaveTimePlayer = time;
 		};
