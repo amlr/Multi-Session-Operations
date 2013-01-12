@@ -40,8 +40,8 @@ link17[] = {15,11};
 link18[] = {15,12};
 link19[] = {16,17};
 link20[] = {17,14};
-globals[] = {25.000000,1,0,0,16777215,640,480,1,21,6316128,1,-846.809387,-124.570236,657.285034,-235.827698,465,599,1};
-window[] = {0,-1,-1,-1,-1,840,110,1370,110,1,482};
+globals[] = {25.000000,1,0,0,16777215,640,480,1,21,6316128,1,-909.666504,-61.713322,525.290466,-134.351013,623,599,1};
+window[] = {0,-1,-1,-1,-1,1010,60,1320,280,1,640};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -231,7 +231,12 @@ class FSM
           to="Delete";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
           condition=/*%FSM<CONDITION""">*/"_players = [] call BIS_fnc_listPlayers;" \n
-           "{(position _car) distance _x < _spawnDistance} count _players == 0"/*%FSM</CONDITION""">*/;
+           "_initfinished = _twn getvariable ""ALICE_init"";" \n
+           "_carpos = position _car;" \n
+           "" \n
+           "({(_carpos distance _x < _spawnDistance) && (_carpos distance _x < 100)} count _players == 0) &&" \n
+           "_initfinished" \n
+           ""/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
@@ -242,14 +247,12 @@ class FSM
     class Delete
     {
       name = "Delete";
-      init = /*%FSM<STATEINIT""">*/"if ({(position _driver) distance _x < 100} count ([] call BIS_fnc_listPlayers) < 1) then {" \n
-       "	_cargo = assignedCargo _car;" \n
+      init = /*%FSM<STATEINIT""">*/"	_cargo = assignedCargo _car;" \n
        "	{" \n
        "		deletevehicle _x;" \n
        "	} forEach _cargo;" \n
        "	deletevehicle _driver;" \n
-       "	deletevehicle _car;" \n
-       "};"/*%FSM</STATEINIT""">*/;
+       "	deletevehicle _car;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -320,7 +323,12 @@ class FSM
           to="Delete";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
           condition=/*%FSM<CONDITION""">*/"_players = [] call BIS_fnc_listPlayers;" \n
-           "{(position _car) distance _x < _spawnDistance} count _players == 0"/*%FSM</CONDITION""">*/;
+           "_initfinished = _twn getvariable ""ALICE_init"";" \n
+           "_carpos = position _car;" \n
+           "" \n
+           "({(_carpos distance _x < _spawnDistance) && (_carpos distance _x < 100)} count _players == 0) &&" \n
+           "_initfinished" \n
+           ""/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
