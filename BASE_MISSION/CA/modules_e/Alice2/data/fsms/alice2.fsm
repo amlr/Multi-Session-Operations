@@ -16,8 +16,8 @@ link4[] = {3,6};
 link5[] = {4,5};
 link6[] = {5,6};
 link7[] = {6,1};
-globals[] = {25.000000,1,0,0,16777215,640,480,1,8,6316128,1,-159.584564,165.645096,295.731445,-205.072067,389,599,1};
-window[] = {0,-1,-1,-1,-1,972,242,1502,242,1,406};
+globals[] = {25.000000,1,0,0,16777215,640,480,1,8,6316128,1,-152.440353,309.585632,275.137817,-288.515076,491,599,1};
+window[] = {0,-1,-1,-1,-1,818,88,1348,88,1,508};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -127,6 +127,7 @@ class FSM
        "	_town setvariable [""ALICE_active_traffic"",0,true];" \n
        "	_town setvariable [""ALICE_threat"",-1];" \n
        "	_town setvariable [""ALICE_status"",""black""];" \n
+       "	_town setvariable [""ALICE_init"",false,true];" \n
        "};" \n
        "if (isnil {_town getvariable ""demography""} || count (_town getvariable ""demography"") == 0) then {" \n
        "	_town setvariable [""demography"",_logic getvariable ""townsFaction""];" \n
@@ -134,6 +135,7 @@ class FSM
        "" \n
        "_active = _town getvariable ""ALICE_active"";" \n
        "_activeTraffic = _town getvariable [""ALICE_active_traffic"",0];" \n
+       "_initfinished = _town getvariable ""ALICE_init"";" \n
        "" \n
        "////////////////////////////////////////////////////////////////////////////////////////////////" \n
        "//--- Spawn distance" \n
@@ -151,7 +153,7 @@ class FSM
        "};" \n
        "" \n
        "//--- End" \n
-       "if (_active && {_town distance _x < _spawnDisMax} count _players == 0) then {" \n
+       "if (_active && _initfinished && {_town distance _x < _spawnDisMax} count _players == 0) then {" \n
        "	_town setvariable [""ALICE_active"",false,true];" \n
        "	textLogFormat [""Log: [ALICE 2]: %1 depopulated."",_name];" \n
        "" \n
