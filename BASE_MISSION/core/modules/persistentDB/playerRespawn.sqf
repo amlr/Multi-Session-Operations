@@ -26,7 +26,13 @@
 		_player setVariable ["hands", 0, true];
 		_player setVariable ["legs", 0, true];
 		
-		if (pdb_ace_enabled) then {
-				[player,"Player is being respawned."] call PDB_FNC_ACE_WOUNDS;
+		if (pdb_ace_enabled) then {[player,"Player is being respawned."] call PDB_FNC_ACE_WOUNDS;	};
+		
+		if (pdb_aim_enabled) then { 
+		    _player setVariable ["gbl_drink_status", 100, true];
+		    _player setVariable ["gbl_food_status", 100, true];
+		    _player setVariable ["gbl_camelbak_state", 100, true];
+			[player,"Player AIM is being reset."] call PDB_FNC_AIM; 
 		};
+
 // ====================================================================================

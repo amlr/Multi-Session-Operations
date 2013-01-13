@@ -47,33 +47,40 @@ if (( MISSIONDATA_LOADED == "false") && (_pname == "__SERVER__")) then {
 	
 	// Load Map Markers
 	if (pdb_markers_enabled) then {	
-			[_missionid] execVM "core\modules\persistentDB\serverLoadMarkers.sqf";
+	script_markersload = [_missionid] execVM "core\modules\persistentDB\serverLoadMarkers.sqf";
+	waitUntil {scriptDone script_markersload};		
 	};
 	
 	// Load Tasks
 	if (pdb_tasks_enabled) then {	
-			[_missionid] execVM "core\modules\persistentDB\serverLoadTasks.sqf";
+	 script_tasksload = [_missionid] execVM "core\modules\persistentDB\serverLoadTasks.sqf";
+	 waitUntil {scriptDone script_tasksload};	
 	};
 	
 	// Load AAR & Log
 	if (pdb_AAR_enabled) then {	
-			[_missionid] execVM "core\modules\persistentDB\serverLoadAAR.sqf";
+	script_aarload = [_missionid] execVM "core\modules\persistentDB\serverLoadAAR.sqf";
+	 waitUntil {scriptDone script_aarload};
 	};
 	
 	// Load Vehicles
 	if (pdb_landvehicles_enabled) then {	
-		[_missionid] execVM "core\modules\persistentDB\serverLoadVehicles.sqf";
+	 script_landvehiclesload =[_missionid] execVM "core\modules\persistentDB\serverLoadVehicles.sqf";
+	  waitUntil {scriptDone script_landvehiclesload};
 	};			
 	
 	// Load Objects
 	if (pdb_objects_enabled) then {	
-		[_missionid] execVM "core\modules\persistentDB\serverLoadObjects.sqf";
+	 script_objectsload =	[_missionid] execVM "core\modules\persistentDB\serverLoadObjects.sqf";
+	  waitUntil {scriptDone script_objectsload};
 	};	
 	
 	// Load Locations?
 	if (pdb_locations_enabled) then {	
-		[_missionid] execVM "core\modules\persistentDB\serverLoadLocations.sqf";
+		script_locationsload = [_missionid] execVM "core\modules\persistentDB\serverLoadLocations.sqf";
+		waitUntil {scriptDone script_locationsload};
 	};	
+	
 	
 	MISSIONDATA_LOADED = "true";
 	publicVariable "MISSIONDATA_LOADED"; // update the global array	

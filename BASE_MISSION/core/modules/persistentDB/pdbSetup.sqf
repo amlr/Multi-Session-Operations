@@ -55,6 +55,20 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 	mpdb_ace_enabled = 0; pdb_ace_enabled = false;
 };
 
+
+// AIM Rations and Water with AIM Add-on (if available)
+if (isClass(configFile>>"CfgPatches">>"gbl_field_rations")) then {
+	if (isnil"mpdb_aim_enabled" || mpdb_aim_enabled == 1) then { 
+		pdb_aim_enabled = true;
+		[] call compile PP "core\modules\persistentDB\aim.sqf"; // AIM rations data model 
+		PDB_CLIENT_GET_DATA set [count PDB_CLIENT_GET_DATA, "G_AIM_DATA"];
+		PDB_CLIENT_SET_DATA set [count PDB_CLIENT_SET_DATA, "S_AIM_DATA"];
+	};
+} else {
+	pdb_aim_enabled = false;
+}; 
+
+
 if (isnil"mpdb_landvehicles_enabled" || mpdb_landvehicles_enabled == 1) then { pdb_landvehicles_enabled = true;} else {pdb_landvehicles_enabled = false;};
 if (isnil"mpdb_objects_enabled" || mpdb_objects_enabled == 0) then { pdb_objects_enabled = false;} else {pdb_objects_enabled = true;};
 if (isnil"mpdb_locations_enabled" || mpdb_locations_enabled == 0) then {pdb_locations_enabled = false;} else {pdb_locations_enabled = true;};

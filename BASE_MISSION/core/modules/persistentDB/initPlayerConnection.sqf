@@ -57,10 +57,14 @@ sleep 0.01;
 		diag_log format["SERVER MSG: Player connected %1, puid %2", _pname, _puid];
 	};
 	
-
+	 _dataRead =[];
 	// If Player found in DB then read in data else initialise player
 	_response = ["GetPlayer", format["[tmid=%1,tpid=%2]",_missionid,_puid]] call persistent_fnc_callDatabase;	
 	_dataRead = _response select 0;
+	
+	
+	if(isNil "_dataRead") then {_dataRead = [];};
+	
 	
 	if (count _dataRead > 0) then {
 		

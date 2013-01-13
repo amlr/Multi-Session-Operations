@@ -88,7 +88,7 @@ if (pdb_log_enabled) then {
 					// Set parameters to be passed to stored procedure
 					call compile format["_params = %1_PARAMS",_typestring];
 					// Set id params for client get data call
-					_idparams = format["tpid=%1,tna=%2,tmid=%3", _puid, _pname, _missionid];
+					_idparams = format["tpid=%1,tmid=%2", _puid, _missionid];
 					// Save Data to DB
 					_response = [_thisClientData,_params,_procedure,_idparams] call persistent_fnc_saveData;
 				} foreach PDB_CLIENT_GET_DATA;

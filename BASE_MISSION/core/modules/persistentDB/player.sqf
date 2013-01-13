@@ -1,11 +1,12 @@
 // PLAYER DATA MODEL
 
 // Get code - i.e. getting player data so we can write it to DB
-G_PLAYER_DATA_PARAMS = ["tsc","tpos","tdam","tdhe","tdbo","tdha","tdle","tdir","tsta","tsid","tveh","tsea","ttyp","trat","tvd","ttd","tran","tfir","tek","tck","tfk","tsui","tlif","tdea","ttp","tlc","tld"];
+G_PLAYER_DATA_PARAMS = ["tna","tsc","tpos","tdam","tdhe","tdbo","tdha","tdle","tdir","tsta","tsid","tveh","tsea","ttyp","trat","tvd","ttd","tran","tfir","tek","tck","tfk","tsui","tlif","tdea","ttp","tlc","tld"];
 
 G_PLAYER_DATA_PROCEDURE = "UpdatePlayer";
 
 G_PLAYER_DATA = [
+	{ name (_this select 0); },
 	{if (pdb_globalScores_enabled) then {			
 		_loadedPlayerScore =  (_this select 0) getVariable "loadedPlayerScore"; 
         _globalPlayerScore =  (_this select 0) getVariable "globalPlayerScore";

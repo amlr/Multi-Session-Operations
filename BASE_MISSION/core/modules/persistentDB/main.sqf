@@ -63,7 +63,7 @@ if (isdedicated) then {
 				//diag_log format ["Time: %1, PDBLST: %2, PDBSD: %3", time, PDBLastSaveTimeServer, mpdb_save_delay_server];
 				(time > (PDBLastSaveTimeServer + mpdb_save_delay_server))
 			};
-			diag_log["PersistentDB: SERVER MSG - Saving Server Data, time: ", time];
+			diag_log["PersistentDB: SERVER MSG - Auto Saving Server Data, time: ", time];
 			[0, "__SERVER__", 0] call compile PP "core\modules\persistentDB\onDisconnected.sqf";
 			PDBLastSaveTimeServer = time;
 			sleep 5;
@@ -82,6 +82,8 @@ if (isdedicated) then {
 			{
 				if (_x getVariable "player_intialised" == 1 &&  _x getVariable "isHC" == 0) then {
 					diag_log format["PersistentDB: SERVER MSG - Auto Saving Player Data for %1, time: %2, playerobject: %3",  name _x, time, _x];
+					if (pdb_aim_enabled) then { [_x,"Getting Player AIM Data"] call PDB_FNC_AIM; };
+					if (pdb_ace_enabled) then { [_x,"Getting Player ACE Wounds Data"] call PDB_FNC_ACE_WOUNDS;};
 					[0, name _x, getplayeruid _x] call compile PP "core\modules\persistentDB\onDisconnected.sqf";
 					sleep 5;
 				} else { diag_log format["PersistentDB: SERVER MSG - Player has not initialised yet. Skipping Auto Saving Player Data for: %1, time: %2, playerobject: %3",  name _x, time, _x];};
