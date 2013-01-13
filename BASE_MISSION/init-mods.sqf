@@ -1,7 +1,16 @@
 // Custom improvements that you may wish to implement - currently supporting ACE, ACRE, EOD and CIM
 
-private ["_speakernum","_i","_markername","_pos","_grp"];
+private ["_speakernum","_i","_markername","_pos","_grp","_hc"];
 
+
+// Headless client check
+isHC = false;
+ if !(Isdedicated) then {
+  _hc = ppEffectCreate ["filmGrain", 2005];
+  if (_hc == -1) then { isHC = true; player setvariable ["isHC", 1, true]; } else { isHC = false; player setvariable ["isHC", 0, true]; };
+ };
+ 
+ 
 // ACE configuration
 if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
         
@@ -206,7 +215,7 @@ if (isClass(configFile>>"CfgPatches">>"gbl_advanced_interaction")) then {
 //Init Rations and Water
 if (isClass(configFile>>"CfgPatches">>"gbl_field_rations")) then {
     
-    _AIMFRinit = [] execVM "\gbl_field_rations\scripts\Init_FRM.sqf";
+ 	if (!isHC) then {	 _AIMFRinit = [] execVM "\gbl_field_rations\scripts\Init_FRM.sqf";  };
 
     // Add Fieldrations box near current ammo boxes - GBL_UK_rationsbox
     if (isServer) then {

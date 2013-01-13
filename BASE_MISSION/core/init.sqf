@@ -4,7 +4,7 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
-private ["_uid","_hc"];
+private ["_uid"];
 
 //All client should have the Functions Manager initialized, to be sure.
 if (isnil "BIS_functions_mainscope") then {
@@ -19,13 +19,6 @@ mso_version = "4.55";
 diag_log format["MSO-%1 Version: %2", time, mso_version];
 
 
-// Headless client check
-isHC = false;
- if !(Isdedicated) then {
-  _hc = ppEffectCreate ["filmGrain", 2005];
-  if (_hc == -1) then { isHC = true; player setvariable ["isHC", 1, true]; } else { isHC = false; player setvariable ["isHC", 0, true]; };
- };
- 
 // reset player intialised variable
 if (isnil {player getvariable "player_intialised"}) then {player setvariable ["player_intialised", 0, false]};
  
