@@ -12,7 +12,7 @@ if (([_parameters] call CBA_fnc_strLen) < 1900) then {
 	_response = "Arma2Net.Unmanaged" callExtension format ["Arma2NETMySQL ['%1','%2','%3']", _databaseName,_procedureName,_parameters];	
 	_response = call compile _response;	
 } else{
-	diag_log format["SERVER MSG: Output is greater than 4096 bytes - NOT saving: %1", _parameters];
+ if (pdb_log_enabled) then {	diag_log format["SERVER MSG: Output is greater than 4096 bytes - NOT saving: %1", _parameters];};
 	_response = [];
 };
  
