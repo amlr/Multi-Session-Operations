@@ -50,27 +50,54 @@ if (CQB_HC_active) then {
 	if (isDedicated) exitwith {[] spawn CQB_GCS; diag_log format ["MSO-%1 CQB Populator exiting on server (HC active - GCS activated)... - HC is active!",time]};
 	if !(player == CQB_HCid) exitwith {diag_log format ["MSO-%1 CQB Populator running on client - Exiting...",time]};
 
-	_center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
-	_spawnhouses = [_center,CRB_LOC_DIST] call MSO_fnc_getEnterableHouses;
-	CQBpositionsStrat = [_spawnhouses] call MSO_fnc_CQBgetSpawnposStrategic;
-	CQBpositionsReg = [_spawnhouses] call MSO_fnc_CQBgetSpawnposRegular;
-	
-	Publicvariable "CQBpositionsStrat";
-	Publicvariable "CQBpositionsReg";
-	
+	if (persistentDBHeader == 1) then {	
+			waituntil {!(isnil "PDB_CQB_positionsloaded")};
+			sleep 5;
+	};
+
+	if ((isnil "CQBpositionsReg") || (isnil "CQBpositionsStrat")) then {
+		CQBpositionsStrat = [] call MSO_fnc_CQBgetSpawnposStrategic;
+		CQBpositionsReg = [] call MSO_fnc_CQBgetSpawnposRegular;
+		
+		Publicvariable "CQBpositionsStrat";
+		Publicvariable "CQBpositionsReg";
+	} else {
+		if ((count CQBpositionsReg + count CQBpositionsReg) == 0) then {
+			CQBpositionsStrat = [] call MSO_fnc_CQBgetSpawnposStrategic;
+			CQBpositionsReg = [] call MSO_fnc_CQBgetSpawnposRegular;
+			
+			Publicvariable "CQBpositionsStrat";
+			Publicvariable "CQBpositionsReg";
+		};
+	};
+
 	[_debug] spawn MSO_fnc_CQBclientloop;
 
 } else {
 
 	if (isServer) then {
-		_center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
-		_spawnhouses = [_center,CRB_LOC_DIST] call MSO_fnc_getEnterableHouses;
-		CQBpositionsStrat = [_spawnhouses] call MSO_fnc_CQBgetSpawnposStrategic;
-		CQBpositionsReg = [_spawnhouses] call MSO_fnc_CQBgetSpawnposRegular;
-		
-		Publicvariable "CQBpositionsStrat";
-		Publicvariable "CQBpositionsReg";
-		
+
+		if (persistentDBHeader == 1) then {	
+				waituntil {!(isnil "PDB_CQB_positionsloaded")};
+				sleep 5;
+		};
+
+		if ((isnil "CQBpositionsReg") || (isnil "CQBpositionsStrat")) then {
+			CQBpositionsStrat = [] call MSO_fnc_CQBgetSpawnposStrategic;
+			CQBpositionsReg = [] call MSO_fnc_CQBgetSpawnposRegular;
+			
+			Publicvariable "CQBpositionsStrat";
+			Publicvariable "CQBpositionsReg";
+		} else {
+			if ((count CQBpositionsReg + count CQBpositionsReg) == 0) then {
+				CQBpositionsStrat = [] call MSO_fnc_CQBgetSpawnposStrategic;
+				CQBpositionsReg = [] call MSO_fnc_CQBgetSpawnposRegular;
+				
+				Publicvariable "CQBpositionsStrat";
+				Publicvariable "CQBpositionsReg";
+			};
+		};
+
 		[] spawn CQB_GCS;
 	};
 

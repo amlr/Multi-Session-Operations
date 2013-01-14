@@ -1,15 +1,7 @@
     	private ["_debug","_idx","_loopcounter","_localEnemyCount","_pU"];
 		
         _debug = _this select 0;
-        
-		if (persistentDBHeader == 1) then {	
-			waitUntil{!isNil "MISSIONDATA_LOADED"};
-			if (pdb_locations_enabled) then {
-				waituntil {!(isnil "PDB_CQB_positionsloaded")};
-				sleep 5;
-			};
-		};
-		
+
         waituntil {!(isnil "CQBpositionsReg") && !(isnil "CQBpositionsStrat")};
         CQBpositionsRegLocal = CQBpositionsReg;
 		CQBpositionsStratLocal = CQBpositionsStrat;

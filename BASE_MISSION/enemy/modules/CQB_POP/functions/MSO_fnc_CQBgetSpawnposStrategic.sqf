@@ -1,6 +1,7 @@
 private ["_spawnhouses","_housecount","_positions","_position","_t","_m","_cqb_spawn_intensity","_BuildingTypeStrategic","_base1","_base2","_BL0","_BL1","_BL2","_BL3","_BL4","_BL5","_BL6","_BL7","_BL8","_BL9"];
 
-_spawnhouses = _this select 0;
+_center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
+_spawnhouses = [_center,CRB_LOC_DIST] call MSO_fnc_getEnterableHouses;
 
 _base1 = markerpos "ammo_1"; if (str(_base1) == "[0,0,0]") then {_base1 = markerpos "respawn_west"};
 _base2 = markerpos "ammo"; if (str(_base2) == "[0,0,0]") then {_base2 = markerpos "respawn_west"};
