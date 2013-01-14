@@ -7,7 +7,7 @@ item2[] = {"End",1,250,-25.000000,0.000000,75.000000,50.000000,0.000000,"End"};
 link0[] = {0,1};
 link1[] = {1,2};
 globals[] = {25.000000,1,0,0,16777215,640,480,1,3,6316128,1,-202.103897,368.489807,427.600128,-409.208588,613,929,1};
-window[] = {2,-1,-1,-1,-1,774,44,1304,44,3,630};
+window[] = {2,-1,-1,-1,-1,818,88,1348,88,3,630};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -29,17 +29,18 @@ class FSM
        "_unit setspeedmode ""full"";" \n
        "_unit forcewalk false;" \n
        "" \n
-       "_home = _unit getvariable ""ALICE_home"";" \n
-       "if (!(isnil ""_home"") && {!(isnull _home)}) then {" \n
-       "	_unit domove position _home;" \n
-       "} else {" \n
-       "	_unit domove [" \n
-       "		(position _twn select 0) + (-50 + random 100)," \n
-       "		(position _twn select 1) + (-50 + random 100)," \n
-       "		0" \n
-       "	];" \n
+       "if (alive _unit) then {" \n
+       "	_home = _unit getvariable ""ALICE_home"";" \n
+       "	if (!(isnil ""_home"") then {" \n
+       "		if !(isnull _home) then {" \n
+       "			_unit domove position _home;" \n
+       "		} else {" \n
+       "			_unit domove [(position _twn select 0) + (-50 + random 100),(position _twn select 1) + (-50 + random 100),0];" \n
+       "		};" \n
+       "	} else {" \n
+       "		_unit domove [(position _twn select 0) + (-50 + random 100),(position _twn select 1) + (-50 + random 100),0];" \n
+       "	};" \n
        "};" \n
-       "" \n
        "" \n
        "_marker = """";" \n
        "if (bis_alice_mainscope getvariable ""debug"") then {" \n
