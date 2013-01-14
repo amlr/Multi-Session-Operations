@@ -4,6 +4,7 @@
 
 private ["_loc","_pname", "_serverData", "_procedureName", "_parameters", "_response", "_missionArray", "_thisMissionID", "_thisMissionName", "_thisMissionDate", "_missionid","_mda","_map","_svr"];
 
+	
 if (isNil "MISSIONDATA") then { MISSIONDATA = [];};
 if (isNil "PDB_PLAYERS_CONNECTED") then { PDB_PLAYERS_CONNECTED = ["000000"];  PDB_PLAYER_IS_READY = []; publicVariable "PDB_PLAYERS_CONNECTED"; publicVariable "PDB_PLAYER_IS_READY"; };
 if (pdb_log_enabled) then {
@@ -54,7 +55,7 @@ if ((isNil "_missionArray") || (count _missionArray == 0)) then {
 	_loc = [_loc,",","-"] call CBA_fnc_replace;
 	
 	_procedureName = "NewMission"; 
-	_parameters = format["[tna=%1,ttd=%2,tsc=%3,tgsc=%4,tlog=%5,twea=%6,tace=%7,tlv=%8,tobj=%9,tloc=%10,tobc=%11,tmar=%12,ttas=%13,taar=%14,tmda=%15,tmap=%16,tsvr=%17,taddr=%18,tsloc=%19,taim=%20]",pdb_fullmissionName,mpdb_date_enabled,mpdb_persistentScores_enabled,mpdb_globalScores_enabled,mpdb_log_enabled,mpdb_weapons_enabled,mpdb_ace_enabled,mpdb_landvehicles_enabled,mpdb_objects_enabled,mpdb_locations_enabled,mpdb_objects_contents_enabled,mpdb_markers_enabled,mpdb_tasks_enabled,mpdb_aar_enabled,_mda,_map,_svr,_addr,_loc,mpdb_aim_enabled];
+	_parameters = format["[tna=%1,ttd=%2,tsc=%3,tgsc=%4,tlog=%5,twea=%6,tace=%7,tlv=%8,tobj=%9,tloc=%10,tobc=%11,tmar=%12,ttas=%13,taar=%14,tmda=%15,tmap=%16,tsvr=%17,taddr=%18,tsloc=%19,taim=%20]",pdb_fullmissionName,mpdb_date_enabled,mpdb_persistentScores_enabled,mpdb_globalScores_enabled,mpdb_log_enabled,mpdb_weapons_enabled,mpdb_ace_enabled,mpdb_landvehicles_enabled,mpdb_objects_enabled,mpdb_locations_enabled,mpdb_objects_contents_enabled,mpdb_markers_enabled,mpdb_tasks_enabled,mpdb_aar_enabled,_mda,_map,_svr,_addr,_loc,mpdb_aim_enabled];		
 	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 	
 	_serverData = format["Mission: %1 created an entry...", pdb_fullmissionName];
@@ -65,6 +66,7 @@ if ((isNil "_missionArray") || (count _missionArray == 0)) then {
 	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 	_missionArray = _response select 0;    // copy the returned row into array
 }; 
+
 
 if (_missionArray select 1 == pdb_fullmissionName) then {  // START mission name found
 	
@@ -94,15 +96,16 @@ if (_missionArray select 1 == pdb_fullmissionName) then {  // START mission name
 	publicVariable "pdb_tasks_enabled";
 	publicVariable "pdb_AAR_enabled";
 	publicVariable "pdb_aim_enabled";
+
+
 	
 	if (pdb_date_enabled) then {	
 		
 		_thisMissionDate = [(_missionArray select 3),"read"] call persistent_fnc_convertFormat;
 		
 		if (typename _thisMissionDate == "ARRAY") then {
-			
 			if ((count _thisMissionDate) == 5) then {
-				//diag_log["setdate:  _thisMissionDate: ", _thisMissionDate];
+				// diag_log["setdate:  _thisMissionDate: ", _thisMissionDate];
 				setdate _thisMissionDate;
 			};
 		

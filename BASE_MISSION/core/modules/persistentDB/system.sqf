@@ -104,9 +104,10 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				["ace_sys_wounds_hdeh", {call PDB_FNC_ACE_WOUNDS}] call CBA_fnc_addEventhandler;
 				
 				// Update player in case they are not wounded or respawned before saving.
-				[player,"Player is having wounds initialized."] call PDB_FNC_ACE_WOUNDS;	
+				[player,"Player is having wounds initialized."] call PDB_FNC_ACE_WOUNDS;
 			};
 			
+		
 			if (isClass(configFile>>"CfgPatches">>"gbl_field_rations")) then { [player,"Player is being AIM initialized."] call PDB_FNC_AIM; };
 				 
 			diag_log["PersistentDB: PLAYER READY: ", name player];
@@ -149,7 +150,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				// player sideChat format["Welcome back %1, your details have been retrieved from the database",  name player];
 				diag_log ["PersistentDB: Existing player: ",  (name player), typeName  (name player)]; 
 			};
-		  [player] execVM "core\modules\persistentDB\playerIntialised.sqf";
+			[player] execVM "core\modules\persistentDB\playerIntialised.sqf";
 		};	
 // ====================================================================================
 	PDB_FNC_ACE_WOUNDS = {
@@ -193,7 +194,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				_player setVariable ["ACE_WOUNDS", _thisWounds, true];
 			};
 	};
-
+	
 // ====================================================================================	
 
 	PDB_FNC_AIM = {
@@ -239,7 +240,9 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 			};
 	};
 // ====================================================================================
-	
+
+
+
 	PDB_FNC_PLAYER_RUCK = {
 		// [_amount,_type,_class]
 		_amount = _this select 0;	 //_amount - int, negative or positive count

@@ -18,13 +18,12 @@
 //	sleep 0.01;	
 
 	private ["_globalPlayerScore","_seen","_serverData","_player","_pname","_puid","_thistime"];
-	
 	_player = _this select 0; 
 	_pname = _this select 1; 
 	_puid = _this select 2; 
 	_score = _this select 3;   
 	_globalPlayerScore = _this select 4;
-   _seen = _this select 5;
+	_seen = _this select 5;
 
 if (pdb_persistentScores_enabled) then {
 	   	// zero the score before we deal with it...
