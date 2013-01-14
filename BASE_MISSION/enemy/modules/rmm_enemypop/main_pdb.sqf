@@ -44,9 +44,6 @@ ep_campprob = 0.25;
 
 waitUntil{!isNil "BIS_fnc_init"};
 
-// Initialize DEP_LOCS array
-DEP_LOCS = [];
-
 // Array of used CO compositions (Fix for Camp-type error)
 DEP_camptypes =
 [
@@ -82,15 +79,19 @@ DEP_camptypes =
 
 [] spawn {
 
-	if (persistentDBHeader == 1) then {
-		waitUntil{!isNil "PDB_DEP_positionsloaded"};
-		if (debug) then {
-			diag_log format["Loaded PDB DEP, %1, %2", DEP_LOCS, count DEP_LOCS];
-		};
+	if (persistentDBHeader == 1) then {	
+			waituntil {!(isnil "PDB_DEP_positionsloaded")};
+			sleep 1;
 	};
-	
-	if(count DEP_LOCS < 1) then {
+
+	if (isnil "DEP_LOCS") then {
+		DEP_LOCS = [];
+		[] call MSO_fnc_depinitlocs;
+	} else {
+		if ((count DEP_LOCS) == 0) then {
+			DEP_LOCS = [];
 			[] call MSO_fnc_depinitlocs;
+		};
 	};
 			
 	{

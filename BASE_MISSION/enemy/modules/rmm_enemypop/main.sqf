@@ -21,7 +21,7 @@ if (isNil "rmm_ep_arm") then {rmm_ep_arm = 1;};
 if (isNil "rmm_ep_aa") then {rmm_ep_aa = 2;};
 if (isNil "DEP_ACTIVE_LOCS") then {DEP_ACTIVE_LOCS = 40;};
 if (isNil "DEP_DENSITY") then {DEP_DENSITY = 1000;};
-if (isNil "pdb_locations_enabled") then {pdb_locations_enabled = false;};
+if (isNil "mpdb_locations_enabled") then {pdb_locations_enabled = false;};
 
 if (isnil "rmm_locality") then {rmm_locality = 0};
 switch (rmm_locality) do {
@@ -31,7 +31,7 @@ switch (rmm_locality) do {
 	default {RMM_HC_active = false; DEP_clientside = false};
 };
 
-if ((rmm_dynamic == 2) || (pdb_locations_enabled)) exitWith {call compile preprocessfilelinenumbers "enemy\modules\rmm_enemypop\main_pdb.sqf"};
+if (rmm_dynamic == 2) exitWith {call compile preprocessfilelinenumbers "enemy\modules\rmm_enemypop\main_pdb.sqf"};
 if (rmm_dynamic == 1) exitWith {call compile preprocessfilelinenumbers "enemy\modules\rmm_enemypop\main_dynamic.sqf"};
 if (rmm_ep_intensity == 0) exitWith{diag_log format ["MSO-%1 Enemy Populator Disabled - Exiting.",time];};
 
