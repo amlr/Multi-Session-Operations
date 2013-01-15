@@ -64,11 +64,11 @@ _logic setvariable ["civilianCount",_civilianCount];
 
 //--- Civilian actions
 _actionCategories = if (isnil {_logic getvariable "civilianActions"}) then {["BIS"]} else {_logic getvariable "civilianActions";};
-_logic setvariable ["civilianActions",_actionCategories];
+_logic setvariable ["civilianActions",_actionCategories,true];
 
 //--- Civilian conversations
 _kbCategories = if (isnil {_logic getvariable "civilianConversations"}) then {["BIS"]} else {_logic getvariable "civilianConversations";};
-_logic setvariable ["civilianConversations",_kbCategories];
+_logic setvariable ["civilianConversations",_kbCategories,true];
 
 //--- Towns faction
 _townsFaction = if (isnil {_logic getvariable "townsFaction"}) then {["BIS_TK_CIV"]} else {_logic getvariable "townsFaction";};
@@ -286,10 +286,10 @@ for "_i" from 0 to 2 do {
 		};
 	} foreach _kbCategories;
 };
-_logic setvariable ["ALICE_conversations",_allConversations];
-_logic setvariable ["ALICE_screams",_allScreams];
-_logic setvariable ["ALICE_remarks",_allRemarks];
-_logic setvariable ["ALICE_topics",_allTopics];
+_logic setvariable ["ALICE_conversations",_allConversations,true];
+_logic setvariable ["ALICE_screams",_allScreams,true];
+_logic setvariable ["ALICE_remarks",_allRemarks,true];
+_logic setvariable ["ALICE_topics",_allTopics,true];
 
 
 ///////////////////////////////////////////////////////////////////////////////////

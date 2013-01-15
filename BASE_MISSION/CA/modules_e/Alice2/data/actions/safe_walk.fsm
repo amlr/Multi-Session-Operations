@@ -199,8 +199,7 @@ class FSM
     {
       name = "Talk";
       itemno = 6;
-      init = /*%FSM<STATEINIT""">*/"_unit setspeedmode ""limited"";" \n
-	"_unit domove position _unit;" \n
+      init = /*%FSM<STATEINIT""">*/"_unit domove position _unit;" \n
        "_neighbour domove position _neighbour;" \n
        "" \n
        "//--- Speak" \n
@@ -311,7 +310,6 @@ class FSM
        "" \n
        "_unit setvariable [""ALICE_action_locked"",1];" \n
        "" \n
-       "_unit setspeedmode ""limited"";" \n
        "_unit domove position _unit;" \n
        "_unit dowatch _neighbour;" \n
        "_unit domove position _neighbour;" \n
@@ -442,7 +440,7 @@ class FSM
   initState="SAFE___WALK";
   finalStates[] =
   {
-    "End"
+    "End",
   };
 };
 /*%FSM</COMPILE>*/
