@@ -1,4 +1,6 @@
-private ["_spawnhouses","_positions","_t","_m","_cqb_spawn_intensity","_BuildingTypeStrategic","_base1","_base2","_BL0","_BL1","_BL2","_BL3","_BL4","_BL5","_BL6","_BL7","_BL8","_BL9"];
+private ["_spawnhouses","_housecount","_positions","_position","_t","_m","_cqb_spawn_intensity","_BuildingTypeStrategic","_base1","_base2","_BL0","_BL1","_BL2","_BL3","_BL4","_BL5","_BL6","_BL7","_BL8","_BL9"];
+
+_Btype = _this select 0;
 
 _center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
 _spawnhouses = [_center,CRB_LOC_DIST] call MSO_fnc_getEnterableHouses;
@@ -21,7 +23,12 @@ if (isnil "rmm_ep_safe_zone") then {rmm_ep_safe_zone = 1000};
 if (isnil "cqb_blacklistdist") then {cqb_blacklistdist = 500};
 
 _positions = [];
-_cqb_spawn_intensity = 1 - (cqb_spawn / 100);
+if (_Btype == "strategic") then {
+	_cqb_spawn_intensity = 0.3;
+};
+if (_Btype == "regular") then {
+	_cqb_spawn_intensity = 1 - (cqb_spawn / 100);
+};
 
 _BuildingTypeStrategic = [
 "Land_A_TVTower_Base",
@@ -55,8 +62,7 @@ _BuildingTypeStrategic = [
 
 {
     if (
-    	!(typeof (_x select 0) in _BuildingTypeStrategic) && 
-        ((random 1) > _cqb_spawn_intensity) &&
+        (random 1 > _cqb_spawn_intensity) &&
         (((position (_x select 0)) distance _base1) > rmm_ep_safe_zone) &&
         (((position (_x select 0)) distance _base2) > rmm_ep_safe_zone) &&
         
@@ -70,9 +76,19 @@ _BuildingTypeStrategic = [
         if !(isnil "_BL7") then {(((position (_x select 0)) distance _BL7) > cqb_blacklistdist)} else {true} &&
         if !(isnil "_BL8") then {(((position (_x select 0)) distance _BL8) > cqb_blacklistdist)} else {true} &&
         if !(isnil "_BL9") then {(((position (_x select 0)) distance _BL9) > cqb_blacklistdist)} else {true}
-       )
-        then {
-    	_positions set [count _positions,_x];
+       ) then {
+
+			if (_Btype == "strategic") then {
+				if (typeof (_x select 0) in _BuildingTypeStrategic) then {
+    				_positions set [count _positions,_x];
+				};
+			};
+			
+			if (_Btype == "regular") then {
+				if !(typeof (_x select 0) in _BuildingTypeStrategic) then {
+					_positions set [count _positions,_x];
+				};
+			};
     };
 } foreach _spawnhouses;
 

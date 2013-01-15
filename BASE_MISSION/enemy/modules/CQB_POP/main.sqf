@@ -38,8 +38,7 @@ if (isnil "CQB_PlayersGroundCheck") then {CQB_PlayersGroundCheck = compile prepr
 if (isnil "MSO_fnc_CQBspawnRandomgroup") then {MSO_fnc_CQBspawnRandomgroup = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBspawnRandomgroup.sqf"};
 if (isnil "MSO_fnc_CQBmovegroup") then {MSO_fnc_CQBmovegroup = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBmovegroup.sqf"};
 if (isnil "MSO_fnc_getEnterableHouses") then {MSO_fnc_getEnterableHouses = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_getEnterableHouses.sqf"};
-if (isnil "MSO_fnc_CQBgetSpawnposRegular") then {MSO_fnc_CQBgetSpawnposRegular = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBgetSpawnposRegular.sqf"};
-if (isnil "MSO_fnc_CQBgetSpawnposStrategic") then {MSO_fnc_CQBgetSpawnposStrategic = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBgetSpawnposStrategic.sqf"};
+if (isnil "MSO_fnc_CQBgetSpawnpos") then {MSO_fnc_CQBgetSpawnpos = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBgetSpawnpos.sqf"};
 if (isnil "MSO_fnc_CQBhousepos") then {MSO_fnc_CQBhousepos = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBhousepos.sqf"};
 if (isnil "getGridPos") then {getGridPos = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\getGridPos.sqf"};
 if (isnil "CQB_GCS") then {CQB_GCS = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_GCS.sqf"};
@@ -56,15 +55,15 @@ if (CQB_HC_active) then {
 	};
 
 	if ((isnil "CQBpositionsReg") || (isnil "CQBpositionsStrat")) then {
-		CQBpositionsStrat = [] call MSO_fnc_CQBgetSpawnposStrategic;
-		CQBpositionsReg = [] call MSO_fnc_CQBgetSpawnposRegular;
+			CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
+			CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
 		
 		Publicvariable "CQBpositionsStrat";
 		Publicvariable "CQBpositionsReg";
 	} else {
 		if ((count CQBpositionsReg + count CQBpositionsReg) == 0) then {
-			CQBpositionsStrat = [] call MSO_fnc_CQBgetSpawnposStrategic;
-			CQBpositionsReg = [] call MSO_fnc_CQBgetSpawnposRegular;
+			CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
+			CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
 			
 			Publicvariable "CQBpositionsStrat";
 			Publicvariable "CQBpositionsReg";
@@ -83,18 +82,18 @@ if (CQB_HC_active) then {
 		};
 
 		if ((isnil "CQBpositionsReg") || (isnil "CQBpositionsStrat")) then {
-			CQBpositionsStrat = [] call MSO_fnc_CQBgetSpawnposStrategic;
-			CQBpositionsReg = [] call MSO_fnc_CQBgetSpawnposRegular;
+			CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
+			CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
 			
 			Publicvariable "CQBpositionsStrat";
 			Publicvariable "CQBpositionsReg";
 		} else {
 			if ((count CQBpositionsReg + count CQBpositionsReg) == 0) then {
-				CQBpositionsStrat = [] call MSO_fnc_CQBgetSpawnposStrategic;
-				CQBpositionsReg = [] call MSO_fnc_CQBgetSpawnposRegular;
+			CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
+			CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
 				
-				Publicvariable "CQBpositionsStrat";
-				Publicvariable "CQBpositionsReg";
+			Publicvariable "CQBpositionsStrat";
+			Publicvariable "CQBpositionsReg";
 			};
 		};
 
