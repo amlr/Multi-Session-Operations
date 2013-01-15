@@ -1,20 +1,14 @@
 class rmm_dynamic {
         title = "    Dynamic Enemy Populator";
-        values[]= {0,1,2}; 
-        texts[]= {"Static (no PDB)","Dynamic (no PDB)","Dynamic (PDB compatible)"}; 
-        default = 2;
+        values[]= {0,1}; 
+        texts[]= {"Off","On"};
+        default = 1;
 };
 class rmm_locality {
         title = "    Enemy Populator Locality";
         values[]= {0,1,2}; 
         texts[]= {"Server","Headless Client 1","Headless Client 2"}; 
         default = 0;
-};
-class rmm_ep_intensity {
-        title = "    Enemy Intensity"; 
-        values[]= {0,10,5,3,2,1}; 
-        texts[]= {"Disabled","10%","20%","33%","50%","100%"}; 
-        default = 3;
 };
 class DEP_ACTIVE_LOCS {
         title = "    Enemy Active Locations"; 

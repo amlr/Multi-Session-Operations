@@ -1,3 +1,35 @@
+#include <crbprofiler.hpp>
+
+//#squint filter Unknown variable MSO_FACTIONS
+//#squint filter Unknown variable mso_core_fnc_initLocations
+//#squint filter Unknown variable mso_core_fnc_selectRandomBias
+//#squint filter Unknown variable mso_core_fnc_randomGroup
+//#squint filter Unknown variable mso_core_fnc_createComposition
+//#squint filter Unknown variable mso_core_fnc_createCompositionE
+//#squint filter Careful - string searches using 'in' are case-sensitive
+private ["_debug","_d","_camp","_flag"];
+
+_debug = debug_mso;
+if (isnil "rmm_dynamic") then {rmm_dynamic = 1};
+if (isNil "rmm_ep_spawn_dist") then {rmm_ep_spawn_dist = 2000;};
+if (isNil "rmm_ep_safe_zone") then {rmm_ep_safe_zone = 2000;};
+if (isNil "rmm_ep_inf") then {rmm_ep_inf = 4;};
+if (isNil "rmm_ep_mot") then {rmm_ep_mot = 3;};
+if (isNil "rmm_ep_mec") then {rmm_ep_mec = 2;};
+if (isNil "rmm_ep_arm") then {rmm_ep_arm = 1;};
+if (isNil "rmm_ep_aa") then {rmm_ep_aa = 2;};
+if (isNil "DEP_ACTIVE_LOCS") then {DEP_ACTIVE_LOCS = 40;};
+if (isNil "DEP_DENSITY") then {DEP_DENSITY = 1000;};
+if (isNil "mpdb_locations_enabled") then {pdb_locations_enabled = false;};
+
+if (isnil "rmm_locality") then {rmm_locality = 0};
+switch (rmm_locality) do {
+    case 0: {RMM_HC_active = false; DEP_clientside = false};
+    case 1: {RMM_HC_active = true; DEP_clientside = true; RMM_HCid = MSO_HC1};
+    case 2: {RMM_HC_active = true; DEP_clientside = true; RMM_HCid = MSO_HC2};
+	default {RMM_HC_active = false; DEP_clientside = false};
+};
+
 if (RMM_HC_active) then {
 	if (isDedicated) then {KillServ = true};
 	if (!(isDedicated) && {player == RMM_HCid}) then {KillClient = false} else {KillClient = true};
@@ -5,6 +37,7 @@ if (RMM_HC_active) then {
 	if (isServer) then {KillServ = false} else {KillClient = true};
 };
 
+if(rmm_dynamic == 0) exitWith{diag_log format ["MSO-%1 Enemy Populator Disabled - Exiting.",time];};
 if (isDedicated && {KillServ}) exitWith {KillServ = false; diag_log format ["MSO-%1 Killing DEP init on server - Exiting...",time]};
 if (!(isServer) && {KillClient}) exitWith {KillClient = false; diag_log format ["MSO-%1 Killing DEP init on Client - Exiting...",time]};
 
@@ -24,18 +57,6 @@ if (isnil "fPlayersInside") then {fPlayersInside = compile preprocessFileLineNum
 if (isnil "DEP_convert_group") then {DEP_convert_group = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_convert_group.sqf"};
 if (isnil "DEP_Triggerloop") then {DEP_Triggerloop = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_Triggerloop.sqf"};
 diag_log format["MSO-%1 PDB EP Population: loaded functions...", time];
-
-_debug = debug_mso;
-if(isNil "rmm_ep_intensity")then{rmm_ep_intensity = 3;};
-if(isNil "rmm_ep_spawn_dist")then{rmm_ep_spawn_dist = 2000;};
-if(isNil "rmm_ep_safe_zone")then{rmm_ep_safe_zone = 2000;};
-if(isNil "rmm_ep_inf")then{rmm_ep_inf = 4;};
-if(isNil "rmm_ep_mot")then{rmm_ep_mot = 3;};
-if(isNil "rmm_ep_mec")then{rmm_ep_mec = 2;};
-if(isNil "rmm_ep_arm")then{rmm_ep_arm = 1;};
-if(isNil "rmm_ep_aa")then{rmm_ep_aa = 2;};
-
-if(rmm_ep_intensity == 0) exitWith{diag_log format ["MSO-%1 Enemy Populator Disabled - Exiting.",time];};
 
 ep_groups = [];
 ep_locations = [];

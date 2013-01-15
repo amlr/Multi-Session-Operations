@@ -63,7 +63,7 @@ if (CQB_spawn > 0) then {
 };
 
 if (isnil "rmm_dynamic") then {rmm_dynamic = 1};
-if (rmm_dynamic == 2) then {
+if (rmm_dynamic == 1) then {
 	waituntil {!(isnil "DEP_LOCS")};
 	{
 			if(count ((position (_x select 0)) nearRoads 300) > 3) then {

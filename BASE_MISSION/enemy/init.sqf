@@ -119,7 +119,7 @@ execNow "enemy\modules\CQB_POP\main.sqf";
 
 #ifdef RMM_ENEMYPOP
 "Enemy Populate" call mso_core_fnc_initStat;
-execNow "enemy\modules\rmm_enemypop\main.sqf";
+execNow "enemy\modules\rmm_enemypop\main_pdb.sqf";
 #endif
 
 #ifdef WICT_ENEMYPOP
