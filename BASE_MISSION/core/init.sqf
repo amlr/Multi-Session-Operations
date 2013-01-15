@@ -138,7 +138,7 @@ execNow "core\modules\rmm_nomad\main.sqf";
 #endif
 
 #ifdef persistentDB
-if (isHC) then {
+if ([] call mso_core_fnc_isHC) then {
 	if (persistentDBHeader == 1) then {	
 			diag_log format["MSO-%1 Headless Client: %2, waiting for mission data...", time, player];
 			waitUntil{!isNil "MISSIONDATA_LOADED"};
