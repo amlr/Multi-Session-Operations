@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `landvehicles` (
   `eng` varchar(5) default 'false',
   `wmag` varchar(4096) default '',
   PRIMARY KEY  (`id`),
-  KEY `obj` (`obj`)
+  KEY `obj` (`obj`),
   KEY `mid` (`mid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
