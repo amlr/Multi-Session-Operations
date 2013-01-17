@@ -15,7 +15,6 @@
 if(isNil "persistentDBHeader")then{persistentDBHeader = 0;};
 
 if(persistentDBHeader == 0) exitWith{diag_log format ["MSO-%1 Persistent DB Disabled - Exiting.",time];};
-	
 // ====================================================================================
 // DEFINES
 #define PP preprocessfilelinenumbers
@@ -24,6 +23,7 @@ if(persistentDBHeader == 0) exitWith{diag_log format ["MSO-%1 Persistent DB Disa
 
 // PDB SETUP	
 _pdbsettings = [] execVM "core\modules\persistentDB\pdbSetup.sqf";
+
 waitUntil {scriptDone _pdbsettings};
 diag_log["PersistentDB: pdb settings loaded"];
 
@@ -68,31 +68,7 @@ if (isdedicated) then {
 			PDBLastSaveTimeServer = time;
 			sleep 5;
 		};
-	};
-	
-	// Spawn Auto-Save process - players
-	[] spawn {
-		PDBLastSaveTimePlayer = time;
-		while {mpdb_save_delay_player > 0} do {
-			waitUntil {
-				sleep (60 + random 15); 
-				//diag_log format ["Time: %1, PDBLST: %2, PDBSD: %3", time, PDBLastSaveTimePlayer, mpdb_save_delay_player];
-				(time > (PDBLastSaveTimePlayer + mpdb_save_delay_player))
-			};
-			{
-				if (_x getVariable "player_intialised" == 1 &&  _x getVariable "isHC" == 0) then {
-					diag_log format["PersistentDB: SERVER MSG - Auto Saving Player Data for %1, time: %2, playerobject: %3",  name _x, time, _x];
-					if (pdb_aim_enabled) then { [_x,"Getting Player AIM Data"] call PDB_FNC_AIM; };
-					if (pdb_ace_enabled) then { [_x,"Getting Player ACE Wounds Data"] call PDB_FNC_ACE_WOUNDS;};
-					[0, name _x, getplayeruid _x] call compile PP "core\modules\persistentDB\onDisconnected.sqf";
-					sleep 5;
-				} else { diag_log format["PersistentDB: SERVER MSG - Player has not initialised yet. Skipping Auto Saving Player Data for: %1, time: %2, playerobject: %3",  name _x, time, _x];};
-			  if (_x getVariable "isHC" == 1) then { diag_log format["PersistentDB: SERVER MSG - Player is a headless client. Skipping Auto Saving Player Data for: %1, time: %2, playerobject: %3",  name _x, time, _x];};
-			} foreach playableunits;
-			PDBLastSaveTimePlayer = time;
-		};
-	};
-	
+	};	
 };
 
 // Compile player EHs
@@ -141,6 +117,25 @@ if ((!isServer) || (!isdedicated)) then {
 		[] spawn {
 				waitUntil {!isNil "mso_interaction_key"};
 				["player", [mso_interaction_key], -9500, ["core\modules\persistentDB\menuSavePlayer.sqf", "main"]] call CBA_ui_fnc_add;
+		};
+		// Player Auto-Save process
+	if !([] call mso_core_fnc_isHC) then {
+				[] spawn {
+				PDBLastSaveTimePlayer = time;
+				while {mpdb_save_delay_player > 0} do {
+					waitUntil {
+						sleep (60 + random 15); 
+						(time > (PDBLastSaveTimePlayer + mpdb_save_delay_player))
+					};
+						diag_log format ["PersistentDB: Auto-Save process: player: %1, pdb_aim_enabled: %2", player, pdb_aim_enabled];
+							if (pdb_aim_enabled) then {[player,"Getting player's AIM data"] call PDB_FNC_AIM;};
+				      if (pdb_ace_enabled) then {[player,"Getting player's ACE Wounds data"] call PDB_FNC_ACE_WOUNDS;};
+							PDB_SAVE_PLAYER = [name player, getplayeruid player, "Auto"]; 
+							PublicVariableServer "PDB_SAVE_PLAYER";
+							PDBLastSaveTimePlayer = time;
+							sleep 5;
+				};
+			};
 		};
 	};
 };

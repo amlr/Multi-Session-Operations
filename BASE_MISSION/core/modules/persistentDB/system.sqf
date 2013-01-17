@@ -114,7 +114,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 
 			diag_log["PersistentDB: PLAYER CONNECTED"];
 			[pdb_shortmissionName ,  pdb_author] spawn BIS_fnc_infoText;
-			diag_log ["PersistentDB: _seen: ",  _seen, typeName _seen];
+			if (pdb_log_enabled) then { diag_log ["PersistentDB: _seen: ",  _seen, typeName _seen]; };
 			
 			if (!_seen) then { 
 				
@@ -154,11 +154,9 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		};	
 // ====================================================================================
 	PDB_FNC_ACE_WOUNDS = {
-		diag_log format ["PDB_FNC_ACE_WOUNDS = %1",_this];
-		_player = player;
-		
+		diag_log format ["PersistentDB: PDB_FNC_ACE_WOUNDS: %1",_this];
+		_player = _this select 0;
 		_aceWounds = [];
-		
 		_aceWounds = [
 				(_player getVariable ["ace_w_overall",0]),
 				([_player] call ace_sys_wounds_fnc_getDamage),
@@ -179,9 +177,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				(_player getVariable ["ace_w_revive",-1]),
 				(_player getVariable ["ace_w_wakeup",0])
 			];
-			
 		PDB_ACE_WOUNDS_UPDATE = [player, _aceWounds];
-		
 		publicVariableServer "PDB_ACE_WOUNDS_UPDATE";
 	};
 	
@@ -190,41 +186,47 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				_data = _this select 1;
 				_player = _data select 0;
 				_thisWounds = _data select 1;
-				
 				_player setVariable ["ACE_WOUNDS", _thisWounds, true];
+				if (pdb_log_enabled) then { diag_log format ["PersistentDB: PDB_FNC_ACE_WOUNDS: _player: %1, ACE_WOUNDS: %2", _player, _player getVariable ["ACE_WOUNDS",""]]; };
 			};
 	};
 	
 // ====================================================================================	
 
 	PDB_FNC_AIM = {
-		diag_log format ["PDB_FNC_AIM = %1",_this];
-		_player = player;
+		diag_log format ["PersistentDB: PDB_FNC_AIM: %1",_this];
+		_player = _this select 0;
 		_aimRations = [];
 		_aimRations = [
 				(_player getVariable ["gbl_drink_status",""]),
 				(_player getVariable ["gbl_food_status",""]),
 				(_player getVariable ["gbl_camelbak_state",""])
 			];
-			
-		PDB_AIM_UPDATE = [player, _aimRations];	
+		if (pdb_log_enabled) then { 
+			diag_log format ["PersistentDB: PDB_FNC_AIM: _player: %1, getting gbl_drink_status: %2", _player, _player getVariable ["gbl_drink_status",""]];
+			diag_log format ["PersistentDB: PDB_FNC_AIM: _player: %1, getting gbl_food_status: %2", _player, _player getVariable ["gbl_food_status",""]];
+			diag_log format ["PersistentDB: PDB_FNC_AIM: _player: %1, getting gbl_camelbak_state: %2", _player, _player getVariable ["gbl_camelbak_state",""]];
+		};
+		PDB_AIM_UPDATE = [_player, _aimRations];	
 		publicVariableServer "PDB_AIM_UPDATE";
 	};
 	
-	"PDB_AIM_UPDATE" addPublicVariableEventHandler { 
+	
+	"PDB_AIM_UPDATE" addPublicVariableEventHandler {  // runs on server
 			if (isServer) then {
 				_data = _this select 1;
 				_player = _data select 0;
 				_thisAIMRations= _data select 1;
-				
 				_player setVariable ["AIM_RATIONS", _thisAIMRations, true];
+				if (pdb_log_enabled) then { diag_log format ["PersistentDB: PDB_AIM_UPDATE: _player: %1, AIM_RATIONS: %2", _player, _player getVariable ["AIM_RATIONS",""]]; };
 			};
 	};
-
+	
 // ====================================================================================
 
+
 		PDB_FNC_PLAYER_INTIALISED = {
-			diag_log format ["PDB_FNC_PLAYER_INTIALISED = %1",_this];
+			diag_log format ["PersistentDB: PDB_FNC_PLAYER_INTIALISED: %1",_this];
 			_player = player;
 			
 			PDB_FNC_PLAYER_IS_INTIALISED = [player];
@@ -236,7 +238,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				_data = _this select 1;
 				_player = _data select 0;
 				_player setVariable ["player_intialised", 1, false];
-				diag_log format ["PDB_FNC_PLAYER_INTIALISED = %1", _player];
+				diag_log format ["PersistentDB: PDB_FNC_PLAYER_INTIALISED: %1", _player];
 			};
 	};
 // ====================================================================================
@@ -294,7 +296,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		if (isServer && (persistentDBHeader == 1)) then {
 				private "_data";
 				_data = _this select 1;
-				diag_log ["PersistentDB: SERVER MSG - Saving Player Data (Manual), time: ", time];
+				diag_log format ["PersistentDB: SERVER MSG -  (%2) Saving Data for Player: %1, Time: %3 ", (_data select 0), (_data select 2), time];
 				[0, (_data select 0), (_data select 1)] call compile preprocessfilelinenumbers "core\modules\persistentDB\onDisconnected.sqf";
 		};
 	};

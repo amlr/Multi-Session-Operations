@@ -24,9 +24,9 @@ _menus = [
 		[
 			["Save Player",
 				{ 
-				    if (pdb_aim_enabled) then { [player,"Getting Player AIM Data"] call PDB_FNC_AIM; };
-		             if (pdb_ace_enabled) then { [player,"Getting Player ACE Wounds Data"] call PDB_FNC_ACE_WOUNDS;};
-					PDB_SAVE_PLAYER = [name player, getplayeruid player]; 
+				  if (pdb_aim_enabled) then {[player,"Getting player's AIM data"] call PDB_FNC_AIM;};
+		      if (pdb_ace_enabled) then {[player,"Getting Player's ACE wounds data"] call PDB_FNC_ACE_WOUNDS;};
+					PDB_SAVE_PLAYER = [name player, getplayeruid player, "Manual"]; 
 					PublicVariableServer "PDB_SAVE_PLAYER";
 				}
 			]
