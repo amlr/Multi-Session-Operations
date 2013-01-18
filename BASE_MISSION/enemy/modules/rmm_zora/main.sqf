@@ -1,7 +1,7 @@
 #include <crbprofiler.hpp>
 
 if (isnil "ZORAmaxgrps") then {ZORAmaxgrps = 3};
-if (isnil "ZORAmindist") then {ZORAmindist = 750};
+if (isnil "ZORAmindist") then {ZORAmindist = 875};
 
 if (!(isserver) or (ZORAmaxgrps == 0)) exitwith {diag_log format["MSO-%1 ZORA exiting...", time];};
 
@@ -9,11 +9,9 @@ private ["_logicZora"];
 _logicZora = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
 if (isnil 'BIS_Zora_mainscope') then {
         BIS_Zora_MainScope = _logicZora;
-        if (isServer) then {
-                private ["_ok"];
-                //		_ok = [_logicZora] execVM "ca\modules\zora\data\scripts\main.sqf"
-                _ok = [_logicZora] execVM "enemy\modules\rmm_zora\zora.sqf"
-        };
+	private ["_ok"];
+//		_ok = [_logicZora] execVM "ca\modules\zora\data\scripts\main.sqf"
+	_ok = [_logicZora] execVM "enemy\modules\rmm_zora\zora.sqf"
 };
 
 waitUntil{!isNil "BIS_Zora_Mainscope"};
@@ -23,10 +21,10 @@ waitUntil{!isNil "BIS_Zora_Mainscope"};
 BIS_Zora_Mainscope setVariable ["debug",false];
 BIS_Zora_Mainscope setvariable ["bordersize",10000];
 BIS_Zora_Mainscope setvariable ["factionlist",MSO_FACTIONS];
-BIS_Zora_Mainscope setvariable ["search_radius",300];
+BIS_Zora_Mainscope setvariable ["search_radius",500];
 BIS_Zora_Mainscope setvariable ["maxgroups",ZORAmaxgrps];
 BIS_Zora_Mainscope setvariable ["mindist",ZORAmindist];
-BIS_Zora_Mainscope setvariable ["maxdist", 2000];
+BIS_Zora_Mainscope setvariable ["maxdist", ZORAmindist * 2.5];
 
 [] spawn {
         private ["_mx","_fnc_status","_waittime"];
@@ -40,32 +38,33 @@ BIS_Zora_Mainscope setvariable ["maxdist", 2000];
         };
         
 
-	while {true} do {
+	waitUntil {
 		CRBPROFILERSTART("RMM ZORA")
 
-                _waittime = 60;
+                _waittime = 60 * (30 + random 30); // wait between 30 min to 1hr
+                /*
                 if (count playableUnits > 0) then {
                         _mx = floor( (sqrt (count playableUnits)) + random 1);
                         if(_mx > 5) then {_mx = 5;};
                         BIS_Zora_mainscope setvariable ["maxgroups", _mx];
                 };
+                */
                 if ((random 1 > NIGHT_POSSIBILITY) && (daytime < 5 || daytime > 18)) then {
                         BIS_Zora_pause = true;
                         call _fnc_status;
-                        _waittime = (60 * 60) + ((random 60) * 60);
+                        _waittime = 60 * (60 + random 60);
                 } else {
                         if(BIS_Zora_pause) then {
                                 call _fnc_status;
-                                _waittime = ((random 60) * 10);
                                 BIS_Zora_pause = false;
                         } else {
                                 call _fnc_status;
-                                _waittime = ((random 60) * 10);
                                 BIS_Zora_pause = true;
                         };
                 };
 
 		CRBPROFILERSTOP
 		sleep _waittime;
+                false;
         };
 };
