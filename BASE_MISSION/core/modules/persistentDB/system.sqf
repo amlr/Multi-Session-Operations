@@ -18,7 +18,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 
 	PDB_FNC_HEADLESS_LOADERSTATUS = {
 			_hcData = _this select 0;
-			  if ((ENV_dedicated)  && (pdb_serverError != 1)) then { 
+			  if (((ENV_dedicated)  && (pdb_serverError != 1) && ((player getvariable "player_intialised" == 0)))) then { 
 			  	if (pdb_log_enabled) then {  diag_log["PersistentDB: PDB_FNC_HEADLESS_LOADERSTATUS: ", _hcData]; };
 			  	startLoadingScreen [_hcData, "PDB_loadingScreen"];
 			  	 };
@@ -27,7 +27,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 
 	PDB_FNC_SERVER_LOADERSTATUS = {
 			_serverData = _this select 0;
-			  if ((ENV_dedicated)  && (pdb_serverError != 1)) then { 
+			  if (((ENV_dedicated)  && (pdb_serverError != 1) && ((player getvariable "player_intialised" == 0)))) then { 
 			  	if (pdb_log_enabled) then {  diag_log["PersistentDB: PDB_FNC_SERVER_LOADERSTATUS: ", _serverData]; };
 			  	startLoadingScreen [_serverData, "PDB_loadingScreen"];
 			  	 };
@@ -238,7 +238,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		PDB_FNC_PLAYER_INTIALISED = {
 				if (pdb_log_enabled) then { diag_log format ["PersistentDB: PDB_FNC_PLAYER_INTIALISED: %1",_this];};
 			_player = player;
-			
+			player setVariable ["player_intialised", 1, false];
 			PDB_FNC_PLAYER_IS_INTIALISED = [player];
 			publicVariableServer "PDB_FNC_PLAYER_IS_INTIALISED";
 		};
