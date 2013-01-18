@@ -58,7 +58,7 @@ while {count _DEP_locs_tmp < DEP_ACTIVE_LOCS} do {
     ) then {
 	    _DEP_locs_tmp set [count _DEP_locs_tmp, _loc];
 	    _CRB_locs_tmp = _CRB_locs_tmp - [_loc];
-        if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Location %1 at %2 selected...", time,_loc,_posLoc]};
+        if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Location %2 at %3 selected...", time,_loc,_posLoc]};
     };
     
     //Failsafe exit
