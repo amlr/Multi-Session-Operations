@@ -151,10 +151,7 @@ class FSM
        "_spawnDisMax = _spawnDisMin * 1.2;" \n
        "" \n
        "//--- Start " \n
-       "if (!_active &&" \n
-       "	{_town distance _x < _spawnDisMin} count _players > 0 &&" \n
-       "	!isDedicated &&" \n
-       "	{local _x} count allUnits <= count allUnits / count _players) then {" \n
+       "if (!_active && {_town distance _x < _spawnDisMin} count _players > 0) then {" \n
        "	_town setvariable [""ALICE_active"",true,true];" \n
        "	textLogFormat [""Log: [ALICE 2]: %1 populated."",_name];" \n
        "	_fsm = [_logic,_town] execfsm (BIS_Alice2_path + ""fsms\alice2_town.fsm"");" \n
@@ -168,9 +165,9 @@ class FSM
        "	_grp = _town getvariable ""ALICE_group"";" \n
        "	_units = units _grp;" \n
        "" \n
-       "	for ""_i"" from 0 to ((count _units) - 1) do {" \n
+       "	{" \n
        "" \n
-       "		_unit = _units select _i;" \n
+       "		_unit = _x;" \n
        "		_id = _unit getvariable ""ALICE_id"";" \n
        "		if (_debug && !isNil ""_id"") then {" \n
        "			deletemarker format [""BIS_alice_civ_%1"",_id];" \n
@@ -182,7 +179,7 @@ class FSM
        "			deletevehicle vehicle _unit;" \n
        "			deletevehicle _unit;" \n
        "		};" \n
-       "	};" \n
+       "	} forEach _units;" \n
        "};" \n
        "" \n
        "////////////////////////////////////////////////////////////////////////////////////////////////" \n

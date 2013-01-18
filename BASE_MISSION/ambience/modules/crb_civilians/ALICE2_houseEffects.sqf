@@ -168,7 +168,7 @@ _logic setVariable ["ALICE_topics",_allTopics,true];
                                                 private ["_house","_timeStop","_randomValue","_daytimeStart","_daytimeEnd","_rain","_overcast","_fog","_twn"];
                                                 _house = _this select 0;
                                                 _twn = _this select 1;
-                                                //diag_log format["MSO-%1 houseEffect: started %2 %3", time, _door, position _door];
+                                                //diag_log format["MSO-%1 houseEffect: started %2 %3", time, _house];
                                                 [1,_house] spawn BIS_ALICE_fnc_houseEffects;
                                                 _timeStop = time + ((random 30) * 60);
                                                 _randomValue = random 1;
@@ -185,7 +185,7 @@ _logic setVariable ["ALICE_topics",_allTopics,true];
                                                 fog <= _fog) ||
                                                 !(_twn getVariable "ALICE_active") };
                                                 [0,_house] spawn BIS_ALICE_fnc_houseEffects;
-                                                //diag_log format["MSO-%1 houseEffect: stopped %2", time, _door];
+                                                //diag_log format["MSO-%1 houseEffect: stopped %2", time, _house];
                                         };
                                 } forEach _houses;
                         };

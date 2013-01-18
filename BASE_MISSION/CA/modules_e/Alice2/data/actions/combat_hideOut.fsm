@@ -31,14 +31,13 @@ class FSM
        "" \n
        "if (alive _unit) then {" \n
        "	_home = _unit getvariable ""ALICE_home"";" \n
-       "	if (!(isnil ""_home"")) then {" \n
-       "		if !(isnull _home) then {" \n
+       "	if (!(isnil ""_home"") && {!(isnull _home)}) then {" \n
        "			_unit domove position _home;" \n
        "		} else {" \n
-       "			_unit domove [(position _twn select 0) + (-50 + random 100),(position _twn select 1) + (-50 + random 100),0];" \n
-       "		};" \n
-       "	} else {" \n
-       "		_unit domove [(position _twn select 0) + (-50 + random 100),(position _twn select 1) + (-50 + random 100),0];" \n
+       "		_unit domove [" \n
+       "			(position _twn select 0) + (-50 + random 100)," \n
+       "			(position _twn select 1) + (-50 + random 100)," \n
+       "			0];" \n
        "	};" \n
        "};" \n
        "" \n

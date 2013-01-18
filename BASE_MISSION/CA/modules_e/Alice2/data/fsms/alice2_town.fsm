@@ -372,9 +372,9 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"	_grp = _twn getvariable ""ALICE_group"";" \n
        "	_units = units _grp;" \n
        "" \n
-       "	for ""_i"" from 0 to ((count _units) - 1) do {" \n
+       "	{" \n
        "" \n
-       "		_unit = _units select _i;" \n
+       "		_unit = _x;" \n
        "		_id = _unit getvariable ""ALICE_id"";" \n
        "		if (_debug && !isNil ""_id"") then {" \n
        "			deletemarker format [""BIS_alice_civ_%1"",_id];" \n
@@ -386,7 +386,7 @@ class FSM
        "			deletevehicle vehicle _unit;" \n
        "			deletevehicle _unit;" \n
        "		};" \n
-       "	};" \n
+       "	} forEach _units;" \n
        "" \n
        "if (count _houselist == 0) then {" \n
        "	debuglog [""Log: ALICE 2: [ERROR] No houses in %1!"",_twnclass];" \n
