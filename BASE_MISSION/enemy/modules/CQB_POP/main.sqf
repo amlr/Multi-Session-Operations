@@ -1,3 +1,6 @@
+
+private ["_hcData","_serverData"];
+
 if (isnil "CQB_spawn") then {CQB_spawn = 10};
 if (CQB_spawn == 0) exitwith {diag_log format["MSO-%1 CQB Population turned off! Exiting...", time]};
 
@@ -26,6 +29,17 @@ if (isnil "CRB_LOC_DIST") then {CRB_LOC_DIST = (getArray (configFile >> "CfgWorl
 _debug = debug_mso;
 
 diag_log format["MSO-%1 CQB Population: starting to load functions...", time];
+
+	if (((CQBlocality > 1) && ([] call mso_core_fnc_isHC) && (persistentDBHeader == 1))) then {
+			_hcData = format["Headless client is loading CQB functions please wait..."];
+		   PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
+	};
+	
+	if ((CQBlocality == 0) && (persistentDBHeader == 1)) then {
+			_serverData = format["Server is loading CQB functions please wait..."];
+			PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+	};
+
 if (isnil "BIN_fnc_taskDefend") then {BIN_fnc_taskDefend = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskDefend.sqf"};
 if (isnil "BIN_fnc_taskPatrol") then {BIN_fnc_taskPatrol = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskPatrol.sqf"};
 if (isnil "BIN_fnc_taskSweep") then {BIN_fnc_taskSweep = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskSweep.sqf"};
@@ -54,6 +68,12 @@ if (CQB_HC_active) then {
 			sleep 5;
 	};
 
+
+	if (((CQBlocality > 1) && ([] call mso_core_fnc_isHC) && (persistentDBHeader == 1))) then {
+			_hcData = format["Headless client is registering CQB positions please wait..."];
+		   PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
+	};
+
 	if ((isnil "CQBpositionsReg") || (isnil "CQBpositionsStrat")) then {
 			CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
 			CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
@@ -80,6 +100,13 @@ if (CQB_HC_active) then {
 				waituntil {!(isnil "PDB_CQB_positionsloaded")};
 				sleep 5;
 		};
+		
+
+				if ((CQBlocality == 0) && (persistentDBHeader == 1)) then {
+						_serverData = format["Server is registering CQB positions please wait..."];
+						PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+				};
+		
 
 		if ((isnil "CQBpositionsReg") || (isnil "CQBpositionsStrat")) then {
 			CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;

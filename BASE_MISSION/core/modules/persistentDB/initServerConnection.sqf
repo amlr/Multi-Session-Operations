@@ -78,9 +78,9 @@ if (( MISSIONDATA_LOADED == "false") && (_pname == "__SERVER__")) then {
 	// Load Locations?
 	if (pdb_locations_enabled) then {	
 		script_locationsload = [_missionid] execVM "core\modules\persistentDB\serverLoadLocations.sqf";
-		waitUntil {scriptDone script_locationsload};
+		if ([] call mso_core_fnc_isHC) then { waitUntil {scriptDone script_locationsload}; };
 	};	
-	
+		
 	
 	MISSIONDATA_LOADED = "true";
 	publicVariable "MISSIONDATA_LOADED"; // update the global array	

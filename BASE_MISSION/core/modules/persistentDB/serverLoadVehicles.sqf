@@ -15,21 +15,23 @@ _response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 //    diag_log ["callExtension->Arma2NETMySQL: CountLandVehicleIDsByMission _response: ",  _response, typeName _response];
 
 if (pdb_log_enabled) then {
-	diag_log format["SERVER MSG: SQL output: %1", _parameters];
+	diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
 };
 
 _landVehicleCountInDB = _response select 0;    // copy the returned row into array
 
-diag_log format ["SERVER MSG: Loading %1 Vehicles from database.",  _landVehicleCountInDB];
-
-_serverData = format["Getting land vehicles from database..."];
-PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
 
 // now get the vehicledata per id
 
 _procedureName = "GetLandVehicleByInitid"; 
 
 _countInDB = parseNumber (_landVehicleCountInDB select 0);
+
+if (_countInDB > 0) then {
+	if (pdb_log_enabled) then {	diag_log format ["PersistentDB: SERVER MSG: Loading %1 Vehicles from database.",  _landVehicleCountInDB]; };
+	_serverData = format["Getting land vehicles from database..."];
+	PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+};
 
 // START LOOP
 for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
@@ -82,9 +84,10 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 
 		//diag_log ["_thisVehicle: ",  _thisVehicle, typeName _thisVehicle];
 		
-		//_serverData = format["Loading land vehicle: %1...", _thisVehicle];
-		//PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
-				
+	if (pdb_extendedLoader_enabled) then {
+		_serverData = format["Loading land vehicle: %1...", _thisVehicle];
+		PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+	};		
 		_vDir = _landVehicleData select 4;
 		_vDir = [_vDir, "|", ","] call CBA_fnc_replace;
 		_vDir = call compile _vDir;

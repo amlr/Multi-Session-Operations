@@ -35,6 +35,8 @@ if (isnil"mpdb_killStats_enabled" || mpdb_killStats_enabled == 1) then { pdb_kil
 if (isnil"mpdb_persistentScores_enabled" || mpdb_persistentScores_enabled == 1) then { pdb_persistentScores_enabled = true;} else { pdb_persistentScores_enabled = false;};
 if (isnil"mpdb_globalScores_enabled" || mpdb_globalScores_enabled == 1) then { pdb_globalScores_enabled = true;} else {pdb_globalScores_enabled = false;};
 if (isnil"mpdb_log_enabled" || mpdb_log_enabled == 1) then {pdb_log_enabled = true;} else {pdb_log_enabled = false;};
+if (isnil"mpdb_extendedLoader_enabled" || mpdb_extendedLoader_enabled == 1) then {pdb_extendedLoader_enabled = true;} else {pdb_extendedLoader_enabled = false;};
+
 
 if (isnil"mpdb_weapons_enabled" || mpdb_weapons_enabled == 1) then { 
 	pdb_weapons_enabled = true;
@@ -56,6 +58,7 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 };
 
 
+
 // AIM Rations and Water with AIM Add-on (if available)
 if (isClass(configFile>>"CfgPatches">>"gbl_field_rations")) then {
 	if (isnil"mpdb_aim_enabled" || mpdb_aim_enabled == 1) then { 
@@ -66,7 +69,8 @@ if (isClass(configFile>>"CfgPatches">>"gbl_field_rations")) then {
 	};
 } else {
 	pdb_aim_enabled = false;
-}; 
+};
+
 
 
 if (isnil"mpdb_landvehicles_enabled" || mpdb_landvehicles_enabled == 1) then { pdb_landvehicles_enabled = true;} else {pdb_landvehicles_enabled = false;};

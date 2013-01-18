@@ -16,10 +16,19 @@
 // ====================================================================================
 persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\persistentDB\fn_convertFormat.sqf";
 
+	PDB_FNC_HEADLESS_LOADERSTATUS = {
+			_hcData = _this select 0;
+			  if ((ENV_dedicated)  && (pdb_serverError != 1)) then { 
+			  	if (pdb_log_enabled) then {  diag_log["PersistentDB: PDB_FNC_HEADLESS_LOADERSTATUS: ", _hcData]; };
+			  	startLoadingScreen [_hcData, "PDB_loadingScreen"];
+			  	 };
+	};
+// ====================================================================================
+
 	PDB_FNC_SERVER_LOADERSTATUS = {
 			_serverData = _this select 0;
 			  if ((ENV_dedicated)  && (pdb_serverError != 1)) then { 
-			  	diag_log["PersistentDB: PDB_FNC_SERVER_LOADERSTATUS: ", _serverData];
+			  	if (pdb_log_enabled) then {  diag_log["PersistentDB: PDB_FNC_SERVER_LOADERSTATUS: ", _serverData]; };
 			  	startLoadingScreen [_serverData, "PDB_loadingScreen"];
 			  	 };
 	};
@@ -29,7 +38,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				_serverData = _this select 0;			
 				  if ((ENV_dedicated) && (pdb_serverError != 1)) then { 
 				  	pdb_serverError = 1;
-				  	diag_log["PersistentDB: PDB_FNC_SERVER_LOADERERROR: ", _serverData];
+				  	if (pdb_log_enabled) then { diag_log["PersistentDB: PDB_FNC_SERVER_LOADERERROR: ", _serverData]; };
 				  	startLoadingScreen [_serverData, "PDB_loadingScreen"];
 				  	for [{_a=0},{_a < 5000},{_a=_a+1}] do {};
 				  	[player] execVM "core\modules\persistentDB\serverConnectionError.sqf";
@@ -42,7 +51,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 			  _serverData = _this select 1;
 			  if ((ENV_dedicated)  && (pdb_clientError != 1)) then { 
 			  	if (player != _player) exitWith { }; // Im not the player so I shouldn't continue
-			  	diag_log["PersistentDB: PDB_FNC_CLIENT_LOADERSTATUS: ", _serverData];
+			  	if (pdb_log_enabled) then {   diag_log["PersistentDB: PDB_FNC_CLIENT_LOADERSTATUS: ", _serverData]; };
 			  	startLoadingScreen [_serverData, "PDB_loadingScreen"];
 			  	 };
 	};
@@ -54,7 +63,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
   			if ((ENV_dedicated) && (pdb_clientError != 1)) then { 
 		  	pdb_clientError = 1;
 		  	if (player != _player) exitWith { }; // Im not the player so I shouldn't continue
-		  	diag_log["PersistentDB: PDB_FNC_CLIENT_LOADERERROR: ", _serverData];
+		  	if (pdb_log_enabled) then {   diag_log["PersistentDB: PDB_FNC_CLIENT_LOADERERROR: ", _serverData]; };
 		  	startLoadingScreen [_serverData, "PDB_loadingScreen"];
 		  	for [{_a=0},{_a < 5000},{_a=_a+1}] do {};
 		  	[player] execVM "core\modules\persistentDB\clientConnectionError.sqf";
@@ -70,12 +79,12 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		   if (player != _player) exitWith { }; // Im not the player so I shouldn't continue
 			if (pdb_date_enabled) then {
 				if ((count MISSIONDATE) == 5)  then {
-						diag_log["PersistentDB: MISSIONDATE: ", MISSIONDATE];
+						if (pdb_log_enabled) then {   diag_log["PersistentDB: MISSIONDATE: ", MISSIONDATE]; };
 						setdate MISSIONDATE;
 				};
 			};
 			if  (ENV_dedicated) then { 	player setVariable ["loader", "Standby entering game"]; startLoadingScreen [(player getVariable "loader"), "PDB_loadingScreen"]; };	
-		   diag_log["PersistentDB: ACTIVATE PLAYER"];		  
+		   if (pdb_log_enabled) then {  diag_log["PersistentDB: ACTIVATE PLAYER"];	 };	  
 		   endLoadingScreen;
 		   player allowdamage true; 
 		 
@@ -110,9 +119,10 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		
 			if (isClass(configFile>>"CfgPatches">>"gbl_field_rations")) then { [player,"Player is being AIM initialized."] call PDB_FNC_AIM; };
 				 
-			diag_log["PersistentDB: PLAYER READY: ", name player];
-
-			diag_log["PersistentDB: PLAYER CONNECTED"];
+				if (pdb_log_enabled) then {  
+					diag_log["PersistentDB: PLAYER READY: ", name player];
+					diag_log["PersistentDB: PLAYER CONNECTED"]; 
+				};
 			[pdb_shortmissionName ,  pdb_author] spawn BIS_fnc_infoText;
 			if (pdb_log_enabled) then { diag_log ["PersistentDB: _seen: ",  _seen, typeName _seen]; };
 			
@@ -123,7 +133,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				hintSilent parseText (initText);
 			
 				// player sideChat format["Welcome %1, your details have been entered into the database",  name player];
-				 diag_log ["PersistentDB: New player: ",  (name player), typeName  (name player)];
+				 	if (pdb_log_enabled) then {  diag_log ["PersistentDB: New player: ",  (name player), typeName  (name player)];};
 				 
 			} else { 
 					
@@ -148,13 +158,13 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				};
 			
 				// player sideChat format["Welcome back %1, your details have been retrieved from the database",  name player];
-				diag_log ["PersistentDB: Existing player: ",  (name player), typeName  (name player)]; 
+				if (pdb_log_enabled) then {  diag_log ["PersistentDB: Existing player: ",  (name player), typeName  (name player)];  };
 			};
 			[player] execVM "core\modules\persistentDB\playerIntialised.sqf";
 		};	
 // ====================================================================================
 	PDB_FNC_ACE_WOUNDS = {
-		diag_log format ["PersistentDB: PDB_FNC_ACE_WOUNDS: %1",_this];
+		if (pdb_log_enabled) then {  diag_log format ["PersistentDB: PDB_FNC_ACE_WOUNDS: %1",_this]; };
 		_player = _this select 0;
 		_aceWounds = [];
 		_aceWounds = [
@@ -194,7 +204,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 // ====================================================================================	
 
 	PDB_FNC_AIM = {
-		diag_log format ["PersistentDB: PDB_FNC_AIM: %1",_this];
+		if (pdb_log_enabled) then {  diag_log format ["PersistentDB: PDB_FNC_AIM: %1",_this]; };
 		_player = _this select 0;
 		_aimRations = [];
 		_aimRations = [
@@ -226,7 +236,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 
 
 		PDB_FNC_PLAYER_INTIALISED = {
-			diag_log format ["PersistentDB: PDB_FNC_PLAYER_INTIALISED: %1",_this];
+				if (pdb_log_enabled) then { diag_log format ["PersistentDB: PDB_FNC_PLAYER_INTIALISED: %1",_this];};
 			_player = player;
 			
 			PDB_FNC_PLAYER_IS_INTIALISED = [player];
@@ -238,7 +248,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				_data = _this select 1;
 				_player = _data select 0;
 				_player setVariable ["player_intialised", 1, false];
-				diag_log format ["PersistentDB: PDB_FNC_PLAYER_INTIALISED: %1", _player];
+				if (pdb_log_enabled) then {  diag_log format ["PersistentDB: PDB_FNC_PLAYER_INTIALISED: %1", _player]; };
 			};
 	};
 // ====================================================================================
@@ -296,7 +306,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		if (isServer && (persistentDBHeader == 1)) then {
 				private "_data";
 				_data = _this select 1;
-				diag_log format ["PersistentDB: SERVER MSG -  (%2) Saving Data for Player: %1, Time: %3 ", (_data select 0), (_data select 2), time];
+				if (pdb_log_enabled) then { diag_log format ["PersistentDB: SERVER MSG -  (%2) Saving Data for Player: %1, Time: %3 ", (_data select 0), (_data select 2), time]; };
 				[0, (_data select 0), (_data select 1)] call compile preprocessfilelinenumbers "core\modules\persistentDB\onDisconnected.sqf";
 		};
 	};
@@ -414,6 +424,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
     "PDB_SERVER_LOADERERROR" addPublicVariableEventHandler { (_this select 1) call PDB_FNC_SERVER_LOADERERROR };
     "PDB_CLIENT_LOADERSTATUS" addPublicVariableEventHandler { (_this select 1) call PDB_FNC_CLIENT_LOADERSTATUS };
     "PDB_CLIENT_LOADERERROR" addPublicVariableEventHandler { (_this select 1) call PDB_FNC_CLIENT_LOADERERROR };
+    "PDB_HEADLESS_LOADERSTATUS" addPublicVariableEventHandler { (_this select 1) call PDB_FNC_HEADLESS_LOADERSTATUS };
 // ====================================================================================	
 
 // MISC FUNCTIONS

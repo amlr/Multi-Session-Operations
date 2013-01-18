@@ -17,21 +17,23 @@ _response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 //    diag_log ["callExtension->Arma2NETMySQL: CountaarIDsByMission _response: ",  _response, typeName _response];
 
 if (pdb_log_enabled) then {
-	diag_log format["SERVER MSG: SQL output: %1", _parameters];
+	diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
 };
 
 _aarCountInDB = _response select 0;    // copy the returned row into array
 
-diag_log format ["SERVER MSG: Loading %1 After Action Reports from database.",   _aarCountInDB];
-
-_serverData = format["Getting After Action Reports from database..."];
-PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
 
 // now get the aar per ID
 
 _procedureName = "GetaarByInitid"; 
 
 _countInDB = parseNumber (_aarCountInDB select 0);
+
+if (_countInDB > 0) then {
+	if (pdb_log_enabled) then {	diag_log format ["PersistentDB: SERVER MSG: Loading %1 After Action Reports from database.",   _aarCountInDB];};
+	PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+};
+
 
 // START LOOP
 for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {

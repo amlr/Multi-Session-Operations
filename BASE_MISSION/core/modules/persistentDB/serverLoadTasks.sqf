@@ -17,21 +17,24 @@ _response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 //    diag_log ["callExtension->Arma2NETMySQL: CounttaskIDsByMission _response: ",  _response, typeName _response];
 
 if (pdb_log_enabled) then {
-	diag_log format["SERVER MSG: SQL output: %1", _parameters];
+	diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
 };
 
 _taskCountInDB = _response select 0;    // copy the returned row into array
 
-diag_log format ["SERVER MSG: Loading %1 tasks from database.",   _taskCountInDB];
 
-_serverData = format["Getting Tasks from database..."];
-PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
 
 // now get the task per ID
 
 _procedureName = "GetTaskByInitid"; 
 
 _countInDB = parseNumber (_taskCountInDB select 0);
+
+if (_countInDB > 0) then {
+	if (pdb_log_enabled) then { diag_log format ["PersistentDB: SERVER MSG: Loading %1 tasks from database.",   _taskCountInDB]; };
+	_serverData = format["Getting Tasks from database..."];
+	PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+};
 
 // START LOOP
 for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {

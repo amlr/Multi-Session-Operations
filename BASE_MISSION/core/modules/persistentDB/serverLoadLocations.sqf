@@ -12,17 +12,15 @@ _parameters = format["[tmid=%1]",_missionid];
 _response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
 
 if (pdb_log_enabled) then {
-	diag_log format["SERVER MSG: SQL output: %1", _parameters];
+	diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
 };
 
 _LocationCountInDB = _response select 0;    // copy the returned row into array
 
 // diag_log ["CountLocationIDsByMission _LocationCountInDB: ",  _locationCountInDB, typeName _locationCountInDB];
 
-diag_log format ["SERVER MSG: Loading %1 Locations from database.",   _locationCountInDB];
 
-_serverData = format["Getting Locations from database..."];
-PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+
 
 // now get the vehicledata per id
 
@@ -38,6 +36,11 @@ if (_countInDB > 0) then {
 	
 	// EN_POP
 	DEP_LOCS = [];
+	
+		if (pdb_log_enabled) then {	diag_log format ["PersistentDB: SERVER MSG: Loading %1 locations from database.",  _locationCountInDB];};
+		_serverData = format["Getting locations from database..."];
+		PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+		
 };
 
 // START LOOP
@@ -64,8 +67,16 @@ for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
 	
 	//										diag_log ["_vPosition: ",  _vPosition, typeName _vPosition];
 	
+	
+
+	
 	// Get object based on save string name - match on nearest house to position provided
 	_vlocation = _locationData select 1;
+	
+	if (pdb_extendedLoader_enabled) then {
+		_serverData = format["Loading location: %1...", _vlocation];
+		PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+	};
 	
 	//diag_log ["_vlocation: ",  _vlocation, typeName _vlocation];
 	

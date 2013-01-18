@@ -1,5 +1,5 @@
 
-private ["_loc","_loctype","_pos","_placeholder","_grptype","_camp","_grptype2","_d","_type"];
+private ["_loc","_loctype","_pos","_placeholder","_grptype","_camp","_grptype2","_d","_type","_hcData","_serverData"];
 
 _debug = debug_mso;
 diag_log format["MSO-%1 PDB EP Population: Starting INIT...", time];
@@ -23,8 +23,20 @@ diag_log format["MSO-%1 PDB EP Population: Starting INIT...", time];
     
 if (isNil "CRB_LOCS") then {
     	diag_log format["MSO-%1 PDB EP Population: Calling INITLOCS...", time];
+    	
+					if (((rmm_locality > 0) && ([] call mso_core_fnc_isHC) && (persistentDBHeader == 1))) then {
+						_hcData = format["Headless client is calling locations please wait..."];
+						PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
+					};
+					
+					if ((rmm_locality == 0) && (persistentDBHeader == 1)) then {
+						_serverData = format["Server is calling locations please wait..."];
+						PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+					};
+	
         CRB_LOCS = [] call mso_core_fnc_initLocations;
         diag_log format["MSO-%1 PDB EP Population: Endet INITLOCS %2...", time, count CRB_LOCS];
+	
 };
 
 //Select Active locations
@@ -34,6 +46,18 @@ _DEP_locs_tmp = [];
 _timenow = time;
 
 diag_log format["MSO-%1 PDB EP Population: Start collecting locs from CRB_Locs (%2)...!", time, count CRB_LOCS];
+
+					if (((rmm_locality > 0) && ([] call mso_core_fnc_isHC) && (persistentDBHeader == 1))) then {
+						_hcData = format["Headless client is collecting locations please wait..."];
+						PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
+					};
+					
+					if ((rmm_locality == 0) && (persistentDBHeader == 1)) then {
+						_serverData = format["Server is collecting locations please wait..."];
+						PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+					};
+		
+
 while {count _DEP_locs_tmp < DEP_ACTIVE_LOCS} do {
     private ["_continue"];
 

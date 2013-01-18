@@ -29,8 +29,10 @@
 				_thispseat = player getVariable "pseat";	
 
 
-	diag_log ["PersistentDB: (teleportPlayer) _player:", _player, typeName _player];			
-    diag_log ["PersistentDB: (teleportPlayer) teleportToLocation:", _teleportToLocation, typeName _teleportToLocation];
+		if (pdb_log_enabled) then {	
+			diag_log ["PersistentDB: (teleportPlayer) _player:", _player, typeName _player];			
+    	diag_log ["PersistentDB: (teleportPlayer) teleportToLocation:", _teleportToLocation, typeName _teleportToLocation];
+  	};
 
 	
 	if (_teleportToLocation == 1) then {

@@ -17,21 +17,24 @@ _response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 //    diag_log ["callExtension->Arma2NETMySQL: CountMarkerIDsByMission _response: ",  _response, typeName _response];
 
 if (pdb_log_enabled) then {
-	diag_log format["SERVER MSG: SQL output: %1", _parameters];
+	diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
 };
 
 _MarkerCountInDB = _response select 0;    // copy the returned row into array
 
-diag_log format ["SERVER MSG: Loading %1 Markers from database.",   _markerCountInDB];
-
-_serverData = format["Getting Markers from database..."];
-PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
 
 // now get the marker per ID
 
 _procedureName = "GetMarkerByInitid"; 
 
 _countInDB = parseNumber (_MarkerCountInDB select 0);
+
+if (_countInDB > 0) then {
+	if (pdb_log_enabled) then {	diag_log format ["PersistentDB: SERVER MSG: Loading %1 Markers from database.",   _markerCountInDB]; };
+	_serverData = format["Getting Markers from database..."];
+	PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+};
+
 
 // START LOOP
 for [{_z=0},{_z < _countInDB},{_z=_z+1}] do {
