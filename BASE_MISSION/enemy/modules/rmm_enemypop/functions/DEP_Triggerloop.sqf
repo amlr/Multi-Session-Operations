@@ -1,3 +1,4 @@
+private ["_suspended"];
 waituntil {
 		{
 	        private ["_obj","_pos","_grpt","_grpt","_camp","_grpt2","_AA","_RB","_cleared"];
@@ -22,6 +23,6 @@ waituntil {
 	       };
 	       
 		} foreach DEP_LOCS;
+	sleep 2;
 	false;
-    sleep 2;
 };

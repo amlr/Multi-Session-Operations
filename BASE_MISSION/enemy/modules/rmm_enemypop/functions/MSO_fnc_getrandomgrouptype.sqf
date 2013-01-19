@@ -1,13 +1,13 @@
 
-private ["_type","_fac","_facs","_sidex","_side","_grpx","_grps","_grouptype","_grp","_fx","_facx","_s","_spawnGrp","_wp","_nonConfigs"];
+private ["_type","_fac","_facs","_sidex","_side","_grpx","_grps","_grouptype","_grp","_fx","_facx","_s","_nonConfigs"];
 
 _type = _this select 0;
 _fac = nil;
 
 if (rmm_ep_aa > 1) then {
-	_nonConfigs = ["TK_InfantrySectionAA","RU_InfSection_AA","INS_InfSection_AA","TK_INS_AATeam","ACE_RU_InfSection_AA_D","TK_GUE_AATeam"];
+        _nonConfigs = ["TK_InfantrySectionAA","RU_InfSection_AA","INS_InfSection_AA","TK_INS_AATeam","ACE_RU_InfSection_AA_D","TK_GUE_AATeam"];
 } else {
-	_nonConfigs = [""];
+        _nonConfigs = [""];
 };
 
 if (count _this > 1) then { _fac = _this select 1; };
@@ -19,8 +19,8 @@ _facs = [];
 _side = nil;
 
 if(isNil "CRB_ALLFACS") then {
-	CRB_ALLFACS = [] call BIS_fnc_getFactions;
-
+        CRB_ALLFACS = [] call BIS_fnc_getFactions;
+        
 };
 
 if(typeName _fac == "ANY" || typeName _fac == "SIDE") then {
@@ -115,17 +115,17 @@ _s = switch(_side) do {
 
 _grpx = count(configFile >> "CfgGroups" >> _s >> _fac >> _type);
 for "_y" from 1 to _grpx - 1 do {
-		private "_cx";
-		_cx = configName ((configFile >> "CfgGroups" >> _s >> _fac >> _type) select _y);
-		if ( {(_cx == _x)} count _nonConfigs == 0 ) then {	
-			_grps set [count _grps, (configFile >> "CfgGroups" >> _s >> _fac >> _type) select _y];			
-		};	
+        private "_cx";
+        _cx = configName ((configFile >> "CfgGroups" >> _s >> _fac >> _type) select _y);
+        if ( {(_cx == _x)} count _nonConfigs == 0 ) then {	
+                _grps set [count _grps, (configFile >> "CfgGroups" >> _s >> _fac >> _type) select _y];			
+        };	
 };
 
 if (count _grps > 0) then {
-	_grp = _grps select floor(random count _grps);
+        _grp = _grps select floor(random count _grps);
 } else {
-	_grp = 2 + floor(random 8);
+        _grp = 2 + floor(random 8);
 };
 
 _grouptype = [_side, _grp];

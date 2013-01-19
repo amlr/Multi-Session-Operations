@@ -16,7 +16,7 @@ class DEP_ACTIVE_LOCS {
         texts[]= {"Disabled","20","40","60","80","100"}; 
         default = 40;
 };
-class DEP_DENSITY {
+class DEP_LOC_DENSITY {
         title = "    Enemy Density";
         values[]= {0,500,1000,2000}; 
         texts[]= {"Disabled","High","Medium","low"}; 
