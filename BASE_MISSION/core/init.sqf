@@ -137,26 +137,8 @@ execNow "core\modules\rmm_nomad\main.sqf";
 #endif
 
 #ifdef persistentDB
-if (isHC) then {
-	if (persistentDBHeader == 1) then {	
-		// DEP
-		if (rmm_locality > 0) then {
-			diag_log format["MSO-%1 Headless Client: %2, waiting for PDB_DEP_positionsloaded...", time, player];
-			waituntil {!(isnil "PDB_DEP_positionsloaded")};
-			sleep 5;
-		};	
-		// CQB
-		if (CQBlocality > 1) then {
-			diag_log format["MSO-%1 Headless Client: %2, waiting for PDB_CQB_positionsloaded...", time, player];
-			waituntil {!(isnil "PDB_CQB_positionsloaded")};
-			sleep 5;
-		};	
-		// CIVS
-	};	
-}else{
 	"Persistent DB" call mso_core_fnc_initStat;
 	execNow "core\modules\persistentDB\main.sqf";
-};
 #endif
 
 #ifdef RMM_GTK
