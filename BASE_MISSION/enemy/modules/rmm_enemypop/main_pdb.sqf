@@ -101,7 +101,6 @@ DEP_camptypes =
         private ["_debug"];
         if (persistentDBHeader == 1) then {	
                 waituntil {!(isnil "PDB_DEP_positionsloaded")};
-                sleep 1;
         };
         
         if (isnil "DEP_LOCS") then {

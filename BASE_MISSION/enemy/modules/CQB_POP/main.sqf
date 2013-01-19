@@ -64,7 +64,6 @@ if (CQB_HC_active) then {
 
 	if (persistentDBHeader == 1) then {	
 			waituntil {!(isnil "PDB_CQB_positionsloaded")};
-			sleep 5;
 	};
 
 
@@ -97,7 +96,6 @@ if (CQB_HC_active) then {
 
 		if (persistentDBHeader == 1) then {	
 				waituntil {!(isnil "PDB_CQB_positionsloaded")};
-				sleep 5;
 		};
 		
 

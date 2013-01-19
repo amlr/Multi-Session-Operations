@@ -23,8 +23,7 @@
 // ====================================================================================
 // MAIN
 // This is done for all players connecting...
-//sleep 5;
-sleep 0.01;
+//sleep 0.01;
 
 private ["_missionid","_id","_pname","_puid"];
 

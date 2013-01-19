@@ -114,11 +114,25 @@ execNow "enemy\modules\crb_terrorists\main.sqf";
 
 #ifdef CQB_POP
 "CQB Populator" call mso_core_fnc_initStat;
+if (persistentDBHeader == 1 && {isHC}) then {
+	// CQB
+	if (CQBlocality > 1) then {
+		diag_log format["MSO-%1 Headless Client: %2, waiting for PDB_CQB_positionsloaded...", time, player];
+		waituntil {!(isnil "PDB_CQB_positionsloaded")};
+	};	
+};	
 execNow "enemy\modules\CQB_POP\main.sqf";
 #endif
 
 #ifdef RMM_ENEMYPOP
 "Enemy Populate" call mso_core_fnc_initStat;
+if (persistentDBHeader == 1 && {isHC}) then {
+	// DEP
+	if (rmm_locality > 0) then {
+		diag_log format["MSO-%1 Headless Client: %2, waiting for PDB_DEP_positionsloaded...", time, player];
+		waituntil {!(isnil "PDB_DEP_positionsloaded")};
+	};	
+};	
 execNow "enemy\modules\rmm_enemypop\main_pdb.sqf";
 #endif
 
