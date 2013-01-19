@@ -22,3 +22,9 @@ class AmbientAnimals {
         texts[]= {"Off", "On"}; 
         default = 1;
 };
+class AmbientLocality {
+	title = "        Ambient Locality";
+	values[]= {0,1}; 
+	texts[]= {"Server","Headless Client"};
+	default = 0;
+};

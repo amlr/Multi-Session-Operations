@@ -1,11 +1,17 @@
 
-private["_debug","_logicCiv","_logicVeh","_logicAni"];
+private ["_debug","_logicVeh","_logicAni","_spawnAI"];
 
 _debug = debug_mso;
 
 if(isNil "ambientCivs") then {ambientCivs = 1;};
 if(isNil "ambientVehs") then {ambientVehs = 1;};
 if(isNil "ambientAnimals") then {ambientAnimals = 1;};
+if(isnil "ambientLocality") then {ambientLocality = 0;};
+_spawnAI = false;
+switch (ambientLocality) do {
+        case 0: {_spawnAI = isServer};
+        default {_spawnAI = isHC};
+};
 
 waitUntil{!isNil "BIS_fnc_init"};
 
@@ -13,27 +19,40 @@ if(isServer && isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
-if (ambientCivs == 1) then {
+if (ambientCivs == 1 ) then {
+        
+        if(_spawnAI) then {
 	if(isNil "BIS_alice_mainscope") then {
 		BIS_alice_mainscope = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
+                };
+                BIS_alice_mainscope setVariable ["townlist",(BIS_functions_mainscope getVariable "locations")];
+                BIS_ALICE2_fnc_civilianSet = compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\fn_civilianSet.sqf";
+                [] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\crB_AmbCivSetup.sqf";
+                [BIS_alice_mainscope] call compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\main.sqf";
+                publicVariable "BIS_alice_mainscope";
+        };
+        
+        waitUntil {!isNil "BIS_alice_mainscope"};
+        
         if !(isServer) then {
         	BIS_alice_mainscope setVariable ["AliceLogic",true,true];
         };
-	};
+        
 	if(_debug) then {
 		BIS_alice_mainscope setVariable ["debug", true];
 	};
-	BIS_alice_mainscope setVariable ["townlist",(BIS_functions_mainscope getVariable "locations")];
-	BIS_ALICE2_fnc_civilianSet = compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\fn_civilianSet.sqf";
+        
+        if(
+                ((!isDedicated && !isHC) || // client
+                (!isDedicated && isServer) || // hosted server
+                !isMultiplayer) // single player
+        ) then {
 	BIS_ALICE_fnc_houseEffects = compile preprocessFileLineNumbers "CA\modules\Alice\data\scripts\fnc_houseEffects.sqf";
-	[] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\crB_AmbCivSetup.sqf";
-	[BIS_alice_mainscope] call compile preprocessFileLineNumbers "ca\modules_e\alice2\data\scripts\main.sqf";
-	if(!isDedicated) then {
 		[] call compile preprocessFileLineNumbers "ambience\modules\crb_civilians\ALICE2_houseEffects.sqf";
 	};
 };
 
-if(isServer) then {        
+if(_spawnAI) then {
         if (isNil "BIS_silvie_mainscope" && ambientVehs == 1) then {
                 _logicVeh = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
                 BIS_silvie_mainscope = _logicVeh;
@@ -52,9 +71,11 @@ if(isServer) then {
                 private ["_ok"];
                 _ok = [_logicAni] execVM "CA\Modules\Animals\Data\scripts\init.sqf";
         };
+};
         
-        if (isDedicated && ambientCivs == 1) then {
+if (isDedicated && ambientCivs == 1) then {
 			[] spawn {
+                private ["_ALICE_logic_group"];
 	        	while {true} do {
                     sleep (900 + (random 60));
 		            {
@@ -64,8 +85,7 @@ if(isServer) then {
 		                    deletevehicle _x;
                             deletegroup _ALICE_logic_group;
 		                };
-		            } foreach allmissionobjects "LOGIC";
-               };
+                        } foreach (allmissionobjects "LOGIC");
             };
        };
 };
