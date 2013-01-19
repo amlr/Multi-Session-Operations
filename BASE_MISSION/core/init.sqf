@@ -18,7 +18,6 @@ waitUntil{!isNil "BIS_fnc_init"};
 mso_version = "4.55";
 diag_log format["MSO-%1 Version: %2", time, mso_version];
 
-
 // reset player intialised variable
 if (isnil {player getvariable "player_intialised"}) then {player setvariable ["player_intialised", 0, false]};
 
@@ -138,7 +137,7 @@ execNow "core\modules\rmm_nomad\main.sqf";
 #endif
 
 #ifdef persistentDB
-if ([] call mso_core_fnc_isHC) then {
+if (isHC) then {
 	if (persistentDBHeader == 1) then {	
 		// DEP
 		if (rmm_locality > 0) then {

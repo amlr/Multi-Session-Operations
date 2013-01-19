@@ -3,6 +3,8 @@
 #endif
 
 titleText ["Initialising...", "BLACK"];
+call mso_core_fnc_isHC;
+
 execNow "init-mods.sqf";
 
 execNow "core\init.sqf";

@@ -24,7 +24,7 @@ class CQBspawnrange {
 };
 class CQBlocality {
 	title = "        CQB Locality";
-	values[]= {0,1,2,3}; 
-	texts[]= {"Server","Client","Headless Client 1","Headless Client 2"};
+	values[]= {0,1,2}; 
+	texts[]= {"Server","Client","Headless Client"};
 	default = 1;
 };

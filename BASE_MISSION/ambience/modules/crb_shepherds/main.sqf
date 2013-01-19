@@ -1,7 +1,9 @@
 #include <crbprofiler.hpp>
 
 private ["_types","_name","_pos","_shepherds"];
-if (!isServer) exitWith{};
+
+// Exit if not HC and not a server with no HC's
+if !(isHC || (isServer && count headlessClients == 0)) exitWith{};
 
 if(isNil "ambientShepherds")then{ambientShepherds = 1;};
 if (ambientShepherds == 0) exitWith{};

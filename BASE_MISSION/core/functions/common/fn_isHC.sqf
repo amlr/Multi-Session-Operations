@@ -1,7 +1,20 @@
 // Headless client check
-_isHC = false;
-if !(Isdedicated) then {
-  _hc = ppEffectCreate ["filmGrain", 2005];
-  if (_hc == -1) then {_isHC = true; player setvariable ["isHC", 1, true]} else {_isHC = false; player setvariable ["isHC", 0, true]};
+isHC = false;
+if(isNil "headlessClients") then {
+	headlessClients = [];
+	publicVariable "headlessClients";
 };
-_isHC;
+if !(Isdedicated) then {
+	private["_hc"];
+  _hc = ppEffectCreate ["filmGrain", 2005];
+        if (_hc == -1) then {
+                isHC = true;
+                if(!(player in headlessClients)) then {
+                        headlessClients set [count headlessClients, player];
+                        publicVariable "headlessClients";
+                };                        
+		} else {
+			ppEffectDestroy _hc;
+        };
+};
+isHC;

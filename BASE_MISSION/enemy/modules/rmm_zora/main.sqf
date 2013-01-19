@@ -3,7 +3,8 @@
 if (isnil "ZORAmaxgrps") then {ZORAmaxgrps = 3};
 if (isnil "ZORAmindist") then {ZORAmindist = 875};
 
-if (!(isserver) or (ZORAmaxgrps == 0)) exitwith {diag_log format["MSO-%1 ZORA exiting...", time];};
+// Exit if not HC and not a server with no HC's
+if (!(isHC || (isServer && count headlessClients == 0)) or (ZORAmaxgrps == 0)) exitwith {diag_log format["MSO-%1 ZORA exiting...", time];};
 
 private ["_logicZora"];
 _logicZora = (createGroup sideLogic) createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];

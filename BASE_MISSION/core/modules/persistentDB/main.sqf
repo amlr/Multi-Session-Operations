@@ -71,10 +71,6 @@ if (isdedicated) then {
 	};	
 };
 
-
-
-	
-
 // Compile player EHs
 persistent_fnc_playerDamage = compile PP "core\modules\persistentDB\playerDamage.sqf";
 persistent_fnc_playerHeal = compile PP "core\modules\persistentDB\playerHeal.sqf";
@@ -123,7 +119,7 @@ if ((!isServer) || (!isdedicated)) then {
 				["player", [mso_interaction_key], -9500, ["core\modules\persistentDB\menuSavePlayer.sqf", "main"]] call CBA_ui_fnc_add;
 		};
 		// Player Auto-Save process
-	if !([] call mso_core_fnc_isHC) then {
+	if !(isHC) then {
 				[] spawn {
 				PDBLastSaveTimePlayer = time;
 				while {mpdb_save_delay_player > 0} do {

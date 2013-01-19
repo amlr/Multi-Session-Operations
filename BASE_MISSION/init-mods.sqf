@@ -1,6 +1,6 @@
 // Custom improvements that you may wish to implement - currently supporting ACE, ACRE, EOD and CIM
 
-private ["_speakernum","_i","_markername","_pos","_grp","_hc"];
+private ["_speakernum","_i","_markername","_pos","_grp"];
 
 // ACE configuration
 if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
@@ -214,7 +214,7 @@ if (isClass(configFile>>"CfgPatches">>"gbl_advanced_interaction")) then {
 //Init Rations and Water
 if (isClass(configFile>>"CfgPatches">>"gbl_field_rations")) then {
     
- 	if !([] call mso_core_fnc_isHC) then {_AIMFRinit = [] execVM "\gbl_field_rations\scripts\Init_FRM.sqf";};
+ 	if !(isHC) then {_AIMFRinit = [] execVM "\gbl_field_rations\scripts\Init_FRM.sqf";};
 
     // Add Fieldrations box near current ammo boxes - GBL_UK_rationsbox
     if (isServer) then {

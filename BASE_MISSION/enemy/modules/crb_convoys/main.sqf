@@ -8,7 +8,9 @@
 //#squint filter Unknown variable CBA_fnc_randPos
 
 private ["_debug","_strategic","_convoyLocs","_numconvoys"];
-if(!isServer) exitWith{};
+// Exit if not HC and not a server with no HC's
+if (!(isHC || (isServer && count headlessClients == 0))) exitwith {diag_log format["MSO-%1 ZORA exiting...", time];};
+
 
 _debug = debug_mso;
 if(isNil "crb_convoy_intensity")then{crb_convoy_intensity = 1;};

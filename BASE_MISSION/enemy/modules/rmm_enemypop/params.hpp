@@ -6,8 +6,8 @@ class rmm_dynamic {
 };
 class rmm_locality {
         title = "    Enemy Populator Locality";
-        values[]= {0,1,2}; 
-        texts[]= {"Server","Headless Client 1","Headless Client 2"}; 
+        values[]= {0,1};
+        texts[]= {"Server","Headless Client"}; 
         default = 0;
 };
 class DEP_ACTIVE_LOCS {

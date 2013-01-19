@@ -78,7 +78,7 @@ if (( MISSIONDATA_LOADED == "false") && (_pname == "__SERVER__")) then {
 	// Load Locations?
 	if (pdb_locations_enabled) then {	
 		script_locationsload = [_missionid] execVM "core\modules\persistentDB\serverLoadLocations.sqf";
-		if ([] call mso_core_fnc_isHC) then { waitUntil {scriptDone script_locationsload}; };
+		if (isHC) then { waitUntil {scriptDone script_locationsload}; };
 	};	
 		
 	

@@ -24,15 +24,14 @@ if (isNil "mpdb_locations_enabled") then {pdb_locations_enabled = false;};
 
 if (isnil "rmm_locality") then {rmm_locality = 0};
 switch (rmm_locality) do {
-    case 0: {RMM_HC_active = false; DEP_clientside = false};
-    case 1: {RMM_HC_active = true; DEP_clientside = true; RMM_HCid = MSO_HC1};
-    case 2: {RMM_HC_active = true; DEP_clientside = true; RMM_HCid = MSO_HC2};
-	default {RMM_HC_active = false; DEP_clientside = false};
+        case 0: {RMM_HC_active = false; DEP_clientside = false};
+        case 1: {RMM_HC_active = true; DEP_clientside = true;};
+        default {RMM_HC_active = false; DEP_clientside = false};
 };
 
 if (RMM_HC_active) then {
-	if (isDedicated) then {KillServ = true};
-	if (!(isDedicated) && {player == RMM_HCid}) then {KillClient = false} else {KillClient = true};
+        if (isDedicated) then {KillServ = true};
+        if (!(isDedicated) && {isHC}) then {KillClient = false} else {KillClient = true};
 } else {
         if (isServer) then {KillServ = false} else {KillClient = true};
 };

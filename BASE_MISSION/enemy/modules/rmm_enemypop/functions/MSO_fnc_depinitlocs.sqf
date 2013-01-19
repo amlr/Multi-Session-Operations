@@ -24,7 +24,7 @@ DEP_format_group = {
 if (isNil "CRB_LOCS") then {
         diag_log format["MSO-%1 PDB EP Population: Calling INITLOCS...", time];
     	
-					if (((rmm_locality > 0) && ([] call mso_core_fnc_isHC) && (persistentDBHeader == 1))) then {
+					if (((rmm_locality > 0) && (isHC) && (persistentDBHeader == 1))) then {
 						_hcData = format["Headless client is calling locations please wait..."];
 						PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
 					};
@@ -46,7 +46,6 @@ _DEP_locs_tmp = [];
 _timenow = time;
 
 diag_log format["MSO-%1 PDB EP Population: Start collecting locs from CRB_Locs (%2)...!", time, count CRB_LOCS];
-while {count _DEP_locs_tmp < DEP_ACTIVE_LOCS && count _CRB_locs_tmp > 0} do {
 					if (((rmm_locality > 0) && (isHC) && (persistentDBHeader == 1))) then {
 						_hcData = format["Headless client is collecting locations please wait..."];
 						PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
@@ -57,6 +56,7 @@ while {count _DEP_locs_tmp < DEP_ACTIVE_LOCS && count _CRB_locs_tmp > 0} do {
 						PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
 					};
 		
+while {count _DEP_locs_tmp < DEP_ACTIVE_LOCS && count _CRB_locs_tmp > 0} do {
 
         private ["_continue"];
         

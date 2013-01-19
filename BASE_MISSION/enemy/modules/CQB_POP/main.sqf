@@ -18,8 +18,7 @@ if (isnil "CQBlocality") then {CQBlocality = 1};
 switch (CQBlocality) do {
     case 0: {CQB_HC_active = false; CQBclientside = false};
     case 1: {CQB_HC_active = false; CQBclientside = true};
-	case 2: {CQB_HC_active = true; CQBclientside = true; CQB_HCid = MSO_HC1};
-	case 3: {CQB_HC_active = true; CQBclientside = true; CQB_HCid = MSO_HC2};
+	case 2: {CQB_HC_active = isHC; CQBclientside = true;};
 	default {CQB_HC_active = false; CQBclientside = true};
 };
 if (isnil "CQBmaxgrps") then {CQBmaxgrps = 50};
@@ -30,7 +29,7 @@ _debug = debug_mso;
 
 diag_log format["MSO-%1 CQB Population: starting to load functions...", time];
 
-	if (((CQBlocality > 1) && ([] call mso_core_fnc_isHC) && (persistentDBHeader == 1))) then {
+	if (((CQBlocality > 1) && (isHC) && (persistentDBHeader == 1))) then {
 			_hcData = format["Headless client is loading CQB functions please wait..."];
 		   PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
 	};
@@ -61,7 +60,7 @@ diag_log format["MSO-%1 CQB Population: loaded functions...", time];
 if (CQB_HC_active) then {
 
 	if (isDedicated) exitwith {[] spawn CQB_GCS; diag_log format ["MSO-%1 CQB Populator exiting on server (HC active - GCS activated)... - HC is active!",time]};
-	if !(player == CQB_HCid) exitwith {diag_log format ["MSO-%1 CQB Populator running on client - Exiting...",time]};
+	if !(player in headlessClients) exitwith {diag_log format ["MSO-%1 CQB Populator running on client - Exiting...",time]};
 
 	if (persistentDBHeader == 1) then {	
 			waituntil {!(isnil "PDB_CQB_positionsloaded")};
@@ -69,7 +68,7 @@ if (CQB_HC_active) then {
 	};
 
 
-	if (((CQBlocality > 1) && ([] call mso_core_fnc_isHC) && (persistentDBHeader == 1))) then {
+	if (((CQBlocality > 1) && (isHC) && (persistentDBHeader == 1))) then {
 			_hcData = format["Headless client is registering CQB positions please wait..."];
 		   PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
 	};
