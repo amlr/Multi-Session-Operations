@@ -15,20 +15,6 @@
 if(isNil "persistentDBHeader")then{persistentDBHeader = 0;};
 
 if(persistentDBHeader == 0) exitWith{diag_log format ["MSO-%1 Persistent DB Disabled - Exiting.",time];};
-
-if (isHC) then {
-		if (rmm_locality > 0) then {
-			diag_log format["MSO-%1 Headless Client: %2, waiting for PDB_DEP_positionsloaded...", time, player];
-			waituntil {!(isnil "PDB_DEP_positionsloaded")};
-			exitWith{diag_log format ["PersistentDB: MSO-%1 Persistent DB Disabled - Exiting.",time];};
-		};	
-		if (CQBlocality > 1) then {
-			diag_log format["MSO-%1 Headless Client: %2, waiting for PDB_CQB_positionsloaded...", time, player];
-			waituntil {!(isnil "PDB_CQB_positionsloaded")};
-			exitWith{diag_log format ["PersistentDB: MSO-%1 Persistent DB Disabled - Exiting.",time];};
-		};	
-};
-
 // ====================================================================================
 // DEFINES
 #define PP preprocessfilelinenumbers
