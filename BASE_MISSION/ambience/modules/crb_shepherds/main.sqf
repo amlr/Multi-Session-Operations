@@ -225,7 +225,9 @@ CRB_fnc_createHerd = {
                 };                        
                 case 1: {
                         _herdClass = [
-                                "Goat"
+                                "Goat",
+				"Goat01_EP1",
+				"Goat02_EP1"
                         ];
                 };
                 case 2: {
@@ -236,7 +238,7 @@ CRB_fnc_createHerd = {
         };
         
         // Create animals
-        for "_i" from 0 to 6 + floor(random 12) do {
+        for "_i" from 0 to 5 + floor(random 5) do {
                 _h = (createGroup civilian) createUnit [(_herdClass call BIS_fnc_selectRandom), _pos, [], 30, "NONE"];
                 _h setSkill 0;
                 _h allowFleeing 1;
