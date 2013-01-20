@@ -10,3 +10,9 @@ class ZORAmindist {
         texts[]= {"500m","750m","875m","1000m","1.5km","2km"}; 
         default = 875;
 };
+class ZORALocality {
+	title = "        ZORA Locality";
+	values[]= {0,1}; 
+	texts[]= {"Server","Headless Client"};
+	default = 0;
+};
