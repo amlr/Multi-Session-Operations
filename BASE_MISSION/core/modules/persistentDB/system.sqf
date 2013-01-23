@@ -165,7 +165,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 // ====================================================================================
 	PDB_FNC_ACE_WOUNDS = {
 		if (pdb_log_enabled) then {  diag_log format ["PersistentDB: PDB_FNC_ACE_WOUNDS: %1",_this]; };
-		_player = _this select 0;
+		_player = player;
 		_aceWounds = [];
 		_aceWounds = [
 				(_player getVariable ["ace_w_overall",0]),
