@@ -60,7 +60,7 @@ diag_log format["MSO-%1 PDB EP Population: loaded functions...", time];
 ep_groups = [];
 ep_locations = [];
 ep_total = 0;
-ep_campprob = 1;
+ep_campprob = 0.8;
 
 waitUntil{!isNil "BIS_fnc_init"};
 
