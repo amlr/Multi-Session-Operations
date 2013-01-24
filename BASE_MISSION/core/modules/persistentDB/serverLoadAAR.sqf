@@ -1,6 +1,6 @@
 // Load AARs and Logs
 
-private ["_missionid", "_procedureName", "_parameters", "_response", "_aarCountInDB", "_countInDB", "_z", "_i", "_m","_thisID", "_aarData", "_vMarker", "_tmp", "_thisaar", "_vPosition", "_vType", "_vSide", "_vColor", "_vText"];
+private ["_missionid", "_procedureName", "_parameters", "_response", "_aarCountInDB", "_serverData", "_countInDB", "_z", "_i", "_m","_thisID", "_aarData", "_vMarker", "_tmp", "_thisaar", "_vPosition", "_vType", "_vSide", "_vColor", "_vText"];
 
 RMM_aars = [];
 
@@ -31,6 +31,7 @@ _countInDB = parseNumber (_aarCountInDB select 0);
 
 if (_countInDB > 0) then {
 	if (pdb_log_enabled) then {	diag_log format ["PersistentDB: SERVER MSG: Loading %1 After Action Reports from database.",   _aarCountInDB];};
+		_serverData = format["Getting after action reports from database..."];
 	PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
 };
 

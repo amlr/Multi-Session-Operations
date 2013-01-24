@@ -1,6 +1,6 @@
 // Load Tasks
 
-private ["_missionid", "_procedureName", "_parameters", "_response", "_taskCountInDB", "_countInDB", "_z", "_i", "_m","_thisID", "_taskData", "_vtask", "_tmp", "_thistask", "_vPosition", "_vType", "_vSide", "_vColor", "_vText"];
+private ["_missionid", "_procedureName", "_parameters", "_response", "_taskCountInDB", "_serverData", "_countInDB", "_z", "_i", "_m","_thisID", "_taskData", "_vtask", "_tmp", "_thistask", "_vPosition", "_vType", "_vSide", "_vColor", "_vText"];
 
 RMM_tasks = [];
 
