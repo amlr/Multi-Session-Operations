@@ -52,81 +52,83 @@ if (isnil "getGridPos") then {getGridPos = compile preprocessFileLineNumbers "en
 if (isnil "CQB_GCS") then {CQB_GCS = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_GCS.sqf"};
 diag_log format["MSO-%1 CQB Population: loaded functions...", time];
 
-if (CQB_HC_active) then {
-
-	if (isDedicated) exitwith {[] spawn CQB_GCS; diag_log format ["MSO-%1 CQB Populator exiting on server (HC active - GCS activated)... - HC is active!",time]};
-	if !(player in headlessClients) exitwith {diag_log format ["MSO-%1 CQB Populator running on client - Exiting...",time]};
-
-	if (persistentDBHeader == 1) then {	
-			waituntil {!(isnil "PDB_CQB_positionsloaded")};
-	};
-
-
-	if (((CQBlocality > 1) && (isHC) && (persistentDBHeader == 1))) then {
-			_hcData = format["Headless client is registering CQB positions please wait..."];
-		   PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
-	};
-
-	if ((isnil "CQBpositionsReg") || (isnil "CQBpositionsStrat")) then {
-			CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
-			CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
-		
-		Publicvariable "CQBpositionsStrat";
-		Publicvariable "CQBpositionsReg";
-	} else {
-		if ((count CQBpositionsReg + count CQBpositionsReg) == 0) then {
-			CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
-			CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
-			
-			Publicvariable "CQBpositionsStrat";
-			Publicvariable "CQBpositionsReg";
-		};
-	};
-
-	[_debug] spawn MSO_fnc_CQBclientloop;
-
-} else {
-
-	if (isServer) then {
-
+[] spawn {
+	if (CQB_HC_active) then {
+	
+		if (isDedicated) exitwith {[] spawn CQB_GCS; diag_log format ["MSO-%1 CQB Populator exiting on server (HC active - GCS activated)... - HC is active!",time]};
+		if !(player in headlessClients) exitwith {diag_log format ["MSO-%1 CQB Populator running on client - Exiting...",time]};
+	
 		if (persistentDBHeader == 1) then {	
 				waituntil {!(isnil "PDB_CQB_positionsloaded")};
 		};
-		
-
-				if ((CQBlocality == 0) && (persistentDBHeader == 1)) then {
-						_serverData = format["Server is registering CQB positions please wait..."];
-						PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
-				};
-		
-
+	
+	
+		if (((CQBlocality > 1) && (isHC) && (persistentDBHeader == 1))) then {
+				_hcData = format["Headless client is registering CQB positions please wait..."];
+			   PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
+		};
+	
 		if ((isnil "CQBpositionsReg") || (isnil "CQBpositionsStrat")) then {
-			CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
-			CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
+				CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
+				CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
 			
 			Publicvariable "CQBpositionsStrat";
 			Publicvariable "CQBpositionsReg";
 		} else {
 			if ((count CQBpositionsReg + count CQBpositionsReg) == 0) then {
-			CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
-			CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
+				CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
+				CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
 				
-			Publicvariable "CQBpositionsStrat";
-			Publicvariable "CQBpositionsReg";
+				Publicvariable "CQBpositionsStrat";
+				Publicvariable "CQBpositionsReg";
 			};
 		};
-
-		[] spawn CQB_GCS;
-	};
-
-	//Locality Check
-	if (CQBclientside) then {
-		if !(isDedicated) then {
-			[_debug] spawn MSO_fnc_CQBclientloop;
-		};
+	
+		[_debug] spawn MSO_fnc_CQBclientloop;
+	
 	} else {
+	
 		if (isServer) then {
-			[_debug] spawn MSO_fnc_CQBclientloop;
+	
+			if (persistentDBHeader == 1) then {	
+					waituntil {!(isnil "PDB_CQB_positionsloaded")};
+			};
+			
+	
+					if ((CQBlocality == 0) && (persistentDBHeader == 1)) then {
+							_serverData = format["Server is registering CQB positions please wait..."];
+							PDB_SERVER_LOADERSTATUS = [_serverData]; publicVariable "PDB_SERVER_LOADERSTATUS";
+					};
+			
+	
+			if ((isnil "CQBpositionsReg") || (isnil "CQBpositionsStrat")) then {
+				CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
+				CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
+				
+				Publicvariable "CQBpositionsStrat";
+				Publicvariable "CQBpositionsReg";
+			} else {
+				if ((count CQBpositionsReg + count CQBpositionsReg) == 0) then {
+				CQBpositionsStrat = ["strategic"] call MSO_fnc_CQBgetSpawnpos;
+				CQBpositionsReg = ["regular"] call MSO_fnc_CQBgetSpawnpos;
+					
+				Publicvariable "CQBpositionsStrat";
+				Publicvariable "CQBpositionsReg";
+				};
+			};
+	
+			[] spawn CQB_GCS;
+		};
+	
+		//Locality Check
+		if (CQBclientside) then {
+			if !(isDedicated) then {
+				[_debug] spawn MSO_fnc_CQBclientloop;
+			};
+		} else {
+			if (isServer) then {
+				[_debug] spawn MSO_fnc_CQBclientloop;
+			};
 		};
 	};
 };
