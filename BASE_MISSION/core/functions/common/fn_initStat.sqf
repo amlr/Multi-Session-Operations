@@ -14,6 +14,8 @@ if ((!isServer) || (!isdedicated)) then {
 if ((isServer) || (isdedicated)) then {
 	if  (_this == "Completed") then {
 		missionNameSpace setVariable ["server_initcomplete", 1];
-		[] execVM "core\modules\persistentDB\lobby_onConnected.sqf"; 
+		if(!isNil "persistentDBHeader" && {persistentDBHeader == 0}) then {
+			[] execVM "core\modules\persistentDB\lobby_onConnected.sqf"; 
+		};
 	};
 };
