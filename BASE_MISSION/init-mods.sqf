@@ -33,59 +33,56 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 			mso_interaction_key = ace_sys_interaction_key_self;
 		};
         
-        // ACE Jerry can and tyre cleanup workaround
-        if (isserver) then {
+        // ACE Jerry can and tyre cleanup workaround running on all localities
             
-            //Checking for Jerrycans and Tyres existing on missionstart (editor placed objects), Defining mess-objects
-            ACE_MESS = ["ACE_JerryCan_15", "ACE_JerryCan_5","ACE_JerryCan","ACE_Spare_Tyre","ACE_Spare_Tyre_HD","ACE_WoundingLitter_Morphine","ACE_ACE_WoundingLitterMedkit","ACE_WoundingLitter_Traumabandage","ACE_Blooddrop_1","ACE_Blooddrop_2","ACE_Spare_Tyre_HDAPC"];
-            AllowedSupplyObjects = [];
-                { 
-                
-                	if (typeof _x in ACE_MESS) then {
-                        AllowedSupplyObjects set [count AllowedSupplyObjects, _x];
-                    };
-                } foreach allmissionobjects "";
+        //Checking for Jerrycans and Tyres existing on missionstart (editor placed objects), Defining mess-objects
+        ACE_MESS = ["ACE_JerryCan_15", "ACE_JerryCan_5","ACE_JerryCan","ACE_Spare_Tyre","ACE_Spare_Tyre_HD","ACE_WoundingLitter_Morphine","ACE_ACE_WoundingLitterMedkit","ACE_WoundingLitter_Traumabandage","ACE_Blooddrop_1","ACE_Blooddrop_2","ACE_Spare_Tyre_HDAPC"];
+        AllowedSupplyObjects = [];
+            { 
+            	if (typeof _x in ACE_MESS) then {
+                    AllowedSupplyObjects set [count AllowedSupplyObjects, _x];
+                };
+            } foreach allmissionobjects "";
 
-            //Define cleanup Procedure
-            ACE_object_cleanup = {
-                diag_log format["MSO-%1 ACE Cleanup: Starting cleanup procedure...", time];
-                _timeStart = time;
-                
-                //Checking cargo of existing vehicles
-                _allowedobjects = AllowedSupplyObjects;
-                {
-                    _runtime = (time - _timeStart);
-                    if (_runtime > 60) exitwith {diag_log format["MSO-%1 ACE Cleanup: Collect-procedure fails to finish properly...", time];};
-                    
-                    if (alive _x) then {
-	                    _tempCargo = _x call ACE_fnc_listCargo;
-	                    _allowedobjects = _allowedobjects + _tempCargo;
-                    };
-                } foreach allmissionobjects "LandVehicle";
-                
-                //Delete all other jerrycans and tyres
-                {
-                    _runtime = (time - _timeStart);
-                    if (_runtime > 60) exitwith {diag_log format["MSO-%1 ACE Cleanup: Delete-procedure fails to finish properly...", time];};
+        //Define cleanup Procedure
+        ACE_object_cleanup = {
+            diag_log format["MSO-%1 ACE Cleanup: Starting cleanup procedure...", time];
+            _timeStart = time;
             
-                	if ((typeof _x in ACE_MESS) && {!(_x in _allowedobjects)}) then {
-                        diag_log format["Cleaning abandoned ACE object %1", _x];
-                        deletevehicle vehicle _x; deletevehicle _x;
-                    };
-                } foreach allmissionobjects "";
-                diag_log format["MSO-%1 ACE Cleanup: Ended cleanup procedure...", time];
-            };
+            //Checking cargo of existing vehicles
+            _allowedobjects = AllowedSupplyObjects;
+            {
+                _runtime = (time - _timeStart);
+                if (_runtime > 60) exitwith {diag_log format["MSO-%1 ACE Cleanup: Collect-procedure fails to finish properly...", time];};
+                
+                if (alive _x) then {
+                    _tempCargo = _x call ACE_fnc_listCargo;
+                    _allowedobjects = _allowedobjects + _tempCargo;
+                };
+            } foreach allmissionobjects "LandVehicle";
             
-            //Spawning Cleanuploop that deletes every half an hour IF totalcount of abandoned tyres/jerrycans is over 150
-            [] spawn {
-            	while {true} do {
-                    sleep (900 + (random 60));
-                    _objectCount = {typeof _x in ACE_MESS} count allmissionobjects "";
-                	if (_objectCount > 100) then {
-                        [] call ACE_object_cleanup;
-                    } else {
-                        diag_log format["Not cleaning - Abandoned ACE objects are %1 - below 100",_objectCount];
-                    };
+            //Delete all other jerrycans and tyres
+            {
+                _runtime = (time - _timeStart);
+                if (_runtime > 60) exitwith {diag_log format["MSO-%1 ACE Cleanup: Delete-procedure fails to finish properly...", time];};
+        
+            	if ((local _x) && {typeof _x in ACE_MESS} && {!(_x in _allowedobjects)}) then {
+                    diag_log format["Cleaning abandoned ACE object %1", _x];
+                    deletevehicle vehicle _x; deletevehicle _x;
+                };
+            } foreach allmissionobjects "";
+            diag_log format["MSO-%1 ACE Cleanup: Ended cleanup procedure...", time];
+        };
+        
+        //Spawning Cleanuploop that deletes every 15 minutes IF totalcount of local abandoned tyres/jerrycans is over 150
+        [] spawn {
+        	while {true} do {
+                sleep (900 + (random 60));
+                _objectCount = {local _x && typeof _x in ACE_MESS} count allmissionobjects "";
+            	if (_objectCount > 100) then {
+                    [] call ACE_object_cleanup;
+                } else {
+                    diag_log format["Not cleaning - Abandoned ACE objects are %1 - below 100",_objectCount];
                 };
             };
         };
