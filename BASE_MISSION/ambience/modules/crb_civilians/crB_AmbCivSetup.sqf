@@ -36,105 +36,112 @@ waitUntil{!isNil "BIS_alice_mainscope"};
 // BIS_alice_mainscope setVariable ["civilianCount","round (4 * (sqrt %1))"]; 
 
 switch toLower(worldName) do {		
-        case "chernarus": { 
-                BIS_alice_mainscope setvariable ["trafficDistance",1000];
-                BIS_alice_mainscope setvariable ["spawnDistance",800];
+	case "chernarus": { 
+		BIS_alice_mainscope setvariable ["trafficDistance",1000];
+		BIS_alice_mainscope setvariable ["spawnDistance",800];
 		BIS_alice_mainscope setvariable ["ALICE_townsize",800,true];
-                BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];
+		BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];
 		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"];
-        };        
+	    };        
 	case "clafghan": {   
-                BIS_alice_mainscope setvariable ["trafficDistance",1200]; // default 500
-                BIS_alice_mainscope setvariable ["spawnDistance",800]; // default 400
+		BIS_alice_mainscope setvariable ["trafficDistance",1200]; // default 500
+		BIS_alice_mainscope setvariable ["spawnDistance",800]; // default 400
 		BIS_alice_mainscope setvariable ["ALICE_townsize",800,true]; // default 266.667
 		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"]; // default round (4 * (sqrt %1))
-                // Add some rare english speaking civilians to the mix
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
-        };
-        case "eden": {                
-                BIS_alice_mainscope setvariable ["trafficDistance",700];                
-                BIS_alice_mainscope setvariable ["spawnDistance",600];                
+		// Add some rare english speaking civilians to the mix
+		BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
+	};
+	case "eden": {                
+		BIS_alice_mainscope setvariable ["trafficDistance",700];                
+		BIS_alice_mainscope setvariable ["spawnDistance",600];                
 		BIS_alice_mainscope setvariable ["ALICE_townsize",600,true];
-                BIS_alice_mainscope setVariable ["townsFaction",["cwr2_civ","CIV","CIV_RU"]];                
-        };
-        case "esbekistan": {   
-                BIS_alice_mainscope setvariable ["trafficDistance",1000]; // default 500
-                BIS_alice_mainscope setvariable ["spawnDistance",700]; // default 400
+		BIS_alice_mainscope setVariable ["townsFaction",["cwr2_civ","CIV","CIV_RU"]];                
+	};
+	case "esbekistan": {   
+		BIS_alice_mainscope setvariable ["trafficDistance",1000]; // default 500
+		BIS_alice_mainscope setvariable ["spawnDistance",700]; // default 400
 		BIS_alice_mainscope setvariable ["ALICE_townsize",700,true]; // default 266.667
 		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"]; // default round (4 * (sqrt %1))
-                // Add some rare english speaking civilians to the mix
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
-        };
-        case "fallujah": {                
-                BIS_alice_mainscope setvariable ["trafficDistance",800];      
-                BIS_alice_mainscope setvariable ["spawnDistance",600];      
+		// Add some rare english speaking civilians to the mix
+		BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
+	};
+	case "fallujah": {                
+		BIS_alice_mainscope setvariable ["trafficDistance",800];      
+		BIS_alice_mainscope setvariable ["spawnDistance",600];      
 		BIS_alice_mainscope setvariable ["ALICE_townsize",600,true];
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
+		BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
 	};  
-        case "isladuala": {      
-                BIS_alice_mainscope setvariable ["trafficDistance",1000];             
-                BIS_alice_mainscope setvariable ["spawnDistance",700];            
+	    case "isladuala": {      
+		BIS_alice_mainscope setvariable ["trafficDistance",1000];             
+		BIS_alice_mainscope setvariable ["spawnDistance",700];            
 		BIS_alice_mainscope setvariable ["ALICE_townsize",700,true];
-                BIS_alice_mainscope setVariable ["civilianCount","round (5 * (sqrt %1))"];   
-        };       
-        case "lingor": { 
-                BIS_alice_mainscope setvariable ["trafficDistance", 500];
-                BIS_alice_mainscope setvariable ["spawnDistance", 400]; 
+		BIS_alice_mainscope setVariable ["civilianCount","round (5 * (sqrt %1))"];   
+	};       
+	case "lingor": { 
+		BIS_alice_mainscope setvariable ["trafficDistance", 500];
+		BIS_alice_mainscope setvariable ["spawnDistance", 400]; 
 		BIS_alice_mainscope setvariable ["ALICE_townsize",400,true];
-                BIS_alice_mainscope setVariable ["townsFaction", ["CIV_LGR"]]; 
-                BIS_alice_mainscope setVariable ["civilianCount", "round (1.5 * (sqrt %1))"]; 
-        }; 
-        case "mbg_celle2": {
-            	BIS_alice_mainscope setvariable ["trafficDistance",1000];                
-                BIS_alice_mainscope setvariable ["spawnDistance",700];                
+		BIS_alice_mainscope setVariable ["townsFaction", ["CIV_LGR"]]; 
+		BIS_alice_mainscope setVariable ["civilianCount", "round (1.5 * (sqrt %1))"]; 
+	}; 
+	case "mbg_celle2": {
+		BIS_alice_mainscope setvariable ["trafficDistance",1000];                
+		BIS_alice_mainscope setvariable ["spawnDistance",700];                
 		BIS_alice_mainscope setvariable ["ALICE_townsize",700,true];
-                BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];                
+		BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];                
 		BIS_alice_mainscope setVariable ["civilianCount","round (1.5 * (sqrt %1))"]; 
-        };
-        case "mcn_hazarkot": {
-                BIS_alice_mainscope setvariable ["trafficDistance",500];
-                BIS_alice_mainscope setvariable ["spawnDistance",400];
+	};
+	case "mcn_hazarkot": {
+		BIS_alice_mainscope setvariable ["trafficDistance",500];
+		BIS_alice_mainscope setvariable ["spawnDistance",400];
 		BIS_alice_mainscope setvariable ["ALICE_townsize",400,true];
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
+		BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
 		//BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"];
-        };       
-        case "takistan": {   
-                BIS_alice_mainscope setvariable ["trafficDistance",1000]; // default 500
-                BIS_alice_mainscope setvariable ["spawnDistance",800]; // default 400
+	};       
+	case "takistan": {   
+		BIS_alice_mainscope setvariable ["trafficDistance",1000]; // default 500
+		BIS_alice_mainscope setvariable ["spawnDistance",800]; // default 400
 		BIS_alice_mainscope setvariable ["ALICE_townsize",800,true]; // default 266.667
 		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"]; // default round (4 * (sqrt %1))
-                // Add some rare english speaking civilians to the mix
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
-        };   
-        case "tavi": { 
-                BIS_alice_mainscope setvariable ["trafficDistance",1000];
-                BIS_alice_mainscope setvariable ["spawnDistance",700];
+		// Add some rare english speaking civilians to the mix
+		BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];
+	};   
+	case "tavi": { 
+		BIS_alice_mainscope setvariable ["trafficDistance",1000];
+		BIS_alice_mainscope setvariable ["spawnDistance",700];
 		BIS_alice_mainscope setvariable ["ALICE_townsize",700,true];
-                BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];
+		BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];
 		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"];
-        };
-        case "torabora": {       
-                BIS_alice_mainscope setvariable ["trafficDistance",1500];       
-                BIS_alice_mainscope setvariable ["spawnDistance",600];        
+	};
+	case "torabora": {       
+		BIS_alice_mainscope setvariable ["trafficDistance",1500];       
+		BIS_alice_mainscope setvariable ["spawnDistance",600];        
 		BIS_alice_mainscope setvariable ["ALICE_townsize",600,true];
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];  
-        };
-        case "utes": {        
-                BIS_alice_mainscope setvariable ["trafficDistance",650];      
-                BIS_alice_mainscope setvariable ["spawnDistance",500];       
+		BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];  
+	};
+	case "utes": {        
+		BIS_alice_mainscope setvariable ["trafficDistance",650];      
+		BIS_alice_mainscope setvariable ["spawnDistance",500];       
 		BIS_alice_mainscope setvariable ["ALICE_townsize",500,true];
-                BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];  
+		BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];  
 		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"];
-        };
-        case "zargabad": { 
-                BIS_alice_mainscope setvariable ["trafficDistance",750];      
-                BIS_alice_mainscope setvariable ["spawnDistance",600];      
+	};
+	case "zargabad": { 
+		BIS_alice_mainscope setvariable ["trafficDistance",750];      
+		BIS_alice_mainscope setvariable ["spawnDistance",600];      
 		BIS_alice_mainscope setvariable ["ALICE_townsize",600,true];
-                BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"];   
-                // Add some rare english speaking civilians to the mix            
-                BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];  
-                //[BIS_alice_mainscope, "civilianRarity",["CIV_EuroWoman01_EP1", 5, "CIV_EuroWoman02_EP1", 5, "Dr_Annie_Baker_EP1", 10, "Rita_Ensler_EP1", 10, "CIV_EuroMan01_EP1", 5, "CIV_EuroMan02_EP1", 5, "Haris_Press_EP1", 10, "Dr_Hladik_EP1", 10, "Citizen2_EP1", 5, "Citizen3_EP1", 5, "Profiteer2_EP1", 5, "Functionary1_EP1", 5, "Functionary2_EP1", 3]] call BIS_fnc_variableSpaceAdd;
-        };
+		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"];   
+		// Add some rare english speaking civilians to the mix            
+		BIS_alice_mainscope setVariable ["townsFaction",["BIS_TK_CIV"]];  
+		//[BIS_alice_mainscope, "civilianRarity",["CIV_EuroWoman01_EP1", 5, "CIV_EuroWoman02_EP1", 5, "Dr_Annie_Baker_EP1", 10, "Rita_Ensler_EP1", 10, "CIV_EuroMan01_EP1", 5, "CIV_EuroMan02_EP1", 5, "Haris_Press_EP1", 10, "Dr_Hladik_EP1", 10, "Citizen2_EP1", 5, "Citizen3_EP1", 5, "Profiteer2_EP1", 5, "Functionary1_EP1", 5, "Functionary2_EP1", 3]] call BIS_fnc_variableSpaceAdd;
+	};
+	default {
+		BIS_alice_mainscope setvariable ["trafficDistance",800];
+		BIS_alice_mainscope setvariable ["spawnDistance",600];
+		BIS_alice_mainscope setvariable ["ALICE_townsize",400,true];
+		BIS_alice_mainscope setVariable ["townsFaction",["CIV","CIV_RU"]];
+		BIS_alice_mainscope setVariable ["civilianCount","round (2 * (sqrt %1))"];
+	};
 };
 
 // list of action categories from CfgCivilianActions 
