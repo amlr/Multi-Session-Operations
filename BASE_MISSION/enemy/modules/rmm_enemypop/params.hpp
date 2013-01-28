@@ -18,9 +18,9 @@ class DEP_ACTIVE_LOCS {
 };
 class DEP_LOC_DENSITY {
         title = "        Enemy Density";
-        values[]= {0,500,1000,2000}; 
-        texts[]= {"Disabled","High","Medium","low"}; 
-        default = 1000;
+        values[]= {0,500,1000,1500,2000,2500}; 
+        texts[]= {"Disabled","Very High","High","Medium","Low","Very Low"}; 
+        default = 1500;
 };
 class rmm_ep_spawn_dist {
         title = "        Enemy Spawn Distance"; 
