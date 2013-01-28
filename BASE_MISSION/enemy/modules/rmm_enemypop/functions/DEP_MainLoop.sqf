@@ -99,15 +99,11 @@ waituntil {
                 if !(isnil "_group") then {
                         ep_groups = ep_groups - [_group];
                         while {(count (waypoints (_group))) > 0} do {deleteWaypoint ((waypoints (_group)) select 0);};
-                        {deletevehicle (vehicle _x); deletevehicle _x} foreach units _group;
-                        deletegroup _group;
                         if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - Position cleared %2 (%3)", time, _pos, _group];}; 
                 };
                 if !(isnil "_grp2") then {
                         ep_groups = ep_groups - [_grp2];
                         while {(count (waypoints (_grp2))) > 0} do {deleteWaypoint ((waypoints (_grp2)) select 0);};
-                        {if !((vehicle _x) iskindof "StaticWeapon") then {deletevehicle (vehicle _x)}; deletevehicle _x} foreach units _grp2;
-                        deletegroup _grp2;
                         if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Deleting group - Position cleared %2 (%3)", time, _pos, _grp2];};
                 };
                 
