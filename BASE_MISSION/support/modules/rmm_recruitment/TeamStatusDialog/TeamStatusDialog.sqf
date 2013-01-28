@@ -63,6 +63,13 @@
 
 //#define TSD9_hightlight_text_code "%$Highlight$%"
 
+TSD9_TriggerCleanup = {
+		_Trig = _this select 0;
+		_timeNow = time;
+		while {time - _timeNow < 5} do {sleep 1};
+		deletevehicle _Trig;
+};
+
 //-----------------------------------------------------------------------------
 TSD9_GridRefCoords = if (isNil "ICE_GridRefCoords") then {
 	compile preprocessFileLineNumbers "support\modules\rmm_recruitment\TeamStatusDialog\pos2grid.cpp";
@@ -863,6 +870,8 @@ TSD9_JoinGroupByName = {
 		"this",
 		format["['%1', thislist] call TSD9_JoinGroupByName_FromTriggerList", _groupName],
 	"" ];
+
+	[_Trig] spawn TSD9_TriggerCleanup;
 };
 //----------------------
 TSD9_InviteAIOrPlayerIntoGroupByName_FromTriggerList = {
@@ -940,6 +949,8 @@ TSD9_InviteAIOrPlayerIntoGroupByName = {
 		"this",
 		format["['%1', thislist] call TSD9_InviteAIOrPlayerIntoGroupByName_FromTriggerList", _playerToFind],
 	"" ];
+
+	[_Trig] spawn TSD9_TriggerCleanup;
 };
 //----------------------
 TSD9_SetNewTeamLeaderByName_FromTriggerList = {
@@ -988,6 +999,8 @@ TSD9_SetNewTeamLeaderByName = {
 		"this",
 		format["['%1', thislist] call TSD9_SetNewTeamLeaderByName_FromTriggerList", _playerToFind],
 	"" ];
+
+	[_Trig] spawn TSD9_TriggerCleanup;
 };
 //----------------------
 TSD9_RemoveAIOrPlayerFromYourGroupByName = {
@@ -1060,6 +1073,8 @@ TSD9_GetVehicleByName = {
 		"this",
 		format["['%1', thislist] call TSD9_GetVehicleByName_FromTriggerList", _VehicleName],
 	"" ];
+
+	[_Trig] spawn TSD9_TriggerCleanup;
 };
 //----------------------
 TSD9_LeaveGroup = {
@@ -1576,10 +1591,10 @@ TSD9_DrawPage_Opposition = {
 	_Trig setTriggerStatements ["this","[thislist] call TSD9_FillGroups; ","" ];
 	call TSD9_SetTitle;
 
-	  ctrlSetFocus (TSD9_IDC_OppositionButton call TSD9_getControl);
-
-
+	ctrlSetFocus (TSD9_IDC_OppositionButton call TSD9_getControl);
 	[true] call TSD9_ShowCollapseExpandButtons;
+
+	[_Trig] spawn TSD9_TriggerCleanup;
 };
 //----------------------
 TSD9_DrawPage_MyTeam = {
@@ -1593,10 +1608,10 @@ TSD9_DrawPage_MyTeam = {
 	//_Trig setTriggerTimeout [0, 0, 0, false];
 	call TSD9_SetTitle;
 
-	  ctrlSetFocus (TSD9_IDC_MyTeamButton call TSD9_getControl);
-
-
+	ctrlSetFocus (TSD9_IDC_MyTeamButton call TSD9_getControl);
 	[true] call TSD9_ShowCollapseExpandButtons;
+
+	[_Trig] spawn TSD9_TriggerCleanup;
 };
 //----------------------
 TSD9_DrawPage = {
@@ -1627,6 +1642,8 @@ TSD9_CollapseAll = {
 	_Trig setTriggerActivation ["ANY", "PRESENT", false];
 	_Trig setTriggerArea [31000, 31000, 0, true];
 	_Trig setTriggerStatements ["this","[thislist] call TSD9_FillClosedGroupsWithAllGroups; ",""];
+
+	[_Trig] spawn TSD9_TriggerCleanup;
 };
 //----------------------
 TSD9_ExpandAll = {
