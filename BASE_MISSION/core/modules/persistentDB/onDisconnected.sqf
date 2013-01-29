@@ -47,7 +47,7 @@ if (pdb_log_enabled) then {
 	};	
 };
 
-	if (_pname != "__SERVER__") then {
+	if ((_pname != "__SERVER__") && (_pname != "SYSTEM")) then {
 
 		_player = objNull;
 		{
@@ -70,7 +70,7 @@ if (pdb_log_enabled) then {
 		
 	
 
-		if !((isNull _player) && !(_player in headlessClients)) then {	
+		if !((isNull _player) then {	
 			
 
 				// Set disconnect flag for player
