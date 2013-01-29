@@ -26,7 +26,7 @@
 // ====================================================================================
 // MAIN
 
-private ["_disconnectflag","_id", "_allobjectTypes","_pname", "_puid", "_player", "_missionid", "_thisPlayerData", "_thisdata", "_thisWeaponData", "_thisACEData", "_params", "_parameters", "_i", "_procedureName", "_response", "_thisObject", "_landVehicles", "_landVehicleCount", "_missionLandVehicles", "_vDir", "_vUp", "_vDam", "_vPosition", "_vObject", "_vFuel", "_vLocked", "_vWeaponCargo", "_vMagazineCargo","_vEngine", "_result", "_thisObjectData", "_object", "_date"];
+private ["_disconnectflag","_id", "_allobjectTypes","_pname", "_puid", "_player", "_missionid", "_thisPlayerData", "_thisdata", "_thisWeaponData", "_thisACEData", "_params", "_parameters", "_i", "_procedureName", "_response", "_thisObject", "_landVehicles", "_landVehicleCount", "_missionLandVehicles", "_vDir", "_vUp", "_vDam", "_vPosition", "_vObject", "_vFuel", "_vLocked", "_vWeaponCargo", "_vMagazineCargo","_vEngine", "_result", "_thisObjectData", "_object", "_date","_aimRationsClient"];
 
 _id = _this select 0; 
 _pname = _this select 1; 
@@ -41,9 +41,9 @@ _missionid = (MISSIONDATA select 1);
 
 if (pdb_log_enabled) then {
 	if (_disconnectflag) then {
-		diag_log format["PersistentDB: SERVER MSG: Player %1, is leaving the server, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
+		diag_log format["PersistentDB: onDisconnected: SERVER MSG: Player %1, is leaving the server, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
 	} else {
-			diag_log format["PersistentDB: SERVER MSG: Player %1, is auto-saving, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
+			diag_log format["PersistentDB: onDisconnected: SERVER MSG: Player %1, is auto-saving, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
 	};	
 };
 
@@ -53,14 +53,14 @@ if (pdb_log_enabled) then {
 		{
 			
 			if (pdb_log_enabled) then {
-				diag_log format["PersistentDB: SERVER MSG: Loop. %1", getPlayerUID _x];
+				diag_log format["PersistentDB: onDisconnected: SERVER MSG: Loop. %1", getPlayerUID _x];
 			};	
 			
 
 			if (getPlayerUID _x == _puid) exitWith {
 				
 				if (pdb_log_enabled) then {		
-					diag_log format["PersistentDB: SERVER MSG: Loop break. %1", getPlayerUID _x];
+					diag_log format["PersistentDB: onDisconnected: SERVER MSG: Loop break. %1", getPlayerUID _x];
 				};
 				
 				_player = _x;
@@ -70,12 +70,9 @@ if (pdb_log_enabled) then {
 		
 	
 
-		if !(isNull _player) then {	
+		if !((isNull _player) && !(_player in headlessClients)) then {	
 			
-			
-		
-			  
-			  
+
 				// Set disconnect flag for player
 				if (_disconnectflag) then {
 					private "_timenow";
@@ -113,8 +110,8 @@ if (pdb_log_enabled) then {
 		
 		} else {
 			// player not found!
-			if (pdb_log_enabled) then {
-				diag_log format["PersistentDB: SERVER MSG: Player %1, not found in playableUnits!, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
+			if (pdb_log_enabled) && then {
+				diag_log format["PersistentDB: onDisconnected: SERVER MSG: Player %1, not found in playableUnits!, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
 			};
 		};
 		
@@ -136,7 +133,7 @@ if (pdb_log_enabled) then {
 		_parameters = format["[tmid=%1]",_missionid];
 		
 		if (pdb_log_enabled) then {
-			diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+			diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 		};
 	
 		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
@@ -198,7 +195,7 @@ if (pdb_log_enabled) then {
 				_parameters = format["[tobj=%1,ttyp=%2,tpos=%3,tdir=%4,tup=%5,tdam=%6,tfue=%7,tlkd=%8,twcar=%9,teng=%10,twmag=%11,tmid=%12,tintid=%13]",_vObject, _vType, _vPosition, _vDir, _vUp, _vDam, _vFuel, _vLocked, _vWeaponCargo, _vEngine, _vMagazineCargo, _missionid, _landVehicleCount];
 				
 				if (pdb_log_enabled) then {
-					diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+					diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 				};
 				
 				//	diag_log ("callExtension->Arma2NETMySQL: InsertLandVehicles");		
@@ -223,7 +220,7 @@ if (pdb_log_enabled) then {
 		_parameters = format["[tmid=%1]",_missionid];
 		
 		if (pdb_log_enabled) then {
-			diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+			diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 		};
 	
 		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
@@ -289,7 +286,7 @@ if (pdb_log_enabled) then {
 				_parameters = format["[tobj=%1,ttyp=%2,tpos=%3,tdir=%4,tup=%5,tdam=%6,twcar=%7,twmag=%8,tmid=%9,tintid=%10]",_vObject, _vType, _vPosition, _vDir, _vUp, _vDam, _vWeaponCargo, _vMagazineCargo, _missionid,_ObjectCount];
 				
 				if (pdb_log_enabled) then {
-					diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+					diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 				};
 				
 				_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
@@ -310,7 +307,7 @@ if (pdb_log_enabled) then {
 		_parameters = format["[tmid=%1]",_missionid];
 		
 		if (pdb_log_enabled) then {
-			diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+			diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 		};
 	
 		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
@@ -346,7 +343,7 @@ if (pdb_log_enabled) then {
 				_parameters = format["[tobj=%1,tpos=%2,thpo=%3,tcle=%4,tsus=%5,tgrt=%6,tgrs=%7,ttyp=%8,tpa=%9,tmid=%10,tintid=%11]",_vObject, _vPosition, _vHousePositions, _vCleared, _vSuspended, _vGroupType, _vGroupStrength, _vType, _ParentArrayName, _missionid, _locationCount];
 				
 				if (pdb_log_enabled) then {
-					diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+					diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 				};
 
 				_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
@@ -366,7 +363,7 @@ if (pdb_log_enabled) then {
 		_parameters = format["[tmid=%1]",_missionid];
 		
 		if (pdb_log_enabled) then {
-			diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+			diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 		};
 	
 		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
@@ -393,7 +390,7 @@ if (pdb_log_enabled) then {
 			_parameters = format["[tnam=%1,tpos=%2,ttyp=%3,ttxt=%4,tside=%5,tcol=%6,tmid=%7,tintid=%8]",_vName, _vPosition, _vType, _vText, _vSide, _vColor, _missionid, _markerCount];
 			
 			if (pdb_log_enabled) then {
-				diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+				diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 			};
 
 			_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
@@ -413,7 +410,7 @@ if (pdb_log_enabled) then {
 		_parameters = format["[tmid=%1]",_missionid];
 		
 		if (pdb_log_enabled) then {
-			diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+			diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 		};
 	
 		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
@@ -437,7 +434,7 @@ if (pdb_log_enabled) then {
 			_parameters = format["[tnam=%1,tdes=%2,tdest=%3,tsta=%4,tside=%5,tmid=%6,tintid=%7]",_vName, _vDescr, _vPosition, _vState, _vSide, _missionid, _taskCount];
 			
 			if (pdb_log_enabled) then {
-				diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+				diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 			};
 
 			_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
@@ -457,7 +454,7 @@ if (pdb_log_enabled) then {
 		_parameters = format["[tmid=%1]",_missionid];
 		
 		if (pdb_log_enabled) then {
-			diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+			diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 		};
 	
 		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
@@ -478,7 +475,7 @@ if (pdb_log_enabled) then {
 			_parameters = format["[tsitrep=%1,ttyp=%2,tmid=%3,tintid=%4]",_vSitRep, _vType, _missionid, _aarCount];
 			
 			if (pdb_log_enabled) then {
-				diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+				diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 			};
 
 			_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
@@ -498,7 +495,7 @@ if (pdb_log_enabled) then {
 		_parameters = format["[tda=%1,tmid=%2]",_date,_missionid]; 
 		
 		if (pdb_log_enabled) then {
-			diag_log format["PersistentDB: SERVER MSG: SQL output: %1", _parameters];
+			diag_log format["PersistentDB: onDisconnected: SERVER MSG: SQL output: %1", _parameters];
 		};
 				
 		//	diag_log ("callExtension->Arma2NETMySQL: UpdateDate");		
@@ -510,7 +507,7 @@ if (pdb_log_enabled) then {
 	// __SERVER__ exit
 
 	if (pdb_log_enabled) then {
-		diag_log format["PersistentDB: SERVER MSG: %1 exiting/saving, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
+		diag_log format["PersistentDB: onDisconnected: SERVER MSG: %1 exiting/saving, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
 	};
 	exit;	
 			
