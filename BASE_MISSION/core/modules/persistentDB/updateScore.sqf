@@ -50,7 +50,7 @@ if (pdb_persistentScores_enabled) then {
 
 		PDB_ACTIVATEPLAYER = [_player,_pname,_seen]; 
 		publicVariable "PDB_ACTIVATEPLAYER";
-		diag_log ["PersistentDB: SERVER PV - PDB_ACTIVATEPLAYER: ",  PDB_ACTIVATEPLAYER];
+		if (pdb_log_enabled) then { diag_log ["PersistentDB: SERVER PV - PDB_ACTIVATEPLAYER: ",  PDB_ACTIVATEPLAYER]; };
 		//diag_log["PersistentDB: UPDATESCORES, time: ", time];
 		
 

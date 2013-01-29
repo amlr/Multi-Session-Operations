@@ -25,7 +25,6 @@
 // ====================================================================================
 // MAIN
 // This is done for all players connecting...
-//sleep 0.01;
 
 // ====================================================================================		
 // START addPublicVariableEventHandler
@@ -40,28 +39,28 @@
 	_pname = _data select 2; 
 	_playerSide = _data select 3;
 
-	
-	diag_log["PASS: _player: ", _player];
-	diag_log["PASS: _puid: ", _puid];
-	diag_log["PASS: _pname: ", _pname];
-	diag_log["PASS: _playerSide: ", _playerSide];
-	
+	if (pdb_log_enabled) then { 
+		diag_log["PersistentDB: SERVER MSG: PDB_PLAYER_READY: _player: ", _player];
+		diag_log["PersistentDB: SERVER MSG: PDB_PLAYER_READY: _puid: ", _puid];
+		diag_log["PersistentDB: SERVER MSG: PDB_PLAYER_READY: _pname: ", _pname];
+		diag_log["PersistentDB: SERVER MSG: PDB_PLAYER_READY: _playerSide: ", _playerSide];
+	};
 	// Set player connection time
 	_player setVariable ["LastConnected", "Arma2Net.Unmanaged" callExtension "DateTime ['utcnow',]", true];
 	
 	_missionid = (MISSIONDATA select 1);
 	
 	if (pdb_log_enabled) then {
-		diag_log format["SERVER MSG: Mission ID (ARRAY) is %1", _missionid];
-		diag_log format["SERVER MSG: Player connected %1, puid %2", _pname, _puid];
+		diag_log format["PersistentDB: SERVER MSG: PDB_PLAYER_READY: Mission ID (ARRAY) is %1", _missionid];
+		diag_log format["PersistentDB: SERVER MSG: PDB_PLAYER_READY: Player connected %1, puid %2", _pname, _puid];
 	};
 	
 	 _dataRead =[];
 	// If Player found in DB then read in data else initialise player
 	_response = ["GetPlayer", format["[tmid=%1,tpid=%2]",_missionid,_puid]] call persistent_fnc_callDatabase;	
 	_dataRead = _response select 0;
-	
-	
+
+
 	if(isNil "_dataRead") then {_dataRead = [];};
 	
 	
@@ -71,12 +70,12 @@
 			
 			// Log Player details as returned from DB -----------------------------------------------------------------------------------------------------------------------------------
 			if (pdb_log_enabled) then {	
-				diag_log format["SERVER MSG: Welcome back, %1", _dataRead select 1];
-				diag_log format["SERVER MSG: Database player: %1 id: %2", _dataRead select 1, _dataRead select 0];
-				diag_log format["SERVER MSG: Database player: %1 puid: %2", _dataRead select 1, _dataRead select 2];
-				diag_log format["SERVER MSG: Database player: %1 name: %2", _dataRead select 1, _dataRead select 1];
-				diag_log format["SERVER MSG: Database player: %1 score: %2", _dataRead select 1, _dataRead select 4];
-				diag_log format["SERVER MSG: Database player: %1 mission id: %2", _dataRead select 1, _dataRead select 3];
+				diag_log format["PersistentDB: SERVER MSG: PDB_PLAYER_READY: Welcome back, %1", _dataRead select 1];
+				diag_log format["PersistentDB: SERVER MSG: PDB_PLAYER_READY: Database player: %1 id: %2", _dataRead select 1, _dataRead select 0];
+				diag_log format["PersistentDB: SERVER MSG: PDB_PLAYER_READY: Database player: %1 puid: %2", _dataRead select 1, _dataRead select 2];
+				diag_log format["PersistentDB: SERVER MSG: PDB_PLAYER_READY: Database player: %1 name: %2", _dataRead select 1, _dataRead select 1];
+				diag_log format["PersistentDB: SERVER MSG: PDB_PLAYER_READY: Database player: %1 score: %2", _dataRead select 1, _dataRead select 4];
+				diag_log format["PersistentDB: SERVER MSG: PDB_PLAYER_READY: Database player: %1 mission id: %2", _dataRead select 1, _dataRead select 3];
 			};
 			
 			// For each client data object, load from database and set data on server and to be passed back to client
@@ -114,7 +113,7 @@
 					[_thisdata, _player] call (_type select _d);
 				
 					if (pdb_log_enabled) then {	
-						diag_log format["SERVER MSG: Database %3: %1 - Data: %2", _dataRead select 1, _thisdata, _message];
+						diag_log format["PersistentDB: SERVER MSG: PDB_PLAYER_READY:: Database %3: %1 - Data: %2", _dataRead select 1, _thisdata, _message];
 					};
 					// Next attribute
 					_d = _d + 1;
@@ -127,12 +126,12 @@
 			// Send data to client
 			PDB_PLAYER_HANDLER = _dataRead;
 			publicVariable "PDB_PLAYER_HANDLER";
-			[_player, _pname, _puid, true] call persistent_fnc_getScore;
+			[_player, _pname, _puid, "true"] call persistent_fnc_getScore;
 		};  // end if player in DB	
 		
-	} else { // if new player initialize
 	
-
+	
+	} else { // if new player initialize
 		
 		_serverData = format["Creating player entry in database..."];
 		PDB_CLIENT_LOADERSTATUS = [_player,_serverData]; publicVariable "PDB_CLIENT_LOADERSTATUS";
@@ -168,7 +167,7 @@
 		
 		_procedureName = "InsertPlayer"; _parameters = format["[tpid=%1,tna=%2,tmid=%3,tsid=%4,tpos=%5]",_puid,_pname,_missionid,_pside,_pposition];
 		_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;	
-		 [_player, _pname, _puid, false] call persistent_fnc_getScore;
+		 [_player, _pname, _puid, "false"] call persistent_fnc_getScore;
 	}; // end  if new player
 
 };  // END addPublicVariableEventHandler

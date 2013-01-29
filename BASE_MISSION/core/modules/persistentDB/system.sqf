@@ -74,8 +74,11 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 	PDB_FNC_ACTIVATEPLAYER = {
 		   _player = _this select 0;
 		   _pname = _this select 1;
-			_seen = _this select 2;
-			
+			 _seen = _this select 2;
+			 
+			 [private "_seen"];
+			 
+
 		   if (player != _player) exitWith { }; // Im not the player so I shouldn't continue
 			if (pdb_date_enabled) then {
 				if ((count MISSIONDATE) == 5)  then {
@@ -84,7 +87,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				};
 			};
 			if  (ENV_dedicated) then { 	player setVariable ["loader", "Standby entering game"]; startLoadingScreen [(player getVariable "loader"), "PDB_loadingScreen"]; };	
-		   if (pdb_log_enabled) then {  diag_log["PersistentDB: ACTIVATE PLAYER"];	 };	  
+		   if (pdb_log_enabled) then { diag_log["PersistentDB: PDB_FNC_ACTIVATEPLAYER"];	}; 
 		   endLoadingScreen;
 		   player allowdamage true; 
 		 
@@ -120,23 +123,22 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 			if (isClass(configFile>>"CfgPatches">>"gbl_field_rations")) then { [player,"Player is being AIM initialized."] call PDB_FNC_AIM; };
 				 
 				if (pdb_log_enabled) then {  
-					diag_log["PersistentDB: PLAYER READY: ", name player];
-					diag_log["PersistentDB: PLAYER CONNECTED"]; 
+					diag_log["PersistentDB: PDB_FNC_ACTIVATEPLAYER: PLAYER READY: ", name player];
+					diag_log["PersistentDB: PDB_FNC_ACTIVATEPLAYER: PLAYER CONNECTED"]; 
 				};
 			[pdb_shortmissionName ,  pdb_author] spawn BIS_fnc_infoText;
-			if (pdb_log_enabled) then { diag_log ["PersistentDB: _seen: ",  _seen, typeName _seen]; };
+			if (pdb_log_enabled) then { diag_log ["PersistentDB: PDB_FNC_ACTIVATEPLAYER: _seen: ",  _seen, typeName _seen]; };
 			
-			if (!_seen) then { 
-				
+			if (_seen == "false") then { 
 				initText = "<br/>Multi-Session Operations<br/><br/>Welcome<br/><t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
 				+name player+"</t><br/><br/>Your details have been entered into the database.<br/><br/>";
 				hintSilent parseText (initText);
 			
 				// player sideChat format["Welcome %1, your details have been entered into the database",  name player];
-				 	if (pdb_log_enabled) then {  diag_log ["PersistentDB: New player: ",  (name player), typeName  (name player)];};
-				 
-			} else { 
-					
+				 	if (pdb_log_enabled) then {  diag_log ["PersistentDB: PDB_FNC_ACTIVATEPLAYER: New player: ",  (name player), typeName  (name player)];};
+			}; 
+			
+			if (_seen == "true") then { 
 				initText = "<br/>Multi-Session Operations<br/><br/>Welcome back<br/><t color='#ffff00' size='1.0' shadow='1' shadowColor='#000000' align='center'> "
 				+name player+"</t><br/><br/>Your details have been retrieved from the database.<br/><br/>";
 				hintSilent parseText (initText);
@@ -156,9 +158,8 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 						[player,1] execVM "core\modules\persistentDB\teleportPlayer.sqf";
 					};
 				};
-			
 				// player sideChat format["Welcome back %1, your details have been retrieved from the database",  name player];
-				if (pdb_log_enabled) then {  diag_log ["PersistentDB: Existing player: ",  (name player), typeName  (name player)];  };
+				if (pdb_log_enabled) then {  diag_log ["PersistentDB: PDB_FNC_ACTIVATEPLAYER: Existing player: ",  (name player), typeName  (name player)];  };
 			};
 			[player] execVM "core\modules\persistentDB\playerIntialised.sqf";
 		};	
@@ -306,7 +307,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		if (isServer && (persistentDBHeader == 1)) then {
 				private "_data";
 				_data = _this select 1;
-				if (pdb_log_enabled) then { diag_log format ["PersistentDB: SERVER MSG -  (%2) Saving Data for Player: %1, Time: %3 ", (_data select 0), (_data select 2), time]; };
+				if (pdb_log_enabled) then { diag_log format ["PersistentDB: SERVER MSG: PDB_SAVE_PLAYER: (%2) Saving Data for Player: %1, Time: %3 ", (_data select 0), (_data select 2), time]; };
 				[0, (_data select 0), (_data select 1)] call compile preprocessfilelinenumbers "core\modules\persistentDB\onDisconnected.sqf";
 		};
 	};
@@ -406,7 +407,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 					[_data select _i, player] call (_dataModel select _i);
 					// Log Data
 					if (pdb_log_enabled) then {	
-						diag_log format["PersistentDB: Database player: %1 - Data %3: %2", name player, _data select _i, _i];
+						diag_log format["PersistentDB: PDB_PLAYER_HANDLER: Database player: %1 - Data %3: %2", name player, _data select _i, _i];
 					};
 					// Next attribute
 					_i =_i + 1;

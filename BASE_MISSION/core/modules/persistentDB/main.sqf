@@ -63,13 +63,17 @@ if (isdedicated) then {
 				//diag_log format ["Time: %1, PDBLST: %2, PDBSD: %3", time, PDBLastSaveTimeServer, mpdb_save_delay_server];
 				(time > (PDBLastSaveTimeServer + mpdb_save_delay_server))
 			};
-			diag_log["PersistentDB: SERVER MSG - Auto Saving Server Data, time: ", time];
+			if (pdb_log_enabled) then {	diag_log["PersistentDB: SERVER MSG - Auto Saving Server Data, time: ", time]; };
 			[0, "__SERVER__", 0] call compile PP "core\modules\persistentDB\onDisconnected.sqf";
 			PDBLastSaveTimeServer = time;
 			sleep 5;
 		};
 	};	
 };
+
+
+
+	
 
 // Compile player EHs
 persistent_fnc_playerDamage = compile PP "core\modules\persistentDB\playerDamage.sqf";
@@ -127,7 +131,7 @@ if ((!isServer) || (!isdedicated)) then {
 						sleep (60 + random 15); 
 						(time > (PDBLastSaveTimePlayer + mpdb_save_delay_player))
 					};
-						diag_log format ["PersistentDB: Auto-Save process: player: %1, pdb_aim_enabled: %2", player, pdb_aim_enabled];
+						  if (pdb_log_enabled) then {	diag_log format ["PersistentDB: Auto-Save process: player: %1, pdb_aim_enabled: %2", player, pdb_aim_enabled]; };
 							if (pdb_aim_enabled) then {[player,"Getting player's AIM data"] call PDB_FNC_AIM;};
 				      if (pdb_ace_enabled) then {[player,"Getting player's ACE Wounds data"] call PDB_FNC_ACE_WOUNDS;};
 							PDB_SAVE_PLAYER = [name player, getplayeruid player, "Auto"]; 

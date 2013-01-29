@@ -15,7 +15,7 @@
 
 // ====================================================================================
 
-//	 data = [_player, _pname, _puid, false] call persistent_fnc_getScore;
+//	 data = [_player, _pname, _puid, "false"] call persistent_fnc_getScore;
 		private ["_player","_puid","_globalPlayerScore","_thisPlayerGlobalscore","_response","_procedureName","_serverData","_parameters","_thisPSCount","_r","_thisPSArray","_thisPScore","_seen"];
 			_player = _this select 0;
 			_pname = _this select 1; 		
