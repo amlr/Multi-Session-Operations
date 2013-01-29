@@ -70,7 +70,7 @@ if (pdb_log_enabled) then {
 		
 	
 
-		if !((isNull _player) then {	
+		if !(isNull _player) then {	
 			
 
 				// Set disconnect flag for player
