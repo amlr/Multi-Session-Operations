@@ -26,7 +26,7 @@
 // ====================================================================================
 // MAIN
 
-private ["_disconnectflag","_id", "_allobjectTypes","_pname", "_puid", "_player", "_missionid", "_thisPlayerData", "_thisdata", "_thisWeaponData", "_thisACEData", "_params", "_parameters", "_i", "_procedureName", "_response", "_thisObject", "_landVehicles", "_landVehicleCount", "_missionLandVehicles", "_vDir", "_vUp", "_vDam", "_vPosition", "_vObject", "_vFuel", "_vLocked", "_vWeaponCargo", "_vMagazineCargo","_vEngine", "_result", "_thisObjectData", "_object", "_date","_aimRationsClient"];
+private ["_disconnectflag","_id", "_allobjectTypes","_pname", "_puid", "_player", "_missionid", "_thisPlayerData", "_thisdata", "_thisWeaponData", "_thisACEData", "_params", "_parameters", "_i", "_procedureName", "_response", "_thisObject", "_landVehicles", "_landVehicleCount", "_missionLandVehicles", "_vDir", "_vUp", "_vDam", "_vPosition", "_vObject", "_vFuel", "_vLocked", "_vWeaponCargo", "_vMagazineCargo","_vEngine", "_result", "_thisObjectData", "_object", "_date"];
 
 _id = _this select 0; 
 _pname = _this select 1; 
@@ -110,7 +110,7 @@ if (pdb_log_enabled) then {
 		
 		} else {
 			// player not found!
-			if (pdb_log_enabled) && then {
+			if (pdb_log_enabled) then {
 				diag_log format["PersistentDB: onDisconnected: SERVER MSG: Player %1, not found in playableUnits!, frame Number: %2, Tick: %3, Time: %4", _pname, diag_frameno, diag_tickTime, time];
 			};
 		};
