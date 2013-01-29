@@ -1,15 +1,15 @@
 #include <crbprofiler.hpp>
 
-if (isnil "ZORAmaxgrps") then {ZORAmaxgrps = 3};
-if (isnil "ZORAmindist") then {ZORAmindist = 875};
+if (isnil "ZORAmaxgrps") then {ZORAmaxgrps = 1};
+if (isnil "ZORAmindist") then {ZORAmindist = 1500};
 if (ZORAmaxgrps == 0) exitwith {diag_log format["MSO-%1 ZORA exiting...", time];};
 
 // Exit if not HC and not a server
 if(isnil "ZORALocality") then {ZORALocality = 0;};
-if(
+if (
 	switch (ZORALocality) do {
-        	case 1: {isHC};
-	        default {isServer};
+        	case 1: {!isHC};
+	        default {!isServer};
 	}
 ) exitWith{};
 
@@ -49,7 +49,7 @@ BIS_Zora_Mainscope setvariable ["maxdist", ZORAmindist * 2.5];
 	waitUntil {
 		CRBPROFILERSTART("RMM ZORA")
 
-                _waittime = 60 * (30 + random 30); // wait between 30 min to 1hr
+		_waittime = 60 * (30 + random 90); // wait between 30 min to 2hr
                 /*
                 if (count playableUnits > 0) then {
                         _mx = floor( (sqrt (count playableUnits)) + random 1);
@@ -60,14 +60,14 @@ BIS_Zora_Mainscope setvariable ["maxdist", ZORAmindist * 2.5];
                 if ((random 1 > NIGHT_POSSIBILITY) && (daytime < 5 || daytime > 18)) then {
                         BIS_Zora_pause = true;
                         call _fnc_status;
-                        _waittime = 60 * (60 + random 60);
                 } else {
                         if(BIS_Zora_pause) then {
-                                call _fnc_status;
                                 BIS_Zora_pause = false;
-                        } else {
                                 call _fnc_status;
+	                        _waittime = 340 * ZORAmaxgrps; // 340s comes from zora.fsm _time2Wait
+                        } else {
                                 BIS_Zora_pause = true;
+                                call _fnc_status;
                         };
                 };
 
