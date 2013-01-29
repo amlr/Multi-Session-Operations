@@ -21,7 +21,8 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 			  if (((ENV_dedicated)  && (pdb_serverError != 1) && ((player getvariable "player_intialised" == 0)))) then { 
 			  	if (pdb_log_enabled) then {  diag_log["PersistentDB: PDB_FNC_HEADLESS_LOADERSTATUS: ", _hcData]; };
 			  	startLoadingScreen [_hcData, "PDB_loadingScreen"];
-			  	 };
+			  	if (player getvariable "player_intialised" == 1) then {endLoadingScreen;};
+			  };
 	};
 // ====================================================================================
 
@@ -30,7 +31,8 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 			  if (((ENV_dedicated)  && (pdb_serverError != 1) && ((player getvariable "player_intialised" == 0)))) then { 
 			  	if (pdb_log_enabled) then {  diag_log["PersistentDB: PDB_FNC_SERVER_LOADERSTATUS: ", _serverData]; };
 			  	startLoadingScreen [_serverData, "PDB_loadingScreen"];
-			  	 };
+			  	if (player getvariable "player_intialised" == 1) then {endLoadingScreen;};
+			  };
 	};
 // ====================================================================================
 
