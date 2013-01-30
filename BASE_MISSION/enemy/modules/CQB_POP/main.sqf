@@ -1,8 +1,13 @@
-
 private ["_hcData","_serverData"];
 
+//Set default values and check if turned on
 if (isnil "CQB_spawn") then {CQB_spawn = 10};
 if (CQB_spawn == 0) exitwith {diag_log format["MSO-%1 CQB Population turned off! Exiting...", time]};
+
+//Start
+_debug = debug_mso;
+
+if (isnil "isHC") then {call mso_core_fnc_isHC};
 
 if (isnil "CQBaicap") then {CQBaicap = 2};
 switch (CQBaicap) do {
@@ -25,8 +30,6 @@ if (isnil "CQBmaxgrps") then {CQBmaxgrps = 50};
 if (isnil "CQBspawnrange") then {CQBspawnrange = 500};
 if (isnil "CRB_LOC_DIST") then {CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8};
 
-_debug = debug_mso;
-
 diag_log format["MSO-%1 CQB Population: starting to load functions...", time];
 
 	if (((CQBlocality > 1) && (isHC) && (persistentDBHeader == 1))) then {
@@ -42,7 +45,6 @@ if (isnil "CQB_findnearhousepos") then {CQB_findnearhousepos = compile preproces
 if (isnil "CQB_setposgroup") then {CQB_setposgroup = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_setposgroup.sqf"};
 if (isnil "CQB_houseguardloop") then {CQB_houseguardloop = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_houseguardloop.sqf"};
 if (isnil "CQB_patrolloop") then {CQB_patrolloop = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_patrolloop.sqf"};
-if (isnil "CQB_PlayersGroundCheck") then {CQB_PlayersGroundCheck = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_PlayersGroundCheck.sqf"};
 if (isnil "MSO_fnc_CQBspawnRandomgroup") then {MSO_fnc_CQBspawnRandomgroup = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBspawnRandomgroup.sqf"};
 if (isnil "MSO_fnc_CQBmovegroup") then {MSO_fnc_CQBmovegroup = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBmovegroup.sqf"};
 if (isnil "MSO_fnc_getEnterableHouses") then {MSO_fnc_getEnterableHouses = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_getEnterableHouses.sqf"};
@@ -50,6 +52,7 @@ if (isnil "MSO_fnc_CQBgetSpawnpos") then {MSO_fnc_CQBgetSpawnpos = compile prepr
 if (isnil "MSO_fnc_CQBhousepos") then {MSO_fnc_CQBhousepos = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\MSO_fnc_CQBhousepos.sqf"};
 if (isnil "getGridPos") then {getGridPos = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\getGridPos.sqf"};
 if (isnil "CQB_GCS") then {CQB_GCS = compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_GCS.sqf"};
+if (isnil "CQB_PlayersGroundCheck") then {call compile preprocessFileLineNumbers "enemy\modules\CQB_POP\functions\CQB_PlayersGroundCheck.sqf"};
 diag_log format["MSO-%1 CQB Population: loaded functions...", time];
 
 [] spawn {
