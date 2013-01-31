@@ -18,24 +18,38 @@ S_WEAPON_DATA_PROCEDURE = "GetPlayerWeapons";
 
 S_WEAPON_DATA = [
 	{	if (typeName (_this select 0) == "ARRAY") then 
-		{
+		{	
 			{
 				(_this select 1) removeweapon _x;
 			} foreach ((weapons (_this select 1)) + (items (_this select 1)));
-			{
-				if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
-					// Catch any acre radios and restore as base radio (do not restore radio with ID) http://tracker.idi-systems.com/issues/2
-					private ["_ret"];
-					_ret = [_x] call acre_api_fnc_getBaseRadio;
-					if (typeName _ret == "STRING") then {
-						(_this select 1) addweapon _ret;
-					} else {
-						(_this select 1) addweapon _x;
-					};
-				} else {
-					(_this select 1) addweapon _x;
-				};
-			} foreach (_this select 0);
+			private ["_i","_result","_aceradios","_ar"];
+		 _aceradios = ["ACE_P168_RD90","ACE_P159_RD99","ACE_P159_RD90","ACE_P159_RD54","ACE_PRC119","ACE_PRC119_ACU","ACE_PRC119_MAR","ACE_ANPRC77","ACRE_PRC148_UHF"];	
+		{	
+			_ar = "false";
+			// check for _aceradios
+  		for "_i" from 0 to (count _aceradios -1) do {
+				_result = [_x, (_aceradios select _i)] call CBA_fnc_find;
+				if (_result >= 0) then { _ar = _aceradios select _i };
+			};	
+					 	if (_ar != "false") then { 
+						 		(_this select 1) addweapon (_ar);
+						 };	
+		 
+					  if (_ar == "false") then {	
+							if (isClass(configFile>>"CfgPatches">>"acre_main")) then {
+								// Catch any acre radios and restore as base radio (do not restore radio with ID) http://tracker.idi-systems.com/issues/2
+								private ["_ret"];
+								_ret = [_x] call acre_api_fnc_getBaseRadio;
+								if (typeName _ret == "STRING") then {
+									(_this select 1) addweapon _ret;
+								} else {
+									(_this select 1) addweapon _x;
+								};
+							} else {
+								(_this select 1) addweapon _x;
+							};
+						};	
+		} foreach (_this select 0);
 			if (primaryWeapon (_this select 1) != "") then {
 				(_this select 1) selectweapon (primaryweapon (_this select 1));
 				_muzzles = getArray(configFile>>"cfgWeapons" >> primaryWeapon (_this select 1) >> "muzzles"); // Fix for weapons with grenade launcher
@@ -44,7 +58,6 @@ S_WEAPON_DATA = [
 			};
 		};
 	}, // Weapons and Items
-		
 	{	if (typeName (_this select 0) == "ARRAY") then 
 		{
 			{
