@@ -20,7 +20,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 			_hcData = _this select 0;
 			  if (((ENV_dedicated)  && (pdb_serverError != 1) && ((player getvariable "player_intialised" == 0)))) then { 
 			  	if (pdb_log_enabled) then {  diag_log["PersistentDB: PDB_FNC_HEADLESS_LOADERSTATUS: ", _hcData]; };
-			  	startLoadingScreen [_hcData, "PDB_loadingScreen"];
+				titleText [_hcData, "BLACK FADED"];
 			  	if (player getvariable "player_intialised" == 1) then {endLoadingScreen;};
 			  };
 	};
@@ -30,7 +30,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 			_serverData = _this select 0;
 			  if (((ENV_dedicated)  && (pdb_serverError != 1) && ((player getvariable "player_intialised" == 0)))) then { 
 			  	if (pdb_log_enabled) then {  diag_log["PersistentDB: PDB_FNC_SERVER_LOADERSTATUS: ", _serverData]; };
-			  	startLoadingScreen [_serverData, "PDB_loadingScreen"];
+			  	titleText [_serverData, "BLACK FADED"];
 			  	if (player getvariable "player_intialised" == 1) then {endLoadingScreen;};
 			  };
 	};
@@ -41,7 +41,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 				  if ((ENV_dedicated) && (pdb_serverError != 1)) then { 
 				  	pdb_serverError = 1;
 				  	if (pdb_log_enabled) then { diag_log["PersistentDB: PDB_FNC_SERVER_LOADERERROR: ", _serverData]; };
-				  	startLoadingScreen [_serverData, "PDB_loadingScreen"];
+				  	titleText [_serverData, "BLACK FADED"];
 				  	for [{_a=0},{_a < 5000},{_a=_a+1}] do {};
 				  	[player] execVM "core\modules\persistentDB\serverConnectionError.sqf";
 				  	 };
@@ -54,7 +54,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 			  if ((ENV_dedicated)  && (pdb_clientError != 1)) then { 
 			  	if (player != _player) exitWith { }; // Im not the player so I shouldn't continue
 			  	if (pdb_log_enabled) then {   diag_log["PersistentDB: PDB_FNC_CLIENT_LOADERSTATUS: ", _serverData]; };
-			  	startLoadingScreen [_serverData, "PDB_loadingScreen"];
+			  	titleText [_serverData, "BLACK FADED"];
 			  	 };
 	};
 // ====================================================================================
@@ -66,7 +66,7 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 		  	pdb_clientError = 1;
 		  	if (player != _player) exitWith { }; // Im not the player so I shouldn't continue
 		  	if (pdb_log_enabled) then {   diag_log["PersistentDB: PDB_FNC_CLIENT_LOADERERROR: ", _serverData]; };
-		  	startLoadingScreen [_serverData, "PDB_loadingScreen"];
+		  	titleText [_serverData, "BLACK FADED"];
 		  	for [{_a=0},{_a < 5000},{_a=_a+1}] do {};
 		  	[player] execVM "core\modules\persistentDB\clientConnectionError.sqf";
 		  	 };
@@ -88,9 +88,8 @@ persistent_fnc_convertFormat = compile preprocessfilelinenumbers "core\modules\p
 						setdate MISSIONDATE;
 				};
 			};
-			if  (ENV_dedicated) then { 	player setVariable ["loader", "Standby entering game"]; startLoadingScreen [(player getVariable "loader"), "PDB_loadingScreen"]; };	
+			if  (ENV_dedicated) then { 	player setVariable ["loader", "Standby entering game"]; titleText [(player getVariable "loader"), "BLACK IN"];};	
 		   if (pdb_log_enabled) then { diag_log["PersistentDB: PDB_FNC_ACTIVATEPLAYER"];	}; 
-		   endLoadingScreen;
 		   player allowdamage true; 
 		 
 		   if (pdb_ace_enabled) then {				

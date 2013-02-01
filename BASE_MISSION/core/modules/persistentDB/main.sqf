@@ -98,7 +98,7 @@ if ((!isServer) || (!isdedicated)) then {
 		sleep 0.2;
 		waituntil { (player getvariable "mso_initcomplete" == 1) };
 		if (pdb_log_enabled) then {	diag_log["PersistentDB: SPAWN"]; };
-		if  (ENV_dedicated) then { startLoadingScreen ["Please wait setting up client...", "PDB_loadingScreen"];	 };
+		if  (ENV_dedicated) then {titleText ["Please wait setting up client...", "BLACK FADED"];};
 		player setVariable ["BIS_noCoreConversations", true];
 		player addeventhandler ["Dammaged", { _this call persistent_fnc_playerDamage; } ];
 		player addeventhandler ["animChanged", { _this call persistent_fnc_playerHeal; } ];
@@ -111,11 +111,11 @@ if ((!isServer) || (!isdedicated)) then {
 		waituntil {time > 3};
 		_thistime = time; waituntil { time > (random 5) + _thistime };
 		if (pdb_log_enabled) then {	diag_log["PersistentDB CLIENT: FINISHED MISSION INIT, time: ", time];};
-		if  (ENV_dedicated) then { startLoadingScreen ["Server is loading persistent mission data please standby...", "PDB_loadingScreen"]; };
+		if  (ENV_dedicated) then {titleText ["Server is loading persistent mission data please standby...", "BLACK FADED"]};
 		waituntil { (MISSIONDATA_LOADED == "true") };
 		PDB_PLAYER_READY = [getPlayerUID player, player, name player, playerside];
 		publicVariableServer "PDB_PLAYER_READY";
-		if  (ENV_dedicated) then { startLoadingScreen ["Client is loading persistent player data...", "PDB_loadingScreen"]; };
+		if  (ENV_dedicated) then {titleText ["Client is loading persistent player data...", "BLACK FADED"]};
 		if (pdb_log_enabled) then {	diag_log["PersistentDB CLIENT: PLAYER READY"];};
 		// Setup Player Menu Save
 		[] spawn {
