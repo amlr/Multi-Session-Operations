@@ -2,7 +2,7 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
-titleText ["Initialising...", "BLACK"];
+titleCut ["", "BLACK FADED", 999]; titleText ["Initialising...", "BLACK"];
 call mso_core_fnc_isHC;
 
 execNow "init-mods.sqf";
@@ -16,5 +16,5 @@ execNow "init-custom.sqf";
 
 "Completed" call mso_core_fnc_initStat;
 diag_log format["MSO-%1 Initialisation Completed", time];
-titleText ["Initialisation Completed", "BLACK IN"];
+titleCut ["", "BLACK IN", 3]; titleText ["Initialisation Completed", "BLACK IN"];
 execNow "core\scripts\intro.sqf";
