@@ -1,37 +1,30 @@
 private ["_hcData","_serverData"];
 
 //Set default values and check if turned on
-if (isnil "CQB_spawn") then {CQB_spawn = 10};
 if (CQB_spawn == 0) exitwith {diag_log format["MSO-%1 CQB Population turned off! Exiting...", time]};
 
-//Start
+//Default values for params and needed variables
+if (isnil "CQB_spawn") then {CQB_spawn = 10};
+if (isnil "isHC") then {call mso_core_fnc_isHC};
+if (isnil "CQBlocality") then {CQBlocality = 1};
+if (isnil "CQBspawnrange") then {CQBspawnrange = 500};
+if (isnil "CRB_LOC_DIST") then {CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8};
+
+//Static params
+CQBmaxgrps = 144;
+CQB_AUTO = true;
+CQBaiBroadcast = true;
 _debug = debug_mso;
 
-if (isnil "isHC") then {call mso_core_fnc_isHC};
-
-if (isnil "CQBaicap") then {CQBaicap = 2};
-switch (CQBaicap) do {
-    case 0: {CQB_AUTO = true; CQBaiBroadcast = true};
-    case 1: {CQBaicap = 15; CQBaiBroadcast = false};
-    case 2: {CQBaicap = 25; CQBaiBroadcast = false};
-    case 3: {CQBaicap = 50; CQBaiBroadcast = false};
-    case 4: {CQBaicap = 100; CQBaiBroadcast = false};
-    case 5: {CQB_AUTO = true; CQBaiBroadcast = false};
-	default {CQBaicap = 15; CQBaiBroadcast = false};
-};
-if (isnil "CQBlocality") then {CQBlocality = 1};
 switch (CQBlocality) do {
     case 0: {CQB_HC_active = false; CQBclientside = false};
     case 1: {CQB_HC_active = false; CQBclientside = true};
 	case 2: {CQB_HC_active = isHC; CQBclientside = true;};
 	default {CQB_HC_active = false; CQBclientside = true};
 };
-if (isnil "CQBmaxgrps") then {CQBmaxgrps = 50};
-if (isnil "CQBspawnrange") then {CQBspawnrange = 500};
-if (isnil "CRB_LOC_DIST") then {CRB_LOC_DIST = (getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition") select 0) * 2.8};
 
+//Starting
 diag_log format["MSO-%1 CQB Population: starting to load functions...", time];
-
 	if (((CQBlocality > 1) && (isHC) && (persistentDBHeader == 1))) then {
 			_hcData = format["Headless client is loading CQB functions please wait..."];
 		   PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
