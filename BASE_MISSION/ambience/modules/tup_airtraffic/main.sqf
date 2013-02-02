@@ -6,8 +6,8 @@ private ["_mapsize","_helidest","_planedest","_destinations"];
 tup_airtraffic_debug = false;
 
 if (isNil "tup_airtraffic_factions") then {tup_airtraffic_factions = 0;};
-if (tup_airtraffic_factions == 2) exitWith{};
-if (isNil "tup_airtraffic_intensity") then {tup_airtraffic_intensity = 0;};
+if (tup_airtraffic_factions == 0) exitWith{};
+if (isNil "tup_airtraffic_intensity") then {tup_airtraffic_intensity = 25;};
 if (isNil "tup_airtraffic_ROE") then {tup_airtraffic_ROE = 2;};
 
 switch(tup_airtraffic_ROE) do {
@@ -112,11 +112,17 @@ tup_airtraffic_getFactions = {
 		_factions = ["USMC"];
 	} else {
 		// Work out side that controls destination (based on unit numbers)
-		if (tup_airtraffic_factions == 1) then {
-			_factions = TUP_CIVFACS;
-			_airfieldside = civilian;
-		} else {
-			_factions = [_airfieldside, _currentairfield, 1000,"factions",false,""] call mso_core_fnc_getFactions;
+		switch(tup_airtraffic_factions) do {
+			case 1: {
+				_factions = TUP_CIVFACS;
+				_airfieldside = civilian;
+			};
+			case 2: {
+				_factions = ([_airfieldside, _currentairfield, 1000,"factions",false,""] call mso_core_fnc_getFactions) - TUP_CIVFACS;
+			};
+			case 3: {
+				_factions = [_airfieldside, _currentairfield, 1000,"factions",false,""] call mso_core_fnc_getFactions;
+			};
 		};
 	};
 	
@@ -209,7 +215,7 @@ for "_j" from 0 to (_destinations-1) do {
 			waitUntil{
 				sleep (90 + random 90);
 				({(_x distance _currentairfield < _maxdist)} count ([] call BIS_fnc_listPlayers) > 0) &&
-				(random 4 > (3 - tup_airtraffic_intensity))
+				(random 1 < (tup_airtraffic_intensity / 100))
 			};
 			
 			CRBPROFILERSTART("TUP Air Traffic")
@@ -349,7 +355,7 @@ for "_j" from 0 to (_destinations-1) do {
 				_players = [] call BIS_fnc_listPlayers;
 				(({(_x distance _currentairfield < _maxdist * 1.2)} count _players == 0)
 					&& ({_x distance _aircraftVehicle < _maxdist * 1.2} count _players == 0)) ||
-				(damage _aircraftVehicle > 0.3) ||
+				/*(damage _aircraftVehicle > 0.3) || */
 				(_aircraftVehicle distance _endpos < 200) ||
 				!(_grp call CBA_fnc_isAlive)
 			};
@@ -365,7 +371,7 @@ for "_j" from 0 to (_destinations-1) do {
 			deletegroup _grp;
 
 			// Pause before creating another aircraft for destination
-			_sleep = if(tup_airtraffic_debug) then {10;} else {random 300;};
+			_sleep = if(tup_airtraffic_debug) then {10;} else {600 + random 300;};
 			sleep _sleep;
 
 			// Remove aircraft and crew
