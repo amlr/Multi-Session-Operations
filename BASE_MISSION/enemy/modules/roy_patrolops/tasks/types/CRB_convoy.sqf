@@ -36,14 +36,14 @@ _convoydest = [];
                 _spawnpoints set [count _spawnpoints, position _x];
                 if (_debug) then {
                         _t = format["convoy_s%1", floor(random 10000)];
-                        _m = [_t, position _x, "Icon", [1,1], "TYPE:", "Destroy", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                        _m = [_t, position _x, "Icon", [1,1], "TYPE:", "Destroy", "GLOBAL"] call CBA_fnc_createMarker;
                 };
         };
         if(type _x in _strategic) then {
                 _convoydest set [count _convoydest, position _x];
                 if (_debug) then {
                         _t = format["convoy_d%1", floor(random 10000)];
-                        _m = [_t, position _x, "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorOrange", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                        _m = [_t, position _x, "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "ColorOrange", "GLOBAL"] call CBA_fnc_createMarker;
                 };
         };
 } forEach CRB_LOCS;
@@ -152,13 +152,13 @@ for "_j" from 1 to _numconvoys do {
                         
                         _cid = floor(random 10000);
                         _t = format["s%1",_cid];
-                        [_t, _startpos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Start", "COLOR:", "ColorGreen", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                        [_t, _startpos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Start", "COLOR:", "ColorGreen", "GLOBAL"] call CBA_fnc_createMarker;
                         
                         _t = format["d%1",_cid];
-                        [_t, _destpos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Pickup", "COLOR:", "ColorYellow", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                        [_t, _destpos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "Pickup", "COLOR:", "ColorYellow", "GLOBAL"] call CBA_fnc_createMarker;
                         
                         _t = format["e%1",_cid];
-                        [_t, _endpos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "End", "COLOR:", "ColorRed", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                        [_t, _endpos, "Icon", [1,1], "TEXT:", _t, "TYPE:", "End", "COLOR:", "ColorRed", "GLOBAL"] call CBA_fnc_createMarker;
                         
                         {
                         	_x setSkill 0.9;

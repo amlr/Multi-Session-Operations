@@ -479,7 +479,7 @@ if(isNil "wict_baselocations")then{wict_baselocations = 0};
                         private["_t","_m"];
                         _t = format["op%1",floor(random 10000)];
                         if(isNil "_type") then {_type = "";};
-                        _m = [_t, _pos_WICT, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                        _m = [_t, _pos_WICT, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", _type, "GLOBAL"] call CBA_fnc_createMarker;
                 };
                 */
         };

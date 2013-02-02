@@ -29,7 +29,7 @@ if (_debug) then
 	{
 		private["_t"];
 		_t = format["%1", floor(random 10000)];
-		[_t, position _x, "Icon", [0.5,0.5], "TYPE:", _icon, "COLOR:", _color, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+		[_t, position _x, "Icon", [0.5,0.5], "TYPE:", _icon, "COLOR:", _color, "GLOBAL"] call CBA_fnc_createMarker;
 	} forEach _objects;
 };
 

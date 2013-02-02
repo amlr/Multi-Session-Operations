@@ -37,7 +37,7 @@ if (isNil "tup_suicide_threat")then{tup_suicide_threat = 10;};
 			 if (_debug) then {
 				_t = format["suic_t%1", random 1000];
 				diag_log format ["MSO-%1 Suicide Bomber Trigger: created at %2 (%3)", time, text _twn, mapgridposition  _x];
-				[_t, getpos _twn, "Ellipse", [_size+250,_size+250], "TEXT:", text _twn, "COLOR:", "ColorOrange", "BRUSH:", "Border", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
+				[_t, getpos _twn, "Ellipse", [_size+250,_size+250], "TEXT:", text _twn, "COLOR:", "ColorOrange", "BRUSH:", "Border", "GLOBAL] call CBA_fnc_createMarker;
 			};
 		};
 
@@ -56,7 +56,7 @@ if (isNil "tup_suicide_threat")then{tup_suicide_threat = 10;};
 			if (_debug) then {
 				_t = format["ied_t%1", random 1000];
 				diag_log format ["MSO-%1 IED Trigger: created at %2 (%3)", time, text _twn, mapgridposition  _x];
-				[_t, getpos _twn, "Ellipse", [_size+245,_size+245], "TEXT:", text _twn, "COLOR:", "ColorYellow", "BRUSH:", "Border", "GLOBAL","PERSIST"] call CBA_fnc_createMarker;
+				[_t, getpos _twn, "Ellipse", [_size+245,_size+245], "TEXT:", text _twn, "COLOR:", "ColorYellow", "BRUSH:", "Border", "GLOBAL"] call CBA_fnc_createMarker;
 			};
 		};
 	};

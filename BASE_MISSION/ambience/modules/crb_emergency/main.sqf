@@ -76,7 +76,7 @@ _maxdist = 3000;
         _n = format["hospital_%1", random 10000];
         _x setVariable ["name", _n];
         if (crb_emergency_debug) then {
-                [_n, position _x, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorRed", "TEXT:", _n,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                [_n, position _x, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorRed", "TEXT:", _n,  "GLOBAL"] call CBA_fnc_createMarker;
         };
 } forEach _hospitals;
 
@@ -85,7 +85,7 @@ _maxdist = 3000;
         _n = format["police_%1", random 10000];
         _x setVariable ["name", _n];
         if (crb_emergency_debug) then {
-                [_n, position _x, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorBlue", "TEXT:", _n,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                [_n, position _x, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorBlue", "TEXT:", _n,  "GLOBAL"] call CBA_fnc_createMarker;
         };
 } forEach _police;
 
@@ -94,7 +94,7 @@ _maxdist = 3000;
         _n = format["repair_%1", random 10000];
         _x setVariable ["name", _n];
         if (crb_emergency_debug) then {
-                [_n, position _x, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorGreen", "TEXT:", _n,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                [_n, position _x, "Icon", [1,1], "TYPE:", "Destroy", "COLOR:", "ColorGreen", "TEXT:", _n,  "GLOBAL"] call CBA_fnc_createMarker;
         };
 } forEach _repairs;
 

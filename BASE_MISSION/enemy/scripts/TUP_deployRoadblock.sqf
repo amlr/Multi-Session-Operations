@@ -60,7 +60,7 @@ if (_debug) then {
 	private "_id";
 	_id = floor (random 1000);
 	diag_log format["Position of Road Block is %1", getpos _roadpos];
-	[format["roadblock_%1", _id], _roadpos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", "RoadBlock",  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+	[format["roadblock_%1", _id], _roadpos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", "RoadBlock",  "GLOBAL"] call CBA_fnc_createMarker;
 };
 
 // Define [ Gate, Blocks, Barriers, Guides, Nest, Wire, Weapon] for each faction

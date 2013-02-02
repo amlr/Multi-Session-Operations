@@ -115,11 +115,11 @@ for "_j" from 1 to _numconvoys do {
 							private ["_t","_c"];
 							_t = format["convoy_%1", floor(random 10000)];
 							_c = format["convoy_%1", floor(random 10000)];
-							[_c, _startpos, "Icon", [1,1], "TYPE:", "Start", "TEXT:", _t,"GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+							[_c, _startpos, "Icon", [1,1], "TYPE:", "Start", "TEXT:", _t,"GLOBAL"] call CBA_fnc_createMarker;
 							_c = format["convoy_%1", floor(random 10000)];
-							[_c, _destpos, "Icon", [1,1], "TYPE:", "mil_pickup", "TEXT:", _t,"GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+							[_c, _destpos, "Icon", [1,1], "TYPE:", "mil_pickup", "TEXT:", _t,"GLOBAL"] call CBA_fnc_createMarker;
 							_c = format["convoy_%1", floor(random 10000)];
-							[_c, _endpos, "Icon", [1,1], "TYPE:", "End", "TEXT:", _t,"GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+							[_c, _endpos, "Icon", [1,1], "TYPE:", "End", "TEXT:", _t,"GLOBAL"] call CBA_fnc_createMarker;
 						};
 						
                         _grp = nil;
