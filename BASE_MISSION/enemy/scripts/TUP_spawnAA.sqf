@@ -94,5 +94,5 @@ for "_i" from 1 to _number do {
 _id = floor (random 1000);
 
 if (_debug) then {
-	[format["AA_%1", _id], _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", "AA",  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+	[format["AA_%1", _id], _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", "AA",  "GLOBAL"] call CBA_fnc_createMarker;
 };

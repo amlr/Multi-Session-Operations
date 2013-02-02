@@ -25,7 +25,7 @@ _dest = [];
 				{
 						private["_t","_m"];
 						_t = format["%1", floor(random 10000)];
-						_m = [_t, position _x, "Icon", [1,1], "TYPE:", _icon, "TEXT:", format["%1",type _x], "COLOR:", _color, "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+						_m = [_t, position _x, "Icon", [1,1], "TYPE:", _icon, "TEXT:", format["%1",type _x], "COLOR:", _color, "GLOBAL"] call CBA_fnc_createMarker;
 				};
 		};
 } forEach CRB_LOCS;

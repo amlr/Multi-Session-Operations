@@ -164,7 +164,7 @@ DEP_camptypes =
                 if (_debug) then {
                         private["_t","_m"];
                         _t = format["DEP%1",floor(random 100000)];
-                        _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", str(_grpt select 2), "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+                        _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", str(_grpt select 2), "GLOBAL"] call CBA_fnc_createMarker;
                 };
                 
                 if (typename _camp == "STRING") then {

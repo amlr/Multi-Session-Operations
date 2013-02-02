@@ -54,7 +54,7 @@ if(count _this > 0) then {
                                                         _grp = createGroup _side;
                                                         if(_debug) then {
                                                                 player globalChat format["Dogs: spawning %1",  _name];
-																["m_" + _name, _pos,  "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "colorKhaki", "TEXT:", _name,  "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+								["m_" + _name, _pos,  "Icon", [1,1], "TYPE:", "Dot", "COLOR:", "colorKhaki", "TEXT:", _name,  "GLOBAL"] call CBA_fnc_createMarker;
                                                         };
                                                         diag_log format["MSO-%1 Dog Packs spawning %2 at %3", time, _name, _pos];
                                                         [_pos, _grp] call dogs_fnc_wilddogs;

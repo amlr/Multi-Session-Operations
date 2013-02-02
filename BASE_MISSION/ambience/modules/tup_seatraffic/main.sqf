@@ -44,7 +44,7 @@ tup_seatraffic_getMapSize = {
 	_mapsize = ((_center select 0) max (_center select 1)) * 1.2;
 	if (tup_seatraffic_debug) then {
 		diag_log format ["MSO-%1 Sea Traffic: Mapsize is %2", time, _mapsize];
-		["tup_seatraffic_mapsize", _center, "Rectangle", [_mapsize,_mapsize], "BRUSH:", "Border", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+		["tup_seatraffic_mapsize", _center, "Rectangle", [_mapsize,_mapsize], "BRUSH:", "Border", "GLOBAL"] call CBA_fnc_createMarker;
 	};
 	_mapsize;
 };

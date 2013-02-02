@@ -219,7 +219,7 @@ if (_debug) then
 		{		
 			// private["_t"];
 			//_t = format["%1", floor(random 10000)];
-			//[_t, _x, "Icon", [0.5,0.5], "TYPE:", "Dot", "COLOR:", "ColorBlack", "GLOBAL", "PERSIST"] call CBA_fnc_createMarker;
+			//[_t, _x, "Icon", [0.5,0.5], "TYPE:", "Dot", "COLOR:", "ColorBlack", "GLOBAL"] call CBA_fnc_createMarker;
 			_position = _x;
 			_currentPos = [0,0,0];
 			_done = false;

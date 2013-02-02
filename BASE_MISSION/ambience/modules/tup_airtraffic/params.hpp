@@ -1,14 +1,14 @@
 class tup_airtraffic_factions {
         title = "    Enable Ambient Air Factions"; 
-        values[]= {0,1,2}; 
-        texts[]= {"All Factions","Civilian Only","None"}; 
+        values[]= {0,1,2,3}; 
+        texts[]= {"None","Civilian Only","Military Only","All Factions"}; 
         default = 0;
 };
 class tup_airtraffic_intensity {
         title = "        Ambient Air Intensity"; 
-       values[]= {0, 1, 2, 3}; 
-       texts[]= {"25%","50%","75%","100%"}; 
-       default = 0;
+       values[]= {5, 10, 25, 50, 75, 100}; 
+       texts[]= {"5%","10%","25%","50%","75%","100%"}; 
+       default = 25;
 };
 class tup_airtraffic_ROE {
         title = "        Ambient Air Rules of Engagement"; 
