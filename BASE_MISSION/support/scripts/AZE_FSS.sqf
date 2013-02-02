@@ -1,9 +1,6 @@
-//////////////// Forward Squad Spawning Suite by M. Philips for MilGO insurgency Alpha (by M. Philips) //////////////////
-/////////// Plce this in the init line of the object you want to interact with for the forward teleport action: ///////////
-/////////// nul = this addAction ["Teleport to Squad Member", "support\scripts\AZE_FSS.sqf"]; /////////////
+/////////// Place this in the init line of the object you want to interact with for the forward teleport action: ///////////
+///////////                 nul = this addAction ["Teleport to Squad Member", "AZE_FSS.sqf"];                   ////////////
 
-#define __REFRESH 5
-#define __DISTANCE 500
 #define __NMEDISTANCE 50
 
 if (isDedicated) exitwith {};
@@ -33,6 +30,8 @@ waituntil {alive player}; _unit = player;
 aliveUnits = []; {if (alive _x and _x != player) then {aliveUnits set [count aliveUnits,_x]};} foreach units (group player); if (count aliveUnits == 0) exitwith {TitleText[format["There are no units in your group!",_playerUnit],"PLAIN DOWN"]};
 actualUnits = 0;
 keyout = 0;
+_distance = 400000;
+_refresh = 5;
 EXITFSS = false;
 
 _selection = (aliveUnits select actualUnits);
@@ -62,17 +61,17 @@ while {!(keyout > 0)} do {
 		_target = _currentmate;
 		
 		if (_target isKindOf "Man" && player == vehicle player) then{
-			if((side _target == playerSide || playerside == resistance) && (player distance _target) < __DISTANCE)then{
+			if((side _target == playerSide || playerside == resistance) && (player distance _target) < _distance) then {
 				_nameString = "<t size='0.6' shadow='2' color='#FFA500'>" + format['%1',_target getVariable ['unitname', name _target]] + "</t>";
-				[_nameString,0,0.8,__REFRESH,0,0,3] spawn bis_fnc_dynamicText;
+				[_nameString,0,0.8,_refresh,0,0,3] spawn bis_fnc_dynamicText;
 			};
 		};
     
 		if ((_target isKindOf "Car" || _target isKindOf "Motorcycle" || _target isKindOf "Tank") && player == vehicle player) then{
-			if((side _target == playerSide || playerside == resistance) && (player distance _target) < __DISTANCE && ((count crew _target) > 0))then{
+			if((side _target == playerSide || playerside == resistance) && (player distance _target) < _distance && ((count crew _target) > 0))then{
 				_unit = crew _target select 0;
 				_nameString = "<t size='0.6' shadow='2' color='#FFA500'>" + format['%1',_unit getVariable ['unitname', name _target]] + "</t>";
-				[_nameString,0,0.8,__REFRESH,0,0,3] spawn bis_fnc_dynamicText;
+				[_nameString,0,0.8,_refresh,0,0,3] spawn bis_fnc_dynamicText;
 			};
 		};
     };
