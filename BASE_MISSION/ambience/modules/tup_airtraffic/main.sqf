@@ -3,7 +3,7 @@ if(!isServer) exitWith{};
 
 private ["_mapsize","_helidest","_planedest","_destinations"];
 
-tup_airtraffic_debug = false;
+tup_airtraffic_debug = debug_mso;
 
 if (isNil "tup_airtraffic_factions") then {tup_airtraffic_factions = 0;};
 if (tup_airtraffic_factions == 2) exitWith{};
@@ -74,10 +74,18 @@ tup_airtraffic_getAirports = {
 
 //Find hangars at airport locations
 tup_airtraffic_getHangars = {
-	private ["_destairfield","_planelandings"];
+	private ["_destairfield","_planelandings","_selection","_center","_mapsize"];
 	_destairfield = _this select 0;
 	_planelandings = ["Land_SS_hangar","Land_SS_hangarD","Land_Mil_hangar_EP1","ED102_Hangar","ED102_HangarOffice"];
-	([_planelandings, _destairfield, 1000,tup_airtraffic_debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType);
+    
+	_selection = ([_planelandings, _destairfield, 1000,tup_airtraffic_debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType);
+	if ((count _selection) == 0) then {
+        _center = getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition");
+    	_mapsize = ((_center select 0) max (_center select 1)) * 1.4;
+        
+        _selection = ([_planelandings, nearestLocations [_center, ["NameCity"],_mapsize],2000,tup_airtraffic_debug,"ColorGreen","Airport"] call mso_core_fnc_findObjectsByType);
+    };
+    _selection;
 };
 
 // Find helipads on the map
@@ -245,7 +253,6 @@ for "_j" from 0 to (_destinations-1) do {
 				_t = format["AirTraffic_e%1", _j];
 				_m = [_t, _endpos, "Icon", [0.5,0.5], "TEXT:", str _j, "TYPE:", "hd_end", "GLOBAL"] call CBA_fnc_createMarker;
 			};
-
 				
 			// Create aircraft 
 			_aircraftVehicle = [_j, _currentairfield, _startpos, _isPlane] call tup_airtraffic_createAircraft;
