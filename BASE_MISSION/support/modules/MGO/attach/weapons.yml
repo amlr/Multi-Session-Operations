@@ -170,8 +170,8 @@ SCAR_L_Set:
   ACE_SCAR_L_SNIPER: Sniper Scope / PEQ-15
 
 SCAR_H_CQC_Set:
-  SCAR_H_CQC_CCO: No Silencer
-  SCAR_H_CQC_CCO_SD: Silencer
+  SCAR_H_CQC_CCO: Remove Silencer
+  SCAR_H_CQC_CCO_SD: Attach Silencer
 
 SCAR_H_Set:
   ACE_SCAR_H_STD_Spect: RCO
@@ -179,37 +179,65 @@ SCAR_H_Set:
   SCAR_H_STD_TWS_SD: TWS / Silencer
 
 SCAR_H_LNG_Set:
-  SCAR_H_LNG_Sniper: No Silencer
-  SCAR_H_LNG_Sniper_SD: Silencer
+  SCAR_H_LNG_Sniper: Remove Silencer
+  SCAR_H_LNG_Sniper_SD: Attach Silencer
 
 G36C_Set:
   G36C: Iron Sight
   G36_C_SD_eotech: EoTech / Silencer
 
 G36C_camo_Set:
-  G36C_camo: No Silencer
-  G36_C_SD_camo: Silencer
+  G36C_camo: Remove Silencer
+  G36_C_SD_camo: Attach Silencer
+
+G36A1_Set:
+  ACE_G36A1: Attach AG36
+  ACE_G36A1_AG36A1: Remove AG36
+  ACE_G36A1_AG36A1_F: hidden
+  ACE_G36A1_AG36A1_UP: hidden
+  ACE_G36A1_AG36_UP_F: hidden
+
+G36A1_Set:
+  ACE_G36A1_D: Attach AG36
+  ACE_G36A1_AG36A1_D: Remove AG36
+  ACE_G36A1_AG36A1_D_F: hidden
+  ACE_G36A1_AG36A1_D_UP: hidden
+  ACE_G36A1_AG36A1_D_UP_F: hidden
 
 G36A2_Set:
   ACE_G36A2: No Bipod
   ACE_G36A2_F: hidden
-  ACE_G36A2_D: hidden
-  ACE_G36A2_D_F: hidden
   ACE_G36A2_Bipod: Bipod
-  ACE_G36A2_Bipod_D: hidden
   ACE_G36A2_AG36A2: AG36
   ACE_G36A2_AG36A2_UP: hidden
   ACE_G36A2_AG36A2_F: hidden
   ACE_G36A2_AG36A2_UP_F: hidden
 
+G36A2_D_Set:
+  ACE_G36A2_D: Remove Bipod
+  ACE_G36A2_D_F: hidden
+  ACE_G36A2_Bipod_D: Attach Bipod
+
 G36K_Set:
   G36K: hidden
   ACE_G36K_iron: Iron Sight
-  ACE_G36K_iron_D: hidden
   ACE_G36K: Dual Sights
-  ACE_G36K_D: hidden
   ACE_G36K_EoTech: EoTech
-  ACE_G36K_EoTech_D: hidden
+
+G36K_D_Set:
+  ACE_G36K_iron_D: Iron Sight
+  ACE_G36K_D: Dual Sights
+  ACE_G36K_EoTech_D: EoTech
+
+MG36_Set:
+  MG36: hidden
+  ACE_MG36: Stock Sight
+  ACE_MG36A1: EoTech
+
+MG36_D_Set:
+  MG36_camo: hidden
+  ACE_MG36_D: Stock Sight
+  ACE_MG36A1_D: EoTech
 
 HK416_D10_Set:
   ACE_HK416_D10: Iron Sight
@@ -313,3 +341,29 @@ M9_Set:
 USP_Set:
   ACE_USP: No Silencer
   ACE_USPSD: Silencer
+
+AKS74_Set:
+  AKS_74: Iron Sights
+  AKS_74_kobra: Kobra
+  AKS_74_pso: PSO
+  AKS_74_NSPU: NSPU
+  AKS_74_GOSHAWK: Go Shawk
+
+AKS74P_Set:
+  ACE_AKS74P: Iron Sights
+  ACE_AKS74P_kobra: Kobra
+  ACE_AKS74P_pso: PSO
+  ACE_AKS74P_1P29: 1P29
+  ACE_AKS74P_GL: Iron Sights / GL
+  ACE_AKS74P_GL_Kobra: Kobra / GL
+  ACE_AKS74P_GL_PSO: PSO / GL
+  ACE_AKS74P_GL_1P29: 1P29 / GL
+
+AKS74_UN_Set:
+  AKS_74_U: Iron Sights
+  AKS_74_UN_kobra: hidden
+  ACE_AKS74_UN: Kobra
+
+AKMS_Set:
+  ACE_AKMS: Remove Silencer
+  ACE_AKMS_SD: Attach Silencer
