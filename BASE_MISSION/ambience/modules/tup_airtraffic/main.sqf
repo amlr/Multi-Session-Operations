@@ -1,12 +1,20 @@
 #include <crbprofiler.hpp>
-if(!isServer) exitWith{};
-
 private ["_mapsize","_helidest","_planedest","_destinations"];
 
 tup_airtraffic_debug = debug_mso;
 
-if (isNil "tup_airtraffic_factions") then {tup_airtraffic_factions = 0;};
+if (isNil "tup_airtraffic_factions") then {tup_airtraffic_factions = 1;};
 if (tup_airtraffic_factions == 0) exitWith{};
+
+// Exit if not HC and not a server
+if(isnil "tup_airtraffic_locality") then {tup_airtraffic_locality = 0;};
+if(
+	switch (tup_airtraffic_locality) do {
+	        case 0: {!isServer};
+        	case 1: {!isHC};
+	}
+) exitWith{};
+
 if (isNil "tup_airtraffic_intensity") then {tup_airtraffic_intensity = 25;};
 if (isNil "tup_airtraffic_ROE") then {tup_airtraffic_ROE = 2;};
 

@@ -1,11 +1,5 @@
-class destroyCity {
-        title = "    Ambient - Destroy City"; 
-        values[]= {0}; 
-        texts[]= {" "}; 
-        default = 0;
-};
 class destroyCityIntensity {
-        title = "        Enable Destroyed Cities"; 
+        title = "    Ambient - Destroy City Intensity"; 
         values[]= {0,1,2,3}; 
         texts[]= {"Off", "Low", "Med", "High"}; 
         default = 0;

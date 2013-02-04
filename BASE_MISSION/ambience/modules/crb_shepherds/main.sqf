@@ -1,13 +1,18 @@
 #include <crbprofiler.hpp>
 
-private ["_types","_name","_pos","_shepherds"];
-
-// Exit if not HC and not a server with no HC's
-if !(isHC || (isServer && count headlessClients == 0)) exitWith{};
-
 if(isNil "ambientShepherds")then{ambientShepherds = 1;};
 if (ambientShepherds == 0) exitWith{};
 
+// Exit if not HC and not a server
+if(isnil "ShepherdsLocality") then {ShepherdsLocality = 0;};
+if(
+	switch (ShepherdsLocality) do {
+	        case 0: {!isServer};
+        	case 1: {!isHC};
+	}
+) exitWith{};
+
+private ["_types","_name","_pos","_shepherds"];
 crb_shepherds_debug = false;
 
 waitUntil{!isNil "BIS_fnc_init"};
@@ -238,7 +243,7 @@ CRB_fnc_createHerd = {
         };
         
         // Create animals
-        for "_i" from 0 to 5 + floor(random 5) do {
+        for "_i" from 0 to 5 + floor(random 3) do {
                 _h = (createGroup civilian) createUnit [(_herdClass call BIS_fnc_selectRandom), _pos, [], 30, "NONE"];
                 _h setSkill 0;
                 _h allowFleeing 1;
@@ -260,6 +265,8 @@ CRB_fnc_createHerd = {
 if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
+
+waitUntil{!isNil "CRB_LOCS"};
 
 _types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","NameVillage","NameLocal","ViewPoint","Hill"];
 _shepherds = [];

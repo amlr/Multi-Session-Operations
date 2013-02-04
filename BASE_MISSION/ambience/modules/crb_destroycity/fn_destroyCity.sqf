@@ -59,10 +59,11 @@ _buildings = _buildings - _blacklist;
 			//_x hideobject true;
 			_x setdamage 1;
 			if (_debug) then {_marker = createMarker ["X" + str _posTotal, position _x]; _marker setmarkertype "Dot"; _marker setmarkercolor "colorblue";};
-                        if(_fire && !isDedicated) then {
-                                _centre = "HeliHEmpty" createVehicleLocal _pos;
-			_centre setPos _pos;
-			0 = [_centre, exp((_size select 0) * (_size select 1) * (_size select 2) / 500) min 10, time, false, false] spawn BIS_Effects_Burn;
+                        if(_fire && !isDedicated && !isHC) then {
+				_pos set [2, -1];
+                                _centre = "Can_small" createVehicleLocal _pos;
+				_centre setPos _pos;
+				0 = [_centre, exp((_size select 0) * (_size select 1) * (_size select 2) / 500) min 10, time, false, false] spawn BIS_Effects_Burn;
                         };
 		} else {
 			_x setdamage 0.5;

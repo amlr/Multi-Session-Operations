@@ -8,8 +8,8 @@ if (ZORAmaxgrps == 0) exitwith {diag_log format["MSO-%1 ZORA exiting...", time];
 if(isnil "ZORALocality") then {ZORALocality = 0;};
 if (
 	switch (ZORALocality) do {
+	        case 0: {!isServer};
         	case 1: {!isHC};
-	        default {!isServer};
 	}
 ) exitWith{};
 

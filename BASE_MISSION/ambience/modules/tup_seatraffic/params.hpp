@@ -1,14 +1,14 @@
 class tup_seatraffic_factions {
         title = "    Enable Ambient Sea Factions"; 
-        values[]= {0,1,2}; 
-        texts[]= {"All Factions","Civilian Only","None"}; 
+        values[]= {0,1,2,3}; 
+        texts[]= {"None","Civilian Only","Military Only","All Factions"}; 
         default = 1;
 };
 class tup_seatraffic_amount {
-        title = "    Enable Ambient Sea Traffic"; 
+        title = "        Enable Ambient Sea Traffic"; 
         values[]= {0,1}; 
-        texts[]= {"Full","Reduced"}; 
-        default = 1;
+        texts[]= {"Reduced","Full"}; 
+        default = 0;
 };
 class tup_seatraffic_ROE {
         title = "        Ambient Sea Traffic Rules of Engagement"; 
@@ -21,4 +21,10 @@ class tup_seatraffic_LHD {
        values[]= {0,1,2}; 
        texts[]= {"Never","Always","Random"}; 
        default = 2;
+};
+class tup_seatraffic_locality {
+	title = "        Ambient Sea Locality";
+	values[]= {0,1}; 
+	texts[]= {"Server","Headless Client"};
+	default = 0;
 };

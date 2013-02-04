@@ -1,13 +1,21 @@
 #include <crbprofiler.hpp>
-if(!isServer) exitWith{};
-
 private ["_seadest","_mapsize","_LHD","_dummy","_LHDLand","_group","_logic","_unit","_lhdpos","_center"];
 
 tup_seatraffic_debug = false;
 
-if (isNil "tup_seatraffic_amount") then {tup_seatraffic_amount = 1;};
 if (isNil "tup_seatraffic_factions") then {tup_seatraffic_factions = 1;};
-if (tup_seatraffic_factions == 2) exitWith{};
+if (tup_seatraffic_factions == 0) exitWith{};
+
+// Exit if not HC and not a server
+if(isnil "tup_seatraffic_locality") then {tup_seatraffic_locality = 0;};
+if(
+	switch (tup_seatraffic_locality) do {
+	        case 0: {!isServer};
+        	case 1: {!isHC};
+	}
+) exitWith{};
+
+if (isNil "tup_seatraffic_amount") then {tup_seatraffic_amount = 0;};
 if (isNil "tup_seatraffic_ROE") then {tup_seatraffic_ROE = 2;};
 if (isNil "tup_seatraffic_LHD") then {tup_seatraffic_LHD = 2;};
 
@@ -54,9 +62,9 @@ tup_seatraffic_getSeaDestinations = {
 	private ["_sealandings","_mapsize"];
 	_mapsize = _this select 0;
 	_sealandings = [];
-	//Find boathouses, piers , fuelling stations on map. tup_seatraffic_amount = 1 reduced, tup_seatraffic_amount = 0 full
+	//Find boathouses, piers , fuelling stations on map. tup_seatraffic_amount = 0 reduced, tup_seatraffic_amount = 1 full
 	_sealandings = ["land_nav_boathouse","land_nav_pier_m_end","Land_Nav_Boathouse_PierT","BuoyBig","Land_cwr2_nabrezi_najezd"];
-	if (tup_seatraffic_amount == 0) then {
+	if (tup_seatraffic_amount == 1) then {
 		_sealandings = _sealandings + ["land_nav_pier_m_fuel","land_nav_pier_c2_end","land_nav_pier_c_t15","BuoySmall"];
 	};
 	[_sealandings, [], _mapsize, tup_seatraffic_debug,"ColorBlack","boat"] call mso_core_fnc_findObjectsByType;
@@ -156,10 +164,21 @@ if (((random 1 < 0.5) && (tup_seatraffic_LHD == 2)) || (tup_seatraffic_LHD == 1)
 			_seaportside = [_currentseadest, 1000, format["%1 %2",_currentseadest,_j],tup_seatraffic_debug] call mso_core_fnc_getDominantSide;
 			// Get the factions for the controlling side and count their units
 			if (tup_seatraffic_factions == 1) then {
-				_seaportside = civilian;
 			};
-			_factions = [_seaportside, _currentseadest, 1000,"factions",tup_seatraffic_debug,format["Seaport %2",_j]] call mso_core_fnc_getFactions;
-			
+			// Work out side that controls destination (based on unit numbers)
+			switch(tup_seatraffic_factions) do {
+				case 1: {
+					_factions = TUP_CIVFACS;
+					_seaportside = civilian;
+				};
+				case 2: {
+					_factions = ([_seaportside, _currentseadest, 1000,"factions",tup_seatraffic_debug,format["Seaport %2",_j]] call mso_core_fnc_getFactions) - TUP_CIVFACS;
+				};
+				case 3: {
+					_factions = [_seaportside, _currentseadest, 1000,"factions",tup_seatraffic_debug,format["Seaport %2",_j]] call mso_core_fnc_getFactions;
+				};
+			};
+
 			_ship = [];
 			_front = "Ship";
 			

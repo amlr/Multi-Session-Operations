@@ -1,26 +1,28 @@
-//////////////// Forward Squad Spawning Suite by M. Philips for MilGO insurgency Alpha (by M. Philips) //////////////////
-/////////// Plce this in the init line of the object you want to interact with for the forward teleport action: ///////////
-/////////// nul = this addAction ["Teleport to Squad Member", "support\scripts\AZE_FSS.sqf"]; /////////////
+/////////// Place this in the init line of the object you want to interact with for the forward teleport action: ///////////
+///////////                 nul = this addAction ["Teleport to Squad Member", "AZE_FSS.sqf"];                   ////////////
+
+#define __NMEDISTANCE 50
 
 if (isDedicated) exitwith {};
 if (isnil "keyspressed") then {
     keyspressed = {
 			_key = _this select 1;
 			
-			//right arrow
 			if (_key == 205) then {
 				actualUnits = actualUnits + 1;
-				if (actualUnits > (count aliveUnits)) then {actualUnits = (count aliveUnits)};
+				if (actualUnits > (count aliveUnits)) then {actualUnits = 0};
+				TitleText[format["Select unit with ARROWKEYS and press ENTER to select, Backspace to exit!",true],"PLAIN DOWN"];
 				};
 			
-			//left arrow
 			if (_key == 203) then {
 				actualUnits = actualUnits - 1; 
 				if (actualUnits < 0) then {actualUnits = 0};
+				TitleText[format["Select unit with ARROWKEYS and press ENTER to select, Backspace to exit!",true],"PLAIN DOWN"];
 			};
 			
-			//Enter key
 			if (_key == 28) then {keyout = _key};
+            
+            if (_key == 14) then {keyout = _key; EXITFSS = true;};
 	};
 };
 
@@ -28,6 +30,9 @@ waituntil {alive player}; _unit = player;
 aliveUnits = []; {if (alive _x and _x != player) then {aliveUnits set [count aliveUnits,_x]};} foreach units (group player); if (count aliveUnits == 0) exitwith {TitleText[format["There are no units in your group!",_playerUnit],"PLAIN DOWN"]};
 actualUnits = 0;
 keyout = 0;
+_distance = 400000;
+_refresh = 5;
+EXITFSS = false;
 
 _selection = (aliveUnits select actualUnits);
 
@@ -38,11 +43,11 @@ _cam camsetrelpos [0,-5,2.5];
 _cam camcommit 0;
 _cam attachTo [_selection, [0,-5,2.5]];
 
-TitleText[format["Select unit with ARROWKEYS and press ENTER to select!",true],"PLAIN DOWN"];
+TitleText[format["Select unit with ARROWKEYS and press ENTER to select, Backspace to exit!",true],"PLAIN DOWN"];
 _DispId = ["KeyDown", "_this call keyspressed"] call CBA_fnc_addDisplayHandler;
 while {!(keyout > 0)} do {
 	_currentmate = (aliveUnits select actualUnits);
-    
+	
     if !(_selection == _currentmate) then {
         _selection = _currentmate;
 
@@ -52,16 +57,34 @@ while {!(keyout > 0)} do {
 		waituntil {camCommitted _cam};
         
         _cam attachTo [_selection, [0,-5,2.5]];
-     };
+		
+		_target = _currentmate;
+		
+		if (_target isKindOf "Man" && player == vehicle player) then{
+			if((side _target == playerSide || playerside == resistance) && (player distance _target) < _distance) then {
+				_nameString = "<t size='0.6' shadow='2' color='#FFA500'>" + format['%1',_target getVariable ['unitname', name _target]] + "</t>";
+				[_nameString,0,0.8,_refresh,0,0,3] spawn bis_fnc_dynamicText;
+			};
+		};
+    
+		if ((_target isKindOf "Car" || _target isKindOf "Motorcycle" || _target isKindOf "Tank") && player == vehicle player) then{
+			if((side _target == playerSide || playerside == resistance) && (player distance _target) < _distance && ((count crew _target) > 0))then{
+				_unit = crew _target select 0;
+				_nameString = "<t size='0.6' shadow='2' color='#FFA500'>" + format['%1',_unit getVariable ['unitname', name _target]] + "</t>";
+				[_nameString,0,0.8,_refresh,0,0,3] spawn bis_fnc_dynamicText;
+			};
+		};
+    };
 	sleep 0.1;
 };
 ["KeyDown", _DispId] call CBA_fnc_removeDisplayHandler;
+If (EXITFSS) exitwith {showCinemaBorder false; player cameraEffect ["terminate","back"];camdestroy _cam;};
 
 _playerUnit = (aliveUnits select actualUnits);
-_enemyunits = {side _x == east} count ((position _playerUnit) nearEntities [["Man"],50]);
+_enemyunits = {side _x == east} count ((position _playerUnit) nearEntities [["Man"],__NMEDISTANCE]);
 
 if (_enemyunits > 0) then {
-	TitleText[format["Selected unit %1 is too close to enemies!",_playerUnit],"PLAIN DOWN"];
+	TitleText[format["That unit is too close to enemies for a safe spawn."],"PLAIN DOWN"];
 } else {
 	if (vehicle _playerUnit == _playerUnit) then {
     	TitleText[format["Transported to unit %1!",_playerUnit],"PLAIN DOWN"];

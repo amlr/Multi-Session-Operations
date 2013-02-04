@@ -1,11 +1,5 @@
-class AmbientEnvironment {
-        title = "    Ambient - Environment"; 
-        values[]= {0}; 
-        texts[]= {" "}; 
-        default = 0;
-};
 class AmbientCivs {
-        title = "        Enable Civilians"; 
+        title = "    Ambient Civilians"; 
         values[]= {0,1}; 
         texts[]= {"Off", "On"}; 
         default = 1;
