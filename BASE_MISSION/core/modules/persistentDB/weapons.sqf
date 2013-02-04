@@ -23,7 +23,7 @@ S_WEAPON_DATA = [
 				(_this select 1) removeweapon _x;
 			} foreach ((weapons (_this select 1)) + (items (_this select 1)));
 			private ["_i","_result","_aceradios","_ar"];
-		 _aceradios = ["ACE_P168_RD90","ACE_P159_RD99","ACE_P159_RD90","ACE_P159_RD54","ACE_PRC119","ACE_PRC119_ACU","ACE_PRC119_MAR","ACE_ANPRC77","ACRE_PRC148_UHF"];	
+		 _aceradios = ["ACE_P168_RD90","ACE_P159_RD99","ACE_P159_RD90","ACE_P159_RD54","ACE_PRC119","ACE_PRC119_ACU","ACE_PRC119_MAR","ACE_ANPRC77","ACRE_PRC148_UHF","SR5_THOR3","SR5_THOR3_MAR","SR5_THOR3_ACU"];	
 		{	
 			_ar = "false";
 			// check for _aceradios
