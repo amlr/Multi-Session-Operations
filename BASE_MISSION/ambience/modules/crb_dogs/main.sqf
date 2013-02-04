@@ -1,11 +1,18 @@
 #include <crbprofiler.hpp>
 
-private ["_debug","_types","_dogs","_side","_maxdist"];
-if (!isServer) exitWith{};
-
 if(isNil "ambientDogs")then{ambientDogs = 1;};
 if (ambientDogs == 0) exitWith{};
 
+// Exit if not HC and not a server
+if(isnil "DogsLocality") then {DogsLocality = 0;};
+if(
+	switch (DogsLocality) do {
+	        case 0: {!isServer};
+        	case 1: {!isHC};
+	}
+) exitWith{};
+
+private ["_debug","_types","_dogs","_side","_maxdist"];
 _debug = debug_mso;
 
 waitUntil{!isNil "BIS_fnc_init"};
@@ -13,10 +20,12 @@ if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
 
+waitUntil{!isNil "CRB_LOCS"};
+
 _types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","Hill"];
 _maxdist = 100;
 _dogs = [];
-_side = east;
+_side = civilian;
 if(count _this > 0) then {
         _side = _this select 0;
 };

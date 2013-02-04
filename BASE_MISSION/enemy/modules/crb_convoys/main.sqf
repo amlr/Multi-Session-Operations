@@ -1,26 +1,27 @@
 #include <crbprofiler.hpp>
 
-//#squint filter Unknown variable mso_core_fnc_findVehicleType
-//#squint filter Unknown variable MSO_FACTIONS
-//#squint filter Unknown variable mso_core_fnc_selectRandomBias
-//#squint filter Unknown variable mso_core_fnc_initLocations
-//#squint filter Unknown variable mso_core_fnc_randomGroup
-//#squint filter Unknown variable CBA_fnc_randPos
+if(isNil "crb_convoy_intensity")then{crb_convoy_intensity = 1;};
+if(crb_convoy_intensity == 0) exitWith{};
+
+// Exit if not HC and not a server
+if(isnil "ConvoyLocality") then {ConvoyLocality = 0;};
+if(
+	switch (ConvoyLocality) do {
+	        case 0: {!isServer};
+        	case 1: {!isHC};
+	}
+) exitWith{};
+
 
 private ["_debug","_strategic","_convoyLocs","_numconvoys"];
-// Exit if not HC and not a server with no HC's
-if (!(isHC || (isServer && count headlessClients == 0))) exitwith {diag_log format["MSO-%1 ZORA exiting...", time];};
-
-
 _debug = debug_mso;
-if(isNil "crb_convoy_intensity")then{crb_convoy_intensity = 1;};
-
-if(crb_convoy_intensity == 0) exitWith{};
 
 waitUntil{!isNil "BIS_fnc_init"};
 if(isNil "CRB_LOCS") then {
         CRB_LOCS = [] call mso_core_fnc_initLocations;
 };
+
+waitUntil{!isNil "CRB_LOCS"};
 
 fAddVehicle = {
 	private ["_type","_startposi","_startroads","_dire","_grop","_veh","_pos"];

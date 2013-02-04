@@ -1,8 +1,15 @@
 private ["_hospitals","_police","_repairs","_hp","_pp","_maxdist"];
-if(!isServer) exitWith{};
-
 if(isNil "Emergency")then{Emergency = 1;};
 if (Emergency == 0) exitWith{};
+
+// Exit if not HC and not a server
+if(isnil "EmergencyLocality") then {EmergencyLocality = 0;};
+if(
+	switch (EmergencyLocality) do {
+	        case 0: {!isServer};
+        	case 1: {!isHC};
+	}
+) exitWith{};
 
 waitUntil{!isNil "bis_functions_mainscope"};
 waitUntil{typeName (bis_functions_mainscope getVariable "locations") == "ARRAY"};

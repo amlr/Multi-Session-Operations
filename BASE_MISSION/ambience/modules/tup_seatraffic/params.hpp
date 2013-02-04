@@ -22,3 +22,9 @@ class tup_seatraffic_LHD {
        texts[]= {"Never","Always","Random"}; 
        default = 2;
 };
+class tup_seatraffic_locality {
+	title = "        Ambient Sea Locality";
+	values[]= {0,1}; 
+	texts[]= {"Server","Headless Client"};
+	default = 0;
+};

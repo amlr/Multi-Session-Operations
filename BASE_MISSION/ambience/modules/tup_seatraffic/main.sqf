@@ -1,12 +1,19 @@
 #include <crbprofiler.hpp>
-if(!isServer) exitWith{};
-
 private ["_seadest","_mapsize","_LHD","_dummy","_LHDLand","_group","_logic","_unit","_lhdpos","_center"];
 
 tup_seatraffic_debug = false;
 
 if (isNil "tup_seatraffic_factions") then {tup_seatraffic_factions = 1;};
 if (tup_seatraffic_factions == 0) exitWith{};
+
+// Exit if not HC and not a server
+if(isnil "tup_seatraffic_locality") then {tup_seatraffic_locality = 0;};
+if(
+	switch (tup_seatraffic_locality) do {
+	        case 0: {!isServer};
+        	case 1: {!isHC};
+	}
+) exitWith{};
 
 if (isNil "tup_seatraffic_amount") then {tup_seatraffic_amount = 0;};
 if (isNil "tup_seatraffic_ROE") then {tup_seatraffic_ROE = 2;};

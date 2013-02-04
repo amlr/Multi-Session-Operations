@@ -54,7 +54,7 @@ for "_i" from 1 to _random do {
                 
                 while{count units _grp > 0} do {
                         _near_humans = [];
-                        _distance = 1000;
+                        _distance = 500;
                         _nearest = objNull;
                         _near_humans = nearestObjects [(position leader _grp), ["Man","Car"],100];
                         {
@@ -62,7 +62,8 @@ for "_i" from 1 to _random do {
                                 if(alive _dog && !(_dog getVariable "attacking")) then {
                                         _alive_humans = [];
                                         {
-                                                if ((side _dog)getFriend (side _x) <0.6) then {
+                                                //if ((side _dog)getFriend (side _x) <0.6) then {
+                                                if (side _x == west || side _x == east) then {
                                                         _alive_humans set [count _alive_humans, _x];
                                                         _dog knowsabout _x;
                                                 }
@@ -76,7 +77,7 @@ for "_i" from 1 to _random do {
                                                 _nearest = _alive_humans select 0;
                                                 _distance = _dog distance _nearest;
                                                 _pos = position _nearest;
-                                                if (_distance < 2.5) then {
+                                                if (_distance < 1.5) then {
                                                         [_nearest, _dog] spawn dogs_fnc_dogattack;
                                                 } else {
                                                         _dog setSpeedMode "full";
