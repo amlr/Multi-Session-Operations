@@ -114,13 +114,6 @@ execNow "enemy\modules\crb_terrorists\main.sqf";
 
 #ifdef CQB_POP
 "CQB Populator" call mso_core_fnc_initStat;
-if (persistentDBHeader == 1 && {isHC}) then {
-	// CQB
-	if (CQBlocality > 1) then {
-		diag_log format["MSO-%1 Headless Client: %2, waiting for PDB_CQB_positionsloaded...", time, player];
-		waituntil {!(isnil "PDB_CQB_positionsloaded")};
-	};	
-};	
 execNow "enemy\modules\CQB_POP\main.sqf";
 #endif
 
