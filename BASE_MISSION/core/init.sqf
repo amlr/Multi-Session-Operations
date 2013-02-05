@@ -127,8 +127,7 @@ execNow "core\modules\rmm_debug\main.sqf";
 #endif
 
 #ifdef ADMINACTIONS
-"Admin Actions" call mso_core_fnc_initStat;
-[player] execVM "core\modules\adminActions\main.sqf";
+[player] execNow "core\modules\adminActions\main.sqf";
 #endif
 
 #ifdef RMM_NOMAD
