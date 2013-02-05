@@ -40,6 +40,13 @@ if(rmm_dynamic == 0) exitWith{diag_log format ["MSO-%1 Enemy Populator Disabled 
 if (isDedicated && {KillServ}) exitWith {KillServ = false; diag_log format ["MSO-%1 Killing DEP init on server - Exiting...",time]};
 if (!(isServer) && {KillClient}) exitWith {KillClient = false; diag_log format ["MSO-%1 Killing DEP init on Client - Exiting...",time]};
 
+if (persistentDBHeader == 1 && {isHC}) then {
+	// DEP
+	if (rmm_locality > 0) then {
+		diag_log format["MSO-%1 Headless Client: %2, waiting for PDB_DEP_positionsloaded...", time, player];
+		waituntil {!(isnil "PDB_DEP_positionsloaded")};
+	};	
+};	
 diag_log format["MSO-%1 PDB EP Population: starting to load functions...", time];
 if (isnil "BIN_fnc_taskDefend") then {BIN_fnc_taskDefend = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskDefend.sqf"};
 if (isnil "BIN_fnc_taskPatrol") then {BIN_fnc_taskPatrol = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskPatrol.sqf"};

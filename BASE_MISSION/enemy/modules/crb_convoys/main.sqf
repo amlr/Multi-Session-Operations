@@ -53,7 +53,7 @@ _convoyLocs = [];
 } forEach CRB_LOCS;
 
 // Add suitable CQB and DEP LOCS
-if (isnil "CQB_spawn") then {CQB_spawn = 10};
+if (isnil "CQB_spawn") then {CQB_spawn = 0};
 if (CQB_spawn > 0) then {
 	waituntil {!(isnil "CQBpositionsStrat")};
 	if (count CQBpositionsStrat > 0) then {
@@ -65,7 +65,7 @@ if (CQB_spawn > 0) then {
 	};
 };
 
-if (isnil "rmm_dynamic") then {rmm_dynamic = 1};
+if (isnil "rmm_dynamic") then {rmm_dynamic = 0};
 if (rmm_dynamic == 1) then {
 	waituntil {!(isnil "DEP_LOCS")};
 	{

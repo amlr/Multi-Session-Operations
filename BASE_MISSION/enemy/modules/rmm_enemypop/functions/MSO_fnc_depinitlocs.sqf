@@ -230,5 +230,5 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
         };
 };
 
-publicVariableServer "DEP_LOCS";
+publicVariable "DEP_LOCS";
 diag_log format["MSO-%1 PDB EP Population: Endet INIT! Finalized DEP Locations: %2", time,count DEP_LOCS];

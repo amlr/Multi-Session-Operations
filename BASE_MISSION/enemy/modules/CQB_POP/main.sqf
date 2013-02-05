@@ -25,10 +25,17 @@ switch (CQBlocality) do {
 
 //Starting
 diag_log format["MSO-%1 CQB Population: starting to load functions...", time];
-	if (((CQBlocality > 1) && (isHC) && (persistentDBHeader == 1))) then {
-			_hcData = format["Headless client is loading CQB functions please wait..."];
-		   PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
-	};
+if (persistentDBHeader == 1 && {isHC}) then {
+	// CQB
+	if (CQBlocality > 1) then {
+		diag_log format["MSO-%1 Headless Client: %2, waiting for PDB_CQB_positionsloaded...", time, player];
+		waituntil {!(isnil "PDB_CQB_positionsloaded")};
+	};	
+};	
+if (((CQBlocality > 1) && (isHC) && (persistentDBHeader == 1))) then {
+	_hcData = format["Headless client is loading CQB functions please wait..."];
+	PDB_HEADLESS_LOADERSTATUS = [_hcData]; publicVariable "PDB_HEADLESS_LOADERSTATUS";
+};
 	
 if (isnil "BIN_fnc_taskDefend") then {BIN_fnc_taskDefend = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskDefend.sqf"};
 if (isnil "BIN_fnc_taskPatrol") then {BIN_fnc_taskPatrol = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskPatrol.sqf"};

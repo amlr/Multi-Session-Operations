@@ -12,27 +12,31 @@
 * 
 * */
 
+// ====================================================================================
+// DEFINES
+#define CPP compile preprocessfilelinenumbers
+#define VAR_DEFAULT(var,val) if (isNil #var) then {var=(val);}
+
+#ifndef execNow
+#define execNow call compile preprocessfilelinenumbers
+#endif
+// ====================================================================================	
+
 if(isNil "persistentDBHeader")then{persistentDBHeader = 0;};
 
 if(persistentDBHeader == 0) exitWith{diag_log format ["MSO-%1 Persistent DB Disabled - Exiting.",time];};
-// ====================================================================================
-// DEFINES
-#define PP preprocessfilelinenumbers
-#define VAR_DEFAULT(var,val) if (isNil #var) then {var=(val);}
-// ====================================================================================	
+if (isHC) exitWith {diag_log format ["MSO-%1 Persistent DB Disabled on HC - Exiting.",time];};
 
 // PDB SETUP	
-_pdbsettings = [] execVM "core\modules\persistentDB\pdbSetup.sqf";
+[] execNow "core\modules\persistentDB\pdbSetup.sqf";
 
-waitUntil {scriptDone _pdbsettings};
 if (pdb_log_enabled) then {	diag_log["PersistentDB: pdb settings loaded"]; };
-
 
 PDB_PLAYER_HANDLED = false;
 
 if (pdb_log_enabled) then {	diag_log format ["############################# Starting PDB for %1 #############################", pdb_fullmissionName]; };
 
-[] call compile PP "core\modules\persistentDB\system.sqf";
+[] execNow "core\modules\persistentDB\system.sqf";
 
 pdb_serverError = 0;
 pdb_clientError = 0;
@@ -45,14 +49,14 @@ if (isServer) then {
 	}; 
 };
 
-if (isdedicated) then {	
-	persistent_fnc_callDatabase = compile PP "core\modules\persistentDB\callDatabase.sqf"; 
-	persistent_fnc_getData = compile PP "core\modules\persistentDB\fn_getData.sqf";
-	persistent_fnc_saveData = compile PP "core\modules\persistentDB\fn_saveData.sqf";
-	persistent_fnc_getScore = compile PP "core\modules\persistentDB\fn_getScore.sqf";
+if (isServer) then {	
+	persistent_fnc_callDatabase = CPP "core\modules\persistentDB\callDatabase.sqf"; 
+	persistent_fnc_getData = CPP "core\modules\persistentDB\fn_getData.sqf";
+	persistent_fnc_saveData = CPP "core\modules\persistentDB\fn_saveData.sqf";
+	persistent_fnc_getScore = CPP "core\modules\persistentDB\fn_getScore.sqf";
 	ENV_dedicated = true; publicVariable "ENV_dedicated"; 
-	onPlayerConnected {[_id, _name, _uid] call compile PP "core\modules\persistentDB\onConnected.sqf"}; 
-	onPlayerDisconnected {[_id, _name, _uid, true] call compile PP "core\modules\persistentDB\onDisconnected.sqf" }; 
+	onPlayerConnected {[_id, _name, _uid] execNow "core\modules\persistentDB\onConnected.sqf"}; 
+	onPlayerDisconnected {[_id, _name, _uid, true] execNow "core\modules\persistentDB\onDisconnected.sqf" }; 
 	
 	// Spawn auto-save process - server
 	[] spawn {
@@ -64,7 +68,7 @@ if (isdedicated) then {
 				(time > (PDBLastSaveTimeServer + mpdb_save_delay_server))
 			};
 			if (pdb_log_enabled) then {	diag_log["PersistentDB: SERVER MSG - Auto Saving Server Data, time: ", time]; };
-			[0, "__SERVER__", 0] call compile PP "core\modules\persistentDB\onDisconnected.sqf";
+			[0, "__SERVER__", 0] execNow "core\modules\persistentDB\onDisconnected.sqf";
 			PDBLastSaveTimeServer = time;
 			sleep 5;
 		};
@@ -76,10 +80,10 @@ if (isdedicated) then {
 	
 
 // Compile player EHs
-persistent_fnc_playerDamage = compile PP "core\modules\persistentDB\playerDamage.sqf";
-persistent_fnc_playerHeal = compile PP "core\modules\persistentDB\playerHeal.sqf";
-persistent_fnc_playerRespawn = compile PP "core\modules\persistentDB\playerRespawn.sqf";
-persistent_fnc_playerFired = compile PP "core\modules\persistentDB\playerFired.sqf";
+persistent_fnc_playerDamage = CPP "core\modules\persistentDB\playerDamage.sqf";
+persistent_fnc_playerHeal = CPP "core\modules\persistentDB\playerHeal.sqf";
+persistent_fnc_playerRespawn = CPP "core\modules\persistentDB\playerRespawn.sqf";
+persistent_fnc_playerFired = CPP "core\modules\persistentDB\playerFired.sqf";
 
 //Add manual persistence action for Admins (aka "Magicwand")
 PersistActionLocal = {

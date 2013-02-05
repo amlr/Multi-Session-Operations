@@ -127,20 +127,17 @@ execNow "core\modules\rmm_debug\main.sqf";
 #endif
 
 #ifdef ADMINACTIONS
-"Admin Actions" call mso_core_fnc_initStat;
-[player] execVM "core\modules\adminActions\main.sqf";
+[player] execNow "core\modules\adminActions\main.sqf";
+#endif
+
+#ifdef persistentDB
+"Persistent DB" call mso_core_fnc_initStat;
+execNow "core\modules\persistentDB\main.sqf";
 #endif
 
 #ifdef RMM_NOMAD
 "NOMAD" call mso_core_fnc_initStat;
 execNow "core\modules\rmm_nomad\main.sqf";
-#endif
-
-#ifdef persistentDB
-if (!isHC) then {
-	"Persistent DB" call mso_core_fnc_initStat;
-	execNow "core\modules\persistentDB\main.sqf";
-};
 #endif
 
 #ifdef RMM_GTK
