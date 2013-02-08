@@ -1,15 +1,15 @@
-//call compile preprocessfilelinenumbers "init-mso.sqf";
+#ifndef execNow
+#define execNow call compile preprocessfilelinenumbers
+#endif
 
-call compile preprocessfilelinenumbers "core\init.sqf";
-"Completed" call MSO_fnc_initialising;
-titleText ["", "BLACK IN"];
+execNow "init-mso.sqf";
 
-call compile preprocessfilelinenumbers "core\modules\mso_strategic\tests\test.sqf";
-//call compile preprocessfilelinenumbers "core\modules\MSO_STORE\tests\test.sqf";
-//call compile preprocessfilelinenumbers "Enemy\modules\MSO_CQBPOP\tests\test.sqf";
+//execNow "core\modules\mso_strategic\tests\test.sqf";
+execNow "core\modules\MSO_STORE\tests\test.sqf";
+//execNow "Enemy\modules\MSO_CQBPOP\tests\test.sqf";
 
-//call compile preprocessfilelinenumbers "find_stuff.sqf";
-//call compile preprocessfilelinenumbers "find_stuff_civ.sqf";
+//execNow "find_stuff.sqf";
+//execNow "find_stuff_civ.sqf";
 
 endMission "END1";
 forceEnd;
