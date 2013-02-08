@@ -22,6 +22,24 @@ _response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
 _missionArray = [];
 if (count _response > 0) then {
 	_missionArray = _response select 0;
+	// UpdateMissionByName
+	_procedureName = "UpdateMissionByName"; 
+	_parameters = format["[ttd=%1,tsc=%2,tgsc=%3,tlog=%4,twea=%5,tace=%6,tlv=%7,tobj=%8,tloc=%9,tobc=%10,tmar=%11,ttas=%12,taar=%13,taim=%14,tna=%15]",mpdb_date_enabled,mpdb_persistentScores_enabled,mpdb_globalScores_enabled,mpdb_log_enabled,mpdb_weapons_enabled,mpdb_ace_enabled,mpdb_landvehicles_enabled,mpdb_objects_enabled,mpdb_locations_enabled,mpdb_objects_contents_enabled,mpdb_markers_enabled,mpdb_tasks_enabled,mpdb_aar_enabled,mpdb_aim_enabled,pdb_fullmissionName];		
+	_response = [_procedureName,_parameters] call persistent_fnc_callDatabase;
+	_missionArray set [2, str(mpdb_date_enabled)];
+	_missionArray set [4, str(mpdb_persistentScores_enabled)];
+	_missionArray set [5, str(mpdb_globalScores_enabled)];
+	_missionArray set [6, str(mpdb_log_enabled)];
+	_missionArray set [7, str(mpdb_weapons_enabled)];
+	_missionArray set [8, str(mpdb_ace_enabled)];
+	_missionArray set [9, str(mpdb_landvehicles_enabled)];
+	_missionArray set [10, str(mpdb_objects_enabled)];
+	_missionArray set [11, str(mpdb_locations_enabled)];
+	_missionArray set [12, str(mpdb_objects_contents_enabled)];
+	_missionArray set [13, str(mpdb_markers_enabled)];
+	_missionArray set [14, str(mpdb_tasks_enabled)];
+	_missionArray set [15, str(mpdb_aar_enabled)];
+	_missionArray set [21, str(mpdb_aim_enabled)];
 } else {
 	_missionArray = [];
 };// copy the returned row into array
