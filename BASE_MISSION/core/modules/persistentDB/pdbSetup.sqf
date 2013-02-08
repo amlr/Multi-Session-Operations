@@ -22,7 +22,7 @@ pdb_author = "Thanks to the PDB Dev Team"; // for BIS_fnc_infoText
 PDB_CLIENT_GET_DATA = ["G_PLAYER_DATA"]; // Setup an array of object data that we need to get from client
 PDB_CLIENT_SET_DATA = ["S_PLAYER_DATA"];
 
-// The following are set initially with a mission param or by default and then overridden by the mission DB vars if mission exists
+
 // mpdb = mission param variable
 // pdb = setting used by pdb
 // Add any data models here as necessary
