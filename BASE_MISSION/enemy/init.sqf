@@ -8,6 +8,10 @@
 #define execNow call compile preprocessfilelinenumbers
 #endif
 
+#ifndef execLater
+#define execLater execvm
+#endif
+
 MSO_FACTIONS = [];
 
 if(isNil "faction_RU") then {faction_RU = DEFAULT_RU;};
@@ -114,12 +118,12 @@ execNow "enemy\modules\crb_terrorists\main.sqf";
 
 #ifdef CQB_POP
 "CQB Populator" call mso_core_fnc_initStat;
-execNow "enemy\modules\CQB_POP\main.sqf";
+execLater "enemy\modules\CQB_POP\main.sqf";
 #endif
 
 #ifdef RMM_ENEMYPOP
 "Enemy Populate" call mso_core_fnc_initStat;
-execNow "enemy\modules\rmm_enemypop\main_pdb.sqf";
+execLater "enemy\modules\rmm_enemypop\main_pdb.sqf";
 #endif
 
 #ifdef WICT_ENEMYPOP
@@ -139,7 +143,7 @@ execNow "enemy\modules\bis_warfare\main.sqf";
 
 #ifdef CRB_CONVOYS
 "Convoys" call mso_core_fnc_initStat;
-execNow "enemy\modules\crb_convoys\main.sqf";
+execLater "enemy\modules\crb_convoys\main.sqf";
 #endif
 
 #ifdef ROY_PATROLOPS
