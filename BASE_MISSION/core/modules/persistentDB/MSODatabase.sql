@@ -547,6 +547,6 @@ DROP PROCEDURE IF EXISTS `UpdateMissionByName`$$
 CREATE DEFINER = 'arma'@'localhost' PROCEDURE `UpdateMissionByName`(IN ttd INTEGER(1), IN tsc INTEGER(1), IN tgsc INTEGER(1), IN tlog INTEGER(1), IN twea INTEGER(1), IN tace INTEGER(1), IN tlv INTEGER(1), IN tobj INTEGER(1), IN tloc INTEGER(1), IN tobc INTEGER(1), IN tmar INTEGER(1), IN ttas INTEGER(1), IN taar INTEGER(1), IN taim INTEGER(1), IN tna VARCHAR(255))
 BEGIN
 UPDATE missions SET td = ttd, sc = tsc, gsc = tgsc, log = tlog, wea = twea, ace = tace, lv = tlv, obj = tobj, loc = tloc, obc = tobc, mar = tmar, tas = ttas, aar = taar, aim = taim  WHERE na = tna;
-END;
+END$$
 
 DELIMITER ;
