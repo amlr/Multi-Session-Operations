@@ -8,7 +8,7 @@ if(count _this > 3) then {_gradientarea = _this select 3} else {_gradientarea = 
 
 _pos = [];
 
-for "_i" from 1 to 25 do {
+for "_i" from 1 to 3000 do {
         _pos = [(_position select 0) + _radius - random (2*_radius),(_position select 1) + _radius - random (2*_radius),0];
         _pos = 	_pos isflatempty [
                 10,				//--- Minimal distance from another object
@@ -33,6 +33,6 @@ for "_i" from 1 to 25 do {
 
 if(count _pos == 0) then {
         _pos = _position;
-        if (_debug) then {diag_log format["MSO-%1 RMM GETFLATAREA defaulting to original pos after 25 trys: %2", time, _pos];};
+        if (_debug) then {diag_log format["MSO-%1 RMM GETFLATAREA defaulting to original pos after 3000 trys: %2", time, _pos];};
 };
 _pos;
