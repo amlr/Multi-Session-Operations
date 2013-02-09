@@ -109,7 +109,6 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
         if ((_loctype == "Hill")) then {
                 _pos = [position _loc, 0, 30, 1, 0, 5, 0] call bis_fnc_findSafePos;
                 _placeholder = "Can_small" createvehicle _pos;
-                _placeholder setposATL [_pos select 0, _pos select 1, -30];
                 
                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                 while {isnil "_grptype"} do {
@@ -120,8 +119,11 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _placeholder setVariable ["groupType",[_grptype],DEP_clientside];
                 
                 if (random 1 < ep_campprob) then {
+                        _posTMP = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
+                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to steep position %2!", time,_posTMP];};
+                        
+                        _pos = _posTMP;
                         _camp = [] call mso_fnc_selectcamptype;
-                        _pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
                         _grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
                         _grptype2 = [_grptype2] call DEP_format_group;
                         _placeholder setVariable ["groupType", [_grptype] + [_grptype2],DEP_clientside];
@@ -133,6 +135,7 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                         _placeholder setVariable ["type", [_camp,_AA,false],DEP_clientside];                
                 };
                 
+                _placeholder setposATL [_pos select 0, _pos select 1, -30];
                 DEP_LOCS set [count DEP_LOCS,[_placeholder,0]];
         };
         
@@ -140,7 +143,6 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _d = 500;
                 _pos = [position _loc, 0,_d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                 _placeholder = "Can_small" createvehicle _pos;
-                _placeholder setposATL [_pos select 0, _pos select 1, -30];
                 
                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                 while {isnil "_grptype"} do {
@@ -151,8 +153,11 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _placeholder setVariable ["groupType",[_grptype],DEP_clientside];
                 
                 if (random 1 < ep_campprob) then {
+                        _posTMP = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
+                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to steep position %2!", time,_posTMP];};
+                        
+                        _pos = _posTMP;
                         _camp = [] call mso_fnc_selectcamptype;
-                        _pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
                         _grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
                         _grptype2 = [_grptype2] call DEP_format_group;
                         _placeholder setVariable ["groupType", [_grptype] + [_grptype2],DEP_clientside];
@@ -163,7 +168,8 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                         };
                         _placeholder setVariable ["type", [_camp,_AA,false],DEP_clientside];                      
                 };
-                
+
+                _placeholder setposATL [_pos select 0, _pos select 1, -30];
                 DEP_LOCS set [count DEP_LOCS,[_placeholder,0]];
         };
         
@@ -171,7 +177,6 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _d = 300;
                 _pos = [position _loc, 0,_d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                 _placeholder = "Can_small" createvehicle _pos;
-                _placeholder setposATL [_pos select 0, _pos select 1, -30];
                 
                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                 while {isnil "_grptype"} do {
@@ -182,8 +187,11 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _placeholder setVariable ["groupType",[_grptype],DEP_clientside];
                 
                 if (random 1 < ep_campprob) then {
+                        _posTMP = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
+                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to steep position %2!", time,_posTMP];};
+                        
+                        _pos = _posTMP;
                         _camp = [] call mso_fnc_selectcamptype;
-                        _pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
                         _grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
                         _grptype2 = [_grptype2] call DEP_format_group;
                         _placeholder setVariable ["groupType", [_grptype] + [_grptype2],DEP_clientside];
@@ -200,6 +208,7 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                         _placeholder setVariable ["type", [_camp,_AA,false],DEP_clientside]; 
                 };
                 
+                _placeholder setposATL [_pos select 0, _pos select 1, -30];
                 DEP_LOCS set [count DEP_LOCS,[_placeholder,0]];
         };
         
@@ -207,7 +216,6 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _d = 200;
                 _pos = [position _loc, 0,_d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                 _placeholder = "Can_small" createvehicle _pos;
-                _placeholder setposATL [_pos select 0, _pos select 1, -30];
                 
                 _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                 while {isnil "_grptype"} do {
@@ -218,14 +226,18 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _placeholder setVariable ["groupType",[_grptype],DEP_clientside];
                 
                 if (random 1 < ep_campprob) then {
+                        _posTMP = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
+                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to steep position %2!", time,_posTMP];};
+                        
+                        _pos = _posTMP;
                         _camp = [] call mso_fnc_selectcamptype;
-                        _pos = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
                         _grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
                         _grptype2 = [_grptype2] call DEP_format_group;
                         _placeholder setVariable ["type", [_camp,_AA,false],DEP_clientside];
                         _placeholder setVariable ["groupType", [_grptype] + [_grptype2],DEP_clientside];
                 };
                 
+                _placeholder setposATL [_pos select 0, _pos select 1, -30];
                 DEP_LOCS set [count DEP_LOCS,[_placeholder,0]];
         };
 };
