@@ -60,6 +60,13 @@ _BuildingTypeStrategic = [
 "Land_Ind_PowerStation_EP1",
 "Land_Ind_PowerStation"];
 
+switch (worldName) do {		
+        case "Panthera2": {
+			_BuildingTypeStrategic = _BuildingTypeStrategic + ["land_posed","Land_army_hut3_long_int","land_army_hut2_int","land_army_hut_int","Land_fuelstation_army","Land_Hangar_2"];
+			if (_Btype == "strategic") then {_cqb_spawn_intensity = 0.6};
+		};
+};
+
 {
     if (
         (random 1 > _cqb_spawn_intensity) &&

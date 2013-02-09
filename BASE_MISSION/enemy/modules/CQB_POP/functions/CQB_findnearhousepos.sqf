@@ -2,7 +2,8 @@ private ["_pos","_radius"];
 
 _pos = _this select 0;
 _radius = _this select 1;
-_bldgpos = [];
+_bldgposLow = [];
+_bldgposHigh = [];
 
 _nearbldgs = nearestObjects [_pos, ["House"], _radius];
 
@@ -21,12 +22,16 @@ _nearbldgs = nearestObjects [_pos, ["House"], _radius];
     
     if (_poscount > 2) then {
     		for "_z" from 0 to (_poscount - 2) do {
-				if ((_y select 2 < 3) && (_i > 0)) then {
-					_bldgpos set [count _bldgpos, _y];
+				if (_i > 0) then {
+					if (_y select 2 < 3) then {
+						_bldgposLow set [count _bldgposLow, _y];
+					} else {
+						_bldgposHigh set [count _bldgposHigh, _y];
+					};
 				};
 				_i = _i + 1;
 				_y = _x buildingPos _i;
 			};
     };
 } forEach _nearbldgs;
-_bldgpos;
+[_bldgposLow,_bldgposHigh];
