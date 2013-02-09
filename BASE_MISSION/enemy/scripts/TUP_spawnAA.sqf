@@ -66,7 +66,7 @@ if (_type == "static" || _type == "mixed") then {
 			_pos = [_pos, 0, 50, 10, 0, 2, 0] call bis_fnc_findSafePos;
 			[_camp, random 360, _pos] call f_builder2;
 			if (_debug) then {
-				diag_log format ["MSO-%1 Enemy Population - Anti Air Camp created at %2 (%3)", time, _pos, text _loc]; 
+				diag_log format ["MSO-%1 Enemy Population - Anti Air Camp created at %2", time, _pos]; 
 				
 			};
 		} else {
