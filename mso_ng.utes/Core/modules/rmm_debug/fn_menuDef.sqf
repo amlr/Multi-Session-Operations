@@ -16,6 +16,7 @@ if (typeName _params == typeName []) then {
 } else {
 	_menuName = _params;
 };
+
 //-----------------------------------------------------------------------------
 
 _menus = [
@@ -23,8 +24,8 @@ _menus = [
 		["main", mso_menuname, _menuRsc],
 		[
 			["Debug Console",
-				{ createDialog "RMM_ui_debug" },
-				"", "", "", -1,	1/*, (getPlayerUID player) in MSO_R_Admin*/]
+				{createDialog "RMM_ui_debug"},
+				"", "", "", -1,	1, ([] call DEBUG_CHECK)]
 		]
 	]
 ];

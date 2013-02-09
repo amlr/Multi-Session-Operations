@@ -1,4 +1,4 @@
-if(isDedicated) exitWith{};
+if(isDedicated || isHC) exitWith{};
 
 [] spawn {
 

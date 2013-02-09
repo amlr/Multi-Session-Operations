@@ -1,10 +1,9 @@
 private ["_hcData","_serverData"];
 
-//Set default values and check if turned on
-if (CQB_spawn == 0) exitwith {diag_log format["MSO-%1 CQB Population turned off! Exiting...", time]};
-
 //Default values for params and needed variables
 if (isnil "CQB_spawn") then {CQB_spawn = 10};
+//Set default values and check if turned on
+if (CQB_spawn == 0) exitwith {diag_log format["MSO-%1 CQB Population turned off! Exiting...", time]};
 if (isnil "isHC") then {call mso_core_fnc_isHC};
 if (isnil "CQBlocality") then {CQBlocality = 1};
 if (isnil "CQBspawnrange") then {CQBspawnrange = 500};

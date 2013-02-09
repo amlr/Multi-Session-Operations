@@ -1,6 +1,3 @@
-#include <script_macros_core.hpp>
-SCRIPT(convertData);
-
 /* ----------------------------------------------------------------------------
 Function: MSO_fnc_convertData
 
@@ -38,56 +35,59 @@ Wolffy.au
 Peer Reviewed:
 
 ---------------------------------------------------------------------------- */
+#include <script_macros_core.hpp>
+SCRIPT(convertData);
+
 private ["_result","_debug"];
 _debug = false;
 _result = nil;
 
 if(isNil "_this") exitWith {
-        if (_debug) then {
-                "ConvertData <null> type" call MSO_fnc_logger;
-        };
-        "nil";
+	if (_debug) then {
+		"ConvertData <null> type" call MSO_fnc_logger;
+	};
+	"nil";
 };
 
 if (_debug) then {
-        format["ConvertData %1:%2", typeName _this, _this] call MSO_fnc_logger;
+	format["ConvertData %1:%2", typeName _this, _this] call MSO_fnc_logger;
 };
 
 switch(typeName _this) do {
-        case "BOOL": {
-                private["_tmp"];
-                _tmp = if(_this) then {1} else {0};
-                _result = format["%1:%2",typeName _this, _tmp];
-        };
-        case "ARRAY": {
-                private["_tmp"];
-                _tmp = [];
-                {
-                        private["_v"];
-                        _v = _x call MSO_fnc_convertData;
-                        if(
-                                (typeName _x == "ARRAY") ||
-                                {typeName _x == "OBJECT"}
-                        ) then {
-                                _v = [_v, """", """"""] call CBA_fnc_replace;
-                        };
-                        _tmp set [count _tmp, _v];
-                } forEach _this;
-                _result = format["%1:%2",typeName _this, _tmp];
-        };
-        case "OBJECT": {
-                private["_tmp"];
-                _tmp = [] call CBA_fnc_hashCreate;
-                if(_this isKindOf "Building") then {
-                        [_tmp, "Category", "Building"] call CBA_fnc_hashSet;
-                };
-                [_tmp, "typeOf", typeOf _this] call CBA_fnc_hashSet;
-                [_tmp, "position", position _this] call CBA_fnc_hashSet;
-                [_tmp, "direction", direction _this] call CBA_fnc_hashSet;
-                _result = format["%1:%2",typeName _this, _tmp];
-        };
-        default {
-                _result = format["%1:%2",typeName _this, _this];
-        };
+	case "BOOL": {
+		private["_tmp"];
+		_tmp = if(_this) then {1} else {0};
+		_result = format["%1:%2",typeName _this, _tmp];
+	};
+	case "ARRAY": {
+		private["_tmp"];
+		_tmp = [];
+		{
+			private["_v"];
+			_v = _x call MSO_fnc_convertData;
+			if(
+				(typeName _x == "ARRAY") ||
+				{typeName _x == "OBJECT"}
+			) then {
+				_v = [_v, """", """"""] call CBA_fnc_replace;
+			};
+			_tmp set [count _tmp, _v];
+		} forEach _this;
+		_result = format["%1:%2",typeName _this, _tmp];
+	};
+	case "OBJECT": {
+		private["_tmp"];
+		_tmp = [] call CBA_fnc_hashCreate;
+		if(_this isKindOf "Building") then {
+			[_tmp, "Category", "Building"] call CBA_fnc_hashSet;
+		};
+		[_tmp, "typeOf", typeOf _this] call CBA_fnc_hashSet;
+		[_tmp, "position", position _this] call CBA_fnc_hashSet;
+		[_tmp, "direction", direction _this] call CBA_fnc_hashSet;
+		_result = format["%1:%2",typeName _this, _tmp];
+	};
+	default {
+		_result = format["%1:%2",typeName _this, _this];
+	};
 };
 _result;

@@ -9,7 +9,8 @@ scriptName "garbage_collector\data\scripts\process_queue.sqf";
 */
 
 //TODO: dangerous and does not work on dedicated server. Allow registering important units to the GC through a function?
-private ["_queue","_i"];
+private ["_mainGrp", "_queue","_i"];
+_mainGrp = group player;
 
 waitUntil{!isNil "BIS_GC"};
 //--- Execute Functions

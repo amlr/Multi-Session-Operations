@@ -1,6 +1,3 @@
-#include <script_macros_core.hpp>
-SCRIPT(writeData);
-
 /* ----------------------------------------------------------------------------
 Function: MSO_fnc_readData
 
@@ -24,6 +21,9 @@ Tupolov
 Peer Reviewed:
 Wolffy.au 24 Oct 2012
 ---------------------------------------------------------------------------- */
+#include <script_macros_core.hpp>
+SCRIPT(writeData);
+
 private ["_debug","_response","_module","_params"];
 _debug = false;
 
