@@ -65,6 +65,10 @@ switch (worldName) do {
 			_BuildingTypeStrategic = _BuildingTypeStrategic + ["land_posed","Land_army_hut3_long_int","land_army_hut2_int","land_army_hut_int","Land_fuelstation_army","Land_Hangar_2"];
 			if (_Btype == "strategic") then {_cqb_spawn_intensity = 0.6};
 		};
+		case "lingor": {
+			_BuildingTypeStrategic = _BuildingTypeStrategic + ["land_posed","Land_army_hut3_long_int","land_army_hut2_int","land_army_hut_int","Land_fuelstation_army","Land_Hangar_2"];
+			if (_Btype == "strategic") then {_cqb_spawn_intensity = 0.6};
+		};
 };
 
 {
