@@ -62,7 +62,7 @@ if (isNil "tup_logistics_defence") then {
 
 tup_logistics_container = ["Misc_cargo_cont_net1","Misc_cargo_cont_net2","Misc_cargo_cont_net3"];
 
-if (isserver) exitwith {};
+if (isDedicated) exitwith {};
 
 //if (!(getPlayerUID player) in MSO_R_Leader)) exitwith {};
 
