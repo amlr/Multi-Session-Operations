@@ -6,7 +6,6 @@ _exitcheck = 0;
 
 for [{_n = 0},{_n < 10},{_n = _n + 1}] do {
     if (_quit || _n > _exitcheck + 1) exitwith {};
-    player sidechat str(_n);
 	if !(isnil format ["BIS_ARZ_%1",_n]) then {
         _exitcheck = _n;
         _trigger = call compile format  ["BIS_ARZ_%1",_n];
