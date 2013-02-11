@@ -21,7 +21,7 @@ for "_i" from 1 to 3000 do {
         ];
         if(count _pos > 0) then {
                 _pos set [2,0];
-                if(count (_pos nearRoads 20) != 0) then {
+                if ((count (_pos nearRoads 20) != 0) || {[_pos] call MSO_core_fnc_inARZtrigger}) then {
                         _pos = [];
                 };
         };
