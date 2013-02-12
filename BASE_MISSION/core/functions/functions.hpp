@@ -25,5 +25,6 @@ class mso_core {
 		class getrandgrouptype {};
 		class isHC {};
 		class inARZtrigger {};
+		class inZORAtrigger {};
 	};
 };
