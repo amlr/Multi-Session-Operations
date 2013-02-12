@@ -47,7 +47,7 @@ _convoyLocs = [];
 
 // Search CRB_LOCs for suitable destinations
 {
-        if((type _x in _strategic) && (count ((position _x) nearRoads 300) > 3)) then {
+        if ((type _x in _strategic) && {(count ((position _x) nearRoads 300) > 3)}) then {
                 _convoyLocs set [count _convoyLocs, position _x];
         };
 } forEach CRB_LOCS;
@@ -104,8 +104,7 @@ for "_j" from 1 to _numconvoys do {
 						// Select a start position outside of player safe zone and not near base
 						while { 
 							_startroad = ((_convoyLocs call BIS_fnc_selectRandom) nearRoads 300) call BIS_fnc_selectRandom; 
-							((position _startroad distance getmarkerpos "ammo" < rmm_ep_safe_zone) && 
-							(position _startroad  distance getmarkerpos "ammo_1" < rmm_ep_safe_zone))
+							[position _startroad] call MSO_core_fnc_inZORAtrigger;
 						} do {};
                         
 						_startpos =  position _startroad; 
