@@ -53,7 +53,7 @@ if (_fac == "CIV_RU") then {_fac = "INS";};
 
 // Find nearest road
 _roads = _pos nearRoads 500;
-while {_roadpos = _roads call BIS_fnc_selectRandom; _roads = _roads - [_roadpos]; count (nearestobjects [getpos _roadpos, ["House"], 60]) > 0} do {
+while {_roadpos = _roads call BIS_fnc_selectRandom; _roads = _roads - [_roadpos]; (count (nearestobjects [getpos _roadpos, ["House"], 60]) > 0 || [getpos _roadpos] call MSO_core_fnc_inARZtrigger)} do {
 	if (count _roads == 1) exitWith {_roadpos = _roads select 0};
 };
 if (_debug) then {
