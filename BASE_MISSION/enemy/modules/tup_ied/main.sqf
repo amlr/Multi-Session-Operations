@@ -7,7 +7,7 @@ private ["_debug"];
 _debug = debug_mso;
 
 if (isNil "tup_ied_header")then{tup_ied_header = 1;};
-if ((!isServer) || (tup_ied_header == 0)) exitWith{};
+if ((!isServer) || (tup_ied_header == 0)) exitWith {diag_log format["MSO-%1 TUP IEDs: Exiting...", time];};
 if (isNil "tup_ied_enemy")then{tup_ied_enemy = 0;};
 if (isNil "tup_ied_eod")then{tup_ied_eod = 1;};
 if (isNil "tup_ied_threat")then{tup_ied_threat = 50;};
@@ -37,12 +37,12 @@ if (isNil "tup_suicide_threat")then{tup_suicide_threat = 10;};
 			 if (_debug) then {
 				_t = format["suic_t%1", random 1000];
 				diag_log format ["MSO-%1 Suicide Bomber Trigger: created at %2 (%3)", time, text _twn, mapgridposition  _x];
-				[_t, getpos _twn, "Ellipse", [_size+250,_size+250], "TEXT:", text _twn, "COLOR:", "ColorOrange", "BRUSH:", "Border", "GLOBAL] call CBA_fnc_createMarker;
+				[_t, getpos _twn, "Ellipse", [_size+250,_size+250], "TEXT:", text _twn, "COLOR:", "ColorOrange", "BRUSH:", "Border", "GLOBAL"] call CBA_fnc_createMarker;
 			};
 		};
 
 		if (_fate < tup_ied_threat) then {
-			// Place IED trigger
+
 			_trg = createTrigger["EmptyDetector",getpos _twn]; 
 			_trg setTriggerArea[(_size+250), (_size+250),0,false];
 			if (tup_ied_enemy == 1) then {
@@ -61,6 +61,3 @@ if (isNil "tup_suicide_threat")then{tup_suicide_threat = 10;};
 		};
 	};
 } foreach (bis_functions_mainscope getvariable "locations");
-
-
-
