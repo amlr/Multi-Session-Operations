@@ -120,7 +120,7 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 
                 if (random 1 < ep_campprob) then {
                         _posTMP = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
-                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to steep position %2!", time,_posTMP];};
+                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to unsuitable location %2!", time,_posTMP];};
                         
                         _pos = _posTMP;
                         _camp = [] call mso_fnc_selectcamptype;
@@ -154,7 +154,7 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 
                 if (random 1 < ep_campprob) then {
                         _posTMP = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
-                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to steep position %2!", time,_posTMP];};
+                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to unsuitable location %2!", time,_posTMP];};
                         
                         _pos = _posTMP;
                         _camp = [] call mso_fnc_selectcamptype;
@@ -188,7 +188,7 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 
                 if (random 1 < ep_campprob) then {
                         _posTMP = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
-                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to steep position %2!", time,_posTMP];};
+                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to unsuitable location %2!", time,_posTMP];};
                         
                         _pos = _posTMP;
                         _camp = [] call mso_fnc_selectcamptype;
@@ -227,7 +227,7 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 
                 if (random 1 < ep_campprob) then {
                         _posTMP = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
-                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to steep position %2!", time,_posTMP];};
+                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to unsuitable location %2!", time,_posTMP];};
                         
                         _pos = _posTMP;
                         _camp = [] call mso_fnc_selectcamptype;
