@@ -229,4 +229,7 @@ if (isClass(configFile>>"CfgPatches">>"gbl_field_rations")) then {
                 };
         } foreach _rationsmarkers;
     };
+    
+    gbl_descentRateDrink = 0.1;
+    gbl_descentRateFood = 0.03;
 };
