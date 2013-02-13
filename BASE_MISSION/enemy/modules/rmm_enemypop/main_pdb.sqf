@@ -194,3 +194,6 @@ PublicVariableServer "ep_locations";
 
 [] spawn DEP_Triggerloop;
 DEP_INIT_FINISHED = true; publicvariable "DEP_INIT_FINISHED";
+
+// Output sidechat to inform admin that DEP has finished (as it is called after clicking continue on mapscreen)
+[-1, {if (servercommandavailable "#kick") then {player sidechat _this}}, format["MSO DEP INIT FINISHED! Collected %1 enemy locations!",count DEP_LOCS]] call CBA_fnc_globalExecute;
