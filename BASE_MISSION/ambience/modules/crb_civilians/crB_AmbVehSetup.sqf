@@ -73,6 +73,11 @@ switch toLower(worldName) do {
 // BIS_silvie_mainscope setVariable ["vehicleInit",{}]; 
 // randomly lock and vary fuel
 
+#ifdef TUP_IED
+// set default VBIED threat for SP
+if (isNil "tup_vbied_threat") then {tup_vbied_threat = 5};
+#endif
+
 BIS_silvie_mainscope setVariable ["vehicleInit",{
 	if(random 1 > 0.6) then {
 		clearMagazineCargo _this;
@@ -85,14 +90,15 @@ BIS_silvie_mainscope setVariable ["vehicleInit",{
 		_this setFuel 0.5 + ((random 1)^3 - (random 1)^3)/2;
 		_this setDamage (random 0.5)^2;	// Up to 25% worn out
         };
-#ifdef TUP_IED
+
 		// 10% (set in params) chance its a VB-IED (radio controlled if EOD) - never a bike
-		if (isNil "tup_vbied_threat")then{tup_vbied_threat = 5;};
-		If ((random 100 < tup_vbied_threat) && (tup_vbied_threat > 0) && !(_this iskindOf  "Motorcycle")) then {
-			_this lock true;
-			[_this,true] execvM "enemy\modules\tup_ied\vbied.sqf";
-		};
-#endif
+		if !(isNil "tup_vbied_threat") then {
+        	If ((random 100 < tup_vbied_threat) && (tup_vbied_threat > 0) && !(_this iskindOf  "Motorcycle")) then {
+	            _this lock true;
+				[_this,true] execvM "enemy\modules\tup_ied\vbied.sqf";
+			};
+        };
+
         _this addEventHandler ["Engine", {
                 if(_this select 1) then {
                         driver (_this select 0) addRating -400;
