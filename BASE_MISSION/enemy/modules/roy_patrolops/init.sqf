@@ -30,6 +30,15 @@ if(isNil "paramsArray") then {
     PO2_IFACTION = 0;
 };
 
+if (isnil "fPlayersInside") then {
+	fPlayersInside = {
+	        private["_pos","_dist"];
+	        _pos = _this select 0;
+	        _dist = _this select 1;
+	        ({_pos distance _x < _dist} count ([] call BIS_fnc_listPlayers) > 0);
+	};
+};
+
 if(AMBAIRPARTOLS > 0) then {mps_ambient_air = true};
 
 //define Ranks that are allowed to sign in and abort operations
