@@ -174,7 +174,7 @@ CRB_createSeizedTrigger = {
 	};
 	
 	_colour = "ColorWhite";
-	[format["%1_mgr", _name], _pos, _type, [_size, _size], "COLOR:", _colour, "BRUSH:", "Cross"] call CBA_fnc_createMarker;
+	[format["%1_mgr_%2", _name,floor(random 10000)], _pos, _type, [_size, _size], "COLOR:", _colour, "BRUSH:", "Cross","PERSIST"] call CBA_fnc_createMarker;
 	
 	if (twnmgr_detected == 1) then {
 		//////////////////////////////////////////
