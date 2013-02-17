@@ -4,6 +4,7 @@
 
 titleCut ["", "BLACK FADED", 999];
 titleText ["Initialising...", "BLACK"];
+waitUntil{!isNil "BIS_fnc_init"};
 call mso_core_fnc_isHC;
 
 execNow "init-mods.sqf";
