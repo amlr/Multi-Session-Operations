@@ -25,7 +25,7 @@ waitUntil{!isNil "CRB_LOCS"};
 _types = ["FlatArea","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard","ViewPoint","Hill"];
 _maxdist = 100;
 _dogs = [];
-_side = civilian;
+_side = east;
 if(count _this > 0) then {
         _side = _this select 0;
 };

@@ -62,8 +62,8 @@ for "_i" from 1 to _random do {
                                 if(alive _dog && !(_dog getVariable "attacking")) then {
                                         _alive_humans = [];
                                         {
-                                                //if ((side _dog)getFriend (side _x) <0.6) then {
-                                                if (side _x == west || side _x == east) then {
+                                                if ((side _dog)getFriend (side _x) <0.6) then {
+                                                //if (side _x == west || side _x == east) then {
                                                         _alive_humans set [count _alive_humans, _x];
                                                         _dog knowsabout _x;
                                                 }
