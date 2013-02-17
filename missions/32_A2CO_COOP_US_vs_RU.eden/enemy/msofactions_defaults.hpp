@@ -7,7 +7,7 @@
 #define DEFAULT_BIS_TK_GUE 0
 #define DEFAULT_CWR2_US 0
 #define DEFAULT_CWR2_RU 1
-#define DEFAULT_CWR2_FIA 0
+#define DEFAULT_CWR2_FIA 1
 #define DEFAULT_tigerianne 0
 #define DEFAULT_ibr_arl_faction 0
 #define DEFAULT_ibr_drg_faction 0
