@@ -95,8 +95,6 @@ if (CQB_HC_active) then {
 
 		if (persistentDBHeader == 1) then {	
 				waituntil {!(isnil "PDB_CQB_positionsloaded")};
-                // Output sidechat to inform admin that CQB has finished (as it is called after clicking continue on mapscreen)
-				[-1, {if (servercommandavailable "#kick") then {player sidechat _this}}, format["MSO CQB INIT FINISHED! Collected %1 spawnpositions!",((count CQBpositionsStrat) + (count CQBpositionsReg))]] call CBA_fnc_globalExecute;
 		};
 
 				if ((CQBlocality == 0) && (persistentDBHeader == 1)) then {
