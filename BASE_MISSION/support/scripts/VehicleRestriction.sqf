@@ -31,7 +31,7 @@ for "_i" from 0 to ((count RestrictionArray)-1) do {
         if (typeof _x == _carType) then {
             _x setvariable ["allowedDrivers",_allowedUnits];
 	        _x addEventHandler ["GetIn", {
-				[_this select 0,_this select 1,_this select 2] spawn RestrictFunction;
+				if ((_this select 2) == player) then {[_this select 0,_this select 1,_this select 2] spawn RestrictFunction};
 	        }];
     	};
 	} foreach vehicles;
