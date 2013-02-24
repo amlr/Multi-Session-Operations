@@ -9,7 +9,6 @@
 //#squint filter Careful - string searches using 'in' are case-sensitive
 private ["_debug"];
 
-_debug = debug_mso;
 if (isnil "rmm_dynamic") then {rmm_dynamic = 1};
 if (isNil "rmm_ep_spawn_dist") then {rmm_ep_spawn_dist = 2000;};
 if (isNil "rmm_ep_safe_zone") then {rmm_ep_safe_zone = 2000;};
@@ -21,6 +20,8 @@ if (isNil "rmm_ep_aa") then {rmm_ep_aa = 2;};
 if (isNil "DEP_ACTIVE_LOCS") then {DEP_ACTIVE_LOCS = 40;};
 if (isNil "DEP_LOC_DENSITY") then {DEP_LOC_DENSITY = 1000;};
 if (isNil "mpdb_locations_enabled") then {pdb_locations_enabled = false;};
+ARTILLERIES = [];
+_debug = debug_mso;
 
 if (isnil "rmm_locality") then {rmm_locality = 0};
 switch (rmm_locality) do {
@@ -40,13 +41,6 @@ if(rmm_dynamic == 0) exitWith{diag_log format ["MSO-%1 Enemy Populator Disabled 
 if (isDedicated && {KillServ}) exitWith {KillServ = false; diag_log format ["MSO-%1 Killing DEP init on server - Exiting...",time]};
 if (!(isServer) && {KillClient}) exitWith {KillClient = false; diag_log format ["MSO-%1 Killing DEP init on Client - Exiting...",time]};
 
-if (persistentDBHeader == 1 && {isHC}) then {
-	// DEP
-	if (rmm_locality > 0) then {
-		diag_log format["MSO-%1 Headless Client: %2, waiting for PDB_DEP_positionsloaded...", time, player];
-		waituntil {!(isnil "PDB_DEP_positionsloaded")};
-	};	
-};	
 diag_log format["MSO-%1 PDB EP Population: starting to load functions...", time];
 if (isnil "BIN_fnc_taskDefend") then {BIN_fnc_taskDefend = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskDefend.sqf"};
 if (isnil "BIN_fnc_taskPatrol") then {BIN_fnc_taskPatrol = compile preprocessFileLineNumbers "enemy\scripts\BIN_taskPatrol.sqf"};
@@ -62,12 +56,23 @@ if (isnil "rmm_ep_getFlatArea") then {rmm_ep_getFlatArea = compile preprocessFil
 if (isnil "fPlayersInside") then {fPlayersInside = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\fPlayersInside.sqf"};
 if (isnil "DEP_convert_group") then {DEP_convert_group = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_convert_group.sqf"};
 if (isnil "DEP_Triggerloop") then {DEP_Triggerloop = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_Triggerloop.sqf"};
+if (isnil "DEP_ArtyFOAI") then {DEP_ArtyFOAI = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_ArtyFOAI.sqf"};
+if (isnil "DEP_InitArtyBattery") then {DEP_InitArtyBattery = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_InitArtyBattery.sqf"};
+if (isnil "DEP_InitArtilleriesServer") then {DEP_InitArtilleriesServer = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_InitArtilleriesServer.sqf"};
 diag_log format["MSO-%1 PDB EP Population: loaded functions...", time];
 
 ep_groups = [];
 ep_locations = [];
 ep_total = 0;
 ep_campprob = 1;
+
+if (persistentDBHeader == 1 && {isHC}) then {
+	// DEP
+	if (rmm_locality > 0) then {
+		diag_log format["MSO-%1 Headless Client: %2, waiting for PDB_DEP_positionsloaded...", time, player];
+		waituntil {!(isnil "PDB_DEP_positionsloaded")};
+	};	
+};	
 
 waitUntil{!isNil "BIS_fnc_init"};
 
@@ -104,7 +109,6 @@ DEP_camptypes =
         "radar_site_tk1"
 ];
 
-
 private ["_debug"];
 if (persistentDBHeader == 1) then {	
         waituntil {!(isnil "PDB_DEP_positionsloaded")};
@@ -121,7 +125,7 @@ if (isnil "DEP_LOCS") then {
 };
 
 {
-        private ["_obj","_pos","_grpt","_grpt","_camp","_grpt2","_AA","_RB"];
+        private ["_obj","_pos","_grpt","_grpt","_camp","_grpt2","_AA","_RB","_Arty","_LogicGroup","_artygroup"];
         
         //Dataset
         //Using "DEP_locs"-array for quick access [[_obj,[_pos select 0,_pos select 1,_pos select 2]],[_obj,[_pos select 0,_pos select 1,_pos select 2]],...]
@@ -131,12 +135,10 @@ if (isnil "DEP_LOCS") then {
         _camp = ((_x select 0) getvariable "type") select 0; if (isnil "_camp") then {_camp = false}; //Type of Camp (string)
         _grpt2 = ((_x select 0) getvariable "groupType") select 1; if (isnil "_grpt2") then {_grpt2 = false}; // Type of Campguards (array [side,grouptype])
         _AA = ((_x select 0) getvariable "type") select 1; if (isnil "_AA") then {_AA = false}; // AA Flag (bool)
-        if (count ((_x select 0) getvariable "type") > 2) then {
-                _RB = ((_x select 0) getvariable "type") select 2;
-        };
-        if (isnil "_RB") then {_RB = false}; // RB Flag (bool)
+        _RB = ((_x select 0) getvariable "type") select 2; if (isnil "_RB") then {_RB = false}; // RB Flag (bool)
+        _Arty = ((_x select 0) getvariable "type") select 3; if (isnil "_Arty") then {_Arty = false}; // Arty Flag (bool)
         _debug = debug_mso;
-        
+                
         //Fix for PO2
         if (typename _camp == "STRING") then {
                 ep_locations set [count ep_locations,["Camp",_pos]];
@@ -166,14 +168,7 @@ if (isnil "DEP_LOCS") then {
                 if (_debug) then {diag_log format["MSO-%1 PDB EP Population: MSO-%1 Armored at %2", time,_pos]};
                 ep_locations set [count ep_locations,["Armored",_pos]];
         };
-        
-        //Markers in Debug
-        if (_debug) then {
-                private["_t","_m"];
-                _t = format["DEP%1",floor(random 100000)];
-                _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", str(_grpt select 2), "GLOBAL"] call CBA_fnc_createMarker;
-        };
-        
+   
         if (typename _camp == "STRING") then {
                 if (_camp in DEP_camptypes) then {
                         [_camp, floor(random 360), _pos] call mso_core_fnc_createCompositionE;
@@ -184,13 +179,25 @@ if (isnil "DEP_LOCS") then {
                 if (_AA) then {
                         [_pos, "static", 1 + random 1] call TUP_fnc_deployAA;
                 };
-                
                 if (_RB) then {
                         _obj setvariable ["RBspawned",false];
                 };
-        };   
+        };
+        
+        //Markers in Debug
+        if (_debug) then {
+                private["_t","_m"];
+                _t = format["DEP%1",floor(random 100000)];
+                _m = [_t, _pos, "Icon", [1,1], "TYPE:", "Dot", "TEXT:", str(_grpt select 2), "GLOBAL"] call CBA_fnc_createMarker;
+        };
 } foreach DEP_LOCS;
 PublicVariableServer "ep_locations";
+
+[0, {
+    	if (isnil "DEP_InitArtilleriesServer") then {DEP_InitArtilleriesServer = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_InitArtilleriesServer.sqf"};
+        [] call DEP_InitArtilleriesServer;
+    }, true
+] call CBA_fnc_globalExecute;
 
 [] spawn DEP_Triggerloop;
 DEP_INIT_FINISHED = true; publicvariable "DEP_INIT_FINISHED";

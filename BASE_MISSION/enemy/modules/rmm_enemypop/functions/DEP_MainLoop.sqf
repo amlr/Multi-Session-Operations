@@ -1,4 +1,4 @@
-private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_obj","_group","_grp2Pos","_grp2","_debug","_cleared","_spawned","_locunits","_groupPos","_breakouttimer","_suspended","_group2DEACTIVATED","_RBpos","_groupDEACTIVATED"];
+private ["_pos","_pos2","_grpt","_camp","_grpt2","_AA","_RB","_obj","_group","_grp2Pos","_grp2","_debug","_cleared","_spawned","_locunits","_groupPos","_breakouttimer","_suspended","_group2DEACTIVATED","_RBpos","_groupDEACTIVATED","_Arty"];
 
 _obj = _this select 0;
 _pos = _this select 1;
@@ -15,6 +15,7 @@ _breakouttimer = 0;
 _suspended = true;                               
 _groupDEACTIVATED = nil; _groupDEACTIVATED = _obj getvariable "GRPdeact"; if (isnil "_groupDEACTIVATED") then {_obj setvariable ["GRPdeact",false]};
 _group2DEACTIVATED = nil; _group2DEACTIVATED = _obj getvariable "GRP2deact"; if (isnil "_group2DEACTIVATED") then {_obj setvariable ["GRP2deact",false]};
+_Arty = nil; _Arty = _obj getvariable "Artillery";
 _debug = debug_mso;
 
 if (_debug) then {
@@ -38,11 +39,12 @@ waituntil {
                         ep_groups set [count ep_groups, _group];
                         
                         if ((isnil "_camp") || count units _group <= 2) then {
-                                [_group,_pos,500,2 + (random 3), "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+                                [_group,_pos,500,4 + (random 4), "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
                         } else {
-                                [_group,_pos,100,4 + random 6, "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-                        };
-                };
+                                [_group,_pos,300,4 + (random 2), "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
+								[_group,1000] spawn DEP_ArtyFOAI;
+                		};
+				};
                 
                 //spawn camp guards
                 if(!(isnil "_camp")) then {

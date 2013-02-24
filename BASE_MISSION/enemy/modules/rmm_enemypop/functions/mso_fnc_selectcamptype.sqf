@@ -3,7 +3,7 @@
     
 	_camp = [];
 	if("RU" in MSO_FACTIONS) then {
-		_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
+		_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
 	};
 	if("INS" in MSO_FACTIONS) then {
 		_camp = _camp + ["camp_ins1","camp_ins2"];
@@ -27,7 +27,7 @@
 		_camp = _camp + ["bunkerMedium01","bunkerMedium02","bunkerMedium03","bunkerMedium04","bunkerSmall01","guardpost4","guardpost5","guardpost6","guardpost7","guardpost8","citybase01","cityBase02","cityBase03","cityBase04"];
 	};
 	if (count _camp == 0) then {
-		_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","firebase_ru1","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
+		_camp = _camp + ["anti-air_ru1","camp_ru1","camp_ru2","heli_park_ru1","mediumtentcamp2_ru","mediumtentcamp3_ru","mediumtentcamp_ru","radar_site_ru1"];
 	};
 	if (count _camp > 0) then {
 		_camp = _camp call BIS_fnc_selectRandom;

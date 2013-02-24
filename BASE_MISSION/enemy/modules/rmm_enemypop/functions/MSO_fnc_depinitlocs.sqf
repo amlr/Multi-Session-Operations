@@ -101,6 +101,8 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
         _pos = position _loc;
         _grptype = nil;
         _AA = false;
+        _RB = false;
+        _Arty = false;
         _camp = false;
         
         _loctype = type _loc;
@@ -132,7 +134,7 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                         if (random 1 < 0.5) then { 
                                 _AA = true;
                         };
-                        _placeholder setVariable ["type", [_camp,_AA,false],DEP_clientside];                
+                        _placeholder setVariable ["type", [_camp,_AA,_RB,_Arty],DEP_clientside];                
                 };
                 
                 _placeholder setposATL [_pos select 0, _pos select 1, -30];
@@ -166,7 +168,7 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                         if (random 1 < 0.5) then {
                                 _AA = true;
                         };
-                        _placeholder setVariable ["type", [_camp,_AA,false],DEP_clientside];                      
+                        _placeholder setVariable ["type", [_camp,_AA,_RB,_Arty],DEP_clientside];                      
                 };
 
                 _placeholder setposATL [_pos select 0, _pos select 1, -30];
@@ -187,7 +189,8 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _placeholder setVariable ["groupType",[_grptype],DEP_clientside];
                 
                 if (random 1 < ep_campprob) then {
-                        _posTMP = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
+                    if (random 1 < 0.1) then {
+                         _posTMP = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
                         if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to unsuitable location %2!", time,_posTMP];};
                         
                         _pos = _posTMP;
@@ -195,17 +198,29 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                         _grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
                         _grptype2 = [_grptype2] call DEP_format_group;
                         _placeholder setVariable ["groupType", [_grptype] + [_grptype2],DEP_clientside];
+                   } else {
+                        _posTMP = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
+                        if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to unsuitable location %2!", time,_posTMP];};
+
+						_pos = _posTMP;
+						if ("BIS_TK" in MSO_FACTIONS || "BIS_TK_INS" in MSO_FACTIONS || "BIS_TK_GUE" in MSO_FACTIONS) then {_camp = "firebase_tk1";} else {_camp = "firebase_ru1";};
+                        _Arty = true;
                         
-                        // Add AA
-                        if (random 1 < 0.5) then { 
-                                _AA = true;
-                        };
+                        _grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
+                        _grptype2 = [_grptype2] call DEP_format_group;
+                        _placeholder setVariable ["groupType", [_grptype] + [_grptype2],DEP_clientside];
+                   };
+                   
+                    // Add AA
+                    if (random 1 < 0.5) then { 
+                            _AA = true;
+                    };
                 };
-                
+
                 if (((random 1 < 0.8) && (count (_pos nearRoads 500) > 0)) ) then {
-                        _placeholder setVariable ["type", [_camp,_AA,true],DEP_clientside];  
+                        _placeholder setVariable ["type", [_camp,_AA,true,_Arty],DEP_clientside];  
                 } else {
-                        _placeholder setVariable ["type", [_camp,_AA,false],DEP_clientside]; 
+                        _placeholder setVariable ["type", [_camp,_AA,false,_Arty],DEP_clientside]; 
                 };
                 
                 _placeholder setposATL [_pos select 0, _pos select 1, -30];
@@ -233,7 +248,7 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                         _camp = [] call mso_fnc_selectcamptype;
                         _grptype2 = ["Infantry", MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
                         _grptype2 = [_grptype2] call DEP_format_group;
-                        _placeholder setVariable ["type", [_camp,_AA,false],DEP_clientside];
+                        _placeholder setVariable ["type", [_camp,_AA,_RB,_Arty],DEP_clientside];
                         _placeholder setVariable ["groupType", [_grptype] + [_grptype2],DEP_clientside];
                 };
                 
