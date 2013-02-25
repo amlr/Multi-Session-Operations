@@ -45,6 +45,7 @@ if (isnil "DEP_ARTY_aifiremission") then {
 		
 		_impact = [(getpos (_tgt) select 0) + _Xadj+(random _error - _error/2), (getpos (_tgt) select 1) + _Yadj+(random _error - _error/2), getpos (_tgt) select 2];
         [0, {
+            [_this select 0, 100] call BIS_ARTY_F_SetDispersion;
              _this call BIS_ARTY_F_ExecuteTemplateMission;
             }, [_battery, _impact, _template]
         ] call CBA_fnc_globalExecute;
