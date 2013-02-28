@@ -43,6 +43,7 @@ if (isNil "CRB_LOCS") then {
 _DEP_loctypes = ["Hill","Strategic","StrongpointArea","Airport","HQ","FOB","Heliport","Artillery","AntiAir","City","Strongpoint","Depot","Storage","PlayerTrail","WarfareStart","FlatArea", "FlatAreaCity","FlatAreaCitySmall","CityCenter","NameMarine","NameCityCapital","NameCity","NameVillage","NameLocal","fakeTown","ViewPoint","RockArea","VegetationBroadleaf","VegetationFir","VegetationPalm","VegetationVineyard"];
 _CRB_locs_tmp = +CRB_LOCS;
 _DEP_locs_tmp = [];
+_DEP_ArtyIntensity = (rmm_ep_arty / 10);
 _timenow = time;
 
 diag_log format["MSO-%1 PDB EP Population: Start collecting locs from CRB_Locs (%2)...!", time, count CRB_LOCS];
@@ -189,7 +190,7 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _placeholder setVariable ["groupType",[_grptype],DEP_clientside];
                 
                 if (random 1 < ep_campprob) then {
-                    if (random 1 < 0.1) then {
+                    if (random 1 < _DEP_ArtyIntensity) then {
                          _posTMP = [position _loc,200,0.15,5] call rmm_ep_getFlatArea;
                         if (str(_posTMP) == str(position _loc)) exitwith {diag_log format["MSO-%1 PDB EP Population: Camp not created due to unsuitable location %2!", time,_posTMP];};
                         
@@ -217,7 +218,7 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                     };
                 };
 
-                if (((random 1 < 0.8) && (count (_pos nearRoads 500) > 0)) ) then {
+                if (((random 1 < 0.5) && (count (_pos nearRoads 500) > 0)) ) then {
                         _placeholder setVariable ["type", [_camp,_AA,true,_Arty],DEP_clientside];  
                 } else {
                         _placeholder setVariable ["type", [_camp,_AA,false,_Arty],DEP_clientside]; 

@@ -17,6 +17,7 @@ if (isNil "rmm_ep_mot") then {rmm_ep_mot = 3;};
 if (isNil "rmm_ep_mec") then {rmm_ep_mec = 2;};
 if (isNil "rmm_ep_arm") then {rmm_ep_arm = 1;};
 if (isNil "rmm_ep_aa") then {rmm_ep_aa = 2;};
+if (isNil "rmm_ep_arty") then {rmm_ep_arty = 9;};
 if (isNil "DEP_ACTIVE_LOCS") then {DEP_ACTIVE_LOCS = 40;};
 if (isNil "DEP_LOC_DENSITY") then {DEP_LOC_DENSITY = 1000;};
 if (isNil "mpdb_locations_enabled") then {pdb_locations_enabled = false;};
@@ -193,11 +194,15 @@ if (isnil "DEP_LOCS") then {
 } foreach DEP_LOCS;
 PublicVariableServer "ep_locations";
 
-[0, {
-    	if (isnil "DEP_InitArtilleriesServer") then {DEP_InitArtilleriesServer = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_InitArtilleriesServer.sqf"};
-        [] call DEP_InitArtilleriesServer;
-    }, true
-] call CBA_fnc_globalExecute;
+if !(rmm_ep_arty == 0) then {
+	[0, {
+	    	if (isnil "DEP_InitArtilleriesServer") then {DEP_InitArtilleriesServer = compile preprocessFileLineNumbers "enemy\modules\rmm_enemypop\functions\DEP_InitArtilleriesServer.sqf"};
+	        [] call DEP_InitArtilleriesServer;
+	    }, true
+	] call CBA_fnc_globalExecute;
+} else {
+    if (_debug) then {diag_log format["MSO-%1 PDB EP Population: Artillery batteries disabled!", time]};
+};
 
 [] spawn DEP_Triggerloop;
 DEP_INIT_FINISHED = true; publicvariable "DEP_INIT_FINISHED";

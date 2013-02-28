@@ -5,10 +5,12 @@ _debug = debug_mso;
 _LogCenter = createCenter sideLogic;
 
 {
+    private ["_Arty","_cleared"];
     _obj = _x select 0;
     _Arty = (_obj getvariable "type") select 3; if (isnil "_Arty") then {_Arty = false};
+    _cleared = _obj getvariable ["c",nil];
     
-    if (_Arty) then {
+    if ((_Arty) && (isnil "_cleared")) then {
       [_x select 0] call DEP_InitArtyBattery;
     };
 } foreach DEP_LOCS;

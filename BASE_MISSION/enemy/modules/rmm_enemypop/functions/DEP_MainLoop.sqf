@@ -42,7 +42,7 @@ waituntil {
                                 [_group,_pos,500,4 + (random 4), "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
                         } else {
                                 [_group,_pos,300,4 + (random 2), "MOVE", "AWARE", "RED", "LIMITED", "STAG COLUMN", "if (dayTime < 18 or dayTime > 6) then {this setbehaviour ""STEALTH""}", [120,200,280]] call CBA_fnc_taskPatrol;
-								[_group,1000] spawn DEP_ArtyFOAI;
+								if !(rmm_ep_arty == 0) then {[_group,1000] spawn DEP_ArtyFOAI};
                 		};
 				};
                 

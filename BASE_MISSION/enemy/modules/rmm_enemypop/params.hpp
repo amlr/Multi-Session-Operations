@@ -64,3 +64,9 @@ class rmm_ep_aa {
         texts[]= {"None","with AA Missiles","without AA Missiles"}; 
         default = 2;
 };
+class rmm_ep_arty {
+        title = "        Enemy Artillery Batteries"; 
+        values[]= {0,8,6,4}; 
+        texts[]= {"None","low","Medium","High"}; 
+        default = 8;
+};
