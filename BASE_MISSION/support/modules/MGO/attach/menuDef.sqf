@@ -28,7 +28,7 @@ if (_menuName == "main") then {
 			["main"],
 			[
 				["MilGO Attach >", "", "", "",
-					["mgo\attach\menuDef.sqf", "wepalt", 1],
+					["support\modules\mgo\attach\menuDef.sqf", "wepalt", 1],
 					-1, true, !isNil "_set_n"]
 			]
 		]
