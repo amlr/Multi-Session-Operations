@@ -125,6 +125,9 @@ class supportHeader {
 #ifdef PXS_SATCOM_OA
 #include "support\modules\pxs_satcom_oa\params.hpp"
 #endif
+#ifdef AIM
+#include <support\modules\AIM\params.hpp>
+#endif
 
 class enemyHeader {
         title = "Enemy"; 

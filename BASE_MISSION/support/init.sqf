@@ -139,3 +139,10 @@ execNow "support\modules\mgo\main\init.sqf";
 "PXS SATCOMs" call mso_core_fnc_initStat;
 ["ON"] execVM "support\modules\pxs_satcom_oa\init_satellite.sqf";
 #endif
+
+#ifdef AIM
+if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
+"AIM" call mso_core_fnc_initStat;
+execNow "support\modules\aim\init.sqf";
+};
+#endif
