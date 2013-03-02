@@ -59,7 +59,7 @@ _loc = nearestObject [(position leader _ArtyGroup), "Can_small"];
 _isSync = false;
 
 	{
-		if (_BL in (synchronizedObjects _ArtyGroup)) exitWith {_isSync = true};
+		if (_BL in (synchronizedObjects _x)) exitWith {_isSync = true};
 	}
 foreach _mdls;
 

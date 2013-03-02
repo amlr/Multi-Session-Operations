@@ -109,89 +109,98 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 sleep random 10;
 
 While {alive _FO && !(_quitFO)} do {
-    _FO selectWeapon (primaryweapon _FO);
-    _FO dowatch ObjNull;
 	if ([getposATL _FO,_Range] call fplayersinside) then {
             _targets = [_FO,_Range] call DEP_ARTY_SelectTargets;
             
             if (count _targets > 0) then {
                 if !(_AlignTime < _AlignTimeLimit) then {
-                    
-	                private ["_hit"];
 	                
-	                _target = _targets call BIS_fnc_selectRandom;
-					_RndPos = _target getvariable ["ACC_RNDS",[position _target,150]];
-	                _disp = _RndPos select 1;
-                    _FO selectWeapon "Binoculars";
-                    _FO dowatch _target;
-	            
-		            if ((_RndPos select 0) distance _target < _disp) then {
-	                    if (speed _target > 20) then {
-	                        _hit = [_target] call DEP_ARTY_CalcImpact;
-	                        if (_debug) then {diag_log format ["Impactcalculation for %1: %2 !", _target, _hit]};
-	                    } else {
-	                        _hit = [position _target, _disp] call CBA_fnc_randPos;
-	                        if (_debug) then {diag_log format ["Randpos calculation for %1: %2 !", _target, _hit]};
-	                    };
-	                    if (_disp >= 25) then {_disp = _disp - 25} else {_disp = 25};
-		                _RndPosNEW = [_hit,_disp];
-		                _target setvariable ["ACC_RNDS",_RndPosNEW];
-		            } else {
-	                    if (speed _target > 20) then {
-	                        _hit = [_target] call DEP_ARTY_CalcImpact;
-	                        if (_debug) then {diag_log format ["Impactcalculation for %1: %2 !", _target, _hit]};
-	                    } else {
-	                        _hit = [position _target, _disp] call CBA_fnc_randPos;
-	                        if (_debug) then {diag_log format ["Randpos calculation for %1: %2 !", _target, _hit]};
-	                    };
-	                    if (_disp <= 150) then {_disp = _disp + 25} else {_disp = 150};
-		                _RndPosNEW = [_hit,_disp];
-		                _target setvariable ["ACC_RNDS",_RndPosNEW];
-		            };
-		            
-		            _impact = (_target getvariable "ACC_RNDS") select 0;
-	                _dispersion = (_target getvariable "ACC_RNDS") select 1;
-		            if (_debug) then {diag_log format ["Checking variables %1 on Target %2 - Impact will be: %3!", _target, _target getvariable "ACC_RNDS",_impact]};
-		            
-					if (!isNull _target && {_impact distance _FO > 100}) then {
-		                
-		                if (sunOrMoon < 0.15 && {(_FMcount > 3 || _FMcount == -1)}) then {
-		                    if !(isnil "_battery") then {
-	                             [_battery, _illumTMP select 1] call BIS_ARTY_F_LoadMapRanges;
-	                            
-	                            if ([_battery, _impact, _illumTMP select 1] call BIS_ARTY_F_PosInRange) then {
-	                                _null1 = [_impact,_battery,_illumTMP,_dispersion] call DEP_ARTY_aifiremission;
-	                                if (_debug) then {diag_log format ["Impact %1 selected for battery %2 and template %3 dispersion %4",_impact,_battery,_HETMP,_dispersion]};
-	                            } else {
-	                                _battery = [_impact, _illumTMP] call DEP_ARTY_SelectBestArty;
-	                                if (_debug) then {diag_log format ["Artillery out of range, Calling new Artillery! MAXRANGE:%1 MINRANGE:%2 DISTANCE:%3", _battery getVariable "ARTY_MAX_RANGE",_battery getVariable "ARTY_MIN_RANGE",(position _battery) distance _impact]};
-	                                _AlignTime = 0;
-	                            };
-		                    } else {
-                                	_quitFO = true;
-		                    };
-			                _FMcount = 0;
-		                } else {
-		                    if !(isnil "_battery") then {
-	                            [_battery, _HETMP select 1] call BIS_ARTY_F_LoadMapRanges;
-	                            
-	                            if ([_battery, _impact, _HETMP select 1] call BIS_ARTY_F_PosInRange) then {
-	                                _null1 = [_impact,_battery,_HETMP,_dispersion] call DEP_ARTY_aifiremission;
-                                    _FMcount = _FMcount + 1;
-	                                if (_debug) then {diag_log format ["Impact %1 selected for battery %2 and template %3 dispersion %4",_impact,_battery,_HETMP,_dispersion]};
-	                            } else {
-	                                _battery = [_impact, _HETMP] call DEP_ARTY_SelectBestArty;
-	                                if (_debug) then {diag_log format ["Artillery out of range, Calling New Artillery! MAXRANGE:%1 MINRANGE:%2 DISTANCE:%3", _battery getVariable "ARTY_MAX_RANGE",_battery getVariable "ARTY_MIN_RANGE",(position _battery) distance _impact]};
-	                                _AlignTime = 0;
-	                            };
-		                    } else {
-                                	_quitFO = true;
-		                    };
-		                };
-					} else {
-		                if (_debug) then {diag_log format ["Target %1 isNull: %2 and Impact is farer away then 100mtrs: %3", _target, isNull _target,_impact, _impact distance _FO > 100]};
-		            };
-	                Sleep 20;
+                    if !(_battery getvariable "ARTY_ONMISSION") then {
+                        private ["_hit"];
+                    
+		                _target = _targets call BIS_fnc_selectRandom;
+						_RndPos = _target getvariable ["ACC_RNDS",[getposASL _target,150]];
+		                _disp = _RndPos select 1;
+                        
+                        _FO selectWeapon "Binoculars";
+	                	_FO dowatch _target;
+
+						if (!isNull _target && {(position _target) distance _FO > 100}) then {
+                            
+	                        if ((_RndPos select 0) distance (getposASL _target) < _disp) then {
+			                    if (speed _target > 20) then {
+			                        _hit = [_target] call DEP_ARTY_CalcImpact;
+			                        if (_debug) then {diag_log format ["Impactcalculation for %1: %2 !", _target, _hit]};
+			                    } else {
+                                    _minD = (_disp / 10)*3;
+			                        _hitA = [position _target, _disp] call CBA_fnc_randPos;
+								    _hit = [position _target,_minD,_disp,0,0,100,0,[],[_hitA]] call BIS_fnc_findSafePos;
+                                    _hit = [_hit select 0, _hit select 1,(getposASL _target) select 2];
+			                        if (_debug) then {diag_log format ["Randpos calculation for %1: %2 !", _target, _hit]};
+			                    };
+			                    if (_disp >= 25) then {_disp = _disp - 25} else {_disp = 25};
+				                _RndPosNEW = [_hit,_disp];
+				                _target setvariable ["ACC_RNDS",_RndPosNEW];
+				            } else {
+			                    if (speed _target > 20) then {
+			                        _hit = [_target] call DEP_ARTY_CalcImpact;
+			                        if (_debug) then {diag_log format ["Impactcalculation for %1: %2 !", _target, _hit]};
+			                    } else {
+			                        _hitA = [position _target, _disp] call CBA_fnc_randPos;
+								    _hit = [position _target,20,_disp,0,0,100,0,[],[_hitA]] call BIS_fnc_findSafePos;
+                                    _hit = [_hit select 0, _hit select 1,(getposASL _target) select 2];
+			                        if (_debug) then {diag_log format ["Randpos calculation for %1: %2 !", _target, _hit]};
+			                    };
+			                    if (_disp <= 150) then {_disp = _disp + 25} else {_disp = 150};
+				                _RndPosNEW = [_hit,_disp];
+				                _target setvariable ["ACC_RNDS",_RndPosNEW];
+				            };
+			            
+				            _impact = (_target getvariable "ACC_RNDS") select 0;
+			                _dispersion = (_target getvariable "ACC_RNDS") select 1;
+				            if (_debug) then {diag_log format ["Checking variables %1 on Target %2 - Impact will be: %3!", _target, _target getvariable "ACC_RNDS",_impact]};
+                            
+			                if (sunOrMoon < 0.15 && {(_FMcount > 3 || _FMcount == -1)}) then {
+			                    if !(isnil "_battery") then {
+		                             [_battery, _illumTMP select 1] call BIS_ARTY_F_LoadMapRanges;
+		                            
+		                            if ([_battery, _impact, _illumTMP select 1] call BIS_ARTY_F_PosInRange) then {
+		                                _null1 = [_impact,_battery,_illumTMP,_dispersion] call DEP_ARTY_aifiremission;
+		                                if (_debug) then {diag_log format ["Impact %1 selected for battery %2 and template %3 dispersion %4",_impact,_battery,_HETMP,_dispersion]};
+		                            } else {
+		                                _battery = [_impact, _illumTMP] call DEP_ARTY_SelectBestArty;
+		                                if (_debug) then {diag_log format ["Artillery out of range, Calling new Artillery! MAXRANGE:%1 MINRANGE:%2 DISTANCE:%3", _battery getVariable "ARTY_MAX_RANGE",_battery getVariable "ARTY_MIN_RANGE",(position _battery) distance _impact]};
+		                                _AlignTime = 0;
+		                            };
+			                    } else {
+	                                	_quitFO = true;
+			                    };
+				                _FMcount = 0;
+			                } else {
+			                    if !(isnil "_battery") then {
+		                            [_battery, _HETMP select 1] call BIS_ARTY_F_LoadMapRanges;
+		                            
+		                            if ([_battery, _impact, _HETMP select 1] call BIS_ARTY_F_PosInRange) then {
+		                                _null1 = [_impact,_battery,_HETMP,_dispersion] call DEP_ARTY_aifiremission;
+	                                    _FMcount = _FMcount + 1;
+		                                if (_debug) then {diag_log format ["Impact %1 selected for battery %2 and template %3 dispersion %4",_impact,_battery,_HETMP,_dispersion]};
+		                            } else {
+		                                _battery = [_impact, _HETMP] call DEP_ARTY_SelectBestArty;
+		                                if (_debug) then {diag_log format ["Artillery out of range, Calling New Artillery! MAXRANGE:%1 MINRANGE:%2 DISTANCE:%3", _battery getVariable "ARTY_MAX_RANGE",_battery getVariable "ARTY_MIN_RANGE",(position _battery) distance _impact]};
+		                                _AlignTime = 0;
+		                            };
+			                    } else {
+	                                	_quitFO = true;
+			                    };
+			                };
+						} else {
+			                if (_debug) then {diag_log format ["Target %1 isNull: %2 and Impact is farer away then 100mtrs: %3", _target, isNull _target,_impact, _impact distance _FO > 100]};
+			            };
+                  	};  
+					Sleep 10;
+                    _FO selectWeapon (primaryweapon _FO);
+    				_FO dowatch ObjNull;
+                    sleep 10;
 	            } else {
 	                _AlignTime = _AlignTime + 20;
 	        		if (_debug) then {diag_log format ["Waiting %1 of %2", _AlignTime,_AlignTimeLimit]};
