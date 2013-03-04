@@ -20,6 +20,7 @@
 //#define MGO
 #define PXS_SATCOM_OA
 #define TUP_LOGISTICS
+#define AIM
 
 // WIP
 //#define GC_PACK_COW

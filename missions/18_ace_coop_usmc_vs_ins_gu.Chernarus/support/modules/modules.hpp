@@ -1,5 +1,9 @@
 // - Tested
+//#define BIS_SOM
 #define RMM_AAR
+#define RMM_CAS
+#define RMM_CASEVAC
+#define RMM_CNSTRCT
 #define CRB_TWNMGR
 #define CRB_FLIPPABLE
 #define RMM_JIPMARKERS
@@ -11,3 +15,14 @@
 #define RMM_TASKS
 #define RMM_TYRES
 #define WHB_MULTISPAWN
+#define ZKS_Build
+#define CREWINFO
+#define MGO
+#define PXS_SATCOM_OA
+#define TUP_LOGISTICS
+#define AIM
+
+// WIP
+//#define GC_PACK_COW
+//#define TN_LHDELEVATOR
+

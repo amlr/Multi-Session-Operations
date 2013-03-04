@@ -1,14 +1,14 @@
 // - Tested
 #define MSOFACTIONS
-#define CRB_CONVOYS
-//#define RMM_ENEMYPOP
-#define CRB_TERRORISTS
+#define CQB_POP
+#define RMM_ENEMYPOP
+#define ROY_PATROLOPS
 #define RMM_ZORA
+#define TUP_IED
+#define CRB_CONVOYS
 
 // - To Test
-#define TUP_IED
 //#define WICT_ENEMYPOP
 //#define RYD_HAC
-#define ROY_PATROLOPS
-#define CQB_POP
+//#define CRB_TERRORISTS
 //#define BIS_WARFARE

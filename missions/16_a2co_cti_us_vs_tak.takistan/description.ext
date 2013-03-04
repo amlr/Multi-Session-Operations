@@ -15,6 +15,7 @@ onLoadMission = "An MSO Team Development";
 onLoadIntroTime = true;
 onLoadMissionTime = true;
 
+disabledAI = 0;
 aiKills = 0;
 briefing = 1;
 debriefing = 1;

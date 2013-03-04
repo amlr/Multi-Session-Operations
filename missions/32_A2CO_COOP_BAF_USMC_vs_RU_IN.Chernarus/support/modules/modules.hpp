@@ -17,9 +17,10 @@
 #define WHB_MULTISPAWN
 #define ZKS_Build
 #define CREWINFO
-//#define MGO
+#define MGO
 #define PXS_SATCOM_OA
 #define TUP_LOGISTICS
+#define AIM
 
 // WIP
 //#define GC_PACK_COW
