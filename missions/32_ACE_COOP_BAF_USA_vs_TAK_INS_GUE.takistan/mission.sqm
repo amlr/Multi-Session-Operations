@@ -28,7 +28,6 @@ class Mission
 		"CAWheeled_E",
 		"cawheeled_e_hmmwv",
 		"CAWheeled_E_ATV",
-		"CAAir_E_UH60M",
 		"CAWheeled2_MMT",
 		"CAMisc",
 		"takistan",
@@ -120,7 +119,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=40;
+		items=41;
 		class Item0
 		{
 			side="LOGIC";
@@ -1522,6 +1521,29 @@ class Mission
 					vehicle="BAF_L2A1_Tripod_D";
 					leader=1;
 					skill=0.46666661;
+				};
+			};
+		};
+		class Item40
+		{
+			side="WEST";
+			class Vehicles
+			{
+				items=1;
+				class Item0
+				{
+					position[]={-3991.9646,342.96555,5003.9648};
+					azimut=-26.084101;
+					id=370;
+					side="WEST";
+					vehicle="BAF_Soldier_TL_MTP";
+					player="PLAY CDG";
+					forceHeadlessClient=1;
+					leader=1;
+					rank="SERGEANT";
+					skill=0.60000002;
+					init="this allowdamage false";
+					description="Headless Client";
 				};
 			};
 		};
@@ -4855,12 +4877,12 @@ class Mission
 	};
 	class Sensors
 	{
-		items=2;
+		items=4;
 		class Item0
 		{
 			position[]={2632.2578,197.05301,5107.3735};
-			a=100;
-			b=100;
+			a=500;
+			b=500;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
@@ -4881,6 +4903,38 @@ class Mission
 			interruptable=1;
 			age="UNKNOWN";
 			name="BIS_Zora_1";
+			class Effects
+			{
+			};
+		};
+		class Item2
+		{
+			position[]={5690.3237,83.040001,11373.257};
+			a=120;
+			b=600;
+			angle=404.81601;
+			rectangular=1;
+			activationBy="WEST";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			name="BIS_ARZ_0";
+			class Effects
+			{
+			};
+		};
+		class Item3
+		{
+			position[]={8064.4829,296.04001,1828.4487};
+			a=120;
+			b=500;
+			angle=420.151;
+			rectangular=1;
+			activationBy="WEST";
+			repeating=1;
+			interruptable=1;
+			age="UNKNOWN";
+			name="BIS_ARZ_1";
 			class Effects
 			{
 			};
