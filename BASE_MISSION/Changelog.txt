@@ -19,7 +19,131 @@ Thanks to:
 - Military Gaming Development Team for MGO Attach
 - Glowbal for AIM support
 
-4.55 Changelog
+4.6 Changelog
+
+[ENEMY] Set En-Loc density to "High" by default (to fit more maps with default settings)
+[AMBIENCE] Turned of EMS by default (not stable for 1.62)
+[SUPPORT] AIM - Moved AIM module init to modules folder. Added AIM decent rate parameters.
+[SUPPORT] MGO - Fixed path to menuDef.sqf
+[ENEMY] Mandatory improvements and fixes to DEP FO Artillery (param switch)
+[ENEMY] Impemented Arty Dispersion to make it less accurate
+[SUPPORT] Fixed TWNMGR not updating accordingly and being not JIP compatible by reverting to version before 02.02.2013
+[SUPPORT] FIXED: Simply Vehicle Restriction function was called on all localities (through eventhandler getin)
+[ENEMY] NEW: DEP Forward Artillery (HC compatible)
+[ENEMY] Fixed (minor): CQB Init-sidechat was displayed twice
+[CORE] wait for BIS Functions to init for mso_core_fnc_isHC
+[MISSIONS] Updated CWR2 MSO template
+[General] Changed search lights and Humvees to CWR2 models
+[SUPPORT] Fixed: white Townmarkers not showing up, Fixed: Warnings in server.rpt for existing persisted markers
+[ENEMY] Fixed PO2 not completing operations successfully if DEP was on HC
+[ENEMY] Fixed VBIEDs not working (not getting triggered in crB_AmbVehSetup.sqf)
+[ENEMY] Changed diag_log text of DEP if unfitting location was selected (was irritating)
+[ENEMY] Added DEP init finished information for admins (on missionstart)
+[ENEMY] Fixed CQB INIT running on all localities if HC was activated + added init finished information for admins (on missionstart)
+[CORE] Added suitable Drink and Food rate for MSO (thx Glowball)
+[ENEMY] Fixed TUP_IEDs not showing up in debug
+[ENEMY] Fixed: Roadblocks spawn within Safezone if no ammo or ammo_1 marker was placed. Instead place a BIS_ZORA_x marker (0-9) around your bases.
+[CORE] Implemented ZORA trigger check function (in order to fix Convoys spawn near base)
+[ENEMY] Fixed Camps & Roadblocks spawn on Airstrip (fixed and recommitted)! Place BIS_ARZ_x triggers on airports (optional, also works without)
+[ENEMY] RMM_ep_getFlatArea checks for BIS_ARZ_%1 triggers. Fixes enemy camps can spawn on airstrip!
+[CORE] Removed Debug Line in MSO_CORE_FNC_inARZtrigger
+[CORE] Function to check if position is in a BIS_ARZ_% Trigger (preparation of Airstrip fix)
+[ENEMY] Added case for Lingor for m0aR strategic buildings
+[SUPPORT] Fixed TUP_Logisitics not working if playing as HOST
+[ENEMY] Improvements to CQB (now also selects high buildingpositions for patrol)
+[SUPPORT] Added simple vehicle-restriction script (was requested by DET-7)
+[ENEMY] Fixed Debug Log error in TUP Spawn AA
+[ENEMY] Fixed steep camps (again), camps are not created anymore if rmm_ep_getflatarea fails to find a flat pos
+[CQB_POP] - Fixed init sequence on SP
+[CORE] Don't run intro on HC
+[CORE] Reformatted Intro Hint, and removed "You have limited number of lives;" as not fitting anymore
+[CORE] Renamed SQL Dump to 20130208.sql for easier seperation to former versions
+[ENEMY] Fixed Convoys stopping "Init completed" on map when using PDB, removed "[] spawn" from DEP and CQB main.sqf (and exec in seperate thread directly on init)
+[CORE] persistentDB - Fixed reported issue https://dev-heaven.net/issues/32524 Overwrite 'missions' DB data with current PDB mission parameters.
+[PDB] Moved HC check to main.sqf - Removed execVM - Standardised MACROs for execNow - Changed default settings check to shortcut method
+[CRB_CONVOYS] default to no locs from CQB and ENEMYPOP if not active
+[CQB_POP] Moved code from enemy\init.sqf into main.sqf
+[RMM_ENEMYPOP] Moved code from enemy\init.sqf into main_pdb.sqf - set PV to all for Convoys without PDB
+[MISSIONS] Updated core testing mission
+[AdminActions] Disabled init messages if disabled - Removed use of execVM during init - Enabled for single player - Removed extra header from params - Restores map click for team markers/tasks after using teleport - Reformatted syntax
+[CORE] persistentDB Fixed issue where SR5_THOR III's were being restored as ACRE_PRC119.
+[General] implemented HC on other modules (optional)
+[SUPPORT] Additional updates (thanks HazeyGaming)
+[MGO_ATTACH] Added additional weapon sets, started OPFOR weapons, menu changes. (thanks Alderman)
+[SUPPORT] Updated AZE_FSS script - Fixed issue with not knowing who you were spawning onto. Now displays the unit name before spawning correctly. (thanks HazeyGaming)
+[CRB_CIVILIANS] Reduced params header
+[CRB_DESTROYCITY] Changed object that fires spawn on from HeliHEmpty (which conflicted with ambient air) to Can_small - Added check not to spawn on HC - Removed header from params
+[CRB_SHEPHERDS] Reduced herd count to 5 - 8 animals
+[TUP_AMBIENTSEA] Added military only option
+[RMM_NOMAD] Disable if PDB enabled
+[crewinfo] Enabled by default
+[CRB_CIVILIANS] Reduced civilian count in Zargabad
+[AMBIENCE] Fixed: In Ambient Air no planes were created on some islands (even if there was an airport)
+[CRB_TOWNMGR] Removed PERSIST to prevent errors
+[TUP_AMBIENTAIR] Added Military only option - Added additional intensity values - Increased delay between flights from 5 mins to 10 - 15 mins
+[General] Removed PERSIST parameter from CBA_fnc_createMarker whereever GLOBAL is stated, as it is implied and generates errors
+[ENEMY] Removed CQB AI Cap and MaxGroup param as they were misleading
+[CORE] Made init-screen stay black during init
+[CORE] Changed MSO Logo with new (incl. PDB)
+[CORE] If PDB is used, wait for Intro until loading is finished
+[CORE] Changed PDB init-screen to match up with MSO initialisation (+ making player not stuck on fail)!
+[SUPPORT] Added Hazeys "Forward Squad Spawn"-script
+[CORE] persistentDB - Fixed issue where ACE radios were being restored from DB as ACRE radios. [CORE] persistentDB - Fixed issue where ACRE_PRC148_UHF radios were being restored as ACRE_PRC148_VHF.
+[ENEMY] Separate proximity-check function for CQB (Server/HC & Client)
+[CORE] persistentDB - Fix to catch player_intialised during PDB_FNC_HEADLESS_LOADERSTATUS
+[CORE] persistentDB - Removed && typo and legacy private var _aimRationsClient
+[core] persistentDB - Fixed issue where server was attempting to save HC's data during onPlayerDisconnected EVH (thx Wolffy!)
+[CORE] persistentDB - Fixed issue where player _seen was not getting set correctly [CORE] persistentDB - Moved remaining diag_logs into "if (pdb_date_enabled)"
+[ENEMY] Fixed too early deletion of bodies with DEP (now using regular BIS Garbagecollector, no direct cleanup)
+[SUPPORT] Fixed endless trigger-creation of Teamstatus Dialog, now cleaned up
+[ENEMYPOP] Additional density parameters (thanks J Alderman)
+[CORE] ACE Cleanup now runs on every locality and deletes local objects (hopefully fixing the stoppage and better perf. overall)
+[AMBIENCE] Fixed TwnMgr script error if no case for the world was defined (implemented default value)
+[CORE] perform check for PDB
+[ENEMY] Lowered camp probability to 80%
+[ENEMY] CQB not stopping "Initialisation complete" message anymore
+[CORE] persistentDB - Fixed error where _serverData was not defined.
+[CORE] Fixed PDB re-loading error of serverside CQB
+[CORE] Fixed PDB ACE-wounds error
+[AMBIENCE] ALICE_Logic-cleanup shall only happen with clientside Civs (+ reformatted some parts)
+[RMM_ZORA] Implemented optional HC
+[CRB_SHEPHERDS] Added OA Goats - Reduced herd size to 5 - 10
+[RMM_ENEMYPOP] Changed formatting of mission params
+[CRB_CIVILIANS] Moved mark civilians script
+[PDB] Removed sleeps from init to prevent jamming during briefing screen - Move module specific checks to their appropriate locations
+[CORE] persistentDB - Moved waituntils out of core\init.sqf to keep framework consistent
+[CORE] persistentDB - remote client must wait until script complete as well as HC
+[CRB_CIVILIANS] - Implemented Headless Client option
+[RMM_ENEMYPOP] - Performance improvements (RMM_ep_getFlatArea and ) - Formatting changes - Fixed empty groups crashing EP
+[RMM_ZORA] - Changed configuration - Increased Min Distance - Changed Max Distance to be dynamic - Increased delay between waves (between 30 mins and 1 hr) - Increased search radius
+[CRB_CIVILIANS] - General clean up
+[CORE] persistentDB - Only show headless status to non-initialised player
+[CORE] persistentDB - Improved loading procedure and timings especially when using headless client [CORE] persistentDB - Added Extended Loader Details
+[CORE] persistentDB - Moved player auto save call to client (auto-save still on server) Notes. Above fixes ACE wounds and AIM rations auto-save data. Auto save can now no longer get called on a init'ing player thus fixing the tsc=any issue. [CORE] persistentDB - Updated MYSQL schema (MSODatabase.sql): removed index key on landvehicles table which was preventing objects of the same name but different mission id's from saving to DB. [CORE] persistentDB - Moved several diag_logs to if pdb_log_enabled)
+[ENEMY] Combined 2 big CQB functions (CQBgetSpawnposRegular and Strategic). Now call it with param "strategic" or "regular"
+[ENEMY] Removed old and deprecated enemypop-modules (cleanup)
+[CORE] Added MSO_CORE_FNC_isHC to common functions (precompiled, removed global vars)
+[CRB_TOWNMGR] - Removed customer PVEH and used CBA GlobalEvent
+[CRB_CIVILIANS] - Sync'd CA directory back to original BIS code
+[MISSIONS] - Added some missions
+[CORE] persistentDB - Added support for Advanced Interaction Module ration variables in database. [CORE] persistentDB - Fixed new player connection/creation issue and tweaked a few other scripts. [CORE] persistentDB - Adjusted all player related update procedures and scripts so that the WHERE statement no longer uses the players name. Players name now gets updated. [CORE] persistentDB - *** VERY IMPORTANT *** New database schema.
+[CORE] Moved isHC earlier in init process so it can be used to create exceptions for loaded mods.
+[CORE] PersistentDB - Moved diag_log output to if pdb_log_enabled
+[AMBIENCE] Fix for alice_home error (still occured)
+[AMBIENCE] Fix for Twnrespect in Civi traffic
+[AMBIENCE] Fix for twnrespect (and hopefully alltownscount and alice_home) Bug!
+[CORE] PersistentDB - Fixed issue where autosave player data was running during player's load data session causing vars = any issue and resulting in existing connecting player's data to be reset. Auto save feature now checks if player is fully initialised. [CORE] PersistentDB - Removed all references of MSO_HC#. Now using isHC.
+[CORE] Added isHC to determine if connected client is headless
+[Various] Animals now have black and brown goats - Moved AIM EH to Civilian custom init - Fixed Glowbal's name in changelog - Added Esbekistan to vehicles - Sorted CivSetup into alphabetical order and added AIM EH
+[Various] DET7 changes submitted by Singleton
+[CORE] Fixed race condition on headless clients when loading mission data on initial mission start
+[CORE] Fixed duplicate player inserts [CORE] Added exceptions for MSO_HC1 and MSO_HC2 PDB player data
+[AMBIENCE] Identified ALICE Logic units and groups that were passed to server after client disconnect and delete abandoned ones from server. Probably causing perf issues on highly frequented persistent servers
+[ENEMY] Not spawn CQB units "underground" as they wont spawn underground either way. Should fix units spawning on roofs before they are moved to houseposition
+[ENEMY] Introducing Multi-Locality (dedicated CPU usage) for Enemypop
+[ENEMY] Introducing Multi-Locality (dedicated CPU usage) for CQB
+
+4.55
 
 [AMBIENCE] Further improvements and compatibility with GBL Advanced Interaction Module
 [CORE] Made MSO compatible with playing as EAST/OPFOR (you need markers named: ammo, ammo_1, respawn_east and respawn_%faction% eg. respawn_RU)
