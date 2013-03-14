@@ -1,15 +1,36 @@
-private ["_groups","_range","_type","_sleep","_array","_forEachIndex","_functions","_fnc_init"];
+private ["_groups","_range","_type","_sleep","_array","_forEachIndex","_functions","_fnc_init","_quit"];
 
-if !(isServer) exitWith {};
-
-if(isNil "gtk_cache_header") then { gtk_cache_header = 0; };
-if(gtk_cache_header == 0) exitWith{};
+if (isNil "gtk_cache_header") then {gtk_cache_header = 0};
+if (gtk_cache_header == 0) exitWith {};
 
 _debug = debug_mso;
-
 _groups = allGroups;
 _range = 1500; 
 _sleep = 3;
+
+if(!isNil "gtk_cache_distance") then {_range = gtk_cache_distance};
+if(!isNil "gtk_cache_interval") then {_sleep = gtk_cache_interval};
+
+switch (gtk_cache_header) do {
+        case 1: {
+                _type = "NOUJAY";
+        };
+        case 2: {
+                _type = "CEP";
+        };
+//      case 3: {
+//              _type = "OSOM";
+//      };
+        case 4: {
+                _type = "YACSA";
+        };
+};
+
+if (_type == "YACSA") exitwith {
+        if (isNil "BIS_fps_manager_init") then {
+    		[gtk_cache_distance] execfsm "core\modules\rmm_gtk\fpsmanager.fsm";
+	};
+};
 
 if(_debug) then {
 	_range = 100;
@@ -21,20 +42,6 @@ GTK_fnc_nearPlayer = {
         _pos = _this select 0;
         _dist = _this select 1;
         ({_pos distance _x < _dist} count ([] call BIS_fnc_listPlayers) > 0);
-};
-
-if(!isNil "gtk_cache_distance") then { _range = gtk_cache_distance; };
-if(!isNil "gtk_cache_interval") then {  _sleep = gtk_cache_interval; };
-switch(gtk_cache_header) do {
-        case 1: {
-                _type = "NOUJAY";
-        };
-        case 2: {
-                _type = "CEP";
-        };
-//        case 3: {
-//                _type = "OSOM";
-//        };
 };
 
 // Check if from the Editor or scripted
