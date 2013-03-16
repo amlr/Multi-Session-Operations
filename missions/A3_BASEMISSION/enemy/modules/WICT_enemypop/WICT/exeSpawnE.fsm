@@ -1,0 +1,934 @@
+/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, exeSpawnE">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Start",0,250,-25.645254,-123.744377,64.354828,-73.744392,0.000000,"Start"};
+item1[] = {"check_if_point_is",2,250,258.678925,-122.324417,348.678955,-72.324417,0.000000,"check if" \n "point is found"};
+item2[] = {"no",4,218,334.412354,-225.404907,424.412354,-175.404907,1.000000,"no"};
+item3[] = {"yes",8,218,390.579681,-42.795464,480.579681,7.204536,0.000000,"yes"};
+item4[] = {"End",1,250,334.955231,-331.610443,424.955200,-281.610474,0.000000,"End"};
+item5[] = {"setup_spawning_p",2,250,540.637695,-43.510025,630.637695,6.489975,0.000000,"setup" \n "spawning" \n "paramters"};
+item6[] = {"_",8,218,702.353516,-45.984642,792.353516,4.015360,0.000000,""};
+item7[] = {"set_parameters",2,250,871.688171,-46.747505,961.688171,3.252495,0.000000,"set" \n "parameters"};
+item8[] = {"_",8,218,1060.097900,-45.902771,1150.097900,4.097229,0.000000,""};
+item9[] = {"choose_spot",2,250,1253.091309,-47.580971,1343.091309,2.419029,0.000000,"choose" \n "spot"};
+item10[] = {"in_water_",4,218,1252.249390,114.365097,1342.249390,164.365097,2.000000,"in water?"};
+item11[] = {"",7,210,912.414246,137.860275,920.414246,145.860291,0.000000,""};
+item12[] = {"exit_search_",4,218,1253.088745,-196.102097,1343.088745,-146.102097,4.000000,"exit search?"};
+item13[] = {"End_1",1,250,1253.088745,-300.150574,1343.088745,-250.150589,0.000000,"End"};
+item14[] = {"not_frontline_",4,218,1411.677246,20.385403,1501.677246,70.385406,1.000000,"not frontline?"};
+item15[] = {"",7,210,1013.104614,41.362808,1021.104614,49.362808,0.000000,""};
+item16[] = {"is_frontline_",8,218,1498.101074,-50.938995,1588.101074,-0.938995,0.000000,"is frontline!"};
+item17[] = {"move_marker",2,250,1660.886108,-52.617226,1750.886108,-2.617226,0.000000,"move marker"};
+item18[] = {"check_sleep",4,218,1812.015747,-54.702446,1902.015381,-4.702448,0.000000,"check sleep"};
+item19[] = {"select_class",2,250,1984.244629,-60.035961,2074.244629,-10.035967,0.000000,"select class"};
+item20[] = {"regular__infantr",4,218,2129.437500,-406.452362,2219.437500,-356.452362,13.000000,"regular " \n "infantry"};
+item21[] = {"AT_teams",4,218,2151.488281,-339.749756,2241.488281,-289.749786,12.000000,"AT teams"};
+item22[] = {"support",4,218,2162.165039,-279.669769,2252.165039,-229.669800,11.000000,"support"};
+item23[] = {"snipers",4,218,2170.595459,-222.313812,2260.595459,-172.313751,10.000000,"snipers"};
+item24[] = {"special",4,218,2175.785156,-167.940125,2265.785156,-117.940063,9.000000,"special"};
+item25[] = {"transport",4,218,2178.767578,-110.623093,2268.767578,-60.623035,8.000000,"transport"};
+item26[] = {"light_vehicles",4,218,2180.975098,-52.828434,2270.975098,-2.828390,7.000000,"light" \n "vehicles"};
+item27[] = {"IFV",4,218,2182.524658,1.725595,2272.524658,51.725643,6.000000,"IFV"};
+item28[] = {"medium_tanks",4,218,2184.887939,57.726833,2274.887939,107.726868,5.000000,"medium" \n "tanks"};
+item29[] = {"heavy_tanks",4,218,2186.993164,115.701752,2276.993164,165.701752,4.000000,"heavy tanks"};
+item30[] = {"medium_chopper",4,218,2183.523438,175.357788,2273.523438,225.357758,3.000000,"medium" \n "chopper"};
+item31[] = {"heavy_gunship",4,218,2167.037842,237.885223,2257.037842,287.885162,2.000000,"heavy" \n "gunship"};
+item32[] = {"wings",4,218,2143.442383,300.548004,2233.442383,350.548004,1.000000,"wings"};
+item33[] = {"error__",8,218,2257.754883,451.906891,2347.754883,501.906860,0.000000,"error ?"};
+item34[] = {"_",2,250,2234.161865,-409.163879,2324.161865,-359.163879,0.000000,""};
+item35[] = {"__1",2,250,2256.797607,-341.256653,2346.797607,-291.256622,0.000000,""};
+item36[] = {"__2",2,250,2279.433350,-281.222778,2369.433350,-231.222809,0.000000,""};
+item37[] = {"__3",2,250,2278.449219,-223.157257,2368.449219,-173.157257,0.000000,""};
+item38[] = {"__4",2,250,2283.370117,-169.028351,2373.370117,-119.028351,0.000000,""};
+item39[] = {"__5",2,250,2291.243408,-111.946953,2381.243408,-61.946941,0.000000,""};
+item40[] = {"__6",2,250,2294.195801,-55.849682,2384.195801,-5.849691,0.000000,""};
+item41[] = {"__7",2,250,2295.179932,0.247538,2385.179932,50.247524,0.000000,""};
+item42[] = {"__8",2,250,2297.148438,57.328976,2387.148438,107.328979,0.000000,""};
+item43[] = {"__9",2,250,2302.069092,114.410370,2392.069092,164.410370,0.000000,""};
+item44[] = {"__10",2,250,2295.049805,176.109955,2385.049805,226.109924,0.000000,""};
+item45[] = {"__11",2,250,2270.575928,236.446472,2360.575928,286.446503,0.000000,""};
+item46[] = {"__12",2,250,2254.829346,299.432861,2344.829346,349.432861,0.000000,""};
+item47[] = {"_",8,218,2489.442871,-71.391243,2579.442871,-21.391201,0.000000,""};
+item48[] = {"End_2",1,250,2625.149902,-69.321411,2715.149902,-19.321421,0.000000,"End"};
+item49[] = {"clutch",2,4346,2382.421143,453.380676,2472.421143,503.380676,0.000000,"clutch"};
+item50[] = {"server",4,218,122.849792,-123.744377,212.849838,-73.744392,1.000000,"server"};
+item51[] = {"client",8,218,126.247017,-239.104630,216.247055,-189.104630,0.000000,"client"};
+item52[] = {"End_3",1,250,183.101242,-316.715393,273.101135,-266.715515,0.000000,"End"};
+item53[] = {"players_near_",4,218,1415.687500,77.531570,1505.687500,127.531593,3.000000,"players near?"};
+link0[] = {0,50};
+link1[] = {0,51};
+link2[] = {1,2};
+link3[] = {1,3};
+link4[] = {2,4};
+link5[] = {3,5};
+link6[] = {5,6};
+link7[] = {6,7};
+link8[] = {7,8};
+link9[] = {8,9};
+link10[] = {9,10};
+link11[] = {9,12};
+link12[] = {9,14};
+link13[] = {9,16};
+link14[] = {9,53};
+link15[] = {10,11};
+link16[] = {11,7};
+link17[] = {12,13};
+link18[] = {14,15};
+link19[] = {15,7};
+link20[] = {16,17};
+link21[] = {17,18};
+link22[] = {18,19};
+link23[] = {19,20};
+link24[] = {19,21};
+link25[] = {19,22};
+link26[] = {19,23};
+link27[] = {19,24};
+link28[] = {19,25};
+link29[] = {19,26};
+link30[] = {19,27};
+link31[] = {19,28};
+link32[] = {19,29};
+link33[] = {19,30};
+link34[] = {19,31};
+link35[] = {19,32};
+link36[] = {19,33};
+link37[] = {20,34};
+link38[] = {21,35};
+link39[] = {22,36};
+link40[] = {23,37};
+link41[] = {24,38};
+link42[] = {25,39};
+link43[] = {26,40};
+link44[] = {27,41};
+link45[] = {28,42};
+link46[] = {29,43};
+link47[] = {30,44};
+link48[] = {31,45};
+link49[] = {32,46};
+link50[] = {33,49};
+link51[] = {34,47};
+link52[] = {35,47};
+link53[] = {36,47};
+link54[] = {37,47};
+link55[] = {38,47};
+link56[] = {39,47};
+link57[] = {40,47};
+link58[] = {41,47};
+link59[] = {42,47};
+link60[] = {43,47};
+link61[] = {44,47};
+link62[] = {45,47};
+link63[] = {46,47};
+link64[] = {47,48};
+link65[] = {49,47};
+link66[] = {50,1};
+link67[] = {51,52};
+link68[] = {53,7};
+globals[] = {0.000000,0,0,0,0,640,480,1,175,6316128,1,1958.010864,2770.089111,537.035095,-347.316162,810,929,1};
+window[] = {2,-1,-1,-1,-1,913,176,1436,176,3,827};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "exeSpawnE";
+  class States
+  {
+    /*%FSM<STATE "Start">*/
+    class Start
+    {
+      name = "Start";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "server">*/
+        class server
+        {
+          priority = 1.000000;
+          to="check_if_point_is";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"isServer or isDedicated"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "client">*/
+        class client
+        {
+          priority = 0.000000;
+          to="End_3";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "check_if_point_is">*/
+    class check_if_point_is
+    {
+      name = "check_if_point_is";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "no">*/
+        class no
+        {
+          priority = 1.000000;
+          to="End";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(WICT_eb == ""none"")"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "yes">*/
+        class yes
+        {
+          priority = 0.000000;
+          to="setup_spawning_p";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "End">*/
+    class End
+    {
+      name = "End";
+      init = /*%FSM<STATEINIT""">*/"WICT_clutch = 1;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "setup_spawning_p">*/
+    class setup_spawning_p
+    {
+      name = "setup_spawning_p";
+      init = /*%FSM<STATEINIT""">*/"_null = [] call WICT_setupE;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="set_parameters";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "set_parameters">*/
+    class set_parameters
+    {
+      name = "set_parameters";
+      init = /*%FSM<STATEINIT""">*/"_i = 0;" \n
+       "_cs = 0;" \n
+       "_cp = 0;" \n
+       "" \n
+       "_base_pos = getMarkerPos WICT_eb;" \n
+       "" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="choose_spot";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "choose_spot">*/
+    class choose_spot
+    {
+      name = "choose_spot";
+      init = /*%FSM<STATEINIT""">*/"_i = _i + 1;" \n
+       "	" \n
+       "_posOrig = WICT_playerPos;" \n
+       "	" \n
+       "_angle = round (random 360);" \n
+       "	" \n
+       "_sd = WICT_sd + (round (random WICT_sdRand));" \n
+       "" \n
+       "_center_x = (_posOrig) select 0;" \n
+       "_center_y = (_posOrig) select 1;" \n
+       "_center_z = (_posOrig) select 2;" \n
+       "" \n
+       "if(isNil ""_center_z"")then{_center_z = 0;};" \n
+       "" \n
+       "_x1 = 0; _y1 = 0;" \n
+       "" \n
+       "_x1 = _x1 + _center_x - (sin _angle * _sd);" \n
+       "_y1 = _y1 + _center_y - (cos _angle * _sd);" \n
+       "	" \n
+       "	WICT_spwnPos = [_x1, _y1, _center_z];" \n
+       "    if ( isNil ""_center_z"" ) then {" \n
+       "       WICT_spwnPos = [_x1, _y1];" \n
+       "    };" \n
+       "" \n
+       "_cs =  _base_pos distance  WICT_spwnPos;" \n
+       "_cp = _posOrig distance _base_pos;" \n
+       "_spawndist = WICT_SavePos distance WICT_spwnPos;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "exit_search_">*/
+        class exit_search_
+        {
+          priority = 4.000000;
+          to="End_1";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_i == 25"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "players_near_">*/
+        class players_near_
+        {
+          priority = 3.000000;
+          to="set_parameters";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_spawndist < 800"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "in_water_">*/
+        class in_water_
+        {
+          priority = 2.000000;
+          to="set_parameters";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"surfaceIsWater [WICT_spwnPos select 0,WICT_spwnPos select 1]"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "not_frontline_">*/
+        class not_frontline_
+        {
+          priority = 1.000000;
+          to="set_parameters";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_cs > _cp"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "is_frontline_">*/
+        class is_frontline_
+        {
+          priority = 0.000000;
+          to="move_marker";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "End_1">*/
+    class End_1
+    {
+      name = "End_1";
+      init = /*%FSM<STATEINIT""">*/"WICT_clutch = 1;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "move_marker">*/
+    class move_marker
+    {
+      name = "move_marker";
+      init = /*%FSM<STATEINIT""">*/"WICT_angleE = _angle;" \n
+       "" \n
+       "_time = time;" \n
+       "" \n
+       "if (WICT_debug == ""yes"") then" \n
+       "{" \n
+       "	_null =	deleteMarker ""east_spawn"";" \n
+       "	_marker = createMarker [""east_spawn"", WICT_spwnPos];" \n
+       "	""east_spawn"" setMarkerColor ""ColorRed"";" \n
+       "	""east_spawn"" setMarkerSize [1,1];" \n
+       "	""east_spawn"" setMarkerType ""Warning"";" \n
+       "};"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "check_sleep">*/
+        class check_sleep
+        {
+          priority = 0.000000;
+          to="select_class";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_time + 1 < time"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "select_class">*/
+    class select_class
+    {
+      name = "select_class";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "regular__infantr">*/
+        class regular__infantr
+        {
+          priority = 13.000000;
+          to="_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_reginf > 0) and (E_reginf >= WICT_dice)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "AT_teams">*/
+        class AT_teams
+        {
+          priority = 12.000000;
+          to="__1";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_at >= WICT_dice) and ( WICT_dice > E_reginf)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "support">*/
+        class support
+        {
+          priority = 11.000000;
+          to="__2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_sup >= WICT_dice) and ( WICT_dice > E_at)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "snipers">*/
+        class snipers
+        {
+          priority = 10.000000;
+          to="__3";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_snip >= WICT_dice) and ( WICT_dice > E_sup)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "special">*/
+        class special
+        {
+          priority = 9.000000;
+          to="__4";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_spec >= WICT_dice) and ( WICT_dice > E_snip)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "transport">*/
+        class transport
+        {
+          priority = 8.000000;
+          to="__5";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_trans >= WICT_dice) and ( WICT_dice > E_spec)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "light_vehicles">*/
+        class light_vehicles
+        {
+          priority = 7.000000;
+          to="__6";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_lightveh >= WICT_dice) and ( WICT_dice > E_trans)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "IFV">*/
+        class IFV
+        {
+          priority = 6.000000;
+          to="__7";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_ifv >= WICT_dice) and ( WICT_dice > E_lightveh)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "medium_tanks">*/
+        class medium_tanks
+        {
+          priority = 5.000000;
+          to="__8";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_mtank >= WICT_dice) and ( WICT_dice > E_ifv)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "heavy_tanks">*/
+        class heavy_tanks
+        {
+          priority = 4.000000;
+          to="__9";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_htank >= WICT_dice) and ( WICT_dice > E_mtank)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "medium_chopper">*/
+        class medium_chopper
+        {
+          priority = 3.000000;
+          to="__10";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_mchop >= WICT_dice) and ( WICT_dice > E_htank)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "heavy_gunship">*/
+        class heavy_gunship
+        {
+          priority = 2.000000;
+          to="__11";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_hchop >= WICT_dice) and ( WICT_dice > E_mchop)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "wings">*/
+        class wings
+        {
+          priority = 1.000000;
+          to="__12";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(E_wing >= WICT_dice) and ( WICT_dice > E_hchop)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "error__">*/
+        class error__
+        {
+          priority = 0.000000;
+          to="clutch";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "_">*/
+    class _
+    {
+      name = "_";
+      init = /*%FSM<STATEINIT""">*/"[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_reginf.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__1">*/
+    class __1
+    {
+      name = "__1";
+      init = /*%FSM<STATEINIT""">*/"[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_at.sqf"";" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__2">*/
+    class __2
+    {
+      name = "__2";
+      init = /*%FSM<STATEINIT""">*/"[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_support.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__3">*/
+    class __3
+    {
+      name = "__3";
+      init = /*%FSM<STATEINIT""">*/"[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_sniper.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__4">*/
+    class __4
+    {
+      name = "__4";
+      init = /*%FSM<STATEINIT""">*/"[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_specop.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__5">*/
+    class __5
+    {
+      name = "__5";
+      init = /*%FSM<STATEINIT""">*/"[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_trans.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__6">*/
+    class __6
+    {
+      name = "__6";
+      init = /*%FSM<STATEINIT""">*/"[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_lightveh.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__7">*/
+    class __7
+    {
+      name = "__7";
+      init = /*%FSM<STATEINIT""">*/"[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_ifv.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__8">*/
+    class __8
+    {
+      name = "__8";
+      init = /*%FSM<STATEINIT""">*/"[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_mtank.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__9">*/
+    class __9
+    {
+      name = "__9";
+      init = /*%FSM<STATEINIT""">*/"[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_htank.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__10">*/
+    class __10
+    {
+      name = "__10";
+      init = /*%FSM<STATEINIT""">*/"_posOrig = WICT_spwnPos;" \n
+       "	" \n
+       "	_angle = WICT_angleE;" \n
+       "	" \n
+       "	_sd = WICT_displace;" \n
+       "" \n
+       "	_center_x = (_posOrig) select 0;" \n
+       "	_center_y = (_posOrig) select 1;" \n
+       "	_center_z = (_posOrig) select 2;" \n
+       "" \n
+       "	if(isNil ""_center_z"")then{_center_z = 0;};" \n
+       "	" \n
+       "	_x1 = 0; _y1 = 0;" \n
+       "" \n
+       "	_x1 = _x1 + _center_x - (sin _angle * _sd);" \n
+       "	_y1 = _y1 + _center_y - (cos _angle * _sd);" \n
+       "		" \n
+       "		WICT_spwnPos = [_x1, _y1, _center_z];" \n
+       "		if ( isNil ""_center_z"" ) then {" \n
+       "		   WICT_spwnPos = [_x1, _y1];" \n
+       "		};" \n
+       "" \n
+       "[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_mchop.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__11">*/
+    class __11
+    {
+      name = "__11";
+      init = /*%FSM<STATEINIT""">*/"_posOrig = WICT_spwnPos;" \n
+       "	" \n
+       "	_angle = WICT_angleE;" \n
+       "	" \n
+       "	_sd = WICT_displace;" \n
+       "" \n
+       "	_center_x = (_posOrig) select 0;" \n
+       "	_center_y = (_posOrig) select 1;" \n
+       "	_center_z = (_posOrig) select 2;" \n
+       "" \n
+       "	if(isNil ""_center_z"")then{_center_z = 0;};" \n
+       "	" \n
+       "	_x1 = 0; _y1 = 0;" \n
+       "" \n
+       "	_x1 = _x1 + _center_x - (sin _angle * _sd);" \n
+       "	_y1 = _y1 + _center_y - (cos _angle * _sd);" \n
+       "		" \n
+       "		WICT_spwnPos = [_x1, _y1, _center_z];" \n
+       "		if ( isNil ""_center_z"" ) then {" \n
+       "		   WICT_spwnPos = [_x1, _y1];" \n
+       "		};" \n
+       "" \n
+       "[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_hchop.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__12">*/
+    class __12
+    {
+      name = "__12";
+      init = /*%FSM<STATEINIT""">*/"_posOrig = WICT_spwnPos;" \n
+       "	" \n
+       "	_angle = WICT_angleE;" \n
+       "	" \n
+       "	_sd = WICT_displace;" \n
+       "" \n
+       "	_center_x = (_posOrig) select 0;" \n
+       "	_center_y = (_posOrig) select 1;" \n
+       "	_center_z = (_posOrig) select 2;" \n
+       "" \n
+       "	if(isNil ""_center_z"")then{_center_z = 0;};" \n
+       "	" \n
+       "	_x1 = 0; _y1 = 0;" \n
+       "" \n
+       "	_x1 = _x1 + _center_x - (sin _angle * _sd);" \n
+       "	_y1 = _y1 + _center_y - (cos _angle * _sd);" \n
+       "		" \n
+       "		WICT_spwnPos = [_x1, _y1, _center_z];" \n
+       "		if ( isNil ""_center_z"" ) then {" \n
+       "		   WICT_spwnPos = [_x1, _y1];" \n
+       "		};" \n
+       "" \n
+       "[] execVM ""enemy\modules\WICT_enemypop\WICT_data\E_classes\E_wing.sqf"";"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "End_2">*/
+    class End_2
+    {
+      name = "End_2";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "clutch">*/
+    class clutch
+    {
+      name = "clutch";
+      init = /*%FSM<STATEINIT""">*/"if (WICT_debug == ""yes"") then" \n
+       "{" \n
+       "	_null =	deleteMarker ""east_spawn"";" \n
+       "};" \n
+       "WICT_clutch = 1;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "_">*/
+        class _
+        {
+          priority = 0.000000;
+          to="End_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "End_3">*/
+    class End_3
+    {
+      name = "End_3";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Start";
+  finalStates[] =
+  {
+    "End",
+    "End_1",
+    "End_2",
+    "End_3",
+  };
+};
+/*%FSM</COMPILE>*/

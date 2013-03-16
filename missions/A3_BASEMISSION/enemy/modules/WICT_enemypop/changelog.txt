@@ -1,0 +1,51 @@
+changelog WICT_module from vanilla MSO 4.03 (Takistan, only files in WICT module touched):
+
+13.01.2012, v.014
+- Added Mission-Parameter for turning of BLUFOR-Spawning (on/off) in order to preserve performance (setupW.sqf/params.hpp) 
+- changed base markers to mil_circle for wict-bases in "show bases"-mode in main.sqf
+- fixed wrong base-count in diag_log and debug-hints // tested
+- added AI-count debug-hint in corescript.sqf // tested
+- added maximum AI-Group Cap from missionparameters to gain performance in corescript.sqf // tested
+- moved battlefront away from player to near strategic places in corescript.sqf // tested
+-------------------
+14.01.2012, v.015
+- "moved battlefront away from player" working for singleplayer (corescript) // tested, much more potential in this one.
+- Added "ep_total = ep_total+1" to main.sqf again (i deleted it by mistake, but no big deal) // tested
+- Added comments on changes in code
+- changed spawning probability so less units are spawned (also added more snipers)
+-------------------
+15.01.2012, v.020
+- Improved Spawning-Distance (minimum of 800mtrs to average players position, in exeSpawnE.fsm) // tested
+--------------------
+16.01.2012, v.024
+- Added debug-fix of Spawning markers in debug mode (Spawning marker wasnt deleted in exeSpawnE.fsm, easyone) // tested
+- Changed Maximum of WICT AI groups to 120 // tested
+- Added Jedras IRAN-configs (thanks man) to WICT (IRAN needs to be added in enemy\init.sqf tough) // To be tested, but should work out (no Iran-Mod yet)
+- Fixed Camp-building for IRAN in WICT (+ added a default situation "RU") in enemy\WICT_enemypop\main.sqf (thx Jedra again) // tested, https://dev-heaven.net/issues/27695 (tupolov fixed it too, we need to check when merging code)
+- Changed "find battlefront"-code so it can check more locations and added "FlatArea" to battlefront-searchscript (in corescript.sqf) // tested
+
+>>>>>> v.028 tested and working
+
+26.01.2012, v.04.10.001
+- removed clearmemory script in corescript.sqf (obsolete due to WICT AI cap and AI caching modules)!
+- changed max. safepos in main.sqf for camps and AI to have baseguards and to get better spawning positions of bases (not in hills and elevation)
+- changed private variables _pos and _pos2 to _pos_WICT and _pos2_WICT in main.sqf in order to have no interference with rmm_enemypop in fnc_loophandler
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
