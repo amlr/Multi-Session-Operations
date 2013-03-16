@@ -2,9 +2,9 @@ class gtk_cache_header {
 	title = "    AI Caching";
 //	values[]= {0,1,2,3}; 
 //	texts[]= {"Off","NOUJAY","CEP","OSOM"}; 
-	values[]= {0,1,2};
-	texts[]= {"Off","NOUJAY","CEP"}; 
-	default = 0; 
+	values[]= {0,1,2,4};
+	texts[]= {"Off","NOUJAY","CEP","YACSA"}; 
+	default = 4; 
 };
 class gtk_cache_distance {
 	title = "        Distance caching activates";
