@@ -151,10 +151,10 @@ class TSD9_RscButton
   colorBackgroundDisabled[] = {TSD9_ColorScheme_3DControlBackground,0.3};
   font = TSD9_FontM;
 
-  soundEnter[] = {"\ca\ui\data\sound\mouse2", 0.2, 1};
-  soundPush[] = {"\ca\ui\data\sound\new1", 0.2, 1};
-  soundClick[] = {"\ca\ui\data\sound\mouse3", 0.2, 1};
-  soundEscape[] = {"\ca\ui\data\sound\mouse1", 0.2, 1};
+  soundEnter[] = {"", 0.2, 1};
+  soundPush[] = {"", 0.2, 1};
+  soundClick[] = {"", 0.2, 1};
+  soundEscape[] = {"", 0.2, 1};
 
   default = false;
   text = "";
@@ -184,12 +184,12 @@ class TSD9_RscLB_LIST
   colorSelectBackground2[] = {TSD9_ColorScheme_HighlightBackground,1};
   font = TSD9_FontM;
   
-	arrowEmpty = "\ca\ui\data\ui_arrow_combo_ca.paa";
-	arrowFull = "\ca\ui\data\ui_arrow_combo_active_ca.paa";
+	arrowEmpty = "";
+	arrowFull = "";
 
-  soundSelect[] = {"\ca\ui\data\sound\mouse3", 0.2, 1};
-  soundExpand[] = {"\ca\ui\data\sound\mouse2", 0.2, 1};
-  soundCollapse[] = {"\ca\ui\data\sound\mouse1", 0.2, 1};
+  soundSelect[] = {"", 0.2, 1};
+  soundExpand[] = {"", 0.2, 1};
+  soundCollapse[] = {"", 0.2, 1};
 
   maxHistoryDelay = 1.0;
 

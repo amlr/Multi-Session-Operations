@@ -58,7 +58,17 @@ _BuildingTypeStrategic = [
 "Land_fortified_nest_big_EP1",
 "Land_Fort_Watchtower_EP1",
 "Land_Ind_PowerStation_EP1",
-"Land_Ind_PowerStation"];
+"Land_Ind_PowerStation",
+
+//A3
+"Land_Cargo_Patrol_V1_F",
+"Land_MilOffices_V1_F",
+"Land_dp_smallFactory_F",
+"Land_Cargo_HQ_V1_F",
+"Land_Radar_F",
+"Land_Airport_Tower_F",
+"Land_TentHangar_V1_F"
+];
 
 switch (worldName) do {		
         case "Panthera2": {

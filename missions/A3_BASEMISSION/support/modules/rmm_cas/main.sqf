@@ -8,9 +8,7 @@ waitUntil {LDL_initDone};
 */
 
 RMM_cas_types = [
-	"A10",
-	"AH64D",
-	"AH1Z"
+	"B_AH9_F"
 	//"C130J",
 	//"MQ9PredatorB"
 ];

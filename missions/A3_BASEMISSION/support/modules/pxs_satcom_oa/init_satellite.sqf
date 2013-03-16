@@ -25,4 +25,5 @@ if (isserver) then {
 	[_switch] call PXS_switcher;
 };
 //create menu item
+["PXS Satellite Comms","call compile preprocessfilelinenumbers 'support\modules\pxs_satcom_oa\start_satellite.sqf'"] call mso_core_fnc_updateMenu;
 ["player", [mso_interaction_key], -9398, ["support\modules\pxs_satcom_oa\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;

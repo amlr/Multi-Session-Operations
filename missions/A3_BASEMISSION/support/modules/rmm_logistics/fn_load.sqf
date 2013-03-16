@@ -25,7 +25,7 @@ _target setvariable ["logistics_contents",_array + [_object],true];
 _target setvariable ["logistics_volume",_volume_t - _volume_o];
 
 if (isnil "logistics_Virtual") then {
-	logistics_Virtual = createVehicle ["Land_HelipadEmpty_F",[0,0,0],[],0,"NONE"];
+	logistics_Virtual = createVehicle ["HeliHEmpty",[0,0,0],[],0,"NONE"];
 	publicvariable "logistics_Virtual";
 };
 _object attachto [logistics_Virtual,[0,0,10]];

@@ -16,7 +16,9 @@ if(isNil "twnmgr_broadcastMP")then{twnmgr_broadcastMP = 1;};
 diag_log format["MSO-%1 Town Manager - Starting", time];
 
 // Manage/provide intel on each town/area with a city center
-_locs = bis_functions_mainscope getvariable "locations";
+//A2 _locs = bis_functions_mainscope getvariable "locations";
+//A3
+_locs = nearestlocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"),["CityCenter"],7000];
 diag_log format["MSO-%1 Town Manager - Locations: %2", time, count _locs];
 
 CRB_whichSideText = {
@@ -160,7 +162,7 @@ CRB_createSeizedTrigger = {
 	if !(isnil "bis_alice_mainscope") then {
 		_size = _x getVariable ["ALICE_townsize", bis_alice_mainscope getVariable "ALICE_townsize"];	
 	} else {
-		_size = 250; // so it doesnt need alice to be running anymore
+		_size = 400; // so it doesnt need alice to be running anymore
 	};
 	
 	// Get location object nearest each CityCenter (City Centers typically don't have text friendly names)
@@ -174,7 +176,7 @@ CRB_createSeizedTrigger = {
 	};
 	
 	_colour = "ColorWhite";
-	[format["%1_mgr", _name], _pos, _type, [_size, _size], "COLOR:", _colour, "BRUSH:", "Cross", "PERSIST"] call CBA_fnc_createMarker;
+	[format["%1_mgr", _name], _pos, _type, [_size, _size], "COLOR:", _colour, "BRUSH:", "DiagGrid", "PERSIST"] call CBA_fnc_createMarker;
 	
 	if (twnmgr_detected == 1) then {
 		//////////////////////////////////////////

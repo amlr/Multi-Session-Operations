@@ -60,6 +60,7 @@ RMM_jipmarkers_colors = [
 	};
 
 	["player", [mso_interaction_key], -9403, ["support\modules\rmm_jipmarkers\fn_menuDef.sqf", "main"]] call CBA_ui_fnc_add;
+	["JIP Markers","openmap true; if (call mso_fnc_hasRadio) then {call jipmarkers_fnc_click};"] call mso_core_fnc_updateMenu;
 
 	CRB_MAPCLICK = CRB_MAPCLICK + "if (!_shift && _alt) then {RMM_jipmarkers_position = _pos; createDialog ""RMM_ui_jipmarkers"";};";
 	onMapSingleClick CRB_MAPCLICK;

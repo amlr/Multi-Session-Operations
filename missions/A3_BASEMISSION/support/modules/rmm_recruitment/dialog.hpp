@@ -27,7 +27,7 @@ class RMM_ui_recruitment { // by Tupolov
 			w = CUI_Box_W;
 			y = CUI_Row_Y(2);
 			h = CUI_Row_DY(0,1);
-			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [tup_recruit_classes select (lbCurSel 1), [player, 50] call CBA_fnc_randPos, [], 0, ""FORM""];};";
+			action = "if ({!isplayer _x} count (units player) < 6) then {(group player) createunit [tup_recruit_classes select (lbCurSel 1), [getposATL player, 10, 50, 1, 0, 50, 0] call BIS_fnc_findSafePos, [], 0, ""FORM""];};";
 		};
 	};
 };

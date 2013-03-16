@@ -2,7 +2,7 @@ class TownManager {
         title = "    INTEL Reports (Towns)"; 
         values[]= {0,1}; 
         texts[]= {"Off","On"}; 
-        default = 0;
+        default = 1;
 };
 class twnmgr_status {
         title = "        Update Map based on INTEL reports"; 

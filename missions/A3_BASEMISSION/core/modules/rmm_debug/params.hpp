@@ -9,6 +9,6 @@ class debug_mso_setting {
 	title = "    Debug - Turn on Module Debugging"; 
 	values[]= {0,1,2}; 
 	texts[]= {"Off","On","include location markers"}; 
-	default = 2; 
+	default = 0; 
 };
 

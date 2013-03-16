@@ -73,6 +73,7 @@ class CUI_Frame	{
 	
 	colorBackground[] = {CUI_Colours_DialogBackground, 3/4};
 	colorText[] = {0,0,0,0};
+	colorDisabled[] = {CUI_Colours_WindowText, 1/2};
 	text = "";
 };
 
@@ -81,6 +82,7 @@ class CUI_Caption : CUI_Frame {
 
 	colorBackground[] = {CUI_Colours_CaptionBackground, 4/5};
 	colorText[] = {CUI_Colours_CaptionText, 1};
+	colorDisabled[] = {CUI_Colours_WindowText, 1/2};
 };
 
 class CUI_List {
@@ -97,6 +99,7 @@ class CUI_List {
 	color[] = {0,0.5,0,1};
 	colorText[] = {CUI_Colours_WindowText, 1};
 	colorBackground[] = {CUI_Colours_WindowBackground, 3/4};
+	colorDisabled[] = {CUI_Colours_WindowText, 1/2};
 	colorScrollbar[] = {0.95, 0.95, 0.95, 1};
 	colorSelect[] = {CUI_Colours_DialogText, 1/2};
 	colorSelect2[] = {0.95, 0.95, 0.95, 1};
@@ -112,17 +115,17 @@ class CUI_List {
 	autoScrollRewind = 0;
 	maxHistoryDelay = 1.0;
 
-	arrowFull = "\ca\ui\data\ui_arrow_top_active_ca.paa";
-	arrowEmpty = "\ca\ui\data\ui_arrow_top_ca.paa";
+	arrowEmpty = "";
+	arrowFull = "";
 	
 	class ScrollBar	{
 		color[] = {CUI_Colours_WindowText, 3/4};
 		colorActive[] = {CUI_Colours_WindowText, 1};
 		colorDisabled[] = {CUI_Colours_WindowText, 1/2};
-		thumb = "\ca\ui\data\ui_scrollbar_thumb_ca.paa";
-		arrowFull = "\ca\ui\data\ui_arrow_top_active_ca.paa";
-		arrowEmpty = "\ca\ui\data\ui_arrow_top_ca.paa";
-		border = "\ca\ui\data\ui_border_scroll_ca.paa";
+		thumb = "";
+		arrowEmpty = "";
+		arrowFull = "";
+		border = "";
 	};
 };
 
@@ -167,6 +170,7 @@ class CUI_Combo {
 	color[] = {1,1,1,3/4};
 	colorText[] = {CUI_Colours_WindowText, 3/5};
 	colorBackground[] = {CUI_Colours_DialogBackground, 2/4};
+	colorDisabled[] = {CUI_Colours_WindowText, 1/2};
 	colorSelect[] = {CUI_Colours_WindowText, 1};
 	colorSelectBackground[] = {CUI_Colours_DialogBackground, 3/4};
 	soundSelect[] = {"", 0.0, 1};
@@ -178,17 +182,17 @@ class CUI_Combo {
 	autoScrollRewind = 0;
 	maxHistoryDelay = 1.0;
 	
-	arrowFull = "\ca\ui\data\ui_arrow_top_active_ca.paa";
-	arrowEmpty = "\ca\ui\data\ui_arrow_top_ca.paa";
+	arrowEmpty = "";
+	arrowFull = "";
 	
 	class ScrollBar	{
 		color[] = {CUI_Colours_WindowText, 3/4};
 		colorActive[] = {CUI_Colours_WindowText, 1};
 		colorDisabled[] = {CUI_Colours_WindowText, 1/2};
-		thumb = "\ca\ui\data\ui_scrollbar_thumb_ca.paa";
-		arrowFull = "\ca\ui\data\ui_arrow_top_active_ca.paa";
-		arrowEmpty = "\ca\ui\data\ui_arrow_top_ca.paa";
-		border = "\ca\ui\data\ui_border_scroll_ca.paa";
+		thumb = "";
+		arrowEmpty = "";
+		arrowFull = "";
+		border = "";
 	};
 };
 
@@ -202,6 +206,7 @@ class CUI_Edit {
 	sizeEx = 0.028;	font = "BitStream";
 
 	colorBackground[] = {CUI_Colours_DialogBackground, 4/5};
+	colorDisabled[] = {CUI_Colours_WindowText, 1/2};
 	colorText[] = {CUI_Colours_WindowText, 4/5};
 	colorSelection[] = {0,0,0,1};
 
@@ -231,6 +236,7 @@ class CUI_Text {
 
 	colorBackground[] = {0,0,0,0};
 	colorText[] = {CUI_Colours_WindowText, 1};
+	colorDisabled[] = {CUI_Colours_WindowText, 1/2};
 };
 
 class CUI_StructText {
@@ -243,6 +249,7 @@ class CUI_StructText {
 
 	colorBackground[] = {0,0,0,0};
 	colorText[] = {CUI_Colours_WindowText, 1};
+	colorDisabled[] = {CUI_Colours_WindowText, 1/2};
 };
 
 class CUI_ControlGroup {

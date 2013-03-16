@@ -134,8 +134,8 @@
 	CREATE_MOVEABLE_TOWER		= compile preprocessFileLineNumbers (mps_path+"func\mps_func_moveable_tower.sqf");
 
 // Dynamic BIS Object spawner
-	BIS_fnc_dyno			= compile preprocessFileLineNumbers "ca\modules\dyno\data\scripts\objectMapper.sqf";
-
+	//not in A3 BIS_fnc_dyno			= compile preprocessFileLineNumbers "ca\modules\dyno\data\scripts\objectMapper.sqf";
+	BIS_fnc_dyno = {};
 // Begin Task sytem by Shuko
 	[] call mps_tasks_init;
 

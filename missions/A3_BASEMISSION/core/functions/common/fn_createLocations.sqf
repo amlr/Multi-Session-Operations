@@ -56,7 +56,7 @@ if (count _twnlist == 0) then {
 		diag_log format ["MSO-%1 Create Locations: Name %4 - Size %2,%3 ", time, size _x select 0, size _x select 1, text _x];
 		_twn setVariable ["name", text _x]; 
 		_twn setVariable ["neighbors",[]];
-		[[_twn], [], _debug] call BIS_fnc_locations;
+		//Not working properly in A3 [[_twn], [], false] call BIS_fnc_locations;
 	} foreach nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), ["NameCityCapital","NameCity","NameVillage"] , CRB_LOC_DIST];
 	// Set neighbors
 	[] call _initNeighbors;	

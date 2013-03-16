@@ -15,7 +15,7 @@ if (isnil "BIS_functions_mainscope") then {
 
 waitUntil{!isNil "BIS_fnc_init"};
 
-mso_version = "4.55";
+mso_version = "4.6";
 diag_log format["MSO-%1 Version: %2", time, mso_version];
 
 // reset player intialised variable
@@ -55,6 +55,8 @@ if (isnil "mso_interaction_key") then {
 	mso_interaction_key = [221,[false,false,false]];
 };
 
+//temporary Hack for A3 Alpha
+/*
 mso_fnc_hasRadio = {
     if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
         if (player call ACE_fnc_hasRadio) then {true;} else {hint "You require a radio.";false;};
@@ -68,6 +70,8 @@ mso_fnc_hasRadio = {
         if(_hasRadio) then {true} else {hint "You require a radio.";false;};
     };
 };
+*/
+mso_fnc_hasRadio = {true};
 
 "Mission Parameters" call mso_core_fnc_initStat;
 if (!isNil "paramsArray") then {

@@ -98,6 +98,7 @@ class TSD9_CELL: TSD9_RscText
 
   colorBackground[] = TSD9_ColorAttribute_Clear;
   colorText[] = {TSD9_ColorScheme_WindowText, 1};
+  colorDisabled[] = {CUI_Colours_WindowText, 1/2};
 };
 
 class TSD9_CELLA: TSD9_CELL
@@ -126,6 +127,7 @@ class TSD9_CELLCombo: TSD9_RscCombo
   color[] = TSD9_ColorAttribute_Clear;
   colorText[] = TSD9_ColorAttribute_Clear;
   colorBackground[] = TSD9_ColorAttribute_Clear;
+  colorDisabled[] = {CUI_Colours_WindowText, 1/2};
   //colorSelect[] = TSD9_ColorAttribute_Clear;
   //colorSelect2[] = TSD9_ColorAttribute_Clear;
   colorScrollbar[] = TSD9_ColorAttribute_Clear;
@@ -144,6 +146,7 @@ class TSD9_CELLButton: TSD9_RscButton
 
   colorText[] = {TSD9_ColorScheme_3DControlText, 1};
   colorBackground[] = TSD9_ColorAttribute_Clear;
+  colorDisabled[] = {CUI_Colours_WindowText, 1/2};
   colorFocused[] = {TSD9_ColorScheme_3DControlFocus, 1};
   colorBackgroundActive[] = {TSD9_ColorScheme_3DControlFocus, 1};
   colorShadow[] = TSD9_ColorAttribute_Clear;
@@ -161,6 +164,7 @@ class TSD9_MainButton: TSD9_CELLButton
   colorText[] = {TSD9_ColorScheme_3DControlText,1};
   colorBackground[] = {TSD9_ColorScheme_3DControlBackground, 1};
   colorFocused[] = {TSD9_ColorScheme_3DControlFocus, 1};
+  colorDisabled[] = {CUI_Colours_WindowText, 1/2};
   colorBackgroundActive[] = {TSD9_ColorScheme_3DControlFocus, 1};
   //colorShadow[] = {TSD9_Color_Gray_7, 1};
   //colorBorder[] = {TSD9_Color_Gray_6, 1};
@@ -182,6 +186,7 @@ class TSD9_ColBase_01_ButtonPicture: RscPicture
   h = TSD9_ROWHGT;
   sizeEx = TSD9_TEXTHGT;
 	colorBackground[] = {TSD9_color_cellABG, 1};
+	colorDisabled[] = {CUI_Colours_WindowText, 1/2};
   
   //"\CA\ui\data\i_prev_group_ca.paa";
   //text="\CA\ui\data\i_next_group_ca.paa";
@@ -190,7 +195,7 @@ class TSD9_ColBase_01_ButtonPicture: RscPicture
   
   //text="\CA\ui\data\ui_sipka.paa";
   
-  text="\CA\ui\data\ui_map_arrow_close_ca.paa";
+  text="close";
   //text="\CA\ui\data\ui_map_arrow_open_ca.paa";
   
   //text="\CA\ui\data\tankdir_right_ca.paa";
@@ -206,6 +211,7 @@ class TSD9_ColBase_01_Button: TSD9_CELLButton
   colorBackground[] = {TSD9_color_cellABG, 1};
   //colorBackground[] = TSD9_ColorAttribute_Clear; // overlay transparent button over picture control
   //colorShadow[] = TSD9_ColorAttribute_Clear;
+  colorDisabled[] = {CUI_Colours_WindowText, 1/2};
 };
 
 class TSD9_ColBase_02: TSD9_CELLB
@@ -435,6 +441,7 @@ class ICE_TeamStatusDialog
     //colorBackground[] = TSD9_ColorAttribute_Clear;
     //colorText[] = {TSD9_ColorScheme_WindowText, 1};
     text = "";
+    colorDisabled[] = {CUI_Colours_WindowText, 1/2};
   };
   //-----------------------------------------------------------------------------
   objects[] = { };
@@ -521,6 +528,7 @@ class ICE_TeamStatusDialog
     w = 0.08;
     colorBackground[] = {TSD9_Color_Gray_1, 1};
     colorText[] = {TSD9_ColorScheme_WindowText, 1};
+    colorDisabled[] = {CUI_Colours_WindowText, 1/2};
   };
   */
   //---------

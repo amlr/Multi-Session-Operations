@@ -80,19 +80,19 @@ switch(_priority) do
     };
     case "Priority": {
         _chance = _chance + 0.25;
-		_startpos = [_mapsize, RMM_casevac_flyinheight, _debug, format ["CASEVAC-%1",time], "ColorGreen", "mil_dot"] call mso_core_fnc_randomEdgePos;
+		_startpos = [_mapsize, RMM_casevac_flyinheight, _debug, format ["CASEVAC-%1",time], "ColorGreen", "Dot"] call mso_core_fnc_randomEdgePos;
 		RMM_casevac_speed = "NORMAL";
 		RMM_casevac_behav = "SAFE";
     };
     case "Routine": {
         _chance = _chance + 0.15;
-		_startpos = [_mapsize, RMM_casevac_flyinheight, _debug, format ["CASEVAC-%1",time], "ColorGreen", "mil_dot"] call mso_core_fnc_randomEdgePos;
+		_startpos = [_mapsize, RMM_casevac_flyinheight, _debug, format ["CASEVAC-%1",time], "ColorGreen", "Dot"] call mso_core_fnc_randomEdgePos;
 		RMM_casevac_speed = "NORMAL";
 		RMM_casevac_behav = "AWARE";
     };
 	case "Convenience": {
         _chance = _chance + 0.1;
-		_startpos = [_mapsize, RMM_casevac_flyinheight, _debug, format ["CASEVAC-%1",time], "ColorGreen", "mil_dot"] call mso_core_fnc_randomEdgePos;
+		_startpos = [_mapsize, RMM_casevac_flyinheight, _debug, format ["CASEVAC-%1",time], "ColorGreen", "Dot"] call mso_core_fnc_randomEdgePos;
 		RMM_casevac_speed = "NORMAL";
 		RMM_casevac_behav = "AWARE";
     };
@@ -167,7 +167,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 	// Check if armed escort required, spawn
 	if ((_enemy == "Heavy Enemy") || (_enemy == "Enemy" && ((random 1) > 0.5))) then 
 	{
-		_gunship = ["AH64D","BAF_Apache_AH1_D","AH1Z","AH64D_EP1","UH1Y","AW159_Lynx_BAF","AH6J_EP1"];
+		_gunship = ["B_AH9_F"];
 		_armvehtype = (_gunship) call BIS_fnc_selectRandom;
 		_armveh = ([position _veh, 0, _armvehtype, group _veh] call BIS_fnc_spawnVehicle) select 0;
 		_armavehname = getText (configFile >> "CfgVehicles" >> _armavehtype >> "displayname");
@@ -275,7 +275,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 				};
 				
 				// Setup Heli landing
-				_landEnd = "Land_HelipadEmpty_F" createVehicle _destpos;
+				_landEnd = "HeliHEmpty" createVehicle _destpos;
 				_unit land "GET IN";
 					
 				// Wait for helicopter landing
@@ -410,7 +410,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 				waitUntil {sleep 3;( _unit distance _hospital <= 600) || !(alive _unit) || damage _unit > 0.3};
 				
 				// Setup Heli landing
-				_landEnd = "Land_HelipadEmpty_F" createVehicle _hospital;
+				_landEnd = "HeliHEmpty" createVehicle _hospital;
 				_unit land "GET OUT";
 				
 				waitUntil {sleep 3;((position _unit) select 2 <= 3) || !(alive _unit) || damage _unit > 0.3};
