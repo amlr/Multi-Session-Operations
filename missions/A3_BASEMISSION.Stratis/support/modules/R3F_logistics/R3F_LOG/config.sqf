@@ -34,23 +34,18 @@
 R3F_LOG_CFG_remorqueurs =
 [
 	// e.g. : "MyTowingVehicleClassName1", "MyTowingVehicleClassName2"
-	"Wheeled_APC",
-	"HMMWV_Base",
-	"TowingTractor",
-	"tractor",
-	"Kamaz_Base",
-	"MTVR",
-	"GRAD_Base",
-	"Ural_Base",
-	"Ural_ZU23_Base",
-	"V3S_Civ",
-	"UAZ_Base",
-	"BRDM2_Base",
-	"BTR90_Base",
-	"GAZ_Vodnik_HMG",
-	"LAV25_Base",
-	"MLRS",
-	"LandRover_Base"
+/*	"B_Hunter_F",
+	"B_Hunter_RCWS_F",
+	"B_Hunter_HMG_F",
+	"O_Ifrit_F",
+	"O_Ifrit_GMG_F",
+	"O_Ifrit_MG_F",
+	"c_offroad",
+	"B_Quadbike_F",
+	"O_Quadbike_F",
+*/
+	"Car",
+	"Ship"
 ];
 
 /**
@@ -61,8 +56,7 @@ R3F_LOG_CFG_objets_remorquables =
 [
 	// e.g. : "MyTowableObjectClassName1", "MyTowableObjectClassName2"
 	"Car",
-	"StaticCannon",
-	"RubberBoat"
+	"Ship"
 ];
 
 
@@ -75,10 +69,12 @@ R3F_LOG_CFG_objets_remorquables =
 R3F_LOG_CFG_heliporteurs =
 [
 	// e.g. : "MyLifterVehicleClassName1", "MyLifterVehicleClassName2"
-	"BAF_Merlin_HC3_D",
-	"CH_47F_EP1",
-	"AAW_CH47",
-	"kyo_MH47E_base"
+/*	"B_AH9_F",
+	"O_Ka60_F",
+	"O_Ka60_Unarmed_F",
+	"B_MH9_F"
+*/
+	"Air"
 ];
 
 /**
@@ -88,29 +84,11 @@ R3F_LOG_CFG_heliporteurs =
 R3F_LOG_CFG_objets_heliportables =
 [
 	// e.g. : "MyLiftableObjectClassName1", "MyLiftableObjectClassName2"
-	"BAF_Jackal2_BASE_D",
-	"StaticCannon",
+	"Static",
 	"Car",
 	"Ship",
-	"ReammoBox",
-	"MLRS",
-	
-	"Land_Misc_Cargo1Ao",
-	"Land_Misc_Cargo1B",
-	"Land_Misc_Cargo1Bo",
-	"Land_Misc_Cargo1C",
-	"Land_Misc_Cargo1D",
-	"Land_Misc_Cargo1E",
-	"Land_Misc_Cargo1F",
-	"Land_Misc_Cargo1G",
-	"Base_WarfareBContructionSite",
-	"Misc_cargo_cont_net1",
-	"Misc_cargo_cont_net2",
-	"Misc_cargo_cont_net3",
-	"Misc_cargo_cont_small",
-	"Misc_cargo_cont_small2",
-	"Misc_cargo_cont_tiny",
-	"Land_Misc_Cargo1E_EP1"
+	"Ammo",
+	"Land_CargoBox_V1_F"
 ];
 
 
@@ -146,78 +124,25 @@ R3F_LOG_CFG_objets_heliportables =
 R3F_LOG_CFG_transporteurs =
 [
 	// e.g. : ["MyTransporterClassName1", itsCapacity], ["MyTransporterClassName2", itsCapacity]
-	["kyo_MH47E_base", 50],
-	
-	
-	["BAF_Jackal2_BASE_D", 15],
-	["CH_47F_EP1", 50],
-	["AW159_Lynx_BAF", 15],
-
-	["AAW_CH47", 50],
-	["AAW_s70bh_mg",25],
-	["AAW_s70",25],
-	
-	["aawBushmaster_ECM", 13],
-	["aawBushmaster_pws_ECM", 12],
-	["aawBushmaster", 15],
-	
-	["ATV_US_EP1", 10],
-
-	["hilux1_civil_1_open", 10],
-	["HMMWV_Base", 12],
-	["Ikarus", 40],
-	["Lada_base", 6],
-	["SkodaBase", 6],
-	["TowingTractor", 5],
-	["tractor", 2],
-	["Motorcycle", 1],
-	["KamazRefuel", 5],
-	["Kamaz_Base", 40],
-	["MtvrRefuel", 5],
-	["MTVR", 110],
-	["GRAD_Base", 2],
-	["Ural_Base", 40],
-	["ACE_Truck5tMG", 40],
-	["V3S_Civ", 25],
-	["UAZ_Base", 10],
-	["VWGolf", 6],
-	["BRDM2_Base", 25],
-	["BTR90_Base", 25],
-	["GAZ_Vodnik_HMG", 25],
-	["LAV25_Base", 25],
-	["AAV", 10],
-	["BMP2_Base", 8],
-	["BMP3", 8],
-	
-	["Mi17_base", 50],
-	["Mi24_Base", 40],
-	["UH1Y", 15],
-	["UH60_Base", 25],
-	["C130J", 150],
-	["MV22", 90],
-	
-	["RHIB", 12],
-	["RubberBoat", 5],
-	["Fishing_Boat", 18],
-	["Smallboat_1", 6],
-	
-	["Land_Misc_Cargo1E_EP1", 100],
-
-	["Land_Misc_Cargo1Ao", 100],
-	["Land_Misc_Cargo1B", 100],
-	["Land_Misc_Cargo1Bo", 100],
-	["Land_Misc_Cargo1C", 100],
-	["Land_Misc_Cargo1D", 100],
-	["Land_Misc_Cargo1E", 100],
-	["Land_Misc_Cargo1F", 100],
-	["Land_Misc_Cargo1G", 100],
-	["Base_WarfareBContructionSite", 50],
-	["Misc_cargo_cont_net1", 9],
-	["Misc_cargo_cont_net2", 18],
-	["Misc_cargo_cont_net3", 30],
-	["Misc_cargo_cont_small", 20],
-	["Misc_cargo_cont_small2", 16],
-	["Misc_cargo_cont_tiny", 12]
+	["B_Hunter_F", 50],
+	["B_Hunter_RCWS_F", 35],
+	["B_Hunter_HMG_F", 35],
+	["O_Ifrit_F", 50],
+	["O_Ifrit_GMG_F", 35],
+	["O_Ifrit_MG_F", 35],
+	["c_offroad", 40],
+	["B_Quadbike_F", 25],
+	["O_Quadbike_F", 25],
+	["B_AH9_F", 35],
+	["O_Ka60_F", 35],
+	["O_Ka60_Unarmed_F", 50],
+	["B_MH9_F", 50],
+	["Land_CargoBox_V1_F", 100],
+	["B_Assaultboat", 35],
+	["O_Assaultboat", 35],
+	["C_Rubberboat", 35],
+	["O_SpeedBoat", 50],
+	["B_SpeedBoat", 50]
 ];
 
 /**
@@ -890,142 +815,11 @@ R3F_LOG_CFG_objets_deplacables = R3F_LOG_CFG_objets_deplacables +
  
 // BAF content
 
-R3F_LOG_CFG_remorqueurs = R3F_LOG_CFG_remorqueurs +
-[
-	"BAF_Jackal2_Base",
-	"BAF_Offroad_Base"
-];
-
-R3F_LOG_CFG_objets_remorquables = R3F_LOG_CFG_objets_remorquables +
-[
-	"BAF_Jackal2_Base",
-	"BAF_Offroad_Base"	
-];
-
-R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
-[
-	"BAF_Merlin_HC3_D"	
-];
-
-R3F_LOG_CFG_objets_heliportables = R3F_LOG_CFG_objets_heliportables +
-[
-	"BAF_Jackal2_Base",
-	"BAF_Offroad_Base"	
-];
-
-R3F_LOG_CFG_transporteurs = R3F_LOG_CFG_transporteurs +
-[
-	["BAF_Merlin_HC3_D", 50],
-	["BAF_Jackal2_Base", 15],
-	["BAF_Offroad_Base", 15]
-];
-
-R3F_LOG_CFG_objets_transportables = R3F_LOG_CFG_objets_transportables +
-[
-	["BAF_GMG_Tripod_D", 4]
-];
-
-R3F_LOG_CFG_objets_deplacables = R3F_LOG_CFG_objets_deplacables +
-[
-	
-]; 
- 
-
-// ACE OA est-il présent ? (is ACE OA activated ?)
-if (isClass (configFile >> "CfgVehicles" >> "ACE_Required_Logic")) then
-{
-
-	R3F_LOG_CFG_remorqueurs = R3F_LOG_CFG_remorqueurs +
-	[
-		"ACE_Truck5tMG_Base"
-	];
-
-	R3F_LOG_CFG_objets_remorquables = R3F_LOG_CFG_objets_remorquables +
-	[
-		"ACE_EASA_Vehicle"
-	];
-	
-
-	R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
-	[
-		// Aucun lifteur fourni par ACE OA
-	];
-	
-
-	R3F_LOG_CFG_objets_heliportables = R3F_LOG_CFG_objets_heliportables +
-	[
-		"ACE_Truck5tMG_Base",
-		"ACE_Lifeboat",
-		"ACE_EASA_Vehicle"
-	];
-
-	R3F_LOG_CFG_transporteurs = R3F_LOG_CFG_transporteurs +
-	[
-		["ACE_Truck5tRepair", 35],
-		["ACE_Truck5tRepair_Base", 35],
-		["ACE_Truck5tReammo", 35],
-		["ACE_Truck5tReammo_Base", 35],
-		["ACE_Truck5tRefuel", 10],
-		["ACE_Truck5tRefuel_Base", 10],
-		["ACE_Truck5tMG_Base", 120],
-		["ACE_UralReammo_TK_EP1", 35],
-		["ACE_UralRefuel_TK_EP1", 10],
-		["ACE_UralRepair_TK_EP1", 35],
-		["ACE_V3S_Reammo_TK_GUE_EP1", 35],
-		["ACE_V3S_Refuel_TK_GUE_EP1", 10],
-		["ACE_V3S_Repair_TK_GUE_EP1", 35],
-		["ACE_Lifeboat", 5]
-	];
-	
-	R3F_LOG_CFG_objets_transportables = R3F_LOG_CFG_objets_transportables +
-	[
-		["ACE_Stretcher", 2],
-		["ACE_KonkursTripod_NoGeo", 5],
-		["ACE_M3Tripod", 3],
-		["ACE_Konkurs", 7],
-		["ACE_SpottingScope", 3],
-		["ACE_Lifeboat", 7],
-		["ACE_Sandbag_NoGeo", 1],
-		["ACE_BandageBoxWest", 4],
-		["ACE_CSW_Box_Base", 12],
-		["ACE_RuckBox_East", 12],
-		["ACE_RuckBox_Ind", 12],
-		["ACE_RUCK_Box_Base", 35],
-		["ACE_Rope_Box_Base", 35],
-		["ACE_SandBox", 35],
-		["ACE_GuerillaCacheBox", 9],
-		["ACE_RUBasicAmmunitionBox", 5],
-		["ACE_RUOrdnanceBox", 9],
-		["ACE_RUVehicleBox", 40],
-		["ACE_RUBasicWeaponsBox", 15],
-		["ACE_RULaunchers", 9],
-		["ACE_RULaunchersBox", 9],
-		["ACE_RUSpecialWeaponsBox", 15],
-		["ACE_LocalBasicAmmunitionBox", 5],
-		["ACE_LocalBasicWeaponsBox", 10],
-		["ACE_EmptyBox", 5],
-		["ACE_HuntIRBox", 4],
-		["ACE_KnicklichtBox", 4],
-		["ACE_USBasicAmmunitionBox", 4],
-		["ACE_USOrdnanceBox", 4],
-		["ACE_USVehicleBox", 35],
-		["ACE_USVehicleBox_EP1", 35],
-		["ACE_USBasicWeaponsBox", 12],
-		["ACE_USLaunchersBox", 9],
-		["ACE_SpecialWeaponsBox", 12],
-		["ACE_USSpecialWeaponsBox", 12],
-		["ACE_TargetBase", 2],
-		["ACE_UsedTubes", 2],
-		["ACE_MS2000_STROBE_OBJECT", 1]
-	];
-	
-	R3F_LOG_CFG_objets_deplacables = R3F_LOG_CFG_objets_deplacables +
-	[
-		"ACE_Stretcher",
-		"ACE_Lifeboat",
-		"ACE_Sandbag_NoGeo",
-		"ACE_TargetBase",
-		"ACE_UsedTubes",
-		"ACE_MS2000_STROBE_OBJECT"
-	];
-};
+/*
+ * List of files adding objects in the arrays of logistics configuration (e.g. R3F_LOG_CFG_remorqueurs)
+ * Add an include to the new file here if you want to use the logistics with a new addon.
+ * 
+ * Liste des fichiers ajoutant des objets dans les tableaux de fonctionnalités logistiques (ex : R3F_LOG_CFG_remorqueurs)
+ * Ajoutez une inclusion vers votre nouveau fichier ici si vous souhaitez utilisez la logistique avec un nouvel addon.
+ */
+//#include "addons_config\arma2_CO_objects.sqf"
