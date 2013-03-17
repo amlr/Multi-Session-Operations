@@ -73,20 +73,20 @@ R3F_REV_fil_exec_attente_reanimation = [] spawn
 	if (R3F_REV_nb_reanimations > 0) then
 	{
 		// Isoler le nouveau corps
-		_joueur setPosATL [_position_avant_mort select 0, _position_avant_mort select 1, 2000];
+		//_joueur setPosATL [_position_avant_mort select 0, _position_avant_mort select 1, 2000];
 		
 		_joueur setCaptive true;
 		
 		// Retrait de l'équipement
-		removeAllWeapons _joueur;
-		removeAllItems _joueur;
+		//removeAllWeapons _joueur;
+		//removeAllItems _joueur;
 		
 		// Couché sans arme dans les mains, posture blessé
 		_joueur switchMove "AinjPpneMstpSnonWrflDnon";
 		
 		// Restauration des armes d'avant le décès
-		{_joueur addMagazine _x;} forEach _chargeurs_avant_mort;
-		{_joueur addWeapon _x;} forEach _armes_avant_mort;
+		//{_joueur addMagazine _x;} forEach _chargeurs_avant_mort;
+		//{_joueur addWeapon _x;} forEach _armes_avant_mort;
 		
 		// OA 1.54+ seulement : restaurer le sac à dos d'avant le décès ou le supprimer s'il n'en avait pas
 		if !(isNil "R3F_REV_FNCT_assigner_sacados") then
@@ -122,8 +122,8 @@ R3F_REV_fil_exec_attente_reanimation = [] spawn
 		// Ramener le nouveau corps au lieu du décès
 		_joueur setVelocity [0, 0, 0];
 		_joueur setDir _direction_avant_mort;
-		_joueur setPos [_position_avant_mort select 0, _position_avant_mort select 1, _hauteur_ATL_avant_mort - (_position_avant_mort select 2)];
-		
+		_joueur setPos [_position_avant_mort select 0, _position_avant_mort select 1, _hauteur_ATL_avant_mort - (_position_avant_mort select 2)];		
+
 		// Suppression de l'ancien corps
 		if (R3F_REV_corps_avant_mort != _joueur) then
 		{deleteVehicle R3F_REV_corps_avant_mort;};
@@ -245,18 +245,20 @@ R3F_REV_fil_exec_attente_reanimation = [] spawn
 			R3F_REV_nb_reanimations = R3F_REV_CFG_nb_reanimations;
 			
 			// Restauration des armes d'avant le décès
+			/*
 			removeAllWeapons _joueur;
 			removeAllItems _joueur;
 			{_joueur addMagazine _x;} forEach _chargeurs_avant_mort;
 			{_joueur addWeapon _x;} forEach _armes_avant_mort;
 			_joueur selectWeapon (primaryWeapon _joueur);
-			
+			*/
+
 			// OA 1.54+ seulement : restaurer le sac à dos d'avant le décès ou le supprimer s'il n'en avait pas
 			if !(isNil "R3F_REV_FNCT_assigner_sacados") then
 			{
 				[_joueur, _sacados_avant_mort] call R3F_REV_FNCT_assigner_sacados;
 			};
-			
+
 			// Retour du corps au marqueur de réapparition
 			_joueur setVelocity [0, 0, 0];
 			_joueur setPosATL R3F_REV_position_reapparition;
