@@ -23,9 +23,13 @@ CREATING ADDITIONAL CONFIGS
 /-------------------------------------------------------------*/
 
 // BIS Configs
-#include "config_addons\config_units_a2.sqf"
-#include "config_addons\config_units_oa.sqf"
-#include "config_addons\config_units_baf.sqf"
+//#include "config_addons\config_units_a2.sqf"
+//#include "config_addons\config_units_oa.sqf"
+//#include "config_addons\config_units_baf.sqf"
+#include "config_addons\config_units_a3.sqf"
 
 // AAW Mod Config
-#include "config_addons\config_units_aaw.sqf"
+//#include "config_addons\config_units_aaw.sqf"
+
+// Lingor Units
+// #include "config_addons\config_units_lingor.sqf"

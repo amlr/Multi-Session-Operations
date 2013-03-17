@@ -1,87 +1,92 @@
-if(count mps_loc_towns < 1) exitWith{};
+diag_log [diag_frameno, diag_ticktime, time, "#PO2 TASK: Search and Destroy Convoy Initialise"];
 
-diag_log [diag_frameno, diag_ticktime, time, "MISSION TASK SAD_convoy.sqf"];
+private["_location","_position","_taskid","_startloc","_startpos","_radius","_nearRoads","_vehicles"];
 
-private["_locationstart","_locationEnd","_positionStart","_positionEnd","_spawnpos","_taskid","_object","_grp","_stance ","_b"];
+/*--------------------CREATE LOCATION---------------------------------*/
 
-_locationStart = (mps_loc_towns call mps_getRandomElement);
+	_location = [["towns"]] call mps_getNewLocation;
+	_position = [(position _location) select 0,(position _location) select 1, 0];
+	_taskid = format["%1%2%3",round (_position select 0),round (_position select 1),(round random 999)];
 
-while {_locationstart == mps_loc_last} do {
-	_locationstart = (mps_loc_towns call mps_getRandomElement); 
-    sleep 0.1;
-};
+/*--------------------Get nearby Locations-----------------------------------*/
 
-mps_loc_last = _locationstart;
+	_nearlocations = [];
+	_radius = 2000;
+	While{count _nearlocations < 2} do {
+		_nearlocations = (nearestLocations [_position,["Name","NameVillage","NameCity","NameCityCapital"],_radius] - [_location]);
+		_radius = _radius + 100;
+	};
+	_nearlocations = _nearlocations call mps_getArrayPermutation;
 
-_locationEnd = (mps_loc_towns call mps_getRandomElement);
+	_radius = 200;
+	_nearRoads = [];
+	While{count _nearRoads == 0} do {
+		_nearRoads = _position nearRoads _radius;
+		_radius = _radius + 100;
+	};
 
-while {_locationEnd == mps_loc_last} do {
-	_locationEnd = (mps_loc_towns call mps_getRandomElement); 
-    sleep 0.1;
-};
+/*--------------------CREATE TARGET-----------------------------------*/
 
-mps_loc_last = _locationEnd;
+	_car_type = (mps_opfor_car+mps_opfor_apc) call mps_getRandomElement;
+	_vehgrp1 = [_car_type,(SIDE_B select 0),position (_nearRoads call mps_getRandomElement),0] call mps_spawn_vehicle; sleep 1;
+	_vehgrp2 = [_car_type,(SIDE_B select 0),position (_nearRoads call mps_getRandomElement),0] call mps_spawn_vehicle; sleep 1;
+	_vehgrp3 = [_car_type,(SIDE_B select 0),position (_nearRoads call mps_getRandomElement),0] call mps_spawn_vehicle; sleep 1;
 
+	_vehicles = [];
+	{ _vehicles = _vehicles + [vehicle (leader _x)]; }forEach [_vehgrp1,_vehgrp2,_vehgrp3];
 
-_positionStart = [(position _locationStart) select 0,(position _locationStart) select 1, 0];
-_positionEnd = [(position _locationEnd) select 0,(position _locationEnd) select 1, 0];
+	(units _vehgrp2 + units _vehgrp3) joinSilent _vehgrp1;
+	sleep 1;
+	{ deleteGroup _x; }forEach [_vehgrp2,_vehgrp3];
 
-_spawnpos = [_positionStart,200,0.15,5] call rmm_ep_getFlatArea;
-waituntil {!isnil "_spawnpos"};
+/*--------------------MOVE TARGET TO LOCATIONS------------------------*/
 
-_spawnpos = position ([_spawnpos] call mps_getnearestroad);
+	_vehgrp1 addWaypoint [_position,100];
+	_vehgrp1 setBehaviour "SAFE";
+	_vehgrp1 setSpeedMode "LIMITED";
+	_vehgrp1 setFormation "COLUMN";
 
-_taskid = format["%1%2%3",round (_positionEnd select 0),round (_positionEnd select 1),(round random 999)];
+	{
+		_vehgrp1 addWaypoint [position _x,100];
+	} foreach _nearlocations;
+	(_vehgrp1 addWaypoint [_position,100]) setWaypointtype "CYCLE";
 
-_radius = 200;
-_nearRoads = [];
-While{count _nearRoads < 3} do {
-	_nearRoads = _spawnpos nearRoads _radius;
-	_radius = _radius + 100;
-};
+/*--------------------CREATE INTEL, RESET DEATHCOUNT---------------------------------*/
 
-_truckgroup = [mps_opfor_ncov call mps_getRandomElement,(SIDE_B select 0),position (_nearRoads call mps_getRandomElement),0] call mps_spawn_vehicle;
-WaitUntil{vehicle leader _truckgroup != leader _truckgroup};
-_truck = vehicle leader _truckgroup;
-leader _truckgroup setRank "COLONEL";
+	mps_civilian_intel = _vehicles; publicVariable "mps_civilian_intel";
+	mps_mission_deathcount = mps_mission_deathlimit; publicVariable "mps_mission_deathcount";
 
-_armorgroup = [mps_opfor_armor call mps_getRandomElement,(SIDE_B select 0),position (_nearRoads call mps_getRandomElement),0] call mps_spawn_vehicle;
-WaitUntil{vehicle leader _armorgroup != leader _armorgroup};
-_armor = vehicle leader _armorgroup;
+/*--------------------CREATE TASK OBJECTIVE---------------------------------*/
 
-_apcgroup = [mps_opfor_apc call mps_getRandomElement,(SIDE_B select 0),position (_nearRoads call mps_getRandomElement),0] call mps_spawn_vehicle;
-WaitUntil{vehicle leader _apcgroup != leader _apcgroup};
-_apc = vehicle leader _apcgroup;
+	[ format["TASK%1",_taskid],
+		"Disable Supply Coloumn",
+		format["A supply coloumn is distributing weapons around %1. Locate and ambush the coloumn, disabling any vehicles.", text _location],
+		(SIDE_A select 0),
+		[format["MARK%1",_taskid],(_position),"hd_objective","ColorRed"," Column Spotted"],
+		"created",
+		_position
+	] call mps_tasks_add;
 
-(units _apcgroup + units _armorgroup) joinSilent _truckgroup;
-(units _truckgroup + [_truck,_armor,_apc]) spawn mps_cleanup;
+/*--------------------MISSION CRITERIA TO PASS---------------------------------*/
 
-sleep 2;
-deleteGroup _apcgroup;
-deleteGroup _armorgroup;
+	while { { canMove _x; } count _vehicles > 0 && mps_mission_deathcount > 0 } do { sleep 5 };
 
-_truckgroup addWaypoint [_positionEnd,200];
-_truckgroup setBehaviour "SAFE";
-_truckgroup setSpeedMode "LIMITED";
-_truckgroup setFormation "COLUMN";
+/*--------------------CHECK IF SUCCESSFUL---------------------------------*/
 
-leader _truckgroup setVariable ["rmm_gtk_exclude", true];
+	if( mps_mission_deathcount > 0 && { canMove _x; }count _vehicles == 0 ) then {
+		[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
+	}else{
+		[format["TASK%1",_taskid],"failed"] call mps_tasks_upd;
+	};
 
-[format["TASK%1",_taskid],
-	"Destroy Weapons Convoy",
-	format["A weapons supply convoy is moving from %1 to %2. Destroy it before it reaches the town.", text _locationStart, text _locationEnd],
-	true,
-	[format["MARK%1",_taskid],(_positionEnd),"hd_objective","ColorRedAlpha"," Target"],
-	"created",
-	_positionEnd
-] call mps_tasks_add;
+/*--------------------CLEAN UP AFTER MISSION---------------------------------*/
 
-While{!ABORTTASK_PO && (canMove _truck || canMove _armor || canMove _apc) && (_truck distance _positionEnd > 100 && _armor distance _positionEnd > 100 && _apc distance _positionEnd > 100) } do { sleep 5 };
+	{ _x setDamage 1; } forEach _vehicles;
 
-if(!ABORTTASK_PO && !canMove _truck && !canMove _armor && !canMove _apc) then {
-	[format["TASK%1",_taskid],"succeeded"] call mps_tasks_upd;
-	mps_mission_status = 2;
-}else{
-	[format["TASK%1",_taskid],"failed"] call mps_tasks_upd;
-	mps_mission_status = 3;
-};
+/*--------------------RESET INTEL---------------------------------*/
+
+	mps_civilian_intel = []; publicVariable "mps_civilian_intel";
+
+/*--------------------FORCE SCRIPT END---------------------------------*/
+
+if(true)exitWith{};

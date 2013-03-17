@@ -14,7 +14,7 @@ if(count _this > 1) then {
 };
 
 _spawnpos = _pos;
-While{_forcetype == "REINFORCEMENTS" && ({isPlayer _x} count nearestObjects [_spawnpos,["Man"],1200] > 0 || _spawnpos distance _pos < 800)} do{
+While{_forcetype == "REINFORCEMENTS" && ({isPlayer _x} count nearestObjects [_spawnpos,["CAManBase"],1200] > 0 || _spawnpos distance _pos < 800)} do{
 	_radius = 800;
 	_angle = random 360;
 	_a = (_pos select 0) + (sin(_angle) * (_radius + random 200));
@@ -116,26 +116,8 @@ for "_i" from 1 to (_tankweight max (_apcweight max (_carweight max (_aaweight m
 		};
 	};
 };
-/******************************** SPAWN STATIC MGs ********************************************
-_ang = round random 360;
-_bcount = 1 + (round random 2); //#MGs
-_inc = 360/_bcount; 
 
-for "_i" from 0 to _bcount do {
-	_radius = 50 + (random 150);
-	_a = (_pos select 0)+(sin(_ang)*_radius);
-	_b = (_pos select 1)+(cos(_ang)*_radius);
-
-	_mgpos = [_a,_b,0];
-	_ang = _ang + _inc;
-
-	if(not surfaceIsWater [_mgpos select 0, _mgpos select 1]) then{
-		_mg = mps_opfor_staticmg createVehicle _mgpos;
-		_Grp = [_pos,"INF",1,10,false] call CREATE_OPFOR_SQUAD; leader _Grp moveInGunner _mg;
-		_Enemies = _Enemies + (units _Grp);
-	};
-};
-*********************************************************************************************/
+/*********************************************************************************************/
 _Enemies spawn mps_cleanup;
 EnemiesSpawned=true;
 sleep 5;

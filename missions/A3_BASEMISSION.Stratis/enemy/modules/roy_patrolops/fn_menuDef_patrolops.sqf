@@ -27,7 +27,7 @@ _menus = [
   [
    ["Abort Patrol Operation",
     { 
-      [] execvm PO_Path + "tasks\abort_po.sqf";
+      [] execvm "enemy\modules\roy_patrolops\tasks\abort_po.sqf";
     }
    ]
   ]
@@ -40,7 +40,7 @@ _menus = [
   [
    ["Request Patrol Operation",
     { 
-      [] execvm PO_Path + "tasks\checkin_po.sqf";
+      [] execvm "enemy\modules\roy_patrolops\tasks\checkin_po.sqf";
     }
    ]
   ]

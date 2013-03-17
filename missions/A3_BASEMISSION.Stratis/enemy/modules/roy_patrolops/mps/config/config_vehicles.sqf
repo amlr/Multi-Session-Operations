@@ -24,7 +24,7 @@ CREATING ADDITIONAL CONFIGS
 	tank = Heavy Armour
 	apc = Armoured Personell Carrier
 	mhq = MHQ vehicle (not used)
- //Logistics Class_ID
+    Logistics
 	cargo = Container for Objects
 	item = Draggable / Loadable objects (must be less than 20 in size otherwise too heavy for players)
 
@@ -42,12 +42,17 @@ CREATING ADDITIONAL CONFIGS
 /-------------------------------------------------------------*/
 
 // BIS Configs
-#include "config_addons\config_vehicles_a2.sqf"
-#include "config_addons\config_vehicles_oa.sqf"
-#include "config_addons\config_vehicles_baf.sqf"
+//#include "config_addons\config_vehicles_a2.sqf"
+//#include "config_addons\config_vehicles_oa.sqf"
+//#include "config_addons\config_vehicles_baf.sqf"
+#include "config_addons\config_vehicles_a3.sqf"
 
 // Logistics Config
-#include "config_addons\config_vehicles_logistics.sqf"
+//#include "config_addons\config_vehicles_logistics.sqf"
+
+//if(mps_ace_enabled) then {
+//	#include "config_addons\config_vehicles_ace.sqf"
+//};
 
 // AAW Mod Config
-#include "config_addons\config_vehicles_aaw.sqf"
+//#include "config_addons\config_vehicles_aaw.sqf"

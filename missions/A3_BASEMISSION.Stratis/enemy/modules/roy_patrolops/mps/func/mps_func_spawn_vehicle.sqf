@@ -28,8 +28,8 @@ _crewtype = getArray (configFile >> "CfgVehicles" >> _type >> "typicalCargo");
 _max = (count _crewtype)-1;
 
 if(count(_crewtype - ["Soldier"])==0) then{
-	if(_side==EAST) then{_crewtype = ["TK_Soldier_EP1"]}
-	else {_crewtype = ["US_Soldier_EP1"]};
+	if(_side==EAST) then{_crewtype = ["O_helipilot_F"]}
+	else {_crewtype = ["B_Helipilot_F"]};
 };
 
 if((_vec emptyPositions "commander") > 0) then {
@@ -47,27 +47,30 @@ if((_vec emptyPositions "driver") > 0) then {
 	_unit moveinDriver _vec;
 };
 
-
 // Cleanup
-_Grp spawn {
-	_units = units _this;
-	_hidetime = 30;
 
-	While{({alive _x} count _units) > 0} do{sleep 20};
+[_Grp,_vec] spawn {
+	_grp = _this select 0;
+	_units = units _grp;
+	_veh = _this select 1;
+
+	_vehpos = position _veh;
+
+	While{ damage _veh < 1 && ({alive _x} count _units) > 0 } do { sleep 20; };
+
+	while{ { alive _x && side _x == (SIDE_A select 0) } count nearestObjects[_vehpos,["CAManBase","LandVehicle"],800] > 0 } do { sleep 15; };
+
+	deleteVehicle _veh;
+
 	{
-		sleep _hidetime;
 		hidebody _x;
 		sleep 3;
 		deleteVehicle _x;
 	} foreach _units;
 
 	sleep 5;
-	deleteGroup _this;
-};
-_vec spawn {
-	While{damage _this < 1} do{sleep 20};
-	sleep 600;
-	deleteVehicle _this;
+
+	deleteGroup _grp;
 };
 
 _Grp

@@ -2,8 +2,10 @@
 
 private["_position","_type"];
 
-	if(mps_a2) then {_type = "Misc_Cargo1B_military"};
-	if(mps_oa) then {_type = "Land_Misc_Cargo1E_EP1"};
+	if(mps_a2) then {_type = "Land_CargoBox_V1_F"};
+	if(mps_oa) then {_type = "Land_CargoBox_V1_F"};
+	
+	_type = "Land_CargoBox_V1_F";
 
 	if(count _this < 1 || isNil "_type") exitWith {hint "Container Create Error";};
 

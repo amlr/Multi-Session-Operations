@@ -11,7 +11,8 @@ _list = switch (MISSIONTYPE_PO) do {
 	// Mix Easy
 	case 4: {["CAP_target","CAP_town","CAP_vehicle","SAD_cache","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","CRB_convoy","SAD_scud","SAD_tower","SAR_pilot","SAD_bombcar"]};
 	// Mix Hard
-	case 5: {["CAP_target_2","CAP_town","CAP_vehicle","RTF_tower","SAD_camp","SAD_chemical","SAD_depot","SAD_radar","SAD_scud","SAD_tower","SAR_pow","SAD_bombcar","CRB_convoy"]};
+	case 5: {["sad_depot","sad_tower","cap_town","sad_convoy","sar_drone","def_town","sad_column","def_camp"]};
+	// not working: "rtf_minefield" (needs class of explosive charge which is ATMine_Range_Mag), "sad_camp" spams cache location  markers; "sad_scud" It's a SCUD, needs to be converted, "sad_cache" can't get markers off enemy to find cache
 	// Capture
 	case 6: {["CAP_target","CAP_target_2","CAP_town","CAP_vehicle","SAD_bombcar","CRB_convoy"]};
 	// MSO Autotasking
@@ -48,7 +49,7 @@ for "_i" from 1 to MISSIONCOUNT do {
 	_next = _list select _j;
 
 	mps_mission_status = 1;
-	_script = [] execVM format[PO_Path + "tasks\types\%1.sqf",_next];
+	_script = [] execVM format["enemy\modules\roy_patrolops\tasks\types\%1.sqf",_next];
 	if (mps_debug) then {diag_log format ["MSO-%1 PO2: Launching %2 mission", time, _next];};
 	runningmission_po = true;
     Publicvariable "runningmission_po";

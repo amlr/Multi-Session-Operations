@@ -364,7 +364,7 @@ class FSM
        "" \n
        "	if(mps_debug) then {" \n
        "		_marker = createMarkerlocal [format[""bon_ap%1"",_x],_x];" \n
-       "		_marker setMarkerTypelocal ""mil_dot"";" \n
+       "		_marker setMarkerTypelocal ""dot"";" \n
        "		_marker setMarkersizelocal [0.5,0.5];" \n
        "		_marker setMarkerTextlocal str _index;" \n
        "		_index = _index + 1;" \n
@@ -488,7 +488,7 @@ class FSM
        "	_buildingpos = _buildingpos - 1;" \n
        "" \n
        "	for ""_i"" from 2 to _buildingpos do {" \n
-       "		_fortpositions set [count _fortpositions, _house buildingpos _i];" \n
+       "		_fortpositions = _fortpositions + [_house buildingpos _i];" \n
        "	};" \n
        "};" \n
        "" \n
@@ -503,7 +503,7 @@ class FSM
        "" \n
        "		if(mps_debug) then {" \n
        "			_marker = createMarkerlocal [str random 999999,_fortpos];" \n
-       "			_marker setMarkerTypelocal ""mil_dot"";" \n
+       "			_marker setMarkerTypelocal ""dot"";" \n
        "			_marker setMarkerSizelocal [0.5,0.5];" \n
        "			_marker setMarkerColorlocal ""ColorOrange"";" \n
        "			_marker setMarkerTextlocal ""hide"";" \n
@@ -652,7 +652,7 @@ class FSM
        "" \n
        "	if(mps_debug) then {" \n
        "		_marker = createMarkerlocal [str random 999999,_isFlatEmpty];" \n
-       "		_marker setMarkerTypelocal ""mil_dot"";" \n
+       "		_marker setMarkerTypelocal ""dot"";" \n
        "		_marker setMarkerSizelocal [0.5,0.5];" \n
        "		_marker setMarkerColorlocal ""ColorBlue"";" \n
        "		_marker setMarkerTextlocal ""standby"";" \n

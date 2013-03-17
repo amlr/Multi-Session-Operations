@@ -34,7 +34,7 @@ for "_i" from 1 to MISSIONCOUNT do {
 	_next = _list select _j;
 
 	mps_mission_status = 1;
-	_script = [] execVM format[PO_Path + "tasks\types\%1.sqf",_next];
+	_script = [] execVM format["enemy\modules\roy_patrolops\tasks\types\%1.sqf",_next];
 	if (mps_debug) then {diag_log format ["MSO-%1 PO2: Launching %2 mission", time, _next];};
 	runningmission_air = true;
     Publicvariable "runningmission_air";

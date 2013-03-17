@@ -705,8 +705,9 @@ class RscMap {
 	};		
 };
 
-//#include "mps_dialog_backpack.hpp"
-//#include "mps_dialog_hud.hpp"
-//#include "mps_dialog_logistics.hpp"
-//#include "mps_dialog_recruit.hpp"
-//#include "mps_dialog_respawn.hpp"
+#include "mps_dialog_aas.hpp"
+#include "mps_dialog_backpack.hpp"
+#include "mps_dialog_hud.hpp"
+#include "mps_dialog_logistics.hpp"
+#include "mps_dialog_recruit.hpp"
+#include "mps_dialog_respawn.hpp"

@@ -1,7 +1,7 @@
 // Written by Code34
 // Adapted by EightySix
 
-if(!mps_oa) exitWith {hint format["%1",_this select 2];};
+if(!mps_co) exitWith {hint format["%1",_this select 2];};
 
 	private ["_title","_instruction","_duration"];
 

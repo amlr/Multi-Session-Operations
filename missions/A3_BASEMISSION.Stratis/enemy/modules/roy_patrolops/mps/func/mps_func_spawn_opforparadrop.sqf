@@ -5,16 +5,17 @@ private["_heligrp","_spawnpos","_dest","_paradrop","_flyin","_droptype","_invisi
 
 waituntil {!isnil "bis_fnc_init"};
 
+if( count mps_opfor_ncoh == 0 ) exitWith{};
+
 _helogrp = _this select 0;
-_spawnpos = (_this select 1) call mps_get_position;
+_spawnpos = (_this select 1) call mps_get_position; sleep 1;
 _dest = (_this select 2) call mps_get_position;
-//_dest = (_dest call mps_getFlatArea);
 _paradrop = false;
 if(count _this > 3) then { _paradrop = _this select 3};
 
 _flyin = 200;
 _droptype = (mps_opfor_ncoh) call mps_getRandomElement;
-_invisibleTarget = "Land_HelipadEmpty_F" createVehiclelocal _dest;
+_invisibleTarget = "Land_CargoBox_V1_F" createVehiclelocal _dest;
 
 if(count (units _helogrp) == 0) then {_heligrp = [_spawnpos,"INF",(8 + random 5),10] call CREATE_OPFOR_SQUAD; };
 if(_droptype isKindof "Plane" || count _this > 3) then { _paradrop = true };
@@ -36,6 +37,8 @@ _helopilot disableAI "AUTOTARGET";
 
 {_x assignAsCargo _drophelo; _x moveInCargo _drophelo} forEach (Units _helogrp);
 
+{ if(vehicle _x == _x) then { _x setDamage 1; }; }forEach (units _helogrp);
+
 if (!isEngineOn _drophelo && alive _helopilot) then {
 	if (!canMove _drophelo) then {
 		_drophelo setDammage 0;
@@ -47,8 +50,7 @@ if (!isEngineOn _drophelo && alive _helopilot) then {
 
 _helopilot doMove _dest;
 
-while {_drophelo distance _dest > 200 || canMove _drophelo || alive _helopilot} do {sleep 1};
-
+waitUntil { _drophelo distance _dest <= 250 || !canMove _drophelo || !alive _helopilot };
 
 if(_paradrop || !(toupper (behaviour _helopilot) IN ["CARELESS","SAFE","AWARE"]) ) then {
 	{	if( (assignedVehicleRole _x) select 0 == "Cargo")then {
@@ -80,7 +82,7 @@ _drophelo land "NONE";
 sleep 2;
 _helopilot doMove _spawnpos;
 
-while {_drophelo distance _spawnpos > 200 || canMove _drophelo || alive _helopilot} do {sleep 1};
+waitUntil {_drophelo distance _spawnpos <= 200 || !canMove _drophelo || !alive _helopilot};
 
 { _x action ["EJECT", vehicle _x]; sleep 0.2; deleteVehicle _x; } forEach (crew _drophelo);
 deleteVehicle _drophelo;

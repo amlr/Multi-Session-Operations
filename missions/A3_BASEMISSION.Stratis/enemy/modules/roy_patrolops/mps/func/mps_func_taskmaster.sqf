@@ -2,6 +2,7 @@
 // Modified by EightySix
 
 	mps_tasks_initDone = false;
+
 	mps_tasks_add = {
 		if isserver then {
 			private ["_name","_short","_long","_cond","_marker","_state","_dest"];
@@ -46,7 +47,7 @@
 					_x setcurrenttask _handle;
 				};
 				switch (toupper(typename _dest)) do {
-					case "OBJECT": { _handle setsimpletasktarget [_dest,true] };
+					case "OBJECT": { if(mps_co) then { _handle setsimpletasktarget [_dest,true] }else{ _handle setsimpletaskdestination (position _dest) }; };
 					case "STRING": { _handle setsimpletaskdestination (getmarkerpos _dest) };
 					case "ARRAY": { _handle setsimpletaskdestination _dest };
 				};
@@ -64,9 +65,8 @@
 							private ["_m","_t","_c","_txt"];
 							{
 								_m = createmarkerlocal [(_x select 0),(_x select 1)];
-								_m setmarkershapelocal "ELLIPSE";
-								_m setMarkerSizeLocal [1000,1000];
-                                _m setMarkerBrushLocal "Grid";
+								_m setmarkershapelocal "ICON";
+								
 								_t = "selector_selectedMission";
 								if (count _x > 2) then {
 									private "_tmp";
@@ -77,7 +77,7 @@
 								};
 								_m setmarkertypelocal _t;
 								
-								_c = "ColorRedAlpha";
+								_c = "ColorRed";
 								if (count _x > 3) then {
 									private "_tmp";
 									_tmp = (_x select 3); 
@@ -88,6 +88,8 @@
 								_m setmarkercolorlocal _c;
 								
 								if (count _x > 4) then {_m setmarkertextlocal (_x select 4)};
+
+								if (count _x > 5) then {_m setMarkerSizeLocal  (_x select 5)};
 								
 							} foreach _marker;
 						};
@@ -96,7 +98,6 @@
 			};
 		} foreach (if ismultiplayer then {playableunits} else {switchableunits});
 		mps_tasks_TasksLocal set [count mps_tasks_TasksLocal,[_name,_state,_handles]];
-		playSound "IncomingTask";
 	};
 	mps_tasks_assign = {
 		if isserver then {
@@ -123,8 +124,8 @@
 			switch (typename _cond) do {
 				case (typename grpNull): { (_unit in (units _cond)) };
 				case (typename objNull): { _unit == _cond };
-				case (typename WEST):		{ (side _unit == _cond) };
-				case (typename true):		{ _cond };
+				case (typename WEST): { (side _unit == _cond) };
+				case (typename true): { _cond };
 				case (typename ""): {
 					if (_cond in ["USMC","INS","CDF","RU","CIV","GUE","CIV_RU"]) then {
 						(faction _unit == _cond)
@@ -168,6 +169,9 @@
 			} else {
 				if mps_debug then { diag_log format ["mps_Taskmaster> handleEvent calling addTask: %1",_name]};
 				_x call mps_tasks_addTask;
+				if (!isdedicated && mps_tasks_initDone) then {
+					playSound "IncomingTask";
+				};
 			};
 		} foreach _this;
 	};

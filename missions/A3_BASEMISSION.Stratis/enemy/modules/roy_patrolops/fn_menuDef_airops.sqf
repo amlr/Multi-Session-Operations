@@ -28,7 +28,7 @@ _menus = [
   [
    ["Abort Air Tasking",
     { 
-      [] execvm PO_Path + "tasks\abort_air.sqf";
+      [] execvm "enemy\modules\roy_patrolops\tasks\abort_air.sqf";
     }
    ]
   ]
@@ -41,7 +41,7 @@ _menus = [
   [
    ["Request Air Tasking",
     {    
-      [] execvm PO_Path + "tasks\checkin_air.sqf";
+      [] execvm "enemy\modules\roy_patrolops\tasks\checkin_air.sqf";
     }
    ]
   ]

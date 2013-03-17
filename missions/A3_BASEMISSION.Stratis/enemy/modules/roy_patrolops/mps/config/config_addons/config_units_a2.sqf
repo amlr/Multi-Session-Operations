@@ -18,7 +18,6 @@ mps_config_units = mps_config_units + [
 	["USMC","so","USMC_SoldierS"],
 	["USMC","sn","USMC_SoldierS_Sniper"],
 	["USMC","sn","USMC_SoldierS_SniperH"],
-	["USMC","na","USMC_Soldier_Light"],
 	["USMC","sn","USMC_SoldierS_Spotter"],
 	["USMC","tl","USMC_Soldier_SL"],
 	["USMC","so","FR_Assault_GL"],
@@ -48,7 +47,6 @@ mps_config_units = mps_config_units + [
 	["CDF","pi","CDF_Soldier_Pilot"],
 	["CDF","so","CDF_Soldier"],
 	["CDF","sn","CDF_Soldier_Sniper"],
-	["CDF","na","CDF_Soldier_Light"],
 	["CDF","sn","CDF_Soldier_Spotter"],
 	["CDF","tl","CDF_Soldier_TL"],
 
@@ -69,7 +67,6 @@ mps_config_units = mps_config_units + [
 	["RU","at","RU_Soldier_AT"],
 	["RU","sn","RU_Soldier_Sniper"],
 	["RU","sn","RU_Soldier_SniperH"],
-	["RU","na","RU_Soldier_Light"],
 	["RU","sn","RU_Soldier_Spotter"],
 	["RU","tl","RU_Soldier_SL"],
 	["RU","tl","RU_Soldier_TL"],

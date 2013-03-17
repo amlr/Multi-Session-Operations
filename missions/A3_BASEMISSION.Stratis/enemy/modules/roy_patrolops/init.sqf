@@ -44,7 +44,7 @@ if(AMBAIRPARTOLS > 0) then {mps_ambient_air = true};
 //define Ranks that are allowed to sign in and abort operations
 PO_Ranks = ["CORPORAL","SERGEANT","LIEUTENANT","CAPTAIN"];
 
-[] execVM PO_Path + "mps\init_mps.sqf";
+[] execVM "enemy\modules\roy_patrolops\mps\init_mps.sqf";
 
 // Credit Roy
 player createDiaryRecord ["Diary", ["Patrol Ops 2", "<br/>DESCRIPTION<br/>
@@ -64,4 +64,4 @@ if(!isDedicated) then {
 // To use just the framework for your own missions, delete the line below.
 */
 
-_patrol_ops = [] execVM PO_path + "tasks\operations_init.sqf";
+_patrol_ops = [] execVM "enemy\modules\roy_patrolops\tasks\operations_init.sqf";
