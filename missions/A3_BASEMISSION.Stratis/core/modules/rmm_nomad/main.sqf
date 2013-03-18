@@ -41,7 +41,18 @@ _g_nomad = [
         {lifestate player;},
         {rank player;},
         #include <mods\aaw_g.hpp>
-        {[group player, (leader player == player)];}
+        {[group player, (leader player == player)];},
+        
+        //A3
+        {primaryWeaponItems player;},
+        {secondaryWeaponItems player;},
+	    {vest player;},
+		{uniform player;},
+		{headgear player;},
+		{backpack player;},
+		{handgunItems player;},
+		{items player;},
+		{assignedItems player;}
 ];
 
 _s_nomad = [
@@ -133,7 +144,18 @@ _s_nomad = [
                 if (_this select 1) then {
                         (_this select 0) selectLeader player;
                 };
-        }
+        },
+        
+        //A3
+        {{player addPrimaryWeaponItem _x} forEach _this;},
+        {{player addSecondaryWeaponItem _x} forEach _this;},
+		{player addVest _this;},
+		{player addUniform _this;},
+		{player addHeadgear _this;},
+	    {player addBackpack _this;},
+	    {{player addHandgunItem _x} forEach _this;},
+		{{player addItem _x} forEach _this;},
+		{{player assignItem _x} forEach _this;}
 ];
 
 

@@ -146,3 +146,7 @@ if (isClass(configFile>>"CfgPatches">>"ace_main")) then {
 execNow "support\modules\aim\init.sqf";
 };
 #endif
+
+#ifdef DSY_CHAR
+call compile preprocessfilelinenumbers "support\modules\DSY_CHAR\main.sqf";
+#endif

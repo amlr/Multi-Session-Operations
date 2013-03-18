@@ -128,6 +128,9 @@ class supportHeader {
 #ifdef AIM
 #include <support\modules\AIM\params.hpp>
 #endif
+#ifdef DSY_CHAR
+#include "support\modules\DSY_CHAR\params.hpp"
+#endif
 
 class enemyHeader {
         title = "Enemy"; 
@@ -317,6 +320,12 @@ class cfgFunctions {
 #include "support\modules\pxs_satcom_oa\init_interference.hpp"
 #endif
 
+#ifdef DSY_CHAR
+#include "support\modules\DSY_CHAR\GUI\resincl.hpp"
+#include "support\modules\DSY_CHAR\GUI\commonDefs.hpp"
+#include "support\modules\DSY_CHAR\GUI\rscCommon.hpp"
+#include "support\modules\DSY_CHAR\GUI\slider.hpp"
+#endif
 
 // Extended Event Handlers
 #ifdef persistentDB

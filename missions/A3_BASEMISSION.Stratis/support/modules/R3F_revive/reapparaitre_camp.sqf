@@ -47,7 +47,7 @@ else
 		R3F_REV_corps_avant_mort = _joueur;
 		
 		// Isoler le corps
-		_joueur setPosATL [getPosATL _joueur select 0, getPosATL _joueur select 1, (getPosATL _joueur select 2)+2000];
+		//_joueur setPosATL [getPosATL _joueur select 0, getPosATL _joueur select 1, (getPosATL _joueur select 2)+2000];
 		
 		// Stop animation blessé, reprise arme debout
 		_joueur selectWeapon (primaryWeapon _joueur);
