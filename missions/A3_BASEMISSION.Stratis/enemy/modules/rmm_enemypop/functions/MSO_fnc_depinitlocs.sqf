@@ -113,10 +113,10 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _pos = [position _loc, 0, 30, 1, 0, 5, 0] call bis_fnc_findSafePos;
                 _placeholder = "Sign_Pointer_F" createvehicle _pos;
                 
-                _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
+                _type = [["Infantry", "Motorized_MTP", "Support", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_sup,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                 while {isnil "_grptype"} do {
                         _grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
-                        _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
+                        _type = [["Infantry", "Motorized_MTP", "Support", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_sup,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                 };
                 _grptype = [_grptype] call DEP_format_group;
                 _placeholder setVariable ["groupType",[_grptype],DEP_clientside];
@@ -147,10 +147,10 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _pos = [position _loc, 0,_d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                 _placeholder = "Sign_Pointer_F" createvehicle _pos;
                 
-                _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
+                _type = [["Infantry", "Motorized_MTP", "Support", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_sup,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                 while {isnil "_grptype"} do {
                         _grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
-                        _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
+                        _type = [["Infantry", "Motorized_MTP", "Support", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_sup,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                 };
                 _grptype = [_grptype] call DEP_format_group;
                 _placeholder setVariable ["groupType",[_grptype],DEP_clientside];
@@ -181,10 +181,10 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _pos = [position _loc, 0,_d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                 _placeholder = "Sign_Pointer_F" createvehicle _pos;
                 
-                _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
+                _type = [["Infantry", "Motorized_MTP", "Support", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_sup,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                 while {isnil "_grptype"} do {
                         _grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
-                        _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
+                        _type = [["Infantry", "Motorized_MTP", "Support", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_sup,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                 };
                 _grptype = [_grptype] call DEP_format_group;
                 _placeholder setVariable ["groupType",[_grptype],DEP_clientside];
@@ -233,10 +233,10 @@ for "_i" from 0 to ((count _DEP_locs_tmp)-1) do {
                 _pos = [position _loc, 0,_d / 2 + random _d, 1, 0, 5, 0] call bis_fnc_findSafePos;
                 _placeholder = "Sign_Pointer_F" createvehicle _pos;
                 
-                _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
+                _type = [["Infantry", "Motorized_MTP", "Support", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_sup,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                 while {isnil "_grptype"} do {
                         _grptype = [_type, MSO_FACTIONS] call MSO_fnc_getrandomgrouptype;
-                        _type = [["Infantry", "Motorized", "Mechanized", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_mec,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
+                        _type = [["Infantry", "Motorized_MTP", "Support", "Armored"],[rmm_ep_inf,rmm_ep_mot,rmm_ep_sup,rmm_ep_arm]] call mso_core_fnc_selectRandomBias;
                 };
                 _grptype = [_grptype] call DEP_format_group;
                 _placeholder setVariable ["groupType",[_grptype],DEP_clientside];

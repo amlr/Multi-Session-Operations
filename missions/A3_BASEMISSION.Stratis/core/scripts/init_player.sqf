@@ -73,7 +73,7 @@ player addeventhandler ["respawn", {
         [] call RWG_restoreloadoud;
         player switchmove "";
 		_unit addAction [("<t color=""#ffc600"">" + ("Save Gear") + "</t>"),{[] call RWG_saveloadout},["paperdoll"],-100,true,false,'',"player distance markerpos 'respawn_west' < 20"];
-        _unit addAction [("<t color=""#ffc600"">" + ("Load Gear") + "</t>"),{[] call RWG_restoreloadout},["paperdoll"],-100,true,false,'',"player distance markerpos 'respawn_west' < 20"];
+        _unit addAction [("<t color=""#ffc600"">" + ("Load Gear") + "</t>"),{[_unit] call RWG_restoreloadout},["paperdoll"],-100,true,false,'',"player distance markerpos 'respawn_west' < 20"];
         removeallweapons _corpse;
         removeallitems _corpse;
         removebackpack _corpse;
@@ -81,4 +81,4 @@ player addeventhandler ["respawn", {
 
 [] call RWG_saveloadout;
 player addAction [("<t color=""#ffc600"">" + ("Save Gear") + "</t>"),{[] call RWG_saveloadout},["paperdoll"],-100,true,false,'',"player distance markerpos 'respawn_west' < 20"];
-player addAction [("<t color=""#ffc600"">" + ("Load Gear") + "</t>"),{[] call RWG_restoreloadout},["paperdoll"],-100,true,false,'',"player distance markerpos 'respawn_west' < 20"];
+player addAction [("<t color=""#ffc600"">" + ("Load Gear") + "</t>"),{[player] call RWG_restoreloadout},["paperdoll"],-100,true,false,'',"player distance markerpos 'respawn_west' < 20"];
