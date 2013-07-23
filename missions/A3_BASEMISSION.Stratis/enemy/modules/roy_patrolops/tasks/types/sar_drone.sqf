@@ -10,7 +10,7 @@ private["_location","_position","_taskid","_grp","_stance"];
 
 /*--------------------CREATE TARGET-----------------------------------*/
 
-	_choptype = "O_Ka60_Unarmed_F";
+	_choptype = "O_Heli_Light_02_unarmed_F";
 	if(mps_oa) then { _choptype = "O_Ka60_Unarmed_F_US_EP1"; };
 	_crashchopper = _choptype createvehicle (_position);
 	_crashchopper setDamage 0.9;

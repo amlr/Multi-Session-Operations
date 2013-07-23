@@ -67,19 +67,19 @@ if (_debug) then {
 
 _list = switch (_fac) do {
 	// RU
-	case "RU": {["ZavoraAnim","Land_CncBlock","RoadBarrier_long","Land_arrows_desk_L","Land_arrows_desk_R","Land_fortified_nest_small","Fort_RazorWire","M2StaticMG"]};
+	case "RU": {["ZavoraAnim","Land_CncBlock","RoadBarrier_F","Land_arrows_desk_L","Land_arrows_desk_R","Land_fortified_nest_small","Fort_RazorWire","M2StaticMG"]};
 	// ACE_RU
-    case "ACE_RU": {["ZavoraAnim","Land_CncBlock","RoadBarrier_long","Land_arrows_desk_L","Land_arrows_desk_R","Land_fortified_nest_small","Fort_RazorWire","M2StaticMG"]};
+    case "ACE_RU": {["ZavoraAnim","Land_CncBlock","RoadBarrier_F","Land_arrows_desk_L","Land_arrows_desk_R","Land_fortified_nest_small","Fort_RazorWire","M2StaticMG"]};
 	// GUE
-	case "GUE": {["","Sign_Checkpoint","RoadBarrier_long","RoadCone","RoadCone","Land_BagFenceLong","RoadBarrier_light","SearchLight"]};
+	case "GUE": {["","Sign_Checkpoint","RoadBarrier_F","RoadCone","RoadCone","Land_BagFenceLong","RoadBarrier_light","SearchLight"]};
 	// INS
-	case "INS": {["","Sign_Checkpoint","RoadBarrier_long","RoadCone","RoadCone","Land_BagFenceLong","RoadBarrier_light","SearchLight"]};
+	case "INS": {["","Sign_Checkpoint","RoadBarrier_F","RoadCone","RoadCone","Land_BagFenceLong","RoadBarrier_light","SearchLight"]};
 	// BIS_TK
-	case "BIS_TK": {["ZavoraAnim","Land_CncBlock","RoadBarrier_long","Land_arrows_desk_L","Land_arrows_desk_R","Land_fortified_nest_small","Fort_RazorWire","M2StaticMG"]};
+	case "BIS_TK": {["ZavoraAnim","Land_CncBlock","RoadBarrier_F","Land_arrows_desk_L","Land_arrows_desk_R","Land_fortified_nest_small","Fort_RazorWire","M2StaticMG"]};
 	// BIS_TK_INS
-	case "BIS_TK_INS": {["","Sign_Checkpoint_TK_EP1","RoadBarrier_long","Land_Pneu","Land_Pneu","","Misc_TyreHeapEP1","SearchLight_TK_INS_EP1"]};
+	case "BIS_TK_INS": {["","Sign_Checkpoint_TK_EP1","RoadBarrier_F","Land_Pneu","Land_Pneu","","Misc_TyreHeapEP1","SearchLight_TK_INS_EP1"]};
 	// Default
-	default {["ZavoraAnim","Land_CncBlock","RoadBarrier_long","Land_arrows_desk_L","Land_arrows_desk_R","Land_fortified_nest_small","Fort_RazorWire","M2StaticMG"]};
+	default {["ZavoraAnim","Land_CncBlock","RoadBarrier_F","Land_arrows_desk_L","Land_arrows_desk_R","Land_fortified_nest_small","Fort_RazorWire","M2StaticMG"]};
 };
 
 // Ideally Workout angle (away from unit) of roadblock?

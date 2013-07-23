@@ -39,19 +39,19 @@ CREATING ADDITIONAL CONFIGS
 
 /-------------------------------------------------------------*/
 mps_config_vehicles = mps_config_vehicles + [
-	["BLU_F", "cargoc", "B_Hunter_F",			0,0,0,0,0],
-	["BLU_F", "attakc", "B_Hunter_HMG_F",		0,0,0,0,0],
-	["BLU_F", "attakc", "B_Hunter_RCWS_F",		0,0,0,0,0],
-	["BLU_F", "cargoc", "B_Quadbike_F",			0,0,0,0,0],
-	["BLU_F", "attakh", "B_AH9_F",				0,0,0,0,0],
-	["BLU_F", "cargop", "B_MH9_F",				0,0,0,0,0],
+	["BLU_F", "cargoc", "B_MRAP_01_F",			0,0,0,0,0],
+	["BLU_F", "attakc", "B_MRAP_01_hmg_F",		0,0,0,0,0],
+	["BLU_F", "attakc", "B_MRAP_01_gmg_F",		0,0,0,0,0],
+	["BLU_F", "cargoc", "B_Quadbike_01_F",			0,0,0,0,0],
+	["BLU_F", "attakh", "B_Heli_Light_01_armed_F",				0,0,0,0,0],
+	["BLU_F", "cargop", "B_Heli_Light_01_F",				0,0,0,0,0],
 	
 	["OPF_F", "cargoc", "O_Galkin_F",			0,0,0,0,0],
 	["OPF_F", "attakc", "O_Galkin_GMG_F",		0,0,0,0,0],
 	["OPF_F", "attakc", "O_Galkin_MG_F",		0,0,0,0,0],
-	["OPF_F", "cargoc", "O_Quadbike_F",			0,0,0,0,0],
-	["OPF_F", "attakh", "O_Ka60_F",				0,0,0,0,0],
-	["OPF_F", "cargop", "O_Ka60_Unarmed_F",		0,0,0,0,0]
+	["OPF_F", "cargoc", "O_Quadbike_01_F",			0,0,0,0,0],
+	["OPF_F", "attakh", "O_Heli_Light_02_F",				0,0,0,0,0],
+	["OPF_F", "cargop", "O_Heli_Light_02_unarmed_F",		0,0,0,0,0]
 
 	
 	];

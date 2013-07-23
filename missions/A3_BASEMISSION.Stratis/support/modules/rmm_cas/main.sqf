@@ -8,7 +8,7 @@ waitUntil {LDL_initDone};
 */
 
 RMM_cas_types = [
-	"B_AH9_F"
+	"B_Heli_Light_01_armed_F"
 	//"C130J",
 	//"MQ9PredatorB"
 ];

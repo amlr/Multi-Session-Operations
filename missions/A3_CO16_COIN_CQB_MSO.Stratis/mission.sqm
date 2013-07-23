@@ -6,10 +6,10 @@ class Mission
 		"a3_map_stratis",
 		"A3_Characters_F_BLUFOR",
 		"A3_Weapons_F_Ammoboxes",
-		"A3_Soft_F_Hunter",
-		"A3_Air_F_MH9",
-		"A3_Boat_F_Assault_Boat",
-		"A3_Boat_F_Speedboat",
+		"A3_Soft_F_MRAP_01",
+		"A3_Air_F_Heli_Light_01",
+		"A3_Boat_F_Boat_Armed_01",
+		"A3_Boat_F_Boat_Transport_01",
 		"cba_main",
 		"A3_Modules_F",
 		"A3_Modules_F_Skirmish"
@@ -20,10 +20,10 @@ class Mission
 		"cba_main",
 		"A3_Modules_F",
 		"A3_Modules_F_Skirmish",
-		"A3_Soft_F_Hunter",
-		"A3_Air_F_MH9",
-		"A3_Boat_F_Assault_Boat",
-		"A3_Boat_F_Speedboat",
+		"A3_Soft_F_MRAP_01",
+		"A3_Air_F_Heli_Light_01",
+		"A3_Boat_F_Boat_Armed_01",
+		"A3_Boat_F_Boat_Transport_01",
 		"A3_Weapons_F_Ammoboxes",
 		"a3_map_stratis"
 	};
@@ -1677,7 +1677,7 @@ class Mission
 			azimut=-61.452934;
 			id=36;
 			side="EMPTY";
-			vehicle="B_Hunter_F";
+			vehicle="B_MRAP_01_F";
 			leader=1;
 			skill=0.60000002;
 			init="0 = this execVM ""support\modules\rmm_recruitment\addAction.sqf""; this setVariable [""MHQState"",1,true];this addAction [""Set Spawn"", ""support\modules\WHB_Multispawn\common\fn_Action_SignInFOB.sqf"", position player, 0, false, true, """", ""true""];";
@@ -1688,7 +1688,7 @@ class Mission
 			azimut=-62.227669;
 			id=37;
 			side="EMPTY";
-			vehicle="B_Hunter_RCWS_F";
+			vehicle="B_MRAP_01_gmg_F";
 			leader=1;
 			skill=0.60000002;
 		};
@@ -1698,7 +1698,7 @@ class Mission
 			azimut=-60.083275;
 			id=38;
 			side="EMPTY";
-			vehicle="B_Hunter_HMG_F";
+			vehicle="B_MRAP_01_hmg_F";
 			leader=1;
 			skill=0.60000002;
 		};
@@ -1708,7 +1708,7 @@ class Mission
 			azimut=-238.32443;
 			id=39;
 			side="EMPTY";
-			vehicle="B_AH9_F";
+			vehicle="B_Heli_Light_01_armed_F";
 			leader=1;
 			skill=0.60000002;
 		};
@@ -1718,7 +1718,7 @@ class Mission
 			azimut=132.71474;
 			id=40;
 			side="EMPTY";
-			vehicle="B_MH9_F";
+			vehicle="B_Heli_Light_01_F";
 			leader=1;
 			skill=0.60000002;
 		};
@@ -1728,7 +1728,7 @@ class Mission
 			azimut=127.59443;
 			id=41;
 			side="EMPTY";
-			vehicle="B_Assaultboat";
+			vehicle="B_Boat_Transport_01_F";
 			leader=1;
 			skill=0.46666664;
 		};
@@ -1748,7 +1748,7 @@ class Mission
 			azimut=127.59443;
 			id=43;
 			side="EMPTY";
-			vehicle="B_SpeedBoat";
+			vehicle="B_Boat_Armed_01_minigun_F";
 			leader=1;
 			skill=0.46666664;
 		};
@@ -1758,7 +1758,7 @@ class Mission
 			azimut=127.59443;
 			id=44;
 			side="EMPTY";
-			vehicle="B_SpeedBoat";
+			vehicle="B_Boat_Armed_01_minigun_F";
 			leader=1;
 			skill=0.46666664;
 		};

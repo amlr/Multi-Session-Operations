@@ -17,7 +17,7 @@ _b = (_pos select 1)+(cos(_ang)*_radius);
 _mgpos = [ [_a,_b,0],10,0.1,2] call mps_getFlatArea;
 
 if(not surfaceIsWater [_mgpos select 0, _mgpos select 1]) then{
-	_mg = (["O_Mk6","O_Mk6"] call mps_getRandomElement) createVehicle _mgpos;
+	_mg = (["O_Mortar_01_F","O_Mortar_01_F"] call mps_getRandomElement) createVehicle _mgpos;
 	_grp = [_mgpos,"INF",1,50] call CREATE_OPFOR_SQUAD;
 	leader _grp moveInGunner _mg;
 };

@@ -167,7 +167,7 @@ if ((random 1 < _chance) && !(RMM_casevac_active)) then
 	// Check if armed escort required, spawn
 	if ((_enemy == "Heavy Enemy") || (_enemy == "Enemy" && ((random 1) > 0.5))) then 
 	{
-		_gunship = ["B_AH9_F"];
+		_gunship = ["B_Heli_Light_01_armed_F"];
 		_armvehtype = (_gunship) call BIS_fnc_selectRandom;
 		_armveh = ([position _veh, 0, _armvehtype, group _veh] call BIS_fnc_spawnVehicle) select 0;
 		_armavehname = getText (configFile >> "CfgVehicles" >> _armavehtype >> "displayname");
