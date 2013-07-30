@@ -36,8 +36,8 @@
                 _suspendedcount = 0;
                 _clearcount = 0;
         		{
-                    _strategic = (_x select 0) getVariable "strat";
-                    _regular = (_x select 0) getVariable "reg";
+                    _strategic = (_x select 0) getVariable ["strat",false];
+                    _regular = (_x select 0) getVariable ["reg",false];
                     _clear = (_x select 0) getVariable "c";
                     _suspend = (_x select 0) getVariable "s";
                     _pos = position (_x select 0);

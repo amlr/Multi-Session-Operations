@@ -5,7 +5,7 @@ _pos = _this select 1;
 _grpt = _this select 2;
 _camp = _this select 3; if !(typename _camp == "STRING") then {_camp = nil};
 _grpt2 = _this select 4; if !(typename _grpt2 == "ARRAY") then {_grpt2 = nil};
-_cleared = (_this select 0) getvariable "c";
+_cleared = (_this select 0) getvariable ["c",false];
 if (count (_obj getvariable "type") > 2) then {
         _RB = (_obj getvariable "type") select 2;
 };
@@ -70,7 +70,7 @@ waituntil {
         //store groups data
         _locunits = [];
         if (({alive _x} count (units _group)) > 0) then {{_locunits set [count _locunits, _x]} foreach units _group; if !(str(position (leader _group)) == "[0,0,0]") then {_groupPos = position (leader _group); _obj setvariable ["groupPos",_groupPos]}} else {_obj setvariable ["GRPdeact",true]};
-        if (({alive _x} count (units _grp2)) > 0) then {{_locunits set [count _locunits, _x]} foreach units _grp2; if !(str(position (leader _grp2)) == "[0,0,0]") then {_grp2Pos = position (leader _grp2); _obj setvariable ["grp2Pos",_grp2Pos]}} else {_obj setvariable ["GRP2deact",true]};    	
+//        if (({alive _x} count (units _grp2)) > 0) then {{_locunits set [count _locunits, _x]} foreach units _grp2; if !(str(position (leader _grp2)) == "[0,0,0]") then {_grp2Pos = position (leader _grp2); _obj setvariable ["grp2Pos",_grp2Pos]}} else {_obj setvariable ["GRP2deact",true]};    	
         
         //check for players proximity as the group moves around and delete if players are out of range for more than 20 seconds.
         if (!([_pos, rmm_ep_spawn_dist] call fPlayersInside) && (_spawned)) then {
